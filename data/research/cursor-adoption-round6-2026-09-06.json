@@ -1,0 +1,32 @@
+{
+  "recordedAt": "2026-09-06",
+  "round": 6,
+  "sourceType": "user_confirmed_adoption",
+  "userQuote": "cursor_ultra 标准档（grok-4.6）：100亿 → 64.2亿。依据：放弃口头确认的100亿，回到截图反推，两行在官方2×口径下的中间值：(60.6 + 67.8) / 2 = 64.2亿。cursor_ultra_fast维持30.3亿。cursor_pro_plus按Ultra $3,000池等比，64.2 × 800/3000 ≈ 17.1亿。",
+  "evidenceFiles": [
+    "data/subscriptions.json",
+    "data/research/cursor-user-round5-2026-09-05.json",
+    "data/research/cursor-fast-round6-2026-09-05.json",
+    "data/research/quotas-web-round3-2026-09.json",
+    "scripts/cursor_ultra_backcalc.py"
+  ],
+  "history": [
+    "早期用户确认100亿",
+    "标准截图61.0M/0.9%反推67.8亿",
+    "round5用户再次确认，恢复100亿",
+    "本次用户放弃100亿，确认采用两条标准等效估计的中间值64.2亿"
+  ],
+  "adoption": {
+    "cursorUltraGrok46StandardMonthlyYi": 64.2,
+    "standardFormula": "(30.3 × 2 + 67.8) / 2",
+    "cursorUltraGrok46FastMonthlyYi": 30.3,
+    "cursorProPlusGrok46MonthlyYi": 17.12,
+    "proPlusFormula": "64.2 × 800 / 3000",
+    "derived": "Ultra Grok4.5随标准基准；Ultra和Pro+的Composer Standard/Fast按现有未舍入混合价倍率随动；Pro和SuperGrok不变"
+  },
+  "caveats": [
+    "64.2亿为用户选择的折中采用值，不是单行直接实测或官方硬上限。64.2/30.3≈2.119，不能声称与2×严格相等。",
+    "截图周期跨2026-08-12起发布促销周，可能混入50%折扣/双倍额度；没有逐请求记录，不能把折中值当成已剥离促销的稳态上限。",
+    "Pro+的$800/Ultra $3000是跨档池规模假设；不改其他渠道；旧100亿、67.8亿和round6核验文件全部保留。"
+  ]
+}

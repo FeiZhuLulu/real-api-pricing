@@ -1,0 +1,196 @@
+{
+  "updatedAt": "2026-09-05",
+  "currencyNote": "priceUsd = 原币 / 7.2（人民币档）",
+  "items": [
+    {
+      "id": "cursor_ultra_grok",
+      "name": "Cursor Ultra / 第一方 Grok",
+      "model": "grok-4.6",
+      "priceLabel": "$200",
+      "priceUsd": 200,
+      "monthlyTokens": 10000000000,
+      "monthlyYi": 100,
+      "realUsdPerMTok": 0.02,
+      "quality": "你确认",
+      "adopted": true,
+      "notes": "本会话确认。SubPlan 引擎另有 140 亿（Pro 中位 7 亿 ×20）→ $0.0143/MTok，先听 100 亿",
+      "altClaims": [
+        {
+          "monthlyYi": 140,
+          "source": "SubPlan quotas.json cursor_ultra",
+          "basis": "20x_pro_midpoint",
+          "asOf": "2026-09-02"
+        }
+      ]
+    },
+    {
+      "id": "grok_heavy",
+      "name": "Grok Heavy",
+      "model": "grok-4.6",
+      "priceLabel": "$300",
+      "priceUsd": 300,
+      "weeklyBudgetUsd": 250,
+      "weeklyTokens": 1200000000,
+      "weeklyYi": 12,
+      "monthlyTokens": 4800000000,
+      "monthlyYi": 48,
+      "realUsdPerMTok": 0.0625,
+      "quality": "你确认",
+      "adopted": true,
+      "notes": "周额度 $250 ≈ 12 亿；月按 4 周。文章旧写周 4 亿/月 16 亿（$0.1875）作废。SubPlan 20 亿代理作废"
+    },
+    {
+      "id": "kimi_allegretto_199",
+      "name": "Kimi 会员 199 / Allegretto",
+      "model": "k3-256k / k3 / kimi-for-coding",
+      "priceLabel": "¥199",
+      "priceCny": 199,
+      "priceUsd": 27.6388888889,
+      "weeklyTokens": 290165557,
+      "weeklyYi": 2.9017,
+      "monthlyTokens": 1160662228,
+      "monthlyYi": 11.61,
+      "monthlyYiAlt30over7": 12.44,
+      "realUsdPerMTok": 0.0238,
+      "realUsdPerMTokAlt30over7": 0.0222,
+      "quality": "本机反推",
+      "adopted": true,
+      "inference": {
+        "weekStartDays": ["2026-07-25", "2026-07-26"],
+        "usedFraction": 0.84,
+        "usedTokens": 243739068,
+        "dayTokens": {
+          "2026-07-25": 151560340,
+          "2026-07-26": 92178728,
+          "2026-07-30_same_week_extra": 24053589
+        },
+        "sameWeekLaterPct": 0.92,
+        "sensitivity": {
+          "if80pctWeeklyYi": 3.05,
+          "if80pctMonthlyYi": 12.19,
+          "if88pctWeeklyYi": 2.77,
+          "if88pctMonthlyYi": 11.08
+        }
+      },
+      "discarded": {
+        "acpMonthlyYi": 14.28,
+        "acpRealUsdPerMTok": 0.0194,
+        "note": "ACP 偏高约 23%，不再当主口径"
+      }
+    },
+    {
+      "id": "kimi_andante_49",
+      "name": "Kimi 会员 49 / Andante",
+      "model": "kimi-for-coding",
+      "priceLabel": "¥49",
+      "priceCny": 49,
+      "monthlyYi": 0.58,
+      "realUsdPerMTok": 0.1176,
+      "quality": "倍率外推",
+      "adopted": false,
+      "notes": "官网 1x；11.61 / 20。不是本机打满"
+    },
+    {
+      "id": "kimi_moderato_99",
+      "name": "Kimi 会员 99 / Moderato",
+      "model": "k3 / k2.7-code",
+      "priceLabel": "¥99",
+      "priceCny": 99,
+      "monthlyYi": 2.32,
+      "realUsdPerMTok": 0.0592,
+      "quality": "倍率外推",
+      "adopted": false,
+      "notes": "官网 4x；11.61 × 4/20"
+    },
+    {
+      "id": "kimi_allegro_699",
+      "name": "Kimi 会员 699 / Allegro",
+      "model": "k3 / k2.7-code",
+      "priceLabel": "¥699",
+      "priceCny": 699,
+      "monthlyYi": 34.83,
+      "realUsdPerMTok": 0.0279,
+      "quality": "倍率外推",
+      "adopted": false,
+      "notes": "官网 60x；11.61 × 3"
+    },
+    {
+      "id": "chatgpt_plus_sol",
+      "name": "ChatGPT Plus / Sol Codex",
+      "model": "gpt-5.6-sol",
+      "priceLabel": "$20",
+      "priceUsd": 20,
+      "weeklyYi": 1.54,
+      "monthlyYi": 6.16,
+      "realUsdPerMTok": 0.0325,
+      "quality": "ACP 旧测改挂",
+      "adopted": false,
+      "notes": "ACP 主表写明 Codex gpt-5.6-sol。Plus 计划级 123.2 亿是 Luna 折算，不是这条"
+    },
+    {
+      "id": "chatgpt_pro_20x_sol",
+      "name": "ChatGPT Pro 20x / Sol",
+      "model": "gpt-5.6-sol",
+      "priceLabel": "$200",
+      "priceUsd": 200,
+      "quality": "多源并列，未选定",
+      "adopted": false,
+      "claims": [
+        {
+          "id": "subplan_sol_x20",
+          "monthlyYi": 123.2,
+          "realUsdPerMTok": 0.0162,
+          "model": "gpt-5.6-sol",
+          "how": "ACP Plus Codex 6.16亿 × 官方 20x",
+          "source": "SubPlan data/quotas.json chatgpt_pro_20x.modelUsage"
+        },
+        {
+          "id": "article_community_200yi",
+          "monthlyYi": 200,
+          "realUsdPerMTok": 0.01,
+          "model": "未标明",
+          "how": "文章：有人反应 Pro 20 一个月能用到约 200 亿；可能含周重置累加，或 5.5 用量",
+          "source": "用户文章假设"
+        },
+        {
+          "id": "x_100plus_yi",
+          "monthlyYiClass": "100+",
+          "model": "Codex 20x",
+          "source": "https://x.com/tak_ltc/status/2082475833562914946",
+          "asOf": "2026-07-29"
+        },
+        {
+          "id": "plus_luna_same_number",
+          "monthlyYi": 123.2,
+          "model": "gpt-5.6-luna",
+          "how": "Plus 计划级 Luna 信用当量，不是 Sol",
+          "source": "SubPlan chatgpt_plus estimatedTextWorkloadCapacityMTokens"
+        }
+      ]
+    },
+    {
+      "id": "glm_coding_pro",
+      "name": "GLM Coding Plan Pro",
+      "model": "glm-5.3",
+      "priceLabel": "¥149 老客 / ¥538 新客",
+      "priceCnyOld": 149,
+      "priceCnyNew": 538,
+      "monthlyYi": 18.64,
+      "quality": "SubPlan 校过",
+      "adopted": false,
+      "notes": "2026-09-02 官方 95% 缓存周表中位 ×30/7。ACP 6.4 亿 / glm-5.1 已过期"
+    },
+    {
+      "id": "claude_pro",
+      "name": "Claude Pro",
+      "model": "claude-opus-4.8 测、现用 opus 5",
+      "priceLabel": "$20",
+      "priceUsd": 20,
+      "monthlyYi": 15.88,
+      "realUsdPerMTok": 0.0126,
+      "quality": "ACP 旧测改挂",
+      "adopted": false,
+      "notes": "SubPlan 仍复用 Opus 4.8 的 15.88 亿，没有 Opus 5 新测"
+    }
+  ]
+}

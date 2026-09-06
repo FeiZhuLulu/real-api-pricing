@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-09-05",
+  "exchangeRates": [
+    {
+      "date": "2026-09-04",
+      "pair": "USD/CNY",
+      "rate": 6.7787,
+      "kind": "人民币汇率中间价（中国人民银行授权中国外汇交易中心公布；表列按100外币，100美元=677.87人民币 → 1USD=6.7787CNY）",
+      "source": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2026-08-28&endDate=2026-09-04",
+      "quote": "人民币汇率中间价列表 … 2026-09-04 美元 677.87 … 2026-09-03 美元 678.07"
+    },
+    {
+      "date": "2026-09-04",
+      "pair": "USD/CNY",
+      "rate": 6.7787,
+      "kind": "人民币汇率中间价（新华社转载中国外汇交易中心受权公布；口径同中间价）",
+      "source": "https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html",
+      "quote": "中国外汇交易中心9月4日受权公布…9月4日人民币汇率中间价如下：100美元 677.87人民币"
+    }
+  ],
+  "caijing": [
+    {
+      "source": "https://www.163.com/dy/article/L4ILFQL60519DDOA.html",
+      "finding": "文中 OpenCode = 开源智能体框架，用作统一测试客户端打满各家已订阅套餐；不是 OpenCode Go 订阅本身。同文另有「通过OpenCode接入全球20款主流模型」完成同一财报任务，进一步确认是接入/测试工具。",
+      "publicationNote": "Verbatim article excerpt omitted from public edition; source and analytical fields retained."
+    },
+    {
+      "source": "https://www.163.com/dy/article/L4ILFQL60519DDOA.html",
+      "finding": "与 token 数/均价直接相关的原话均指向 ChatGPT/Codex、$200 档及国内各厂 Token 套餐/API；全文无 OpenCode Go、$10/月、Go 各模型 token 上限或官方估算表。因此《财经》实测不能算 OpenCode Go 的独立验证。",
+      "publicationNote": "Verbatim article excerpt omitted from public edition; source and analytical fields retained."
+    }
+  ],
+  "notFound": [
+    {
+      "item": "caijing_opencode_go_10usd_or_per_model_tokens",
+      "wanted": "《财经》文中与 OpenCode Go $10 套餐及各模型 token 数直接相关的原话",
+      "result": "定向打开存档 URL 全文：仅见「开源智能体框架 OpenCode」作统一测试客户端；无 Go 订阅价、无 Go 美元池、无 Go 分模型 token/request 表。",
+      "sourceChecked": "https://www.163.com/dy/article/L4ILFQL60519DDOA.html"
+    },
+    {
+      "item": "usd_cny_mid_rate_2026-09-05",
+      "wanted": "2026-09-05（周六）当日中间价",
+      "result": "周六无银行间中间价公告；截至核查日最新可用交易日为 2026-09-04，已记录，不拿过期值冒充「今天」。",
+      "sourcesChecked": [
+        "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2026-08-28&endDate=2026-09-04",
+        "https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "round": 5,
+  "date": "2026-09-06",
+  "target": "ChatGPT 订阅额度 —— 本机 codex rollout 反推 + 网络证据",
+  "note": "只记录，不改 adopted。本机账号为 ChatGPT Plus（rate_limits.plan_type=plus）。",
+  "localMeasurement": {
+    "method": "解析 ~/.codex/sessions/**/rollout-*.jsonl：每个 token_count 事件同时携带 last_token_usage.total_tokens（服务端确认的单次请求 token）和 rate_limits.primary{used_percent, window_minutes=10080, resets_at}。按 resets_at 分窗口，窗口内 Σper-req tokens ÷ Δused_percent = 周池（raw token 口径，input_tokens 已含 cached_input，total=input+output）。",
+    "script": "Private diagnostic script; method described in this record",
+    "account": "Anonymous local contributor; ChatGPT Plus (plan_type=plus)",
+    "samples_0_to_100pct_sweeps_weeklyPool_yi": [
+      2.9,
+      4.4,
+      7.3,
+      13.0,
+      6.1,
+      2.7,
+      2.2,
+      0.9,
+      1.2,
+      2.0,
+      0.8,
+      5.3,
+      3.2,
+      2.0
+    ],
+    "partial_sweeps_notable": [
+      "07-16→07-23 窗口 0→13% 消耗 1.98亿 → 反推 15.2亿/周（未打满，且 7 月社区记录 OpenAI 多次中途重置，可能失真）",
+      "08-08→08-15 窗口 0→47% 消耗 5.30亿 → 反推 11.3亿/周（未打满）"
+    ],
+    "median_full_sweep_yi_per_week": 2.7,
+    "monthly_equiv_yi": "不作估计（见下：用户确认该账号重置频繁，样本不可分窗）",
+    "userConfirmed_2026-09-06": "用户原话：『我本机的codex，经常有重置，所以你可能分不清额度』——中途重置把 % 打回低位而 token 累计不回零，按 resets_at 分组无法干净切窗，本机反推值整体不可用作锚点",
+    "caveats": [
+      "本机样本作废原因（用户确认）：账号频繁经历 OpenAI 重置（战情室重置、banked reset、善意重置），% 与 token 累计失步 → 0.8~13亿/周 的大方差是污染，不是真实池差异",
+      "本机数据仅证明机制可行：rollout 的 token_count 事件同框携带服务端确认 token 与 used_percent；无重置的账号可用同法测",
+      "used_percent 按加权单位计（Observatory 证实 Sol=1×/Terra=0.4×/Luna=0.04×/Astra=2×），raw token 池随模型 mix 变",
+      "旧 adopted 值 chatgpt_plus=6.16亿/月 维持；Observatory 折回 7.18亿/月 为当前最佳外部参照"
+    ],
+    "confidence": "low（仅机制验证有效；数值因重置污染不可采用）"
+  },
+  "webEvidence": [
+    {
+      "claim": "Codex 配额查询端点：GET https://chatgpt.com/backend-api/codex/usage（旧 /backend-api/wham/usage），返回 rate_limit.primary_window.used_percent + limit_window_seconds=604800（7天） + secondary_window(5h) + credits.balance + plan_type。只给 %，不给绝对量",
+      "evidenceType": "github_issue_technical",
+      "source": "https://github.com/openai/codex/issues/37455",
+      "sourceDate": "2026-08",
+      "quote": "plan_type: prolite; primary_window.used_percent=81, limit_window_seconds=604800; 面板 '1% left' 与 API 81% used 不一致（前端 bug）",
+      "confidence": "high（端点结构）"
+    },
+    {
+      "claim": "codex-cli rollout 的 rate_limits 快照 + 服务端确认 total_tokens 同框（本机实测证实同一结构）",
+      "evidenceType": "github_issue_technical",
+      "source": "https://github.com/openai/codex/issues/41628",
+      "sourceDate": "2026-08-30",
+      "quote": "session rollouts record rate_limits snapshot attached to every response; total_tokens is the server-confirmed count",
+      "confidence": "high（本机复现）"
+    },
+    {
+      "claim": "Plus 档 5h 窗 30–150 条消息、周额度约 5–8 小时 agent 工作量；Pro5x 150–600 条/5h、周 25–40h；Pro20x 300–1500 条/5h、周 90–140h",
+      "evidenceType": "third_party_aggregator",
+      "source": "https://resetbeacon.com/limits/",
+      "sourceDate": "2026-09",
+      "confidence": "low（消息/小时口径，非 token）"
+    },
+    {
+      "claim": "2026-06-16~25 防欺诈 bug 导致额度消耗快 10~20x，OpenAI 战情室全量重置；另有 4-28、6-4 等多次全量/手动重置——历史 % 轨迹含重置污染",
+      "evidenceType": "third_party_aggregator",
+      "source": "https://velokey.ai/blog/codex-usage-reset",
+      "sourceDate": "2026-09",
+      "confidence": "medium"
+    },
+    {
+      "claim": "Codex 额度为「included plan 窗口（5h+周）→ 之后扣 credits → API key 单独计」三层；Plus/Pro 档表按 local messages/5h 给区间，无绝对 token 上限",
+      "evidenceType": "third_party_aggregator",
+      "source": "https://blog.laozhang.ai/en/posts/openai-codex-usage-limits",
+      "sourceDate": "2026-06-17",
+      "confidence": "medium"
+    }
+  ],
+  "proposedValues": {
+    "chatgpt_plus": {
+      "current": "6.16亿/月 medium(ACP)",
+      "candidate": "本机满扫中位 ~2.7亿/周 ≈ 11亿/月；区间 3~29亿",
+      "confidence": "medium"
+    },
+    "chatgpt_pro_5x": {
+      "current": "30.8亿/月",
+      "candidate": "无直接证据；若按官方 5x×Plus 基准则 ~55亿/月",
+      "confidence": "low"
+    },
+    "chatgpt_pro_20x": {
+      "current": "123.2亿/月 high(用户拍板)",
+      "candidate": "无直接证据；按 20x×Plus 则 ~216亿/月；与现有 123.2 矛盾，需用户拍板",
+      "confidence": "low"
+    }
+  },
+  "notFound": [
+    "任何来源的 token+% 同框公开截图（本机 rollout 是目前唯一金标准样本）",
+    "官方绝对 token 上限表",
+    "Pro 5x/20x 档的实测 raw token 数据"
+  ]
+}

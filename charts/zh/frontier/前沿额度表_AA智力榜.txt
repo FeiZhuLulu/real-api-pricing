@@ -1,0 +1,17 @@
+Artificial Analysis Intelligence Index v4.1.1 | Intelligence Index | 2026-09-05
+前沿按全量订阅/API的单价与得分筛选，非额度排名；同价同分套餐均保留；缺分模型不参与，估算不确定性未纳入筛选。
+订阅额度总览 · 套餐 × 实际服务模型
+月 = 4 周，饱和使用；全口径 token；按量 API 无月额度，不参与额度排序
+同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。
+颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。
+† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。Go为官方典型估算；Composer Fast为产品默认模式。
+汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
+汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
+序号  套餐                        价格/月  服务模型         月额度(亿)  $/MTok   置信度  Intelligence Index  得分版本           
+----  --------------------------  -------  ---------------  ----------  -------  ------  ------------------  -------------------
+1     ChatGPT Pro 20x             USD 200  gpt-5.6-luna     2402.03     0.00083  medium  52                  GPT-5.6 Luna (max) 
+2     Claude Max 20x (9/14+)      USD 200  claude-opus-5    157         0.01274  medium  63                  Claude Opus 5 (max)
+3     Claude Max 5x (9/14+)       USD 100  claude-opus-5    78.5        0.01274  medium  63                  Claude Opus 5 (max)
+4     GLM Coding Pro (老客 ¥149)  CNY 149  glm-5.3-flash    52.64       0.00418  high    57                  GLM-5.3-Flash      
+5     GLM Coding Pro (老客 ¥149)  CNY 149  glm-5.3          17.4        0.01263  high    60                  GLM-5.3 (max)      
+6     Claude Pro                  USD 20   claude-opus-4.8  15.88       0.01259  medium  57.3                Claude Opus 4.8    

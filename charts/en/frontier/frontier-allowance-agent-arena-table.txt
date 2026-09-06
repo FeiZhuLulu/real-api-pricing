@@ -1,0 +1,18 @@
+Agent Arena · Overall (Ranking / Pareto) | Net Improvement % | 2026-09-01
+Selected by price and score across all subscriptions/APIs, not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled.
+Monthly token allowance | Subscription plan x served model
+4 weeks per month, full utilization, all token types; pay-as-you-go APIs have no monthly allowance
+Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.
+Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.
+† Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers scaled, not pure 1M measurements. Go: typical estimates. Composer Fast: product default.
+FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate.
+FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
+No.  Plan                            Monthly fee  Served model       Monthly tokens (B)  USD/MTok  Confidence  Net Improvement %  Score variant                      
+---  ------------------------------  -----------  -----------------  ------------------  --------  ----------  -----------------  -----------------------------------
+1    ChatGPT Pro 20x                 USD 200      gpt-5.6-luna       240.203             0.00083   medium      2.15               GPT 5.6 Luna (xHigh)               
+2    Claude Max 20x (9/14+)          USD 200      claude-opus-5      15.7                0.01274   medium      13.74              Claude Opus 5 (High)               
+3    Claude Max 5x (9/14+)           USD 100      claude-opus-5      7.85                0.01274   medium      13.74              Claude Opus 5 (High)               
+4    GLM Coding Pro (Existing ¥149)  CNY 149      glm-5.3-flash      5.264               0.00418   high        4.03               GLM 5.3 Flash                      
+5    Claude Pro                      USD 20       claude-sonnet-5    3.97                0.00504   medium      7.51               Claude Sonnet 5 (High)             
+6    OpenCode Go                     USD 10       deepseek-v4-flash  2.7224              0.00367   medium      2.85               Deepseek V4 Flash (High) (20260731)
+7    Claude Pro                      USD 20       claude-opus-4.8    1.588               0.01259   medium      9.22               Claude Opus 4.8 (High)             

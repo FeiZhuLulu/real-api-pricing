@@ -1,0 +1,166 @@
+{
+  "checkedAt": "2026-09-05",
+  "scope": "Limited official-source audit of 4 groups only; no forum re-search; preferred archived URLs; live fetch recorded.",
+  "methodNotes": [
+    "HTTP 200 fetches via curl (proxy) of archived official URLs; quotes taken from response bodies.",
+    "https://developers.openai.com/codex/pricing redirected to https://learn.chatgpt.com/docs/pricing; companion markdown https://developers.openai.com/codex/codex-manual.md redirected to https://learn.chatgpt.com/docs/codex-manual.md (same credits table).",
+    "https://docs.x.ai/developers/models/grok-4-6 and /grok-4-5 redirected to /developers/models; prices taken from https://docs.x.ai/developers/pricing embedded model price fields (promptTextTokenPrice etc., divide by 10000 → USD/MTok).",
+    "Did not modify any pre-existing data/, scripts/, out/, or AGENTS.md files."
+  ],
+  "findings": [
+    {
+      "item": "openai_codex_credits_full_table",
+      "status": "confirmed",
+      "source": "https://developers.openai.com/codex/pricing → https://learn.chatgpt.com/docs/pricing (also https://learn.chatgpt.com/docs/codex-manual.md Token rates)",
+      "quote": "Credits per 1M tokens | Input Tokens | Cached input tokens | Output Tokens — GPT-5.6 Sol 100 / 10 / 500; GPT-5.6 Terra 50 / 5 / 300; GPT-5.6 Luna 5 / 0.5 / 30; GPT-5.5 125 / 12.50 / 750. GPT-5.6 Sol’s promotional pricing is available at least through November 21, 2026.",
+      "currentValue": {
+        "fromAdoptedLogic": "Sol:Terra:Luna input credits 100:50:5; GPT-5.5 125 vs Sol 100 → token ratio 0.8",
+        "fromListPricesArchiveApiUsdPerMTok": {
+          "gpt-5.6-sol": {"input": 4.0, "cachedInput": 0.4, "output": 20.0},
+          "gpt-5.6-terra": {"input": 2.0, "cachedInput": 0.2, "output": 12.0},
+          "gpt-5.6-luna": {"input": 0.2, "cachedInput": 0.02, "output": 1.2},
+          "gpt-5.5": {"input": 5.0, "cachedInput": 0.5, "output": 30.0}
+        }
+      },
+      "finding": "Live Codex credits table matches the expected complete input/cached/output rows for Sol/Terra/Luna/GPT-5.5. API list-price archive (developers.openai.com/api/docs/pricing) remains a separate USD table; this item confirms the ChatGPT-credits table used for subscription ratios.",
+      "confidence": "high"
+    },
+    {
+      "item": "openai_sol_terra_luna_gpt55_ratios_all_columns_2_20_0.8",
+      "status": "contradicted",
+      "source": "https://learn.chatgpt.com/docs/codex-manual.md (Token rates / Credits per 1M tokens)",
+      "quote": "GPT-5.6 Sol: 100 / 10 / 500 credits; Terra: 50 / 5 / 300; Luna: 5 / 0.5 / 30; GPT-5.5: 125 / 12.50 / 750.",
+      "currentValue": {
+        "build_adopted.py": "Terra=Sol×2, Luna=Sol×20 (from input credits 100:50:5); GPT-5.5=Sol×0.8 (100:125)",
+        "claimedAllColumns": "input/cached/output all yield ratios Terra×2, Luna×20, GPT-5.5×0.8"
+      },
+      "finding": "Input and cached columns DO follow Terra=Sol/2 (token yield ×2), Luna=Sol/20 (×20), GPT-5.5=Sol×1.25 credits (token yield ×0.8). Output does NOT: Sol 500 vs Terra 300 → yield ≈1.667× not 2×; vs Luna 30 → ≈16.67× not 20×; vs GPT-5.5 750 → ≈0.667× not 0.8×. Same asymmetry appears in API USD archive (Sol out 20 / Terra 12 / Luna 1.2 / GPT-5.5 30). build_adopted.py currently applies the input-only ratio to all tokens; live official credits contradict treating output the same.",
+      "confidence": "high"
+    },
+    {
+      "item": "opencode_go_price_and_shared_dollar_limits",
+      "status": "confirmed",
+      "source": "https://opencode.ai/docs/go/",
+      "quote": "OpenCode Go gives you access to these models for $10/month. ... 5 hour limit — $12 of usage; Weekly limit — $30 of usage; Monthly limit — $60 of usage.",
+      "currentValue": {
+        "build_adopted.py": "OpenCode Go $10; note says 美元池 $12/5h $30/周 $60/月",
+        "quotas-web-round2": "5 hour $12 / week $30 / month $60"
+      },
+      "finding": "Live official page confirms $10/month subscription and shared dollar base limits $12 / $30 / $60. Matches archive and adopted note.",
+      "confidence": "high"
+    },
+    {
+      "item": "opencode_go_per_model_usage_caps",
+      "status": "confirmed",
+      "source": "https://opencode.ai/docs/go/",
+      "quote": "The estimates are also based on the following prices per 1M tokens and the monthly usage included with each model: ... Grok 4.6 ... Usage $15; GPT 5.6 Luna ... $15; DeepSeek V4 Flash ... $30; DeepSeek V4 Pro ... $15; MiniMax M3 ... $60. With Go, you pay $10/month and, for most models, we aim to give you 6x that in usage. ... For these models ... usage mulitplier is lower in the table above.",
+      "currentValue": {
+        "build_adopted.py": "部分模型另有 per-model 上限",
+        "quotas-web-round2": "多数模型另有 per-model Usage 列（$15/$30/$60/$100）"
+      },
+      "finding": "Official pricing table has a per-model Usage dollar column that is often below the shared monthly $60 (e.g. Grok/Luna/Pro $15, Flash $30, some models $60). Page explains lower multipliers when discounts are unavailable. So yes: limited models have additional per-model monthly usage caps distinct from the shared $12/$30/$60 base limits.",
+      "confidence": "high"
+    },
+    {
+      "item": "opencode_go_request_table_tokens_are_estimates_not_hard_caps",
+      "status": "confirmed",
+      "source": "https://opencode.ai/docs/go/",
+      "quote": "The table below provides an estimated request count based on typical Go usage patterns: ... Grok 4.6 | 169 | 423 | 845 ... The estimates use the following token counts per request; actual usage varies. Grok 4.6 — 390 input, 32,500 cached, 120 output tokens per request ... DeepSeek V4 Flash — 410 input, 71,300 cached, 310 output ...",
+      "currentValue": {
+        "build_adopted.py": "官方表 {req} req/月 × {tok} tok/req (e.g. grok-4.6 845 × (390+32500+120))",
+        "confidenceLabelInAdopted": "high"
+      },
+      "finding": "Official wording is explicit: request counts are estimates from typical patterns; per-request token mixes are assumptions; actual usage varies. Hard limits are the dollar pools (shared + per-model Usage), not the token/request numbers in the estimate table. Adopted converts estimate req×tok into monthly tokens—consistent with the table arithmetic, but those tokens are not an official hard token ceiling.",
+      "confidence": "high"
+    },
+    {
+      "item": "deepseek_v4_flash_pro_peak_offpeak_usd",
+      "status": "confirmed",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 / $0.022; PEAK $0.014 / $0.044. 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 / $0.66; PEAK $0.44 / $1.32. 1M OUTPUT TOKENS OFF-PEAK $0.66 / $1.98; PEAK $1.32 / $3.96. (columns: deepseek-v4-flash | deepseek-v4-pro). (1) Off-peak rates are half of the peak rates. Peak hours are 01:00 - 04:00 and 06:00 - 10:00 UTC, Monday through Friday (all other hours are off-peak).",
+      "currentValue": {
+        "list-prices-2026-09.json": {
+          "deepseek-v4-flash": {"peak": {"input": 0.44, "cachedInput": 0.014, "output": 1.32}, "offPeak": {"input": 0.22, "cachedInput": 0.007, "output": 0.66}},
+          "deepseek-v4-pro": {"peak": {"input": 1.32, "cachedInput": 0.044, "output": 3.96}, "offPeak": {"input": 0.66, "cachedInput": 0.022, "output": 1.98}}
+        },
+        "build_adopted.py_METERED": "Flash offpeak 0.007/0.22/0.66; peak 0.014/0.44/1.32; Pro offpeak 0.022/0.66/1.98; peak 0.044/1.32/3.96"
+      },
+      "finding": "Live USD table exactly matches archive and adopted metered rows. Official schedule has TWO time tiers (peak / off-peak), each with THREE token-type prices (cache hit, cache miss, output)—not three separate time-of-day tiers. CN page https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ matches with 元 prices (Flash peak cache-hit 0.10元 / miss 3.0元 / out 9.0元; off-peak half).",
+      "confidence": "high"
+    },
+    {
+      "item": "xai_grok45_vs_grok46_cached_price_difference",
+      "status": "confirmed",
+      "source": "https://docs.x.ai/developers/pricing",
+      "quote": "Embedded price fields: grok-4.6 cachedPromptTokenPrice=5000, cachedPromptTokenPriceLongContext=10000; grok-4.5 cachedPromptTokenPrice=3000, cachedPromptTokenPriceLongContext=6000; both share promptTextTokenPrice=20000 / completionTextTokenPrice=60000 (and long-context 40000 / 120000). Decoded USD/MTok: 4.6 cache $0.50 / long $1.00; 4.5 cache $0.30 / long $0.60; input $2/$4; output $6/$12.",
+      "currentValue": {
+        "list-prices-2026-09.json": {
+          "grok-4.6": {"input": 2.0, "cachedInput": 0.5, "output": 6.0, "longContextCached": 1.0},
+          "grok-4.5": {"input": 2.0, "cachedInput": 0.3, "output": 6.0, "longContextCached": 0.6}
+        },
+        "build_adopted.py": "xAI derived ratio Grok4.5=Grok4.6×1.0 with note「cached 0.3 vs 0.5，略多」"
+      },
+      "finding": "xAI API cache price difference is real and matches archive: 4.5 cheaper on cache ($0.30 vs $0.50; long $0.60 vs $1.00); input/output identical. RELATED CONFLICT (Cursor product table, not xAI API): https://cursor.com/docs/models-and-pricing lists both Cursor Grok 4.6 and Grok 4.5 as Input $2 / Cache Read $0.5 / Output $6—i.e. Cursor does NOT expose the $0.30 cache rate inside Cursor Models. Live source and archive conflict across products; both recorded, no reconciliation chosen.",
+      "confidence": "high"
+    },
+    {
+      "item": "cursor_composer25_standard_fast_prices_and_default",
+      "status": "confirmed",
+      "source": "https://cursor.com/docs/models/cursor-composer-2-5 ; https://cursor.com/docs/models-and-pricing ; https://cursor.com/blog/composer-2-5",
+      "quote": "Docs table: Composer 2.5 $0.5 / - / $0.2 / $2.5; Composer 2.5 (Fast) $3 / - / $0.5 / $15. Docs text: A faster variant ... at $3/M input and $15/M output tokens. Fast is the default in the product. Blog: Composer 2.5 is priced at $0.50/M input and $2.50/M output tokens. There's also a faster variant ... at $3.00/M input and $15.00/M output tokens ... Similar to Composer 2, fast is the default option.",
+      "currentValue": {
+        "list-prices-2026-09.json": {"input": 0.5, "cachedInput": 0.2, "output": 2.5, "fast": {"input": 3.0, "cachedInput": 0.5, "output": 15.0, "note": "Default in Cursor product"}},
+        "build_adopted.py": "Composer blended uses standard $0.5/$0.2/$2.5 vs Grok $2/$0.5/$6 → RATIO_COMPOSER≈2.57"
+      },
+      "finding": "Standard and Fast prices match archive. Fast is explicitly the product default. Note: adopted Composer ratio uses standard rates, while default product mode is Fast (6×-ish more expensive)—relevant if deriving Cursor-pool tokens from observed Fast usage.",
+      "confidence": "high"
+    },
+    {
+      "item": "cursor_composer25_same_pool_as_grok_subscription",
+      "status": "confirmed",
+      "source": "https://cursor.com/docs/models/cursor-composer-2-5 ; https://cursor.com/docs/models-and-pricing",
+      "quote": "On individual and team plans, Composer 2.5 draws from the Cursor Models pool with Cursor Grok 4.6 and Grok 4.5. ... two separate usage pools, each resetting with your monthly billing cycle: Cursor Models: Significantly more included usage for Cursor Grok 4.6, Grok 4.5, and Composer 2.5. Other Models: The pool for third-party models...",
+      "currentValue": {
+        "build_adopted.py": "Cursor Ultra/Pro Composer derived from Grok via compute-cost price ratio (same pool assumption)",
+        "quotas-web-2026-09": "Cursor Models pool for grok-4.6 / composer-2.5"
+      },
+      "finding": "Official docs confirm Composer 2.5 shares the Cursor Models included-usage pool with Cursor Grok 4.6 and Grok 4.5 (not the Other Models / third-party pool). Same-pool assumption used for ratio derivation is supported.",
+      "confidence": "high"
+    }
+  ],
+  "notFound": [
+    {
+      "item": "deepseek_v4_third_time_of_day_tier",
+      "wanted": "If「忙闲三段」meant three clock-time pricing bands beyond peak/off-peak",
+      "result": "Official EN+CN pricing pages only document peak and off-peak (off-peak = half of peak). No third time-of-day USD band found. Three columns exist per tier (cache hit / cache miss / output).",
+      "sourcesChecked": [
+        "https://api-docs.deepseek.com/quick_start/pricing/",
+        "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+      ]
+    },
+    {
+      "item": "xai_standalone_grok_4_6_and_4_5_model_pages",
+      "wanted": "Per-model docs pages at /developers/models/grok-4-6 and /grok-4-5",
+      "result": "Both URLs HTTP-redirected to https://docs.x.ai/developers/models index; pricing recovered from https://docs.x.ai/developers/pricing embedded fields instead.",
+      "sourcesChecked": [
+        "https://docs.x.ai/developers/models/grok-4-6",
+        "https://docs.x.ai/developers/models/grok-4-5",
+        "https://docs.x.ai/developers/pricing"
+      ]
+    }
+  ],
+  "conflictsRecordedWithoutReconciliation": [
+    {
+      "topic": "Grok 4.5 cached input price",
+      "xaiApi": "$0.30/MTok (<200k), $0.60 (>=200k) on docs.x.ai/developers/pricing",
+      "cursorProductTable": "$0.5 cache read on cursor.com/docs/models-and-pricing (same row as Grok 4.6)",
+      "archiveListPrices": "records xAI API $0.30"
+    },
+    {
+      "topic": "OpenAI Sol↔Terra/Luna/GPT-5.5 token ratios across columns",
+      "inputAndCached": "match ×2 / ×20 / ×0.8",
+      "output": "≈×1.667 / ×16.67 / ×0.667",
+      "adoptedScript": "applies input ratio to all tokens"
+    }
+  ]
+}

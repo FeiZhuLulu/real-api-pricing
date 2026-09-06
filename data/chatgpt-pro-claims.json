@@ -1,0 +1,178 @@
+{
+  "updatedAt": "2026-09-05",
+  "selectedMonthlyYi": null,
+  "official": {
+    "plusUsd": 20,
+    "pro5xUsd": 100,
+    "pro20xUsd": 200,
+    "multiplier": "Pro = Plus 的 5x / 20x",
+    "source": "https://learn.chatgpt.com/docs/pricing",
+    "checkedAt": "2026-09-05",
+    "localMessagesPer5h": {
+      "gpt-5.6-sol": {
+        "plus": [
+          10,
+          100
+        ],
+        "pro5x": [
+          50,
+          500
+        ],
+        "pro20x": [
+          200,
+          2000
+        ]
+      },
+      "gpt-5.6-terra": {
+        "plus": [
+          25,
+          200
+        ],
+        "pro5x": [
+          125,
+          1000
+        ],
+        "pro20x": [
+          500,
+          4000
+        ]
+      },
+      "gpt-5.6-luna": {
+        "plus": [
+          250,
+          2000
+        ],
+        "pro5x": [
+          1250,
+          10000
+        ],
+        "pro20x": [
+          5000,
+          40000
+        ]
+      },
+      "gpt-5.5": {
+        "plus": [
+          15,
+          80
+        ],
+        "pro5x": [
+          75,
+          400
+        ],
+        "pro20x": [
+          300,
+          1600
+        ]
+      }
+    },
+    "creditsPerMTok": {
+      "gpt-5.6-sol": {
+        "input": 100,
+        "cached": 10,
+        "output": 500
+      },
+      "gpt-5.6-terra": {
+        "input": 50,
+        "cached": 5,
+        "output": 300
+      },
+      "gpt-5.6-luna": {
+        "input": 5,
+        "cached": 0.5,
+        "output": 30
+      },
+      "gpt-5.5": {
+        "input": 125,
+        "cached": 12.5,
+        "output": 750
+      }
+    },
+    "notes": [
+      "5h 是消息区间，不是 token 帽；另有 weekly limits",
+      "同一信用池里 5.5 比 Sol 贵 25%，同样积分换到的 5.5 token 更少",
+      "2026-06-11 至 06-24 邀请可给 banked rate-limit reset，30 天内可用"
+    ]
+  },
+  "apiPrices": {
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checkedAt": "2026-09-05",
+    "gpt-5.6-sol_short": {
+      "input": 4,
+      "cached": 0.4,
+      "output": 20,
+      "promoThrough": "2026-11-21"
+    },
+    "gpt-5.6-terra_short": {
+      "input": 2,
+      "cached": 0.2,
+      "output": 12
+    },
+    "gpt-5.6-luna_short": {
+      "input": 0.2,
+      "cached": 0.02,
+      "output": 1.2
+    },
+    "arena_gpt55_listed": {
+      "input": 5,
+      "output": 30
+    }
+  },
+  "tokenClaims": [
+    {
+      "monthlyYi": 6.16,
+      "weeklyYi": 1.54,
+      "model": "gpt-5.6-sol",
+      "plan": "ChatGPT Plus Codex",
+      "source": "https://github.com/mahonzhan/awesome-coding-plan",
+      "asOf": "2026-07-30",
+      "note": "ACP 主表明确标 Codex gpt-5.6-sol"
+    },
+    {
+      "monthlyYi": 123.2,
+      "model": "gpt-5.6-sol",
+      "plan": "ChatGPT Pro 20x",
+      "how": "6.16 × 20",
+      "source": "SubPlan/data/quotas.json",
+      "field": "chatgpt_pro_20x.modelUsage[gpt-5.6-sol]",
+      "asOf": "2026-09-01"
+    },
+    {
+      "monthlyYi": 200,
+      "model": null,
+      "plan": "GPT Pro 20",
+      "how": "用户文章：有人反应能用 200 亿。可能算了周重置，或是 5.5 用量",
+      "impliedOfficialBlendUsdPerMTok": 0.7,
+      "articleBookValueUsd": 14000,
+      "source": "用户文章"
+    },
+    {
+      "monthlyYiClass": "100+",
+      "plan": "Codex 20x",
+      "source": "https://x.com/tak_ltc/status/2082475833562914946",
+      "asOf": "2026-07-29"
+    },
+    {
+      "monthlyYi": 123.2,
+      "model": "gpt-5.6-luna",
+      "plan": "ChatGPT Plus 计划级",
+      "how": "Luna 信用当量，不能当 Sol",
+      "source": "SubPlan chatgpt_plus estimatedTextWorkloadCapacityMTokens"
+    },
+    {
+      "monthlyYi": 2464,
+      "model": "gpt-5.6-luna",
+      "plan": "ChatGPT Pro 20x 计划级",
+      "how": "Plus Luna ×20",
+      "source": "SubPlan chatgpt_pro_20x estimatedTextWorkloadCapacityMTokens"
+    }
+  ],
+  "arithmeticAgainst200yi": {
+    "plusWeeklyYi": 1.54,
+    "proWeeklyYiIfX20": 30.8,
+    "times4weeks": 123.2,
+    "times30over7": 132,
+    "weeksToReach200": 6.49,
+    "note": "只是对照，不是实测。ACP/SubPlan 没有 5.5 月 token 行"
+  }
+}

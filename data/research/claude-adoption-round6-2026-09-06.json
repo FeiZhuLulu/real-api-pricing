@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-09-06",
+  "effectiveFrom": "2026-09-14",
+  "sourceType": "user_provided_decision_and_source_verification",
+  "userProvidedPermanentBasis": "永久基准：47.2亿/周 ×4 ÷1.5 ×1.25 ≈157亿/月；参考区间110~200亿；量级证据较强，单点精度medium更诚实。",
+  "userWeeklyRatioClarification": "claude20x的周额度实际是5x的2x，也就是20x实际是10x的周额度，只是5小时限额是20x",
+  "adoption": {
+    "claudeMax20xMonthlyYi": 157,
+    "claudeMax20xPreviousMonthlyYi": 80,
+    "claudeMax5xMonthlyYi": 78.5,
+    "claudeMax5xPreviousMonthlyYi": 35.6,
+    "weeklyPoolRatio20xTo5x": 2,
+    "confidence": "medium",
+    "range20xMonthlyYi": [110, 200],
+    "note": "157是按用户提供的永久口径取整采用值；5x=157/2。5小时窗口倍数与周池比例不可混用；36/70亿候选均不采；旧2.25周池比例保留为未采用历史证据。"
+  },
+  "sources": [
+    {
+      "url": "https://zenn.dev/skipbit/articles/2026-08-token-call-count",
+      "quote": "1晩目953.9M、週次41%→57%；2晩目850.3M、61%→79%。私の4週間も1つではありませんでした。2晩目はループが始まる前の作業が30分ほど入っています。",
+      "note": "原文已核对；Max20x混合模型负载，非纯Opus5实测。每1% raw token有32.8~59.8M变化，不能声明固定线性硬上限。"
+    },
+    {
+      "url": "https://the-decoder.com/anthropics-claude-code-limit-change-is-a-raise-on-paper-but-a-cut-in-practice/",
+      "quote": "Starting September 14, the baseline limits ... permanently increase by 25 percent ... a temporary 50 percent boost is currently active.",
+      "note": "媒体转述官方声明；活动实测转永久口径乘1.25/1.5，9月14日前并非现行活动额度。"
+    }
+  ],
+  "notAdopted": [
+    {
+      "item": "Claude Pro Opus5约1.9亿/月",
+      "reason": "由假定周消息数和跨来源token/request拼接，没有纯Opus5的token+周%匹配实测；用户未确认采用。暂保留Opus4.8历史15.88亿及Sonnet39.7亿，不将新推算宣称为实测收紧。"
+    },
+    {
+      "item": "Claude Max5x 36或70亿候选",
+      "reason": "用户明确周池20x/5x=2，现采用78.5亿；不再采用跨来源消息数推算或旧2.25倍率。"
+    }
+  ],
+  "archivedResearch": "data/research/claude-quotas-round5-2026-09.json",
+  "caveats": "量级支持不等于单模型精确额度验证；Sonnet、Opus4.8、Fable均为派生。保留原文件，不覆盖活动期及矛盾来源。"
+}

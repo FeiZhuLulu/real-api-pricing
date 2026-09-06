@@ -1,0 +1,13 @@
+# Local archive; never publish it (it may contain private diagnostics).
+/_backup/
+/tmp/
+/_build/
+__pycache__/
+*.py[cod]
+node_modules/
+.venv/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

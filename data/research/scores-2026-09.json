@@ -1,0 +1,541 @@
+{
+  "collectedAt": "2026-09-05",
+  "boards": [
+    {
+      "boardId": "arena_agent_mode",
+      "name": "Agent Arena · Overall (Ranking / Pareto)",
+      "url": "https://arena.ai/leaderboard/agent",
+      "paretoUrl": "https://arena.ai/leaderboard/agent/pareto",
+      "metric": "Net Improvement %",
+      "secondaryMetric": "Median cost per task USD (P50, last 14 days)",
+      "snapshotDate": "2026-09-01",
+      "note": "Page header: Sep 1, 2026 · 2,188,416 sessions · 58 models. Pareto title: Net Improvement x Cost/task from real Agent Mode tasks."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index v4.1.1",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "2026-09-05",
+      "note": "Charts on artificialanalysis.ai are client-rendered; numbers taken from https://r.jina.ai/https://artificialanalysis.ai/leaderboards/models text extract of the live leaderboard."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "name": "Artificial Analysis Coding Agent Index",
+      "url": "https://artificialanalysis.ai/agents/coding-agents",
+      "metric": "Coding Agent Index (avg pass@1 across DeepSWE, Terminal-Bench v2.1, SWE-Atlas-QnA)",
+      "snapshotDate": "2026-09-05",
+      "note": "Page confirms the index exists but numeric leaderboard cells were not exposed in static HTML / jina extract ('Not publicly available' style empty charts)."
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (High)",
+      "score": 13.74,
+      "secondary": { "medianCostPerTaskUsd": 2.43, "rank": 1, "sessions": 21688 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (Max)",
+      "score": 11.69,
+      "secondary": { "medianCostPerTaskUsd": 3.76, "rank": 2, "sessions": 17295 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Fable 5 (High)",
+      "score": 10.61,
+      "secondary": { "medianCostPerTaskUsd": 2.37, "rank": 3, "sessions": 35190 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "GPT 5.6 Sol (xHigh)",
+      "score": 9.49,
+      "secondary": { "medianCostPerTaskUsd": 1.24, "rank": 4, "sessions": 28781 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Opus 4.8 (High)",
+      "score": 9.22,
+      "secondary": { "medianCostPerTaskUsd": 1.63, "rank": 5, "sessions": 37142 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k3",
+      "variantLabel": "Kimi K3 (Max)",
+      "score": 8.71,
+      "secondary": { "medianCostPerTaskUsd": 0.81, "rank": 6, "sessions": 95285 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.5",
+      "variantLabel": "GPT 5.5 (xHigh)",
+      "score": 7.53,
+      "secondary": { "medianCostPerTaskUsd": 1.05, "rank": 7, "sessions": 50330 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-sonnet-5",
+      "variantLabel": "Claude Sonnet 5 (High)",
+      "score": 7.51,
+      "secondary": { "medianCostPerTaskUsd": 0.87, "rank": 8, "sessions": 27742 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "grok-4.5",
+      "variantLabel": "Grok 4.5",
+      "score": 6.17,
+      "secondary": { "medianCostPerTaskUsd": 0.43, "rank": 12, "sessions": 34266 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "hy4-preview",
+      "variantLabel": "Hy4 preview",
+      "score": 5.97,
+      "secondary": { "medianCostPerTaskUsd": 0.26, "rank": 13, "sessions": 8994 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "DeepSeek V4 Pro (High) (0813)",
+      "score": 5.91,
+      "secondary": { "medianCostPerTaskUsd": 0.23, "rank": 16, "sessions": 26473 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "grok-4.6",
+      "variantLabel": "Grok 4.6 (xHigh)",
+      "score": 5.33,
+      "secondary": { "medianCostPerTaskUsd": 1.06, "rank": 17, "sessions": 15796 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.3-flash",
+      "variantLabel": "GLM 5.3 Flash",
+      "score": 4.03,
+      "secondary": { "medianCostPerTaskUsd": 0.11, "rank": 21, "sessions": 11994 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.3",
+      "variantLabel": "GLM 5.3 (Max)",
+      "score": 3.74,
+      "secondary": { "medianCostPerTaskUsd": 0.45, "rank": 22, "sessions": 43951 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "GPT 5.6 Terra (xHigh)",
+      "score": 3.01,
+      "secondary": { "medianCostPerTaskUsd": 0.42, "rank": 23, "sessions": 17046 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-flash",
+      "variantLabel": "Deepseek V4 Flash (High) (20260731)",
+      "score": 2.85,
+      "secondary": { "medianCostPerTaskUsd": 0.15, "rank": 25, "sessions": 52887 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "GPT 5.6 Luna (xHigh)",
+      "score": 2.15,
+      "secondary": { "medianCostPerTaskUsd": 0.08, "rank": 28, "sessions": 17115 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k2.7-code",
+      "variantLabel": "Kimi K2.7 Code",
+      "score": 1.24,
+      "secondary": { "medianCostPerTaskUsd": 0.16, "rank": 29, "sessions": 11142 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.7-flash",
+      "variantLabel": "Gemini 3.7 Flash (High)",
+      "score": 0.84,
+      "secondary": { "medianCostPerTaskUsd": 0.37, "rank": 33, "sessions": 24413 },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "hy3",
+      "variantLabel": "Hy3",
+      "score": -1.51,
+      "secondary": { "medianCostPerTaskUsd": 0.06, "rank": 38, "sessions": 23428, "signNote": "Negative confirmed on Pareto page; ranking table markdown dropped the minus sign" },
+      "source": "https://arena.ai/leaderboard/agent/pareto",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.7-plus",
+      "variantLabel": "Qwen3.7 Plus",
+      "score": -2.91,
+      "secondary": { "medianCostPerTaskUsd": 0.11, "rank": 40, "sessions": 18987, "signNote": "Below zero on Overall ranking; absolute value from ranking table, minus inferred from sort order + Pareto negatives for nearby models" },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.1-pro",
+      "variantLabel": "Gemini 3.1 Pro Preview",
+      "score": -3.32,
+      "secondary": { "medianCostPerTaskUsd": 0.31, "rank": 43, "sessions": 83517, "signNote": "Below zero; absolute from ranking table" },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m3",
+      "variantLabel": "Minimax M3",
+      "score": -3.57,
+      "secondary": { "medianCostPerTaskUsd": 0.13, "rank": 44, "sessions": 35755, "signNote": "Below zero; absolute from ranking table" },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.5-pro",
+      "variantLabel": "Mimo V2.5 Pro",
+      "score": -3.57,
+      "secondary": { "medianCostPerTaskUsd": 0.05, "rank": 45, "sessions": 36495, "signNote": "Negative confirmed on Pareto page (-3.57%)" },
+      "source": "https://arena.ai/leaderboard/agent/pareto",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m2.7",
+      "variantLabel": "Minimax M2.7",
+      "score": -10.6,
+      "secondary": { "medianCostPerTaskUsd": 0.08, "rank": 51, "sessions": 36015, "signNote": "Below zero; absolute from ranking table" },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05"
+    },
+
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (max)",
+      "score": 63,
+      "secondary": { "costPerTaskUsd": 2.34 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05",
+      "note": "Via jina text extract of live AA models leaderboard"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (xhigh)",
+      "score": 63,
+      "secondary": { "costPerTaskUsd": 1.8 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (high)",
+      "score": 61,
+      "secondary": { "costPerTaskUsd": 1.23 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Fable 5 (with fallback)",
+      "score": 62,
+      "secondary": { "costPerTaskUsd": 3.14 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "GPT-5.6 Sol (max)",
+      "score": 61,
+      "secondary": { "costPerTaskUsd": 0.95 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "GPT-5.6 Sol (xhigh)",
+      "score": 59,
+      "secondary": { "costPerTaskUsd": 0.63 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "grok-4.6",
+      "variantLabel": "Grok 4.6 (high)",
+      "score": 61,
+      "secondary": { "costPerTaskUsd": 0.94 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "grok-4.6",
+      "variantLabel": "Grok 4.6 (xhigh)",
+      "score": 60,
+      "secondary": { "costPerTaskUsd": 1.23 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "kimi-k3",
+      "variantLabel": "Kimi K3 (max)",
+      "score": 60,
+      "secondary": { "costPerTaskUsd": 0.84 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "glm-5.3",
+      "variantLabel": "GLM-5.3 (max)",
+      "score": 60,
+      "secondary": { "costPerTaskUsd": 0.68 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "glm-5.3-flash",
+      "variantLabel": "GLM-5.3-Flash",
+      "score": 57,
+      "secondary": { "costPerTaskUsd": 0.09 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "GPT-5.6 Terra (max)",
+      "score": 57,
+      "secondary": { "costPerTaskUsd": 0.53 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "GPT-5.6 Terra (xhigh)",
+      "score": 53,
+      "secondary": { "costPerTaskUsd": 0.32 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gemini-3.7-flash",
+      "variantLabel": "Gemini 3.7 Flash (high)",
+      "score": 56,
+      "secondary": { "costPerTaskUsd": 0.4 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "grok-4.5",
+      "variantLabel": "Grok 4.5 (high)",
+      "score": 56,
+      "secondary": { "costPerTaskUsd": 0.43 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-sonnet-5",
+      "variantLabel": "Claude Sonnet 5 (max)",
+      "score": 55,
+      "secondary": { "costPerTaskUsd": 1.72 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "DeepSeek V4 Pro 0813 (max)",
+      "score": 53,
+      "secondary": { "costPerTaskUsd": 0.27 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "GPT-5.6 Luna (max)",
+      "score": 52,
+      "secondary": { "costPerTaskUsd": 0.05 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "GPT-5.6 Luna (xhigh)",
+      "score": 50,
+      "secondary": { "costPerTaskUsd": 0.03 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "deepseek-v4-flash",
+      "variantLabel": "DeepSeek V4 Flash 0731 (max)",
+      "score": 52,
+      "secondary": { "costPerTaskUsd": 0.11 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gemini-3.1-pro",
+      "variantLabel": "Gemini 3.1 Pro Preview",
+      "score": 48,
+      "secondary": { "costPerTaskUsd": 0.33 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "minimax-m3",
+      "variantLabel": "MiniMax-M3",
+      "score": 45,
+      "secondary": { "costPerTaskUsd": 0.14 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "kimi-k2.7-code",
+      "variantLabel": "Kimi K2.7 Code",
+      "score": 43,
+      "secondary": { "costPerTaskUsd": 0.22 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "mimo-v2.5-pro",
+      "variantLabel": "MiMo-V2.5-Pro",
+      "score": 43,
+      "secondary": { "costPerTaskUsd": 0.03 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "hy3",
+      "variantLabel": "Hy3",
+      "score": 42,
+      "secondary": { "costPerTaskUsd": 0.04 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "qwen3.7-plus",
+      "variantLabel": "Qwen3.7 Plus",
+      "score": 39,
+      "secondary": { "costPerTaskUsd": 0.17 },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Opus 4.8",
+      "score": 57.3,
+      "secondary": {},
+      "source": "https://www.requesty.ai/models/rankings/intelligence",
+      "checkedAt": "2026-09-05",
+      "note": "Not present in the jina extract of AA leaderboard top/mid list; recorded from Requesty mirror of AA Intelligence Index (snapshot page also lists 57.3)."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-5.5",
+      "variantLabel": "GPT-5.5",
+      "score": 56,
+      "secondary": {},
+      "source": "https://cheapestinference.com/reports/llm-pareto-frontier/",
+      "checkedAt": "2026-09-05",
+      "note": "Edition 2026-08 AA-derived table lists GPT-5.5 at 56. Not clearly labeled in the jina extract of the live AA leaderboard (only GPT-5.5 Instant / Pro rows seen)."
+    }
+  ],
+  "notFound": [
+    {
+      "boardId": "arena_agent_mode",
+      "model": "composer-2.5",
+      "reason": "Not present among the 58 models on Agent Arena Overall ranking / Pareto pages when checked."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "hy4-preview",
+      "reason": "Not found in jina extract of https://artificialanalysis.ai/leaderboards/models on 2026-09-05."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "minimax-m2.7",
+      "reason": "Not found in jina extract of AA models leaderboard on 2026-09-05 (MiniMax-M3 is present at 45)."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "composer-2.5",
+      "reason": "Not on current Intelligence Index extract. Older May 2026 AA article reported Coding Agent Index 62 for Composer 2.5, but that is a different board and likely stale — not copied into scores."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "*",
+      "reason": "Coding Agent Index page confirms the metric but does not expose numeric rows in static/jina extract; no per-model scores recorded rather than guessing."
+    }
+  ]
+}
