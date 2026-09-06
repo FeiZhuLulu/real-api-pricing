@@ -1,0 +1,84 @@
+订阅额度总览 · 套餐 × 实际服务模型
+月 = 4 周，饱和使用；全口径 token；按量 API 无月额度，不参与额度排序
+同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。
+颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。
+† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。Go为官方典型估算；Composer Fast为产品默认模式。
+汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
+汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
+序号  套餐                               价格/月   服务模型           月额度(亿)  $/MTok   置信度
+----  ---------------------------------  --------  -----------------  ----------  -------  ------
+1     ChatGPT Pro 20x                    USD 200   gpt-5.6-luna       2402.03     0.00083  medium
+2     ChatGPT Pro 5x                     USD 100   gpt-5.6-luna       600.507     0.00167  medium
+3     Claude Max 20x (9/14+)             USD 200   claude-sonnet-5    392.5       0.0051   medium
+4     ChatGPT Pro 20x                    USD 200   gpt-5.6-terra      240.203     0.00833  medium
+5     Claude Max 5x (9/14+)              USD 100   claude-sonnet-5    196.25      0.0051   low   
+6     Cursor Ultra (Standard)            USD 200   composer-2.5       165.1       0.01211  medium
+7     Claude Max 20x (9/14+)             USD 200   claude-opus-5      157         0.01274  medium
+8     Claude Max 20x (9/14+)             USD 200   claude-opus-4.8    157         0.01274  low   
+9     ChatGPT Pro 20x                    USD 200   gpt-5.6-sol        123.2       0.01623  high  
+10    GLM Coding Max (新客 ¥1078)        CNY 1078  glm-5.3-flash      122.84      0.01295  high  
+11    GLM Coding Max (老客 ¥469)         CNY 469   glm-5.3-flash      122.84      0.00563  high  
+12    ChatGPT Plus                       USD 20    gpt-5.6-luna       120.101     0.00167  medium
+13    MiniMax Token Plan Ultra (Global)  USD 132   minimax-m3         98          0.01347  high  
+14    ChatGPT Pro 20x                    USD 200   gpt-5.5            96.081      0.02082  medium
+15    Claude Max 5x (9/14+)              USD 100   claude-opus-5      78.5        0.01274  medium
+16    MiniMax Token Plan Ultra           CNY 469   minimax-m3         71          0.00974  high  
+17    Cursor Ultra                       USD 200   grok-4.6           64.2        0.03115  medium
+18    Cursor Ultra                       USD 200   grok-4.5           64.2        0.03115  medium
+19    ChatGPT Pro 5x                     USD 100   gpt-5.6-terra      60.051      0.01665  medium
+20    Cursor Ultra (Composer Fast)       USD 200   composer-2.5       58.532      0.03417  medium
+21    GLM Coding Pro (新客 ¥538)         CNY 538   glm-5.3-flash      52.64       0.01508  high  
+22    GLM Coding Pro (老客 ¥149)         CNY 149   glm-5.3-flash      52.64       0.00418  high  
+23    MiniMax Token Plan Max (Global)    USD 55    minimax-m3         51          0.01078  high  
+24    SuperGrok Heavy                    USD 300   grok-4.6           50.9        0.05894  medium
+25    SuperGrok Heavy                    USD 300   grok-4.5           50.9        0.05894  medium
+26    Cursor Pro+ (Standard)             USD 60    composer-2.5       44.027      0.01363  low   
+27    GLM Coding Max (新客 ¥1078)        CNY 1078  glm-5.3            40.56       0.03921  high  
+28    GLM Coding Max (老客 ¥469)         CNY 469   glm-5.3            40.56       0.01706  high  
+29    Claude Pro                         USD 20    claude-sonnet-5    39.7        0.00504  medium
+30    Kimi 会员 699 †                    CNY 699   kimi-k3            34.83       0.02961  medium
+31    ChatGPT Pro 5x                     USD 100   gpt-5.6-sol        30.8        0.03247  medium
+32    Cursor Ultra (Fast)                USD 200   grok-4.6           30.3        0.06601  high  
+33    OpenCode Go                        USD 10    deepseek-v4-flash  27.224      0.00367  medium
+34    ChatGPT Pro 5x                     USD 100   gpt-5.5            24.02       0.04163  medium
+35    SuperGrok Plus                     USD 100   grok-4.6           20.4        0.04902  medium
+36    MiniMax Token Plan Max             CNY 119   minimax-m3         18          0.00975  high  
+37    GLM Coding Pro (新客 ¥538)         CNY 538   glm-5.3            17.4        0.04561  high  
+38    GLM Coding Pro (老客 ¥149)         CNY 149   glm-5.3            17.4        0.01263  high  
+39    Cursor Pro+                        USD 60    grok-4.6           17.12       0.03505  medium
+40    MiniMax Token Plan Plus (Global)   USD 22    minimax-m3         17          0.01294  high  
+41    MiniMax Token Plan Plus (Global)   USD 22    minimax-m2.7       17          0.01294  medium
+42    Claude Pro                         USD 20    claude-opus-4.8    15.88       0.01259  medium
+43    Cursor Pro+ (Composer Fast)        USD 60    composer-2.5       15.609      0.03844  low   
+44    OpenCode Go                        USD 10    mimo-v2.5-pro      14.196      0.00704  medium
+45    OpenCode Go                        USD 10    qwen3.7-plus       12.461      0.00803  medium
+46    Cursor Pro (Standard)              USD 20    composer-2.5       12.087      0.01655  medium
+47    Claude Max 20x (9/14+)             USD 200   claude-fable-5     12.077      0.16561  low   
+48    ChatGPT Plus                       USD 20    gpt-5.6-terra      12.01       0.01665  medium
+49    Kimi 会员 199 †                    CNY 199   kimi-k3            11.61       0.02529  medium
+50    Claude Max 5x (9/14+)              USD 100   claude-fable-5     9.235       0.10828  low   
+51    OpenCode Go                        USD 10    minimax-m3         9.072       0.01102  medium
+52    GLM Coding Lite (新客 ¥118)        CNY 118   glm-5.3-flash      8.76        0.01987  high  
+53    GLM Coding Lite (老客 ¥49)         CNY 49    glm-5.3-flash      8.76        0.00825  high  
+54    ChatGPT Plus                       USD 20    gpt-5.6-sol        6.16        0.03247  medium
+55    MiniMax Token Plan Plus            CNY 49    minimax-m3         6           0.01205  high  
+56    MiniMax Token Plan Plus            CNY 49    minimax-m2.7       6           0.01205  medium
+57    OpenCode Go                        USD 10    gpt-5.6-luna       5.25        0.01905  medium
+58    SuperGrok                          USD 30    grok-4.6           5.09        0.05894  high  
+59    SuperGrok                          USD 30    grok-4.5           5.09        0.05894  medium
+60    OpenCode Go                        USD 10    hy4-preview        4.917       0.02034  medium
+61    ChatGPT Plus                       USD 20    gpt-5.5            4.804       0.04163  medium
+62    Cursor Pro                         USD 20    grok-4.6           4.7         0.04255  medium
+63    OpenCode Go                        USD 10    glm-5.3-flash      4.44        0.02252  medium
+64    OpenCode Go                        USD 10    deepseek-v4-pro    4.318       0.02316  medium
+65    Cursor Pro (Composer Fast)         USD 20    composer-2.5       4.285       0.04667  medium
+66    OpenCode Go                        USD 10    kimi-k2.7-code     3.785       0.02642  medium
+67    GLM Coding Lite (新客 ¥118)        CNY 118   glm-5.3            2.9         0.06003  high  
+68    GLM Coding Lite (老客 ¥49)         CNY 49    glm-5.3            2.9         0.02493  high  
+69    Kimi 会员 99 †                     CNY 99    kimi-k3            2.32        0.06295  medium
+70    阿里云百炼 Coding Plan Pro         CNY 200   qwen3.7-plus       1.98        0.14901  medium
+71    Alibaba Cloud Coding Plan Pro      USD 50    qwen3.7-plus       1.98        0.25253  low   
+72    SuperGrok Lite                     USD 10    grok-4.6           1.5         0.06667  low   
+73    OpenCode Go                        USD 10    glm-5.3            0.571       0.17513  medium
+74    OpenCode Go                        USD 10    kimi-k3            0.381       0.26247  medium
+75    OpenCode Go                        USD 10    grok-4.6           0.279       0.35842  medium

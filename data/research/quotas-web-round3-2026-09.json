@@ -1,0 +1,188 @@
+{
+  "collectedAt": "2026-09-05",
+  "scopeNote": "第三轮：只攻 Claude Max 5x/20x、xAI SuperGrok/Plus/Heavy（Grok Build）、Cursor Pro+。换策略：ccusage/工具硬编码周上限、/usage 与 token+% 同框、linux.do/V2EX 打满与 dollars÷%、GitHub Hermes/Grok meter、forum.cursor cents+% 反推。不重复抄录前两轮已有条目；低质量博客/无数字综述不收录。",
+  "items": [
+    {
+      "planId": "cursor_pro_plus",
+      "priceUsd": 60,
+      "model": "Cursor Models pool (Grok 4.5/4.6 + Composer 2.5)",
+      "claim": "Pro+ 账号：dashboard API totalCents 合计约 $214.74 = Cursor Models 26.8% → 反推第一方池约 $800/月；同账号分模型交叉验证均落在 ~$799–$807",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "美元池（request compute / totalCents），非 raw token。作者估计高 cache 占比下约 15–35 亿 raw tokens/月量级，但本条只采 $800 池硬数字",
+      "evidenceType": "dashboard_screenshot",
+      "source": "https://linux.do/t/topic/2765049",
+      "sourceDate": "2026-08-17",
+      "quote": "我自己的 Pro+ 订阅，把所有 Cursor 第一方模型对应的 cents 加起来合计大约 $214.74，而 Dashboard 显示它消耗了 26.8%。反推出来 Pro+ 第一方池大概率就是 $800。… Grok 4.5 high-fast：$172.72 / 21.6% ≈ $800；Grok 4.6 high-fast：$20.17 / 2.5% ≈ $807；Composer 2.5 fast：$9.59 / 1.2% ≈ $799",
+      "confidence": "high",
+      "note": "方法与 Ultra 金标准同型（用量绝对值 ÷ %）。相对 Pro 第一方社区常见 ~$300–$450 约为 1.8–2.7×，不是简单「整池 3× Pro」；Other Models 官方曾标 Pro+ $70 vs Pro $20≈3.5×（见下条历史文档）。现行 docs 公开页只写 Included。"
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "priceUsd": 60,
+      "model": "Other Models (third-party API pool)",
+      "claim": "官方个人方案页（历史表述仍被社区引用）：Pro+ 含 $70 API agent usage；Pro $20、Ultra $400 —— Pro+ Other Models ≈ 3.5× Pro",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "美元 API 池；与 Cursor Models 第一方池分离。2026-09 现行 models-and-pricing 公开表已改为只写 Included，不再印 $70",
+      "evidenceType": "official_doc",
+      "source": "https://cursor.com/docs/account/pricing",
+      "sourceDate": "2026-03+",
+      "quote": "Pro Plus includes $70 of API agent usage + generous Auto and Composer usage",
+      "confidence": "medium",
+      "note": "论坛员工亦写过「Pro+ included is $70 vs Pro’s $20… about 3.5x」（forum.cursor.com/t/159902）。可验证「对 Other Models 接近 3×+ Pro」；不能单独证明 Cursor Models raw token 也是 3×。"
+    },
+    {
+      "planId": "cursor_ultra",
+      "priceUsd": 200,
+      "model": "grok-4.6-xhigh (Cursor Models)",
+      "claim": "同帖 Ultra 截图交叉：Grok 4.6 xhigh 1037.9M tokens = Cursor Models 16.6%；作者用 token 构成估 23.4% 总池 ≈ $450–470 → 反推 Ultra 第一方池约 $2,000",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "1037.9M/0.166≈62.5 亿 raw tokens 若线性外推全池——但官方按 compute cost 计，作者改为 cents 路径得 $2000。与项目 Ultra 61.0M=0.9%→67.8 亿同数量级",
+      "evidenceType": "dashboard_screenshot",
+      "source": "https://linux.do/t/topic/2765049",
+      "sourceDate": "2026-08-17",
+      "quote": "Grok 4.6 xhigh：1037.9M tokens，16.6% … 约 $460 / 23.4% ≈ $1,950，这就非常接近 $2,000",
+      "confidence": "high",
+      "note": "本轮为给 Pro+ $800 提供同方法对照而收录；非 Pro+ 本体。Pro+ $800 / Ultra $2000 ≈ 0.4×（第一方池），不是 60/200 价比也不是 3/20。"
+    },
+    {
+      "planId": "supergrok_heavy",
+      "priceUsd": 300,
+      "model": "shared weekly pool (Chat/Imagine/Voice/Build)",
+      "claim": "同账号对照：SuperGrok 周标价等效约 $90–$110；SuperGrok Heavy 约 $890≈$900/周（sub2api 用量 ÷ Settings/Usage %）",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "美元标价等效，非 raw token。若按 V2EX/linux.do Super 打满 ~1.27 亿 tokens ≈ ~$24 CLI 成本（高 cache）粗外推，Heavy≈10× 则 raw 可达约 10–12 亿/周量级，但计量权重未证明线性",
+      "evidenceType": "community_measurement",
+      "source": "https://linux.do/t/topic/2814273",
+      "sourceDate": "2026-08-26",
+      "quote": "Supergrok 订阅，取几个不同时间测试，在 $90 ~ $110 波动。Supergrok Heavy 订阅，目前看是 $890 左右，姑且认为是 $900",
+      "confidence": "high",
+      "note": "与项目内用户参考「Heavy ≈$250/周」差约 3.6×，方向上大幅高于 $250。作者强调无优惠/无 Cursor 绑定时正价 $300 Heavy 性价比差。@grok 仍称 exact sizes unpublished。"
+    },
+    {
+      "planId": "supergrok",
+      "priceUsd": 30,
+      "model": "Grok Build / shared weekly",
+      "claim": "linux.do：已用 9% ≈ $13 ≈ 13M tokens → 外推全周约 $144 / ~1.44 亿 tokens（与双倍消退后 V2EX ~1.27 亿同量级）",
+      "weeklyTokens": 144000000,
+      "monthlyTokens": 576000000,
+      "tokenCountingNote": "作者同时报刀与 token；cache/阶梯价会影响 $/token。monthly=×4",
+      "evidenceType": "ccusage_with_pct",
+      "source": "https://linux.do/t/topic/2771495",
+      "sourceDate": "2026-08-18",
+      "quote": "剛看了一下 用了9% 13刀 13m token 確實是150刀週限才對",
+      "confidence": "medium",
+      "note": "同帖另有「100–150 刀 / 1–1.5 亿」口述。不替代上一轮 V2EX 受控打满（127M@非双倍周）。"
+    },
+    {
+      "planId": "supergrok",
+      "priceUsd": 30,
+      "model": "Grok Build (dollar÷% during/after 4.6 double week)",
+      "claim": "另一用户：26% 限额对应约 $64.51（含阶梯）→ 双倍周全池约 $248，去掉首周双倍约 $125/周",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "美元等效；与 weddy $90–110、clp 外推 ~$144 同数量级带",
+      "evidenceType": "community_measurement",
+      "source": "https://linux.do/t/topic/2747320",
+      "sourceDate": "2026-08-13",
+      "quote": "实测SuperGrok 30$的订阅，26%限额蹬了64.51$左右的限额（考虑了阶梯计价），换算下来一周是250$的grok 4.6,由于第一周说是4.6的额度翻倍，因此实际上应该是125左右",
+      "confidence": "medium",
+      "note": "同帖口述区间另有 Super~$50/周、Heavy~$500/周与「打满体感只有三百多刀」矛盾样本，保留主测数字。"
+    },
+    {
+      "planId": "supergrok_plus",
+      "priceUsd": 100,
+      "model": "Grok Build shared weekly",
+      "claim": "Plus 用户体感：周额度约 $100 标价等效；Grok Build 用量「差不多每用一刀就涨 1%」",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "若 $1≈1% 成立则周池 ≈$100；介于 Super(~$90–150) 与 Heavy(~$900) 之间，接近 Super 而非 Heavy 的 1/3",
+      "evidenceType": "community_measurement",
+      "source": "https://linux.do/t/topic/2837349",
+      "sourceDate": "2026-08-31",
+      "quote": "plus 是一百刀的那个套餐吗？我用的感觉是一周 100 刀额度，我盯着 grok build 里的用量，差不多每用一刀就涨 1%",
+      "confidence": "medium",
+      "note": "无截图；同帖另有「Heavy 大概七八倍 Super」口述（非 10×）。官方 Settings→Usage 仍不公布绝对 token。"
+    },
+    {
+      "planId": "supergrok_heavy",
+      "priceUsd": 300,
+      "model": "grok-4.6 via Hermes xai-oauth (not Grok Build CLI)",
+      "claim": "SuperGrok Heavy：单下午 delegate 扇出 Insights 合计 ~110M total tokens（94.6% cache_read），周表估计跳 >20%，当日到 60%",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "Hermes Insights total≠订阅有效计量；作者明确 fresh+output 仅 ~6M。若字面 110M≈>20% 则周池 <5.5 亿 Insights-total，与 Build 高 cache 打满口径不可直接换算",
+      "evidenceType": "ccusage_with_pct",
+      "source": "https://github.com/NousResearch/hermes-agent/issues/85233",
+      "sourceDate": "2026-08-13",
+      "quote": "burned a large chunk of the weekly subscription meter (user estimate >20%, meter went to 60% with reset the same day). Hermes Insights reported ~110M “total tokens” … cache_read 104.0M (94.6%)",
+      "confidence": "medium",
+      "note": "证明 Heavy 有可读周 % 面板，且 OAuth/Hermes 路径 cache 仍啃周表；不能单独采为 Build 周 raw token 上限。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "Fable 5 weekly-scoped cap",
+      "claim": "Max x20 用户：单次重任务约 6M tokens、39 agents → 周 Fable 用量一次跳到 20%",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "Fable 独立周 cap（官方最多占全模型周池 50%）；且 Fable 在订阅内权重远高于 API 标价，6M raw ≠ 6M TV。若误按线性：Fable 周 raw≈30M，远小于全池",
+      "evidenceType": "other",
+      "source": "https://www.reddit.com/r/ClaudeAI/comments/1vxuf9r/usage_limits_discussion_hub_updated_on_25_august/",
+      "sourceDate": "2026-08-25",
+      "quote": "As a Claude Max x20 user, I literally just hit 20% in one prompt. (my weekly Fable usage) … totalling 39 agents and about 6M in tokens",
+      "confidence": "low",
+      "note": "有 token+% 但仅 Fable 分桶、无 ccusage 截图、无 all-models 周池。不能印证或推翻「Max20x≈80亿/月」。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "ccusage local logs (Fable 5 + Opus 4.8 dominant)",
+      "claim": "Max 20x 用户跑 ccusage：37 天本地日志 5.65B tokens / API 标价等效 $6,677（98% cache read）；未同时给出周 %",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "有绝对 token 与 $，无周额度 %，无法反推周池。日均 ~1.53 亿 tokens 若可持续则月约 45 亿 raw——仍受周 cap 与 Fable 权重约束",
+      "evidenceType": "other",
+      "source": "https://www.reddit.com/r/ClaudeAI/comments/1v3pfbh/ran_ccusage_on_my_max_20x_6677_of_apirate_usage/",
+      "sourceDate": "2026-07-22",
+      "quote": "Max 20x, Claude Code, mostly Fable 5 and Opus 4.8 … $6,677.54 total in 37 days … 5.65B tokens: 60M input, 31M output, 5.55B cached",
+      "confidence": "medium",
+      "note": "说明重度 Max20x 可跑出数十亿 raw（含 cache）；缺 % 故不能升级为周池硬测。工具硬编码方面：LinkedIn 一文把 Max20x WEEKLY_LIMIT=202_000_000 写入脚本，量级远低于社区 TV/口述，本轮不采为共识上限。"
+    }
+  ],
+  "notFound": [
+    {
+      "planId": "claude_max_20x",
+      "wanted": "2026-08 后 Opus 5 / Fable 5 为主、同时含 ccusage（或等价）绝对 token 与 all-models 周额度 % 的可核验面板，用于印证或推翻参考「约 80 亿/月」",
+      "searched": "ccusage weekly/blocks、Claude Code /usage、anthropics/claude-code issues 2026-08~09、ryoppippi/ccusage、claude-monitor/ccu 硬编码、linux.do/V2EX/知乎「Max 20x」「亿token」「打满」、Reddit hub、X",
+      "result": "仍无金标准同框。新得：Fable 分桶 6M≈20%（低置信）、37 天 5.65B 无 %、工具默认周上限不可信。前两轮 TV 1412M/周与 Jul-09「2B@25%」口述仍是最接近的间接源；官方不公布绝对 token。"
+    },
+    {
+      "planId": "claude_max_5x",
+      "wanted": "同上，Max 5x 的 token+% 同框面板",
+      "searched": "同上 + wakamex/ccusage 示例仅有 % 无绝对 token",
+      "result": "无新面板。仅有第二轮已录 TV 628M/周与 linux.do「~$1600/周 API 等价」美元口径。"
+    },
+    {
+      "planId": "supergrok_plus",
+      "wanted": "Plus $100 的 Settings→Usage / Grok Build：绝对 token 数 + 周 %（或受控打满外推）",
+      "searched": "linux.do「super grok plus 用量」、X @grok、GitHub Hermes/QuotaKit",
+      "result": "仅有「~$100/周、$1≈1%」体感，无 token+% 截图或打满表。官方仍 unpublished exact sizes。"
+    },
+    {
+      "planId": "supergrok_heavy",
+      "wanted": "Heavy 在 Grok Build 内受控打满：token 增量 + 周 %（对标 $30 档 V2EX 方法），或官方周 token/credits 表",
+      "searched": "linux.do Heavy 打满、X SuperGrok Heavy Build usage、hermes-agent、fulcrum-grok-meter、xAI docs",
+      "result": "新得美元÷% ≈$900/周（高置信）与 Hermes 110M/>20%（中置信、非 Build CLI）。仍缺 Build 路径上「token+%」金标准截图；用户参考 $250/周未被公开源复现，且与 $900 口径冲突。"
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "wanted": "Included Usage 面板某一行同时显示 raw token 数与 %（对标 Ultra 61.0M=0.9%）",
+      "searched": "forum.cursor.com、r/cursor、linux.do、X、现行 Cursor docs",
+      "result": "未找到 Pro+ 行级 token+%。改用 cents+% 反推得 Cursor Models ≈$800（高置信）与历史 Other Models $70≈3.5×Pro。现行公开 docs 已隐藏绝对美元，只留 Included。"
+    }
+  ]
+}

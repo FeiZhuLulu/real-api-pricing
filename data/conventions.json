@@ -1,0 +1,32 @@
+{
+  "updatedAt": "2026-09-05",
+  "project": "真实API定价",
+  "role": "只收集资料，不选定未对齐口径，不画帕累托",
+  "formula": "订阅价 ÷ 用户实际能用到的月 token = 真实混合单价",
+  "usdPerCny": 6.7787,
+  "exchangeRate": {
+    "date": "2026-09-04",
+    "pair": "USD/CNY",
+    "units": "CNY per USD; legacy field usdPerCny stores this direction",
+    "kind": "人民币汇率中间价",
+    "labelZh": "中国外汇交易中心中间价，新华社转载",
+    "labelEn": "CFETS central parity, via Xinhua",
+    "source": "https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html",
+    "evidence": "data/research/fx-caijing-round5-2026-09-05.json",
+    "previousRate": 7.2,
+    "note": "2026-09-05为周六，采用最近交易日9月4日中间价；非银行卡实际结算价。100美元=677.87人民币。"
+  },
+  "monthWeeks": 4,
+  "monthWeeksAlt": "30/7 只作灵敏度",
+  "tokenPolicy": "所有 token 一视同仁，先忽略缓存",
+  "sourcePriority": [
+    "用户口头确认",
+    "本机 ccusage + 用户对周额度占用的说明",
+    "本地 SubPlan（SubPlan/data，lastUpdatedAt 2026-09-02）",
+    "awesome-coding-plan 只当旧测/假说"
+  ],
+  "notSavedElsewhere": [
+    "Cursor 画布只是展示，不是仓库存盘",
+    "Nowledge Mem 本会话连不上"
+  ]
+}

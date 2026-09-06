@@ -1,0 +1,922 @@
+{
+  "collectedAt": "2026-09-06",
+  "boards": [
+    {
+      "boardId": "aa_coding_agent_index",
+      "name": "Artificial Analysis Coding Agent Index v1.4",
+      "url": "https://artificialanalysis.ai/agents/coding-agents",
+      "metric": "Coding Agent Index",
+      "snapshotDate": "2026-09-06",
+      "note": "Equal-weight mean of DeepSWE, Terminal-Bench v2.1, and SWE-Atlas-QnA. Official page exposed 68 agent × model configurations; project mapping keeps exact model identities and records the harness in variantLabel."
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (xhigh)",
+      "score": 68.1498,
+      "secondary": {
+        "configurationRank": 2,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 60.472,
+        "terminalBenchV2_1": 89.1386,
+        "sweAtlasQnA": 54.8387,
+        "meanCostUsdPerTask": 8.170784
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Code - Fable 5 (max) (with fallback)",
+      "score": 67.1728,
+      "secondary": {
+        "configurationRank": 4,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-fable-5",
+        "deepSWE": 66.0767,
+        "terminalBenchV2_1": 86.5169,
+        "sweAtlasQnA": 48.9247,
+        "meanCostUsdPerTask": 11.687408
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (max)",
+      "score": 67.0281,
+      "secondary": {
+        "configurationRank": 5,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 63.1268,
+        "terminalBenchV2_1": 88.764,
+        "sweAtlasQnA": 49.1935,
+        "meanCostUsdPerTask": 8.943547
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Code - Fable 5 (xhigh) (with fallback)",
+      "score": 66.017,
+      "secondary": {
+        "configurationRank": 7,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-fable-5",
+        "deepSWE": 65.1917,
+        "terminalBenchV2_1": 86.8914,
+        "sweAtlasQnA": 45.9677,
+        "meanCostUsdPerTask": 8.525765
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (high)",
+      "score": 65.6173,
+      "secondary": {
+        "configurationRank": 8,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 60.767,
+        "terminalBenchV2_1": 86.8914,
+        "sweAtlasQnA": 49.1935,
+        "meanCostUsdPerTask": 3.918602
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Code - Fable 5 (high) (with fallback)",
+      "score": 65.1269,
+      "secondary": {
+        "configurationRank": 9,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-fable-5",
+        "deepSWE": 64.3068,
+        "terminalBenchV2_1": 89.1386,
+        "sweAtlasQnA": 41.9355,
+        "meanCostUsdPerTask": 5.970994
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (max)",
+      "score": 65.0524,
+      "secondary": {
+        "configurationRank": 10,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 68.7316,
+        "terminalBenchV2_1": 83.1461,
+        "sweAtlasQnA": 43.2796,
+        "meanCostUsdPerTask": 4.995463
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (high)",
+      "score": 64.1164,
+      "secondary": {
+        "configurationRank": 12,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 64.8968,
+        "terminalBenchV2_1": 82.0225,
+        "sweAtlasQnA": 45.4301,
+        "meanCostUsdPerTask": 3.000467
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "grok-4.5",
+      "variantLabel": "Grok Build - Grok 4.5 (high)",
+      "score": 64.09,
+      "secondary": {
+        "configurationRank": 13,
+        "agentHarness": "Grok Build",
+        "provider": "xai",
+        "hostModelSlug": "xai_grok-4-5",
+        "deepSWE": 59.882,
+        "terminalBenchV2_1": 84.2697,
+        "sweAtlasQnA": 48.1183,
+        "meanCostUsdPerTask": 2.438982
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (medium)",
+      "score": 64.0685,
+      "secondary": {
+        "configurationRank": 14,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 62.8319,
+        "terminalBenchV2_1": 85.0187,
+        "sweAtlasQnA": 44.3548,
+        "meanCostUsdPerTask": 3.171867
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (xhigh)",
+      "score": 63.3388,
+      "secondary": {
+        "configurationRank": 15,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 66.9617,
+        "terminalBenchV2_1": 79.7753,
+        "sweAtlasQnA": 43.2796,
+        "meanCostUsdPerTask": 3.736678
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Code - Fable 5 (medium) (with fallback)",
+      "score": 63.1956,
+      "secondary": {
+        "configurationRank": 16,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-fable-5",
+        "deepSWE": 63.7168,
+        "terminalBenchV2_1": 86.8914,
+        "sweAtlasQnA": 38.9785,
+        "meanCostUsdPerTask": 4.735521
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "kimi-k3",
+      "variantLabel": "Kimi Code CLI - Kimi K3",
+      "score": 62.6388,
+      "secondary": {
+        "configurationRank": 17,
+        "agentHarness": "Kimi Code CLI",
+        "provider": "moonshotai",
+        "hostModelSlug": "moonshot_kimi-k3",
+        "deepSWE": 63.7168,
+        "terminalBenchV2_1": 87.6404,
+        "sweAtlasQnA": 36.5591,
+        "meanCostUsdPerTask": 3.081636
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Code - Opus 4.8 (max)",
+      "score": 62.1405,
+      "secondary": {
+        "configurationRank": 18,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-4-8",
+        "deepSWE": 55.7522,
+        "terminalBenchV2_1": 83.8951,
+        "sweAtlasQnA": 46.7742,
+        "meanCostUsdPerTask": 7.724726
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (medium)",
+      "score": 61.6196,
+      "secondary": {
+        "configurationRank": 20,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 64.0118,
+        "terminalBenchV2_1": 80.5243,
+        "sweAtlasQnA": 40.3226,
+        "meanCostUsdPerTask": 2.192998
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.5",
+      "variantLabel": "Codex - GPT-5.5 (xhigh)",
+      "score": 61.0333,
+      "secondary": {
+        "configurationRank": 23,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-5",
+        "deepSWE": 64.3068,
+        "terminalBenchV2_1": 82.7715,
+        "sweAtlasQnA": 36.0215,
+        "meanCostUsdPerTask": 4.75237
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (max)",
+      "score": 60.4201,
+      "secondary": {
+        "configurationRank": 24,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 66.9617,
+        "terminalBenchV2_1": 78.2772,
+        "sweAtlasQnA": 36.0215,
+        "meanCostUsdPerTask": 1.930015
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (low)",
+      "score": 59.4006,
+      "secondary": {
+        "configurationRank": 26,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 56.9322,
+        "terminalBenchV2_1": 82.0225,
+        "sweAtlasQnA": 39.2473,
+        "meanCostUsdPerTask": 2.295158
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Code - Opus 5 (none)",
+      "score": 59.1695,
+      "secondary": {
+        "configurationRank": 27,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-5",
+        "deepSWE": 44.2478,
+        "terminalBenchV2_1": 81.6479,
+        "sweAtlasQnA": 51.6129,
+        "meanCostUsdPerTask": 3.530937
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Code - Opus 4.8 (xhigh)",
+      "score": 59.0718,
+      "secondary": {
+        "configurationRank": 29,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-4-8",
+        "deepSWE": 51.3274,
+        "terminalBenchV2_1": 83.1461,
+        "sweAtlasQnA": 42.7419,
+        "meanCostUsdPerTask": 5.665366
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Code - Fable 5 (low) (with fallback)",
+      "score": 58.5566,
+      "secondary": {
+        "configurationRank": 31,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-fable-5",
+        "deepSWE": 59.882,
+        "terminalBenchV2_1": 81.6479,
+        "sweAtlasQnA": 34.1398,
+        "meanCostUsdPerTask": 3.166079
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Code - Opus 4.8 (high)",
+      "score": 57.5764,
+      "secondary": {
+        "configurationRank": 32,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-4-8_api-key",
+        "deepSWE": 51.6224,
+        "terminalBenchV2_1": 82.397,
+        "sweAtlasQnA": 38.7097,
+        "meanCostUsdPerTask": 3.782301
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (max)",
+      "score": 57.1661,
+      "secondary": {
+        "configurationRank": 33,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 63.4218,
+        "terminalBenchV2_1": 75.2809,
+        "sweAtlasQnA": 32.7957,
+        "meanCostUsdPerTask": 0.288277
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (xhigh)",
+      "score": 56.0292,
+      "secondary": {
+        "configurationRank": 35,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 58.4071,
+        "terminalBenchV2_1": 77.1536,
+        "sweAtlasQnA": 32.5269,
+        "meanCostUsdPerTask": 1.358857
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Code - Opus 4.8 (medium)",
+      "score": 55.7688,
+      "secondary": {
+        "configurationRank": 36,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-4-8",
+        "deepSWE": 49.2625,
+        "terminalBenchV2_1": 82.0225,
+        "sweAtlasQnA": 36.0215,
+        "meanCostUsdPerTask": 3.303842
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.5",
+      "variantLabel": "Codex - GPT-5.5 (medium)",
+      "score": 55.3113,
+      "secondary": {
+        "configurationRank": 37,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-5",
+        "deepSWE": 56.6372,
+        "terminalBenchV2_1": 78.6517,
+        "sweAtlasQnA": 30.6452,
+        "meanCostUsdPerTask": 2.652536
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (low)",
+      "score": 55.2345,
+      "secondary": {
+        "configurationRank": 38,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 53.3923,
+        "terminalBenchV2_1": 77.9026,
+        "sweAtlasQnA": 34.4086,
+        "meanCostUsdPerTask": 1.292459
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (high)",
+      "score": 54.6465,
+      "secondary": {
+        "configurationRank": 40,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 60.472,
+        "terminalBenchV2_1": 72.2846,
+        "sweAtlasQnA": 31.1828,
+        "meanCostUsdPerTask": 1.140926
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (xhigh)",
+      "score": 52.9584,
+      "secondary": {
+        "configurationRank": 41,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 56.6372,
+        "terminalBenchV2_1": 70.7865,
+        "sweAtlasQnA": 31.4516,
+        "meanCostUsdPerTask": 0.23591
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (high)",
+      "score": 51.6946,
+      "secondary": {
+        "configurationRank": 43,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 53.3923,
+        "terminalBenchV2_1": 72.6592,
+        "sweAtlasQnA": 29.0323,
+        "meanCostUsdPerTask": 0.179793
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "deepseek-v4-flash",
+      "variantLabel": "Codex - DeepSeek V4 Flash 0731 (max)",
+      "score": 49.7576,
+      "secondary": {
+        "configurationRank": 46,
+        "agentHarness": "Codex",
+        "provider": "deepseek",
+        "hostModelSlug": "deepseek_deepseek-v4-flash-0731",
+        "deepSWE": 42.7729,
+        "terminalBenchV2_1": 67.7903,
+        "sweAtlasQnA": 38.7097,
+        "meanCostUsdPerTask": 0.059499
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Code - Opus 4.8 (low)",
+      "score": 49.0438,
+      "secondary": {
+        "configurationRank": 47,
+        "agentHarness": "Claude Code",
+        "provider": "anthropic",
+        "hostModelSlug": "anthropic_claude-opus-4-8",
+        "deepSWE": 41.0029,
+        "terminalBenchV2_1": 77.9026,
+        "sweAtlasQnA": 28.2258,
+        "meanCostUsdPerTask": 2.182595
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (medium)",
+      "score": 48.0497,
+      "secondary": {
+        "configurationRank": 48,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 45.7227,
+        "terminalBenchV2_1": 69.6629,
+        "sweAtlasQnA": 28.7634,
+        "meanCostUsdPerTask": 0.669999
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.5",
+      "variantLabel": "Cursor CLI - GPT-5.5 (medium)",
+      "score": 47.0869,
+      "secondary": {
+        "configurationRank": 50,
+        "agentHarness": "Cursor CLI",
+        "provider": "cursor",
+        "hostModelSlug": "openai_gpt-5-5-medium",
+        "deepSWE": 37.1681,
+        "terminalBenchV2_1": 76.4045,
+        "sweAtlasQnA": 27.6882,
+        "meanCostUsdPerTask": 1.998031
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "Codex - GPT-5.6 Sol (none)",
+      "score": 43.3688,
+      "secondary": {
+        "configurationRank": 52,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-sol",
+        "deepSWE": 35.3982,
+        "terminalBenchV2_1": 60.2996,
+        "sweAtlasQnA": 34.4086,
+        "meanCostUsdPerTask": 1.086855
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "Codex - DeepSeek V4 Pro 0813 (max)",
+      "score": 42.7797,
+      "secondary": {
+        "configurationRank": 54,
+        "agentHarness": "Codex",
+        "provider": "deepseek",
+        "hostModelSlug": "deepseek_deepseek-v4-pro-0813",
+        "deepSWE": 16.2242,
+        "terminalBenchV2_1": 62.9213,
+        "sweAtlasQnA": 49.1935,
+        "meanCostUsdPerTask": 0.090811
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (medium)",
+      "score": 41.967,
+      "secondary": {
+        "configurationRank": 56,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 36.5782,
+        "terminalBenchV2_1": 62.1723,
+        "sweAtlasQnA": 27.1505,
+        "meanCostUsdPerTask": 0.088418
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (low)",
+      "score": 38.6463,
+      "secondary": {
+        "configurationRank": 58,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 29.7935,
+        "terminalBenchV2_1": 63.2959,
+        "sweAtlasQnA": 22.8495,
+        "meanCostUsdPerTask": 0.385063
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "composer-2.5",
+      "variantLabel": "Cursor CLI - Composer 2.5 Fast",
+      "score": 38.3008,
+      "secondary": {
+        "configurationRank": 59,
+        "agentHarness": "Cursor CLI",
+        "provider": "cursor",
+        "hostModelSlug": "cursor_composer-2-5-fast",
+        "deepSWE": 15.9292,
+        "terminalBenchV2_1": 67.7903,
+        "sweAtlasQnA": 31.1828,
+        "meanCostUsdPerTask": 0.557344
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "composer-2.5",
+      "variantLabel": "Cursor CLI - Composer 2.5",
+      "score": 38.3008,
+      "secondary": {
+        "configurationRank": 60,
+        "agentHarness": "Cursor CLI",
+        "provider": "cursor",
+        "hostModelSlug": "cursor_composer-2-5",
+        "deepSWE": 15.9292,
+        "terminalBenchV2_1": 67.7903,
+        "sweAtlasQnA": 31.1828,
+        "meanCostUsdPerTask": 0.085051
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "qwen3.7-plus",
+      "variantLabel": "Claude Code - Qwen3.7 Plus (thinking)",
+      "score": 38.1218,
+      "secondary": {
+        "configurationRank": 61,
+        "agentHarness": "Claude Code",
+        "provider": "alibaba_cloud",
+        "hostModelSlug": "alibaba_cloud_qwen3-7-plus",
+        "deepSWE": 19.174,
+        "terminalBenchV2_1": 71.5356,
+        "sweAtlasQnA": 23.6559,
+        "meanCostUsdPerTask": 6.300659
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "Claude Code - DeepSeek V4 Pro (high)",
+      "score": 32.8282,
+      "secondary": {
+        "configurationRank": 65,
+        "agentHarness": "Claude Code",
+        "provider": "deepseek",
+        "hostModelSlug": "deepseek_deepseek-v4-pro-1m",
+        "deepSWE": 8.5546,
+        "terminalBenchV2_1": 70.0375,
+        "sweAtlasQnA": 19.8925,
+        "meanCostUsdPerTask": 0.254726
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (low)",
+      "score": 25.0637,
+      "secondary": {
+        "configurationRank": 66,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 10.3245,
+        "terminalBenchV2_1": 49.8127,
+        "sweAtlasQnA": 15.0538,
+        "meanCostUsdPerTask": 0.038938
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "Codex - GPT-5.6 Terra (none)",
+      "score": 23.092,
+      "secondary": {
+        "configurationRank": 67,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-terra",
+        "deepSWE": 13.2743,
+        "terminalBenchV2_1": 37.4532,
+        "sweAtlasQnA": 18.5484,
+        "meanCostUsdPerTask": 0.292696
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "Codex - GPT-5.6 Luna (none)",
+      "score": 19.0987,
+      "secondary": {
+        "configurationRank": 68,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-5-6-luna",
+        "deepSWE": 6.4897,
+        "terminalBenchV2_1": 33.3333,
+        "sweAtlasQnA": 17.4731,
+        "meanCostUsdPerTask": 0.069475
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-06",
+      "note": "Score belongs to this named agent/harness × model configuration; it is not a harness-independent model measurement."
+    }
+  ],
+  "notFound": [
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "claude-sonnet-5",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "glm-5.3",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "glm-5.3-flash",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "grok-4.6",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "hy4-preview",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "kimi-k2.7-code",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "mimo-v2.5-pro",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "minimax-m2.7",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "minimax-m3",
+      "reason": "No exact project-model configuration found among the 68 official configurations in the 2026-09-06 page source."
+    }
+  ],
+  "coverage": {
+    "projectModels": 22,
+    "matchedModels": 13,
+    "scoreRows": 45
+  }
+}

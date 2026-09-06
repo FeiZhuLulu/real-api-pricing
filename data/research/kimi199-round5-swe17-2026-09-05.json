@@ -1,0 +1,194 @@
+{
+  "checkedAt": "2026-09-05",
+  "findings": [
+    {
+      "claim": "本机 7/25-26 新周约 84% 已用 243,739,068 total tokens",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3-256k / kimi-for-coding (K2.7 Code) 混合；峰值两日均为 k3-256k",
+      "weeklyTokens": 290165557,
+      "monthlyTokens": 1160662228,
+      "source": "data/kimi-local.json",
+      "quote": "userSaid: 7/25-26 是新一周额度，大约用了 84%，订阅 199; usedTokens 243739068; usedFraction 0.84; weeklyTokens 290165557; monthlyTokensX4 1160662228; peakDays 2026-07-25 k3-256k 151560340 tokens, 2026-07-26 k3-256k 92178728 tokens",
+      "confidence": "high",
+      "note": "本机 ccusage 反推，panel 显示约 84%。7/25 还含 kimi-for-coding，因此 243.7M 非纯 k3-256k。'约 84%' 存在取整区间；若按 83.5%-84.4% 反推，周额度 289M-292M。"
+    },
+    {
+      "claim": "V2EX 用户 199 套餐上午跑 kimi-for-coding：11.9M total = 5h 18.7% / 7天 3.78% / 月 0.76%",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "kimi-for-coding (K2.7 Code)",
+      "weeklyTokens": 315162195,
+      "monthlyTokens": 1567514868,
+      "source": "https://www.v2ex.com/t/1235826",
+      "quote": "kimi会员界面统计结果: 五小时限额已使用量 18.7%, 七天限额已使用量 3.78%, 总使用量 0.76%; CPAMP界面统计结果: 模型 kimi-for-coding, 总Token数 11.9M (11,913,113), 输入Token数 11.9M, 输出Token数 58.3K, 缓存Token数 11.5M, 缓存命中率 97.4%; 按上述结果粗略估算: 五小时限额 ≈ 6370 万, 七天限额 ≈ 3.15 亿, 月总限额 ≈ 15.68 亿",
+      "confidence": "high",
+      "note": "独立面板 + CPAMP token 日志，与本机同量级。按 7天 3.78% 反推周≈3.15亿，与 Rorysky 引述的 linux.do 12亿/月（≈3.18亿/周）吻合。但按 月 0.76% 直接反推≈15.68亿，高于 ×4 折算；可能因 Kimi 月/周限额比例约为 5:1（见 smzdm 三层滚动限额分析），而非严格的 4 周。模型为 K2.7 Code，非 adopted 的 kimi-k3。"
+    },
+    {
+      "claim": "V2EX 同一用户下午跑 K3-256K：22.6M total = 5h 34.07% / 7天 10.6% / 月 2.12%",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3-256k",
+      "weeklyTokens": 213431311,
+      "monthlyTokens": 1067156557,
+      "source": "https://www.v2ex.com/t/1235826",
+      "quote": "下午全程使用K3-256K模型; 5小时已使用额度: 34.07%; 7天已使用额度: 10.6%; 月总使用额度: 2.12%; 总Token数: 22.6M (22,623,719); 输入Token数: 22.5M; 输出Token数: 136.5K; 缓存Token数: 21.8M; 缓存命中率: 97.1%",
+      "confidence": "medium",
+      "note": "短时下午样本；7天反推≈2.13亿/周，低于本机 k3-256k 的 2.90亿/周。差异可能来自滚动 7 天窗口中此前已计入其他消费，或 K3-256K 与 k3-1M 的 credits 比并非严格 0.5×。2.12% 月额度反推≈10.67亿/月，若按 ×4 周折算约 8.54亿/月，与本机 11.61亿仍有差距。"
+    },
+    {
+      "claim": "V2EX 跟帖 Rorysky 引述 linux.do：100% 五小时 = 20% 周额度；月额度约 12 亿 token",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3 / k3-256k / kimi-for-coding 混合",
+      "weeklyTokens": 318500000,
+      "monthlyTokens": 1200000000,
+      "source": "https://www.v2ex.com/t/1235826 (Rorysky 引述 linux.do)",
+      "quote": "这个 linuxdo 有人测过， 首先 100% 五小时严格对应 20% 周额度； 其次 月额度 大概是在 12 亿 token",
+      "confidence": "medium",
+      "note": "二手转述，无直接截图。按 OP 5h 63.7M×5 = 3.185亿/周，×4 周≈12.74亿/月，与 stated 12亿一致。与现采用 11.61亿/月相差 +3%（周基数），与月 0.76% 直接反推 15.68亿矛盾。"
+    },
+    {
+      "claim": "V2EX 同一帖 sillydaddy 按 API 标价折算月额度等效约 ¥2500，约 12 倍月费",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "kimi-for-coding 混合",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "https://www.v2ex.com/t/1235826",
+      "quote": "算了下相当于 12 倍的倍率： 这些 token 按 API 值¥18.6 ，花费了月额度 0.76%，那就是一个月有¥2500=18.6/0.76%的额度，约等于 12 倍=¥2500/¥200",
+      "confidence": "medium",
+      "note": "API-dollar 等效，非 raw token。AGENTS.md 口径：两种'美元额度'不能混；该 ¥2500 是用公开 API 价反推的额度价值，不等于厂商面板额度，不应直接除 API 价得到 token。"
+    },
+    {
+      "claim": "阅微堂用户 199 Allegretto 小样本：k3 177k token = 1.3% 周额度，k2.7 1.22M token = 1.31% 周额度",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3 / k2.7-code",
+      "weeklyTokens": 13615385,
+      "monthlyTokens": null,
+      "source": "https://zhiqiang.org/it/kimi-plan-is-4x-api.html",
+      "quote": "我买的是 199 的 Allegretto 套餐; k3 |79k|90k|8k|1.3%; k2.7|132k|1071k|18k|1.31%; 这么算下来，kimi 的 199 元的 Allegretto 月套餐每周的额度大约相当于 197 元的 k3 模型，或者 209 元的 k2.7 的模型。换算成月额度，大约相当于 900 元左右的 API 额度",
+      "confidence": "medium",
+      "note": "样本极小，仅一次请求。按 raw token÷%：k3 周≈1362万，k2.7 周≈9321万，差异说明 quota 是 credits 池而非 raw token 上限。作者主旨是 API 等效价值（4-5 倍），不直接给绝对 token 额度。AGENTS.md 禁止 月费÷API价 当额度。"
+    },
+    {
+      "claim": "NothAmor 博客 2026-04：Allegretto 周额度约 2.64 亿 Tokens（3 倍扩容加持下），月破 10 亿",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "Kimi K2.5",
+      "weeklyTokens": 263686990,
+      "monthlyTokens": 1000000000,
+      "source": "https://www.nothamor.com/index.php/archives/kimiCodingPlan.html",
+      "quote": "输入 Token 总计 162,431,670; 输出 Token 总计 1,054,264; 当前周期已用总计 163,485,934; 后台显示本周已消耗 62% 的额度，由此反推：周期额度 ≈ 1.63 亿 ÷ 0.62 ≈ 2.64 亿 Tokens; 若按自然月折算，月可用 Token 量轻松突破 10 亿",
+      "confidence": "medium",
+      "note": "2026-04 数据，作者明确'限时 3 倍额度扩容'。若扣除 3×，正常周额度≈0.88亿，远低于 7 月本机 2.90亿。模型为 K2.5，且存在 3× 活动，不能直接套用到 2026-07 K3 周期。缓存读占 95%，与本机 mix 同量级。"
+    },
+    {
+      "claim": "smzdm 综述引小红书/知乎：199 套餐 60 万 token 耗 5h 额度 9%；K3-256k 两周约 3.5 亿，月额度约 9 亿",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3-256k / K3 混合",
+      "weeklyTokens": null,
+      "monthlyTokens": 900000000,
+      "source": "https://post.smzdm.com/p/anvxl7w7/",
+      "quote": "有人晒出「199 套餐，60 万 token 消耗掉 5 小时额度的 9%」。有人算了笔账，基本只用 K3-256k 的情况下两周烧掉约 3.5 亿 token，推算月额度在 9 亿上下",
+      "confidence": "low",
+      "note": "小红书/知乎口述经 smzdm 转述，无截图。60万/9% → 5h≈666.7万；若 100% 5h=20% 周，周≈3333万，明显偏低，与 V2EX/本机差一个数量级。'两周 3.5亿' 反推周≈1.75亿，与作者自行给出的'月额度 9亿' 量级接近但远低于 11.61亿。仅作低信参考。"
+    },
+    {
+      "claim": "Awesome-Coding-Plan 社区表：Kimi Code Allegretto ¥199 月度 14.28 亿 / 周 3.57 亿（kimi-k2.5）",
+      "plan": "Kimi Code Allegretto (CN)",
+      "model": "kimi-k2.5",
+      "weeklyTokens": 357000000,
+      "monthlyTokens": 1428000000,
+      "source": "https://github.com/mahonzhan/awesome-coding-plan (README 表格)",
+      "quote": "Kimi Code Allegretto | ￥199.00 | Kimi Code 20 倍额度 | ... 9073/3.57亿 | 36292/14.28亿",
+      "confidence": "medium",
+      "note": " adopted 注释已说明 'ACP 14.28 偏高 23%，未采'。本表为 k2.5 时代数据，服务模型 k2.5 与当前 K3 不同；表中 5h 6500万、周 3.57亿、月 14.28亿。同时 subscription-quotas.json 中 global $39 Allegretto 也标记 14.28亿/月，可能存在 CN/global 混淆。"
+    },
+    {
+      "claim": "《财经》2026-08：月之暗面旗舰模型 1 亿 Token 均价约 95 元",
+      "plan": "Kimi 会员 未写明档位（旗舰模型）",
+      "model": "Kimi 旗舰模型（K3/K2.5）",
+      "weeklyTokens": null,
+      "monthlyTokens": 209473684,
+      "source": "https://www.163.com/dy/article/L4ILFQL60519DDOA.html (《财经》2026-08-17)",
+      "confidence": "low",
+      "note": "未写明档位；若强行套用到 ¥199 档，月额度=199/95×1亿≈2.09亿，与本机 11.61亿 差 5.5 倍。data/research/caijing-2026-08.json 内部 note 已指出：'接近 adopted Kimi ¥49 档（¥84/亿），远高于 ¥199 档本机实测（¥17/亿）'。Caijing 测试 mix（3% 输入 / 1% 输出 / 96% 缓存）与本机（2.2% 输入 / 0.35% 输出 / 97.5% 缓存）接近但不完全相同；最可能的解释是 Caijing 的 95元/亿 对应的是中低档或未饱和档位，而非 ¥199 档。",
+      "publicationNote": "Verbatim article excerpt omitted from public edition; source and analytical fields retained."
+    },
+    {
+      "claim": "官方 Kimi Code 模型页：k3（1M）消耗约为 k3-256k 两倍；k2.7 highspeed 为 3 倍消耗",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3 / k3-256k / kimi-for-coding-highspeed",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "https://www.kimi.com/code/docs/kimi-code/models",
+      "quote": "k3-256k 全新上线，256k 上下文内效果相同，k3（1M）消耗约为 k3-256k 两倍; K2.7 Code 的高速版，编码能力一致，输出速度约为普通版 5-6 倍; 高速版（6 倍速 3 倍消耗）",
+      "confidence": "high",
+      "note": "官方明确 credits 差异。若 adopted 的 served_model 是 kimi-k3（1M）而实测主要来自 k3-256k，则等效 k3-1M raw token 应减半（周≈1.45亿，月≈5.8亿），与当前 11.61亿/月 存在模型口径不一致。本研究不修改采用值，仅记录该矛盾。"
+    },
+    {
+      "claim": "官方帮助中心仅给出共享额度池、7 天刷新、5h/周滚动窗口、Code credits 20 倍等相对规则，未公布绝对 token 数",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "K3 / k3-256k / K2.7 Code",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "https://www.kimi.com/zh-cn/help/membership/membership-pricing, https://www.kimi.com/zh-cn/help/kimi-code/benefits, https://www.kimi.com/code/docs/kimi-code/membership.html",
+      "quote": "所有 Kimi 会员功能共享一个额度池，按实际 token 消耗扣除；Kimi Code 的额度以订阅日为起点每 7 天自动刷新；除周额度外，还有每 5 小时的滚动频率窗口；Allegretto Kimi Code 20 倍额度",
+      "confidence": "high",
+      "note": "官方确认 ¥199 档 Code credits 倍率为 20×（相对 Andante 1×），但未给出 1× 基准的绝对 token，因此无法从官方倍率直接推出周/月 token。"
+    }
+  ],
+  "notFound": [
+    {
+      "claim": "Kimi 国内 ¥199 Allegretto 官方绝对 token/月或 token/周表",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3 / k3-256k / K2.7 Code",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "官方帮助中心 / 定价页 / Kimi Code 文档",
+      "quote": "未找到任何形如 '¥199 = X 亿 tokens/周/月' 的绝对额度表，官方仅给倍率和周期规则",
+      "confidence": "notFound",
+      "note": " searched https://www.kimi.com/zh-cn/help/membership/membership-pricing, https://www.kimi.com/zh-cn/help/kimi-code/benefits, https://www.kimi.com/code/docs/kimi-code/membership.html, https://www.kimi.com/code/docs/kimi-code/models, https://www.kimi.com/zh-hans/resources/kimi-k3-pricing. 官方避免公布绝对 token。"
+    },
+    {
+      "claim": "与本机同条件（k3-256k 为主、完整一周）的独立面板 token+% 实测",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3-256k",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "V2EX / linux.do / 小红书 / 知乎 / 官方论坛",
+      "quote": "无完整一周、明确显示 k3-256k 且同时提供 total token 与 % 的截图",
+      "confidence": "notFound",
+      "note": "V2EX OP 的 k3-256k 仅为 2026-08-20 下午样本；NothAmor 为 2026-04 K2.5 且有 3× 活动；smzdm 为二手口述。本机 7/25-26 两日 243.7M 仍是唯一完整新周 k3-256k 面板级数据。"
+    },
+    {
+      "claim": "linux.do '月额度约 12 亿 token' 的原始帖/截图",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3 / k3-256k / K2.7 Code",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "linux.do",
+      "quote": "未找到原帖，仅 V2EX Rorysky 二手引述",
+      "confidence": "notFound",
+      "note": "通过 V2EX Rorysky 转述得知，但无法访问/核验 linux.do 原帖，不能升级为 high。"
+    },
+    {
+      "claim": "Caijing 2026-08 中 '95 元/亿 Token' 对应的明确档位与模型",
+      "plan": "Kimi 会员 未写明档位",
+      "model": "旗舰模型",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "https://www.163.com/dy/article/L4ILFQL60519DDOA.html",
+      "confidence": "notFound",
+      "note": "文章仅给出每亿均价，未拆分档位，因此无法用它直接验证 ¥199 档 11.61亿。",
+      "publicationNote": "Verbatim article excerpt omitted from public edition; source and analytical fields retained."
+    },
+    {
+      "claim": "用户本机 84%  weekly fraction 的精确小数与对应模型 mix 分解",
+      "plan": "Kimi 会员 199 / Allegretto (CN)",
+      "model": "k3-256k / k3 / kimi-for-coding",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "source": "data/kimi-local.json / 用户口述",
+      "quote": "用户仅给出 '约 84%'，未给出该 7 天窗口内每天模型占比的精确分解",
+      "confidence": "notFound",
+      "note": "84% 是用户近似值；若实际为 83.5%-84.4%，周额度 289M-292M，影响 <1%。但该周是否混入 k3-1M 或 kimi-for-coding 会显著影响 k3-1M 等效额度（官方 2× credits）。"
+    }
+  ]
+}

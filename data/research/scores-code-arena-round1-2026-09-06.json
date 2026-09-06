@@ -1,0 +1,546 @@
+{
+  "collectedAt": "2026-09-06",
+  "boards": [
+    {
+      "boardId": "arena_code",
+      "name": "Code Arena | WebDev 🏆 Overall",
+      "url": "https://arena.ai/leaderboard/code",
+      "metric": "Arena Score",
+      "snapshotDate": "2026-09-05",
+      "note": "Page header: Sep 5, 2026 · 650,961 votes · 126 models. Table column is Score; plot section titled Confidence Intervals on Arena Score. Category Overall (not Fullstack / Frontend subdomain). Mirror https://lmarena.ai/leaderboard/code shows the same Overall table. Older path https://arena.ai/leaderboard/webdev is a different/earlier snapshot (e.g. Feb 19, 2026 in one crawl) — not used. Agent Arena Net Improvement % deliberately excluded."
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "arena_code",
+      "model": "claude-opus-5",
+      "variantLabel": "claude-opus-5-max",
+      "score": 1688,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 3,
+        "rankSpread": [3, 6],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 10904,
+        "pricePerM": "$5 / $25",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "claude-opus-5",
+      "variantLabel": "claude-opus-5-high",
+      "score": 1661,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 7,
+        "rankSpread": [5, 7],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 10928,
+        "pricePerM": "$5 / $25",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "kimi-k3",
+      "variantLabel": "kimi-k3-max",
+      "score": 1674,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 5,
+        "rankSpread": [3, 7],
+        "ciPlus": 11,
+        "ciMinus": 11,
+        "votes": 4546,
+        "pricePerM": "$3 / $15",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "claude-fable-5",
+      "variantLabel": "claude-fable-5",
+      "score": 1629,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 8,
+        "rankSpread": [8, 14],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 9356,
+        "pricePerM": "$10 / $50",
+        "context": "1M",
+        "matchNote": "Exact claude-fable-5 only. Nearby claude-fable-5.1-max (1762, rank 2) is a different generation and was not mapped."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "grok-4.6",
+      "variantLabel": "grok-4.6-high",
+      "score": 1625,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 10,
+        "rankSpread": [8, 15],
+        "ciPlus": 11,
+        "ciMinus": 11,
+        "votes": 3487,
+        "pricePerM": "$2 / $6",
+        "context": "500K",
+        "matchNote": "Only grok-4.6-high present on Code Arena Overall; no grok-4.6-xhigh row observed."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "hy4-preview",
+      "variantLabel": "hy4-preview",
+      "score": 1621,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 12,
+        "rankSpread": [8, 15],
+        "ciPlus": 16,
+        "ciMinus": 16,
+        "votes": 1661,
+        "pricePerM": "$0.83 / $2.50",
+        "context": "1M",
+        "preliminary": true
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "gpt-5.6-sol-xhigh (codex-harness)",
+      "score": 1617,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 13,
+        "rankSpread": [8, 15],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 11014,
+        "pricePerM": "$4 / $20",
+        "context": "1.1M",
+        "matchNote": "gpt-6-astra-max (1797, rank 1) is a different model family and was not mapped."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "glm-5.3",
+      "variantLabel": "glm-5.3-max",
+      "score": 1609,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 14,
+        "rankSpread": [8, 17],
+        "ciPlus": 12,
+        "ciMinus": 12,
+        "votes": 2930,
+        "pricePerM": "$1.40 / $4.40",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "glm-5.3-flash",
+      "variantLabel": "glm-5.3-flash",
+      "score": 1605,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 15,
+        "rankSpread": [9, 19],
+        "ciPlus": 15,
+        "ciMinus": 15,
+        "votes": 1961,
+        "pricePerM": "$0.15 / $0.50",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gemini-3.7-flash",
+      "variantLabel": "gemini-3.7-flash-high",
+      "score": 1587,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 17,
+        "rankSpread": [14, 21],
+        "ciPlus": 12,
+        "ciMinus": 12,
+        "votes": 3008,
+        "pricePerM": "$0.75 / $3.75",
+        "context": "1M",
+        "preliminary": true
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "deepseek-v4-pro-high-20260813",
+      "score": 1582,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 19,
+        "rankSpread": [15, 21],
+        "ciPlus": 11,
+        "ciMinus": 11,
+        "votes": 3518,
+        "pricePerM": "$1.32 / $3.96",
+        "context": "N/A"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "deepseek-v4-pro-high-preview",
+      "score": 1464,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 51,
+        "rankSpread": [47, 56],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 12405,
+        "pricePerM": "$1.32 / $3.96",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "deepseek-v4-pro",
+      "score": 1446,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 56,
+        "rankSpread": [53, 66],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 13189,
+        "pricePerM": "$1.32 / $3.96",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "deepseek-v4-flash",
+      "variantLabel": "deepseek-v4-flash-high",
+      "score": 1580,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 20,
+        "rankSpread": [16, 21],
+        "ciPlus": 10,
+        "ciMinus": 10,
+        "votes": 4177,
+        "pricePerM": "$0.44 / $1.32",
+        "context": "1M",
+        "matchNote": "Docs link on leaderboard points to 2026-07-31 update."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "deepseek-v4-flash",
+      "variantLabel": "deepseek-v4-flash-high-preview",
+      "score": 1431,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 66,
+        "rankSpread": [57, 68],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 9490,
+        "pricePerM": "$0.44 / $1.32",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "claude-opus-4.8",
+      "variantLabel": "claude-opus-4-8-high",
+      "score": 1563,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 22,
+        "rankSpread": [21, 25],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 12937,
+        "pricePerM": "$5 / $25",
+        "context": "1M",
+        "matchNote": "Arena slug uses hyphens (claude-opus-4-8); project ID is claude-opus-4.8."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "claude-opus-4.8",
+      "variantLabel": "claude-opus-4-8",
+      "score": 1540,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 28,
+        "rankSpread": [26, 32],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 11820,
+        "pricePerM": "$5 / $25",
+        "context": "1M",
+        "matchNote": "Arena slug uses hyphens (claude-opus-4-8); project ID is claude-opus-4.8."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "grok-4.5",
+      "variantLabel": "grok-4.5",
+      "score": 1556,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 24,
+        "rankSpread": [21, 28],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 7361,
+        "pricePerM": "$2 / $6",
+        "context": "500K"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "claude-sonnet-5",
+      "variantLabel": "claude-sonnet-5-high",
+      "score": 1537,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 31,
+        "rankSpread": [26, 32],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 8401,
+        "pricePerM": "$2 / $10",
+        "context": "1M",
+        "matchNote": "Only claude-sonnet-5-high observed; no non-high / max Sonnet 5 row on Overall."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "gpt-5.6-terra-xhigh (codex-harness)",
+      "score": 1520,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 35,
+        "rankSpread": [32, 41],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 6834,
+        "pricePerM": "$2 / $12",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "gpt-5.6-luna-xhigh (codex-harness)",
+      "score": 1519,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 36,
+        "rankSpread": [32, 41],
+        "ciPlus": 8,
+        "ciMinus": 8,
+        "votes": 6947,
+        "pricePerM": "$0.20 / $1.20",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "hy3",
+      "variantLabel": "hy3",
+      "score": 1512,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 38,
+        "rankSpread": [32, 43],
+        "ciPlus": 11,
+        "ciMinus": 11,
+        "votes": 3173,
+        "pricePerM": "$0.13 / $0.53",
+        "context": "262.1K",
+        "matchNote": "Exact hy3 only. Nearby hunyuan-hy3-preview (1357, rank 94) not mapped."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.5",
+      "variantLabel": "gpt-5.5-xhigh (codex-harness)",
+      "score": 1510,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 39,
+        "rankSpread": [34, 42],
+        "ciPlus": 6,
+        "ciMinus": 6,
+        "votes": 14800,
+        "pricePerM": "$5 / $30",
+        "context": "N/A"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.5",
+      "variantLabel": "gpt-5.5-high (codex-harness)",
+      "score": 1487,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 46,
+        "rankSpread": [42, 51],
+        "ciPlus": 6,
+        "ciMinus": 6,
+        "votes": 16815,
+        "pricePerM": "$5 / $30",
+        "context": "N/A"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gpt-5.5",
+      "variantLabel": "gpt-5.5 (codex-harness)",
+      "score": 1458,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 54,
+        "rankSpread": [49, 57],
+        "ciPlus": 6,
+        "ciMinus": 6,
+        "votes": 14846,
+        "pricePerM": "$5 / $30",
+        "context": "N/A"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "minimax-m3",
+      "variantLabel": "minimax-m3",
+      "score": 1487,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 45,
+        "rankSpread": [42, 51],
+        "ciPlus": 7,
+        "ciMinus": 7,
+        "votes": 11876,
+        "pricePerM": "$0.30 / $1.20",
+        "context": "524.3K"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "mimo-v2.5-pro",
+      "variantLabel": "mimo-v2.5-pro",
+      "score": 1475,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 48,
+        "rankSpread": [45, 53],
+        "ciPlus": 6,
+        "ciMinus": 6,
+        "votes": 15080,
+        "pricePerM": "$0.43 / $0.87",
+        "context": "1.1M",
+        "matchNote": "Exact mimo-v2.5-pro only. Nearby mimo-v2.5 (1438, rank 61) not mapped to the -pro project ID."
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "kimi-k2.7-code",
+      "variantLabel": "kimi-k2.7-code",
+      "score": 1472,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 49,
+        "rankSpread": [45, 55],
+        "ciPlus": 10,
+        "ciMinus": 10,
+        "votes": 4682,
+        "pricePerM": "$0.66 / $3.40",
+        "context": "262.1K"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "gemini-3.1-pro",
+      "variantLabel": "gemini-3.1-pro-preview",
+      "score": 1446,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 57,
+        "rankSpread": [54, 65],
+        "ciPlus": 5,
+        "ciMinus": 5,
+        "votes": 22700,
+        "pricePerM": "$1 / $6",
+        "context": "1M"
+      }
+    },
+    {
+      "boardId": "arena_code",
+      "model": "minimax-m2.7",
+      "variantLabel": "minimax-m2.7",
+      "score": 1398,
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-06",
+      "secondary": {
+        "rank": 75,
+        "rankSpread": [67, 82],
+        "ciPlus": 6,
+        "ciMinus": 6,
+        "votes": 15089,
+        "pricePerM": "$0.30 / $1.20",
+        "context": "204.8K"
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "model": "composer-2.5",
+      "reason": "Not present among the 126 models on Code Arena | WebDev Overall (https://arena.ai/leaderboard/code, Sep 5, 2026). No Composer / Cursor Composer row observed."
+    },
+    {
+      "model": "qwen3.7-plus",
+      "reason": "No exact qwen3.7-plus row. Nearby distinct names left unmatched: qwen3.7-max-20260517 (1517, rank 37) and qwen3.6-plus (1460, rank 53). Different generation/tier — not force-matched."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "real-api-pricing",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "render": "node scripts/render_svg.cjs"
+  },
+  "dependencies": {
+    "sharp": "^0.34.0"
+  }
+}

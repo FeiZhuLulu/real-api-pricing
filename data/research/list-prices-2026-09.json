@@ -1,0 +1,449 @@
+{
+  "collectedAt": "2026-09-05",
+  "usdPerCny": 7.2,
+  "models": [
+    {
+      "model": "gpt-5.6-sol",
+      "vendor": "OpenAI",
+      "input": 4.0,
+      "cachedInput": 0.4,
+      "output": 20.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 8.0, "cachedInput": 0.8, "output": 30.0, "note": "context length >= ~270K (long context column on pricing page)" },
+        "fast": { "input": 8.0, "cachedInput": 0.8, "output": 40.0, "note": "Fast mode / service_tier priority|fast; long-context Fast: input 16 / cached 1.6 / output 60" },
+        "batch": { "input": 2.0, "cachedInput": 0.2, "output": 10.0 },
+        "flex": { "input": 2.0, "cachedInput": 0.2, "output": 10.0 }
+      },
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "GPT-5.6 Sol promotional pricing available at least through 2026-11-21. Short-context Standard rates used as base."
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "vendor": "OpenAI",
+      "input": 2.0,
+      "cachedInput": 0.2,
+      "output": 12.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 4.0, "cachedInput": 0.4, "output": 18.0 },
+        "fast": { "input": 4.0, "cachedInput": 0.4, "output": 24.0, "note": "long-context Fast: input 8 / cached 0.8 / output 36" },
+        "batch": { "input": 1.0, "cachedInput": 0.1, "output": 6.0 },
+        "flex": { "input": 1.0, "cachedInput": 0.1, "output": 6.0 }
+      },
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "vendor": "OpenAI",
+      "input": 0.2,
+      "cachedInput": 0.02,
+      "output": 1.2,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 0.4, "cachedInput": 0.04, "output": 1.8 },
+        "fast": { "input": 0.4, "cachedInput": 0.04, "output": 2.4, "note": "long-context Fast: input 0.8 / cached 0.08 / output 3.6" },
+        "batch": { "input": 0.1, "cachedInput": 0.01, "output": 0.6 },
+        "flex": { "input": 0.1, "cachedInput": 0.01, "output": 0.6 }
+      },
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "gpt-5.5",
+      "vendor": "OpenAI",
+      "input": 5.0,
+      "cachedInput": 0.5,
+      "output": 30.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 10.0, "cachedInput": 1.0, "output": 45.0, "note": "labeled <272K short / long context on pricing page" },
+        "fast": { "input": 12.5, "cachedInput": 1.25, "output": 75.0 },
+        "batch": { "input": 2.5, "cachedInput": 0.25, "output": 15.0 },
+        "flex": { "input": 2.5, "cachedInput": 0.25, "output": 15.0 }
+      },
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "claude-opus-5",
+      "vendor": "Anthropic",
+      "input": 5.0,
+      "cachedInput": 0.5,
+      "output": 25.0,
+      "currency": "USD",
+      "variants": {
+        "fast": { "input": 10.0, "output": 50.0, "note": "Fast mode research preview; cache multipliers stack on fast rates" },
+        "batch": { "input": 2.5, "output": 12.5 },
+        "cacheWrite5m": { "input": 6.25 },
+        "cacheWrite1h": { "input": 10.0 }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "1M context at standard rates (Claude 4.6+). US inference_geo 1.1x."
+    },
+    {
+      "model": "claude-fable-5",
+      "vendor": "Anthropic",
+      "input": 10.0,
+      "cachedInput": 1.0,
+      "output": 50.0,
+      "currency": "USD",
+      "variants": {
+        "batch": { "input": 5.0, "output": 25.0 },
+        "cacheWrite5m": { "input": 12.5 },
+        "cacheWrite1h": { "input": 20.0 }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Claude Fable 5.1 cache hits are $0.25/MTok; Fable 5 cache hits remain $1/MTok."
+    },
+    {
+      "model": "claude-sonnet-5",
+      "vendor": "Anthropic",
+      "input": 2.0,
+      "cachedInput": 0.2,
+      "output": 10.0,
+      "currency": "USD",
+      "variants": {
+        "batch": { "input": 1.0, "output": 5.0 },
+        "cacheWrite5m": { "input": 2.5 },
+        "cacheWrite1h": { "input": 4.0 }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "$2/$10 was launch intro through 2026-08-31; docs now state it is the permanent standard (scheduled $3/$15 increase cancelled)."
+    },
+    {
+      "model": "claude-opus-4.8",
+      "vendor": "Anthropic",
+      "input": 5.0,
+      "cachedInput": 0.5,
+      "output": 25.0,
+      "currency": "USD",
+      "variants": {
+        "fast": { "input": 10.0, "output": 50.0 },
+        "batch": { "input": 2.5, "output": 12.5 },
+        "cacheWrite5m": { "input": 6.25 },
+        "cacheWrite1h": { "input": 10.0 }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "grok-4.6",
+      "vendor": "xAI / SpaceXAI",
+      "input": 2.0,
+      "cachedInput": 0.5,
+      "output": 6.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 4.0, "cachedInput": 1.0, "output": 12.0, "note": "prompt >= 200k tokens; higher rate applies to all tokens in the request" },
+        "fast": { "note": "News post states a fast variant at 2x price; not broken out as separate rows on models pricing table when checked" }
+      },
+      "source": "https://docs.x.ai/developers/models",
+      "checkedAt": "2026-09-05",
+      "note": "Also announced at https://x.ai/news/grok-4-6"
+    },
+    {
+      "model": "grok-4.5",
+      "vendor": "xAI / SpaceXAI",
+      "input": 2.0,
+      "cachedInput": 0.3,
+      "output": 6.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 4.0, "cachedInput": 0.6, "output": 12.0, "note": "prompt >= 200k tokens" }
+      },
+      "source": "https://docs.x.ai/developers/models",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "kimi-k3",
+      "vendor": "Moonshot / Kimi",
+      "input": 3.0,
+      "cachedInput": 0.3,
+      "output": 15.0,
+      "currency": "USD",
+      "variants": {},
+      "source": "https://platform.kimi.ai/",
+      "checkedAt": "2026-09-05",
+      "note": "Homepage Latest Models card; flat across 1M context."
+    },
+    {
+      "model": "kimi-k2.7-code",
+      "vendor": "Moonshot / Kimi",
+      "input": 0.95,
+      "cachedInput": 0.19,
+      "output": 4.0,
+      "currency": "USD",
+      "variants": {},
+      "source": "https://platform.kimi.ai/",
+      "checkedAt": "2026-09-05",
+      "note": "Homepage Latest Models card for K2.7 Code."
+    },
+    {
+      "model": "glm-5.3",
+      "vendor": "Z.AI / Zhipu",
+      "input": 1.4,
+      "cachedInput": 0.26,
+      "output": 4.4,
+      "currency": "USD",
+      "variants": {
+        "cnyDomestic": {
+          "input": 8.0,
+          "cachedInput": 2.0,
+          "output": 28.0,
+          "currency": "CNY",
+          "usdConverted": { "input": 1.111, "cachedInput": 0.278, "output": 3.889 },
+          "source": "https://open.bigmodel.cn/pricing",
+          "note": "Domestic open.bigmodel.cn list; USD = CNY/7.2"
+        }
+      },
+      "source": "https://docs.z.ai/guides/overview/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "International Z.ai USD rates. Cached input storage limited-time free."
+    },
+    {
+      "model": "glm-5.3-flash",
+      "vendor": "Z.AI / Zhipu",
+      "input": 0.15,
+      "cachedInput": 0.03,
+      "output": 0.5,
+      "currency": "USD",
+      "variants": {
+        "promo50offUntil2026-09-09": { "input": 0.075, "cachedInput": 0.015, "output": 0.25, "note": "50% off ends 24:00 2026-09-09 UTC+8 Singapore" },
+        "cnyDomestic": {
+          "input": 0.8,
+          "cachedInput": 0.23,
+          "output": 2.8,
+          "currency": "CNY",
+          "promo50off": { "input": 0.4, "cachedInput": 0.115, "output": 1.4 },
+          "usdConvertedList": { "input": 0.111, "cachedInput": 0.032, "output": 0.389 },
+          "source": "https://open.bigmodel.cn/pricing"
+        }
+      },
+      "source": "https://docs.z.ai/guides/overview/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Base fields are list prices; promo rates in variants."
+    },
+    {
+      "model": "minimax-m3",
+      "vendor": "MiniMax",
+      "input": 0.3,
+      "cachedInput": 0.06,
+      "output": 1.2,
+      "currency": "USD",
+      "variants": {
+        "listBeforePermanent50off": { "input": 0.6, "cachedInput": 0.12, "output": 2.4 },
+        "longContext": { "input": 0.6, "cachedInput": 0.12, "output": 2.4, "note": ">512k input tokens; permanent 50% off already applied (list was 1.2/0.24/4.8)" },
+        "priority": { "input": 0.45, "cachedInput": 0.09, "output": 1.8, "note": "1.5x standard; service_tier=priority; <=512k" },
+        "priorityLongContext": { "input": 0.9, "cachedInput": 0.18, "output": 3.6 }
+      },
+      "source": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "checkedAt": "2026-09-05",
+      "note": "Base fields are current Standard <=512k rates after permanent 50% off."
+    },
+    {
+      "model": "minimax-m2.7",
+      "vendor": "MiniMax",
+      "input": 0.3,
+      "cachedInput": 0.06,
+      "output": 1.2,
+      "currency": "USD",
+      "variants": {
+        "highspeed": { "input": 0.6, "cachedInput": 0.06, "output": 2.4, "cacheWrite": 0.375 },
+        "cacheWrite": { "input": 0.375, "note": "Prompt caching Write $/MTok" }
+      },
+      "source": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "checkedAt": "2026-09-05",
+      "note": ""
+    },
+    {
+      "model": "qwen3.7-plus",
+      "vendor": "Alibaba Cloud / Qwen",
+      "input": 0.4,
+      "cachedInput": 0.08,
+      "output": 1.6,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 1.2, "cachedInput": 0.24, "output": 4.8, "note": "256K < tokens <= 1M; Singapore/International list" },
+        "promo20offInternational": { "input": 0.32, "output": 1.28, "note": "Limited-time 20% off on international list when checked via Alibaba docs" },
+        "cnyBeijing": {
+          "input": 2.0,
+          "cachedInput": 0.4,
+          "output": 8.0,
+          "currency": "CNY",
+          "longContext": { "input": 6.0, "cachedInput": 1.2, "output": 24.0 },
+          "usdConverted": { "input": 0.278, "cachedInput": 0.056, "output": 1.111 },
+          "source": "https://help.aliyun.com/zh/model-studio/qwen3-7-plus"
+        }
+      },
+      "source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Singapore/International list $0.4/$1.6 (<=256K). Implicit cache hit $0.08 on Singapore model-info page."
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "vendor": "DeepSeek",
+      "input": 0.44,
+      "cachedInput": 0.014,
+      "output": 1.32,
+      "currency": "USD",
+      "variants": {
+        "offPeak": { "input": 0.22, "cachedInput": 0.007, "output": 0.66 },
+        "cnyPeak": {
+          "input": 3.0,
+          "cachedInput": 0.1,
+          "output": 9.0,
+          "currency": "CNY",
+          "usdConverted": { "input": 0.417, "cachedInput": 0.014, "output": 1.25 }
+        },
+        "cnyOffPeak": {
+          "input": 1.5,
+          "cachedInput": 0.05,
+          "output": 4.5,
+          "currency": "CNY",
+          "usdConverted": { "input": 0.208, "cachedInput": 0.007, "output": 0.625 }
+        }
+      },
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "checkedAt": "2026-09-05",
+      "note": "Base = USD peak (cache miss). Peak hours UTC Mon-Fri 01:00-04:00 & 06:00-10:00 (= Beijing 09:00-12:00 & 14:00-18:00). CNY from https://api-docs.deepseek.com/zh-cn/quick_start/pricing"
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "vendor": "DeepSeek",
+      "input": 1.32,
+      "cachedInput": 0.044,
+      "output": 3.96,
+      "currency": "USD",
+      "variants": {
+        "offPeak": { "input": 0.66, "cachedInput": 0.022, "output": 1.98 },
+        "cnyPeak": {
+          "input": 9.0,
+          "cachedInput": 0.3,
+          "output": 27.0,
+          "currency": "CNY",
+          "usdConverted": { "input": 1.25, "cachedInput": 0.042, "output": 3.75 }
+        },
+        "cnyOffPeak": {
+          "input": 4.5,
+          "cachedInput": 0.15,
+          "output": 13.5,
+          "currency": "CNY",
+          "usdConverted": { "input": 0.625, "cachedInput": 0.021, "output": 1.875 }
+        }
+      },
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "checkedAt": "2026-09-05",
+      "note": "Base = USD peak. CNY from https://api-docs.deepseek.com/zh-cn/quick_start/pricing. Snapshot DeepSeek-V4-Pro-0813."
+    },
+    {
+      "model": "gemini-3.1-pro",
+      "vendor": "Google",
+      "input": 2.0,
+      "cachedInput": 0.2,
+      "output": 12.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 4.0, "cachedInput": 0.4, "output": 18.0, "note": "prompts > 200k tokens" },
+        "batch": { "input": 1.0, "output": 6.0, "note": "<=200k; >200k batch input 2 / output 9" },
+        "flex": { "input": 1.0, "output": 6.0 },
+        "priority": { "note": "Priority tier present on page; see source for full table" }
+      },
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Model id gemini-3.1-pro-preview. Also mirrored on https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+    },
+    {
+      "model": "gemini-3.7-flash",
+      "vendor": "Google",
+      "input": 0.75,
+      "cachedInput": 0.075,
+      "output": 3.75,
+      "currency": "USD",
+      "variants": {
+        "introThrough2026-12-31": { "input": 0.75, "cachedInput": 0.075, "output": 3.75 },
+        "standardFrom2027-01-01": { "input": 1.5, "cachedInput": 0.15, "output": 7.5 },
+        "batch": { "input": 0.375, "cachedInput": 0.0375, "output": 1.875 },
+        "flex": { "input": 0.375, "cachedInput": 0.0375, "output": 1.875 },
+        "priority": { "input": 1.35, "cachedInput": 0.135, "output": 6.75 }
+      },
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Introductory Flash pricing through 2026-12-31."
+    },
+    {
+      "model": "mimo-v2.5-pro",
+      "vendor": "Xiaomi MiMo",
+      "input": 1.0,
+      "cachedInput": 0.2,
+      "output": 3.0,
+      "currency": "USD",
+      "variants": {
+        "longContext": { "input": 2.0, "cachedInput": 0.4, "output": 6.0, "note": "input 256K-1M overseas tier inferred from 2x short-context pattern on pricing page search snippet" },
+        "cnyDomestic": {
+          "input": 7.0,
+          "cachedInput": 1.4,
+          "output": 21.0,
+          "currency": "CNY",
+          "longContext": { "input": 14.0, "cachedInput": 2.8, "output": 42.0 },
+          "usdConverted": { "input": 0.972, "cachedInput": 0.194, "output": 2.917 },
+          "source": "https://platform.xiaomimimo.com/docs/zh-CN/pricing"
+        }
+      },
+      "source": "https://platform.xiaomimimo.com/docs/zh-CN/pricing",
+      "checkedAt": "2026-09-05",
+      "note": "Overseas short-context rates from official pricing page search index (page itself is JS-rendered). CNY domestic also recorded. Arena Price column shows $0.43/$0.87 which does not match this official card — use official."
+    },
+    {
+      "model": "hy4-preview",
+      "vendor": "Tencent Hunyuan",
+      "input": 0.834,
+      "cachedInput": 0.042,
+      "output": 2.501,
+      "currency": "USD",
+      "variants": {},
+      "source": "https://hy.tencent.ai/research/hy4-preview",
+      "checkedAt": "2026-09-05",
+      "note": "Also restated on https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/"
+    },
+    {
+      "model": "hy3",
+      "vendor": "Tencent Hunyuan",
+      "input": 0.08,
+      "cachedInput": null,
+      "output": 0.33,
+      "currency": "USD",
+      "variants": {
+        "noteFromArenaPriceColumn": { "input": 0.08, "output": 0.33, "source": "https://arena.ai/leaderboard/agent" }
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-09-05",
+      "note": "Could not load a first-party TokenHub HTML price table in this pass; recorded Arena leaderboard Price $/M column for Hy3 ($0.08/$0.33). Prefer TokenHub official page when available."
+    },
+    {
+      "model": "composer-2.5",
+      "vendor": "Cursor",
+      "input": 0.5,
+      "cachedInput": 0.2,
+      "output": 2.5,
+      "currency": "USD",
+      "variants": {
+        "fast": { "input": 3.0, "cachedInput": 0.5, "output": 15.0, "note": "Default in Cursor product" }
+      },
+      "source": "https://cursor.com/docs/models/cursor-composer-2-5",
+      "checkedAt": "2026-09-05",
+      "note": "Cursor on-demand API-equivalent token rates inside Cursor; not a public third-party API. Also https://cursor.com/blog/composer-2-5"
+    }
+  ],
+  "notFound": []
+}

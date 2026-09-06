@@ -1,0 +1,82 @@
+{
+  "recordedAt": "2026-09-05",
+  "round": 6,
+  "topic": "核实用户记忆「Cursor 官方说 fast 是普通 3 倍用量」——未证实；Grok 4.6 Fast 官方为 2×",
+  "findings": [
+    {
+      "item": "grok46_fast_price_official",
+      "status": "confirmed_2x_not_3x",
+      "evidence": [
+        {
+          "source": "https://cursor.com/docs/models/grok-4-6 (live 2026-09-05)",
+          "quote": "Standard on-demand usage is priced at $2/M input tokens, $0.50/M cached input tokens, and $6/M output tokens. The Fast variant is priced at $4/M input tokens, $1/M cached input tokens, and $12/M output tokens."
+        },
+        {
+          "source": "https://cursor.com/blog/grok-4-6",
+          "quote": "Pricing starts at $2 per million input tokens and $6 per million output tokens. A fast variant is available at twice the price."
+        },
+        {
+          "source": "https://x.ai/news/grok-4-6",
+          "quote": "Additionally, there is a fast variant which is twice the price."
+        },
+        {
+          "source": "Wayback cursor.com/docs/models-and-pricing 2026-08-19 03:42 UTC",
+          "quote": "Grok 4.6 (Fast) $4 / - / $1 / $12 —— 截图周期内官方价即 2×，期间未变"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "item": "grok45_fast_output_became_3x_mid_period",
+      "status": "price_changed_within_screenshot_period",
+      "evidence": [
+        {
+          "source": "Wayback 2026-08-19：Grok 4.5 (Fast) $4 / $1 / $12（输出 2×）",
+          "source2": "live 2026-09-05：Grok 4.5 (Fast) $4 / $1 / $18（输出 3×）"
+        }
+      ],
+      "finding": "Grok 4.5 Fast 输出价在 8-19 ~ 9-05 之间从 $12 改为 $18（输出 3×，输入/缓存仍 2×，按实测负载混合仍 ≈2×）。证明 Cursor 会在周期内静默改 Fast 价；但用户截图行全部是 4.6，不受影响。",
+      "confidence": "high"
+    },
+    {
+      "item": "origin_of_3x_memory",
+      "status": "most_likely_composer_or_grok45_output",
+      "candidates": [
+        "Composer 2.5 Fast $3/$0.5/$15 vs 标准 $0.5/$0.2/$2.5：输入/输出 6×，按实测负载（缓存读 97.5%）混合 ≈2.8× —— 论坛上确有用户称「the fast variant takes ~3x more usage than the normal variant」（forum.cursor.com/t/explore-agents-ignoring-model-variant/161647，用户帖非官方，且说的是 Composer）",
+        "Grok 4.5 Fast 输出 $18 = 3×$6（现表；8-19 时还是 $12）",
+        "Pro+ = 3x Pro limits（套餐倍率，与 fast 无关）"
+      ],
+      "finding": "未找到任何官方「fast 按 3 倍计用量」表述；最接近的是 Composer Fast ≈3×（混合）与 4.5 Fast 输出 3×。",
+      "confidence": "medium"
+    },
+    {
+      "item": "panel_pct_is_cost_weighted_official",
+      "status": "confirmed_by_staff",
+      "source": "forum.cursor.com 员工 Colin/kevinn 多次答复（2026-07）",
+      "quote": "That pool is consumed at each model's token rates ... it's not possible to directly compare a total token count across models.",
+      "finding": "面板 % = 按各模型 token 单价折算的费用占比，非 token 数占比。同行另有记录在案的面板异常：Grok 4.5 上线当天被错记 API 池；Fast 开关 bug 使非 Fast 请求按 Fast 计费（cursor-grok-4.5-high-fast）；某用户同面板 21.0M→4.6% 与 16.4M→6.7% 矛盾。",
+      "confidence": "high"
+    },
+    {
+      "item": "launch_promo_overlaps_screenshot_period",
+      "status": "confound_identified",
+      "source": "Wayback 2026-08-19 页脚注 + cursor.com/blog/grok-4-6",
+      "quote": "A 50% launch discount for Grok 4.6 applies for one week starting August 12, 2026. / We're offering 2x included usage inside Cursor and Grok Build for the first week.",
+      "finding": "用户截图周期 2026-08-11~09-11 覆盖 4.6 发布周促销（8-12 起一周：50% 计费折扣 / 双倍 included usage）。促销期用量的 % 分母口径与正常周不同，使单行反推池的不确定性最多再扩 ~2×，且方向为使稳态池显得更大（即真实稳态池可能小于反推值）。",
+      "confidence": "high"
+    },
+    {
+      "item": "recomputed_pool_under_official_2x",
+      "status": "computed",
+      "method": "面板 % 按费用占比解读；负载分布用 data/kimi-local.json（缓存读 97.5%/输入 2.2%/输出 0.35%）：std 混合 $0.5525/M，fast(4.6) 混合 $1.105/M",
+      "rows": {
+        "xhigh-fast 839.5M/27.7%": "→ $927.6 → 池 $3,349 → 折标准 60.6 亿",
+        "xhigh 61.0M/0.9%": "→ $33.7 → 池 $3,745 → 折标准 67.8 亿",
+        "全表 1.1B/38.5% 各档折费": "→ $1,167 → 池 $3,032 → 折标准 54.9 亿（与 CellCog $3,000 吻合）"
+      },
+      "finding": "官方 2× 下三行自洽于池 $3,000~3,700 ≈ 标准档 55~68 亿。若强行用 3× 解读 fast 行得 90.9 亿，但要求丢弃其余所有行且与官方价矛盾。",
+      "confidence": "high"
+    }
+  ],
+  "conclusion": "「fast=3×」无官方依据（4.6 官方 2×）；截图按官方价口径支持 ~55-68 亿标准等效，仍与用户确认的 ~100 亿冲突。用户确认值 100 亿维持采用（adopted），此文件仅记录核验过程，不改数。"
+}

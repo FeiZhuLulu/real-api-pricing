@@ -1,0 +1,85 @@
+{
+  "updatedAt": "2026-09-05",
+  "cli": "npx ccusage kimi monthly/daily --json --offline",
+  "sessionDir": "<LOCAL_KIMI_SESSION_DIRECTORY>",
+  "rawFile": "data/raw/kimi-ccusage-daily.json",
+  "subscription": "Kimi 199 / Allegretto",
+  "caveats": [
+    "这是消耗，不是套餐封顶",
+    "k3-256k 在 ccusage 标价 $0，日表金额不可靠",
+    "<LOCAL_LEGACY_USAGE_EXPORT> 只有 6 月旧导出，不要当主数据",
+    "9 月会话目录在，这份月报未计入"
+  ],
+  "daysWithUsage": 25,
+  "range": [
+    "2026-06-12",
+    "2026-08"
+  ],
+  "monthly": [
+    {
+      "month": "2026-06",
+      "days": 6,
+      "totalTokens": 175385507,
+      "inputTokens": 3737995,
+      "outputTokens": 617440,
+      "cacheReadTokens": 171030072,
+      "cacheShare": 0.975,
+      "ccusageCostUsd": 33.38566677,
+      "mainModel": "kimi-for-coding"
+    },
+    {
+      "month": "2026-07",
+      "days": 14,
+      "totalTokens": 416989306,
+      "inputTokens": 9040062,
+      "outputTokens": 1471843,
+      "cacheReadTokens": 406477401,
+      "cacheShare": 0.975,
+      "ccusageCostUsd": 77.54376533,
+      "mainModels": "k3-256k 2.67亿 / k3 1.13亿 / kimi-for-coding 0.38亿"
+    },
+    {
+      "month": "2026-08",
+      "days": 5,
+      "totalTokens": 25319873,
+      "inputTokens": 1473402,
+      "outputTokens": 165680,
+      "cacheReadTokens": 23680791,
+      "cacheShare": 0.935,
+      "ccusageCostUsd": 0.19020154,
+      "mainModel": "k3-256k + 免费模型"
+    }
+  ],
+  "peakDays": [
+    {
+      "date": "2026-07-25",
+      "tokens": 151560340,
+      "models": [
+        "k3-256k",
+        "kimi-for-coding"
+      ]
+    },
+    {
+      "date": "2026-06-27",
+      "tokens": 100023482,
+      "models": [
+        "kimi-for-coding"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "tokens": 92178728,
+      "models": [
+        "k3-256k"
+      ]
+    }
+  ],
+  "quotaInference": {
+    "userSaid": "7/25–26 是新一周额度，大约用了 84%，订阅 199",
+    "usedTokens": 243739068,
+    "usedFraction": 0.84,
+    "weeklyTokens": 290165557,
+    "monthlyTokensX4": 1160662228,
+    "monthlyTokensX30over7": 1243566673
+  }
+}

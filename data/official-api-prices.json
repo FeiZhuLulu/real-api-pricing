@@ -1,0 +1,73 @@
+{
+  "updatedAt": "2026-09-05",
+  "usdPerCny": 7.2,
+  "items": [
+    {
+      "id": "deepseek_v4_flash",
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-flash",
+      "snapshot": "DeepSeek-V4-Flash-0731",
+      "billing": "metered_api",
+      "firstPartySubscription": false,
+      "chatApp": "免费",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "concurrency": 2500,
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "enSource": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "checkedAt": "2026-09-05",
+      "matchesSubPlanAsOf": "2026-09-01",
+      "peakHoursBeijing": ["Mon-Fri 09:00-12:00", "Mon-Fri 14:00-18:00"],
+      "weekendRuleFrom": "2026-08-23",
+      "weekendRule": "周六日全天空闲价",
+      "cnyPerMTok": {
+        "peak": { "cacheHit": 0.1, "inputMiss": 3.0, "output": 9.0 },
+        "offPeak": { "cacheHit": 0.05, "inputMiss": 1.5, "output": 4.5 }
+      },
+      "usdPerMTok": {
+        "peak": { "cacheHit": 0.014, "inputMiss": 0.44, "output": 1.32 },
+        "offPeak": { "cacheHit": 0.007, "inputMiss": 0.22, "output": 0.66 }
+      }
+    },
+    {
+      "id": "deepseek_v4_pro",
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "snapshot": "DeepSeek-V4-Pro-0813",
+      "billing": "metered_api",
+      "firstPartySubscription": false,
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "concurrency": 500,
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "checkedAt": "2026-09-05",
+      "cnyPerMTok": {
+        "peak": { "cacheHit": 0.3, "inputMiss": 9.0, "output": 27.0 },
+        "offPeak": { "cacheHit": 0.15, "inputMiss": 4.5, "output": 13.5 }
+      },
+      "usdPerMTok": {
+        "peak": { "cacheHit": 0.044, "inputMiss": 1.32, "output": 3.96 },
+        "offPeak": { "cacheHit": 0.022, "inputMiss": 0.66, "output": 1.98 }
+      }
+    },
+    {
+      "id": "openai_gpt56_sol_api",
+      "provider": "OpenAI",
+      "model": "gpt-5.6-sol",
+      "billing": "metered_api",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checkedAt": "2026-09-05",
+      "usdPerMTokShort": { "cacheHit": 0.4, "inputMiss": 4.0, "output": 20.0 },
+      "promoThrough": "2026-11-21",
+      "longContext": "input 2x / output 1.5x；Fast mode 2x"
+    }
+  ],
+  "thirdPartyWrappers": [
+    {
+      "id": "opencode_go",
+      "priceUsd": 60,
+      "note": "价值额度套餐，可跑 DeepSeek，不是 DeepSeek 原厂会员",
+      "source": "https://opencode.ai/docs/go/"
+    }
+  ]
+}
