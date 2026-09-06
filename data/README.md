@@ -1,17 +1,17 @@
 # Data / 数据
 
-Current snapshot: 2026-09-06. The adopted dataset contains 81 plan × model rows: 75 subscription rows and 6 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
+Current snapshot: 2026-09-06. The adopted dataset contains 97 plan × model rows: 91 subscription rows and 6 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
 
 These files are the public redacted edition. Original local evidence is backed up outside Git; see [PUBLICATION.md](../PUBLICATION.md). 本目录为公开脱敏版，保留数值、来源与取舍记录，原件仅存于 Git 忽略的本地备份。
 
-当前采用数据共 81 条“套餐 × 模型”：75 条订阅、6 条按量 API。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但保留在单价/额度数据中。这不是市场上所有产品的完整清单。
+当前采用数据共 97 条“套餐 × 模型”：91 条订阅、6 条按量 API。OpenCode Go 已按官网价格/Endpoints 表补齐 28 个模型，并按每模型 Usage 美元额度与项目统一 token mix 换算。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但保留在单价/额度数据中。这不是市场上所有产品的完整清单。
 
 | Board / 榜单 | Scored rows / 有分行 | Missing model scores / 缺分模型 |
 |---|---:|---|
-| Code Arena | 72 / 81 | Composer 2.5; Qwen3.7 Plus |
-| Agent Arena | 75 / 81 | Composer 2.5 |
-| AA Intelligence | 72 / 81 | Composer 2.5; Hy4 preview; MiniMax M2.7 |
-| AA Coding Agent | 42 / 81 | Claude Sonnet 5; GLM 5.3; GLM 5.3 Flash; Grok 4.6; Hy4 preview; Kimi K2.7 Code; MiMo V2.5 Pro; MiniMax M2.7; MiniMax M3 |
+| Code Arena | 74 / 97 | Composer 2.5; DeepSeek V4 Flash Vision Exp; GLM 5.1; GLM 5.2; Kimi K2.6; LongCat 2.0; MiMo V2.5; MiniMax M2.5; Muse Spark 1.2 Contributor; Muse Spark 1.3 Contributor; Omen Alpha; Qwen3.6 Plus; Qwen3.7 Max; Qwen3.7 Plus; Qwen3.8 Flash; Qwen3.8 Max |
+| Agent Arena | 77 / 97 | Composer 2.5; DeepSeek V4 Flash Vision Exp; GLM 5.1; GLM 5.2; Kimi K2.6; LongCat 2.0; MiMo V2.5; MiniMax M2.5; Muse Spark 1.2 Contributor; Muse Spark 1.3 Contributor; Omen Alpha; Qwen3.6 Plus; Qwen3.7 Max; Qwen3.8 Flash; Qwen3.8 Max |
+| AA Intelligence | 73 / 97 | Composer 2.5; DeepSeek V4 Flash Vision Exp; GLM 5.1; GLM 5.2; Hy4 preview; Kimi K2.6; LongCat 2.0; MiMo V2.5; MiniMax M2.5; MiniMax M2.7; Muse Spark 1.2 Contributor; Muse Spark 1.3 Contributor; Omen Alpha; Qwen3.6 Plus; Qwen3.7 Max; Qwen3.8 Flash; Qwen3.8 Max |
+| AA Coding Agent | 42 / 97 | Claude Sonnet 5; DeepSeek V4 Flash Vision Exp; GLM 5.1; GLM 5.2; GLM 5.3; GLM 5.3 Flash; Grok 4.6; Hy3; Hy4 preview; Kimi K2.6; Kimi K2.7 Code; LongCat 2.0; MiMo V2.5; MiMo V2.5 Pro; MiniMax M2.5; MiniMax M2.7; MiniMax M3; Muse Spark 1.2 Contributor; Muse Spark 1.3 Contributor; Omen Alpha; Qwen3.6 Plus; Qwen3.7 Max; Qwen3.8 Flash; Qwen3.8 Max |
 
 ## Start here / 从这里开始
 

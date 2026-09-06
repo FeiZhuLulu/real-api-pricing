@@ -2,7 +2,7 @@
 # 数据源：data/adopted.csv（生成物，勿手改）
 # 用法：python scripts/plot_quotas.py
 #   →  out/{额度,单价}总览{,_英文}.png / .svg          中英文两栏横向条形图
-#   →  out/额度总览{_英文,}_混合比例.png / .svg         03–75 对数不动，01/02 按对 03 的真实倍数，放不下折下
+#   →  out/额度总览{_英文,}_混合比例.png / .svg         其余条保持对数，01/02 按对 03 的真实倍数，放不下折下
 #   →  out/{额度,单价}总览表{,_英文}.txt               中英文纯文字对齐表格
 #   →  out/前沿{额度,单价}_{CodeArena榜,AgentArena榜,AA智力榜,AA编程Agent榜}{,_英文}.*
 #   →  out/前沿筛选结果.json
@@ -90,7 +90,7 @@ TEXT = {
         "prices_axis": "真实单价（美元 / 百万 token，对数轴）",
         "quotas_order": "额度从高到低",
         "prices_order": "单价从低到高",
-        "mixed_note": "03–75 条长仍按对数轴，未改。01、02 按对 03 的真实倍数重画（01≈6.1×03，02≈1.5×03）；01 横放不下则在右缘折下。叠到 39 处半透明。",
+        "mixed_note": "除前两条外，其余条形仍按对数轴。01、02 按对 03 的真实倍数重画（01≈6.1×03，02≈1.5×03）；01 横放不下则在右缘折下，穿越右栏处半透明。",
         "footer": "颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。",
         "shared": "同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。",
         "headers": ["序号", "套餐", "价格/月", "服务模型", "月额度(亿)", "$/MTok", "置信度"],
@@ -105,7 +105,7 @@ TEXT = {
         "prices_axis": "Effective price (USD per million tokens, log scale)",
         "quotas_order": "Highest allowance first",
         "prices_order": "Lowest price first",
-        "mixed_note": "Bars 03–75 stay on the log scale. 01 and 02 are redrawn as true multiples of 03 (~6.1× and ~1.5×); 01 folds down the right edge if it cannot fit. Overlap on row 39 is translucent.",
+        "mixed_note": "All bars except 01–02 stay on the log scale. Bars 01–02 are redrawn as true multiples of 03 (~6.1× and ~1.5×); 01 folds down the right edge if needed and turns translucent where it crosses the right column.",
         "footer": "Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.",
         "shared": "Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.",
         "headers": ["No.", "Plan", "Monthly fee", "Served model", "Monthly tokens (B)", "USD/MTok", "Confidence"],
@@ -255,7 +255,7 @@ def _fig_box(y0, h, ax, fig):
 
 
 def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
-    """03–75 保持对数条。01、02 条长 = (额度/03) × 03 的像素长；放不下就在右缘折下。"""
+    """其余条保持对数。01、02 条长 = (额度/03) × 03 的像素长；放不下就在右缘折下。"""
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
     tax, rax = axes[0], axes[-1]

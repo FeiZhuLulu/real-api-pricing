@@ -1,0 +1,1651 @@
+{
+  "source": "https://opencode.ai/docs/go/",
+  "relatedSources": [
+    "https://opencode.ai/zen/go/v1/models",
+    "https://opencode.ai/auth",
+    "https://api-docs.deepseek.com/quick_start/pricing/"
+  ],
+  "checkedAt": "2026-09-06",
+  "pageFetchedAt": "2026-09-06",
+  "subscriptionPriceUsd": 10,
+  "officialSharedLimits": {
+    "per5hUsd": 12,
+    "perWeekUsd": 30,
+    "perMonthUsd": 60,
+    "quote": "5 hour limit — $12 of usage; Weekly limit — $30 of usage; Monthly limit — $60 of usage"
+  },
+  "formula": "min(60, perModelUsageUsd)/(cacheMix*cacheReadPrice + inputMix*inputPrice + outputMix*outputPrice)*1e6",
+  "mix": {
+    "cache": 0.9747909482359722,
+    "input": 0.02167936172444672,
+    "output": 0.003529690039581015,
+    "numerators": {
+      "cache": 406477401,
+      "input": 9040062,
+      "output": 1471843
+    },
+    "denominator": 416989306,
+    "source": "project fixed MIX from build_adopted.py / kimi-local distribution",
+    "note": "cache mix multiplies Cached Read $/1M only; Cached Write is recorded but not used in denominator"
+  },
+  "enumerationScope": {
+    "docsCurrentListBullets": 27,
+    "docsRequestEstimateTable": 27,
+    "docsPricingTable": 28,
+    "docsEndpointsTable": 28,
+    "modelsInThisFile": 28,
+    "note": "本文件枚举官网价格表全部 28 行模型（含仅出现在价格/Endpoints、未出现在请求估算表的 MiniMax M2.5）。请求估算表/当前模型列表为 27。zen/go/v1/models 另有未进文档表的 id，记入 apiModelsNotInDocsTables，不编价格。"
+  },
+  "buildAdoptedPresentCount": 12,
+  "buildAdoptedPresent": [
+    "grok-4.6",
+    "gpt-5.6-luna",
+    "glm-5.3-flash",
+    "glm-5.3",
+    "kimi-k3",
+    "kimi-k2.7-code",
+    "mimo-v2.5-pro",
+    "minimax-m3",
+    "qwen3.7-plus",
+    "deepseek-v4-pro",
+    "deepseek-v4-flash",
+    "hy4-preview"
+  ],
+  "missingFromBuildAdoptedCount": 16,
+  "missingFromBuildAdopted": [
+    "glm-5.2",
+    "glm-5.1",
+    "kimi-k2.6",
+    "longcat-2.0",
+    "mimo-v2.5",
+    "minimax-m2.7",
+    "minimax-m2.5",
+    "muse-spark-1.3-contributor",
+    "muse-spark-1.2-contributor",
+    "qwen3.8-max",
+    "qwen3.8-flash",
+    "qwen3.7-max",
+    "qwen3.6-plus",
+    "deepseek-v4-flash-vision-exp",
+    "hy3",
+    "omen-alpha"
+  ],
+  "apiModelsNotInDocsTables": [
+    "glm-5",
+    "grok-4.5",
+    "hy3-preview",
+    "kimi-k2.5",
+    "mimo-v2-omni",
+    "mimo-v2-pro",
+    "qwen3.5-plus"
+  ],
+  "models": [
+    {
+      "officialDisplayName": "Grok 4.6",
+      "modelSlug": "grok-4.6",
+      "configId": "opencode-go/grok-4.6",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "grok-4.6",
+      "requestsEstimate": {
+        "per5h": 169,
+        "perWeek": 423,
+        "perMonth": 845
+      },
+      "typicalTokensPerRequest": {
+        "input": 390,
+        "cacheRead": 32500,
+        "cacheWrite": null,
+        "output": 120
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 2.0,
+        "output": 6.0,
+        "cacheRead": 0.5,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "<=200K tokens",
+          "pricesPer1M": {
+            "input": 2.0,
+            "output": 6.0,
+            "cacheRead": 0.5,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.5519323378,
+          "candidateMonthlyTokens": 27177244.333,
+          "candidateMonthlyYi": 0.271772
+        },
+        {
+          "label": ">200K tokens",
+          "pricesPer1M": {
+            "input": 4.0,
+            "output": 12.0,
+            "cacheRead": 1.0,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 1.1038646756,
+          "candidateMonthlyTokens": 13588622.167,
+          "candidateMonthlyYi": 0.135886
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "<=200K tokens",
+        "blendedUsdPer1M": 0.5519323378,
+        "candidateMonthlyTokens": 27177244.333,
+        "candidateMonthlyYi": 0.271772,
+        "reason": "官方典型请求假设约 390+32500+120≈3.3万 token/req，远低于 200K 阈值；候选采用 <=200K 档。>200K 档保留为 variant。"
+      },
+      "officialQuote": "Grok 4.6 (<= 200K tokens) Input $2.00 Output $6.00 Cached Read $0.50 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 27893450,
+      "officialEstimateMonthlyYi_reqTimesTypical": 0.278934
+    },
+    {
+      "officialDisplayName": "GPT 5.6 Luna",
+      "modelSlug": "gpt-5.6-luna",
+      "configId": "opencode-go/gpt-5.6-luna",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "gpt-5.6-luna",
+      "requestsEstimate": {
+        "per5h": 2050,
+        "perWeek": 5100,
+        "perMonth": 10250
+      },
+      "typicalTokensPerRequest": {
+        "input": 1000,
+        "cacheRead": 50000,
+        "cacheWrite": null,
+        "output": 220
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.2,
+        "output": 1.2,
+        "cacheRead": 0.02,
+        "cacheWrite": 0.25
+      },
+      "variants": [
+        {
+          "label": "<=272K tokens",
+          "pricesPer1M": {
+            "input": 0.2,
+            "output": 1.2,
+            "cacheRead": 0.02,
+            "cacheWrite": 0.25
+          },
+          "blendedUsdPer1M": 0.0280673194,
+          "candidateMonthlyTokens": 534429377.068,
+          "candidateMonthlyYi": 5.344294
+        },
+        {
+          "label": ">272K tokens",
+          "pricesPer1M": {
+            "input": 0.4,
+            "output": 1.8,
+            "cacheRead": 0.04,
+            "cacheWrite": 0.5
+          },
+          "blendedUsdPer1M": 0.0540168247,
+          "candidateMonthlyTokens": 277691257.973,
+          "candidateMonthlyYi": 2.776913
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "<=272K tokens",
+        "blendedUsdPer1M": 0.0280673194,
+        "candidateMonthlyTokens": 534429377.068,
+        "candidateMonthlyYi": 5.344294,
+        "reason": "官方典型请求约 5.1 万 token/req，低于 272K 阈值；候选采用 <=272K 档。>272K 档保留为 variant。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "GPT 5.6 Luna (<= 272K tokens) Input $0.20 Output $1.20 Cached Read $0.02 Cached Write $0.25 Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 525005000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 5.25005
+    },
+    {
+      "officialDisplayName": "GLM-5.3-Flash",
+      "modelSlug": "glm-5.3-flash",
+      "configId": "opencode-go/glm-5.3-flash",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "glm-5.3-flash",
+      "requestsEstimate": {
+        "per5h": 1580,
+        "perWeek": 3950,
+        "perMonth": 7900
+      },
+      "typicalTokensPerRequest": {
+        "input": 1000,
+        "cacheRead": 55000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.15,
+        "output": 0.5,
+        "cacheRead": 0.03,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.15,
+            "output": 0.5,
+            "cacheRead": 0.03,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0342604777,
+          "candidateMonthlyTokens": 437822266.232,
+          "candidateMonthlyYi": 4.378223
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0342604777,
+        "candidateMonthlyTokens": 437822266.232,
+        "candidateMonthlyYi": 4.378223,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "GLM-5.3-Flash Input $0.15 Output $0.50 Cached Read $0.03 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 443980000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 4.4398
+    },
+    {
+      "officialDisplayName": "GLM-5.3",
+      "modelSlug": "glm-5.3",
+      "configId": "opencode-go/glm-5.3",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "glm-5.3",
+      "requestsEstimate": {
+        "per5h": 220,
+        "perWeek": 540,
+        "perMonth": 1080
+      },
+      "typicalTokensPerRequest": {
+        "input": 700,
+        "cacheRead": 52000,
+        "cacheWrite": null,
+        "output": 150
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 1.4,
+        "output": 4.4,
+        "cacheRead": 0.26,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 1.4,
+            "output": 4.4,
+            "cacheRead": 0.26,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.2993273891,
+          "candidateMonthlyTokens": 50112353.713,
+          "candidateMonthlyYi": 0.501124
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.2993273891,
+        "candidateMonthlyTokens": 50112353.713,
+        "candidateMonthlyYi": 0.501124,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "GLM-5.3 Input $1.40 Output $4.40 Cached Read $0.26 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 57078000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 0.57078
+    },
+    {
+      "officialDisplayName": "GLM-5.2",
+      "modelSlug": "glm-5.2",
+      "configId": "opencode-go/glm-5.2",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "glm-5.2",
+      "requestsEstimate": {
+        "per5h": 880,
+        "perWeek": 2150,
+        "perMonth": 4300
+      },
+      "typicalTokensPerRequest": {
+        "input": 700,
+        "cacheRead": 52000,
+        "cacheWrite": null,
+        "output": 150
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 1.4,
+        "output": 4.4,
+        "cacheRead": 0.26,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 1.4,
+            "output": 4.4,
+            "cacheRead": 0.26,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.2993273891,
+          "candidateMonthlyTokens": 200449414.851,
+          "candidateMonthlyYi": 2.004494
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.2993273891,
+        "candidateMonthlyTokens": 200449414.851,
+        "candidateMonthlyYi": 2.004494,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "GLM-5.2 Input $1.40 Output $4.40 Cached Read $0.26 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 227255000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 2.27255
+    },
+    {
+      "officialDisplayName": "GLM-5.1",
+      "modelSlug": "glm-5.1",
+      "configId": "opencode-go/glm-5.1",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "glm-5.1",
+      "requestsEstimate": {
+        "per5h": 880,
+        "perWeek": 2150,
+        "perMonth": 4300
+      },
+      "typicalTokensPerRequest": {
+        "input": 700,
+        "cacheRead": 52000,
+        "cacheWrite": null,
+        "output": 150
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 1.4,
+        "output": 4.4,
+        "cacheRead": 0.26,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 1.4,
+            "output": 4.4,
+            "cacheRead": 0.26,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.2993273891,
+          "candidateMonthlyTokens": 200449414.851,
+          "candidateMonthlyYi": 2.004494
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.2993273891,
+        "candidateMonthlyTokens": 200449414.851,
+        "candidateMonthlyYi": 2.004494,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "GLM-5.1 Input $1.40 Output $4.40 Cached Read $0.26 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 227255000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 2.27255
+    },
+    {
+      "officialDisplayName": "Kimi K3",
+      "modelSlug": "kimi-k3",
+      "configId": "opencode-go/kimi-k3",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "kimi-k3",
+      "requestsEstimate": {
+        "per5h": 110,
+        "perWeek": 250,
+        "perMonth": 490
+      },
+      "typicalTokensPerRequest": {
+        "input": 1050,
+        "cacheRead": 76500,
+        "cacheWrite": null,
+        "output": 300
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 3.0,
+        "output": 15.0,
+        "cacheRead": 0.3,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 3.0,
+            "output": 15.0,
+            "cacheRead": 0.3,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.4104207202,
+          "candidateMonthlyTokens": 36547862.377,
+          "candidateMonthlyYi": 0.365479
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.4104207202,
+        "candidateMonthlyTokens": 36547862.377,
+        "candidateMonthlyYi": 0.365479,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Kimi K3 Input $3.00 Output $15.00 Cached Read $0.30 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 38146500,
+      "officialEstimateMonthlyYi_reqTimesTypical": 0.381465
+    },
+    {
+      "officialDisplayName": "Kimi K2.7 Code",
+      "modelSlug": "kimi-k2.7-code",
+      "configId": "opencode-go/kimi-k2.7-code",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "kimi-k2.7-code",
+      "requestsEstimate": {
+        "per5h": 1350,
+        "perWeek": 3380,
+        "perMonth": 6750
+      },
+      "typicalTokensPerRequest": {
+        "input": 870,
+        "cacheRead": 55000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.95,
+        "output": 4.0,
+        "cacheRead": 0.19,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.95,
+            "output": 4.0,
+            "cacheRead": 0.19,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.219924434,
+          "candidateMonthlyTokens": 272820981.822,
+          "candidateMonthlyYi": 2.72821
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.219924434,
+        "candidateMonthlyTokens": 272820981.822,
+        "candidateMonthlyYi": 2.72821,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Kimi K2.7 Code Input $0.95 Output $4.00 Cached Read $0.19 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 378472500,
+      "officialEstimateMonthlyYi_reqTimesTypical": 3.784725
+    },
+    {
+      "officialDisplayName": "Kimi K2.6",
+      "modelSlug": "kimi-k2.6",
+      "configId": "opencode-go/kimi-k2.6",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "kimi-k2.6",
+      "requestsEstimate": {
+        "per5h": 1150,
+        "perWeek": 2880,
+        "perMonth": 5750
+      },
+      "typicalTokensPerRequest": {
+        "input": 870,
+        "cacheRead": 55000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.95,
+        "output": 4.0,
+        "cacheRead": 0.16,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.95,
+            "output": 4.0,
+            "cacheRead": 0.16,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.1906807055,
+          "candidateMonthlyTokens": 314662146.011,
+          "candidateMonthlyYi": 3.146621
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.1906807055,
+        "candidateMonthlyTokens": 314662146.011,
+        "candidateMonthlyYi": 3.146621,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Kimi K2.6 Input $0.95 Output $4.00 Cached Read $0.16 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 322402500,
+      "officialEstimateMonthlyYi_reqTimesTypical": 3.224025
+    },
+    {
+      "officialDisplayName": "LongCat-2.0",
+      "modelSlug": "longcat-2.0",
+      "configId": "opencode-go/longcat-2.0",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "longcat-2.0",
+      "requestsEstimate": {
+        "per5h": 11400,
+        "perWeek": 28600,
+        "perMonth": 57200
+      },
+      "typicalTokensPerRequest": {
+        "input": 920,
+        "cacheRead": 88900,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.3,
+        "output": 1.2,
+        "cacheRead": 0.006,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.006,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0165881823,
+          "candidateMonthlyTokens": 3617032841.838,
+          "candidateMonthlyYi": 36.170328
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0165881823,
+        "candidateMonthlyTokens": 3617032841.838,
+        "candidateMonthlyYi": 36.170328,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "LongCat-2.0 Input $0.30 Output $1.20 Cached Read $0.006 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 5149144000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 51.49144
+    },
+    {
+      "officialDisplayName": "MiMo-V2.5",
+      "modelSlug": "mimo-v2.5",
+      "configId": "opencode-go/mimo-v2.5",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "mimo-v2.5",
+      "requestsEstimate": {
+        "per5h": 30100,
+        "perWeek": 75200,
+        "perMonth": 150400
+      },
+      "typicalTokensPerRequest": {
+        "input": 830,
+        "cacheRead": 71500,
+        "cacheWrite": null,
+        "output": 295
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.14,
+        "output": 0.28,
+        "cacheRead": 0.0028,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.14,
+            "output": 0.28,
+            "cacheRead": 0.0028,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0067528385,
+          "candidateMonthlyTokens": 8885152507.76,
+          "candidateMonthlyYi": 88.851525
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0067528385,
+        "candidateMonthlyTokens": 8885152507.76,
+        "candidateMonthlyYi": 88.851525,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "MiMo V2.5 Input $0.14 Output $0.28 Cached Read $0.0028 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 10922800000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 109.228
+    },
+    {
+      "officialDisplayName": "MiMo-V2.5-Pro",
+      "modelSlug": "mimo-v2.5-pro",
+      "configId": "opencode-go/mimo-v2.5-pro",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "mimo-v2.5-pro",
+      "requestsEstimate": {
+        "per5h": 3250,
+        "perWeek": 8150,
+        "perMonth": 16300
+      },
+      "typicalTokensPerRequest": {
+        "input": 790,
+        "cacheRead": 86000,
+        "cacheWrite": null,
+        "output": 305
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.435,
+        "output": 0.87,
+        "cacheRead": 0.003625,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.435,
+            "output": 0.87,
+            "cacheRead": 0.003625,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0160349699,
+          "candidateMonthlyTokens": 935455452.664,
+          "candidateMonthlyYi": 9.354555
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0160349699,
+        "candidateMonthlyTokens": 935455452.664,
+        "candidateMonthlyYi": 9.354555,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "MiMo V2.5 Pro Input $0.435 Output $0.87 Cached Read $0.003625 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 1419648500,
+      "officialEstimateMonthlyYi_reqTimesTypical": 14.196485
+    },
+    {
+      "officialDisplayName": "MiniMax M3",
+      "modelSlug": "minimax-m3",
+      "configId": "opencode-go/minimax-m3",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "minimax-m3",
+      "requestsEstimate": {
+        "per5h": 3200,
+        "perWeek": 8000,
+        "perMonth": 16000
+      },
+      "typicalTokensPerRequest": {
+        "input": 510,
+        "cacheRead": 56000,
+        "cacheWrite": null,
+        "output": 190
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.3,
+        "output": 1.2,
+        "cacheRead": 0.06,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.06,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0692268935,
+          "candidateMonthlyTokens": 866715188.304,
+          "candidateMonthlyYi": 8.667152
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0692268935,
+        "candidateMonthlyTokens": 866715188.304,
+        "candidateMonthlyYi": 8.667152,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "MiniMax M3 Input $0.30 Output $1.20 Cached Read $0.06 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 907200000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 9.072
+    },
+    {
+      "officialDisplayName": "MiniMax M2.7",
+      "modelSlug": "minimax-m2.7",
+      "configId": "opencode-go/minimax-m2.7",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "minimax-m2.7",
+      "requestsEstimate": {
+        "per5h": 3400,
+        "perWeek": 8500,
+        "perMonth": 17000
+      },
+      "typicalTokensPerRequest": {
+        "input": 300,
+        "cacheRead": 55000,
+        "cacheWrite": null,
+        "output": 125
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.3,
+        "output": 1.2,
+        "cacheRead": 0.06,
+        "cacheWrite": 0.375
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.06,
+            "cacheWrite": 0.375
+          },
+          "blendedUsdPer1M": 0.0692268935,
+          "candidateMonthlyTokens": 866715188.304,
+          "candidateMonthlyYi": 8.667152
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0692268935,
+        "candidateMonthlyTokens": 866715188.304,
+        "candidateMonthlyYi": 8.667152,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "MiniMax M2.7 Input $0.30 Output $1.20 Cached Read $0.06 Cached Write $0.375 Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 942225000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 9.42225
+    },
+    {
+      "officialDisplayName": "MiniMax M2.5",
+      "modelSlug": "minimax-m2.5",
+      "configId": "opencode-go/minimax-m2.5",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "minimax-m2.5",
+      "requestsEstimate": null,
+      "typicalTokensPerRequest": null,
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.3,
+        "output": 1.2,
+        "cacheRead": 0.06,
+        "cacheWrite": 0.375
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.06,
+            "cacheWrite": 0.375
+          },
+          "blendedUsdPer1M": 0.0692268935,
+          "candidateMonthlyTokens": 866715188.304,
+          "candidateMonthlyYi": 8.667152
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0692268935,
+        "candidateMonthlyTokens": 866715188.304,
+        "candidateMonthlyYi": 8.667152,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "MiniMax M2.5 Input $0.30 Output $1.20 Cached Read $0.06 Cached Write $0.375 Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [
+        "出现在官网价格表与 Endpoints 表，但请求估算表与典型 token 列表未列该模型；requestsEstimate/typicalTokensPerRequest 为 null，不编数。"
+      ]
+    },
+    {
+      "officialDisplayName": "Muse Spark 1.3 Contributor",
+      "modelSlug": "muse-spark-1.3-contributor",
+      "configId": "opencode-go/muse-spark-1.3-contributor",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "muse-spark-1.3-contributor",
+      "requestsEstimate": {
+        "per5h": 45300,
+        "perWeek": 113300,
+        "perMonth": 226600
+      },
+      "typicalTokensPerRequest": {
+        "input": 620,
+        "cacheRead": 71400,
+        "cacheWrite": null,
+        "output": 300
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.1,
+        "output": 0.2,
+        "cacheRead": 0.002,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.1,
+            "output": 0.2,
+            "cacheRead": 0.002,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0048234561,
+          "candidateMonthlyTokens": 12439213510.864,
+          "candidateMonthlyYi": 124.392135
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0048234561,
+        "candidateMonthlyTokens": 12439213510.864,
+        "candidateMonthlyYi": 124.392135,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Muse Spark 1.3 Contributor Input $0.10 Output $0.20 Cached Read $0.002 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [
+        "官网标注 limited regions（Meta Geographic Use Policy）；Contributor 档允许用于训练，非 ZDR。"
+      ],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 16387712000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 163.87712
+    },
+    {
+      "officialDisplayName": "Muse Spark 1.2 Contributor",
+      "modelSlug": "muse-spark-1.2-contributor",
+      "configId": "opencode-go/muse-spark-1.2-contributor",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "muse-spark-1.2-contributor",
+      "requestsEstimate": {
+        "per5h": 45300,
+        "perWeek": 113300,
+        "perMonth": 226600
+      },
+      "typicalTokensPerRequest": {
+        "input": 620,
+        "cacheRead": 71400,
+        "cacheWrite": null,
+        "output": 300
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.1,
+        "output": 0.2,
+        "cacheRead": 0.002,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.1,
+            "output": 0.2,
+            "cacheRead": 0.002,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0048234561,
+          "candidateMonthlyTokens": 12439213510.864,
+          "candidateMonthlyYi": 124.392135
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0048234561,
+        "candidateMonthlyTokens": 12439213510.864,
+        "candidateMonthlyYi": 124.392135,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Muse Spark 1.2 Contributor Input $0.10 Output $0.20 Cached Read $0.002 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [
+        "官网标注 limited regions（Meta Geographic Use Policy）；Contributor 档允许用于训练，非 ZDR。"
+      ],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 16387712000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 163.87712
+    },
+    {
+      "officialDisplayName": "Qwen3.8 Max",
+      "modelSlug": "qwen3.8-max",
+      "configId": "opencode-go/qwen3.8-max",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "qwen3.8-max",
+      "requestsEstimate": {
+        "per5h": 160,
+        "perWeek": 400,
+        "perMonth": 810
+      },
+      "typicalTokensPerRequest": {
+        "input": 420,
+        "cacheRead": 66000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 2.0,
+        "output": 6.0,
+        "cacheRead": 0.25,
+        "cacheWrite": 2.5
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 2.0,
+            "output": 6.0,
+            "cacheRead": 0.25,
+            "cacheWrite": 2.5
+          },
+          "blendedUsdPer1M": 0.3082346007,
+          "candidateMonthlyTokens": 48664231.607,
+          "candidateMonthlyYi": 0.486642
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.3082346007,
+        "candidateMonthlyTokens": 48664231.607,
+        "candidateMonthlyYi": 0.486642,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "Qwen3.8 Max Input $2.00 Output $6.00 Cached Read $0.25 Cached Write $2.50 Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 53962200,
+      "officialEstimateMonthlyYi_reqTimesTypical": 0.539622
+    },
+    {
+      "officialDisplayName": "Qwen3.8 Flash",
+      "modelSlug": "qwen3.8-flash",
+      "configId": "opencode-go/qwen3.8-flash",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "qwen3.8-flash",
+      "requestsEstimate": {
+        "per5h": 5400,
+        "perWeek": 13500,
+        "perMonth": 27000
+      },
+      "typicalTokensPerRequest": {
+        "input": 600,
+        "cacheRead": 58000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 30,
+      "effectiveMonthlyUsdForFormula": 30.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.15,
+        "output": 0.47,
+        "cacheRead": 0.016,
+        "cacheWrite": 0.2
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.15,
+            "output": 0.47,
+            "cacheRead": 0.016,
+            "cacheWrite": 0.2
+          },
+          "blendedUsdPer1M": 0.0205075137,
+          "candidateMonthlyTokens": 1462878453.581,
+          "candidateMonthlyYi": 14.628785
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0205075137,
+        "candidateMonthlyTokens": 1462878453.581,
+        "candidateMonthlyYi": 14.628785,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "Qwen3.8 Flash Input $0.15 Output $0.47 Cached Read $0.016 Cached Write $0.20 Usage $30",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 1587600000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 15.876
+    },
+    {
+      "officialDisplayName": "Qwen3.7 Max",
+      "modelSlug": "qwen3.7-max",
+      "configId": "opencode-go/qwen3.7-max",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "qwen3.7-max",
+      "requestsEstimate": {
+        "per5h": 170,
+        "perWeek": 420,
+        "perMonth": 840
+      },
+      "typicalTokensPerRequest": {
+        "input": 420,
+        "cacheRead": 66000,
+        "cacheWrite": null,
+        "output": 200
+      },
+      "perModelMonthlyUsageUsd": 30,
+      "effectiveMonthlyUsdForFormula": 30.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 2.5,
+        "output": 7.5,
+        "cacheRead": 0.5,
+        "cacheWrite": 3.125
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 2.5,
+            "output": 7.5,
+            "cacheRead": 0.5,
+            "cacheWrite": 3.125
+          },
+          "blendedUsdPer1M": 0.5680665537,
+          "candidateMonthlyTokens": 52810713.469,
+          "candidateMonthlyYi": 0.528107
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.5680665537,
+        "candidateMonthlyTokens": 52810713.469,
+        "candidateMonthlyYi": 0.528107,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "Qwen3.7 Max Input $2.50 Output $7.50 Cached Read $0.50 Cached Write $3.125 Usage $30",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 55960800,
+      "officialEstimateMonthlyYi_reqTimesTypical": 0.559608
+    },
+    {
+      "officialDisplayName": "Qwen3.7 Plus",
+      "modelSlug": "qwen3.7-plus",
+      "configId": "opencode-go/qwen3.7-plus",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "qwen3.7-plus",
+      "requestsEstimate": {
+        "per5h": 4300,
+        "perWeek": 10800,
+        "perMonth": 21600
+      },
+      "typicalTokensPerRequest": {
+        "input": 500,
+        "cacheRead": 57000,
+        "cacheWrite": null,
+        "output": 190
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.4,
+        "output": 1.6,
+        "cacheRead": 0.04,
+        "cacheWrite": 0.5
+      },
+      "variants": [
+        {
+          "label": "<=256K tokens",
+          "pricesPer1M": {
+            "input": 0.4,
+            "output": 1.6,
+            "cacheRead": 0.04,
+            "cacheWrite": 0.5
+          },
+          "blendedUsdPer1M": 0.0533108867,
+          "candidateMonthlyTokens": 1125473683.401,
+          "candidateMonthlyYi": 11.254737
+        },
+        {
+          "label": ">256K tokens",
+          "pricesPer1M": {
+            "input": 1.2,
+            "output": 4.8,
+            "cacheRead": 0.12,
+            "cacheWrite": 1.5
+          },
+          "blendedUsdPer1M": 0.15993266,
+          "candidateMonthlyTokens": 375157894.467,
+          "candidateMonthlyYi": 3.751579
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "<=256K tokens",
+        "blendedUsdPer1M": 0.0533108867,
+        "candidateMonthlyTokens": 1125473683.401,
+        "candidateMonthlyYi": 11.254737,
+        "reason": "官方典型请求约 5.8 万 token/req，低于 256K 阈值；候选采用 <=256K 档。>256K 档保留为 variant。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "Qwen3.7 Plus (<= 256K tokens) Input $0.40 Output $1.60 Cached Read $0.04 Cached Write $0.50 Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 1246104000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 12.46104
+    },
+    {
+      "officialDisplayName": "Qwen3.6 Plus",
+      "modelSlug": "qwen3.6-plus",
+      "configId": "opencode-go/qwen3.6-plus",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "qwen3.6-plus",
+      "requestsEstimate": {
+        "per5h": 3300,
+        "perWeek": 8200,
+        "perMonth": 16300
+      },
+      "typicalTokensPerRequest": {
+        "input": 500,
+        "cacheRead": 57000,
+        "cacheWrite": null,
+        "output": 190
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.5,
+        "output": 3.0,
+        "cacheRead": 0.05,
+        "cacheWrite": 0.625
+      },
+      "variants": [
+        {
+          "label": "<=256K tokens",
+          "pricesPer1M": {
+            "input": 0.5,
+            "output": 3.0,
+            "cacheRead": 0.05,
+            "cacheWrite": 0.625
+          },
+          "blendedUsdPer1M": 0.0701682984,
+          "candidateMonthlyTokens": 855087003.31,
+          "candidateMonthlyYi": 8.55087
+        },
+        {
+          "label": ">256K tokens",
+          "pricesPer1M": {
+            "input": 2.0,
+            "output": 6.0,
+            "cacheRead": 0.2,
+            "cacheWrite": 2.5
+          },
+          "blendedUsdPer1M": 0.2594950533,
+          "candidateMonthlyTokens": 231218280.384,
+          "candidateMonthlyYi": 2.312183
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "<=256K tokens",
+        "blendedUsdPer1M": 0.0701682984,
+        "candidateMonthlyTokens": 855087003.31,
+        "candidateMonthlyYi": 8.55087,
+        "reason": "官方典型请求约 5.8 万 token/req，低于 256K 阈值；候选采用 <=256K 档。>256K 档保留为 variant。 官网提供 Cached Write 价，但项目固定公式仅用 cacheRead/input/output MIX，Write 不进分母；已原样保留在 variants.pricesPer1M。"
+      },
+      "officialQuote": "Qwen3.6 Plus (<= 256K tokens) Input $0.50 Output $3.00 Cached Read $0.05 Cached Write $0.625 Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 940347000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 9.40347
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Pro",
+      "modelSlug": "deepseek-v4-pro",
+      "configId": "opencode-go/deepseek-v4-pro",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "deepseek-v4-pro",
+      "requestsEstimate": {
+        "per5h": 1050,
+        "perWeek": 2600,
+        "perMonth": 5200
+      },
+      "typicalTokensPerRequest": {
+        "input": 750,
+        "cacheRead": 82000,
+        "cacheWrite": null,
+        "output": 290
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.66,
+        "output": 1.98,
+        "cacheRead": 0.022,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "Off-Peak",
+          "pricesPer1M": {
+            "input": 0.66,
+            "output": 1.98,
+            "cacheRead": 0.022,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0427425659,
+          "candidateMonthlyTokens": 350938220.296,
+          "candidateMonthlyYi": 3.509382
+        },
+        {
+          "label": "Peak",
+          "pricesPer1M": {
+            "input": 1.32,
+            "output": 3.96,
+            "cacheRead": 0.044,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0854851318,
+          "candidateMonthlyTokens": 175469110.148,
+          "candidateMonthlyYi": 1.754691
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "Off-Peak",
+        "blendedUsdPer1M": 0.0427425659,
+        "candidateMonthlyTokens": 350938220.296,
+        "candidateMonthlyYi": 3.509382,
+        "reason": "官方注明 Peak 仅周一至周五 UTC 01:00-04:00 与 06:00-10:00，其余含周末为 Off-Peak；饱和周历多数时段 Off-Peak，候选采用 Off-Peak。Peak 保留为 variant。不编峰谷加权。"
+      },
+      "officialQuote": "DeepSeek V4 Pro (Off-Peak) Input $0.66 Output $1.98 Cached Read $0.022 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 431808000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 4.31808
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash",
+      "modelSlug": "deepseek-v4-flash",
+      "configId": "opencode-go/deepseek-v4-flash",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "deepseek-v4-flash",
+      "requestsEstimate": {
+        "per5h": 7600,
+        "perWeek": 18900,
+        "perMonth": 37800
+      },
+      "typicalTokensPerRequest": {
+        "input": 410,
+        "cacheRead": 71300,
+        "cacheWrite": null,
+        "output": 310
+      },
+      "perModelMonthlyUsageUsd": 30,
+      "effectiveMonthlyUsdForFormula": 30.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.22,
+        "output": 0.66,
+        "cacheRead": 0.007,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "Off-Peak",
+          "pricesPer1M": {
+            "input": 0.22,
+            "output": 0.66,
+            "cacheRead": 0.007,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0139225916,
+          "candidateMonthlyTokens": 2154771235.767,
+          "candidateMonthlyYi": 21.547712
+        },
+        {
+          "label": "Peak",
+          "pricesPer1M": {
+            "input": 0.44,
+            "output": 1.32,
+            "cacheRead": 0.014,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0278451833,
+          "candidateMonthlyTokens": 1077385617.884,
+          "candidateMonthlyYi": 10.773856
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "Off-Peak",
+        "blendedUsdPer1M": 0.0139225916,
+        "candidateMonthlyTokens": 2154771235.767,
+        "candidateMonthlyYi": 21.547712,
+        "reason": "官方注明 Peak 仅周一至周五 UTC 01:00-04:00 与 06:00-10:00，其余含周末为 Off-Peak；饱和周历多数时段 Off-Peak，候选采用 Off-Peak。Peak 保留为 variant。不编峰谷加权。"
+      },
+      "officialQuote": "DeepSeek V4 Flash (Off-Peak) Input $0.22 Output $0.66 Cached Read $0.007 Cached Write - Usage $30",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 2722356000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 27.22356
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash Vision Exp",
+      "modelSlug": "deepseek-v4-flash-vision-exp",
+      "configId": "opencode-go/deepseek-v4-flash-vision-exp",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "deepseek-v4-flash-vision-exp",
+      "requestsEstimate": {
+        "per5h": 3800,
+        "perWeek": 9450,
+        "perMonth": 18900
+      },
+      "typicalTokensPerRequest": {
+        "input": 410,
+        "cacheRead": 71300,
+        "cacheWrite": null,
+        "output": 310
+      },
+      "perModelMonthlyUsageUsd": 15,
+      "effectiveMonthlyUsdForFormula": 15.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.22,
+        "output": 0.66,
+        "cacheRead": 0.007,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "Off-Peak",
+          "pricesPer1M": {
+            "input": 0.22,
+            "output": 0.66,
+            "cacheRead": 0.007,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0139225916,
+          "candidateMonthlyTokens": 1077385617.884,
+          "candidateMonthlyYi": 10.773856
+        },
+        {
+          "label": "Peak",
+          "pricesPer1M": {
+            "input": 0.44,
+            "output": 1.32,
+            "cacheRead": 0.014,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0278451833,
+          "candidateMonthlyTokens": 538692808.942,
+          "candidateMonthlyYi": 5.386928
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "Off-Peak",
+        "blendedUsdPer1M": 0.0139225916,
+        "candidateMonthlyTokens": 1077385617.884,
+        "candidateMonthlyYi": 10.773856,
+        "reason": "官方注明 Peak 仅周一至周五 UTC 01:00-04:00 与 06:00-10:00，其余含周末为 Off-Peak；饱和周历多数时段 Off-Peak，候选采用 Off-Peak。Peak 保留为 variant。不编峰谷加权。Vision 图像另按尺寸折 input，本审计不另估。"
+      },
+      "officialQuote": "DeepSeek V4 Flash Vision Exp (Off-Peak) Input $0.22 Output $0.66 Cached Read $0.007 Cached Write - Usage $15",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [
+        "官网：图像按尺寸折成 token 并与文本一并按 input 计费。"
+      ],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 1361178000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 13.61178
+    },
+    {
+      "officialDisplayName": "Hy4 preview",
+      "modelSlug": "hy4-preview",
+      "configId": "opencode-go/hy4-preview",
+      "presentInBuildAdopted": true,
+      "proposedModelId": "hy4-preview",
+      "requestsEstimate": {
+        "per5h": 1350,
+        "perWeek": 3380,
+        "perMonth": 6770
+      },
+      "typicalTokensPerRequest": {
+        "input": 830,
+        "cacheRead": 71500,
+        "cacheWrite": null,
+        "output": 295
+      },
+      "perModelMonthlyUsageUsd": 30,
+      "effectiveMonthlyUsdForFormula": 30.0,
+      "bindingLimitNote": "perModelUsage",
+      "pricesPer1M": {
+        "input": 0.834,
+        "output": 2.501,
+        "cacheRead": 0.042,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.834,
+            "output": 2.501,
+            "cacheRead": 0.042,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0678495623,
+          "candidateMonthlyTokens": 442154657.836,
+          "candidateMonthlyYi": 4.421547
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0678495623,
+        "candidateMonthlyTokens": 442154657.836,
+        "candidateMonthlyYi": 4.421547,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Hy4 preview Input $0.834 Output $2.501 Cached Read $0.042 Cached Write - Usage $30",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 491671250,
+      "officialEstimateMonthlyYi_reqTimesTypical": 4.916713
+    },
+    {
+      "officialDisplayName": "Hy3",
+      "modelSlug": "hy3",
+      "configId": "opencode-go/hy3",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "hy3",
+      "requestsEstimate": {
+        "per5h": 4300,
+        "perWeek": 10750,
+        "perMonth": 21500
+      },
+      "typicalTokensPerRequest": {
+        "input": 830,
+        "cacheRead": 71500,
+        "cacheWrite": null,
+        "output": 295
+      },
+      "perModelMonthlyUsageUsd": 60,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_or_perModelUsage60",
+      "pricesPer1M": {
+        "input": 0.14,
+        "output": 0.58,
+        "cacheRead": 0.035,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.14,
+            "output": 0.58,
+            "cacheRead": 0.035,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0392000141,
+          "candidateMonthlyTokens": 1530611696.196,
+          "candidateMonthlyYi": 15.306117
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0392000141,
+        "candidateMonthlyTokens": 1530611696.196,
+        "candidateMonthlyYi": 15.306117,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。"
+      },
+      "officialQuote": "Hy3 Input $0.14 Output $0.58 Cached Read $0.035 Cached Write - Usage $60",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 1561437500,
+      "officialEstimateMonthlyYi_reqTimesTypical": 15.614375
+    },
+    {
+      "officialDisplayName": "Omen Alpha",
+      "modelSlug": "omen-alpha",
+      "configId": "opencode-go/omen-alpha",
+      "presentInBuildAdopted": false,
+      "proposedModelId": "omen-alpha",
+      "requestsEstimate": {
+        "per5h": 11600,
+        "perWeek": 29000,
+        "perMonth": 57900
+      },
+      "typicalTokensPerRequest": {
+        "input": 300,
+        "cacheRead": 40000,
+        "cacheWrite": null,
+        "output": 100
+      },
+      "perModelMonthlyUsageUsd": 100,
+      "effectiveMonthlyUsdForFormula": 60.0,
+      "bindingLimitNote": "sharedMonthly60_binds_despite_perModelUsage100",
+      "pricesPer1M": {
+        "input": 0.2,
+        "output": 0.66,
+        "cacheRead": 0.04,
+        "cacheWrite": null
+      },
+      "variants": [
+        {
+          "label": "standard",
+          "pricesPer1M": {
+            "input": 0.2,
+            "output": 0.66,
+            "cacheRead": 0.04,
+            "cacheWrite": null
+          },
+          "blendedUsdPer1M": 0.0456571057,
+          "candidateMonthlyTokens": 1314143747.824,
+          "candidateMonthlyYi": 13.141437
+        }
+      ],
+      "adoptionCandidate": {
+        "variantLabel": "standard",
+        "blendedUsdPer1M": 0.0456571057,
+        "candidateMonthlyTokens": 1314143747.824,
+        "candidateMonthlyYi": 13.141437,
+        "reason": "官网单档价格；无上下文/峰谷分档。公式用 Cached Read（非 Write）× MIX.cache。 注意：per-model Usage=$100 高于共享月池 $60；公式 min(60, usage) 以共享 $60 为紧约束。"
+      },
+      "officialQuote": "Omen Alpha Input $0.20 Output $0.66 Cached Read $0.04 Cached Write - Usage $100",
+      "pageDateOrFetchedAt": "2026-09-06",
+      "notes": [
+        "per-model Usage 列高于共享月 $60；实际共享池仍可能先绑住。"
+      ],
+      "officialEstimateMonthlyTokens_reqTimesTypical": 2339160000,
+      "officialEstimateMonthlyYi_reqTimesTypical": 23.3916
+    }
+  ]
+}
