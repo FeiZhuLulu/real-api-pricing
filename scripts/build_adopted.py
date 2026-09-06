@@ -22,6 +22,67 @@ CLAUDE_WEEKLY_20X_TO_5X = 2
 # 本机 ccusage 2026-07 实测 agent 工作负载 token 分布，用于把按量 API 三段价折成一个混合价
 MIX = dict(cache=406_477_401 / 416_989_306, input=9_040_062 / 416_989_306, output=1_471_843 / 416_989_306)
 
+
+def blended(cached: float, inp: float, out: float) -> float:
+    return MIX["cache"] * cached + MIX["input"] * inp + MIX["output"] * out
+
+
+# OpenCode Go 官方给的是共享美元池、每模型月 Usage 和三段价格；按本项目统一 MIX 折 token。
+# 元组：(model, per-model Usage USD, cached read, input, output, 采用价档说明)
+# 证据全量快照：data/research/opencode-go-round5-2026-09-06.json（官网价格/Endpoints 共 28 个模型）。
+OPENCODE_GO_MODELS = (
+    ("grok-4.6", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants"),
+    ("gpt-5.6-luna", 15, 0.02, 0.2, 1.2, "≤272K 标价；>272K 档保留在 research variants"),
+    ("glm-5.3-flash", 15, 0.03, 0.15, 0.5, "官网单档"),
+    ("glm-5.3", 15, 0.26, 1.4, 4.4, "官网单档"),
+    ("glm-5.2", 60, 0.26, 1.4, 4.4, "官网单档"),
+    ("glm-5.1", 60, 0.26, 1.4, 4.4, "官网单档"),
+    ("kimi-k3", 15, 0.3, 3.0, 15.0, "官网单档"),
+    ("kimi-k2.7-code", 60, 0.19, 0.95, 4.0, "官网单档"),
+    ("kimi-k2.6", 60, 0.16, 0.95, 4.0, "官网单档"),
+    ("longcat-2.0", 60, 0.006, 0.3, 1.2, "官网单档"),
+    ("mimo-v2.5", 60, 0.0028, 0.14, 0.28, "官网单档"),
+    ("mimo-v2.5-pro", 15, 0.003625, 0.435, 0.87, "官网单档"),
+    ("minimax-m3", 60, 0.06, 0.3, 1.2, "官网单档"),
+    ("minimax-m2.7", 60, 0.06, 0.3, 1.2, "官网单档"),
+    ("minimax-m2.5", 60, 0.06, 0.3, 1.2, "价格/Endpoints 表在列；请求估算表未列"),
+    ("muse-spark-1.3-contributor", 60, 0.002, 0.1, 0.2, "官网单档"),
+    ("muse-spark-1.2-contributor", 60, 0.002, 0.1, 0.2, "官网单档"),
+    ("qwen3.8-max", 15, 0.25, 2.0, 6.0, "官网单档"),
+    ("qwen3.8-flash", 30, 0.016, 0.15, 0.47, "官网单档"),
+    ("qwen3.7-max", 30, 0.5, 2.5, 7.5, "官网单档"),
+    ("qwen3.7-plus", 60, 0.04, 0.4, 1.6, "≤256K 标价；>256K 档保留在 research variants"),
+    ("qwen3.6-plus", 60, 0.05, 0.5, 3.0, "≤256K 标价；>256K 档保留在 research variants"),
+    ("deepseek-v4-pro", 15, 0.022, 0.66, 1.98, "Off-Peak；Peak 额度为其一半，保留在 research variants"),
+    ("deepseek-v4-flash", 30, 0.007, 0.22, 0.66, "Off-Peak；Peak 额度为其一半，保留在 research variants"),
+    ("deepseek-v4-flash-vision-exp", 15, 0.007, 0.22, 0.66, "Off-Peak；图像另折 input token，不另编图像 mix"),
+    ("hy4-preview", 30, 0.042, 0.834, 2.501, "官网单档"),
+    ("hy3", 60, 0.035, 0.14, 0.58, "官网单档"),
+    ("omen-alpha", 100, 0.04, 0.2, 0.66, "模型 Usage $100，但共享月池 $60 先绑定"),
+)
+
+OPENCODE_GO_OLD_YI = {
+    "grok-4.6": 0.279, "gpt-5.6-luna": 5.25, "glm-5.3-flash": 4.44, "glm-5.3": 0.571,
+    "kimi-k3": 0.381, "kimi-k2.7-code": 3.785, "minimax-m3": 9.072, "qwen3.7-plus": 12.461,
+    "deepseek-v4-pro": 4.318, "deepseek-v4-flash": 27.224, "hy4-preview": 4.917, "mimo-v2.5-pro": 14.196,
+}
+
+
+def opencode_go_rows() -> list[tuple]:
+    rows = []
+    for model, usage, cached, inp, out, variant_note in OPENCODE_GO_MODELS:
+        effective_usage = min(60, usage)
+        yi = round(effective_usage / blended(cached, inp, out) / 100, 3)
+        old = OPENCODE_GO_OLD_YI.get(model)
+        change = f"旧{old:g}亿（请求估算）→{yi:g}亿" if old is not None else f"新增{yi:g}亿"
+        rows.append((
+            "opencode_go", "OpenCode Go", 10, "USD", model, yi, "high",
+            "https://opencode.ai/docs/go/ 官方每模型 Usage 与三段价格；opencode-go-round5-2026-09-06.json",
+            f"{change}：min(共享月池$60, 模型Usage ${usage:g}) ÷ MIX加权价；{variant_note}。"
+            "官方请求数仅作交叉检查，不再作为额度主值；同套餐各模型额度不可相加",
+        ))
+    return rows
+
 # ---- 订阅：(plan_id, plan_name, price, currency, served_model, monthly_yi, confidence, source, decision_note)
 SUBS = [
     # OpenAI —— Sol 为基准；Terra/Luna/5.5 在 DERIVED 按输入、缓存、输出 credits 混合比换算
@@ -74,25 +135,12 @@ SUBS = [
     # 阿里 —— 《财经》2026-08 用 OpenCode 跑满周额度实测：阿里云套餐旗舰模型 ¥101/亿 → ¥200 ÷ 101 ≈ 1.98 亿/月。SubPlan 的 30 亿无实测依据，作废
     ("aliyun_coding_pro_cn", "阿里云百炼 Coding Plan Pro", 200, "CNY", "qwen3.7-plus", 1.98, "medium", "《财经》2026-08 实测 ¥101/亿", "档位未写明，按 ¥200 Pro 折算；旧值 30 亿作废"),
     ("aliyun_coding_pro_global", "Alibaba Cloud Coding Plan Pro", 50, "USD", "qwen3.7-plus", 1.98, "low", "同 CN 档额度", ""),
-    # OpenCode Go —— 官方表：月请求数 × 官方"典型请求" token 假设（opencode.ai/docs/go 2026-09-04）
-    *[("opencode_go", "OpenCode Go", 10, "USD", model, round(req * tok / YI, 3), "medium",
-       f"https://opencode.ai/docs/go/ 官方典型估算 {req:,} req/月 × {tok:,} tok/req", "额度数不变，high→medium：官方典型请求估算，不是硬token上限；美元池$12/5h $30/周 $60/月，另有per-model上限；《财经》OpenCode为测试客户端，未测Go套餐，不作为独立佐证；见fx-caijing-round5-2026-09-05.json")
-      for model, req, tok in (
-          ("grok-4.6", 845, 390 + 32_500 + 120), ("gpt-5.6-luna", 10_250, 1_000 + 50_000 + 220),
-          ("glm-5.3-flash", 7_900, 1_000 + 55_000 + 200), ("glm-5.3", 1_080, 700 + 52_000 + 150),
-          ("kimi-k3", 490, 1_050 + 76_500 + 300), ("kimi-k2.7-code", 6_750, 870 + 55_000 + 200),
-          ("minimax-m3", 16_000, 510 + 56_000 + 190), ("qwen3.7-plus", 21_600, 500 + 57_000 + 190),
-          ("deepseek-v4-pro", 5_200, 750 + 82_000 + 290), ("deepseek-v4-flash", 37_800, 410 + 71_300 + 310),
-          ("hy4-preview", 6_770, 830 + 71_500 + 295), ("mimo-v2.5-pro", 16_300, 790 + 86_000 + 305),
-      )],
+    # OpenCode Go —— 官网全量 28 模型；美元额度 × 本项目固定 MIX，旧请求估算仅作旁证。
+    *opencode_go_rows(),
 ]
 
 # ---- 同一套餐内推更多模型：(基准 plan_id, 基准模型, 新模型, token 倍率, 置信度, 依据, 是否进精选图)
 #   倍率 = 基准模型混合标价 / 新模型混合标价（订阅按 compute cost / credits 计量时成立）；Anthropic Fable 用 Reddit 实测订阅内权重
-def blended(cached: float, inp: float, out: float) -> float:
-    return MIX["cache"] * cached + MIX["input"] * inp + MIX["output"] * out
-
-
 RATIO_COMPOSER = blended(0.5, 2, 6) / blended(0.2, 0.5, 2.5)   # Grok 4.6 → Composer 2.5 Standard ≈ 2.57165
 RATIO_COMPOSER_FAST = blended(0.5, 2, 6) / blended(0.5, 3, 15)
 RATIO_SONNET = round(blended(0.5, 5, 25) / blended(0.2, 2, 10), 2)       # Opus → Sonnet 5 = 2.5

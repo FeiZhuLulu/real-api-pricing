@@ -50,7 +50,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Arena Score</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,272.747 L821.284,272.747 L822.719,370.874 L1005.666,375.842 L1027.194,406.895 L1273.137,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,272.747 L821.284,272.747 L822.719,370.874 L1005.666,375.842 L1273.137,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="1617" data-x="666.495" data-y="360.937" transform="translate(666.495 360.937)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 1617 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#12B886" opacity=".48"/>
 </g>
@@ -150,38 +150,43 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01347" data-score="1487" data-x="812.065" data-y="522.411" transform="translate(812.065 522.411)"><title>MiniMax M3 · MiniMax Token Plan Ultra (Global) · $0.01347/MTok · 1487 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F45BA5" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.35842" data-score="1625" data-x="269.188" data-y="351.000" transform="translate(269.188 351.000)"><title>Grok 4.6 · OpenCode Go · $0.35842/MTok · 1625 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.36765" data-score="1625" data-x="264.982" data-y="351.000" transform="translate(264.982 351.000)"><title>Grok 4.6 · OpenCode Go · $0.36765/MTok · 1625 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01905" data-score="1519" data-x="754.721" data-y="482.663" transform="translate(754.721 482.663)"><title>GPT 5.6 Luna · OpenCode Go · $0.01905/MTok · 1519 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01871" data-score="1519" data-x="757.700" data-y="482.663" transform="translate(757.700 482.663)"><title>GPT 5.6 Luna · OpenCode Go · $0.01871/MTok · 1519 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02252" data-score="1605" data-x="727.035" data-y="375.842" transform="translate(727.035 375.842)"><title>GLM 5.3 Flash · OpenCode Go · $0.02252/MTok · 1605 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02284" data-score="1605" data-x="724.701" data-y="375.842" transform="translate(724.701 375.842)"><title>GLM 5.3 Flash · OpenCode Go · $0.02284/MTok · 1605 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.17513" data-score="1609" data-x="387.679" data-y="370.874" transform="translate(387.679 370.874)"><title>GLM 5.3 · OpenCode Go · $0.17513/MTok · 1609 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1996" data-score="1609" data-x="366.040" data-y="370.874" transform="translate(366.040 370.874)"><title>GLM 5.3 · OpenCode Go · $0.1996/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.26247" data-score="1674" data-x="320.737" data-y="290.137" transform="translate(320.737 290.137)"><title>Kimi K3 · OpenCode Go · $0.26247/MTok · 1674 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27397" data-score="1674" data-x="313.642" data-y="290.137" transform="translate(313.642 290.137)"><title>Kimi K3 · OpenCode Go · $0.27397/MTok · 1674 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02642" data-score="1472" data-x="700.610" data-y="541.042" transform="translate(700.610 541.042)"><title>Kimi K2.7 Code · OpenCode Go · $0.02642/MTok · 1472 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03666" data-score="1472" data-x="646.415" data-y="541.042" transform="translate(646.415 541.042)"><title>Kimi K2.7 Code · OpenCode Go · $0.03666/MTok · 1472 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01102" data-score="1487" data-x="845.280" data-y="522.411" transform="translate(845.280 522.411)"><title>MiniMax M3 · OpenCode Go · $0.01102/MTok · 1487 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01069" data-score="1475" data-x="850.310" data-y="537.316" transform="translate(850.310 537.316)"><title>MiMo V2.5 Pro · OpenCode Go · $0.01069/MTok · 1475 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02316" data-score="1582" data-x="722.399" data-y="404.411" transform="translate(722.399 404.411)"><title>DeepSeek V4 Pro · OpenCode Go · $0.02316/MTok · 1582 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01154" data-score="1487" data-x="837.651" data-y="522.411" transform="translate(837.651 522.411)"><title>MiniMax M3 · OpenCode Go · $0.01154/MTok · 1487 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00367" data-score="1580" data-x="1027.194" data-y="406.895" transform="translate(1027.194 406.895)"><title>DeepSeek V4 Flash · OpenCode Go · $0.00367/MTok · 1580 · medium</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00B9BC" stroke-width="1.35"/>
-<circle r="4" fill="#00B9BC"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02034" data-score="1621" data-x="743.880" data-y="355.968" transform="translate(743.880 355.968)"><title>Hy4 preview · OpenCode Go · $0.02034/MTok · 1621 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01154" data-score="1398" data-x="837.651" data-y="632.958" transform="translate(837.651 632.958)"><title>MiniMax M2.7 · OpenCode Go · $0.01154/MTok · 1398 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00704" data-score="1475" data-x="919.418" data-y="537.316" transform="translate(919.418 537.316)"><title>MiMo V2.5 Pro · OpenCode Go · $0.00704/MTok · 1475 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0285" data-score="1582" data-x="688.072" data-y="404.411" transform="translate(688.072 404.411)"><title>DeepSeek V4 Pro · OpenCode Go · $0.0285/MTok · 1582 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00464" data-score="1580" data-x="988.393" data-y="406.895" transform="translate(988.393 406.895)"><title>DeepSeek V4 Flash · OpenCode Go · $0.00464/MTok · 1580 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02261" data-score="1621" data-x="726.375" data-y="355.968" transform="translate(726.375 355.968)"><title>Hy4 preview · OpenCode Go · $0.02261/MTok · 1621 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00653" data-score="1512" data-x="931.860" data-y="491.358" transform="translate(931.860 491.358)"><title>Hy3 · OpenCode Go · $0.00653/MTok · 1512 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01665" data-score="1520" data-x="776.999" data-y="481.421" transform="translate(776.999 481.421)"><title>GPT 5.6 Terra · Plus / GPT 5.6 Terra · Pro 5x · $0.01665/MTok · 1520 · medium</title>
@@ -266,12 +271,6 @@
 <text x="1028.666" y="355.842" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro · 老客 ¥149</text>
 <text x="1028.666" y="375.842" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00418</text>
 </g>
-<g class="front-label" data-model="deepseek-v4-flash">
-<path d="M1020.486,420.311Q1020.486,442.895 1009.194,442.895" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1003.194" y="455.895" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">DeepSeek V4 Flash</text>
-<text x="1003.194" y="475.895" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >OpenCode Go</text>
-<text x="1003.194" y="495.895" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00367</text>
-</g>
 <g class="front-label" data-model="gpt-5.6-luna">
 <path d="M1276.775,497.215Q1276.775,526.663 1284.137,526.663" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
 <text x="1278.137" y="539.663" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">GPT 5.6 Luna</text>
@@ -301,7 +300,7 @@
 <path d="M959 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="973.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >API 基线</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >月费 ÷ 月可用 token  ·  饱和使用  ·  月 = 4 周  ·  输入、输出与缓存均计入</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >58 个订阅位置 / 6 个 API 基线 / 5 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >60 个订阅位置 / 6 个 API 基线 / 4 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >按量 API 不参与订阅前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >arena.ai/leaderboard/code</text>
