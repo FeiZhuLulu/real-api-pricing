@@ -58,7 +58,7 @@ VENDOR_COLORS = {
     "MiniMax": "#FF5FA2",
     "Alibaba": "#FF4D4F",
     "OpenCode": "#00BCD4",
-    "Command Code": "#7B61FF",
+    "Command Code": "#D81BCC",
     "Ollama": "#00A86B",
     "DeepSeek": "#2F5BFF",
     "Gemini": "#7CC12A",

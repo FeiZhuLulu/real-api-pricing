@@ -15,12 +15,13 @@ BOARDS = {
     "aa_intelligence_index": ("AA智力榜", "Artificial Analysis"),
     "aa_coding_agent_index": ("AA编程Agent榜", "AA Coding Agent"),
 }
-COLORS = {"OpenAI": "#12B886", "Claude": "#F47A35", "xAI": "#9267EF",
-          "Cursor": "#F2BC22", "Kimi": "#26A9F5", "GLM": "#272727",
-          "MiniMax": "#F45BA5", "Alibaba": "#F34E54", "OpenCode": "#00B9BC",
-          "Command Code": "#7B61FF", "Ollama": "#00A86B", "DeepSeek": "#4570F5",
-          "Google": "#91C83E", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
+COLORS = {"OpenAI": "#19B37A", "Claude": "#FF8A3D", "xAI": "#8E6CF7",
+          "Cursor": "#FFC233", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
+          "MiniMax": "#FF5FA2", "Alibaba": "#FF4D4F", "OpenCode": "#00BCD4",
+          "Command Code": "#D81BCC", "Ollama": "#00A86B", "DeepSeek": "#2F5BFF",
+          "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
+            ("anthropic", "Claude"),
             ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
             ("glm", "GLM"), ("minimax", "MiniMax"), ("aliyun", "Alibaba"),
             ("opencode", "OpenCode"), ("command_code", "Command Code"), ("ollama", "Ollama"),

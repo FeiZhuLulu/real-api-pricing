@@ -54,7 +54,7 @@ TEMPLATE = r"""<!doctype html>
 <div class="foot">数据：<code>data/adopted.csv</code>（取舍与出处见 <code>scripts/build_adopted.py</code>）· 四张榜单各自独立绘制，快照与来源见标题及项目记录 · AA Coding Agent 分数属于官网标明的 harness×模型配置 · 美元/credits额度与按量 API 三段价统一按项目标准负载（<span id="mix"></span>）折算；直接 total-token 实测不重复归一</div>
 <script>
 const DATA = __DATA__;
-const VENDOR_COLOR = {OpenAI:"#19B37A",Anthropic:"#FF8A3D",xAI:"#8E6CF7",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#FF5FA2",Alibaba:"#FF4D4F",DeepSeek:"#2F5BFF",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFC233",OpenCode:"#00BCD4","Command Code":"#7B61FF",Ollama:"#00A86B",other:"#00BCD4"};
+const VENDOR_COLOR = {OpenAI:"#19B37A",Anthropic:"#FF8A3D",xAI:"#8E6CF7",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#FF5FA2",Alibaba:"#FF4D4F",DeepSeek:"#2F5BFF",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFC233",OpenCode:"#00BCD4","Command Code":"#D81BCC",Ollama:"#00A86B",other:"#00BCD4"};
 const FRONTIER_COLOR="#111111";
 const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.vendor;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
