@@ -7,10 +7,10 @@ Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers i
 † Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers scaled, not pure 1M measurements. Go: typical estimates. Composer Fast: product default.
 FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate.
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-No.  Plan                    Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence  Coding Agent Index  Score variant               
+No.  Plan                    Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence  Coding Agent Index  Score variant
 ---  ----------------------  -----------  ---------------  ------------------  --------  ----------  ------------------  ----------------------------
-1    ChatGPT Pro 20x         USD 200      gpt-5.6-luna     240.203             0.00083   medium      57.1661             Codex - GPT-5.6 Luna (max)  
-2    ChatGPT Pro 20x         USD 200      gpt-5.6-terra    24.0203             0.00833   medium      60.4201             Codex - GPT-5.6 Terra (max) 
+1    ChatGPT Pro 20x         USD 200      gpt-5.6-luna     240.24              0.00083   medium      57.1661             Codex - GPT-5.6 Luna (max)
+2    ChatGPT Pro 20x         USD 200      gpt-5.6-terra    24.024              0.00833   medium      60.4201             Codex - GPT-5.6 Terra (max)
 3    Claude Max 20x (9/14+)  USD 200      claude-opus-5    15.7                0.01274   medium      68.1498             Claude Code - Opus 5 (xhigh)
 4    Claude Max 5x (9/14+)   USD 100      claude-opus-5    7.85                0.01274   medium      68.1498             Claude Code - Opus 5 (xhigh)
 5    Claude Pro              USD 20       claude-opus-4.8  1.588               0.01259   medium      62.1405             Claude Code - Opus 4.8 (max)

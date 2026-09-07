@@ -1,0 +1,76 @@
+{
+  "recordedAt": "2026-09-07",
+  "scope": "审计所有 adopted 行是否应使用项目统一标准负载（缓存读取97.5% / 普通输入2.15% / 输出0.35%）",
+  "rule": {
+    "apply": "只要额度由美元池、credits、三段价格或模型间三段价格比换算为token，就统一套 standardTokenMix。",
+    "doNotApply": "来源已经直接给出total tokens、ccusage总量、官方绝对token表或token+额度百分比时，不重复套负载比例。",
+    "cannotNormalize": "只有total tokens与费用百分比、但没有token类型拆分或公开美元池时，保留实际观测并明确无法归一。"
+  },
+  "families": [
+    {
+      "family": "OpenCode Go",
+      "rows": 28,
+      "method": "官方共享/月模型美元额度 ÷ 官方三段价",
+      "standardMix": "applied"
+    },
+    {
+      "family": "Command Code GOAT",
+      "rows": 38,
+      "method": "官方共享/月模型credits ÷ 官方三段价",
+      "standardMix": "applied"
+    },
+    {
+      "family": "Ollama Pro/Max",
+      "rows": 20,
+      "method": "官方月度usage credits ÷ 官方三段价",
+      "standardMix": "applied"
+    },
+    {
+      "family": "GLM Coding Lite/Pro/Max",
+      "rows": 12,
+      "method": "官方周积分 ÷ 官方cache/input/output积分系数；非峰时0.5×",
+      "standardMix": "changed_in_this_round",
+      "old": "直接采用官方95%缓存参考表；该表隐含约95%缓存/4%输入/1%输出",
+      "new": "按项目统一97.5%/2.15%/0.35%从积分公式重算，再取峰时与非峰时中位×4周"
+    },
+    {
+      "family": "按量API基线",
+      "rows": 6,
+      "method": "官方三段价加权",
+      "standardMix": "applied"
+    },
+    {
+      "family": "OpenAI Terra/Luna/GPT-5.5派生、Cursor Composer派生",
+      "method": "同套餐基准token × 三段credits或价格比",
+      "standardMix": "applied"
+    },
+    {
+      "family": "Anthropic Sonnet派生",
+      "method": "Opus/Sonnet三段价均严格2.5×",
+      "standardMix": "formally_applied_but_result_independent_of_mix"
+    },
+    {
+      "family": "Cursor Grok、ChatGPT Sol、Claude、Kimi、SuperGrok",
+      "method": "面板/本地日志/打满实测的total tokens或total tokens+百分比",
+      "standardMix": "not_applied",
+      "reason": "这些值本身就是实际total token；重复套标准会篡改实测。Cursor/SuperGrok若面板百分比按费用扣减但没有token类型拆分，则无法进一步归一。"
+    },
+    {
+      "family": "MiniMax Token Plan",
+      "method": "官方绝对月token",
+      "standardMix": "not_applied",
+      "reason": "官方直接给token，不经美元池换算。"
+    },
+    {
+      "family": "Alibaba Coding Plan",
+      "method": "第三方受控跑满得到的实际每亿token成本",
+      "standardMix": "not_applied",
+      "reason": "缺少公开credits池与三段扣费明细，不能从现有证据按统一标准重算。"
+    }
+  ],
+  "singleSource": "data/conventions.json#standardTokenMix",
+  "implementation": [
+    "scripts/build_adopted.py",
+    "scripts/compute.py"
+  ]
+}

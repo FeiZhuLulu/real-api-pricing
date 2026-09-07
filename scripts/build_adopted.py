@@ -14,20 +14,19 @@ OUT = Path(__file__).resolve().parent.parent / "data" / "adopted.csv"
 CONVENTIONS = json.loads((OUT.parent / "conventions.json").read_text(encoding="utf-8"))
 USD_PER_CNY = CONVENTIONS["usdPerCny"]
 YI = 1e8
-CURSOR_ULTRA_FAST_YI = 30.3
-CURSOR_ULTRA_STANDARD_YI = (CURSOR_ULTRA_FAST_YI * 2 + 67.8) / 2
+CURSOR_ULTRA_STANDARD_YI = 77.37
+CURSOR_ULTRA_FAST_YI = 30.74
 CLAUDE_MAX_20X_YI = 157.0
 CLAUDE_WEEKLY_20X_TO_5X = 2
 
-# 本机 ccusage 2026-07 实测 agent 工作负载 token 分布，用于把按量 API 三段价折成一个混合价
-MIX = dict(cache=406_477_401 / 416_989_306, input=9_040_062 / 416_989_306, output=1_471_843 / 416_989_306)
+STANDARD_MIX = CONVENTIONS["standardTokenMix"]
 
 
 def blended(cached: float, inp: float, out: float) -> float:
-    return MIX["cache"] * cached + MIX["input"] * inp + MIX["output"] * out
+    return STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * inp + STANDARD_MIX["output"] * out
 
 
-# OpenCode Go 官方给的是共享美元池、每模型月 Usage 和三段价格；按本项目统一 MIX 折 token。
+# OpenCode Go 官方给的是共享美元池、每模型月 Usage 和三段价格；按项目统一标准负载折 token。
 # 元组：(model, per-model Usage USD, cached read, input, output, 采用价档说明)
 # 证据全量快照：data/research/opencode-go-round5-2026-09-06.json（官网价格/Endpoints 共 28 个模型）。
 OPENCODE_GO_MODELS = (
@@ -55,7 +54,7 @@ OPENCODE_GO_MODELS = (
     ("qwen3.6-plus", 60, 0.05, 0.5, 3.0, "≤256K 标价；>256K 档保留在 research variants"),
     ("deepseek-v4-pro", 15, 0.022, 0.66, 1.98, "Off-Peak；Peak 额度为其一半，保留在 research variants"),
     ("deepseek-v4-flash", 30, 0.007, 0.22, 0.66, "Off-Peak；Peak 额度为其一半，保留在 research variants"),
-    ("deepseek-v4-flash-vision-exp", 15, 0.007, 0.22, 0.66, "Off-Peak；图像另折 input token，不另编图像 mix"),
+    ("deepseek-v4-flash-vision-exp", 15, 0.007, 0.22, 0.66, "Off-Peak；图像另折 input token，不另编图像负载标准"),
     ("hy4-preview", 30, 0.042, 0.834, 2.501, "官网单档"),
     ("hy3", 60, 0.035, 0.14, 0.58, "官网单档"),
     ("omen-alpha", 100, 0.04, 0.2, 0.66, "模型 Usage $100，但共享月池 $60 先绑定"),
@@ -78,10 +77,136 @@ def opencode_go_rows() -> list[tuple]:
         rows.append((
             "opencode_go", "OpenCode Go", 10, "USD", model, yi, "high",
             "https://opencode.ai/docs/go/ 官方每模型 Usage 与三段价格；opencode-go-round5-2026-09-06.json",
-            f"{change}：min(共享月池$60, 模型Usage ${usage:g}) ÷ MIX加权价；{variant_note}。"
+            f"{change}：min(共享月池$60, 模型Usage ${usage:g}) ÷ 统一标准负载加权价；{variant_note}。"
             "官方请求数仅作交叉检查，不再作为额度主值；同套餐各模型额度不可相加",
         ))
     return rows
+
+
+# Command Code GOAT：共享月池 $70 + 每模型 monthly allowance；effective=min(70, allowance)。
+# 元组：(model, allowance USD, cached, input, output, 采用价档说明)
+# 证据：https://commandcode.ai/docs/plans/goat 完整两表（Every model + New models）；
+#       data/research/code-subscriptions-round1-2026-09-06.json。cache write 不进统一标准负载。
+COMMAND_CODE_GOAT_SHARED_USD = 70
+COMMAND_CODE_GOAT_MODELS = (
+    # —— Every model 表（含既有 11 行，勿删）——
+    ("gpt-5.6-sol", 70, 0.5, 5.0, 30.0, "官网三段价"),
+    ("glm-5.2", 70, 0.26, 1.4, 4.4, "官网三段价"),
+    ("hy3", 70, 0.035, 0.14, 0.58, "官网三段价"),
+    ("qwen3.8-27b", 70, 0.04, 0.4, 3.0, "官网三段价"),
+    ("deepseek-v4-flash", 60, 0.007, 0.22, 0.66, "Off-Peak；Peak≈2×（01–04 & 06–10 UTC weekdays），与OpenCode口径一致"),
+    ("kimi-k2.7-code", 60, 0.19, 0.95, 4.0, "官网三段价"),
+    ("minimax-m3", 47, 0.06, 0.3, 1.2, "官网页成交/折扣三段价（-50%类）"),
+    ("glm-5.3-flash", 40, 0.03, 0.15, 0.5, "官网三段价"),
+    ("gemini-3.8-flash", 40, 0.15, 1.5, 7.5, "官网三段价"),
+    ("qwen3.7-max", 33, 0.5, 2.5, 7.5, "官网三段价"),
+    ("qwen3.7-plus", 33, 0.08, 0.4, 1.6, "官网三段价（本渠道 cache read=$0.08）"),
+    ("qwen3.6-plus", 33, 0.1, 0.5, 3.0, "官网三段价（本渠道 cache read=$0.10）"),
+    ("mimo-v2.5", 30, 0.0028, 0.14, 0.28, "官网页成交/折扣三段价"),
+    ("deepseek-v4-pro", 20, 0.022, 0.66, 1.98, "Off-Peak；Peak≈2×（01–04 & 06–10 UTC weekdays），与OpenCode口径一致"),
+    ("gpt-5.6-luna", 20, 0.02, 0.2, 1.2, "官网三段价"),
+    ("qwen3.8-max", 20, 0.25, 2.0, 6.0, "官网三段价"),
+    ("mimo-v2.5-pro", 20, 0.0036, 0.435, 0.87, "官网页成交/折扣三段价"),
+    # —— New models 表（新模型默认 2× credits，Gemini 3.7 Flash 例外 $40）——
+    ("qwen3.8-max-0902", 20, 0.25, 2.0, 6.0, "官网三段价；New models 默认$20"),
+    ("hy4-preview", 20, 0.042, 0.834, 2.501, "官网三段价；New models 默认$20"),
+    ("qwen3.8-flash", 20, 0.016, 0.16, 0.47, "官网三段价（本渠道 input=$0.16）；New models 默认$20"),
+    ("deepseek-v4-flash-vision-exp", 20, 0.007, 0.22, 0.66, "Off-Peak；Peak≈2×；New models 默认$20"),
+    ("deepseek-v4-flash-fast", 20, 0.07, 0.28, 0.56, "官网三段价；New models 默认$20；与Flash额度分开"),
+    ("glm-5.3", 20, 0.26, 1.4, 4.4, "官网三段价；New models 默认$20"),
+    ("muse-spark-1.3", 20, 0.15, 1.25, 4.25, "官网标准档三段价；New models 默认$20"),
+    ("muse-spark-1.3-contributor", 20, 0.002, 0.1, 0.2, "官网 contributor 三段价；New models 默认$20"),
+    ("muse-spark-1.2", 20, 0.15, 1.25, 4.25, "官网标准档三段价；New models 默认$20"),
+    ("muse-spark-1.2-contributor", 20, 0.002, 0.1, 0.2, "官网 contributor 三段价；New models 默认$20"),
+    ("kimi-k3", 20, 0.3, 3.0, 15.0, "官网三段价；New models 默认$20"),
+    ("kimi-k2.7-code-highspeed", 20, 0.38, 1.9, 8.0, "官网三段价；速度变体独立$20，不继承K2.7 Code的$60"),
+    ("grok-4.5", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
+    ("grok-4.6", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
+    ("gemini-3.7-flash", 40, 0.15, 1.5, 7.5, "官网三段价；New models 表写$40"),
+    ("glm-5.2-fast", 20, 0.5, 3.0, 10.25, "官网三段价；速度变体独立$20，不继承GLM-5.2的$70"),
+    ("inkling", 20, 0.17, 1.0, 4.05, "官网三段价；New models 默认$20"),
+    ("inkling-small", 20, 0.1, 0.5, 1.2, "官网三段价；New models 默认$20"),
+    ("step-3.7-flash", 20, 0.04, 0.2, 1.15, "官网三段价；New models 默认$20"),
+    ("step-3.5-flash", 20, 0.02, 0.1, 0.3, "官网三段价；New models 默认$20"),
+    ("nemotron-3-ultra", 20, 0.12, 0.6, 2.4, "官网三段价；New models 默认$20"),
+)
+
+
+def command_code_goat_rows() -> list[tuple]:
+    rows = []
+    for model, allowance, cached, inp, out, variant_note in COMMAND_CODE_GOAT_MODELS:
+        effective_usage = min(COMMAND_CODE_GOAT_SHARED_USD, allowance)
+        yi = round(effective_usage / blended(cached, inp, out) / 100, 3)
+        rows.append((
+            "command_code_goat", "Command Code GOAT", 10, "USD", model, yi, "high",
+            "https://commandcode.ai/docs/plans/goat 官方每模型 allowance 与三段价；"
+            "https://commandcode.ai/pricing；$10→$70 credits；code-subscriptions-round1-2026-09-06.json",
+            f"新增{yi:g}亿：min(共享月池$70, 模型allowance ${allowance:g}) ÷ 统一标准负载加权价；{variant_note}。"
+            "忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
+        ))
+    return rows
+
+
+# Ollama Cloud Pro/Max：官方月度 usage credits × 公开 $/1M；无每模型 cap，共享池打满单模型。
+# 元组：(model, cached, input, output, 采用价档说明)
+# 证据：data/research/code-subscriptions-round1-2026-09-06.json（ollama.com/pricing 当前有明确 input/cache/output 的模型）。
+OLLAMA_PRO_CREDITS_USD = 60
+OLLAMA_MAX_CREDITS_USD = 300
+OLLAMA_MODELS = (
+    ("deepseek-v4-flash", 0.007, 0.22, 0.66, "Off-Peak；Peak=2×（12:00–18:00 UTC Mon–Fri），与项目/OpenCode DeepSeek 峰谷口径一致"),
+    ("deepseek-v4-pro", 0.022, 0.66, 1.98, "Off-Peak；Peak=2×（12:00–18:00 UTC Mon–Fri），与项目/OpenCode DeepSeek 峰谷口径一致"),
+    ("glm-5.3", 0.26, 1.4, 4.4, "官网三段价"),
+    ("glm-5.3-flash", 0.03, 0.15, 0.5, "官网三段价"),
+    ("glm-5.2", 0.26, 1.4, 4.4, "官网三段价"),
+    ("glm-5.1", 0.2, 1.0, 3.2, "官网三段价"),
+    ("kimi-k3", 0.3, 3.0, 15.0, "官网三段价"),
+    ("kimi-k2.7-code", 0.19, 0.95, 4.0, "官网三段价"),
+    ("minimax-m3", 0.12, 0.6, 2.4, "官网三段价（Ollama 标价约为 OpenCode/Command 常见成交价 2×，用本渠道价表）"),
+    ("minimax-m2.7", 0.06, 0.3, 1.2, "官网三段价"),
+)
+
+
+def ollama_rows(plan_id: str, plan_name: str, price_usd: float, credits_usd: float) -> list[tuple]:
+    rows = []
+    for model, cached, inp, out, variant_note in OLLAMA_MODELS:
+        yi = round(credits_usd / blended(cached, inp, out) / 100, 3)
+        rows.append((
+            plan_id, plan_name, price_usd, "USD", model, yi, "high",
+            "https://ollama.com/pricing 官方 usage credits 与三段价；"
+            "https://ollama.com/blog/transparent-pricing；code-subscriptions-round1-2026-09-06.json",
+            f"新增{yi:g}亿：共享月池 ${credits_usd:g} ÷ 统一标准负载加权价；{variant_note}。"
+            "同套餐各模型额度不可相加（共享池按单模型打满）；无面板 token+% 截图，按官方绝对credits+价表",
+        ))
+    return rows
+
+
+GLM_WEEKLY_CREDITS = {"lite": 10_000, "pro": 60_000, "max": 140_000}
+GLM_CREDIT_RATES = {"glm-5.3": (1.7, 6.9, 24), "glm-5.3-flash": (0.56, 2.3, 8)}
+GLM_OLD_MONTHLY_YI = {
+    ("lite", "glm-5.3"): 2.90, ("lite", "glm-5.3-flash"): 8.76,
+    ("pro", "glm-5.3"): 17.40, ("pro", "glm-5.3-flash"): 52.64,
+    ("max", "glm-5.3"): 40.56, ("max", "glm-5.3-flash"): 122.84,
+}
+
+
+def glm_rows() -> list[tuple]:
+    rows = []
+    prices = {"new": {"lite": 118, "pro": 538, "max": 1078}, "old": {"lite": 49, "pro": 149, "max": 469}}
+    for tier, credits in GLM_WEEKLY_CREDITS.items():
+        for who, label in (("new", "新客"), ("old", "老客")):
+            for model, rates in GLM_CREDIT_RATES.items():
+                peak_week_yi = credits * 10_000 / blended(*rates) / YI
+                offpeak_week_yi = peak_week_yi * 2
+                monthly_yi = round((peak_week_yi + offpeak_week_yi) / 2 * 4, 2)
+                old = GLM_OLD_MONTHLY_YI[(tier, model)]
+                rows.append((
+                    f"glm_coding_{tier}_cn_{who}", f"GLM Coding {tier.title()} ({label} ¥{prices[who][tier]})",
+                    prices[who][tier], "CNY", model, monthly_yi, "high",
+                    "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json",
+                    f"旧官方95%缓存表中位{old:g}亿→统一标准负载{monthly_yi:g}亿；周峰时{peak_week_yi:.3f}亿、非峰{offpeak_week_yi:.3f}亿，取中位×4周",
+                ))
+    return rows
+
 
 # ---- 订阅：(plan_id, plan_name, price, currency, served_model, monthly_yi, confidence, source, decision_note)
 SUBS = [
@@ -101,30 +226,21 @@ SUBS = [
     ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.6", 20.4, "medium", "面板周额度 $100 × Super 标定 508 万 token/$ ×4", "linux.do 用户口述「每用一刀涨 1%」→ 周 $100 吻合"),
     ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.6", 50.9, "medium", "面板周额度 $250 × Super 标定 508 万 token/$ ×4", "= Cursor 最初记录的周 12 亿；标价换算 18 亿作废（面板美元≠标价美元）；Zhang $11.5k/月 → 208 亿未采"),
     ("supergrok_lite", "SuperGrok Lite", 10, "USD", "grok-4.6", 1.5, "low", "aa_grok_build_2026_07", "面板周额度未知，三轮联网均无"),
-    # Cursor —— Ultra 用用户 2026-08-11~09-11 面板截图反推：grok-4.6-xhigh 61.0M = 0.9% → 池 67.8 亿（取整区间 64~72）；
-    #   xhigh-fast 839.5M = 27.7% → 30.3 亿。Fast 官方标价 $4/$1/$12 = 标准 2×，实测扣费比 2.24×。
-    #   交叉验证：839.5M Fast × 混合标价 $1.104 ≈ $927 = 27.7% → 池 ≈ $3,345，与 CellCog 报的 $3,000 同量级。
-    #   Pro保留独立面板采用值；Pro+按$800/$3000池比，从round6标准中间值64.2亿反推。
-    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI, "medium", "截图两行中间值+官方2×；cursor-fast-round6-2026-09-05.json；cursor-adoption-round6-2026-09-06.json", "100亿→64.2亿：(30.3×2+67.8)/2；旧链：口头100→截图67.8→round5恢复100→本次用户放弃100采用64.2。high→medium：中间值而非直接实测；64.2/30.3≈2.119，非严格2×；截图跨发布促销周，双倍额度/折扣混杂未剥离；旧100亿及截图冲突证据保留"),
-    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.6", CURSOR_ULTRA_FAST_YI, "high", "截图839.5M / 27.7%直接反推；round6用户确认维持", "保持30.3亿；官方2×折回标准等效60.6亿，与标准截图67.8亿取中间值64.2亿；并非声称64.2/30.3严格等于2；截图跨促销周，保留混杂风险；见cursor-fast-round6-2026-09-05.json；与SuperGrok渠道分开"),
+    # Cursor —— 两张个人Ultra截图均在2026-08-25永久扩池后；社区图可能因首周半价用量集中而使tokens/Usage%反推偏高。
+    #   Fast取用户当前平滑账号最大样本863.8M/28.1%=30.74亿；Standard取用户67.78亿与社区86.95亿主行中间值77.37亿。
+    #   Pro保留独立面板采用值；Pro+按$800/$3000池比，从round8标准77.37亿反推。
+    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI, "medium", "两张调整后个人Ultra标准主行中间值；cursor-adoption-round8-2026-09-06.json", "旧80亿→77.37亿：(用户当前平滑账号61.0M/0.9%=67.78亿 + 社区8/26图1478.2M/17%=86.95亿)/2。社区图可能有大量首周半价用量，按费用百分比反推略高；中间值不是单行直接实测，token类型分布与面板取整差异保留"),
+    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.6", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
     ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.6", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
-    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；round6用户确认按Ultra池$3000等比", "18.1亿→17.12亿：64.2×800/3000；旧18.1亿基于Ultra67.8亿，现随标准中间值重算；仍采用$3000池假设，未采$3345或旧$2000替代池；促销周混杂未剥离；见cursor-adoption-round6-2026-09-06.json"),
+    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
     # Kimi 国内 —— 199 档本机 ccusage 反推，其余按官网倍率 1x/4x/20x/60x
     ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", 11.61, "medium", "本机ccusage 243739068/约84%×4；kimi199-round5-swe17-2026-09-05.json", "额度11.61亿不变，high→medium：占比为用户约数，样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7找到V2EX/1235826短时面板，但模型/统计窗口不同，未替换基准；官方K3 1M约2×消耗，不据混合样本直接折半；ACP14.28为旧模型未采；《财经》95元/亿档位不明未采"),
     ("kimi_moderato_cn", "Kimi 会员 99", 99, "CNY", "kimi-k3", 2.32, "medium", "199 档 × 4/20", "保持2.32亿，继承199档K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
     ("kimi_andante_cn", "Kimi 会员 49", 49, "CNY", "kimi-k3", 0.58, "medium", "199 档 × 1/20", ""),
     ("kimi_allegro_cn", "Kimi 会员 699", 699, "CNY", "kimi-k3", 34.83, "medium", "199 档 × 60/20", "保持34.83亿，继承199档K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
     # Kimi 海外 —— 不画：官方 Code credits 倍率 1×/5×/15×/30× 与国内 1/4/20/60× 体系不同，且无绝对 token 证据
-    # 智谱 —— 官方 95% 缓存周表（亿/周）：下限=全峰时，上限=全非峰(×0.5 积分)。取中位 ×4 周。
-    #   新客 V3：Lite 118 / Pro 538 / Max 1078；老客 V2 续费：49 / 149 / 469（额度同表，2026-07-31 官方说明）
-    *[(f"glm_coding_{tier}_cn_{who}", f"GLM Coding {tier.title()} ({label} ¥{price})", price, "CNY", model, round((lo + hi) / 2 * 4, 2), "high",
-       "docs.bigmodel.cn 官方 95% 缓存表中位 ×4", f"官方周区间 {lo}～{hi} 亿")
-      for tier, tiers in (("lite", {"glm-5.3": (0.48, 0.97), "glm-5.3-flash": (1.46, 2.92)}),
-                          ("pro", {"glm-5.3": (2.90, 5.80), "glm-5.3-flash": (8.77, 17.55)}),
-                          ("max", {"glm-5.3": (6.76, 13.52), "glm-5.3-flash": (20.47, 40.95)}))
-      for who, label, price in (("new", "新客", {"lite": 118, "pro": 538, "max": 1078}[tier]),
-                                ("old", "老客", {"lite": 49, "pro": 149, "max": 469}[tier]))
-      for model, (lo, hi) in tiers.items()],
+    # 智谱 —— 官方周积分与三段积分系数按项目统一标准负载换算；峰时/非峰时取中位×4周。
+    *glm_rows(),
     # MiniMax —— 官方绝对月 token：国内 M3 发布文 + 2026-08 迁移说明；海外 M3 发布文（当时 $20/$50/$120，现价 $22/$55/$132）
     ("minimax_token_plus_cn", "MiniMax Token Plan Plus", 49, "CNY", "minimax-m3", 6.0, "high", "minimaxi.com/blog/minimax-m3 官方", ""),
     ("minimax_token_max_cn", "MiniMax Token Plan Max", 119, "CNY", "minimax-m3", 18.0, "high", "minimaxi.com/blog/minimax-m3 官方", ""),
@@ -135,8 +251,13 @@ SUBS = [
     # 阿里 —— 《财经》2026-08 用 OpenCode 跑满周额度实测：阿里云套餐旗舰模型 ¥101/亿 → ¥200 ÷ 101 ≈ 1.98 亿/月。SubPlan 的 30 亿无实测依据，作废
     ("aliyun_coding_pro_cn", "阿里云百炼 Coding Plan Pro", 200, "CNY", "qwen3.7-plus", 1.98, "medium", "《财经》2026-08 实测 ¥101/亿", "档位未写明，按 ¥200 Pro 折算；旧值 30 亿作废"),
     ("aliyun_coding_pro_global", "Alibaba Cloud Coding Plan Pro", 50, "USD", "qwen3.7-plus", 1.98, "low", "同 CN 档额度", ""),
-    # OpenCode Go —— 官网全量 28 模型；美元额度 × 本项目固定 MIX，旧请求估算仅作旁证。
+    # OpenCode Go —— 官网全量模型；美元额度 × 项目统一标准负载，旧请求估算仅作旁证。
     *opencode_go_rows(),
+    # Command Code GOAT —— 官网每模型 allowance + 三段价；effective=min($70, allowance)；不含 Muse Code（仅5h请求窗）。
+    *command_code_goat_rows(),
+    # Ollama Cloud Pro/Max —— 官方 credits × 官方价表；DeepSeek 用 off-peak。
+    *ollama_rows("ollama_pro", "Ollama Pro", 20, OLLAMA_PRO_CREDITS_USD),
+    *ollama_rows("ollama_max", "Ollama Max", 100, OLLAMA_MAX_CREDITS_USD),
 ]
 
 # ---- 同一套餐内推更多模型：(基准 plan_id, 基准模型, 新模型, token 倍率, 置信度, 依据, 是否进精选图)
@@ -145,9 +266,9 @@ RATIO_COMPOSER = blended(0.5, 2, 6) / blended(0.2, 0.5, 2.5)   # Grok 4.6 → Co
 RATIO_COMPOSER_FAST = blended(0.5, 2, 6) / blended(0.5, 3, 15)
 RATIO_SONNET = round(blended(0.5, 5, 25) / blended(0.2, 2, 10), 2)       # Opus → Sonnet 5 = 2.5
 DERIVED = [
-    # OpenAI：三段 credits 按实测 mix 加权，不再用输入列比例代替全口径
+    # OpenAI：三段 credits 按项目统一标准负载加权，不再用输入列比例代替全口径
     *[(pid, "gpt-5.6-sol", model, blended(10, 100, 500) / blended(*rates), "medium",
-       f"https://learn.chatgpt.com/docs/pricing 三段credits（cache/input/output）Sol=10/100/500，对比{rates}；旧倍率{old_ratio}、旧月额度{sol_yi * old_ratio:g}亿作废；保留Sol基准，按实测mix重算；见audit-round4-2026-09-05.json",
+       f"https://learn.chatgpt.com/docs/pricing 三段credits（cache/input/output）Sol=10/100/500，对比{rates}；旧倍率{old_ratio}、旧月额度{sol_yi * old_ratio:g}亿作废；保留Sol基准，按项目统一标准负载重算；见audit-round4-2026-09-05.json",
        pid != "chatgpt_pro_5x" and model != "gpt-5.6-terra")
       for pid, sol_yi in (("chatgpt_plus", 6.16), ("chatgpt_pro_5x", 30.8), ("chatgpt_pro_20x", 123.2))
       for model, rates, old_ratio in (("gpt-5.6-terra", (5, 50, 300), 2),
@@ -161,10 +282,10 @@ DERIVED = [
     ("claude_max_5x", "claude-opus-5", "claude-sonnet-5", RATIO_SONNET, "low", "旧89亿→196.25亿；78.5×标价比2.5，9/14永久口径派生；claude-adoption-round6-2026-09-06.json", False),
     ("claude_max_5x", "claude-opus-5", "claude-fable-5", 0.5 / 4.25, "low", "旧4.187亿→9.235亿；78.5×0.5/4.25，不再预舍入倍率；订阅内4.25×权重且限周额度50%，9/14永久口径派生；claude-adoption-round6-2026-09-06.json", False),
     # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5 与 4.6 同价
-    ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：旧257.165亿（Grok100亿基准）→64.2×完整混合倍率2.571647；更早174.246亿基于67.8×2.57；随round6中间值联动，保留促销混杂风险，非实测；见cursor-adoption-round6-2026-09-06.json", True),
-    ("cursor_ultra", "grok-4.6", "grok-4.5", 1.0, "medium", "旧100亿→64.2亿，high→medium继承round6标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round6-2026-09-06.json", False),
+    ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", "旧80亿基准→77.37亿×完整混合倍率2.571647；随round8标准中间值联动，保留token类型与促销混杂风险，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
+    ("cursor_ultra", "grok-4.6", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
     ("cursor_pro", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：官方Cursor三段价混合比；旧12.079亿用舍入倍率2.57，现保留完整精度", True),
-    ("cursor_pro_plus", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "low", "Standard：旧46.547亿（18.1亿基准）→17.12×完整混合倍率2.571647；随round6的Ultra64.2×800/3000联动，保留跨档与促销混杂假设；见cursor-adoption-round6-2026-09-06.json", False),
+    ("cursor_pro_plus", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "low", "旧21.33亿基准→20.63亿×完整混合倍率2.571647；随round8的Ultra77.37×800/3000联动，保留跨档与促销混杂假设；见cursor-adoption-round8-2026-09-06.json", False),
     # xAI：订阅面板额度与公开API标价不同；4.5暂按同订阅4.6额度，非API同价断言
     ("supergrok_heavy", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设50.9亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
     ("supergrok", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设5.09亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
@@ -173,7 +294,7 @@ DERIVED = [
     ("minimax_token_plus_global", "minimax-m3", "minimax-m2.7", 1.0, "medium", "与 M3 同价", False),
 ]
 
-# ---- 按量 API 基线：(id, name, model, cached, input, output) USD/MTok；用实测 mix 折成混合价
+# ---- 按量 API 基线：(id, name, model, cached, input, output) USD/MTok；用项目统一标准负载折成混合价
 METERED = [
     ("deepseek_v4_flash_offpeak", "DeepSeek V4 Flash API 闲时", "deepseek-v4-flash", 0.007, 0.22, 0.66, "api-docs.deepseek.com"),
     ("deepseek_v4_flash_peak", "DeepSeek V4 Flash API 忙时", "deepseek-v4-flash", 0.014, 0.44, 1.32, "api-docs.deepseek.com"),
@@ -232,8 +353,8 @@ def main() -> None:
             "low" if pid == "cursor_pro_plus" else "medium",
             "https://cursor.com/docs/models/cursor-composer-2-5；audit-round4-2026-09-05.json",
             f"新增Fast（产品默认）估算：缓存/输入/输出=0.5/3/15；扣费为Standard的{RATIO_COMPOSER / RATIO_COMPOSER_FAST:.4f}×；"
-            f"沿用同套餐Grok标准基准{b['monthly_yi']}亿×{RATIO_COMPOSER_FAST:.8f}，不是实测；不改用户Grok Fast独立实测30.3亿"
-            + (f"；round6随标准基准联动，旧Fast额度{dict(cursor_ultra=91.171, cursor_pro_plus=16.502)[pid]}亿，促销/跨档混杂未剥离；见cursor-adoption-round6-2026-09-06.json"
+            f"沿用同套餐Grok标准基准{b['monthly_yi']}亿×{RATIO_COMPOSER_FAST:.8f}，不是实测；Grok Fast采用用户当前账号独立反推30.74亿，不套到Composer"
+            + (f"；round8随标准基准联动，旧Composer Fast额度{dict(cursor_ultra=72.937, cursor_pro_plus=19.45)[pid]}亿，促销/跨档混杂未剥离；见cursor-adoption-round8-2026-09-06.json"
                if pid in ("cursor_ultra", "cursor_pro_plus") else ""),
             b["chart_tier"],
         ))
@@ -241,7 +362,7 @@ def main() -> None:
         rows.append(dict(plan_id=pid, plan_name=name, billing="metered", price="", currency="USD", price_usd="",
                          served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=round(blended(cached, inp, out), 5),
                          confidence="high", chart_tier="main", source=src,
-                         decision_note=f"标价 cached {cached}/in {inp}/out {out} × 实测 mix {MIX['cache']:.1%}/{MIX['input']:.1%}/{MIX['output']:.1%}"))
+                         decision_note=f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}"))
 
     with OUT.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)

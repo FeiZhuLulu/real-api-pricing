@@ -55,6 +55,7 @@ def main():
         exported.append(destination)
     lines = ['# Charts / 图表目录', '',
              'All Pareto charts use the full dataset. / 帕累托图均使用全量数据。', '',
+             'Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% output; direct total-token measurements are not normalized again. / 美元或credits额度换算统一采用缓存读取97.5%、普通输入2.15%、输出0.35%；直接total-token实测不重复归一。', '',
              '| Chart / 图表 | English SVG | 中文 SVG | English PNG | 中文 PNG |',
              '|---|---|---|---|---|']
     english = [p for p in exported if p.suffix == '.svg' and p.relative_to(CHARTS).parts[0] == 'en']

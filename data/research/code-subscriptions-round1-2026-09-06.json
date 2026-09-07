@@ -1,0 +1,682 @@
+{
+  "recordedAt": "2026-09-06",
+  "scope": {
+    "providers": ["Command Code", "Muse Code (Meta product)", "Ollama Cloud"],
+    "baselineAlreadyInRepo": {
+      "opencodeGo": "data/research/opencode-go-round5-2026-09-06.json + scripts/build_adopted.py OPENCODE_GO_MODELS",
+      "ollamaCatalogStub": "data/subscription-quotas.json planId ollama_free/pro/max (2026-09-02; null token pools)"
+    },
+    "methodNotes": [
+      "本轮只追加证据，不改 adopted.csv / scripts / 已有 data 文件。",
+      "Agent Bridge 本会话 dispatch_enabled=false（nested worker），无法再派子工人；由本会话直接抓官网 HTML/检索。",
+      "月 token 候选按项目固定 MIX（cache/input/output from data/kimi-local via build_adopted.py）把官方美元额度÷三段公开标价；无面板 token+%截图，故不作 high。",
+      "Meta developer.meta.com / ai.developer.meta.com 页面为强 JS 壳，本轮 curl 正文几乎为空；订阅档美元与 requests 区间来自对官方 URL 的多次检索摘要，置信度降为 medium，并标 fetchLimitation。"
+    ],
+    "mix": {
+      "cache": 0.9747909482359722,
+      "input": 0.02167936172444672,
+      "output": 0.003529690039581015,
+      "source": "scripts/build_adopted.py MIX / data/kimi-local distribution"
+    }
+  },
+  "userClaims": {
+    "confidence": "low_or_unknown",
+    "verbatimSummary": "同价格下 CommandCode = OpenCode Go ×2（忽略0.8美元手续费），Ollama = OpenCode Go ×1；OpenCode Go 的 DeepSeek 明显量化，因此 CommandCode GOAT 是 DeepSeek 最优解；Ollama Pro 三并行且+8时区白天处于波谷，GLM很卡。另有很多朋友想看 Muse Code。",
+    "checks": [
+      {
+        "claim": "CommandCode ≈ OpenCode Go ×2 at same ~$10 price (ignore ~$0.80 fee)",
+        "verdict": "partially_supported_model_specific",
+        "evidence": [
+          "OpenCode Go DeepSeek V4 Flash per-model Usage $30 (https://opencode.ai/docs/go/)",
+          "Command Code GOAT DeepSeek V4 Flash monthly credits $60 (https://commandcode.ai/pricing ; https://commandcode.ai/docs/plans/goat) → exactly 2.0× on that model",
+          "Shared pools: OpenCode Go monthly $60 vs Command Code GOAT monthly $70 → 70/60≈1.17×, not 2×",
+          "Official Command Code copy is '$10/month + processing fee'; fixed $0.80 not found on pricing page"
+        ]
+      },
+      {
+        "claim": "Ollama = OpenCode Go ×1",
+        "verdict": "supported_only_as_shared_dollar_pool_not_same_price",
+        "evidence": [
+          "Ollama Pro $20/mo includes $60 usage credits (https://ollama.com/pricing)",
+          "OpenCode Go shared monthly limit $60 (https://opencode.ai/docs/go/)",
+          "Same $60 pool ⇒ ×1 vs OpenCode shared monthly; but subscription price is $20 vs $10, and OpenCode DeepSeek Flash per-model is only $30 so Ollama Pro Flash alone is 2× that per-model cap"
+        ]
+      },
+      {
+        "claim": "OpenCode Go DeepSeek is obviously quantized; CommandCode GOAT is best DeepSeek deal",
+        "verdict": "quota_part_supported_quality_part_notFound",
+        "evidence": [
+          "Quota: GOAT Flash $60 vs OpenCode Flash $30 supports 'more DeepSeek dollars on GOAT'",
+          "Quality/quantization: no official statement that OpenCode Go or Command Code serves a reduced-precision DeepSeek fork; both list the same public $/1M as DeepSeek peak/off-peak. Local GGUF/INT4 quantization is a self-host topic, not evidence about these gateways. Subjective quality ≠ fact."
+        ]
+      },
+      {
+        "claim": "Ollama Pro 3 concurrent; UTC+8 daytime is trough; GLM is laggy",
+        "verdict": "concurrency_supported_trough_mostly_supported_glm_lag_notFound",
+        "evidence": [
+          "Official FAQ: Free 1 / Pro 3 / Max&Team 10 concurrent (https://ollama.com/pricing)",
+          "Ollama DeepSeek peak 12:00–18:00 UTC Mon–Fri = UTC+8 20:00–02:00 → Chinese daytime mostly off-peak for Ollama",
+          "Contrast: OpenCode/Command Code DeepSeek peak 01–04 & 06–10 UTC = UTC+8 09–12 & 14–18 → Chinese daytime is peak there",
+          "GLM卡顿：本轮未找到可追溯测速/面板证据 → notFound"
+        ]
+      }
+    ]
+  },
+  "providers": [
+    {
+      "id": "command_code",
+      "canonicalName": "Command Code",
+      "entityResolution": {
+        "status": "confirmed",
+        "officialSite": "https://commandcode.ai/",
+        "pricingUrl": "https://commandcode.ai/pricing",
+        "npm": "command-code",
+        "cli": "cmd (cmdc on Windows)",
+        "ambiguityNotes": [
+          "拼写 CommandCode / Command Code / command-code 均指向同一产品 commandcode.ai，不是 Claude Code、不是军事/游戏同名词。",
+          "本轮未发现第二个主流 'CommandCode' 代码订阅实体需要并列。"
+        ],
+        "fetchedAt": "2026-09-06"
+      },
+      "billingModel": {
+        "meter": "dollar_denominated_credits_at_listed_per_token_api_rates_zero_markup_plus_deals",
+        "not": ["opaque_internal_credits_only", "pure_request_count_cap_as_primary_meter", "vendor_panel_fake_dollars"],
+        "quote": "Flat monthly subscriptions... A bucket of model credits... underlying API rate — zero markup.",
+        "sourceUrl": "https://commandcode.ai/pricing",
+        "rollingWindows": "included monthly credits only; extra top-ups uncapped and never expire",
+        "processingFee": {
+          "officialText": "+ processing fee on listed plan prices",
+          "fixedUsd080": "notFound_on_official_pricing_page",
+          "userClaimUsd080": "用户原话：忽略0.8美元手续费",
+          "sourceUrl": "https://commandcode.ai/pricing"
+        }
+      },
+      "plans": [
+        {
+          "planId": "command_code_go",
+          "name": "Go",
+          "priceUsdPerMonth": 1,
+          "priceNote": "+ processing fee",
+          "monthlyCreditsUsd": 10,
+          "limit5hUsd": 3,
+          "limitWeeklyUsd": 6,
+          "typicalRequestsMarketing": "~15K",
+          "sourceUrl": "https://commandcode.ai/docs/resources/pricing-limits"
+        },
+        {
+          "planId": "command_code_goat",
+          "name": "GOAT",
+          "priceUsdPerMonth": 10,
+          "priceNote": "+ processing fee",
+          "monthlyCreditsUsd": 70,
+          "multiplierMarketing": "7x ($10 → $70); deals may stretch beyond $100",
+          "limit5hUsd": 14,
+          "limitWeeklyUsd": 35,
+          "typicalRequestsMarketing": "~75K",
+          "modelsMarketing": "30+ open and some closed; per-model allowances",
+          "sourceUrls": [
+            "https://commandcode.ai/pricing",
+            "https://commandcode.ai/docs/plans/goat",
+            "https://commandcode.ai/docs/resources/usage-limits"
+          ],
+          "officialQuotes": [
+            "Your $10 buys $70 of credits - a 7x multiplier",
+            "5-hour limit - $14 of usage; Weekly limit - $35 of usage; Monthly limit - $70 of usage",
+            "$60 on DeepSeek V4 Flash"
+          ]
+        },
+        {
+          "planId": "command_code_pro",
+          "name": "Pro",
+          "priceUsdPerMonth": 20,
+          "priceNote": "+ processing fee",
+          "monthlyCreditsUsd": 80,
+          "limit5hUsd": 16,
+          "limitWeeklyUsd": 40,
+          "typicalRequestsMarketing": "~100K",
+          "sourceUrl": "https://commandcode.ai/docs/resources/pricing-limits"
+        },
+        {
+          "planId": "command_code_max_10x",
+          "name": "Max 10×",
+          "priceUsdPerMonth": 100,
+          "priceNote": "+ processing fee",
+          "monthlyCreditsUsd": 150,
+          "limit5hUsd": 45,
+          "limitWeeklyUsd": 90,
+          "sourceUrl": "https://commandcode.ai/docs/resources/pricing-limits"
+        },
+        {
+          "planId": "command_code_max_20x",
+          "name": "Max 20×",
+          "priceUsdPerMonth": 200,
+          "priceNote": "+ processing fee",
+          "monthlyCreditsUsd": 300,
+          "limit5hUsd": 90,
+          "limitWeeklyUsd": 180,
+          "sourceUrl": "https://commandcode.ai/docs/resources/pricing-limits"
+        },
+        {
+          "planId": "command_code_provider",
+          "name": "Provider (API)",
+          "priceUsdPerMonth": 15,
+          "priceNote": "+ processing fee; pay as you go, no included credits bucket in the same sense",
+          "monthlyCreditsUsd": null,
+          "sourceUrl": "https://commandcode.ai/pricing"
+        },
+        {
+          "planId": "command_code_team_pro",
+          "name": "Team Pro",
+          "priceUsdPerMonth": 40,
+          "monthlyCreditsUsd": 40,
+          "limit5hUsd": 12,
+          "limitWeeklyUsd": 24,
+          "sourceUrl": "https://commandcode.ai/docs/resources/pricing-limits"
+        }
+      ],
+      "concurrencyLimit": {
+        "value": null,
+        "status": "notFound",
+        "note": "官网定价/额度页本轮未检出明确 concurrent requests 数字"
+      },
+      "goatPerModelAllowancesUsd": {
+        "sourceUrl": "https://commandcode.ai/docs/plans/goat",
+        "fetchedAt": "2026-09-06",
+        "refetchNote": "复核补全：官网完整两张 allowance 表（Every model + New models）；旧稿仅 11 行不全。shared plan monthly=$70；cache write 记录但不进项目 MIX。",
+        "note": "per-model monthly credit allowances on GOAT; shared plan monthly is $70 but individual models may be lower; New models default 2x ($20) until deals land",
+        "everyModelTable": [
+          {"model": "gpt-5.6-sol", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 5.0, "output": 30.0, "cacheRead": 0.5, "cacheWrite": 6.25}},
+          {"model": "glm-5.2", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": null}},
+          {"model": "hy3", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 0.14, "output": 0.58, "cacheRead": 0.035, "cacheWrite": null}},
+          {"model": "qwen3.8-27b", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 0.4, "output": 3.0, "cacheRead": 0.04, "cacheWrite": null}},
+          {"model": "deepseek-v4-flash", "monthlyCreditsUsd": 60, "pricesPer1MOffPeak": {"input": 0.22, "output": 0.66, "cacheRead": 0.007}, "peakNote": "01–04 & 06–10 UTC weekdays ≈2×"},
+          {"model": "kimi-k2.7-code", "monthlyCreditsUsd": 60, "pricesPer1M": {"input": 0.95, "output": 4.0, "cacheRead": 0.19, "cacheWrite": null}},
+          {"model": "minimax-m3", "monthlyCreditsUsd": 47, "pricesPer1MDeal": {"input": 0.30, "output": 1.20, "cacheRead": 0.06}, "dealNote": "page shows -50% / effective lower than list on some surfaces"},
+          {"model": "glm-5.3-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 0.15, "output": 0.5, "cacheRead": 0.03, "cacheWrite": null}},
+          {"model": "gemini-3.8-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 1.5, "output": 7.5, "cacheRead": 0.15, "cacheWrite": null}},
+          {"model": "qwen3.7-max", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 2.5, "output": 7.5, "cacheRead": 0.5, "cacheWrite": 3.13}},
+          {"model": "qwen3.7-plus", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 0.4, "output": 1.6, "cacheRead": 0.08, "cacheWrite": 0.5}},
+          {"model": "qwen3.6-plus", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 0.5, "output": 3.0, "cacheRead": 0.1, "cacheWrite": null}},
+          {"model": "mimo-v2.5", "monthlyCreditsUsd": 30, "pricesPer1MDeal": {"input": 0.14, "output": 0.28, "cacheRead": 0.0028}, "dealNote": "page -98% deal prices"},
+          {"model": "gpt-5.6-luna", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.2, "output": 1.2, "cacheRead": 0.02, "cacheWrite": 0.25}},
+          {"model": "qwen3.8-max", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.25, "cacheWrite": 2.5}},
+          {"model": "deepseek-v4-pro", "monthlyCreditsUsd": 20, "pricesPer1MOffPeak": {"input": 0.66, "output": 1.98, "cacheRead": 0.022}, "peakNote": "01–04 & 06–10 UTC weekdays ≈2×"},
+          {"model": "mimo-v2.5-pro", "monthlyCreditsUsd": 20, "pricesPer1MDeal": {"input": 0.435, "output": 0.87, "cacheRead": 0.0036}, "dealNote": "marketing up to 99% off list"}
+        ],
+        "newModelsTable": [
+          {"model": "qwen3.8-max-0902", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.25, "cacheWrite": null}},
+          {"model": "hy4-preview", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.834, "output": 2.501, "cacheRead": 0.042, "cacheWrite": null}},
+          {"model": "qwen3.8-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.16, "output": 0.47, "cacheRead": 0.016, "cacheWrite": null}},
+          {"model": "deepseek-v4-flash-vision-exp", "monthlyCreditsUsd": 20, "pricesPer1MOffPeak": {"input": 0.22, "output": 0.66, "cacheRead": 0.007}, "peakNote": "01–04 & 06–10 UTC weekdays ≈2×"},
+          {"model": "deepseek-v4-flash-fast", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.28, "output": 0.56, "cacheRead": 0.07, "cacheWrite": null}, "note": "speed variant; own $20 credits, not Flash $60"},
+          {"model": "glm-5.3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": null}},
+          {"model": "muse-spark-1.3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.25, "output": 4.25, "cacheRead": 0.15, "cacheWrite": null}},
+          {"model": "muse-spark-1.3-contributor", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.2, "cacheRead": 0.002, "cacheWrite": null}},
+          {"model": "muse-spark-1.2", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.25, "output": 4.25, "cacheRead": 0.15, "cacheWrite": null}},
+          {"model": "muse-spark-1.2-contributor", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.2, "cacheRead": 0.002, "cacheWrite": null}},
+          {"model": "kimi-k3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 3.0, "output": 15.0, "cacheRead": 0.3, "cacheWrite": null}},
+          {"model": "kimi-k2.7-code-highspeed", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.9, "output": 8.0, "cacheRead": 0.38, "cacheWrite": null}, "note": "speed variant; own $20, not K2.7 Code $60"},
+          {"model": "grok-4.5", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.5, "cacheWrite": null}},
+          {"model": "grok-4.6", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.5, "cacheWrite": null}},
+          {"model": "gemini-3.7-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 1.5, "output": 7.5, "cacheRead": 0.15, "cacheWrite": 0.08334}},
+          {"model": "glm-5.2-fast", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 3.0, "output": 10.25, "cacheRead": 0.5, "cacheWrite": null}, "note": "speed variant; own $20, not GLM-5.2 $70"},
+          {"model": "inkling", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.0, "output": 4.05, "cacheRead": 0.17, "cacheWrite": null}},
+          {"model": "inkling-small", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.5, "output": 1.2, "cacheRead": 0.1, "cacheWrite": null}},
+          {"model": "step-3.7-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.2, "output": 1.15, "cacheRead": 0.04, "cacheWrite": null}},
+          {"model": "step-3.5-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.3, "cacheRead": 0.02, "cacheWrite": null}},
+          {"model": "nemotron-3-ultra", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.6, "output": 2.4, "cacheRead": 0.12, "cacheWrite": null}}
+        ],
+        "olderModelsAlsoAvailableNarrative": {
+          "monthlyCreditsUsd": 20,
+          "modelsNamedWithoutSeparateAllowanceTable": [
+            "kimi-k2.6", "kimi-k2.5", "glm-5.1", "glm-5", "qwen3.7-flash",
+            "qwen3.6-max-preview", "minimax-m2.7", "minimax-m2.5"
+          ],
+          "note": "页脚叙事：以上旧模型也在 GOAT、$20 credits；价格见同页 catalog，本文件未另开 allowance 表行；adopted 本轮未强制入库"
+        },
+        "rows": [
+          {"model": "gpt-5.6-sol", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 5.0, "output": 30.0, "cacheRead": 0.5, "cacheWrite": 6.25}, "table": "every"},
+          {"model": "glm-5.2", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": null}, "table": "every"},
+          {"model": "hy3", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 0.14, "output": 0.58, "cacheRead": 0.035, "cacheWrite": null}, "table": "every"},
+          {"model": "qwen3.8-27b", "monthlyCreditsUsd": 70, "pricesPer1M": {"input": 0.4, "output": 3.0, "cacheRead": 0.04, "cacheWrite": null}, "table": "every"},
+          {"model": "deepseek-v4-flash", "monthlyCreditsUsd": 60, "pricesPer1MOffPeak": {"input": 0.22, "output": 0.66, "cacheRead": 0.007}, "peakNote": "01–04 & 06–10 UTC weekdays ≈2×", "table": "every"},
+          {"model": "kimi-k2.7-code", "monthlyCreditsUsd": 60, "pricesPer1M": {"input": 0.95, "output": 4.0, "cacheRead": 0.19, "cacheWrite": null}, "table": "every"},
+          {"model": "minimax-m3", "monthlyCreditsUsd": 47, "pricesPer1MDeal": {"input": 0.30, "output": 1.20, "cacheRead": 0.06}, "dealNote": "page shows -50%", "table": "every"},
+          {"model": "glm-5.3-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 0.15, "output": 0.5, "cacheRead": 0.03, "cacheWrite": null}, "table": "every"},
+          {"model": "gemini-3.8-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 1.5, "output": 7.5, "cacheRead": 0.15, "cacheWrite": null}, "table": "every"},
+          {"model": "qwen3.7-max", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 2.5, "output": 7.5, "cacheRead": 0.5, "cacheWrite": 3.13}, "table": "every"},
+          {"model": "qwen3.7-plus", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 0.4, "output": 1.6, "cacheRead": 0.08, "cacheWrite": 0.5}, "table": "every"},
+          {"model": "qwen3.6-plus", "monthlyCreditsUsd": 33, "pricesPer1M": {"input": 0.5, "output": 3.0, "cacheRead": 0.1, "cacheWrite": null}, "table": "every"},
+          {"model": "mimo-v2.5", "monthlyCreditsUsd": 30, "pricesPer1MDeal": {"input": 0.14, "output": 0.28, "cacheRead": 0.0028}, "table": "every"},
+          {"model": "gpt-5.6-luna", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.2, "output": 1.2, "cacheRead": 0.02, "cacheWrite": 0.25}, "table": "every"},
+          {"model": "qwen3.8-max", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.25, "cacheWrite": 2.5}, "table": "every"},
+          {"model": "deepseek-v4-pro", "monthlyCreditsUsd": 20, "pricesPer1MOffPeak": {"input": 0.66, "output": 1.98, "cacheRead": 0.022}, "peakNote": "01–04 & 06–10 UTC weekdays ≈2×", "table": "every"},
+          {"model": "mimo-v2.5-pro", "monthlyCreditsUsd": 20, "pricesPer1MDeal": {"input": 0.435, "output": 0.87, "cacheRead": 0.0036}, "table": "every"},
+          {"model": "qwen3.8-max-0902", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.25, "cacheWrite": null}, "table": "new"},
+          {"model": "hy4-preview", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.834, "output": 2.501, "cacheRead": 0.042, "cacheWrite": null}, "table": "new"},
+          {"model": "qwen3.8-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.16, "output": 0.47, "cacheRead": 0.016, "cacheWrite": null}, "table": "new"},
+          {"model": "deepseek-v4-flash-vision-exp", "monthlyCreditsUsd": 20, "pricesPer1MOffPeak": {"input": 0.22, "output": 0.66, "cacheRead": 0.007}, "table": "new"},
+          {"model": "deepseek-v4-flash-fast", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.28, "output": 0.56, "cacheRead": 0.07, "cacheWrite": null}, "table": "new"},
+          {"model": "glm-5.3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": null}, "table": "new"},
+          {"model": "muse-spark-1.3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.25, "output": 4.25, "cacheRead": 0.15, "cacheWrite": null}, "table": "new"},
+          {"model": "muse-spark-1.3-contributor", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.2, "cacheRead": 0.002, "cacheWrite": null}, "table": "new"},
+          {"model": "muse-spark-1.2", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.25, "output": 4.25, "cacheRead": 0.15, "cacheWrite": null}, "table": "new"},
+          {"model": "muse-spark-1.2-contributor", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.2, "cacheRead": 0.002, "cacheWrite": null}, "table": "new"},
+          {"model": "kimi-k3", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 3.0, "output": 15.0, "cacheRead": 0.3, "cacheWrite": null}, "table": "new"},
+          {"model": "kimi-k2.7-code-highspeed", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.9, "output": 8.0, "cacheRead": 0.38, "cacheWrite": null}, "table": "new"},
+          {"model": "grok-4.5", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.5, "cacheWrite": null}, "table": "new"},
+          {"model": "grok-4.6", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 2.0, "output": 6.0, "cacheRead": 0.5, "cacheWrite": null}, "table": "new"},
+          {"model": "gemini-3.7-flash", "monthlyCreditsUsd": 40, "pricesPer1M": {"input": 1.5, "output": 7.5, "cacheRead": 0.15, "cacheWrite": 0.08334}, "table": "new"},
+          {"model": "glm-5.2-fast", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 3.0, "output": 10.25, "cacheRead": 0.5, "cacheWrite": null}, "table": "new"},
+          {"model": "inkling", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 1.0, "output": 4.05, "cacheRead": 0.17, "cacheWrite": null}, "table": "new"},
+          {"model": "inkling-small", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.5, "output": 1.2, "cacheRead": 0.1, "cacheWrite": null}, "table": "new"},
+          {"model": "step-3.7-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.2, "output": 1.15, "cacheRead": 0.04, "cacheWrite": null}, "table": "new"},
+          {"model": "step-3.5-flash", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.1, "output": 0.3, "cacheRead": 0.02, "cacheWrite": null}, "table": "new"},
+          {"model": "nemotron-3-ultra", "monthlyCreditsUsd": 20, "pricesPer1M": {"input": 0.6, "output": 2.4, "cacheRead": 0.12, "cacheWrite": null}, "table": "new"}
+        ]
+      },
+      "tokenPlusPercentScreenshotsOrControlledFill": {
+        "status": "notFound",
+        "note": "本轮未找到可追溯的 Studio/usage 面板 token 数 + 占额度 % 截图或受控打满实测"
+      },
+      "plotCandidates": [
+        {
+          "planId": "command_code_goat",
+          "servedModel": "deepseek-v4-flash",
+          "priceUsd": 10,
+          "effectiveUsageUsd": 60,
+          "pricesPer1MUsed": {"cacheRead": 0.007, "input": 0.22, "output": 0.66, "band": "off-peak"},
+          "blendedUsdPer1M": 0.0139225916,
+          "candidateMonthlyTokens": 4309542472,
+          "candidateMonthlyYi": 43.095,
+          "confidence": "medium",
+          "formula": "min(planOrModelUsageUsd) / MIX_blended_offpeak_price * 1e6",
+          "caveats": ["忽略 processing fee", "未扣除 peak 时段溢价", "无面板实测", "同套餐模型额度不可相加"],
+          "sources": ["https://commandcode.ai/docs/plans/goat", "https://commandcode.ai/models/deepseek-v4-flash"]
+        },
+        {
+          "planId": "command_code_goat",
+          "servedModel": "deepseek-v4-pro",
+          "priceUsd": 10,
+          "effectiveUsageUsd": 20,
+          "pricesPer1MUsed": {"cacheRead": 0.022, "input": 0.66, "output": 1.98, "band": "off-peak"},
+          "blendedUsdPer1M": 0.0427425659,
+          "candidateMonthlyTokens": 467917627,
+          "candidateMonthlyYi": 4.679,
+          "confidence": "medium",
+          "caveats": ["GOAT 上 Pro 仅 $20 额度，不是 $70", "peak 未建模"],
+          "sources": ["https://commandcode.ai/docs/plans/goat", "https://commandcode.ai/models/deepseek-v4-pro"]
+        },
+        {
+          "planId": "command_code_goat",
+          "servedModel": "glm-5.2",
+          "priceUsd": 10,
+          "effectiveUsageUsd": 70,
+          "pricesPer1MUsed": {"cacheRead": 0.26, "input": 1.4, "output": 4.4},
+          "blendedUsdPer1M": 0.2993273891,
+          "candidateMonthlyTokens": 233857651,
+          "candidateMonthlyYi": 2.339,
+          "confidence": "medium",
+          "sources": ["https://commandcode.ai/docs/plans/goat"]
+        },
+        {
+          "planId": "command_code_goat",
+          "servedModel": "glm-5.3-flash",
+          "priceUsd": 10,
+          "effectiveUsageUsd": 40,
+          "pricesPer1MUsed": {"cacheRead": 0.03, "input": 0.15, "output": 0.5},
+          "blendedUsdPer1M": 0.0342604777,
+          "candidateMonthlyTokens": 1167526043,
+          "candidateMonthlyYi": 11.675,
+          "confidence": "medium",
+          "sources": ["https://commandcode.ai/docs/plans/goat"]
+        }
+      ]
+    },
+    {
+      "id": "muse_code",
+      "canonicalName": "Muse Code",
+      "entityResolution": {
+        "status": "confirmed_as_meta_product_distinct_from_opencode_model",
+        "officialProductUrl": "https://developer.meta.com/ai/products/muse-code/",
+        "officialSubscriptionsUrl": "https://ai.developer.meta.com/docs/muse-code/subscriptions/",
+        "officialApiPricingUrl": "https://ai.developer.meta.com/docs/pricing-rate-limits/",
+        "unofficialFanPricingMirror": {
+          "url": "https://musecodes.io/pricing/",
+          "footerQuote": "This is an unofficial fan site, not affiliated with Meta Platforms, Inc.",
+          "use": "PAYG 数字与 Meta/OpenCode 列表交叉核对；不能单独当作 Meta 官方订阅页"
+        },
+        "doNotConfuseWith": {
+          "opencodeGoModels": [
+            "muse-spark-1.3-contributor",
+            "muse-spark-1.2-contributor"
+          ],
+          "note": "OpenCode Go 里的 Muse Spark *Contributor* 是可调用模型行（$0.10/$0.20/$0.002，Usage $60），不是 Meta Muse Code 订阅产品本身。见 opencode-go-round5。"
+        },
+        "fetchLimitation": "2026-09-06 curl 抓取 developer.meta.com / ai.developer.meta.com 相关页正文近空（JS 壳）；产品实体 URL 可访问。"
+      },
+      "billingModel": {
+        "subscriptionMeter": "request_or_prompt_windows_not_published_token_pool",
+        "paygMeter": "public_api_token_prices_standard_vs_contributor",
+        "sources": [
+          "https://ai.developer.meta.com/docs/muse-code/subscriptions/",
+          "https://ai.developer.meta.com/docs/pricing-rate-limits/",
+          "https://musecodes.io/pricing/"
+        ]
+      },
+      "plans": [
+        {
+          "planId": "muse_code_everyday",
+          "name": "Everyday Usage",
+          "priceUsdPerMonth": 5.0,
+          "usageWindow": "10–50 requests/prompts every 5 hours (incl. image/video uploads); voice; web search",
+          "models": ["Muse Spark 1.2 / latest Muse models (region-dependent)"],
+          "confidence": "medium",
+          "evidenceGrade": "secondary_retrieval_of_official_urls_html_body_empty",
+          "sourceUrls": [
+            "https://developer.meta.com/ai/products/muse-code/",
+            "https://ai.developer.meta.com/docs/muse-code/subscriptions/"
+          ]
+        },
+        {
+          "planId": "muse_code_high",
+          "name": "High Usage",
+          "priceUsdPerMonth": 15.0,
+          "usageWindow": "Everything in Everyday + about 3× usage; more multimodal",
+          "confidence": "medium",
+          "evidenceGrade": "secondary_retrieval_of_official_urls_html_body_empty",
+          "sourceUrls": [
+            "https://developer.meta.com/ai/products/muse-code/",
+            "https://ai.developer.meta.com/docs/muse-code/subscriptions/"
+          ]
+        },
+        {
+          "planId": "muse_code_power",
+          "name": "Power Usage",
+          "priceUsdPerMonth": 50.0,
+          "usageWindow": "Everything in High + about 10× Everyday; early access; higher uploads",
+          "confidence": "medium",
+          "evidenceGrade": "secondary_retrieval_of_official_urls_html_body_empty",
+          "sourceUrls": [
+            "https://developer.meta.com/ai/products/muse-code/",
+            "https://ai.developer.meta.com/docs/muse-code/subscriptions/"
+          ]
+        }
+      ],
+      "paygTokenPrices": {
+        "standard_private": {
+          "modelIds": ["muse-spark-1.2", "muse-spark-1.3 (listed on Meta API pricing retrievals)"],
+          "input": 1.25,
+          "output": 4.25,
+          "cacheRead": 0.15,
+          "trainingOnData": "never (per musecodes.io / Meta pricing retrievals)"
+        },
+        "contributor": {
+          "modelIds": ["muse-spark-1.2-contributor"],
+          "input": 0.1,
+          "output": 0.2,
+          "cacheRead": 0.002,
+          "trainingOnData": "may be used to improve Meta products"
+        },
+        "crossCheck": "OpenCode Go 官方表 Muse Spark 1.2/1.3 Contributor 同价 $0.10/$0.20/$0.002 (https://opencode.ai/docs/go/)",
+        "musecodesIoDisclaimer": "fan site; use only as mirror + cross-check",
+        "sourceUrls": [
+          "https://musecodes.io/pricing/",
+          "https://opencode.ai/docs/go/",
+          "https://ai.developer.meta.com/docs/pricing-rate-limits/"
+        ]
+      },
+      "concurrencyOrRateLimits": {
+        "subscriptionConcurrentAgents": "notFound_as_hard_number_on_subscription_page_retrieval",
+        "apiRateLimitsFromRetrievals": {
+          "standardRpm": 3000,
+          "standardTpm": 4000000,
+          "contributorRpm": 100,
+          "contributorTpm": 3000000,
+          "confidence": "medium",
+          "sourceUrl": "https://ai.developer.meta.com/docs/pricing-rate-limits/"
+        }
+      },
+      "tokenPlusPercentScreenshotsOrControlledFill": {
+        "status": "notFound"
+      },
+      "plotCandidates": [
+        {
+          "planId": "muse_code_everyday",
+          "servedModel": "muse-spark-1.2",
+          "priceUsd": 5,
+          "candidateMonthlyYi": null,
+          "status": "notFound",
+          "reason": "额度按 5h 请求窗（10–50）描述，无官方美元池或绝对 token 池；不能把请求数编成月 token"
+        },
+        {
+          "planId": "muse_code_high",
+          "servedModel": "muse-spark-1.2",
+          "priceUsd": 15,
+          "candidateMonthlyYi": null,
+          "status": "notFound",
+          "reason": "仅有约 3× Everyday 的相对描述，无绝对 token"
+        },
+        {
+          "planId": "muse_code_power",
+          "servedModel": "muse-spark-1.2",
+          "priceUsd": 50,
+          "candidateMonthlyYi": null,
+          "status": "notFound",
+          "reason": "仅有约 10× Everyday 的相对描述，无绝对 token"
+        },
+        {
+          "planId": "muse_payg_not_subscription",
+          "servedModel": "muse-spark-1.2-contributor",
+          "note": "PAYG 不是订阅点；若将来要画，需自定月花费假设。OpenCode Go 已有同模型 $60 Usage 候选（见 round5），与 Meta 订阅产品仍是两件事。",
+          "status": "out_of_scope_for_subscription_points"
+        }
+      ]
+    },
+    {
+      "id": "ollama_cloud",
+      "canonicalName": "Ollama Cloud",
+      "entityResolution": {
+        "status": "confirmed",
+        "pricingUrl": "https://ollama.com/pricing",
+        "transparentPricingBlog": "https://ollama.com/blog/transparent-pricing",
+        "blogDate": "2026-08-31",
+        "note": "Cloud 已从旧 GPU-time/5h 周窗改为月度 usage credits × 公开 $/1M；本地仍无限。与 subscription-quotas.json 2026-09-02 stub 一致并在本轮复核。"
+      },
+      "billingModel": {
+        "meter": "monthly_usage_credits_burned_at_published_per_token_rates",
+        "quote": "Usage is measured in tokens at each model's rates.",
+        "includedCreditsReset": "monthly on subscription anniversary; no rollover",
+        "extraCredits": "available on all plans including Free; no service fees",
+        "local": "unlimited on own hardware",
+        "sourceUrl": "https://ollama.com/pricing"
+      },
+      "plans": [
+        {
+          "planId": "ollama_free",
+          "name": "Free",
+          "priceUsdPerMonth": 0,
+          "monthlyCreditsUsd": "starter_amount_not_published_as_fixed_dollar_in_page_text",
+          "concurrentRequests": 1,
+          "sourceUrl": "https://ollama.com/pricing"
+        },
+        {
+          "planId": "ollama_pro",
+          "name": "Pro",
+          "priceUsdPerMonth": 20,
+          "annual": {"totalUsd": 200, "effectiveMonthlyUsd": 16.67},
+          "monthlyCreditsUsd": 60,
+          "concurrentRequests": 3,
+          "officialQuotes": [
+            "$60 of usage credits per month",
+            "Free includes 1 concurrent request, Pro 3, and Max and Team 10"
+          ],
+          "sourceUrl": "https://ollama.com/pricing"
+        },
+        {
+          "planId": "ollama_max",
+          "name": "Max",
+          "priceUsdPerMonth": 100,
+          "monthlyCreditsUsd": 300,
+          "concurrentRequests": 10,
+          "sourceUrl": "https://ollama.com/pricing"
+        },
+        {
+          "planId": "ollama_team",
+          "name": "Team",
+          "priceUsdPerMonth": 500,
+          "monthlyCreditsUsd": 1000,
+          "concurrentRequests": 10,
+          "users": "unlimited",
+          "sourceUrl": "https://ollama.com/pricing"
+        }
+      ],
+      "modelPricesPer1MFromPricingPage": {
+        "sourceUrl": "https://ollama.com/pricing",
+        "fetchedAt": "2026-09-06",
+        "rows": [
+          {"model": "deepseek-v4-flash", "input": 0.22, "cacheRead": 0.007, "output": 0.66, "peak": {"input": 0.44, "cacheRead": 0.014, "output": 1.32}},
+          {"model": "deepseek-v4-pro", "input": 0.66, "cacheRead": 0.022, "output": 1.98, "peak": {"input": 1.32, "cacheRead": 0.044, "output": 3.96}},
+          {"model": "glm-5.3", "input": 1.4, "cacheRead": 0.26, "output": 4.4},
+          {"model": "glm-5.3-flash", "input": 0.15, "cacheRead": 0.03, "output": 0.5},
+          {"model": "glm-5.2", "input": 1.4, "cacheRead": 0.26, "output": 4.4},
+          {"model": "glm-5.1", "input": 1.0, "cacheRead": 0.2, "output": 3.2},
+          {"model": "kimi-k3", "input": 3.0, "cacheRead": 0.3, "output": 15.0},
+          {"model": "kimi-k2.7-code", "input": 0.95, "cacheRead": 0.19, "output": 4.0},
+          {"model": "minimax-m3", "input": 0.6, "cacheRead": 0.12, "output": 2.4},
+          {"model": "minimax-m2.7", "input": 0.3, "cacheRead": 0.06, "output": 1.2}
+        ],
+        "peakWindow": {
+          "quote": "Peak pricing applies between 12:00 and 18:00 UTC, Monday to Friday.",
+          "utcPlus8Implication": "peak = 20:00–02:00 UTC+8 → 用户所称“+8白天波谷”对 Ollama DeepSeek 大体成立；与 OpenCode/Command Code 的 DeepSeek peak（UTC+8 白天）相反"
+        }
+      },
+      "tokenPlusPercentScreenshotsOrControlledFill": {
+        "status": "notFound",
+        "note": "无账户 Settings→Usage 的 token+% 截图；官方只给 credits 美元池"
+      },
+      "plotCandidates": [
+        {
+          "planId": "ollama_pro",
+          "servedModel": "deepseek-v4-flash",
+          "priceUsd": 20,
+          "effectiveUsageUsd": 60,
+          "pricesPer1MUsed": {"cacheRead": 0.007, "input": 0.22, "output": 0.66, "band": "off-peak"},
+          "blendedUsdPer1M": 0.0139225916,
+          "candidateMonthlyTokens": 4309542472,
+          "candidateMonthlyYi": 43.095,
+          "confidence": "medium",
+          "caveats": ["共享 $60 池按单模型打满假设", "peak 未建模", "无面板实测", "并发3可能影响打满速度但不改月额度美元"],
+          "sources": ["https://ollama.com/pricing"]
+        },
+        {
+          "planId": "ollama_pro",
+          "servedModel": "deepseek-v4-pro",
+          "priceUsd": 20,
+          "effectiveUsageUsd": 60,
+          "pricesPer1MUsed": {"cacheRead": 0.022, "input": 0.66, "output": 1.98, "band": "off-peak"},
+          "blendedUsdPer1M": 0.0427425659,
+          "candidateMonthlyTokens": 1403752881,
+          "candidateMonthlyYi": 14.038,
+          "confidence": "medium",
+          "sources": ["https://ollama.com/pricing"]
+        },
+        {
+          "planId": "ollama_pro",
+          "servedModel": "glm-5.3-flash",
+          "priceUsd": 20,
+          "effectiveUsageUsd": 60,
+          "pricesPer1MUsed": {"cacheRead": 0.03, "input": 0.15, "output": 0.5},
+          "blendedUsdPer1M": 0.0342604777,
+          "candidateMonthlyTokens": 1751289065,
+          "candidateMonthlyYi": 17.513,
+          "confidence": "medium",
+          "caveats": ["用户称 GLM 很卡 — 无测速证据，不进入额度数字"],
+          "sources": ["https://ollama.com/pricing"]
+        },
+        {
+          "planId": "ollama_pro",
+          "servedModel": "glm-5.3",
+          "priceUsd": 20,
+          "effectiveUsageUsd": 60,
+          "pricesPer1MUsed": {"cacheRead": 0.26, "input": 1.4, "output": 4.4},
+          "blendedUsdPer1M": 0.2993273891,
+          "candidateMonthlyTokens": 200449415,
+          "candidateMonthlyYi": 2.004,
+          "confidence": "medium",
+          "sources": ["https://ollama.com/pricing"]
+        },
+        {
+          "planId": "ollama_max",
+          "servedModel": "deepseek-v4-flash",
+          "priceUsd": 100,
+          "effectiveUsageUsd": 300,
+          "candidateMonthlyYi": 215.477,
+          "confidence": "medium",
+          "note": "300/60 × Pro Flash 候选；同价公式外推",
+          "sources": ["https://ollama.com/pricing"]
+        }
+      ]
+    }
+  ],
+  "comparisons": {
+    "openCodeGoBaseline": {
+      "priceUsd": 10,
+      "sharedLimitsUsd": {"per5h": 12, "perWeek": 30, "perMonth": 60},
+      "deepseekV4FlashUsageUsd": 30,
+      "deepseekV4ProUsageUsd": 15,
+      "sourceUrl": "https://opencode.ai/docs/go/",
+      "adoptedLogic": "scripts/build_adopted.py: yi = min(60, perModelUsage) / blended(cache,input,output) / 100"
+    },
+    "samePriceAbout10Usd": {
+      "commandCodeGoatVsOpenCodeGo": {
+        "sharedPoolRatio": 1.1667,
+        "deepseekFlashPerModelRatio": 2.0,
+        "deepseekProPerModelRatio": 1.3333,
+        "userClaimX2": "成立于 DeepSeek Flash 每模型额度；不成立于共享月池（约1.17×）"
+      }
+    },
+    "ollamaProVsOpenCodeGo": {
+      "priceRatio": 2.0,
+      "sharedDollarPoolRatio": 1.0,
+      "deepseekFlashVsOpenCodeFlashPerModel": 2.0,
+      "userClaimX1": "仅当比较共享美元池 $60=$60；不是同订阅价，也不是对 OpenCode Flash $30 的 ×1"
+    },
+    "deepseekQuantization": {
+      "status": "notFound_as_gateway_fact",
+      "detail": "未找到 OpenCode Go / Command Code 提供量化版 DeepSeek 的官方说明；两边 DeepSeek 标价与峰谷窗口同量级。本地 GGUF/INT4 与订阅网关质量无关。不能把“手感差=量化”写成事实。"
+    },
+    "minimaxM3ListPriceDivergence": {
+      "openCodeGoAndCommandCodeDealish": {"input": 0.3, "output": 1.2, "cacheRead": 0.06},
+      "ollamaPricingPage": {"input": 0.6, "output": 2.4, "cacheRead": 0.12},
+      "note": "同名模型在 Ollama 价表约为 OpenCode/Command 常见成交价的 2×；折 token 时必须用各渠道自己的价表，不能混用。"
+    }
+  },
+  "recommendations": [
+    {
+      "priority": 1,
+      "item": "若要入库 Command Code GOAT，优先 DeepSeek V4 Flash（$60 Usage → 候选约 43.1 亿/月，medium）与 GLM-5.3-Flash（$40 → 约 11.7 亿）；Pro 模型在 GOAT 上额度往往只有 $20，不要误用 $70。",
+      "needsUserDecision": true
+    },
+    {
+      "priority": 2,
+      "item": "Ollama Pro 可按官方 $60 credits × 价表画点（Flash 候选与 GOAT Flash 同量级约 43.1 亿），但标价 $20，性价比轴上贵于 $10 的 GOAT/OpenCode；Max 按 $300 外推。catalog stub 的 null token 可被本轮候选替换，但仍缺面板 gold 证据。",
+      "needsUserDecision": true
+    },
+    {
+      "priority": 3,
+      "item": "Muse Code（Meta 产品）朋友想看：可在文中介绍 $5/$15/$50 请求窗订阅，但本轮无法换算可信月 token → 不建议画帕累托点。OpenCode Go 里的 muse-spark-*-contributor 是另一条线，已有 round5 价格。",
+      "needsUserDecision": true
+    },
+    {
+      "priority": 4,
+      "item": "下一轮若要升 confidence：要 Command Code Studio /usage 或 Ollama Settings 的 token+% 截图；Muse 需要能渲染官方订阅页正文或 Accounts Center 限额截图；量化争议需要 gateway 侧模型指纹/官方声明，不要再采主观手感。",
+      "needsUserDecision": false
+    },
+    {
+      "priority": 5,
+      "item": "用户 ×2/×1 口径建议在文案写清：×2 仅指 GOAT vs OpenCode 的 DeepSeek Flash 每模型美元额度；×1 仅指 Ollama Pro 与 OpenCode 共享月池同为 $60。",
+      "needsUserDecision": false
+    }
+  ]
+}

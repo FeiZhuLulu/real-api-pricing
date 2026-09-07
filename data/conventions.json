@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-07",
   "project": "真实API定价",
   "role": "只收集资料，不选定未对齐口径，不画帕累托",
   "formula": "订阅价 ÷ 用户实际能用到的月 token = 真实混合单价",
@@ -18,7 +18,15 @@
   },
   "monthWeeks": 4,
   "monthWeeksAlt": "30/7 只作灵敏度",
-  "tokenPolicy": "所有 token 一视同仁，先忽略缓存",
+  "tokenPolicy": "所有 token 一视同仁；美元额度和三段价统一按项目标准负载折算",
+  "standardTokenMix": {
+    "cache": 0.975,
+    "input": 0.0215,
+    "output": 0.0035,
+    "labelZh": "项目统一标准负载：缓存读取97.5% / 普通输入2.15% / 输出0.35%",
+    "labelEn": "Project standard workload: 97.5% cache reads / 2.15% fresh input / 0.35% output",
+    "note": "固定比较口径，不代表任何平台或用户的实际负载；三项合计100%。"
+  },
   "sourcePriority": [
     "用户口头确认",
     "本机 ccusage + 用户对周额度占用的说明",

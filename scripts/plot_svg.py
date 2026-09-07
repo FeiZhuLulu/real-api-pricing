@@ -18,11 +18,13 @@ BOARDS = {
 COLORS = {"OpenAI": "#12B886", "Claude": "#F47A35", "xAI": "#9267EF",
           "Cursor": "#F2BC22", "Kimi": "#26A9F5", "GLM": "#272727",
           "MiniMax": "#F45BA5", "Alibaba": "#F34E54", "OpenCode": "#00B9BC",
-          "DeepSeek": "#4570F5", "Google": "#91C83E", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
+          "Command Code": "#7B61FF", "Ollama": "#00A86B", "DeepSeek": "#4570F5",
+          "Google": "#91C83E", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
             ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
             ("glm", "GLM"), ("minimax", "MiniMax"), ("aliyun", "Alibaba"),
-            ("opencode", "OpenCode"), ("deepseek", "DeepSeek")]
+            ("opencode", "OpenCode"), ("command_code", "Command Code"), ("ollama", "Ollama"),
+            ("deepseek", "DeepSeek")]
 WIDTH, HEIGHT = 1440, 940
 LEFT, RIGHT, TOP, BOTTOM = 120, 1338, 233, 705
 
@@ -209,7 +211,7 @@ def draw(board, meta, points, tier, language="zh"):
     s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Subscription frontier" if language == "en" else "订阅前沿", 12, "#687168"),
           f'<path d="M{api_mark_x} 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>',
           text(api_mark_x + 14, 834, "API baseline" if language == "en" else "API 基线", 12, "#687168"),
-          text(56, 874, "Monthly fee ÷ monthly usable tokens  ·  Saturated use  ·  Month = 4 weeks  ·  Input, output and cache included" if language == "en" else "月费 ÷ 月可用 token  ·  饱和使用  ·  月 = 4 周  ·  输入、输出与缓存均计入", 12, "#727B72"),
+          text(56, 874, "Month = 4 weeks · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged" if language == "en" else "月=4周 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算", 12, "#727B72"),
           text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API baselines / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 基线 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
           text(56, 898, ((
               "AA Coding Agent: each score belongs to the shown harness × model; the best official configuration is used per exact model."

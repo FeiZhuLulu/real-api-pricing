@@ -1,0 +1,269 @@
+{
+  "recordedAt": "2026-09-06",
+  "round": 6,
+  "correctedAt": "2026-09-06",
+  "correctionNote": "初稿误把裁切图百分比读成 1.3%。按右侧反推结果，左侧完整值应为 81.3%：161.69M / 81.3% = 198.88M ≈ 1.99 亿。算术链自洽；已删除「链断裂 / 12.44B 周帽」误读。真正缺口见 recommendation.stillMissing。",
+  "scopeNote": "Round 6 专核用户提供的 Antigravity Pro AI 推算截图/说明（161.69M ≈ 81.3% → 5h 满载 ≈1.99 亿），对照官方 5h/周机制与 round5 LLMDevs 300–350M/5h、1B/周。只追加证据，不改 adopted / scripts / 已有 data。已读 AGENTS.md、gemini-quotas-round5-2026-09.json、subscription-quotas.json Gemini 条目。Agent Bridge 本会话 dispatch_enabled=false（worker 继承），联网由本轮直接完成。",
+  "userEvidence": {
+    "providedAt": "2026-09-06",
+    "plan": "Google AI Pro / Antigravity Pro",
+    "providerSelfLabel": "AI 推算；提供者明确称此前说法有误",
+    "uiBehaviorClaim": "Antigravity 不显示周绝对额度，只显示 5h 刷新；高负载每天跑满两三次 5h 后可能显示跨日刷新",
+    "screenshotClaim": {
+      "sessionTokensM": 161.69,
+      "percentOfFiveHourQuota": 81.3,
+      "percentReadingNote": "裁切图左侧曾被误读为 1.3%；按 161.69M→1.99亿 反推，完整值应为 81.3%（used of 5h bucket）。",
+      "inferredFiveHourCapYi": 1.99,
+      "inferredFiveHourCapTokens": 198880000,
+      "inferredFiveHourCapM": 198.88,
+      "apiDollarEstimate": 20.25,
+      "cnyEstimate": 145.82,
+      "tokenMixClaim": {
+        "inputM": 6.74,
+        "outputM": 0.22,
+        "cacheReadM": 192.0,
+        "sumM": 198.96,
+        "note": "三数之和≈198.96M，对应反推的满载 5h 桶构成（非 161.69M 会话本身的按比例拆分说明）。"
+      },
+      "countingProvenanceUnresolved": "未注明 161.69M 来自面板绝对计数、外部会话日志，还是 AI 对日志的估算；未注明实际服务模型（Flash vs Pro）与 cache 占比是否即上列 mix。"
+    },
+    "verbatimSummaryCorrected": "一次 5h 实际使用 161.69M tokens 对应约 81.3%（裁切图曾误读为 1.3%），反推单个 5h 满载上限约 1.99 亿 tokens；按 API 价格估值约 $20.25（输入约 674 万 + 输出约 22 万 + 缓存约 1.92 亿），人民币 145.82。提供者自认 AI 推算。"
+  },
+  "officialEvidence": [
+    {
+      "topic": "Pro/Ultra baseline: 5h refresh + weekly cap",
+      "source": "https://antigravity.google/docs/plans",
+      "sourceDate": "2026-09 (live docs)",
+      "quote": "Users on Google AI Pro receive: High, generous quota, refreshed every five hours until weekly limit reached; Higher weekly rate limit. Users on Google AI Ultra receive: The highest, most generous quota, refreshed every five hours; Highest weekly rate limits.",
+      "confidence": "high",
+      "note": "官方只给定性形容词，不公布绝对 token / 美元面额。与用户「只见 5h 刷新、打满多次后可能跨日/周冷却」叙事兼容：周帽耗尽后 5h 桶不再回填。用户本条只锚定 5h，推不出周/月。"
+    },
+    {
+      "topic": "Shared Gemini pool drawn down by API pricing (token worth)",
+      "source": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceDate": "2026-05-19",
+      "quote": "Now, we are combining these into a single rate limit, drawn down as per API pricing... if Gemini Flash is 8x cheaper than Gemini Pro as per API pricing, you will be able to use X tokens on Gemini Pro, 8X tokens on Gemini Flash (provided the same ratio of input, output, and cache read tokens), or any linear combination in between.",
+      "confidence": "high",
+      "note": "raw token 桶大小随 Flash/Pro 混用与 cache 占比变化；同一「%」对应的绝对 total tokens 不可跨模型/负载直接比较。用户 $20.25 验算假设 Flash 引入价 + 高 cache mix。"
+    },
+    {
+      "topic": "Official tier multipliers (token worth, not raw tokens)",
+      "source": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceDate": "2026-05-19",
+      "quote": "The $100/mo Ultra plan will have a rate limit of 5X worth of tokens compared to the $20/mo Pro plan and the $200/mo Ultra plan will have a rate limit of 20X worth of tokens compared to the $20/mo Pro plan.",
+      "confidence": "high",
+      "note": "Pro 基线绝对值仍未公布；倍率不能单独变成 adopted 点。"
+    },
+    {
+      "topic": "Quota UI is percent-only for hourly and weekly",
+      "source": "https://x.com/_mohansolo/status/2065227875947872472",
+      "sourceDate": "2026-06-12",
+      "quote": "Quota is now shown in percent increments for both hourly and weekly limits so you should never be confused about how much you have left.",
+      "confidence": "high",
+      "note": "官方确认面板不暴露绝对 token；社区工具同样只读 remaining %。若 161.69M 非面板绝对值，则需外部计数器；来源未注明。"
+    },
+    {
+      "topic": "AI credits are overage only; baseline separate",
+      "source": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceDate": "2026-05-19",
+      "quote": "Google has made the decision to simplify subscriptions by removing AI credits as part of the base Google AI plans. Accordingly, we have adjusted the base plan entitlements upwards for Gemini models on Antigravity. AI credits will now solely be used as an overage mechanism.",
+      "confidence": "high",
+      "note": "docs/plans：overage「按 Gemini Enterprise Agent Platform 标准消费价」扣减。不宜把 Google One AI credits 表直接当 Antigravity coding 基线。"
+    },
+    {
+      "topic": "Gemini 3.8 Flash intro API list prices (for dollar-worth cross-check)",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "sourceDate": "2026-09-04",
+      "quote": "Gemini 3.8 Flash ... Input $0.75 ... Output $3.75 ... Context caching $0.075 ... through December 31, 2026.",
+      "confidence": "high",
+      "note": "Antigravity 博客写「as per API pricing」；Flash 引入价与用户对满载 mix 的 $20.25 验算一致（见 calculations）。"
+    },
+    {
+      "topic": "May 2026 permanent 3× then another 3× weekly Gemini quotas (relative only)",
+      "source": "https://x.com/googleaidevs/status/2057680511217393899",
+      "sourceDate": "2026-05-22",
+      "quote": "Update: *Weekly* Gemini quotas on all paid @Antigravity tiers have just been tripled (again!), and quotas are officially reset (again!).",
+      "confidence": "high",
+      "note": "相对倍率，无绝对基线；round5 已收录，本轮作锚点不重复展开。"
+    }
+  ],
+  "communityEvidence": [
+    {
+      "topic": "LLMDevs educated guess — Pro 300–350M/5h, 1.0B/week",
+      "source": "https://www.reddit.com/r/LLMDevs/?f=flair_name%3A%22Resource%22&feedViewType=compactView",
+      "sourceDate": "2026-09-04",
+      "quote": "Gemini Pro / Antigravity Pro ($20/mo) ... 5-Hour Rolling Limit: ~300M – 350M tokens ... Weekly Limit: 1.0B tokens ... The \"3-Sprint\": The 5h burst is kind of generous, 3 heavy sessions will drain the weekly quota.",
+      "confidence": "low",
+      "note": "round5 主绝对来源。作者自述 parsing local session logs + limit hits；非面板绝对数+%。同帖 TLDR 写「Gemini Pro 100m 5h, 1b weekly」与正文 300–350M 自相矛盾（见 conflicts）。与用户 5h≈199M 冲突：用户约低 40%。"
+    },
+    {
+      "topic": "LLMDevs Ultra $100 — velocity-dependent 5h, ~5.0B week",
+      "source": "https://www.reddit.com/r/LLMDevs/?f=flair_name%3A%22Resource%22&feedViewType=compactView",
+      "sourceDate": "2026-09-04",
+      "quote": "Gemini Ultra / Antigravity Ultra ($100/mo) ... 5-Hour Rolling Limit: ~235M ... paced long-context streams can utilize up to 500M ... Weekly Limit: 5.0B tokens it seems ... two almost full 5h session ate around %20 weekly",
+      "confidence": "low",
+      "note": "与官方 5× token worth 叙事同量级，仍是单一口述反推。"
+    },
+    {
+      "topic": "agentpedia units (no unit→token)",
+      "source": "https://agentpedia.codes/blog/antigravity-weekly-quota-cooldown-explained",
+      "sourceDate": "2026-07-10",
+      "quote": "Sprint Quota ... roughly 250 units on Pro ... Weekly Baseline Cap ... around 2,800 units on Pro",
+      "confidence": "low",
+      "note": "第三方；仍无公开 unit→token。表内 Ultra 价仍写旧 $249.99。"
+    },
+    {
+      "topic": "X ask for billion-token figures — no absolute answer",
+      "source": "https://x.com/raazor5050/status/2095698606099755410",
+      "sourceDate": "2026-09-04",
+      "quote": "How’s the token limits for Pro and Ultra plans in Antigravity? How much approximate billion tokens one gets?",
+      "confidence": "low",
+      "note": "回复仅定性「limits are not great... slightly more than Claude's $20 limits」——无绝对数。"
+    },
+    {
+      "topic": "Historical forum absolute (pre-May boosts; outdated)",
+      "source": "https://awesomeagents.ai/news/google-antigravity-quota-lockouts-pro/",
+      "sourceDate": "2026-03-12",
+      "quote": "Before January I could use over 300 million input tokens and 1-2 million output in a week for the Gemini Pro models. This week I hit my weekly rate limits at less than 9 million input and 200 thousand output tokens.",
+      "confidence": "low",
+      "note": "仅 input/output，非 total；发生在 2026-05 两次 3× 之前。round5 已标过时。"
+    },
+    {
+      "topic": "Qualitative Pro weekly tightness 2026-06+",
+      "source": "https://news.ycombinator.com/item?id=49547760",
+      "sourceDate": "2026-09",
+      "quote": "I just ran two light tasks on my codebase and got 100% of the weekly limits of a Pro plan blown away.",
+      "confidence": "low",
+      "note": "无数字；与「数次重会话耗尽周额度」同叙事。用户本条无周 %，无法交叉。"
+    },
+    {
+      "topic": "Search result: no new panel absolute+percent gold standard after 2026-06",
+      "source": "round6 search: official docs + X + Reddit + HN + GitHub quota tools 2026-06+",
+      "sourceDate": "2026-09-06",
+      "quote": null,
+      "confidence": "high",
+      "note": "notFound：未找到可独立核验的「绝对 token + 占 5h/周额度 %」公开截图帖；未找到官方 unit→token 表；未找到复现用户 1.99 亿/5h 或独立给出周帽的第二来源。"
+    }
+  ],
+  "calculations": {
+    "userClaimArithmeticCheck": {
+      "sessionTokensM": 161.69,
+      "percentOfFiveHour": 81.3,
+      "inferredFiveHourCapM": 198.88,
+      "inferredFiveHourCapYi": 1.9888,
+      "claimedFiveHourCapYi": 1.99,
+      "arithmeticStatus": "consistent",
+      "formula": "161.69 / 0.813 = 198.8807M ≈ 1.99 亿",
+      "priorMisread": "初稿误用 1.3% 得到 12.44B；已作废，不再作为冲突项。"
+    },
+    "tokenMixSum": {
+      "inputM": 6.74,
+      "outputM": 0.22,
+      "cacheReadM": 192.0,
+      "sumM": 198.96,
+      "vsInferredCapM": 198.88,
+      "note": "满载构成之和与 81.3% 反推桶几乎重合；支持「1.99 亿 = 满载 5h 桶」读法。"
+    },
+    "apiDollarAtFlashIntroList": {
+      "ratesUsed": {
+        "modelAssumed": "gemini-3.8-flash intro (through 2026-12-31) — 用户未明示模型，此为验算假设",
+        "inputPerM": 0.75,
+        "outputPerM": 3.75,
+        "cacheReadPerM": 0.075,
+        "source": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "costUsd": 20.28,
+      "claimedUsd": 20.25,
+      "match": "close — $20.25 在 Flash 引入价 + 该 mix 下验算成立；若实际为 Pro 标价则 worth 不同、raw 桶不可直接比"
+    },
+    "cnyFxCheck": {
+      "claimedCny": 145.82,
+      "projectUsdPerCny": 6.7787,
+      "projectFxDate": "2026-09-04",
+      "impliedAtProjectFx": 137.27,
+      "fxThatYields145_82": 7.2,
+      "note": "145.82 与 conventions.json 中间价 6.7787 不一致；约对应 ~7.2 CNY/USD。人民币数字不能直接采信。"
+    },
+    "compareToRound5Llmdevs": {
+      "llmdevsFiveHourM": [300, 350],
+      "userFiveHourM": 198.88,
+      "ratioUserToLlmdevsMid": 0.61,
+      "llmdevsWeeklyB": 1.0,
+      "userWeekly": null,
+      "note": "5h：用户 ≈199M vs LLMDevs 300–350M，同数量级但用户约低 40%，冲突保留。用户本条无周帽观测；不能用 5h 桶推出月额度。"
+    },
+    "saturationMonthlyIfForced": {
+      "fromLlmdevsWeekly1B": {
+        "monthlyTokens": 4000000000,
+        "monthlyYi": 40,
+        "assumption": "周×4；饱和用满周帽"
+      },
+      "fromUser199MPer5hOnly": {
+        "note": "仅有 5h 锚。官方：5h 刷新直至周上限。用户称每天可跑满 2–3 次 5h，但周帽未知且会截断——不能单靠 5h×次数推月额度。"
+      },
+      "notForAdoption": true
+    }
+  },
+  "conflicts": [
+    {
+      "id": "C1",
+      "items": ["user 5h≈1.99亿 (198.88M)", "LLMDevs 300–350M/5h"],
+      "observation": "同数量级，用户约低 40%。二者皆非面板金标准（用户为 AI 推算；LLMDevs 为日志口述），不足以择一作为 adopted。"
+    },
+    {
+      "id": "C2",
+      "items": ["LLMDevs TLDR Gemini Pro 100M/5h", "LLMDevs body 300–350M/5h"],
+      "observation": "同一作者同一帖内部矛盾；进一步降低该来源作为唯一绝对锚的可信度。"
+    },
+    {
+      "id": "C3",
+      "items": ["官方 token worth / API 合池", "社区/用户按 raw total tokens 报 5h 桶"],
+      "observation": "官方扣减按 API 价（含 cache）；Flash 高 cache 会话 raw total 会远大于等价「Pro 无 cache」会话。用户 mix 缓存占 ~96.5%；未注明模型时，199M raw 不能当作跨负载通用 5h 上限。"
+    },
+    {
+      "id": "C4",
+      "items": ["用户 CNY 145.82", "conventions.json 6.7787→$20.25≈¥137.27"],
+      "observation": "汇率口径冲突；采用链路应统一用 conventions.json，不采截图人民币。"
+    },
+    {
+      "id": "C5",
+      "items": ["subscription-quotas.json Pro planMonthlyTokens 900M", "LLMDevs 月≈4B / 用户仅有 5h 锚"],
+      "observation": "早期 Cursor 抽的 900M 低置信代理，已被 adopted 流程搁置（Gemini 系全部缺席）。本轮仍不足以替换或确认该代理值，也推不出新的月采用值。"
+    }
+  ],
+  "recommendation": {
+    "addGeminiPoints": false,
+    "confidenceIfForced": null,
+    "proposedMonthlyTokens": null,
+    "proposedMonthlyYi": null,
+    "fiveHourUserEstimateM": 198.88,
+    "fiveHourUserEstimateNote": "算术自洽的 5h 反推（161.69M / 81.3%），置信仍低于 adopted 门槛：自认 AI 推算、计数来源/模型未注明、与 LLMDevs 300–350M 冲突、无周帽。",
+    "reason": "修正百分比误读后，5h 算术链成立，但仍不足以新增月点：官方无绝对桶；本条只锚定 5h、周帽未知；计数是否外部日志、实际模型未注明；提供者自认 AI 推算；与 round5 LLMDevs 300–350M/5h 冲突且双方皆非金标准。",
+    "stillMissing": [
+      "周帽：同账号绝对 tokens + 周 %（或多次打满 5h 后周条读数），否则无法×4 得月额度",
+      "计数来源：161.69M 是外部会话/工具计数还是面板/AI 估算——需注明并可复核",
+      "模型与负载：Flash vs Pro、cache 占比（官方按 API 价合池；raw token 不可跨 mix 直接比）",
+      "独立第二来源复现 ≈199M/5h 或 LLMDevs 300–350M/5h",
+      "（可选）个人订阅基线隐藏美元面额——官方未公布"
+    ],
+    "whatIsStrongEnoughToKeep": [
+      "机制描述可写入文章脚注：Pro=5h 刷新直至周上限；Gemini Flash/Pro 按 API 价合池；UI 仅 %",
+      "用户 UI 行为描述（不见周绝对数、重负载后跨日/周刷新）与官方 docs 一致，可作定性旁证",
+      "修正后的 5h≈1.99 亿可作为 low 旁证候选（算术自洽），但因 AI 推算 + 与 LLMDevs 冲突 + 缺周帽，不进 adopted",
+      "用户 $20.25 Flash mix 验算可作为「该 mix 满载 5h ≈$20 API worth」的价格锚讨论"
+    ],
+    "doNotAdopt": [
+      "1.99 亿/5h 作为 medium/high 采用值或月点基线",
+      "LLMDevs 300–350M/5h 或 1.0B/周作为 high/medium 采用值",
+      "subscription-quotas 900M/月代理",
+      "由 5h 桶×每日次数直接推月额度（周帽未知）"
+    ]
+  },
+  "priorRound": "data/research/gemini-quotas-round5-2026-09.json",
+  "filesNotModified": [
+    "data/adopted.csv",
+    "scripts/*",
+    "data/research/gemini-quotas-round5-2026-09.json",
+    "data/subscription-quotas.json"
+  ]
+}

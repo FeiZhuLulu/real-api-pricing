@@ -2,7 +2,7 @@
 """adopted.csv × 榜单分数 × 官方标价 → derived/points.csv + points.json。
 
 每个点 = (套餐, 实际服务模型)。x = 真实单价 $/MTok；y = 该模型在各榜单的分数（同模型多个 effort 变体取最高分）。
-d = 真实单价 / 标价混合单价（标价按实测 agent 负载分布折算），只作注释，不进图。
+d = 真实单价 / 标价混合单价（标价按项目统一标准负载折算），只作注释，不进图。
 """
 from __future__ import annotations
 
@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
-
-MIX = dict(cache=406_477_401 / 416_989_306, input=9_040_062 / 416_989_306, output=1_471_843 / 416_989_306)
+CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
+STANDARD_MIX = CONVENTIONS["standardTokenMix"]
 BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index")
 SCORE_FILES = (
     "scores-2026-09.json",
@@ -66,7 +66,7 @@ def load_list_blended() -> dict[str, float]:
     out = {}
     for m in json.loads((RESEARCH / "list-prices-2026-09.json").read_text(encoding="utf-8"))["models"]:
         cached = m["cachedInput"] if m["cachedInput"] is not None else m["input"] * 0.1
-        out[m["model"]] = MIX["cache"] * cached + MIX["input"] * m["input"] + MIX["output"] * m["output"]
+        out[m["model"]] = STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * m["input"] + STANDARD_MIX["output"] * m["output"]
     return out
 
 
@@ -101,7 +101,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-06", mix={k: round(v, 4) for k, v in MIX.items()},
+        generatedAt="2026-09-07", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")
