@@ -20,12 +20,12 @@ Snapshot: 2026-09-07. Each row is one **plan × actual served model**; allowance
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | 179 |
+| All adopted plan × model points | 184 |
 | Subscription points with monthly allowance | 173 |
-| Metered API baselines | 6 |
+| Metered API baselines | 11 |
 | OpenCode Go / Command Code GOAT / Ollama models | 28 / 38 / 20 |
-| Code Arena / Agent Arena scored points | 129 / 133 |
-| AA Intelligence / AA Coding Agent scored points | 126 / 55 |
+| Code Arena / Agent Arena scored points | 134 / 138 |
+| AA Intelligence / AA Coding Agent scored points | 131 / 59 |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
 
@@ -41,7 +41,7 @@ All 173 subscription plan × model points, sorted by monthly usable tokens. The 
 
 ## Real unit price overview
 
-All 179 subscription and API points on one comparable $/MTok scale.
+All 184 subscription and API points on one comparable $/MTok scale.
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 
