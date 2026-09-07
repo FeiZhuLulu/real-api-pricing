@@ -1,0 +1,790 @@
+{
+  "recordedAt": "2026-09-06",
+  "contributor": "OpenClawFarm（一人 AI worker 集群，约十位用户经 new-api 网关共用订阅）",
+  "sourceType": "gateway_measurement_raw_tokens",
+  "plan": {
+    "id": "chatgpt_pro_20x",
+    "name": "ChatGPT Pro (20x)",
+    "priceUsd": 200,
+    "account": "个人 Pro 20x 订阅（正价，非转售），只服务网关，无直登客户端；OAuth /backend-api/wham/usage 报 plan=pro、窗口 604800 秒"
+  },
+  "servedModelMix": "gpt-5.6-sol 约 93% token；gpt-5.6-luna 约 6%（codex-auto-review / 轻量任务）；gpt-5.5 与 gpt-5.6-terra 零星",
+  "method": {
+    "quotaProbe": "守卫脚本每 10 分钟经 CLIProxyAPI 读一次 OpenAI OAuth 用量（整数 used_percent + reset 倒计时）与每个 auth 的累计成功请求数，写入日志",
+    "tokenSource": "new-api 网关 logs 表（逐请求 prompt_tokens / completion_tokens / other.cache_tokens），按 10 分钟桶聚合 GPT 渠道",
+    "attribution": "两个 ChatGPT 账号经 CLIProxyAPI priority 排班轮流独占网关流量。只取\"该账号累计成功数增长、另一账号计数不变、无周窗重置\"的连续时段，把时段内网关 token 与该账号 used_percent 增量对齐",
+    "selection": "仅保留 2026-08-21（该账号接入日）之后、增量 ≥5 个百分点的时段；短样本受每周窗约 2.8 点的开窗固定开销影响系统性偏贵，故不用",
+    "alignment": "采样时刻 xx:x5:03 与 10 分钟桶起点 xx:x0 有 5 分钟错位，多小时时段内可忽略",
+    "tokenPolicy": "与本项目一致：input + cache read + output 全部计入 totalTokens；cache 单列以便复算",
+    "caveats": [
+      "用量百分比是整数，单段误差 ±1 点；用增量≥5 的段并做合并可压到 ±2%",
+      "used_percent 由 OpenAI 按额度成本计，不同模型每 token 消耗不同，本测为 Sol 主导的混合负载",
+      "Codex CLI 的 Responses API 缓存命中率极高（94.7%），换成低缓存负载时每百分点 token 会明显减少",
+      "2026-09-04 起窗内出现 gpt-6-astra 流量的段已排除；GPT-6 Astra 消耗周额度显著快于 Sol，另行测量"
+    ]
+  },
+  "pooled": {
+    "segments": 16,
+    "deltaPercentSum": 250,
+    "totalTokens": 8715731220,
+    "cacheReadTokens": 8256078336,
+    "uncachedInputTokens": 415500011,
+    "outputTokens": 44152873,
+    "totalTokensPerPercent": 34862925,
+    "uncachedInputPerPercent": 1662000,
+    "mix": {
+      "cache": 0.9473,
+      "uncachedInput": 0.0477,
+      "output": 0.0051
+    },
+    "perSegmentTotalPerPercentM": {
+      "min": 26.9,
+      "median": 35.1,
+      "max": 38.5
+    },
+    "weeklyTokensAt100Percent": 3486292488,
+    "monthlyTokensFourWeeks": 13945169952,
+    "monthlyYi": 139.5,
+    "monthlyYiRangeFromSegments": [
+      107.7,
+      153.9
+    ],
+    "realUsdPerMTok": 0.01434
+  },
+  "comparison": {
+    "currentAdopted": "chatgpt_pro_20x gpt-5.6-sol 123.2 亿/月（Plus 6.16 亿 × 官方 20x），旁证 109 / 131 / 144 亿",
+    "thisMeasurement": "139.5 亿/月，段间区间 108–154 亿；与现采用值同量级，落在旁证区间内",
+    "suggestion": "可作为 chatgpt_pro_20x 的独立 raw token 实测旁证；是否把采用值从 123.2 改为实测值由维护者裁定"
+  },
+  "priorEvidenceSameCluster": {
+    "note": "2026-08-09~08-13 对另一 Pro 账号用同法做过 52 个 1 点区间的最小二乘：百分点 ≈ 0.336 × 未命中输入(M) + 3.84 × 输出(M)，比 11.4，与官方 Sol 输入/输出定价比同量级，说明周额度按成本计而非按 token 一视同仁；每个周窗另有约 2.8 点固定开销",
+    "implication": "同一订阅在不同模型上的可用 token 数不同，验证了本项目按 credits 比例派生 Terra / Luna 额度的做法方向正确"
+  },
+  "segments": [
+    {
+      "start": "2026-08-21 12:45:03",
+      "end": "2026-08-21 18:45:12",
+      "hours": 6.0,
+      "usedPercentFrom": 73,
+      "usedPercentTo": 80,
+      "deltaPercent": 7,
+      "cliproxyRequests": 1916,
+      "gatewayRequests": 1966,
+      "promptTokens": 239108655,
+      "cacheReadTokens": 229387520,
+      "uncachedInputTokens": 9721135,
+      "outputTokens": 782441,
+      "totalTokens": 239891096,
+      "totalTokensPerPercent": 34270157,
+      "uncachedInputPerPercent": 1388734,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 1939,
+          "promptTokens": 238239524,
+          "cacheReadTokens": 228955904,
+          "outputTokens": 779487
+        },
+        "gpt-5.6-luna": {
+          "calls": 27,
+          "promptTokens": 869131,
+          "cacheReadTokens": 431616,
+          "outputTokens": 2954
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-25 22:25:04",
+      "end": "2026-08-26 06:15:03",
+      "hours": 7.8,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 6,
+      "deltaPercent": 6,
+      "cliproxyRequests": 1650,
+      "gatewayRequests": 1679,
+      "promptTokens": 193083701,
+      "cacheReadTokens": 181928832,
+      "uncachedInputTokens": 11154869,
+      "outputTokens": 882931,
+      "totalTokens": 193966632,
+      "totalTokensPerPercent": 32327772,
+      "uncachedInputPerPercent": 1859145,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 1576,
+          "promptTokens": 185658561,
+          "cacheReadTokens": 176889472,
+          "outputTokens": 871878
+        },
+        "gpt-5.6-luna": {
+          "calls": 103,
+          "promptTokens": 7425140,
+          "cacheReadTokens": 5039360,
+          "outputTokens": 11053
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-26 06:25:02",
+      "end": "2026-08-26 13:55:04",
+      "hours": 7.5,
+      "usedPercentFrom": 6,
+      "usedPercentTo": 11,
+      "deltaPercent": 5,
+      "cliproxyRequests": 1301,
+      "gatewayRequests": 1336,
+      "promptTokens": 160307964,
+      "cacheReadTokens": 149275264,
+      "uncachedInputTokens": 11032700,
+      "outputTokens": 650077,
+      "totalTokens": 160958041,
+      "totalTokensPerPercent": 32191608,
+      "uncachedInputPerPercent": 2206540,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 1241,
+          "promptTokens": 154972075,
+          "cacheReadTokens": 145245568,
+          "outputTokens": 641222
+        },
+        "gpt-5.6-luna": {
+          "calls": 95,
+          "promptTokens": 5335889,
+          "cacheReadTokens": 4029696,
+          "outputTokens": 8855
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-26 16:05:03",
+      "end": "2026-08-27 10:45:03",
+      "hours": 18.7,
+      "usedPercentFrom": 15,
+      "usedPercentTo": 26,
+      "deltaPercent": 11,
+      "cliproxyRequests": 2876,
+      "gatewayRequests": 2989,
+      "promptTokens": 369143572,
+      "cacheReadTokens": 347503744,
+      "uncachedInputTokens": 21639828,
+      "outputTokens": 1526440,
+      "totalTokens": 370670012,
+      "totalTokensPerPercent": 33697274,
+      "uncachedInputPerPercent": 1967257,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 142,
+          "promptTokens": 14386706,
+          "cacheReadTokens": 12285440,
+          "outputTokens": 18269
+        },
+        "gpt-5.6-sol": {
+          "calls": 2730,
+          "promptTokens": 348001937,
+          "cacheReadTokens": 328976896,
+          "outputTokens": 1442403
+        },
+        "gpt-5.5": {
+          "calls": 115,
+          "promptTokens": 6698238,
+          "cacheReadTokens": 6214016,
+          "outputTokens": 65417
+        },
+        "gpt-5.6-terra": {
+          "calls": 2,
+          "promptTokens": 56691,
+          "cacheReadTokens": 27392,
+          "outputTokens": 351
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-27 11:35:03",
+      "end": "2026-08-28 00:15:02",
+      "hours": 12.7,
+      "usedPercentFrom": 27,
+      "usedPercentTo": 50,
+      "deltaPercent": 23,
+      "cliproxyRequests": 6771,
+      "gatewayRequests": 6852,
+      "promptTokens": 808344453,
+      "cacheReadTokens": 773290880,
+      "uncachedInputTokens": 35053573,
+      "outputTokens": 3525466,
+      "totalTokens": 811869919,
+      "totalTokensPerPercent": 35298692,
+      "uncachedInputPerPercent": 1524068,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 390,
+          "promptTokens": 46073189,
+          "cacheReadTokens": 43105024,
+          "outputTokens": 44297
+        },
+        "gpt-5.6-sol": {
+          "calls": 6239,
+          "promptTokens": 735242249,
+          "cacheReadTokens": 704876032,
+          "outputTokens": 3363866
+        },
+        "gpt-image-2": {
+          "calls": 1,
+          "promptTokens": 16,
+          "cacheReadTokens": 0,
+          "outputTokens": 229
+        },
+        "gpt-5.5": {
+          "calls": 222,
+          "promptTokens": 27028999,
+          "cacheReadTokens": 25309824,
+          "outputTokens": 117074
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-28 07:15:02",
+      "end": "2026-08-28 22:15:03",
+      "hours": 15.0,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 29,
+      "deltaPercent": 29,
+      "cliproxyRequests": 9258,
+      "gatewayRequests": 9343,
+      "promptTokens": 1111113297,
+      "cacheReadTokens": 1064364416,
+      "uncachedInputTokens": 46748881,
+      "outputTokens": 4478427,
+      "totalTokens": 1115591724,
+      "totalTokensPerPercent": 38468680,
+      "uncachedInputPerPercent": 1612030,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 664,
+          "promptTokens": 77863475,
+          "cacheReadTokens": 73049088,
+          "outputTokens": 78077
+        },
+        "gpt-5.6-sol": {
+          "calls": 8615,
+          "promptTokens": 1029818115,
+          "cacheReadTokens": 988289792,
+          "outputTokens": 4364520
+        },
+        "gpt-5.6-terra": {
+          "calls": 31,
+          "promptTokens": 1304084,
+          "cacheReadTokens": 1092352,
+          "outputTokens": 16202
+        },
+        "gpt-5.5": {
+          "calls": 33,
+          "promptTokens": 2127623,
+          "cacheReadTokens": 1933184,
+          "outputTokens": 19628
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-29 00:45:04",
+      "end": "2026-08-30 03:55:03",
+      "hours": 27.2,
+      "usedPercentFrom": 31,
+      "usedPercentTo": 48,
+      "deltaPercent": 17,
+      "cliproxyRequests": 4294,
+      "gatewayRequests": 4296,
+      "promptTokens": 452628468,
+      "cacheReadTokens": 426187648,
+      "uncachedInputTokens": 26440820,
+      "outputTokens": 5182373,
+      "totalTokens": 457810841,
+      "totalTokensPerPercent": 26930049,
+      "uncachedInputPerPercent": 1555342,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 3935,
+          "promptTokens": 422636593,
+          "cacheReadTokens": 398466944,
+          "outputTokens": 5142977
+        },
+        "gpt-5.6-luna": {
+          "calls": 353,
+          "promptTokens": 29793461,
+          "cacheReadTokens": 27571200,
+          "outputTokens": 37601
+        },
+        "gpt-5.6-terra": {
+          "calls": 8,
+          "promptTokens": 198414,
+          "cacheReadTokens": 149504,
+          "outputTokens": 1795
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-30 05:25:03",
+      "end": "2026-08-30 14:45:03",
+      "hours": 9.3,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 8,
+      "deltaPercent": 8,
+      "cliproxyRequests": 1974,
+      "gatewayRequests": 2004,
+      "promptTokens": 241473608,
+      "cacheReadTokens": 227233152,
+      "uncachedInputTokens": 14240456,
+      "outputTokens": 1835295,
+      "totalTokens": 243308903,
+      "totalTokensPerPercent": 30413613,
+      "uncachedInputPerPercent": 1780057,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 190,
+          "promptTokens": 20344418,
+          "cacheReadTokens": 18192128,
+          "outputTokens": 22648
+        },
+        "gpt-5.6-sol": {
+          "calls": 1812,
+          "promptTokens": 221106473,
+          "cacheReadTokens": 209041024,
+          "outputTokens": 1812566
+        },
+        "gpt-5.5": {
+          "calls": 2,
+          "promptTokens": 22717,
+          "cacheReadTokens": 0,
+          "outputTokens": 81
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-30 14:55:03",
+      "end": "2026-08-31 06:15:02",
+      "hours": 15.3,
+      "usedPercentFrom": 8,
+      "usedPercentTo": 19,
+      "deltaPercent": 11,
+      "cliproxyRequests": 2661,
+      "gatewayRequests": 2701,
+      "promptTokens": 332747761,
+      "cacheReadTokens": 315276288,
+      "uncachedInputTokens": 17471473,
+      "outputTokens": 2301431,
+      "totalTokens": 335049192,
+      "totalTokensPerPercent": 30459017,
+      "uncachedInputPerPercent": 1588316,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 101,
+          "promptTokens": 12053799,
+          "cacheReadTokens": 11011840,
+          "outputTokens": 12336
+        },
+        "gpt-5.6-sol": {
+          "calls": 2591,
+          "promptTokens": 320472702,
+          "cacheReadTokens": 304120576,
+          "outputTokens": 2286166
+        },
+        "gpt-5.5": {
+          "calls": 6,
+          "promptTokens": 161812,
+          "cacheReadTokens": 103680,
+          "outputTokens": 1880
+        },
+        "gpt-5.6-terra": {
+          "calls": 3,
+          "promptTokens": 59448,
+          "cacheReadTokens": 40192,
+          "outputTokens": 1049
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-31 10:35:03",
+      "end": "2026-08-31 14:45:03",
+      "hours": 4.2,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 9,
+      "deltaPercent": 9,
+      "cliproxyRequests": 2997,
+      "gatewayRequests": 3136,
+      "promptTokens": 333939761,
+      "cacheReadTokens": 319637376,
+      "uncachedInputTokens": 14302385,
+      "outputTokens": 1505640,
+      "totalTokens": 335445401,
+      "totalTokensPerPercent": 37271711,
+      "uncachedInputPerPercent": 1589154,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 201,
+          "promptTokens": 15220235,
+          "cacheReadTokens": 13868544,
+          "outputTokens": 42715
+        },
+        "gpt-5.6-sol": {
+          "calls": 2935,
+          "promptTokens": 318719526,
+          "cacheReadTokens": 305768832,
+          "outputTokens": 1462925
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-31 17:05:03",
+      "end": "2026-08-31 21:05:05",
+      "hours": 4.0,
+      "usedPercentFrom": 14,
+      "usedPercentTo": 20,
+      "deltaPercent": 6,
+      "cliproxyRequests": 1963,
+      "gatewayRequests": 2099,
+      "promptTokens": 222605035,
+      "cacheReadTokens": 209277568,
+      "uncachedInputTokens": 13327467,
+      "outputTokens": 1229896,
+      "totalTokens": 223834931,
+      "totalTokensPerPercent": 37305822,
+      "uncachedInputPerPercent": 2221244,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 197,
+          "promptTokens": 23317802,
+          "cacheReadTokens": 22171392,
+          "outputTokens": 21681
+        },
+        "gpt-5.6-sol": {
+          "calls": 1898,
+          "promptTokens": 199202525,
+          "cacheReadTokens": 187061888,
+          "outputTokens": 1207075
+        },
+        "gpt-5.6-terra": {
+          "calls": 4,
+          "promptTokens": 84708,
+          "cacheReadTokens": 44288,
+          "outputTokens": 1140
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-08-31 21:15:03",
+      "end": "2026-09-02 00:15:10",
+      "hours": 27.0,
+      "usedPercentFrom": 21,
+      "usedPercentTo": 80,
+      "deltaPercent": 59,
+      "cliproxyRequests": 18404,
+      "gatewayRequests": 18582,
+      "promptTokens": 2044325755,
+      "cacheReadTokens": 1943727744,
+      "uncachedInputTokens": 100598011,
+      "outputTokens": 11301544,
+      "totalTokens": 2055627299,
+      "totalTokensPerPercent": 34841141,
+      "uncachedInputPerPercent": 1705051,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 1180,
+          "promptTokens": 135323723,
+          "cacheReadTokens": 127728384,
+          "outputTokens": 128093
+        },
+        "gpt-5.6-sol": {
+          "calls": 17393,
+          "promptTokens": 1908621076,
+          "cacheReadTokens": 1815757184,
+          "outputTokens": 11170428
+        },
+        "gpt-5.6-terra": {
+          "calls": 9,
+          "promptTokens": 380956,
+          "cacheReadTokens": 242176,
+          "outputTokens": 3023
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-09-03 19:15:03",
+      "end": "2026-09-04 00:15:03",
+      "hours": 5.0,
+      "usedPercentFrom": 81,
+      "usedPercentTo": 88,
+      "deltaPercent": 7,
+      "cliproxyRequests": 2273,
+      "gatewayRequests": 2350,
+      "promptTokens": 255387250,
+      "cacheReadTokens": 244169984,
+      "uncachedInputTokens": 11217266,
+      "outputTokens": 1270000,
+      "totalTokens": 256657250,
+      "totalTokensPerPercent": 36665321,
+      "uncachedInputPerPercent": 1602467,
+      "byModel": {
+        "gpt-5.5": {
+          "calls": 63,
+          "promptTokens": 10530081,
+          "cacheReadTokens": 9941632,
+          "outputTokens": 81069
+        },
+        "gpt-5.6-luna": {
+          "calls": 81,
+          "promptTokens": 10858789,
+          "cacheReadTokens": 8031232,
+          "outputTokens": 14434
+        },
+        "gpt-5.6-sol": {
+          "calls": 2179,
+          "promptTokens": 232956097,
+          "cacheReadTokens": 225336448,
+          "outputTokens": 1166140
+        },
+        "gpt-5.6-terra": {
+          "calls": 27,
+          "promptTokens": 1042283,
+          "cacheReadTokens": 860672,
+          "outputTokens": 8357
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-09-04 00:25:03",
+      "end": "2026-09-04 13:35:03",
+      "hours": 13.2,
+      "usedPercentFrom": 88,
+      "usedPercentTo": 100,
+      "deltaPercent": 12,
+      "cliproxyRequests": 3933,
+      "gatewayRequests": 3958,
+      "promptTokens": 449439681,
+      "cacheReadTokens": 431996672,
+      "uncachedInputTokens": 17443009,
+      "outputTokens": 1684287,
+      "totalTokens": 451123968,
+      "totalTokensPerPercent": 37593664,
+      "uncachedInputPerPercent": 1453584,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 3721,
+          "promptTokens": 420087091,
+          "cacheReadTokens": 405330560,
+          "outputTokens": 1568449
+        },
+        "gpt-5.6-luna": {
+          "calls": 73,
+          "promptTokens": 7305376,
+          "cacheReadTokens": 6102784,
+          "outputTokens": 9508
+        },
+        "gpt-5.5": {
+          "calls": 158,
+          "promptTokens": 21851073,
+          "cacheReadTokens": 20416384,
+          "outputTokens": 104620
+        },
+        "gpt-5.6-terra": {
+          "calls": 6,
+          "promptTokens": 196141,
+          "cacheReadTokens": 146944,
+          "outputTokens": 1710
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-09-04 14:05:04",
+      "end": "2026-09-05 09:25:03",
+      "hours": 19.3,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 32,
+      "deltaPercent": 32,
+      "cliproxyRequests": 9935,
+      "gatewayRequests": 9973,
+      "promptTokens": 1174739314,
+      "cacheReadTokens": 1125878784,
+      "uncachedInputTokens": 48860530,
+      "outputTokens": 4897963,
+      "totalTokens": 1179637277,
+      "totalTokensPerPercent": 36863665,
+      "uncachedInputPerPercent": 1526892,
+      "byModel": {
+        "gpt-5.6-luna": {
+          "calls": 707,
+          "promptTokens": 86542475,
+          "cacheReadTokens": 74405632,
+          "outputTokens": 126502
+        },
+        "gpt-5.6-sol": {
+          "calls": 8654,
+          "promptTokens": 993542376,
+          "cacheReadTokens": 960559488,
+          "outputTokens": 4306876
+        },
+        "gpt-5.6-terra": {
+          "calls": 37,
+          "promptTokens": 1625360,
+          "cacheReadTokens": 1393920,
+          "outputTokens": 12613
+        },
+        "gpt-5.5": {
+          "calls": 437,
+          "promptTokens": 78238566,
+          "cacheReadTokens": 75430400,
+          "outputTokens": 371989
+        },
+        "gpt-5.4": {
+          "calls": 1,
+          "promptTokens": 303,
+          "cacheReadTokens": 0,
+          "outputTokens": 11
+        },
+        "gpt-5.4-mini": {
+          "calls": 1,
+          "promptTokens": 303,
+          "cacheReadTokens": 0,
+          "outputTokens": 13
+        },
+        "gpt-6": {
+          "calls": 1,
+          "promptTokens": 307,
+          "cacheReadTokens": 0,
+          "outputTokens": 5
+        },
+        "gpt-6-astra": {
+          "calls": 135,
+          "promptTokens": 14789624,
+          "cacheReadTokens": 14089344,
+          "outputTokens": 79954
+        }
+      },
+      "includedInPooled": true
+    },
+    {
+      "start": "2026-09-05 09:35:02",
+      "end": "2026-09-06 18:55:02",
+      "hours": 33.3,
+      "usedPercentFrom": 32,
+      "usedPercentTo": 100,
+      "deltaPercent": 68,
+      "cliproxyRequests": 9784,
+      "gatewayRequests": 10115,
+      "promptTokens": 1179078204,
+      "cacheReadTokens": 1120298240,
+      "uncachedInputTokens": 58779964,
+      "outputTokens": 5116154,
+      "totalTokens": 1184194358,
+      "totalTokensPerPercent": 17414623,
+      "uncachedInputPerPercent": 864411,
+      "byModel": {
+        "gpt-5.5": {
+          "calls": 845,
+          "promptTokens": 148151004,
+          "cacheReadTokens": 143217536,
+          "outputTokens": 658004
+        },
+        "gpt-5.6-luna": {
+          "calls": 813,
+          "promptTokens": 87911641,
+          "cacheReadTokens": 78473216,
+          "outputTokens": 301647
+        },
+        "gpt-5.6-sol": {
+          "calls": 3883,
+          "promptTokens": 431472233,
+          "cacheReadTokens": 407467520,
+          "outputTokens": 2145019
+        },
+        "gpt-6-astra": {
+          "calls": 4530,
+          "promptTokens": 511043198,
+          "cacheReadTokens": 490844800,
+          "outputTokens": 1998664
+        },
+        "gpt-5.6-terra": {
+          "calls": 16,
+          "promptTokens": 430565,
+          "cacheReadTokens": 295168,
+          "outputTokens": 3874
+        },
+        "gpt-image-2": {
+          "calls": 28,
+          "promptTokens": 69563,
+          "cacheReadTokens": 0,
+          "outputTokens": 8946
+        }
+      },
+      "includedInPooled": false,
+      "excludedReason": "gpt-6-astra 与 gpt-image-2 首次出现并占本段一半以上 token（GPT-6 Astra 官方标价为 Sol 2.5×），每百分点 token 掉到 17.4M；模型混杂，不并入 Sol 口径"
+    },
+    {
+      "start": "2026-09-06 19:05:03",
+      "end": "2026-09-06 23:05:03",
+      "hours": 4.0,
+      "usedPercentFrom": 0,
+      "usedPercentTo": 8,
+      "deltaPercent": 8,
+      "cliproxyRequests": 2176,
+      "gatewayRequests": 2239,
+      "promptTokens": 283190072,
+      "cacheReadTokens": 266942464,
+      "uncachedInputTokens": 16247608,
+      "outputTokens": 1098662,
+      "totalTokens": 284288734,
+      "totalTokensPerPercent": 35536092,
+      "uncachedInputPerPercent": 2030951,
+      "byModel": {
+        "gpt-5.6-sol": {
+          "calls": 350,
+          "promptTokens": 49436196,
+          "cacheReadTokens": 45392512,
+          "outputTokens": 145235
+        },
+        "gpt-6-astra": {
+          "calls": 1466,
+          "promptTokens": 184546035,
+          "cacheReadTokens": 178057984,
+          "outputTokens": 766194
+        },
+        "gpt-5.6-luna": {
+          "calls": 292,
+          "promptTokens": 38633111,
+          "cacheReadTokens": 34197632,
+          "outputTokens": 170634
+        },
+        "gpt-5.6-terra": {
+          "calls": 7,
+          "promptTokens": 2151,
+          "cacheReadTokens": 0,
+          "outputTokens": 35
+        },
+        "codex-auto-review": {
+          "calls": 120,
+          "promptTokens": 10563228,
+          "cacheReadTokens": 9294336,
+          "outputTokens": 14947
+        },
+        "gpt-image-2": {
+          "calls": 4,
+          "promptTokens": 9351,
+          "cacheReadTokens": 0,
+          "outputTokens": 1617
+        }
+      },
+      "includedInPooled": true
+    }
+  ]
+}

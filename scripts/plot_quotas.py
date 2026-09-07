@@ -35,6 +35,7 @@ VENDOR_OF = {
     "chatgpt": "OpenAI",
     "openai": "OpenAI",
     "claude": "Anthropic",
+    "anthropic": "Anthropic",
     "supergrok": "xAI",
     "xai": "xAI",
     "cursor": "Cursor",
