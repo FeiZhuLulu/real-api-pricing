@@ -79,7 +79,7 @@ def plan_name(plan, language):
     return plan.replace(" (9/14+)", " · 9/14+").replace(" (老客 ¥149)", " · 老客 ¥149")
 
 
-def label_lines(p, language):
+def label_lines(p, language, board=None):
     plans = []
     for q in p["members"]:
         plan = plan_name(q["plan"], language)
@@ -88,7 +88,15 @@ def label_lines(p, language):
     if len(plans) == 2 and all(x.startswith("Max ") for x in plans):
         plans = ["Max 5x / 20x · " + ("from Sep 14" if language == "en" else "9/14+")]
     models = list(dict.fromkeys(q["model_display"] for q in p["members"]))
-    return " / ".join(models), " / ".join(plans), fmt_price(p["real_usd_per_mtok"])
+    name = " / ".join(models)
+    if board:
+        effort = p.get(board + "__reasoning_effort")
+        harness = p.get(board + "__agent_harness")
+        if effort:
+            name += " · " + effort
+        if harness:
+            name = harness + " · " + name
+    return name, " / ".join(plans), fmt_price(p["real_usd_per_mtok"])
 
 
 def label_position(p, board, x, y):
@@ -134,7 +142,7 @@ def draw(board, meta, points, tier, language="zh"):
     lang_suffix = "_英文" if language == "en" else ""
     stem = f"帕累托_{BOARDS[board][0]}{suffix}{lang_suffix}"
     scope = ("Full" if tier == "full" else "Selected") if language == "en" else ("全量" if tier == "full" else "精选")
-    headline = "Real price × model capability" if language == "en" else "真实单价 × 模型能力"
+    headline = "Real price × benchmark reference" if language == "en" else "真实单价 × 评测配置参考"
     frontier_caption = f"Pareto frontier · {scope}" if language == "en" else f"帕累托前沿 · {scope}"
     snapshot_caption = "Leaderboard snapshot  " if language == "en" else "榜单快照  "
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc">',
@@ -178,6 +186,7 @@ def draw(board, meta, points, tier, language="zh"):
         is_front = p["id"] in ids
         tooltip_labels = [f'{q["model_display"]} · {plan_name(q["plan"], language)}' for q in p["members"]]
         tooltip = " / ".join(tooltip_labels) + f" · {fmt_price(p['real_usd_per_mtok'])}/MTok · {p[key]} · {p['confidence']}"
+        tooltip += " / ".join(str(q.get(board + "__variant")) + " · " + str(q.get(board + "__mapping_note")) for q in p["members"])
         s.append(f'<g class="point" data-billing="{p["billing"]}" data-frontier="{str(is_front).lower()}" data-price="{p["real_usd_per_mtok"]}" data-score="{p[key]}" data-x="{x:.3f}" data-y="{y:.3f}" transform="translate({x:.3f} {y:.3f})"><title>{escape(tooltip)}</title>')
         if is_front and p["billing"] == "metered":
             s += [f'<path d="M0 -12L12 0 0 12 -12 0Z" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
@@ -193,7 +202,7 @@ def draw(board, meta, points, tier, language="zh"):
     for p in reversed(frontier):
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
         lx, ly, anchor = label_position(p, board, x, y)
-        name, plan, price = label_lines(p, language)
+        name, plan, price = label_lines(p, language, board)
         # 三行标签直接排字，无卡片；短引线从留白侧连接，最高点靠近自身无需长线。
         end_y = ly + 19 if ly < y else ly - 13
         end_x = lx + (6 if anchor == "end" else -6)
@@ -218,11 +227,11 @@ def draw(board, meta, points, tier, language="zh"):
           text(56, 874, "Month = 4 weeks · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged" if language == "en" else "月=4周 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算", 12, "#727B72"),
           text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API positions / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 位置 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
           text(56, 898, ((
-              "AA Coding Agent: each score belongs to the shown harness × model; the best official configuration is used per exact model."
+              "Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements."
               if board == "aa_coding_agent_index" else
               "Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model."
           ) if language == "en" else (
-              "AA Coding Agent：分数属于图示 harness×模型配置，同一精确模型取官网最高已测配置。"
+              "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board == "aa_coding_agent_index" else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
           )), 11, "#929A90"),

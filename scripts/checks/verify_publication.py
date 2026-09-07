@@ -20,7 +20,7 @@ for p in ROOT.joinpath('data').rglob('*.json'):
     json.loads(p.read_text(encoding='utf-8-sig'))
 
 exported = list(exports())
-assert len(exported) == 80
+assert len(exported) == 81
 assert len({d for _,d in exported}) == len(exported)
 for source,destination in exported:
     assert destination.is_file(), destination
@@ -36,7 +36,7 @@ for doc,lang in [('README.md','en'),('README.zh.md','zh')]:
     assert len(pictures)==6 and all(p.startswith(f'charts/{lang}/') for p in pictures)
     assert s.count('[English SVG]')==6 and s.count('[中文 SVG]')==6
     assert s.count('[English PNG]')==6 and s.count('[中文 PNG]')==6
-print(f'PASS: {len(adopted)} adopted rows, 80 exported files match build hashes, all JSON and bilingual links valid')
+print(f'PASS: {len(adopted)} adopted rows, {len(exported)} exported files match build hashes, all JSON and bilingual links valid')
 for board in data['boards']:
     missing=sorted({p['model'] for p in data['points'] if p[board+'__score'] is None})
     print(board, sum(p[board+'__score'] is not None for p in data['points']), 'scored; missing:', ', '.join(missing))

@@ -7,12 +7,12 @@ Agent Arena · Overall (Ranking / Pareto) | Net Improvement % | 2026-09-01
 † Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                             价格/月  服务模型           月额度(亿)  $/MTok   置信度  Net Improvement %  得分版本
-----  -------------------------------  -------  -----------------  ----------  -------  ------  -----------------  -----------------------------------
-1     ChatGPT Pro 20x                  USD 200  GPT 5.6 Luna       2402.4      0.00083  medium  2.15               GPT 5.6 Luna (xHigh)
-2     Claude Max 20x (9/14+)           USD 200  Claude Opus 5      157         0.01274  medium  13.74              Claude Opus 5 (High)
-3     Claude Max 5x (9/14+)            USD 100  Claude Opus 5      78.5        0.01274  medium  13.74              Claude Opus 5 (High)
-4     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3 Flash      76.99       0.00285  high    4.03               GLM 5.3 Flash
-5     Command Code GOAT                USD 10   DeepSeek V4 Flash  43.274      0.00231  medium  2.85               Deepseek V4 Flash (High) (20260731)
-6     Claude Pro                       USD 20   Claude Sonnet 5    39.7        0.00504  medium  7.51               Claude Sonnet 5 (High)
-7     Claude Pro                       USD 20   Claude Opus 4.8    15.88       0.01259  medium  9.22               Claude Opus 4.8 (High)
+序号  套餐                             价格/月  服务模型           月额度(亿)  $/MTok   置信度  Net Improvement %  得分版本                             映射
+----  -------------------------------  -------  -----------------  ----------  -------  ------  -----------------  -----------------------------------  -----------------------------
+1     ChatGPT Pro 20x                  USD 200  GPT 5.6 Luna       2402.4      0.00083  medium  2.15               GPT 5.6 Luna (xHigh)                 agent_configuration_reference
+2     Claude Max 20x (9/14+)           USD 200  Claude Opus 5      157         0.01274  medium  13.74              Claude Opus 5 (High)                 agent_configuration_reference
+3     Claude Max 5x (9/14+)            USD 100  Claude Opus 5      78.5        0.01274  medium  13.74              Claude Opus 5 (High)                 agent_configuration_reference
+4     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3 Flash      76.99       0.00285  high    4.03               GLM 5.3 Flash                        agent_configuration_reference
+5     Command Code GOAT                USD 10   DeepSeek V4 Flash  43.274      0.00231  medium  2.85               Deepseek V4 Flash (High) (20260731)  agent_configuration_reference
+6     Claude Pro                       USD 20   Claude Sonnet 5    39.7        0.00504  medium  7.51               Claude Sonnet 5 (High)               agent_configuration_reference
+7     Claude Pro                       USD 20   Claude Opus 4.8    15.88       0.01259  medium  9.22               Claude Opus 4.8 (High)               agent_configuration_reference

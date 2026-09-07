@@ -77,7 +77,13 @@ GLM Coding Plan 现已改用智谱官方周积分和缓存/输入/输出三段�
 
 ![AA Coding Agent](charts/zh/pareto/帕累托_AA编程Agent榜.svg)
 
-AA 编程 Agent 分数属于已测试的框架 × 模型配置，同一精确模型取已存档最高分。
+AA 编程 Agent 分数属于已测试的 harness × 模型 × effort 配置。静态图和 `points.*` 明确为**最高存档配置参考汇总**，不代表各订阅/API渠道实测；额度样本的effort、产品harness是否对齐仍未验证。更高effort不自动提高每百万token单价，但可能增加每任务token消耗。
+
+[全配置交互图](charts/zh/pareto/帕累托交互图.html) 默认展示全部存档配置，可切换最高分汇总。下载HTML后本地打开，Plotly需要联网。目前全部采用参考映射，尚不是已验证产品配置的严格前沿。
+
+[评测配置JSON](derived/benchmark-configurations.json) / [CSV](derived/benchmark-configurations.csv) 完整保留128条记录、原始标签、已知harness/effort、30条来源分数区间和70条来源任务成本。[套餐配置映射JSON](derived/benchmark-points.json) / [CSV](derived/benchmark-points.csv) 包含604条明确参考映射，保留低effort配置。Composer Standard/Fast只匹配本模式，缺失时留空；未知harness、effort、区间均不推测。
+
+来源任务成本的均值和中位数分别保留，不作为订阅内任务成本。分数区间可在交互图悬停查看，目前尚不参与前沿筛选。额度数值范围、稳健前沿和负载敏感性分析留待后续；不把定性置信度编成误差百分比。
 
 ## 口径与复现
 

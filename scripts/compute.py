@@ -9,6 +9,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
+from benchmark_configs import configuration, candidates, score_fields
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
@@ -57,20 +58,11 @@ def vendor_of(model: str) -> str:
     return next((v for k, v in VENDOR.items() if model.startswith(k)), "other")
 
 
-def load_scores() -> dict[str, dict[str, dict]]:
-    """board -> model -> best {score, variantLabel, secondary}"""
-    best: dict[str, dict[str, dict]] = {b: {} for b in BOARDS}
-    for s in (s for archive in score_archives() for s in archive["scores"]):
-        b, m = s["boardId"], s["model"]
-        if b not in best:
-            continue
-        keys = [m]
-        if m == "composer-2.5":
-            keys.append("composer-2.5-fast" if "Fast" in s["variantLabel"] else "composer-2.5-standard")
-        for key in keys:
-            if key not in best[b] or s["score"] > best[b][key]["score"]:
-                best[b][key] = s
-    return best
+def load_scores() -> list[dict]:
+    """Keep every archived configuration, including lower efforts and unknown harnesses."""
+    return [configuration(s, name) for name in SCORE_FILES
+            for s in json.loads((RESEARCH / name).read_text(encoding="utf-8"))["scores"]
+            if s["boardId"] in BOARDS]
 
 
 def load_list_blended() -> dict[str, float]:
@@ -85,7 +77,7 @@ def main() -> None:
     scores, list_blended = load_scores(), load_list_blended()
     boards_meta = {b["boardId"]: b for archive in score_archives() for b in archive["boards"]}
 
-    points = []
+    points, configuration_points = [], []
     with (DATA / "adopted.csv").open(encoding="utf-8-sig") as f:
         for r in csv.DictReader(f):
             model = r["served_model"]
@@ -100,16 +92,27 @@ def main() -> None:
                 real_usd_per_mtok=real, list_blended_usd_per_mtok=round(lb, 4) if lb else None,
                 d=round(real / lb, 4) if lb else None, confidence=r["confidence"], tier=r["chart_tier"], source=r["source"], note=r["decision_note"],
             )
-            score_key = model
-            if model == "composer-2.5":
-                score_key = "composer-2.5-fast" if "composer_fast" in r["plan_id"] else "composer-2.5-standard"
             for b in BOARDS:
-                s = scores[b].get(score_key) or scores[b].get(model)
-                p[f"{b}__score"] = s["score"] if s else None
-                p[f"{b}__variant"] = s["variantLabel"] if s else None
+                options = candidates(r, scores, b)
+                # Explicit optional summary projection; full configuration rows are also published.
+                selected = max(options, key=lambda s: s["score"], default=None)
+                p[f"{b}__selection"] = "highest_archived_reference" if selected else None
+                p[f"{b}__configuration_count"] = len(options)
+                for field, value in score_fields(selected).items():
+                    p[f"{b}__{field}"] = value
+                for option in options:
+                    configuration_points.append(dict(point_id=p["id"], board=b, **score_fields(option)))
             points.append(p)
 
     OUT.mkdir(exist_ok=True)
+    (OUT / "benchmark-configurations.json").write_text(json.dumps(scores, ensure_ascii=False, indent=2), encoding="utf-8")
+    (OUT / "benchmark-points.json").write_text(json.dumps(configuration_points, ensure_ascii=False, indent=2), encoding="utf-8")
+    for name, records in (("benchmark-configurations", scores), ("benchmark-points", configuration_points)):
+        with (OUT / (name + ".csv")).open("w", encoding="utf-8-sig", newline="") as f:
+            fields = [k for k in records[0] if k != "raw_record"]
+            writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+            writer.writeheader()
+            writer.writerows(records)
     with (OUT / "points.csv").open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(points[0].keys()))
         w.writeheader()
