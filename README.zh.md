@@ -18,12 +18,12 @@ GLM Coding Plan 现已改用智谱官方周积分和缓存/输入/输出三段�
 
 | 覆盖范围 | 行数 |
 |---|---:|
-| 全部采用的套餐 × 模型点 | 155 |
+| 全部采用的套餐 × 模型点 | 160 |
 | 有月额度的订阅点 | 149 |
-| 按量 API 基准点 | 6 |
+| 按量 API 基准点 | 11 |
 | OpenCode Go / Command Code GOAT / Ollama 模型 | 28 / 38 / 20 |
-| Code Arena / Agent Arena 有分点 | 105 / 109 |
-| AA 智力榜 / AA 编程 Agent 榜有分点 | 102 / 55 |
+| Code Arena / Agent Arena 有分点 | 110 / 114 |
+| AA 智力榜 / AA 编程 Agent 榜有分点 | 107 / 59 |
 
 **下载数据：** [采用值 CSV](data/adopted.csv) · [完整计算结果 CSV](derived/points.csv) · [完整计算结果 JSON](derived/points.json) · [数据说明及缺分清单](data/README.md) · [分日期原始证据](data/research/)
 
@@ -39,7 +39,7 @@ GLM Coding Plan 现已改用智谱官方周积分和缓存/输入/输出三段�
 
 ## 真实单价总览
 
-把全部 155 个订阅和 API 点放在同一套 $/MTok 口径下比较。
+把全部 160 个订阅和 API 点放在同一套 $/MTok 口径下比较。
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 

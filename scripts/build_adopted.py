@@ -213,7 +213,7 @@ SUBS = [
     # OpenAI —— Sol 为基准；Terra/Luna/5.5 在 DERIVED 按输入、缓存、输出 credits 混合比换算
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-5.6-sol", 6.16, "medium", "awesome-coding-plan 2026-07-30 实测", ""),
     ("chatgpt_pro_5x", "ChatGPT Pro 5x", 100, "USD", "gpt-5.6-sol", 30.8, "medium", "Plus × 官方 5x", "flat.json 写 38.9 与官方 5x 不符，改 30.8"),
-    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-sol", 123.2, "high", "Plus × 官方 20x", "用户拍板 123.2；两个独立印证：OpenAI 社区健康周 7.87 亿 = 24% → 131 亿/月；《财经》2026-08 跑满实测 109 亿/月；文章 200 亿作废"),
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-sol", 123.2, "high", "Plus × 官方 20x", "用户拍板 123.2；两个独立印证：OpenAI 社区健康周 7.87 亿 = 24% → 131 亿/月；《财经》2026-08 跑满实测 109 亿/月；文章 200 亿作废；第三方旁证：OpenClawFarm 网关 2026-08-21~09-06 对正价 Pro 20x 账号 250 个百分点的 raw token 实测 139.5 亿/月（段间 108~154 亿，实际负载 cache 94.7%，直接给出 total tokens、不再按标准负载归一），见 chatgpt-pro20x-gateway-measurement-2026-09-06.json；采用值未改"),
     # Anthropic —— Pro保留Opus4.8历史实测；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
     #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用
     ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-4.8", 15.88, "medium", "awesome-coding-plan 实测", "Opus4.8历史实测保留，现服务Opus5未重测；round5候选Opus5约1.9亿依赖假定周消息数，用户未确认，不作为实测收紧证据"),
@@ -302,6 +302,12 @@ METERED = [
     ("deepseek_v4_pro_peak", "DeepSeek V4 Pro API 忙时", "deepseek-v4-pro", 0.044, 1.32, 3.96, "api-docs.deepseek.com"),
     ("openai_sol_api", "GPT-5.6 Sol API", "gpt-5.6-sol", 0.4, 4.0, 20.0, "developers.openai.com"),
     ("xai_grok46_api", "Grok 4.6 API (<200k)", "grok-4.6", 0.5, 2.0, 6.0, "docs.x.ai"),
+    # 2026-09-06 补齐 Claude 与 GPT-5.6 其余档的官方按量价，让 Claude / ChatGPT 订阅点在同榜有 API 基线可比
+    ("anthropic_opus5_api", "Claude Opus 5 API", "claude-opus-5", 0.5, 5.0, 25.0, "platform.claude.com/docs/en/about-claude/pricing"),
+    ("anthropic_sonnet5_api", "Claude Sonnet 5 API", "claude-sonnet-5", 0.2, 2.0, 10.0, "platform.claude.com/docs/en/about-claude/pricing"),
+    ("anthropic_fable5_api", "Claude Fable 5 API", "claude-fable-5", 1.0, 10.0, 50.0, "platform.claude.com/docs/en/about-claude/pricing"),
+    ("openai_terra_api", "GPT-5.6 Terra API", "gpt-5.6-terra", 0.2, 2.0, 12.0, "developers.openai.com"),
+    ("openai_luna_api", "GPT-5.6 Luna API", "gpt-5.6-luna", 0.02, 0.2, 1.2, "developers.openai.com"),
 ]
 
 # 精选图只画主流套餐 + 前沿相关点，避免 60 个点挤在一起；全量图画全部
