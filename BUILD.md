@@ -8,9 +8,11 @@ Run from the repository root, in order:
 ```sh
 python scripts/build_adopted.py
 python scripts/compute.py
+python scripts/checks/verify_benchmark_configs.py
 python scripts/plot_svg.py
 node scripts/render_svg.cjs
 python scripts/build_html.py
+node scripts/checks/verify_configuration_html.cjs
 python scripts/plot_quotas.py
 python scripts/publish_charts.py
 python scripts/checks/verify_svg.py
@@ -26,7 +28,7 @@ On Windows, set `PYTHONIOENCODING=utf-8` if the console cannot print Chinese fil
 - `data/raw/`: aggregate usage evidence, retained for traceability.
 - `data/conventions.json`: shared calculation conventions and exchange rate.
 - `scripts/build_adopted.py`: adopted values, confidence and rationale; generates `data/adopted.csv`.
-- `derived/`: computed price/score pairs.
+- `derived/`: price/score summary pairs, lossless benchmark configurations and explicit plan/configuration reference mappings. Run `compute.py` to regenerate all four benchmark JSON/CSV files.
 - `charts/`: public bilingual charts and tables; start with `charts/README.md`. English and Chinese filenames live in `en/` and `zh/`, grouped into `pareto/`, `overview/` and `frontier/`.
 - `_build/`: ignored intermediate renders, interactive HTML and audit reports. `publish_charts.py` exports full-data Pareto charts and all overview/frontier figures to `charts/`. Selected-data renders are never published.
 - `scripts/checks/`: coordinate, frontier and language checks.

@@ -7,10 +7,10 @@ Artificial Analysis Intelligence Index v4.1.1 | Intelligence Index | 2026-09-05
 † Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                             价格/月  服务模型       月额度(亿)  $/MTok   置信度  Intelligence Index  得分版本
-----  -------------------------------  -------  -------------  ----------  -------  ------  ------------------  -------------------
-1     ChatGPT Pro 20x                  USD 200  GPT 5.6 Luna   2402.4      0.00083  medium  52                  GPT-5.6 Luna (max)
-2     Claude Max 20x (9/14+)           USD 200  Claude Opus 5  157         0.01274  medium  63                  Claude Opus 5 (max)
-3     Claude Max 5x (9/14+)            USD 100  Claude Opus 5  78.5        0.01274  medium  63                  Claude Opus 5 (max)
-4     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3 Flash  76.99       0.00285  high    57                  GLM-5.3-Flash
-5     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3        25.4        0.00865  high    60                  GLM-5.3 (max)
+序号  套餐                             价格/月  服务模型       月额度(亿)  $/MTok   置信度  Intelligence Index  得分版本             映射
+----  -------------------------------  -------  -------------  ----------  -------  ------  ------------------  -------------------  -----------------------------
+1     ChatGPT Pro 20x                  USD 200  GPT 5.6 Luna   2402.4      0.00083  medium  52                  GPT-5.6 Luna (max)   model_configuration_reference
+2     Claude Max 20x (9/14+)           USD 200  Claude Opus 5  157         0.01274  medium  63                  Claude Opus 5 (max)  model_configuration_reference
+3     Claude Max 5x (9/14+)            USD 100  Claude Opus 5  78.5        0.01274  medium  63                  Claude Opus 5 (max)  model_configuration_reference
+4     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3 Flash  76.99       0.00285  high    57                  GLM-5.3-Flash        model_configuration_reference
+5     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3        25.4        0.00865  high    60                  GLM-5.3 (max)        model_configuration_reference

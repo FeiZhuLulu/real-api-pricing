@@ -176,7 +176,8 @@ def frontier_rows(rows: list[dict], points: list[dict], board: str) -> list[dict
         if float(row["real_usd_per_mtok"]) != point["real_usd_per_mtok"]:
             raise ValueError("derived/points.json is stale; run scripts/compute.py first")
         candidates.append({**row, "board_score": point[f"{board}__score"],
-                           "board_variant": point[f"{board}__variant"]})
+                           "board_variant": point[f"{board}__variant"],
+                           "board_mapping": point[f"{board}__mapping_kind"]})
     return [row for row in candidates if not any(
         float(other["real_usd_per_mtok"]) <= float(row["real_usd_per_mtok"])
         and other["board_score"] >= row["board_score"]
@@ -212,7 +213,7 @@ def exchange_note(language: str) -> str:
 
 def write_text_table(rows: list[dict], view: str, language: str, board: dict | None = None) -> None:
     text = TEXT[language]
-    head = text["headers"] + ([board["metric"], "得分版本" if language == "zh" else "Score variant"] if board else [])
+    head = text["headers"] + ([board["metric"], "得分版本" if language == "zh" else "Score variant", "映射" if language == "zh" else "Mapping"] if board else [])
     body = [
         [
             str(i), plan_name(r, language),
@@ -220,7 +221,7 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
             DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
             r["real_usd_per_mtok"], r["confidence"],
-        ] + ([f"{r['board_score']:g}", r["board_variant"]] if board else [])
+        ] + ([f"{r['board_score']:g}", r["board_variant"], r["board_mapping"]] if board else [])
         for i, r in enumerate(rows, 1)
     ]
     widths = [max(text_width(c) for c in [h] + [b[i] for b in body])
@@ -370,7 +371,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         separator = "\n" if board else " · "
         labels = [
             f"{start + i:02d}. " + (plan_name(r, language) if r["billing"] == "metered"
-                                   else f"{plan_name(r, language)}{separator}{DISPLAY.get(r['served_model'], r['served_model'])}")
+                                   else f"{plan_name(r, language)}{separator}{r['board_variant'] if board else DISPLAY.get(r['served_model'], r['served_model'])}")
             for i, r in enumerate(chunk, 1)
         ]
         ax.set_yticks(range(len(chunk)), labels, fontsize=12 if board else 10)
@@ -400,7 +401,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     if mixed_scale:
         title += " · 混合比例" if language == "zh" else " | mixed scale"
     if board:
-        title = ("帕累托前沿 · " if language == "zh" else "Pareto frontier | ") + title
+        title = ("最高配置参考前沿 · " if language == "zh" else "Top-configuration reference frontier | ") + title
     fig.suptitle(title, fontsize=18 if board else 21, y=0.975, fontweight="bold")
     fig.text(0.5, 0.925 if board else 0.94,
              frontier_caption(board) if board else text[f"{view}_subtitle"],

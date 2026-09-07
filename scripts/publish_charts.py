@@ -15,6 +15,7 @@ BOARDS = {
 
 
 def exports():
+    yield BUILD / '帕累托交互图.html', CHARTS / 'zh' / 'pareto' / '帕累托交互图.html'
     for source in sorted(BUILD.iterdir()):
         if source.suffix not in ('.svg', '.png', '.txt'):
             continue
@@ -54,7 +55,8 @@ def main():
         shutil.copyfile(source, destination)
         exported.append(destination)
     lines = ['# Charts / 图表目录', '',
-             'All Pareto charts use the full dataset. / 帕累托图均使用全量数据。', '',
+             'All Pareto charts use the full dataset. Static charts summarize the highest archived configuration reference. / 帕累托图均使用全量套餐；静态图为最高存档配置参考汇总。', '',
+             '[All-configuration interactive view / 全配置交互图（中文）](zh/pareto/帕累托交互图.html) · Download the HTML to open locally; Plotly requires network access. / 下载HTML后本地打开，Plotly需要联网。', '',
              'Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% output; direct total-token measurements are not normalized again. / 美元或credits额度换算统一采用缓存读取97.5%、普通输入2.15%、输出0.35%；直接total-token实测不重复归一。', '',
              '| Chart / 图表 | English SVG | 中文 SVG | English PNG | 中文 PNG |',
              '|---|---|---|---|---|']
