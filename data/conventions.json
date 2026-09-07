@@ -1,7 +1,7 @@
 {
   "updatedAt": "2026-09-07",
   "project": "真实API定价",
-  "role": "只收集资料，不选定未对齐口径，不画帕累托",
+  "role": "定义当前采用、计算、绘图和公开发布共用的项目口径",
   "formula": "订阅价 ÷ 用户实际能用到的月 token = 真实混合单价",
   "usdPerCny": 6.7787,
   "exchangeRate": {
@@ -25,16 +25,13 @@
     "output": 0.0035,
     "labelZh": "项目统一标准负载：缓存读取97.5% / 普通输入2.15% / 输出0.35%",
     "labelEn": "Project standard workload: 97.5% cache reads / 2.15% fresh input / 0.35% output",
-    "note": "固定比较口径，不代表任何平台或用户的实际负载；三项合计100%。"
+    "note": "固定比较口径，不代表任何平台或用户的实际负载；三项合计100%。当前不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。"
   },
   "sourcePriority": [
-    "用户口头确认",
-    "本机 ccusage + 用户对周额度占用的说明",
-    "本地 SubPlan（SubPlan/data，lastUpdatedAt 2026-09-02）",
-    "awesome-coding-plan 只当旧测/假说"
-  ],
-  "notSavedElsewhere": [
-    "Cursor 画布只是展示，不是仓库存盘",
-    "Nowledge Mem 本会话连不上"
+    "用户面板截图反推、受控打满实测、官方绝对token或积分表",
+    "本地日志/ccusage与同窗额度百分比",
+    "用户确认；若与多个独立来源冲突，必须公开冲突并重新拍板",
+    "官方美元/credits额度与三段价按项目统一标准负载换算",
+    "第三方综述和跨档假设仅作低置信旁证"
   ]
 }

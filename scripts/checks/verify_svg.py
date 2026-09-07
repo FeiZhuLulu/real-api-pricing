@@ -6,8 +6,7 @@ ns={'s':'http://www.w3.org/2000/svg'}
 for chart in charts:
  k=chart['board']+'__score';tier=chart['tier']
  pts=[p for p in data['points'] if p[k] is not None and p['real_usd_per_mtok']>0 and (tier=='full' or p['tier']=='main')]
- subs=[p for p in pts if p['billing']=='subscription']
- f=[p for p in subs if not any(q['real_usd_per_mtok']<=p['real_usd_per_mtok'] and q[k]>=p[k] and (q['real_usd_per_mtok']<p['real_usd_per_mtok'] or q[k]>p[k]) for q in subs)]
+ f=[p for p in pts if not any(q['real_usd_per_mtok']<=p['real_usd_per_mtok'] and q[k]>=p[k] and (q['real_usd_per_mtok']<p['real_usd_per_mtok'] or q[k]>p[k]) for q in pts)]
  svg=ET.parse(root/'_build'/f"{chart['stem']}.svg");els=svg.findall('.//s:g[@class="point"]',ns)
  actual={(float(e.attrib['data-price']),float(e.attrib['data-score']),e.attrib['data-billing']) for e in els}
  assert actual=={(p['real_usd_per_mtok'],p[k],p['billing']) for p in pts}

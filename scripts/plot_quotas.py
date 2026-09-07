@@ -1,11 +1,11 @@
 # 额度与单价总览图：订阅月额度、订阅与按量 API 真实单价
 # 数据源：data/adopted.csv（生成物，勿手改）
 # 用法：python scripts/plot_quotas.py
-#   →  out/{额度,单价}总览{,_英文}.png / .svg          中英文两栏横向条形图
-#   →  out/额度总览{_英文,}_混合比例.png / .svg         其余条保持对数，01/02 按对 03 的真实倍数，放不下折下
-#   →  out/{额度,单价}总览表{,_英文}.txt               中英文纯文字对齐表格
-#   →  out/前沿{额度,单价}_{CodeArena榜,AgentArena榜,AA智力榜,AA编程Agent榜}{,_英文}.*
-#   →  out/前沿筛选结果.json
+#   →  _build/{额度,单价}总览{,_英文}.png / .svg          中英文两栏横向条形图
+#   →  _build/额度总览{_英文,}_混合比例.png / .svg         其余条保持对数，01/02 按对 03 的真实倍数，放不下折下
+#   →  _build/{额度,单价}总览表{,_英文}.txt               中英文纯文字对齐表格
+#   →  _build/前沿{额度,单价}_{CodeArena榜,AgentArena榜,AA智力榜,AA编程Agent榜}{,_英文}.*
+#   →  _build/前沿筛选结果.json；publish_charts.py 再导出到 charts/
 import csv
 import json
 import math
@@ -17,6 +17,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
+
+from compute import DISPLAY
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ADOPTED = os.path.join(ROOT, "data", "adopted.csv")
@@ -134,6 +136,7 @@ def plan_name(row: dict, language: str) -> str:
             "老客": "Existing",
             "阿里云百炼": "Alibaba Cloud CN",
             "闲时": "Off-peak",
+            "中间值": "Midpoint",
             "忙时": "Peak",
         }.items():
             name = name.replace(original, translated)
@@ -195,8 +198,8 @@ def frontier_rule(language: str) -> str:
 
 def evidence_note(language: str) -> str:
     if language == "zh":
-        return "† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。Go为官方典型估算；Composer Fast为产品默认模式。"
-    return "† Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers scaled, not pure 1M measurements. Go: typical estimates. Composer Fast: product default."
+        return "† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。"
+    return "† Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default."
 
 
 def exchange_note(language: str) -> str:
@@ -214,7 +217,7 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
         [
             str(i), plan_name(r, language),
             f"{r['currency']} {r['price']}" if r["price"] else text["metered"],
-            r["served_model"],
+            DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
             r["real_usd_per_mtok"], r["confidence"],
         ] + ([f"{r['board_score']:g}", r["board_variant"]] if board else [])
@@ -367,7 +370,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         separator = "\n" if board else " · "
         labels = [
             f"{start + i:02d}. " + (plan_name(r, language) if r["billing"] == "metered"
-                                   else f"{plan_name(r, language)}{separator}{r['served_model']}")
+                                   else f"{plan_name(r, language)}{separator}{DISPLAY.get(r['served_model'], r['served_model'])}")
             for i, r in enumerate(chunk, 1)
         ]
         ax.set_yticks(range(len(chunk)), labels, fontsize=12 if board else 10)
@@ -397,7 +400,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     if mixed_scale:
         title += " · 混合比例" if language == "zh" else " | mixed scale"
     if board:
-        title = ("前沿精选 · " if language == "zh" else "Pareto frontier | ") + title
+        title = ("帕累托前沿 · " if language == "zh" else "Pareto frontier | ") + title
     fig.suptitle(title, fontsize=18 if board else 21, y=0.975, fontweight="bold")
     fig.text(0.5, 0.925 if board else 0.94,
              frontier_caption(board) if board else text[f"{view}_subtitle"],

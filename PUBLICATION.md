@@ -13,7 +13,7 @@ Prepared on 2026-09-06. This repository contains redacted research records, not 
 
 ## Retained / 保留
 
-- All 81 adopted plan × model rows and the separate leaderboard scores.
+- The initial 2026-09-06 public snapshot contained all 81 adopted plan × model rows and separate leaderboard scores. The current dataset has since expanded to 179 rows; later additions follow the same redaction rules.
 - Aggregate usage measurements needed to understand quota estimates; these are not conversation transcripts or credentials.
 - Evidence dates, public source URLs, model configurations, confidence, rejected claims and decision notes.
 - Necessary technical evidence from other sources and mandatory upstream author attribution. Public source attribution is not treated as a private identifier.

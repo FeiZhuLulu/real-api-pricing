@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc">
-<title id="title">Code Arena | WebDev Overall · Subscription Pareto frontier · Full</title>
-<desc id="desc">Real unit price uses a logarithmic scale and gets cheaper to the right. Higher scores are better. The line connects subscription frontier points; APIs are reference baselines.</desc>
+<title id="title">Code Arena | WebDev Overall · Pareto frontier · Full</title>
+<desc id="desc">Real unit price uses a logarithmic scale and gets cheaper to the right. Higher scores are better. Subscriptions and metered APIs both participate in the Pareto frontier.</desc>
 <style>text{font-family:"Microsoft YaHei","Segoe UI",sans-serif} .serif{font-family:"Times New Roman",serif} .number{font-family:"Segoe UI",sans-serif;font-variant-numeric:tabular-nums} .label-name{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round} .point:hover{opacity:1}</style>
 <rect width="1440" height="940" fill="#FAF9F6"/>
 <text x="56.000" y="32.000" font-size="10" fill="#90968D" text-anchor="start" font-weight="400" letter-spacing="2.1">REAL API PRICING</text>
 <text x="54.000" y="85.000" font-size="36" fill="#343A33" text-anchor="start" font-weight="300" letter-spacing=".8">Real price × model capability</text>
 <path d="M61 147 Q197 141 343 147" stroke="#9FDDD0" stroke-width="17" stroke-linecap="round" opacity=".55" fill="none"/>
 <text x="56.000" y="146.000" font-size="44" fill="#35483E" text-anchor="start" font-weight="400" class="serif" font-style="italic">Pareto frontier</text>
-<text x="384.000" y="143.000" font-size="16" fill="#858B81" text-anchor="start" font-weight="300" >Subscription frontier · Full</text>
+<text x="384.000" y="143.000" font-size="16" fill="#858B81" text-anchor="start" font-weight="300" >Pareto frontier · Full</text>
 <text x="1388.000" y="76.000" font-size="31" fill="#343A33" text-anchor="end" font-weight="400" class="serif">Code Arena</text>
 <text x="1388.000" y="107.000" font-size="12" fill="#737771" text-anchor="end" font-weight="400" >Leaderboard snapshot  2026-09-05</text>
 <text x="1388.000" y="136.000" font-size="12" fill="#737771" text-anchor="end" font-weight="400" >Arena Score</text>
@@ -50,7 +50,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Arena Score</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,272.747 L821.229,272.747 L837.598,370.874 L1020.966,375.842 L1103.763,406.895 L1273.130,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,272.747 L821.229,272.747 L885.296,370.874 L1069.003,375.842 L1103.763,406.895 L1273.130,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="1617" data-x="666.424" data-y="360.937" transform="translate(666.424 360.937)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 1617 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#12B886" opacity=".48"/>
 </g>
@@ -94,42 +94,114 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02961" data-score="1674" data-x="681.681" data-y="290.137" transform="translate(681.681 290.137)"><title>Kimi K3 · Kimi Membership 699 · $0.02961/MTok · 1674 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#26A9F5" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05491" data-score="1609" data-x="579.492" data-y="370.874" transform="translate(579.492 370.874)"><title>GLM 5.3 · GLM Lite · new ¥118 · $0.05491/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.08211" data-score="1609" data-x="512.914" data-y="370.874" transform="translate(512.914 370.874)"><title>GLM 5.3 · GLM Lite · new ¥118 peak · $0.08211/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0181" data-score="1605" data-x="763.123" data-y="375.842" transform="translate(763.123 375.842)"><title>GLM 5.3 Flash · GLM Lite · new ¥118 · $0.0181/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05491" data-score="1609" data-x="579.492" data-y="370.874" transform="translate(579.492 370.874)"><title>GLM 5.3 · GLM Lite · new ¥118 midpoint · $0.05491/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0228" data-score="1609" data-x="724.926" data-y="370.874" transform="translate(724.926 370.874)"><title>GLM 5.3 · GLM Lite · existing ¥49 · $0.0228/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04115" data-score="1609" data-x="627.224" data-y="370.874" transform="translate(627.224 370.874)"><title>GLM 5.3 · GLM Lite · new ¥118 off-peak · $0.04115/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00751" data-score="1605" data-x="908.680" data-y="375.842" transform="translate(908.680 375.842)"><title>GLM 5.3 Flash · GLM Lite · existing ¥49 · $0.00751/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02711" data-score="1605" data-x="696.276" data-y="375.842" transform="translate(696.276 375.842)"><title>GLM 5.3 Flash · GLM Lite · new ¥118 peak · $0.02711/MTok · 1605 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04166" data-score="1609" data-x="625.186" data-y="370.874" transform="translate(625.186 370.874)"><title>GLM 5.3 · GLM Pro · new ¥538 · $0.04166/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0181" data-score="1605" data-x="763.123" data-y="375.842" transform="translate(763.123 375.842)"><title>GLM 5.3 Flash · GLM Lite · new ¥118 midpoint · $0.0181/MTok · 1605 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01375" data-score="1605" data-x="808.606" data-y="375.842" transform="translate(808.606 375.842)"><title>GLM 5.3 Flash · GLM Pro · new ¥538 · $0.01375/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01357" data-score="1605" data-x="810.786" data-y="375.842" transform="translate(810.786 375.842)"><title>GLM 5.3 Flash · GLM Lite · new ¥118 off-peak · $0.01357/MTok · 1605 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01154" data-score="1609" data-x="837.598" data-y="370.874" transform="translate(837.598 370.874)"><title>GLM 5.3 · GLM Pro · existing ¥149 · $0.01154/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0341" data-score="1609" data-x="658.319" data-y="370.874" transform="translate(658.319 370.874)"><title>GLM 5.3 · GLM Lite · existing ¥49 peak · $0.0341/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0228" data-score="1609" data-x="724.926" data-y="370.874" transform="translate(724.926 370.874)"><title>GLM 5.3 · GLM Lite · existing ¥49 midpoint · $0.0228/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01709" data-score="1609" data-x="772.624" data-y="370.874" transform="translate(772.624 370.874)"><title>GLM 5.3 · GLM Lite · existing ¥49 off-peak · $0.01709/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01126" data-score="1605" data-x="841.663" data-y="375.842" transform="translate(841.663 375.842)"><title>GLM 5.3 Flash · GLM Lite · existing ¥49 peak · $0.01126/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00751" data-score="1605" data-x="908.680" data-y="375.842" transform="translate(908.680 375.842)"><title>GLM 5.3 Flash · GLM Lite · existing ¥49 midpoint · $0.00751/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00563" data-score="1605" data-x="956.355" data-y="375.842" transform="translate(956.355 375.842)"><title>GLM 5.3 Flash · GLM Lite · existing ¥49 off-peak · $0.00563/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06249" data-score="1609" data-x="558.095" data-y="370.874" transform="translate(558.095 370.874)"><title>GLM 5.3 · GLM Pro · new ¥538 peak · $0.06249/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04166" data-score="1609" data-x="625.186" data-y="370.874" transform="translate(625.186 370.874)"><title>GLM 5.3 · GLM Pro · new ¥538 midpoint · $0.04166/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03125" data-score="1609" data-x="672.761" data-y="370.874" transform="translate(672.761 370.874)"><title>GLM 5.3 · GLM Pro · new ¥538 off-peak · $0.03125/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02061" data-score="1605" data-x="741.635" data-y="375.842" transform="translate(741.635 375.842)"><title>GLM 5.3 Flash · GLM Pro · new ¥538 peak · $0.02061/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01375" data-score="1605" data-x="808.606" data-y="375.842" transform="translate(808.606 375.842)"><title>GLM 5.3 Flash · GLM Pro · new ¥538 midpoint · $0.01375/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01031" data-score="1605" data-x="856.247" data-y="375.842" transform="translate(856.247 375.842)"><title>GLM 5.3 Flash · GLM Pro · new ¥538 off-peak · $0.01031/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01731" data-score="1609" data-x="770.508" data-y="370.874" transform="translate(770.508 370.874)"><title>GLM 5.3 · GLM Pro · existing ¥149 peak · $0.01731/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01154" data-score="1609" data-x="837.598" data-y="370.874" transform="translate(837.598 370.874)"><title>GLM 5.3 · GLM Pro · existing ¥149 midpoint · $0.01154/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00865" data-score="1609" data-x="885.296" data-y="370.874" transform="translate(885.296 370.874)"><title>GLM 5.3 · GLM Pro · existing ¥149 off-peak · $0.00865/MTok · 1609 · high</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#272727" stroke-width="1.35"/>
 <circle r="4" fill="#272727"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00381" data-score="1605" data-x="1020.966" data-y="375.842" transform="translate(1020.966 375.842)"><title>GLM 5.3 Flash · GLM Pro · existing ¥149 · $0.00381/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00571" data-score="1605" data-x="954.021" data-y="375.842" transform="translate(954.021 375.842)"><title>GLM 5.3 Flash · GLM Pro · existing ¥149 peak · $0.00571/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00381" data-score="1605" data-x="1020.966" data-y="375.842" transform="translate(1020.966 375.842)"><title>GLM 5.3 Flash · GLM Pro · existing ¥149 midpoint · $0.00381/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00285" data-score="1605" data-x="1069.003" data-y="375.842" transform="translate(1069.003 375.842)"><title>GLM 5.3 Flash · GLM Pro · existing ¥149 off-peak · $0.00285/MTok · 1605 · high</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#272727" stroke-width="1.35"/>
 <circle r="4" fill="#272727"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03578" data-score="1609" data-x="650.362" data-y="370.874" transform="translate(650.362 370.874)"><title>GLM 5.3 · GLM Max · new ¥1078 · $0.03578/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05367" data-score="1609" data-x="583.271" data-y="370.874" transform="translate(583.271 370.874)"><title>GLM 5.3 · GLM Max · new ¥1078 peak · $0.05367/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0118" data-score="1605" data-x="833.912" data-y="375.842" transform="translate(833.912 375.842)"><title>GLM 5.3 Flash · GLM Max · new ¥1078 · $0.0118/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03578" data-score="1609" data-x="650.362" data-y="370.874" transform="translate(650.362 370.874)"><title>GLM 5.3 · GLM Max · new ¥1078 midpoint · $0.03578/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01557" data-score="1609" data-x="788.037" data-y="370.874" transform="translate(788.037 370.874)"><title>GLM 5.3 · GLM Max · existing ¥469 · $0.01557/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02684" data-score="1609" data-x="697.933" data-y="370.874" transform="translate(697.933 370.874)"><title>GLM 5.3 · GLM Max · new ¥1078 off-peak · $0.02684/MTok · 1609 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00514" data-score="1605" data-x="971.422" data-y="375.842" transform="translate(971.422 375.842)"><title>GLM 5.3 Flash · GLM Max · existing ¥469 · $0.00514/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01771" data-score="1605" data-x="766.728" data-y="375.842" transform="translate(766.728 375.842)"><title>GLM 5.3 Flash · GLM Max · new ¥1078 peak · $0.01771/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0118" data-score="1605" data-x="833.912" data-y="375.842" transform="translate(833.912 375.842)"><title>GLM 5.3 Flash · GLM Max · new ¥1078 midpoint · $0.0118/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00885" data-score="1605" data-x="881.513" data-y="375.842" transform="translate(881.513 375.842)"><title>GLM 5.3 Flash · GLM Max · new ¥1078 off-peak · $0.00885/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02335" data-score="1609" data-x="720.981" data-y="370.874" transform="translate(720.981 370.874)"><title>GLM 5.3 · GLM Max · existing ¥469 peak · $0.02335/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01557" data-score="1609" data-x="788.037" data-y="370.874" transform="translate(788.037 370.874)"><title>GLM 5.3 · GLM Max · existing ¥469 midpoint · $0.01557/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01168" data-score="1609" data-x="835.603" data-y="370.874" transform="translate(835.603 370.874)"><title>GLM 5.3 · GLM Max · existing ¥469 off-peak · $0.01168/MTok · 1609 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077" data-score="1605" data-x="904.546" data-y="375.842" transform="translate(904.546 375.842)"><title>GLM 5.3 Flash · GLM Max · existing ¥469 peak · $0.0077/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00514" data-score="1605" data-x="971.422" data-y="375.842" transform="translate(971.422 375.842)"><title>GLM 5.3 Flash · GLM Max · existing ¥469 midpoint · $0.00514/MTok · 1605 · high</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00385" data-score="1605" data-x="1019.238" data-y="375.842" transform="translate(1019.238 375.842)"><title>GLM 5.3 Flash · GLM Max · existing ¥469 off-peak · $0.00385/MTok · 1605 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#272727" opacity=".48"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01205" data-score="1487" data-x="830.443" data-y="522.411" transform="translate(830.443 522.411)"><title>MiniMax M3 · MiniMax Token Plan Plus · $0.01205/MTok · 1487 · high</title>
@@ -150,116 +222,116 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01347" data-score="1487" data-x="812.010" data-y="522.411" transform="translate(812.010 522.411)"><title>MiniMax M3 · MiniMax Token Plan Ultra (Global) · $0.01347/MTok · 1487 · high</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F45BA5" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.36765" data-score="1625" data-x="264.868" data-y="351.000" transform="translate(264.868 351.000)"><title>Grok 4.6 · OpenCode Go · $0.36765/MTok · 1625 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.36765" data-score="1625" data-x="264.868" data-y="351.000" transform="translate(264.868 351.000)"><title>Grok 4.6 · OpenCode Go · $0.36765/MTok · 1625 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01867" data-score="1519" data-x="757.993" data-y="482.663" transform="translate(757.993 482.663)"><title>GPT 5.6 Luna · OpenCode Go · $0.01867/MTok · 1519 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01867" data-score="1519" data-x="757.993" data-y="482.663" transform="translate(757.993 482.663)"><title>GPT 5.6 Luna · OpenCode Go · $0.01867/MTok · 1519 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02282" data-score="1605" data-x="724.781" data-y="375.842" transform="translate(724.781 375.842)"><title>GLM 5.3 Flash · OpenCode Go · $0.02282/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02282" data-score="1605" data-x="724.781" data-y="375.842" transform="translate(724.781 375.842)"><title>GLM 5.3 Flash · OpenCode Go · $0.02282/MTok · 1605 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1992" data-score="1609" data-x="366.269" data-y="370.874" transform="translate(366.269 370.874)"><title>GLM 5.3 · OpenCode Go · $0.1992/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1992" data-score="1609" data-x="366.269" data-y="370.874" transform="translate(366.269 370.874)"><title>GLM 5.3 · OpenCode Go · $0.1992/MTok · 1609 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27322" data-score="1674" data-x="313.987" data-y="290.137" transform="translate(313.987 290.137)"><title>Kimi K3 · OpenCode Go · $0.27322/MTok · 1674 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27322" data-score="1674" data-x="313.987" data-y="290.137" transform="translate(313.987 290.137)"><title>Kimi K3 · OpenCode Go · $0.27322/MTok · 1674 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03662" data-score="1472" data-x="646.522" data-y="541.042" transform="translate(646.522 541.042)"><title>Kimi K2.7 Code · OpenCode Go / Kimi K2.7 Code · Command Code GOAT · $0.03662/MTok · 1472 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03662" data-score="1472" data-x="646.522" data-y="541.042" transform="translate(646.522 541.042)"><title>Kimi K2.7 Code · OpenCode Go / Kimi K2.7 Code · Command Code GOAT · $0.03662/MTok · 1472 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01062" data-score="1475" data-x="851.345" data-y="537.316" transform="translate(851.345 537.316)"><title>MiMo V2.5 Pro · OpenCode Go · $0.01062/MTok · 1475 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01062" data-score="1475" data-x="851.345" data-y="537.316" transform="translate(851.345 537.316)"><title>MiMo V2.5 Pro · OpenCode Go · $0.01062/MTok · 1475 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01152" data-score="1487" data-x="837.885" data-y="522.411" transform="translate(837.885 522.411)"><title>MiniMax M3 · OpenCode Go · $0.01152/MTok · 1487 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01152" data-score="1487" data-x="837.885" data-y="522.411" transform="translate(837.885 522.411)"><title>MiniMax M3 · OpenCode Go · $0.01152/MTok · 1487 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01152" data-score="1398" data-x="837.885" data-y="632.958" transform="translate(837.885 632.958)"><title>MiniMax M2.7 · OpenCode Go · $0.01152/MTok · 1398 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01152" data-score="1398" data-x="837.885" data-y="632.958" transform="translate(837.885 632.958)"><title>MiniMax M2.7 · OpenCode Go · $0.01152/MTok · 1398 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02838" data-score="1582" data-x="688.701" data-y="404.411" transform="translate(688.701 404.411)"><title>DeepSeek V4 Pro · OpenCode Go · $0.02838/MTok · 1582 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02838" data-score="1582" data-x="688.701" data-y="404.411" transform="translate(688.701 404.411)"><title>DeepSeek V4 Pro · OpenCode Go · $0.02838/MTok · 1582 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00462" data-score="1580" data-x="989.070" data-y="406.895" transform="translate(989.070 406.895)"><title>DeepSeek V4 Flash · OpenCode Go / DeepSeek V4 Flash · Ollama Pro / DeepSeek V4 Flash · Ollama Max · $0.00462/MTok · 1580 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00462" data-score="1580" data-x="989.070" data-y="406.895" transform="translate(989.070 406.895)"><title>DeepSeek V4 Flash · OpenCode Go / DeepSeek V4 Flash · Ollama Pro / DeepSeek V4 Flash · Ollama Max · $0.00462/MTok · 1580 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02254" data-score="1621" data-x="726.823" data-y="355.968" transform="translate(726.823 355.968)"><title>Hy4 preview · OpenCode Go · $0.02254/MTok · 1621 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02254" data-score="1621" data-x="726.823" data-y="355.968" transform="translate(726.823 355.968)"><title>Hy4 Preview · OpenCode Go · $0.02254/MTok · 1621 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00653" data-score="1512" data-x="931.817" data-y="491.358" transform="translate(931.817 491.358)"><title>Hy3 · OpenCode Go · $0.00653/MTok · 1512 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00653" data-score="1512" data-x="931.817" data-y="491.358" transform="translate(931.817 491.358)"><title>Hy3 · OpenCode Go · $0.00653/MTok · 1512 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00B9BC" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1" data-score="1617" data-x="480.299" data-y="360.937" transform="translate(480.299 360.937)"><title>GPT 5.6 Sol · Command Code GOAT · $0.1/MTok · 1617 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1" data-score="1617" data-x="480.299" data-y="360.937" transform="translate(480.299 360.937)"><title>GPT 5.6 Sol · Command Code GOAT · $0.1/MTok · 1617 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0056" data-score="1512" data-x="957.239" data-y="491.358" transform="translate(957.239 491.358)"><title>Hy3 · Command Code GOAT · $0.0056/MTok · 1512 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0056" data-score="1512" data-x="957.239" data-y="491.358" transform="translate(957.239 491.358)"><title>Hy3 · Command Code GOAT · $0.0056/MTok · 1512 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00231" data-score="1580" data-x="1103.763" data-y="406.895" transform="translate(1103.763 406.895)"><title>DeepSeek V4 Flash · Command Code GOAT · $0.00231/MTok · 1580 · high</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00231" data-score="1580" data-x="1103.763" data-y="406.895" transform="translate(1103.763 406.895)"><title>DeepSeek V4 Flash · Command Code GOAT · $0.00231/MTok · 1580 · medium</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#7B61FF" stroke-width="1.35"/>
 <circle r="4" fill="#7B61FF"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01471" data-score="1487" data-x="797.438" data-y="522.411" transform="translate(797.438 522.411)"><title>MiniMax M3 · Command Code GOAT · $0.01471/MTok · 1487 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01471" data-score="1487" data-x="797.438" data-y="522.411" transform="translate(797.438 522.411)"><title>MiniMax M3 · Command Code GOAT · $0.01471/MTok · 1487 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00856" data-score="1605" data-x="887.026" data-y="375.842" transform="translate(887.026 375.842)"><title>GLM 5.3 Flash · Command Code GOAT · $0.00856/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00856" data-score="1605" data-x="887.026" data-y="375.842" transform="translate(887.026 375.842)"><title>GLM 5.3 Flash · Command Code GOAT · $0.00856/MTok · 1605 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02129" data-score="1582" data-x="736.264" data-y="404.411" transform="translate(736.264 404.411)"><title>DeepSeek V4 Pro · Command Code GOAT · $0.02129/MTok · 1582 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02129" data-score="1582" data-x="736.264" data-y="404.411" transform="translate(736.264 404.411)"><title>DeepSeek V4 Pro · Command Code GOAT · $0.02129/MTok · 1582 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.014" data-score="1519" data-x="805.624" data-y="482.663" transform="translate(805.624 482.663)"><title>GPT 5.6 Luna · Command Code GOAT · $0.014/MTok · 1519 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.014" data-score="1519" data-x="805.624" data-y="482.663" transform="translate(805.624 482.663)"><title>GPT 5.6 Luna · Command Code GOAT · $0.014/MTok · 1519 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00795" data-score="1475" data-x="899.259" data-y="537.316" transform="translate(899.259 537.316)"><title>MiMo V2.5 Pro · Command Code GOAT · $0.00795/MTok · 1475 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00795" data-score="1475" data-x="899.259" data-y="537.316" transform="translate(899.259 537.316)"><title>MiMo V2.5 Pro · Command Code GOAT · $0.00795/MTok · 1475 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03382" data-score="1621" data-x="659.684" data-y="355.968" transform="translate(659.684 355.968)"><title>Hy4 preview · Command Code GOAT · $0.03382/MTok · 1621 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03382" data-score="1621" data-x="659.684" data-y="355.968" transform="translate(659.684 355.968)"><title>Hy4 Preview · Command Code GOAT · $0.03382/MTok · 1621 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14948" data-score="1609" data-x="413.783" data-y="370.874" transform="translate(413.783 370.874)"><title>GLM 5.3 · Command Code GOAT · $0.14948/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14948" data-score="1609" data-x="413.783" data-y="370.874" transform="translate(413.783 370.874)"><title>GLM 5.3 · Command Code GOAT · $0.14948/MTok · 1609 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.20492" data-score="1674" data-x="361.585" data-y="290.137" transform="translate(361.585 290.137)"><title>Kimi K3 · Command Code GOAT · $0.20492/MTok · 1674 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.20492" data-score="1674" data-x="361.585" data-y="290.137" transform="translate(361.585 290.137)"><title>Kimi K3 · Command Code GOAT · $0.20492/MTok · 1674 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="1556" data-x="312.624" data-y="436.705" transform="translate(312.624 436.705)"><title>Grok 4.5 · Command Code GOAT · $0.27548/MTok · 1556 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="1556" data-x="312.624" data-y="436.705" transform="translate(312.624 436.705)"><title>Grok 4.5 · Command Code GOAT · $0.27548/MTok · 1556 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="1625" data-x="312.624" data-y="351.000" transform="translate(312.624 351.000)"><title>Grok 4.6 · Command Code GOAT · $0.27548/MTok · 1625 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="1625" data-x="312.624" data-y="351.000" transform="translate(312.624 351.000)"><title>Grok 4.6 · Command Code GOAT · $0.27548/MTok · 1625 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05118" data-score="1587" data-x="591.132" data-y="398.200" transform="translate(591.132 398.200)"><title>Gemini 3.7 Flash · Command Code GOAT · $0.05118/MTok · 1587 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05118" data-score="1587" data-x="591.132" data-y="398.200" transform="translate(591.132 398.200)"><title>Gemini 3.7 Flash · Command Code GOAT · $0.05118/MTok · 1587 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7B61FF" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01419" data-score="1582" data-x="803.394" data-y="404.411" transform="translate(803.394 404.411)"><title>DeepSeek V4 Pro · Ollama Pro / DeepSeek V4 Pro · Ollama Max · $0.01419/MTok · 1582 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01419" data-score="1582" data-x="803.394" data-y="404.411" transform="translate(803.394 404.411)"><title>DeepSeek V4 Pro · Ollama Pro / DeepSeek V4 Pro · Ollama Max · $0.01419/MTok · 1582 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.09965" data-score="1609" data-x="480.879" data-y="370.874" transform="translate(480.879 370.874)"><title>GLM 5.3 · Ollama Pro · $0.09965/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.09965" data-score="1609" data-x="480.879" data-y="370.874" transform="translate(480.879 370.874)"><title>GLM 5.3 · Ollama Pro · $0.09965/MTok · 1609 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01141" data-score="1605" data-x="839.473" data-y="375.842" transform="translate(839.473 375.842)"><title>GLM 5.3 Flash · Ollama Pro / GLM 5.3 Flash · Ollama Max · $0.01141/MTok · 1605 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01141" data-score="1605" data-x="839.473" data-y="375.842" transform="translate(839.473 375.842)"><title>GLM 5.3 Flash · Ollama Pro / GLM 5.3 Flash · Ollama Max · $0.01141/MTok · 1605 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.13652" data-score="1674" data-x="428.789" data-y="290.137" transform="translate(428.789 290.137)"><title>Kimi K3 · Ollama Pro · $0.13652/MTok · 1674 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.13652" data-score="1674" data-x="428.789" data-y="290.137" transform="translate(428.789 290.137)"><title>Kimi K3 · Ollama Pro · $0.13652/MTok · 1674 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.07323" data-score="1472" data-x="531.852" data-y="541.042" transform="translate(531.852 541.042)"><title>Kimi K2.7 Code · Ollama Pro · $0.07323/MTok · 1472 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.07323" data-score="1472" data-x="531.852" data-y="541.042" transform="translate(531.852 541.042)"><title>Kimi K2.7 Code · Ollama Pro · $0.07323/MTok · 1472 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0461" data-score="1487" data-x="608.429" data-y="522.411" transform="translate(608.429 522.411)"><title>MiniMax M3 · Ollama Pro / MiniMax M3 · Ollama Max · $0.0461/MTok · 1487 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0461" data-score="1487" data-x="608.429" data-y="522.411" transform="translate(608.429 522.411)"><title>MiniMax M3 · Ollama Pro / MiniMax M3 · Ollama Max · $0.0461/MTok · 1487 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02305" data-score="1398" data-x="723.121" data-y="632.958" transform="translate(723.121 632.958)"><title>MiniMax M2.7 · Ollama Pro / MiniMax M2.7 · Ollama Max · $0.02305/MTok · 1398 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02305" data-score="1398" data-x="723.121" data-y="632.958" transform="translate(723.121 632.958)"><title>MiniMax M2.7 · Ollama Pro / MiniMax M2.7 · Ollama Max · $0.02305/MTok · 1398 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.09967" data-score="1609" data-x="480.846" data-y="370.874" transform="translate(480.846 370.874)"><title>GLM 5.3 · Ollama Max · $0.09967/MTok · 1609 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.09967" data-score="1609" data-x="480.846" data-y="370.874" transform="translate(480.846 370.874)"><title>GLM 5.3 · Ollama Max · $0.09967/MTok · 1609 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1365" data-score="1674" data-x="428.813" data-y="290.137" transform="translate(428.813 290.137)"><title>Kimi K3 · Ollama Max · $0.1365/MTok · 1674 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1365" data-score="1674" data-x="428.813" data-y="290.137" transform="translate(428.813 290.137)"><title>Kimi K3 · Ollama Max · $0.1365/MTok · 1674 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.07322" data-score="1472" data-x="531.875" data-y="541.042" transform="translate(531.875 541.042)"><title>Kimi K2.7 Code · Ollama Max · $0.07322/MTok · 1472 · high</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.07322" data-score="1472" data-x="531.875" data-y="541.042" transform="translate(531.875 541.042)"><title>Kimi K2.7 Code · Ollama Max · $0.07322/MTok · 1472 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".48"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01665" data-score="1520" data-x="776.940" data-y="481.421" transform="translate(776.940 481.421)"><title>GPT 5.6 Terra · Plus / GPT 5.6 Terra · Pro 5x · $0.01665/MTok · 1520 · medium</title>
@@ -268,7 +340,10 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00167" data-score="1519" data-x="1157.444" data-y="482.663" transform="translate(1157.444 482.663)"><title>GPT 5.6 Luna · Plus / GPT 5.6 Luna · Pro 5x · $0.00167/MTok · 1519 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#12B886" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04163" data-score="1510" data-x="625.305" data-y="493.842" transform="translate(625.305 493.842)"><title>GPT 5.5 · Plus / GPT 5.5 · Pro 5x · $0.04163/MTok · 1510 · medium</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04162" data-score="1510" data-x="625.345" data-y="493.842" transform="translate(625.345 493.842)"><title>GPT 5.5 · Plus · $0.04162/MTok · 1510 · medium</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#12B886" opacity=".48"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04163" data-score="1510" data-x="625.305" data-y="493.842" transform="translate(625.305 493.842)"><title>GPT 5.5 · Pro 5x · $0.04163/MTok · 1510 · medium</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#12B886" opacity=".48"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00833" data-score="1520" data-x="891.533" data-y="481.421" transform="translate(891.533 481.421)"><title>GPT 5.6 Terra · Pro 20x · $0.00833/MTok · 1520 · medium</title>
@@ -290,7 +365,7 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01274" data-score="1563" data-x="821.229" data-y="428.011" transform="translate(821.229 428.011)"><title>Claude Opus 4.8 · Max 20x · from Sep 14 · $0.01274/MTok · 1563 · low</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F47A35" opacity=".48"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.16561" data-score="1629" data-x="396.827" data-y="346.032" transform="translate(396.827 346.032)"><title>Claude Fable 5 · Max 20x · from Sep 14 · $0.16561/MTok · 1629 · low</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1656" data-score="1629" data-x="396.837" data-y="346.032" transform="translate(396.837 346.032)"><title>Claude Fable 5 · Max 20x · from Sep 14 · $0.1656/MTok · 1629 · low</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F47A35" opacity=".48"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.10828" data-score="1629" data-x="467.136" data-y="346.032" transform="translate(467.136 346.032)"><title>Claude Fable 5 · Max 5x · from Sep 14 · $0.10828/MTok · 1629 · low</title>
@@ -333,16 +408,16 @@
 <text x="797.229" y="263.747" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01274</text>
 </g>
 <g class="front-label" data-model="glm-5.3">
-<path d="M843.884,357.254Q843.884,331.874 855.598,331.874" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="861.598" y="312.874" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">GLM 5.3</text>
-<text x="861.598" y="332.874" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro · existing ¥149</text>
-<text x="861.598" y="352.874" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.01154</text>
+<path d="M891.582,357.254Q891.582,331.874 903.296,331.874" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="909.296" y="312.874" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">GLM 5.3</text>
+<text x="909.296" y="332.874" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro · existing ¥149 off-peak</text>
+<text x="909.296" y="352.874" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00865</text>
 </g>
 <g class="front-label" data-model="glm-5.3-flash">
-<path d="M1030.404,364.183Q1030.404,354.842 1037.966,354.842" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1043.966" y="335.842" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">GLM 5.3 Flash</text>
-<text x="1043.966" y="355.842" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro · existing ¥149</text>
-<text x="1043.966" y="375.842" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00381</text>
+<path d="M1078.441,364.183Q1078.441,354.842 1086.003,354.842" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1092.003" y="335.842" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">GLM 5.3 Flash</text>
+<text x="1092.003" y="355.842" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro · existing ¥149 off-peak</text>
+<text x="1092.003" y="375.842" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00285</text>
 </g>
 <g class="front-label" data-model="deepseek-v4-flash">
 <path d="M1097.055,420.311Q1097.055,442.895 1085.763,442.895" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -379,12 +454,12 @@
 <rect x="941" y="826" width="8" height="8" fill="#4570F5"/>
 <text x="958.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >DeepSeek</text>
 <path d="M1044 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="1074.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Subscription frontier</text>
+<text x="1074.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Pareto frontier</text>
 <path d="M1225 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="1239.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >API baseline</text>
+<text x="1239.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Month = 4 weeks · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >84 subscription positions / 6 API baselines / 5 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >109 subscription positions / 6 API positions / 5 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model.</text>
-<text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Metered APIs are excluded from the subscription frontier; line segments are visual guides, not purchasable plans.</text>
+<text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >arena.ai/leaderboard/code</text>
 </svg>
