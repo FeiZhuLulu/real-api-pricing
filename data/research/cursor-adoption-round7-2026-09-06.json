@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-09-06",
+  "round": 7,
+  "sourceType": "user_confirmed_cross_account_adoption",
+  "userClarifications": [
+    "社区新截图于2026-08-26发布，已在8月25日永久额度调整后。",
+    "数据库原始截图由用户于2026-09-05截取，同样在永久调整后。",
+    "两张截图均来自个人版Cursor Ultra，不含Teams或组织共享套餐。",
+    "用户本轮最初倾向采用标准档80亿/月。"
+  ],
+  "evidenceFiles": [
+    "data/research/cursor-user-screenshot-round7-2026-09-06.json",
+    "data/research/cursor-fast-round6-2026-09-05.json",
+    "data/research/cursor-adoption-round6-2026-09-06.json"
+  ],
+  "observationsStandardEquivalentYi": {
+    "userScreenshot2026-09-05": {
+      "fastRow": 60.6,
+      "standardRow": 67.8
+    },
+    "communityScreenshotPublished2026-08-26": {
+      "standardRow": 86.9529,
+      "fastRow": 90.2069
+    },
+    "mean": 76.39,
+    "median": 77.38
+  },
+  "adoption": {
+    "cursorUltraGrok46StandardMonthlyYi": 80.0,
+    "cursorUltraGrok46FastMonthlyYi": 40.0,
+    "fastFormula": "80 / official Fast 2x",
+    "cursorProPlusGrok46MonthlyYi": 21.3333333333,
+    "proPlusFormula": "80 × 800 / 3000",
+    "confidence": "medium"
+  },
+  "decisionNote": "旧64.2亿标准/30.3亿Fast → 80亿标准/40亿Fast。两张个人Ultra截图均在2026-08-25永久扩池后，不能再用扩池前后解释差额；四行按官方Fast 2x折成标准等效为60.6、67.8、86.95、90.21亿，平均76.39、中位77.38。采用用户倾向的整值80亿作为跨账号中心，不宣称为单行直接实测。面板百分比按费用扣减，而截图仅给total tokens；token类型分布、首周半价用量占比和账号面板重算差异均可造成反推分散。",
+  "caveats": [
+    "80亿为冲突观测的综合采用值，不是官方绝对池或单张截图直接反推。",
+    "Fast按Grok 4.6官方三段价严格2x派生为40亿，不再保留与标准不自洽的30.3亿作为当前点。",
+    "社区图86.95/90.21与用户图60.6/67.8全部保留；旧64.2/30.3保留为round6历史采用。",
+    "Pro+继续沿用$800/$3000跨档池比，故随标准基准更新为21.33亿；Cursor Pro独立面板4.7亿不变。"
+  ]
+}

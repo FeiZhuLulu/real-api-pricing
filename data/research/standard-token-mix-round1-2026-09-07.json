@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-09-07",
+  "sourceType": "user_confirmed_project_convention",
+  "userDecision": "所有按美元额度和三段价格折算token的数据统一使用一个项目标准，不再称为Kimi mix，也不声称代表Command Code、Ollama或任何平台的实际负载。",
+  "standardTokenMix": {
+    "cache": 0.975,
+    "input": 0.0215,
+    "output": 0.0035,
+    "sum": 1.0
+  },
+  "labelZh": "项目统一标准负载：缓存读取97.5% / 普通输入2.15% / 输出0.35%",
+  "scope": [
+    "美元额度除以三段价格：OpenCode Go、Command Code GOAT、Ollama Pro/Max",
+    "按量API混合单价",
+    "同池模型按三段价格比派生的额度",
+    "官方credits三段费率的模型间换算"
+  ],
+  "interpretation": [
+    "这是固定比较基准，不是任何供应商或用户的实际缓存命中率、输入比例或输出比例。",
+    "所有参与比较的渠道使用同一组成，避免为每个平台任意选择有利的负载分布。",
+    "平台实测token总量或面板反推值不经过此标准重算。",
+    "若未来改标准，应统一重算全部受影响点，不单独调整某一供应商。"
+  ],
+  "implementation": {
+    "singleSource": "data/conventions.json#standardTokenMix",
+    "consumers": [
+      "scripts/build_adopted.py",
+      "scripts/compute.py",
+      "scripts/build_html.py",
+      "scripts/plot_quotas.py"
+    ]
+  },
+  "supersedesWording": [
+    "本机Kimi MIX",
+    "实测agent负载分布作为跨平台事实",
+    "observed token mix"
+  ]
+}

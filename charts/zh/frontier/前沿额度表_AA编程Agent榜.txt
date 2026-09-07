@@ -7,10 +7,10 @@ Artificial Analysis Coding Agent Index v1.4 | Coding Agent Index | 2026-09-06
 † Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。Go为官方典型估算；Composer Fast为产品默认模式。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                    价格/月  服务模型         月额度(亿)  $/MTok   置信度  Coding Agent Index  得分版本                    
+序号  套餐                    价格/月  服务模型         月额度(亿)  $/MTok   置信度  Coding Agent Index  得分版本
 ----  ----------------------  -------  ---------------  ----------  -------  ------  ------------------  ----------------------------
-1     ChatGPT Pro 20x         USD 200  gpt-5.6-luna     2402.03     0.00083  medium  57.1661             Codex - GPT-5.6 Luna (max)  
-2     ChatGPT Pro 20x         USD 200  gpt-5.6-terra    240.203     0.00833  medium  60.4201             Codex - GPT-5.6 Terra (max) 
+1     ChatGPT Pro 20x         USD 200  gpt-5.6-luna     2402.4      0.00083  medium  57.1661             Codex - GPT-5.6 Luna (max)
+2     ChatGPT Pro 20x         USD 200  gpt-5.6-terra    240.24      0.00833  medium  60.4201             Codex - GPT-5.6 Terra (max)
 3     Claude Max 20x (9/14+)  USD 200  claude-opus-5    157         0.01274  medium  68.1498             Claude Code - Opus 5 (xhigh)
 4     Claude Max 5x (9/14+)   USD 100  claude-opus-5    78.5        0.01274  medium  68.1498             Claude Code - Opus 5 (xhigh)
 5     Claude Pro              USD 20   claude-opus-4.8  15.88       0.01259  medium  62.1405             Claude Code - Opus 4.8 (max)

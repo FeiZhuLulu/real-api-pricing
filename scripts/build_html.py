@@ -50,18 +50,18 @@ TEMPLATE = r"""<!doctype html>
 <p class="mobile-hint">左右滑动查看完整图表 · 悬停或点击数据点查看详情</p>
 <div class="chart-scroll"><div id="chart"></div></div>
 <details><summary>前沿点明细与未纳入模型</summary><div id="front-details"></div><p id="unscored"></p></details>
-<div class="foot">数据：<code>data/adopted.csv</code>（取舍与出处见 <code>scripts/build_adopted.py</code>）· 四张榜单各自独立绘制，快照与来源见标题及项目记录 · AA Coding Agent 分数属于官网标明的 harness×模型配置 · 按量 API 用官方标价 × 实测 agent 负载分布（缓存读 <span id="mix"></span>）折算</div>
+<div class="foot">数据：<code>data/adopted.csv</code>（取舍与出处见 <code>scripts/build_adopted.py</code>）· 四张榜单各自独立绘制，快照与来源见标题及项目记录 · AA Coding Agent 分数属于官网标明的 harness×模型配置 · 美元/credits额度与按量 API 三段价统一按项目标准负载（<span id="mix"></span>）折算；直接 total-token 实测不重复归一</div>
 <script>
 const DATA = __DATA__;
-const VENDOR_COLOR = {OpenAI:"#19B37A",Anthropic:"#FF8A3D",xAI:"#8E6CF7",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#FF5FA2",Alibaba:"#FF4D4F",DeepSeek:"#2F5BFF",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFC233",OpenCode:"#00BCD4",other:"#00BCD4"};
+const VENDOR_COLOR = {OpenAI:"#19B37A",Anthropic:"#FF8A3D",xAI:"#8E6CF7",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#FF5FA2",Alibaba:"#FF4D4F",DeepSeek:"#2F5BFF",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFC233",OpenCode:"#00BCD4","Command Code":"#7B61FF",Ollama:"#00A86B",other:"#00BCD4"};
 const FRONTIER_COLOR="#111111";
-const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.vendor;
+const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.vendor;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const priceLabel=x=>"$"+Number(x.toPrecision(5)).toString();
 const sel=document.getElementById("board");
 for(const [id,b] of Object.entries(DATA.boards)){const o=document.createElement("option");o.value=id;o.textContent=b.name;sel.appendChild(o);}
-document.getElementById("mix").textContent=(DATA.mix.cache*100).toFixed(1)+"% / 输入 "+(DATA.mix.input*100).toFixed(1)+"% / 输出 "+(DATA.mix.output*100).toFixed(2)+"%";
+document.getElementById("mix").textContent="缓存读取 "+(DATA.mix.cache*100).toFixed(1)+"% / 普通输入 "+(DATA.mix.input*100).toFixed(2)+"% / 输出 "+(DATA.mix.output*100).toFixed(2)+"%";
 
 function pareto(pts,yk){let best=-Infinity,f=[];for(const p of [...pts].sort((a,b)=>a.real_usd_per_mtok-b.real_usd_per_mtok||b[yk]-a[yk])){if(p[yk]>best){best=p[yk];f.push(p);}}return f;}
 function fmt(v){return v==null?"—":v;}

@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-09-06",
+  "round": 8,
+  "sourceType": "user_current_account_screenshot_and_adoption",
+  "userDecision": "社区8月26日截图可能有大量首周半价用量，按费用百分比反推会稍微虚高；用户自己账号的9月5日截图是当前口径且用量平滑。Fast直接按用户账号的大样本行计算，Standard取两张截图标准主行的中间值。",
+  "scope": "Cursor Ultra individual $200/month; both screenshots are personal Ultra and after the 2026-08-25 permanent pool adjustment",
+  "currentAccountScreenshot": {
+    "capturedAt": "2026-09-05",
+    "billingPeriod": "2026-08-11 to 2026-09-11",
+    "rows": [
+      {"model": "cursor-grok-4.6-xhigh-fast", "tokensM": 863.8, "usagePct": 28.1},
+      {"model": "cursor-grok-4.6-high-fast", "tokensM": 112.4, "usagePct": 4.6},
+      {"model": "grok-bot-default", "tokensM": 67.6, "usagePct": 3.2},
+      {"model": "grok-bot-automation", "tokensM": 38.8, "usagePct": 1.2},
+      {"model": "cursor-grok-4.6-xhigh", "tokensM": 61.0, "usagePct": 0.9},
+      {"model": "cursor-grok-4.5-high-fast", "tokensM": 12.9, "usagePct": 0.7},
+      {"model": "cursor-grok-4.6-high", "tokensM": 25.2, "usagePct": 0.5},
+      {"model": "cursor-grok-4.5-high", "tokensM": 5.7, "usagePct": 0.2},
+      {"model": "composer-2.5", "tokensM": 3.9, "usagePct": 0.1}
+    ],
+    "aggregate": {"tokensB": 1.2, "usagePct": 39.4},
+    "usagePattern": "用户确认整月使用较平滑，不存在一开始几天特别多的情况"
+  },
+  "communityScreenshot": {
+    "publishedAt": "2026-08-26",
+    "standardMainRow": {"model": "cursor-grok-4.6-xhigh", "tokensM": 1478.2, "usagePct": 17.0, "backcalcYi": 86.9529},
+    "discountCaveat": "发布时距离8月12–19日首周半价很近，大量累计token可能按折扣费率进入Usage%，使tokens/Usage%反推值偏高"
+  },
+  "calculations": {
+    "fastCurrentAccountMainRow": {
+      "formula": "863.8 / 0.281 / 100",
+      "monthlyYi": 30.7402,
+      "displayPctRoundingIntervalYi": [30.686, 30.795],
+      "adoptedYi": 30.74
+    },
+    "standardCurrentAccountMainRow": {
+      "formula": "61.0 / 0.009 / 100",
+      "monthlyYi": 67.7778,
+      "displayPctRoundingIntervalYi": [64.211, 71.765]
+    },
+    "standardCommunityMainRowYi": 86.9529,
+    "standardMidpointFormula": "(67.7778 + 86.9529) / 2",
+    "standardMidpointYi": 77.3654,
+    "adoptedStandardYi": 77.37
+  },
+  "adoption": {
+    "cursorUltraGrok46StandardMonthlyYi": 77.37,
+    "cursorUltraGrok46FastMonthlyYi": 30.74,
+    "cursorProPlusGrok46MonthlyYi": 20.632,
+    "proPlusFormula": "77.37 × 800 / 3000",
+    "confidence": "medium"
+  },
+  "decisionNote": "round7旧采用80亿Standard/40亿Fast → round8采用77.37亿Standard/30.74亿Fast。Fast取用户当前平滑账号最大样本863.8M/28.1%直接反推；Standard取用户标准主行67.78亿与社区标准主行86.95亿的中间值77.37亿。社区图可能因首周半价用量集中而略高。Standard/Fast不强制保持官方费率2×的raw-token比例，因为面板按费用扣减，而不同截图的token类型分布与折扣期占比不同。",
+  "caveats": [
+    "Fast 30.74亿是当前用户账号大样本行的直接反推，优先于同图较小high-fast行24.43亿。",
+    "Standard 77.37亿是两个账号标准主行的中间值，不是单行直接实测。",
+    "官方Fast三段价格严格为Standard的2×，但raw total token反推还受输入、缓存读、输出构成影响；不把77.37/30.74解释成隐藏费率倍率。",
+    "Cursor Pro保留独立4.7亿；Pro+继续沿用$800/$3000跨档池比。"
+  ],
+  "supersedes": "data/research/cursor-adoption-round7-2026-09-06.json"
+}

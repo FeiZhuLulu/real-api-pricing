@@ -1,17 +1,16 @@
 Artificial Analysis Intelligence Index v4.1.1 | Intelligence Index | 2026-09-05
 Selected by price and score across all subscriptions/APIs, not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled.
 Effective token price | Subscriptions and APIs compared
-Subscriptions: monthly fee / saturated monthly usage (4 weeks) | APIs: list prices weighted by observed token mix
+Dollar/credit and API rates use 97.5% cache / 2.15% input / 0.35% output; direct total-token measurements are not normalized
 Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.
 Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.
 † Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers scaled, not pure 1M measurements. Go: typical estimates. Composer Fast: product default.
 FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate.
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-No.  Plan                            Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence  Intelligence Index  Score variant      
----  ------------------------------  -----------  ---------------  ------------------  --------  ----------  ------------------  -------------------
-1    ChatGPT Pro 20x                 USD 200      gpt-5.6-luna     240.203             0.00083   medium      52                  GPT-5.6 Luna (max) 
-2    GLM Coding Pro (Existing ¥149)  CNY 149      glm-5.3-flash    5.264               0.00418   high        57                  GLM-5.3-Flash      
-3    Claude Pro                      USD 20       claude-opus-4.8  1.588               0.01259   medium      57.3                Claude Opus 4.8    
-4    GLM Coding Pro (Existing ¥149)  CNY 149      glm-5.3          1.74                0.01263   high        60                  GLM-5.3 (max)      
-5    Claude Max 20x (9/14+)          USD 200      claude-opus-5    15.7                0.01274   medium      63                  Claude Opus 5 (max)
-6    Claude Max 5x (9/14+)           USD 100      claude-opus-5    7.85                0.01274   medium      63                  Claude Opus 5 (max)
+No.  Plan                            Monthly fee  Served model   Monthly tokens (B)  USD/MTok  Confidence  Intelligence Index  Score variant
+---  ------------------------------  -----------  -------------  ------------------  --------  ----------  ------------------  -------------------
+1    ChatGPT Pro 20x                 USD 200      gpt-5.6-luna   240.24              0.00083   medium      52                  GPT-5.6 Luna (max)
+2    GLM Coding Pro (Existing ¥149)  CNY 149      glm-5.3-flash  5.774               0.00381   high        57                  GLM-5.3-Flash
+3    GLM Coding Pro (Existing ¥149)  CNY 149      glm-5.3        1.905               0.01154   high        60                  GLM-5.3 (max)
+4    Claude Max 20x (9/14+)          USD 200      claude-opus-5  15.7                0.01274   medium      63                  Claude Opus 5 (max)
+5    Claude Max 5x (9/14+)           USD 100      claude-opus-5  7.85                0.01274   medium      63                  Claude Opus 5 (max)

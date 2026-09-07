@@ -1,0 +1,607 @@
+{
+  "recordedAt": "2026-09-06",
+  "round": 7,
+  "topic": "Cursor Ultra / Grok 4.6：新截图反推 + 时间线修订（首周临时促销 vs 永久扩池 vs 账期%重算）；80 vs 86.95 vs 64.2",
+  "priorFilesRead": [
+    "AGENTS.md",
+    "data/research/cursor-fast-round6-2026-09-05.json",
+    "data/research/cursor-adoption-round6-2026-09-06.json",
+    "data/research/cursor-user-round5-2026-09-05.json",
+    "_backup/2026-09-06-open-source/scripts/cursor_ultra_backcalc.py"
+  ],
+  "noteOnBackcalcScript": "scripts/cursor_ultra_backcalc.py 不在当前工作树，仅存于 _backup/2026-09-06-open-source/scripts/；本轮按同公式手算/临时代码复算，未改 scripts/。",
+  "userEvidence": {
+    "sourceType": "user_screenshot_transcription",
+    "billingPeriod": "2026-08-11 to 2026-09-11",
+    "label": "Included Usage",
+    "rows": [
+      {
+        "model": "cursor-grok-4.6-xhigh",
+        "tokensM": 1478.2,
+        "pct": 17.0
+      },
+      {
+        "model": "cursor-grok-4.6-high-fast",
+        "tokensM": 130.8,
+        "pct": 2.9
+      },
+      {
+        "model": "cursor-grok-4.5-high",
+        "tokensM": 75.2,
+        "pct": 1.6
+      },
+      {
+        "model": "cursor-grok-4.5-high-fast",
+        "tokensM": 9.2,
+        "pct": 0.6
+      },
+      {
+        "model": "cursor-grok-4.6-xhigh-fast",
+        "tokensM": 5.3,
+        "pct": 0.1
+      },
+      {
+        "model": "Cursor Models aggregate",
+        "tokensM": 1700.1,
+        "pct": 22.3
+      }
+    ],
+    "listedSumM": 1698.7,
+    "aggregateAlmostEqualsListedGrokRows": true,
+    "contrastWithPriorSamePeriodScreenshot": {
+      "priorFile": "cursor-fast-round6 / backup cursor_ultra_backcalc.py",
+      "priorRowsHighlight": [
+        {
+          "model": "cursor-grok-4.6-xhigh-fast",
+          "tokensM": 839.5,
+          "pct": 27.7
+        },
+        {
+          "model": "cursor-grok-4.6-xhigh",
+          "tokensM": 61.0,
+          "pct": 0.9
+        },
+        {
+          "aggregate": "1.1B / 38.5%"
+        }
+      ],
+      "conflict": "同标周期 Aug11–Sep11，但行结构与占比完全不同：旧图 Fast 为主（839.5M@27.7%），新图标准 xhigh 为主（1478.2M@17.0%）。可能是不同账号、不同导出时刻、或中途池上调/% 重算。两套观测全部保留，不默认同源合并。"
+    }
+  },
+  "officialEvidence": [
+    {
+      "item": "grok46_fast_is_exactly_2x_list_prices",
+      "status": "confirmed",
+      "urls": [
+        "https://cursor.com/docs/models/grok-4-6",
+        "https://cursor.com/docs/models-and-pricing",
+        "https://cursor.com/blog/grok-4-6",
+        "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing"
+      ],
+      "quotes": [
+        "Standard on-demand usage is priced at $2/M input tokens, $0.50/M cached input tokens, and $6/M output tokens. The Fast variant is priced at $4/M input tokens, $1/M cached input tokens, and $12/M output tokens.",
+        "Pricing starts at $2 per million input tokens and $6 per million output tokens. A fast variant is available at twice the price.",
+        "Wayback 2026-08-19 03:42 UTC table: Grok 4.6 (Fast) $4 / $1 / $12 — 截图周期内即为全口径 2×"
+      ],
+      "finding": "Grok 4.6 Fast 在截图周期与今日官方表均为输入/缓存读/输出全部 2×，不是按 token 类型不同倍数。未找到额外独立的 speed premium 权重层；计费就是 Fast 行标价。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "fast_is_not_always_2x_across_all_cursor_models",
+      "status": "confirmed_contrast",
+      "urls": [
+        "https://cursor.com/docs/models-and-pricing",
+        "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing"
+      ],
+      "finding": "Grok 4.5 Fast：Wayback 2026-08-19 为 $4/$1/$12（输出仍 2×）；live 2026-09 为 $4/$1/$18（输出 3×）。Composer 2.5 Fast 混合倍率更高。因此「Fast 总是标准 2×」对 Grok 4.6 成立，不能外推到所有 Cursor 模型。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "fast_default_on_pro_and_higher",
+      "status": "confirmed",
+      "urls": [
+        "https://cursor.com/docs/models/grok-4-6"
+      ],
+      "quote": "Fast is the default speed tier on Pro and higher plans.",
+      "finding": "Pro+ 默认 Fast，易在未察觉时按 2× 扣池；与「另有隐藏倍数」不是同一件事。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "included_usage_pct_is_compute_cost_not_raw_tokens",
+      "status": "confirmed_by_staff",
+      "urls": [
+        "https://forum.cursor.com/t/why-is-my-cursor-pro-usage-limit-much-lower-than-other-pro-users/169668",
+        "https://forum.cursor.com/t/cloud-agents-default-model-grok-4-6-high-still-runs-fast-and-burns-2x-usage/169576"
+      ],
+      "quotes": [
+        "Included usage is based on request compute cost, not raw token count. Cache read tokens are much cheaper than fresh input, and output and reasoning are more expensive…",
+        "Fast variants cost more than the regular ones.",
+        "Cloud Agents … Fast is 2x the usage cost."
+      ],
+      "finding": "面板 % = 费用占比。对标准价行，tokens/(pct/100) 直接等于「按该行标价折算的标准等效全池 token」；对 Fast 行需先按 2× 费用再折回标准。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "launch_promo_50pct_equals_2x_included_usage_one_week_from_aug12",
+      "status": "confirmed",
+      "urls": [
+        "https://cursor.com/blog/grok-4-6",
+        "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing",
+        "https://forum.cursor.com/t/grok-4-6-is-now-live/168189",
+        "https://forum.cursor.com/t/clarification-needed-is-the-2x-included-usage-temporary-and-how-does-it-relate-to-the-50-discount/165990",
+        "https://aicatchup.com/news/grok-4-6-launch",
+        "https://x.ai/news/grok-4-6"
+      ],
+      "quotes": [
+        "We’re offering 2x included usage inside Cursor and Grok Build for the first week.",
+        "A 50% launch discount for Grok 4.6 applies for one week starting August 12, 2026. (Wayback 2026-08-19; live 页已删除该句)",
+        "Individual and team plans include double (2x usage) for the first week. (forum announcement)",
+        "50% off and doubled usage for Grok are the same thing, not two separate multipliers. (staff on Grok 4.5 launch; same wording pattern for 4.6)",
+        "AI Catchup 2026-08-21: discount sentence gone from docs; offer treated as ended ~Aug 19."
+      ],
+      "finding": "【首周临时促销，与永久扩池分开】博客写 2x included usage first week；docs 写 50% launch discount one week from Aug 12——按 4.5 员工口径同一乘数。Wayback 2026-08-19 03:42 仍有该句；AI Catchup 2026-08-21 确认 docs 已删、视为约 Aug 19 结束。促销期半价计入分子；4.5 员工称折扣结束后已发生的 % 不因折扣结束而回溯重算。这不等于池子永久翻倍——永久扩池见 timelineABCD / Aug24-25 事件。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "ultra_cursor_models_pool_dollar_size_unpublished_dashboard_3000",
+      "status": "dashboard_secondary",
+      "urls": [
+        "https://cellcog.ai/blog/cursor-auto-pricing/",
+        "https://linux.do/t/topic/2765049",
+        "https://cursor.com/docs/models-and-pricing"
+      ],
+      "finding": "公开 docs 对 Cursor Models 只写 Included。CellCog：Ultra Cursor Models 2026-08-24 先 、同日升至 （=1.5×）；Other Models 。linux.do 2026-08-17（升池前/促销周内）Ultra 美分路径约 。这是仪表盘观测的永久档位上调，不是 8/12 首周临时 2x。仍与本张反推 ~–4800 冲突（见 conflicts）。",
+      "confidence": "medium",
+      "kind": "observation"
+    },
+    {
+      "item": "no_official_absolute_token_cap_published",
+      "status": "not_found",
+      "finding": "未找到官方公布的 Ultra Grok 4.6 绝对月 token 上限（亿）。只能从面板 tokens+% 或美元池÷混合标价反推。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "A_grok46_first_week_promo_ended",
+      "status": "ended_with_high_confidence",
+      "question": "A",
+      "urls": [
+        "https://cursor.com/blog/grok-4-6",
+        "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing",
+        "https://aicatchup.com/news/grok-4-6-launch",
+        "https://forum.cursor.com/t/grok-4-6-is-now-live/168189"
+      ],
+      "datedEvidence": [
+        {
+          "date": "2026-08-12",
+          "what": "官方博客/论坛：first week 2x included usage",
+          "url": "https://cursor.com/blog/grok-4-6"
+        },
+        {
+          "date": "2026-08-19",
+          "what": "Wayback docs 仍写 50% launch discount for one week starting August 12",
+          "url": "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing"
+        },
+        {
+          "date": "2026-08-21",
+          "what": "AI Catchup 复核：该句已从 docs 渲染页与 markdown 源删除；无单独结束公告；视为约 Aug 19 结束",
+          "url": "https://aicatchup.com/news/grok-4-6-launch"
+        }
+      ],
+      "finding": "Grok 4.6 首周 2x/50% 是有明确「一周」期限的临时促销，约 2026-08-19 结束。不是永久额度。live docs 已无该句。",
+      "confidence": "high",
+      "kind": "observation"
+    },
+    {
+      "item": "B_permanent_pool_raises_separate_from_first_week",
+      "status": "confirmed_multiple_events",
+      "question": "B",
+      "urls": [
+        "https://forum.cursor.com/t/now-available-2x-included-usage-your-plan-now-includes-2x-usage-for-all-cursor-models-composer-2-5-and-cursor-grok-4-5/166007",
+        "https://forum.cursor.com/t/clarification-needed-is-the-2x-included-usage-temporary-and-how-does-it-relate-to-the-50-discount/165990",
+        "https://x.com/leerob/status/2092276970226671789",
+        "https://x.com/leerob/status/2092277342848590190",
+        "https://x.com/mark_k/status/2090140666604970222",
+        "https://cellcog.ai/blog/cursor-auto-pricing/",
+        "https://aicatchup.com/news/cursor-doubles-usage-limits-individual-teams",
+        "https://x.com/cursor_ai/status/2079615536963485815"
+      ],
+      "events": [
+        {
+          "date": "2026-07-16/17",
+          "what": "First-party / Cursor Models 池永久 2x Included Usage（Composer 2.5、Grok 4.5；后覆盖新 Cursor 模型）",
+          "plans": "self-serve Pro / Pro+ / Ultra / Teams",
+          "magnitude": "官方未公布美元；员工：「2x Included Usage is permanent」「The doubled pool stays」",
+          "urls": [
+            "https://forum.cursor.com/t/now-available-2x-included-usage-your-plan-now-includes-2x-usage-for-all-cursor-models-composer-2-5-and-cursor-grok-4-5/166007",
+            "https://forum.cursor.com/t/clarification-needed-is-the-2x-included-usage-temporary-and-how-does-it-relate-to-the-50-discount/165990"
+          ],
+          "kind": "permanent_pool"
+        },
+        {
+          "date": "2026-07-21",
+          "what": "Grok 4.5 50% 临时折扣结束；与七月永久 2x 池分离。@cursor_ai 同日重申 doubled limits for Grok/Composer/new Cursor models",
+          "urls": [
+            "https://forum.cursor.com/t/did-the-credit-limit-increase-last-for-only-half-a-day/166362",
+            "https://aicatchup.com/news/cursor-doubles-usage-limits-individual-teams",
+            "https://x.com/cursor_ai/status/2079615536963485815"
+          ],
+          "kind": "temp_discount_end_plus_permanent_restatement"
+        },
+        {
+          "date": "2026-08-19",
+          "what": "用户转发的 Cursor 客户邮件（生效 Aug 24）：Auto 改按模型价；Included usage limits for Cursor Models (including Auto) are increasing and already apply to the current billing cycle",
+          "urls": [
+            "https://x.com/mark_k/status/2090140666604970222"
+          ],
+          "kind": "permanent_increase_announced_applies_current_cycle"
+        },
+        {
+          "date": "2026-08-24",
+          "what": "Auto flat rate 退役；CellCog 多仪表盘：Ultra Cursor Models →同日 （1.5×），Other Models 。官方公开页仍不印 Cursor Models 美元。",
+          "urls": [
+            "https://cellcog.ai/blog/cursor-auto-pricing/"
+          ],
+          "kind": "dashboard_permanent_raise",
+          "confidence": "medium"
+        },
+        {
+          "date": "2026-08-25",
+          "what": "Lee Robinson（@leerob，被 @cursor_ai RT）：We just increased the included usage of Grok models in Cursor! … We already doubled limits last month … And now we are raising limits again permanently. 次帖：applies to all first-party models including Composer 2.5 and future Grok models。未公布倍率/美元。",
+          "urls": [
+            "https://x.com/leerob/status/2092276970226671789",
+            "https://x.com/leerob/status/2092277342848590190"
+          ],
+          "kind": "official_staff_permanent_raise_no_numbers"
+        }
+      ],
+      "finding": "永久扩池至少两波：①7月 first-party 2x；②8/24–25 Cursor Models/Grok 再永久上调（邮件+leerob+仪表盘）。均与 8/12 首周临时促销不是同一事件。官方未公布 8 月这波的精确倍率或 Ultra 美元；第三方观测 Ultra $2000→$3000=1.5×。",
+      "confidence": "high_on_permanence_medium_on_dollar_size",
+      "kind": "observation"
+    },
+    {
+      "item": "C_billing_cycle_pct_uses_new_pool_denominator",
+      "status": "supported_by_official_email_wording",
+      "question": "C",
+      "urls": [
+        "https://x.com/mark_k/status/2090140666604970222",
+        "https://forum.cursor.com/t/ten-days-of-measuring-agent-runs-what-the-token-log-shows-that-the-dashboard-doesnt/169682",
+        "https://forum.cursor.com/t/clarification-needed-is-the-2x-included-usage-temporary-and-how-does-it-relate-to-the-50-discount/165990"
+      ],
+      "quotes": [
+        "Included usage limits for Cursor Models (including Auto) are increasing and already apply to the current billing cycle. (Cursor customer email, via mark_k 2026-08-19)",
+        "What you already used is measured at the price that was active at the time, so if you are at 90% on the 21st you will still be at 90%, it will not get cut down. (staff on Grok 4.5 discount END — rate change does not rewrite past %; different from pool INCREASE)",
+        "Forum user Aug22→Aug26: tokens +68% but % 0.1→1% across Aug24 limit change — meter behavior noisy; does not by itself prove or disprove full recalc"
+      ],
+      "finding": "对 Aug11–Sep11 账期：官方邮件明确 8/24 起的 Cursor Models 额度提升「already apply to the current billing cycle」。因此期末（或 8/24 后）面板 % 的分母应理解为已切换到永久新池，而不是仍按临时首周 2x 池。推论：不应对整张期末截图再做「把临时 2x 折回去」的大幅促销折减。仍可能残留的偏差仅来自 8/12–19 半价周对分子（累计费用）的压低——这会让 tokens/% 略高估永久全价容量，但是二阶，且幅度取决于该周用量占比，不是把 87 折到 64 的理由。注意：折扣结束不回溯 %（4.5 员工）与池子增大适用于当前账期（8/24 邮件）是两种机制，不可混用。",
+      "confidence": "medium_high",
+      "kind": "derivation_from_official_wording"
+    },
+    {
+      "item": "D_no_official_text_that_aug12_first_week_2x_was_later_made_permanent",
+      "status": "not_found",
+      "question": "D",
+      "finding": "未找到官方原文称「8/12 首周临时 2x 后来永久化」。易混淆的永久化原文属于其他事件：①7月 staff「2x Included Usage is permanent / The doubled pool stays」——针对七月 first-party 池，不是 8/12 Grok 4.6 首周；②leerob 2026-08-25「raising limits again permanently」——是另一次上调，明确写成 already doubled last month … raising again，不是把首周促销改永久。AI Catchup 亦写明：勿把 4.6 首周窗口与七月永久 doubled pool 混为一谈。",
+      "urls": [
+        "https://x.com/leerob/status/2092276970226671789",
+        "https://forum.cursor.com/t/now-available-2x-included-usage-your-plan-now-includes-2x-usage-for-all-cursor-models-composer-2-5-and-cursor-grok-4-5/166007",
+        "https://aicatchup.com/news/grok-4-6-launch",
+        "https://aicatchup.com/news/cursor-doubles-usage-limits-individual-teams"
+      ],
+      "confidence": "high",
+      "kind": "observation"
+    }
+  ],
+  "calculations": {
+    "mixAssumption": {
+      "source": "backup cursor_ultra_backcalc.py / data/kimi-local.json style agent load",
+      "cacheRead": 0.974791,
+      "input": 0.021679,
+      "output": 0.00353,
+      "blendStdUsdPerM": 0.5519,
+      "blendFast46UsdPerM": 1.1039,
+      "fastToStdRatio": 2.0,
+      "kind": "assumption"
+    },
+    "standardRowRawBackcalc": {
+      "formula": "1478.2 / (17.0/100) / 100",
+      "pointYi": 86.9529,
+      "roundingIntervalOneDecimalPct": {
+        "method": "displayed 17.0% ⇒ true pct in [16.95, 17.05)",
+        "at_16_95_yi": 87.2094,
+        "at_17_05_yi": 86.6979,
+        "halfStepPlusMinus0_05_yi": [
+          86.698,
+          87.209
+        ]
+      },
+      "costPathCheck": "1478.2 × $0.5519 = $815.87; /0.17 ⇒ pool ≈ $4799; /$0.5519 ⇒ 86.95亿（与 raw 恒等，因该行即标准价）",
+      "kind": "observation"
+    },
+    "otherRowsStdEquivalent": {
+      "high_fast_130_8_at_2_9": {
+        "rawFastEquivalentYi": 45.103,
+        "stdEquivalentYi": 90.207,
+        "roundingStdYi": [
+          88.678,
+          91.789
+        ],
+        "note": "与标准行 86.95 同量级，略高"
+      },
+      "xhigh_fast_5_3_at_0_1": {
+        "stdEquivalentYi": 106.0,
+        "roundingHuge": [
+          70.7,
+          212.0
+        ],
+        "note": "0.1% 取整区间过大，几乎无信息"
+      },
+      "grok45_high_75_2_at_1_6": {
+        "stdEquivalentYi": 47.0,
+        "note": "与主行严重不一致——可能促销未覆盖 4.5、负载分布不同、或小 % 噪声"
+      },
+      "grok45_high_fast_9_2_at_0_6": {
+        "stdEquivalentYi": 31.3,
+        "note": "同上，小行不可单独定池"
+      },
+      "aggregate_1700_1_at_22_3": {
+        "listedCostUsdApprox": 1017.96,
+        "impliedPoolUsd": 4565,
+        "stdEquivalentYi": 82.706,
+        "naiveTokensOverPctYi": 76.238,
+        "note": "naive tokens/% 对混合价无效；费用路径 ~83亿，略低于标准单行 87"
+      },
+      "kind": "derivation"
+    },
+    "promoImpact": {
+      "calendar": {
+        "cycleDays": 31,
+        "promoApprox": "2026-08-12 to ~2026-08-19 (docs sentence present Wayback 08-19; removed by 08-21 per AI Catchup)",
+        "promoFractionOfCalendar": "~0.23"
+      },
+      "mechanism": "半价计入累计 % ⇒ 同样 token 贡献更少 % ⇒ 用全价反推 tokens/% 会高估稳态池。方向：真实稳态 ≤ 未修正反推值。",
+      "sensitivityOn86_95": [
+        {
+          "promoTokenFraction": 0.0,
+          "steadyStateYi": 86.95
+        },
+        {
+          "promoTokenFraction": 0.15,
+          "steadyStateYi": 80.43,
+          "note": "约对应「采用 80亿」的一种可陈述修正"
+        },
+        {
+          "promoTokenFraction": 0.23,
+          "steadyStateYi": 76.95,
+          "note": "用量均匀按日历占比"
+        },
+        {
+          "promoTokenFraction": 0.4,
+          "steadyStateYi": 69.56
+        },
+        {
+          "promoTokenFraction": 0.5,
+          "steadyStateYi": 65.21,
+          "note": "接近旧采用 64.2"
+        },
+        {
+          "promoTokenFraction": 0.6,
+          "steadyStateYi": 60.87
+        }
+      ],
+      "poolChangeConfound": "2026-08-24 Ultra Cursor Models 仪表盘池 $2000→$3000（CellCog）。若周期中途扩大分母且 % 按新池展示，会进一步扭曲单点反推。",
+      "ifAssumePool3000FullPrice": {
+        "stdEquivalentYi": 54.35,
+        "requiredEffectiveUsdPerMFor17pct": 0.345,
+        "vsFullBlendRatio": 0.625,
+        "impliedPromoTokenFractionIfOnlyDiscountExplains": 0.75,
+        "note": "要用 $3000 池吞下本张 17% 标准行，需极强折扣或更低有效单价；与「仅一周 50% + 均匀用量」不自洽。故本张更支持「反推池 >$3000」或「促销+负载+取整」混合，不能单靠 $3000 否决 87。"
+      },
+      "kind": "derivation_with_assumptions",
+      "revisedInterpretationAfterTimeline": {
+        "doNotTreatFirstWeekAsPermanentPoolInflation": true,
+        "residualNumeratorBiasOnly": "8/12–19 半价仍可能略抬高 tokens/%；若促销周用量不大，86.95 已接近永久全价容量观测",
+        "deprecatedPreferredFoldTo80": "先前把 80 当作「轻度促销折减中心」在用户纠正后不再优先——那是把临时首周折扣误当成需要系统性折回稳态池",
+        "cellcog3000VsScreenshot4800": {
+          "cellcogRaise": "$2000→$3000 = 1.5× permanent dashboard raise on Aug24",
+          "screenshotImpliedUsd": "~$4500–$4800",
+          "ratioVs3000": "~1.5–1.6× still higher than CellCog",
+          "ratioVs2000PreRaise": "~2.3–2.4×",
+          "possibleExplanations": [
+            "8/25 leerob 再提价未公布数字，Ultra 可能高于 CellCog 所见 $3000",
+            "本账号负载/混合价与 $0.55/M 假设不符",
+            "首周半价分子残留",
+            "CellCog 样本不完整或日后又调",
+            "截图非 Ultra 或含未识别 credit"
+          ],
+          "kind": "unresolved_conflict"
+        },
+        "kind": "derivation"
+      }
+    },
+    "defensibleRanges": {
+      "primaryObservationYi": {
+        "point": 86.95,
+        "interval": [
+          86.7,
+          87.21
+        ],
+        "label": "标准行直接观测；优先按永久新池分母解读"
+      },
+      "residualFirstWeekDiscountBandYi": {
+        "low": 80,
+        "high": 87,
+        "basis": "仅当假设较多 token 落在 8/12–19 半价周时，才把点估计略下移；默认不做",
+        "label": "可选二阶修正带，不再作为主推荐"
+      },
+      "dollarPoolCrossCheckYi": {
+        "atCellcog3000": 54.4,
+        "fromThisScreenshot": 83,
+        "fromStdRow": 87,
+        "note": "$3000 是 1.5× 永久扩池的第三方观测，仍解释不了 ~$4500–$4800；冲突保留"
+      }
+    }
+  },
+  "conflicts": [
+    {
+      "id": "new_std_87_vs_old_std_67_8",
+      "a": "新截图 cursor-grok-4.6-xhigh 1478.2M/17.0% → 86.95亿",
+      "b": "旧同周期截图 61.0M/0.9% → 67.8亿",
+      "status": "unresolved"
+    },
+    {
+      "id": "new_87_vs_adopted_64_2",
+      "a": "新标准行未修正 86.95",
+      "b": "round6 采用 (30.3×2 + 67.8)/2 = 64.2",
+      "status": "unresolved_needs_user_call"
+    },
+    {
+      "id": "new_87_vs_cellcog_3000_pool_54",
+      "a": "本张费用反推池 ~$4500–4800 → ~83–87亿",
+      "b": "CellCog Ultra Cursor Models $3000 → ~54亿（同混合价）",
+      "status": "unresolved"
+    },
+    {
+      "id": "intra_screenshot_row_inconsistency",
+      "a": "标准 4.6 与 high-fast 指向 ~87–90亿",
+      "b": "4.5 行指向 ~31–47亿",
+      "status": "small_rows_or_promo_asymmetry"
+    },
+    {
+      "id": "same_period_two_exports_incompatible_mix",
+      "a": "旧导出 Fast 839.5M@27.7%，总量 1.1B@38.5%",
+      "b": "新导出标准 1478M@17%，总量 1.7B@22.3%",
+      "status": "likely_different_account_or_midcycle_recalc"
+    },
+    {
+      "id": "other_models_dollar_400_vs_500",
+      "a": "Wayback 2026-08-19 计划表 Ultra Other Models $400",
+      "b": "CellCog 仪表盘 Ultra Other Models $500",
+      "status": "secondary_docs_vs_dashboard"
+    },
+    {
+      "id": "cellcog_1_5x_3000_vs_screenshot_4800",
+      "a": "CellCog Ultra Cursor Models 永久观测 $3000（自 $2000，1.5×）",
+      "b": "本张标准行费用反推 ~$4500–$4800（≈86.95亿）",
+      "status": "unresolved",
+      "note": "1.5× 扩池方向与「额度后来永久提高」一致，但幅度不足以单独对齐新截图"
+    }
+  ],
+  "recommendation": {
+    "summary": "时间线修订后：在 80 / 86.95 / 64.2 三者中改推 **86.95亿** 为采用倾向。8/12 首周 2x/50% 已结束且未「永久化」；8/24–25 另有永久扩池且邮件写明适用于当前账期，故期末 % 主要反映永久新池，不应再把 86.95 系统性折成 80 或 64.2。80 降为「仅当强假设半价周占比」的可选下修；64.2 保留为旧证据链冲突值。$2000→$3000=1.5× 与 ~$4500–$4800 仍冲突。本轮只更新本文件。",
+    "revisedFromPriorRound7Preference": {
+      "was": 80,
+      "now": 86.95,
+      "reason": "user correction + official email/leerob permanent raise + first-week promo ended separately"
+    },
+    "options": [
+      {
+        "valueYi": 86.95,
+        "role": "preferred_observation_of_permanent_pool_era",
+        "pros": "大样本标准行；与 high-fast ~90 同量级；与「当前账期已用新池」官方措辞一致；不做未证实的临时2x折减",
+        "cons": "可能仍含首周半价分子的小幅高估；与 CellCog $3000→54亿冲突未解",
+        "epistemic": "observation_plus_cycle_recalc_reading"
+      },
+      {
+        "valueYi": 80,
+        "role": "optional_residual_discount_haircut",
+        "pros": "若坚持假设 ~15% token 在半价周，可得 ~80.4",
+        "cons": "在永久扩池+账期适用新池之后，不再是默认中心估计；易与「首周2x永久化」混淆",
+        "epistemic": "optional_assumption"
+      },
+      {
+        "valueYi": 64.2,
+        "role": "legacy_round6_conflict_value",
+        "pros": "旧 Fast×2 与旧标准行折中",
+        "cons": "与新大样本行及永久扩池叙事冲突最大",
+        "epistemic": "prior_adoption"
+      }
+    ],
+    "preferredAmongThree": 86.95,
+    "preferredRationale": "A) 首周促销已结束；B) 另有永久扩池（7月 2x + 8/24–25 again permanently）；C) 邮件：increasing and already apply to the current billing cycle → 期末截图不宜再按临时2x折减；D) 无「8/12临时2x后来永久化」原文——永久化说的是别的事件。因此 86.95 是对本张最干净的采用候选；脚注残留半价周与 $3000 冲突即可。",
+    "doNotChangeThisRound": [
+      "data/adopted.csv",
+      "scripts/*",
+      "其他已有 data/research 文件"
+    ],
+    "userDecisionNeeded": true
+  },
+  "confidence": {
+    "overall": "medium_high_on_timeline_medium_on_86_95_vs_3000",
+    "breakdown": {
+      "A_first_week_ended": "high",
+      "B_permanent_raises_exist": "high",
+      "B_ultra_exactly_3000": "medium",
+      "C_current_cycle_applies_new_pool": "medium_high",
+      "D_no_aug12_made_permanent_quote": "high",
+      "prefer_86_95_over_80": "medium_high",
+      "screenshot_vs_cellcog_3000": "unresolved"
+    }
+  },
+  "sources": [
+    "https://cursor.com/docs/models-and-pricing",
+    "https://cursor.com/docs/models/grok-4-6",
+    "https://cursor.com/blog/grok-4-6",
+    "https://web.archive.org/web/20260819034220/https://cursor.com/docs/models-and-pricing",
+    "https://web.archive.org/cdx/search/cdx?url=cursor.com/docs/models-and-pricing&from=20260812&to=20260822&output=json",
+    "https://forum.cursor.com/t/grok-4-6-is-now-live/168189",
+    "https://forum.cursor.com/t/clarification-needed-is-the-2x-included-usage-temporary-and-how-does-it-relate-to-the-50-discount/165990",
+    "https://forum.cursor.com/t/why-is-my-cursor-pro-usage-limit-much-lower-than-other-pro-users/169668",
+    "https://forum.cursor.com/t/cloud-agents-default-model-grok-4-6-high-still-runs-fast-and-burns-2x-usage/169576",
+    "https://aicatchup.com/news/grok-4-6-launch",
+    "https://cellcog.ai/blog/cursor-auto-pricing/",
+    "https://x.ai/news/grok-4-6",
+    "https://linux.do/t/topic/2765049",
+    "data/research/cursor-fast-round6-2026-09-05.json",
+    "data/research/cursor-adoption-round6-2026-09-06.json",
+    "_backup/2026-09-06-open-source/scripts/cursor_ultra_backcalc.py",
+    "https://x.com/leerob/status/2092276970226671789",
+    "https://x.com/leerob/status/2092277342848590190",
+    "https://x.com/mark_k/status/2090140666604970222",
+    "https://forum.cursor.com/t/now-available-2x-included-usage-your-plan-now-includes-2x-usage-for-all-cursor-models-composer-2-5-and-cursor-grok-4-5/166007",
+    "https://forum.cursor.com/t/did-the-credit-limit-increase-last-for-only-half-a-day/166362",
+    "https://forum.cursor.com/t/ten-days-of-measuring-agent-runs-what-the-token-log-shows-that-the-dashboard-doesnt/169682",
+    "https://aicatchup.com/news/cursor-doubles-usage-limits-individual-teams",
+    "https://x.com/cursor_ai/status/2079615536963485815"
+  ],
+  "amendmentAt": "2026-09-06T+timeline",
+  "amendmentNote": "用户纠正后追加：区分 A 首周2x/50%是否结束、B 永久扩池、C 账期%是否按期末新池、D 有无「临时2x永久化」原文。不改 adopted/scripts。",
+  "timelineABCD": {
+    "A_first_week_promo": {
+      "start": "2026-08-12",
+      "endApprox": "2026-08-19",
+      "ended": true,
+      "nature": "temporary_one_week_50pct_or_2x_same_multiplier",
+      "notTheSameAs": "July permanent 2x pool or Aug24-25 permanent raise"
+    },
+    "B_permanent_raises": [
+      {
+        "date": "2026-07-16/21",
+        "label": "first-party pool permanent 2x",
+        "officialNumbers": null
+      },
+      {
+        "date": "2026-08-24/25",
+        "label": "Cursor Models / Grok included usage raised again permanently",
+        "dashboardUltraCursorModels": "CellCog → (=1.5x)",
+        "officialNumbers": null
+      }
+    ],
+    "C_cycle_recalc": {
+      "emailWording": "already apply to the current billing cycle",
+      "implicationForAug11Sep11Screenshot": "read % primarily against permanent post-raise pool; do not fold as if temporary first-week 2x still defines denominator"
+    },
+    "D_temp_made_permanent_claim": {
+      "foundForAug12FirstWeek": false,
+      "nearbyButDifferentQuotes": [
+        "July staff: 2x Included Usage is permanent / The doubled pool stays",
+        "leerob Aug25: raising limits again permanently"
+      ]
+    }
+  }
+}

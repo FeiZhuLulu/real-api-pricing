@@ -1,0 +1,783 @@
+{
+  "collectedAt": "2026-09-07",
+  "scope": "Community/third-party measurements that could independently verify Zhipu GLM Coding Plan official 95%-cache weekly token tables. Focus: V3 Lite/Pro/Max with GLM-5.3 and GLM-5.3-Flash. V2 evidence retained but tagged planGeneration=V2 and must not be mixed into V3 adoption. Official docs and 《财经》 already in quotas-web / caijing — not re-adopted here.",
+  "method": "Web search (CN+EN) across V2EX, linux.do, GitHub issues/repos, X, Reddit, blogs/reviews. Opened primary pages where fetchable. Reddit full pages blocked by network policy this session — Reddit numeric claims recorded only from search-snippet excerpts with explicit limitation. No invented numbers; contradictions kept side-by-side.",
+  "existingEvidenceReviewed": [
+    {
+      "path": "AGENTS.md",
+      "note": "Data flow, confidence grades, no fabricated numbers, research append-only."
+    },
+    {
+      "path": "data/research/quotas-web-2026-09.json",
+      "note": "Already holds official GLM Coding Plan 95%/96%/98% cache weekly tables, credit coefficients, V2 grandfather pricing. Official Pro GLM-5.3 2.90～5.80亿/周; Flash 8.77～17.55亿/周; Lite/Max likewise. Not duplicated as community evidence."
+    },
+    {
+      "path": "data/research/caijing-2026-08.json",
+      "note": "《财经》智谱 Token 套餐（旗舰）¥25/亿粗口径；无套餐档位/模型/面板反推。旁证 only。"
+    },
+    {
+      "path": "data/subscription-quotas.json",
+      "note": "Adopted midpoints from official table; Flash notes cite 'V2EX: V3 Flash ≈ 3× 5.3 quota' without URL — this round locates that URL."
+    }
+  ],
+  "officialBenchmarksForComparison": {
+    "source": "https://docs.bigmodel.cn/cn/coding-plan/overview",
+    "sourceDate": "2026-09-03+",
+    "unit": "亿 Tokens/周",
+    "assumption": "95% cache hit; range = peak(1× credits)～off-peak(0.5× credits)",
+    "rows": [
+      { "model": "GLM-5.3", "Lite": "0.48～0.97", "Pro": "2.90～5.80", "Max": "6.76～13.52" },
+      { "model": "GLM-5.3-Flash", "Lite": "1.46～2.92", "Pro": "8.77～17.55", "Max": "20.47～40.95" }
+    ],
+    "creditsV3": {
+      "Lite": { "per5h": 2000, "perWeek": 10000, "listCny": 118 },
+      "Pro": { "per5h": 12000, "perWeek": 60000, "listCny": 538 },
+      "Max": { "per5h": 28000, "perWeek": 140000, "listCny": 1078 }
+    },
+    "creditCoefficients": {
+      "GLM-5.3": { "input": 6.9, "cachedInput": 1.7, "output": 24 },
+      "GLM-5.3-Flash": { "input": 2.3, "cachedInput": 0.56, "output": 8 },
+      "flashVs53RatioApprox": "~3× (6.9/2.3≈3; 1.7/0.56≈3; 24/8=3)"
+    }
+  },
+  "v2exFlash3xClaimResolution": {
+    "priorCitation": "data/subscription-quotas.json Flash model notes: 'V2EX: V3 Flash ≈ 3× 5.3 quota.' (no URL)",
+    "found": true,
+    "url": "https://www.v2ex.com/t/1237480",
+    "sourceDate": "2026-08-26",
+    "author": "xmdiwei (OP reply #5)",
+    "quote": "关于 coding plan 用户，用 flash 的话，v3 版本是 3 倍额度，v1v2 是 2.5 倍额度",
+    "confidence": "medium",
+    "limitations": [
+      "Community oral statement, not a panel screenshot or controlled burn.",
+      "Aligns with official V3 credit coefficients (~3×) and third-party restatements (codingplan.org, MarkTechPost).",
+      "Does not by itself prove absolute weekly token counts in the official 95% table."
+    ],
+    "corroboratingNonV2EX": [
+      {
+        "url": "https://codingplan.org/plans/zhipu",
+        "quote": "用量为 GLM-5.3 的 3 倍（积分系数更低）",
+        "note": "Aggregator restating official ratio; not independent measurement."
+      },
+      {
+        "url": "https://www.marktechpost.com/2026/08/26/z-ai-releases-glm-5-3-flash-a-320b-a18b-natively-multimodal-moe-with-a-1m-token-context/",
+        "quote": "at 3× the usable quota of GLM-5.3",
+        "note": "Press restatement of vendor claim."
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "v3-v2ex-flash-3x-oral",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "community_oral_ratio",
+      "planId": "glm_coding_plan_any_tier",
+      "planPrice": null,
+      "planVersion": "V3 credits",
+      "model": "GLM-5.3-Flash vs GLM-5.3",
+      "claim": "V3 Coding Plan Flash ≈ 3× 5.3 quota; legacy V1/V2 ≈ 2.5×",
+      "source": "https://www.v2ex.com/t/1237480",
+      "sourceDate": "2026-08-26",
+      "quote": "关于 coding plan 用户，用 flash 的话，v3 版本是 3 倍额度，v1v2 是 2.5 倍额度",
+      "window": null,
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "medium",
+      "limitations": "Ratio claim only; no absolute tokens, no % meter, no burn-to-empty. Consistent with official coefficients but not an independent absolute-token audit."
+    },
+    {
+      "id": "v3-reddit-lite-flash-session-logs-snippet",
+      "planGeneration": "V3",
+      "priorityTier": 2,
+      "evidenceType": "community_session_logs_credit_scaled",
+      "planId": "glm_coding_lite",
+      "planPrice": "$18/mo (Z.ai Lite)",
+      "planVersion": "V3 credits (Lite 2k/5h, 10k/week)",
+      "model": "GLM-5.3-Flash",
+      "claim": "From session logs on $18 Lite: 2k credits ≈ 63.97M tokens (5h); scaling → 10k weekly ≈ 319.86M; 40k monthly ≈ 1.28B",
+      "source": "https://www.reddit.com/r/ZaiGLM/comments/1vzvkay/coding_plans_are_good_again/",
+      "sourceDate": "2026-08-27",
+      "quote": "From my session logs (GLM 5.3 Flash) on the $18 plan (40k credits): 2k (5HR) = 63.97M Tokens; 10k (Weekly) = 319.86M Tokens; 40k (Monthly) = 1.28B Tokens",
+      "window": "5h credit window extrapolated to weekly/monthly by credit ratio",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "claimed total from session logs",
+        "allTokenTypesCounted": "unknown — not stated whether cache write separate"
+      },
+      "peakOffPeak": "not stated (off-peak would inflate tokens/credit)",
+      "cacheRate": "not stated in snippet",
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 319860000,
+      "monthlyTokensImplied": 1280000000,
+      "weeklyYiImplied": 3.1986,
+      "comparisonToOfficialLiteFlash95": {
+        "officialYiWeek": "1.46～2.92",
+        "observedYiWeek": 3.1986,
+        "note": "Observed extrapolated weekly ABOVE official 95% off-peak upper (2.92). Possible higher cache, heavier off-peak, ZCode multiplier, or incomplete mix disclosure. Treat as conflicting until full logs+cache% verified."
+      },
+      "confidence": "low",
+      "limitations": [
+        "FULL Reddit page blocked this session; quote from search-snippet only — must re-open page to verify verbatim before adoption.",
+        "Linear credit→token scale assumes constant mix; 5h sample may not represent weekly mix.",
+        "No panel % shown; not a 0→100% week burn.",
+        "Same thread also says 'over 120million tokens burnt since got it yesterday' on upgraded Pro — separate partial-burn claim, not full-week."
+      ]
+    },
+    {
+      "id": "v3-reddit-pro-flash-3x-credit-oral",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "community_oral_ratio",
+      "planId": "glm_coding_pro",
+      "planPrice": "$80 Pro (international)",
+      "planVersion": "V3",
+      "model": "GLM-5.3-Flash",
+      "claim": "Flash is only ~3× less credit-consuming than 5.3 on the plan (vs ~20× cheaper on API)",
+      "source": "https://www.reddit.com/r/ZaiGLM/comments/1vzhehp/how_is_the_glm_pro_coding_plan_with_the_new/",
+      "sourceDate": "2026-08-26",
+      "quote": "Sadly 5.3-Flash is only 3x less Credit consuming than the real 5.3. ... Flash is 20x cheaper on API but only 3x cheaper on Plan.",
+      "window": null,
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "Search-snippet only (Reddit blocked). Ratio agrees with official coefficients; no absolute weekly tokens."
+    },
+    {
+      "id": "v3-reddit-mixed-usage-partial-week",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "community_partial_usage",
+      "planId": "unknown_tier",
+      "planPrice": null,
+      "planVersion": "V3",
+      "model": "mixed GLM-5.3 (~43%) + GLM-5.3-Flash (~57%)",
+      "claim": "Partial week: 30–45M total tokens; ~90% cached input / ~9% fresh / ~1% output; credits burned ~3400–5700 (35–57% of weekly pool)",
+      "source": "https://www.reddit.com/r/ZaiGLM/comments/1w4eg4b/best_subscription_for_glm_53_53_flash/",
+      "sourceDate": "2026-09-01",
+      "quote": "30-45M total tokens through the plan (~500-600 calls); Split: ~43% GLM-5.3, ~57% GLM-5.3-Flash; Token shape: ~90% cached input, ~9% fresh input, ~1% output; Credits burned: ~3,400-5,700 (35-57% of the weekly pool)",
+      "window": "partial week (rationed usage)",
+      "tokenBreakdown": {
+        "input": "~9%",
+        "cacheRead": "~90%",
+        "cacheWrite": "not stated",
+        "output": "~1%",
+        "totalCounted": "30–45M claimed total",
+        "allTokenTypesCounted": "likely input+cache+output; cache write unclear"
+      },
+      "peakOffPeak": "not stated",
+      "cacheRate": "~90%",
+      "canReverseEngineerWeeklyMonthlyFullTokens": "weak — if credits 35–57% of weekly and tier known, could scale; tier not explicit in snippet",
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "Reddit full page blocked; plan tier ambiguous; not saturated week; mixed models."
+    },
+    {
+      "id": "v3-reddit-pro-5h-burns-20pct-weekly-oral",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "community_oral",
+      "planId": "glm_coding_pro",
+      "planPrice": "Pro",
+      "planVersion": "V3",
+      "model": "unspecified (post about Flash era)",
+      "claim": "Pro: expect one 5h window ≈ 20% of weekly — one agent, mid-sized codebase",
+      "source": "https://www.reddit.com/r/ZaiGLM/comments/1vzhehp/how_is_the_glm_pro_coding_plan_with_the_new/",
+      "sourceDate": "2026-08-26",
+      "quote": "Pro is not that great, expect 5h for 20% weekly - One agent, mid sized code base.",
+      "window": "5h vs weekly ratio",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": "Quite some random cache miss noted in same comment",
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "Subjective; official credit design already has 5h=12k and week=60k (exactly 5×), so 20%/5h is the designed ratio if 5h is fully burned — not an independent token measurement."
+    },
+    {
+      "id": "v2-linuxdo-max-weekly-approx-8yi-screenshot-claim",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_weekly_burn_with_screenshot_claim",
+      "planId": "glm_coding_max_cn",
+      "planPrice": "Max (CN; post-renewal after legacy expiry ~2026-06-16)",
+      "planVersion": "V2 / transitional (pre-V3 credits announcement 2026-07-30)",
+      "model": "GLM-5.2 era (not GLM-5.3)",
+      "claim": "Weekly limit nearly full ≈ 8亿 tokens/week",
+      "source": "https://linux.do/t/topic/2428435",
+      "related": "https://linux.do/t/topic/2447284",
+      "sourceDate": "2026-06-18",
+      "quote": "16号老套餐过期续费的 周限额快满了。 大概也就是 周限额=8亿左右了。只能说远小于老套餐。。难怪要取消",
+      "window": "7-day weekly pool nearly exhausted",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "~8亿 claimed from usage UI (screenshot attached on post)",
+        "allTokenTypesCounted": "unknown — poster notes elsewhere that usage meter shows tokens but may not show cache breakdown"
+      },
+      "peakOffPeak": "poster later says most work during afternoon peak; multiplier accounting unclear",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 800000000,
+      "monthlyTokensImplied": 3200000000,
+      "weeklyYiImplied": 8.0,
+      "confidence": "medium",
+      "limitations": [
+        "V2 / GLM-5.2 — MUST NOT be used as V3 GLM-5.3 official-table verification.",
+        "Screenshot present but OCR/absolute labels not independently transcribed this round (CDN image).",
+        "'大概…左右' ≈ approximation.",
+        "Conflicts with same-thread international Max claim of ~4亿/week (see next item)."
+      ]
+    },
+    {
+      "id": "v2-linuxdo-intl-max-5h-1p2yi-implies-week-4yi",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_5h_burn_percent",
+      "planId": "glm_coding_max_intl",
+      "planPrice": "International Max (~$144/mo cited by poster)",
+      "planVersion": "V2 / transitional",
+      "model": "unspecified (GLM-5.2 era context)",
+      "claim": "One full 5h window = 1.2亿 tokens and reduced 7d meter by 25% → weekly ≈ 4亿",
+      "source": "https://linux.do/t/topic/2428435",
+      "sourceDate": "2026-06-22",
+      "quote": "我国际版GLM Max 用完一次5h 1.2亿token，7d直接减少了25%，算下来7d才4亿左右token啊",
+      "window": "one saturated 5h + weekly %",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "1.2亿 / 5h claimed",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "not stated",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 480000000,
+      "monthlyTokensImplied": 1920000000,
+      "weeklyYiImplied": 4.8,
+      "confidence": "medium",
+      "limitations": [
+        "Conflicts with CN Max ~8亿/week in same thread (lanvv).",
+        "CN vs international SKUs / FX-aligned prices may differ in effective metering.",
+        "V2 era — do not mix with V3 95% table.",
+        "Peak multiplier would change tokens-per-%."
+      ],
+      "conflictsWith": ["v2-linuxdo-max-weekly-approx-8yi-screenshot-claim"]
+    },
+    {
+      "id": "v2-linuxdo-pro-week-approx-2yi-oral",
+      "planGeneration": "V2",
+      "priorityTier": 4,
+      "evidenceType": "community_oral_scaled",
+      "planId": "glm_coding_pro_cn",
+      "planPrice": "Pro",
+      "planVersion": "V2",
+      "model": "unspecified",
+      "claim": "If Max week ≈8亿 then Pro week ≈2亿; another user '体感' day burn 4–5亿 (inconsistent with 2亿/week)",
+      "source": "https://linux.do/t/topic/2428435",
+      "sourceDate": "2026-06-18 / 2026-06-22",
+      "quote": "那pro套餐的话周限额大概就是2E左右了 … 我的体感跟你的差不多，就是用一天…感觉就是4亿-5亿token的样子",
+      "window": "inferred / subjective",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": 200000000,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "Internal contradiction in thread (2亿/周 vs 4–5亿/天体感). No screenshot for Pro. V2 only."
+    },
+    {
+      "id": "v2-linuxdo-pro-multiweek-1p08B-tokens",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_cumulative_usage",
+      "planId": "glm_coding_pro_cn",
+      "planPrice": "Pro (purchased ~2026-05-17)",
+      "planVersion": "V2",
+      "model": "GLM-5.2 likely",
+      "claim": "Four full weekly limits + 6% of current week = 1.08B tokens total; mostly morning/evening (avoided peak except one afternoon)",
+      "source": "https://linux.do/t/topic/2410022",
+      "sourceDate": "2026-06-15",
+      "quote": "5月17日的pro，前面4个周限跑满+这周跑6%周限。就一天下午用过，其他的时候都是早晚用。跑了1.08B，不禁用",
+      "window": "~4.06 weekly cycles cumulative",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "1.08B cumulative",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "mostly off-peak (早晚); one afternoon",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 266000000,
+      "derivation": "1.08e9 / 4.06 ≈ 2.66e8 ≈ 2.66亿/周 average",
+      "monthlyTokensImplied": 1064000000,
+      "confidence": "medium",
+      "limitations": [
+        "V2 Pro — not V3 credits / not GLM-5.3 official table.",
+        "Average across weeks; not a single clean week panel+%.",
+        "Same thread also has oral 'Pro好像差不多周三亿，月13亿' (catnb) — same order of magnitude.",
+        "Cannot verify whether 1.08B is panel total including cache."
+      ],
+      "relatedOralSameThread": {
+        "author": "catnb",
+        "quote": "我记得之前说过Pro好像差不多周三亿，月13亿左右，一周是差不多5个5h限，不全程吃满下午的三倍的话5h差不多是6kw的样子？"
+      }
+    },
+    {
+      "id": "v2-v2ex-max-rough-10yi-and-40pct-in-lt2days",
+      "planGeneration": "V2",
+      "priorityTier": 4,
+      "evidenceType": "community_oral",
+      "planId": "glm_coding_max_cn",
+      "planPrice": "Max",
+      "planVersion": "V2 (GLM-5.2; some posters have no weekly limit on oldest Max)",
+      "model": "GLM-5.2",
+      "claim": "Max weekly roughly 10亿; OP burned 40% of weekly in <2 days; another burned 1.5亿 in one day (no-weekly-limit Max)",
+      "source": "https://www.v2ex.com/t/1221372",
+      "sourceDate": "2026-06-18",
+      "quote": "我发现 MAX 也不能猛猛蹬啊，不到两天干掉周额度的 40% … 我的 max ，粗略计算是 10 亿 … 今天速度好快,已经蹬了 1.5 亿 … 没有周限的 max",
+      "window": "<2 days / 1 day / weekly rough",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "oral",
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": "OP: ZCode 命中率高达 99%",
+      "canReverseEngineerWeeklyMonthlyFullTokens": "weak (10亿粗略; 40% in <2 days → if linear full week ~≥5+ days of similar load)",
+      "weeklyTokensImplied": 1000000000,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "V2; '粗略计算'; mix of weekly-capped Max and no-weekly-limit grandfather Max; not panel OCR."
+    },
+    {
+      "id": "v2-v2ex-lite-5h-20M-and-max-5h-1000M",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_5h_token_claims",
+      "planId": "glm_coding_lite_cn / glm_coding_max_cn",
+      "planPrice": "Lite ¥49-era / Max",
+      "planVersion": "V2 prompt-era (GLM-5.1)",
+      "model": "GLM-5.1",
+      "claim": "Lite 5h ≈ 20M tokens (peak 3× → ~6.7M); old Lite 5h 30M no weekly; Max 5h ≈ 1000M (peak → 333M); one Max user used 760M in a week",
+      "source": "https://www.v2ex.com/t/1217031",
+      "sourceDate": "2026-06-01",
+      "quote": "lite 5h 20M token ， 下午三倍的话 就只能用到 6.7M 左右 … 老套餐的账号会比较划算 lite 5h 30M 还没有周限 … max 相当于 1000M token ，都在高峰期的话就是 333M token 。我上周用了 760M",
+      "window": "5h / one week",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "claimed totals",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "peak 3× discussed",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": "partial for Max week 760M used (not necessarily full)",
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "V2 GLM-5.1; OP also claimed ~1M+ tokens ate 30% of Lite 5h (imgur) — consistent with ~20M/5h order. Not V3."
+    },
+    {
+      "id": "v2-v2ex-pro-5h-20M-peak-half-hour",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_5h_burn",
+      "planId": "glm_coding_pro_cn",
+      "planPrice": "Pro",
+      "planVersion": "V2",
+      "model": "GLM-5.2",
+      "claim": "Pro burned full 5h limit in ~30+ minutes during peak: 2000万 (20M) tokens",
+      "source": "https://www.v2ex.com/t/1222277",
+      "sourceDate": "2026-06-23",
+      "quote": "并没有感觉到很耐用，PRO 套餐半个多小时就把 5 小时限额用完了，2000w token 。",
+      "window": "5h limit exhausted in ~0.5h wall time",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "20M",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "peak (thread about afternoon 3×)",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "V2; 5h absolute only; conflicts in magnitude with other V2 Pro week ~2–3亿 claims if 5h were always 20M×5=100M/week — shows peak/mix sensitivity."
+    },
+    {
+      "id": "v2-linuxdo-old-lite-120prompts-40M-offpeak",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_measurement",
+      "planId": "glm_coding_lite_cn",
+      "planPrice": "old Lite",
+      "planVersion": "V2 legacy (120 prompts/5h)",
+      "model": "unspecified",
+      "claim": "Old Lite 120 prompts measured ≈ 40M tokens off-peak",
+      "source": "https://linux.do/t/topic/2396609",
+      "sourceDate": "2026-06-13",
+      "quote": "实际基本还是按token算的，老lite 120次prompts实测非高峰期大概4千万token",
+      "window": "5h / prompt bucket",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "~40M",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "off-peak",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "V2 legacy prompt SKU; same thread notes meter shows token usage but not cache."
+    },
+    {
+      "id": "v3-github-quota-plugins-percent-api-not-absolute",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "tooling_api_shape",
+      "planId": "any",
+      "planPrice": null,
+      "planVersion": "V3 monitor API",
+      "model": null,
+      "claim": "Public quota APIs / plugins primarily expose percentages (and sometimes example absolute numbers that look illustrative), not audited community burns of the official 95% table",
+      "source": "https://github.com/farion1231/cc-switch/issues/1588",
+      "related": [
+        "https://github.com/guyinwonder168/opencode-glm-quota",
+        "https://github.com/melon-hub/zai-usage-tracker",
+        "https://github.com/clankercode/quotas"
+      ],
+      "sourceDate": "2026-03-20+",
+      "quote": "limits: TIME_LIMIT percentage… TOKENS_LIMIT percentage… level: pro",
+      "window": "5h + weekly %",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": null,
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "high",
+      "limitations": [
+        "opencode-glm-quota README shows example '12,500,000 / 40,000,000' for Pro 5h — treat as SAMPLE OUTPUT, not a verified Pro 5h cap (V3 Pro is credit-based, not a fixed 40M token 5h).",
+        "Useful for future panel+ccusage methodology; not a measurement of official table."
+      ]
+    },
+    {
+      "id": "v3-x-promo-tokens-not-plan-cap",
+      "planGeneration": "V3-promo",
+      "priorityTier": 4,
+      "evidenceType": "promo_usage_not_plan_cap",
+      "planId": "zcode_weekend_or_nightly_gift",
+      "planPrice": "gift / campaign",
+      "planVersion": "promotional (not Lite/Pro/Max weekly credits)",
+      "model": "GLM-5.3-Flash",
+      "claim": "Users report burning gift/promo pools (e.g. 1B in 5 days on free coding window; 3亿 gift half used in a morning) — NOT measurements of paid plan weekly caps",
+      "source": "https://x.com/Ubendev/status/2096637455130902688",
+      "officialRulesSource": "https://docs.bigmodel.cn/cn/coding-plan/notice/event-glm-5.3-flash",
+      "officialRules": "2026-09-03～09-20，每日23:00～次日09:00；GLM-5.3-Flash在ZCode额度消耗为0，在其他支持Agent中标准可用额度×2；GLM-5.3不参与。",
+      "related": [
+        "https://x.com/null12022202/status/2096482861771800805",
+        "https://x.com/cholf5/status/2096571721897980051"
+      ],
+      "sourceDate": "2026-09-06",
+      "quote": "Just hit 1B tokens in Zcode in 5 days, all thanks to the free coding window for the GLM coding plan users.",
+      "window": "promo / gift",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": "promo totals",
+        "allTokenTypesCounted": "unknown"
+      },
+      "peakOffPeak": "nightly free Flash campaign also active per docs",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "high_as_promo_not_plan",
+      "limitations": "Explicitly excluded from verifying paid V3 official table."
+    },
+    {
+      "id": "v2-eastmoney-pro-flash-4pct-in-1h40m",
+      "planGeneration": "V2",
+      "priorityTier": 4,
+      "evidenceType": "third_party_partial_usage",
+      "planId": "glm_coding_pro_cn",
+      "planPrice": "V2 Pro",
+      "planVersion": "V2",
+      "model": "GLM-5.3-Flash",
+      "claim": "第三方作者让 Flash 连续自主开发 1小时40分钟，V2 Pro 周额度消耗 4%",
+      "source": "https://caifuhao.eastmoney.com/news/20260827081039617395750",
+      "sourceDate": "2026-08-27",
+      "quote": "Flash按照目标连续自主运行1小时40分钟，最终笔者的V2 PRO套餐周额度消耗4%。",
+      "window": "1h40m partial weekly usage",
+      "tokenBreakdown": {
+        "input": null,
+        "cacheRead": null,
+        "cacheWrite": null,
+        "output": null,
+        "totalCounted": null,
+        "allTokenTypesCounted": null
+      },
+      "peakOffPeak": "连夜，推定非高峰，但原文没有精确起止时刻",
+      "cacheRate": null,
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "可直接打开核验，但属于V2 Pro且没有token总数、缓存率或费用明细；只能说明Flash消耗较慢，不能校验V3官方绝对token表。作者按4%外推称一周约50小时，按1小时40分/4%机械外推实际约41.7小时，故不采用其工时外推。"
+    },
+    {
+      "id": "旁证-caijing-zhipu-25-cny-per-yi",
+      "planGeneration": "unknown",
+      "priorityTier": 4,
+      "evidenceType": "press_unit_price_only",
+      "planId": "智谱 Token 套餐（旗舰）",
+      "planPrice": null,
+      "planVersion": "unspecified in article item",
+      "model": "旗舰（unspecified）",
+      "claim": "《财经》 reports 智谱套餐 ≈ ¥25/亿 — order-of-magnitude consistent with adopted Pro new-customer pricing if official table mid used, but no absolute weekly tokens",
+      "source": "data/research/caijing-2026-08.json (article https://www.163.com/dy/article/L4ILFQL60519DDOA.html)",
+      "sourceDate": "2026-08-17",
+      "quote": "智谱 Token 套餐（旗舰模型） cnyPerYi: 25",
+      "window": "article week-to-month saturation method with OpenCode task",
+      "tokenBreakdown": {
+        "input": "3%",
+        "cacheRead": "96%",
+        "cacheWrite": null,
+        "output": "1%",
+        "totalCounted": "article mix",
+        "allTokenTypesCounted": "yes per article method note"
+      },
+      "peakOffPeak": "not broken out for 智谱 item",
+      "cacheRate": "96% in article agent mix",
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "weeklyTokensImplied": null,
+      "monthlyTokensImplied": null,
+      "confidence": "low",
+      "limitations": "Already archived; no plan tier; not panel. Listed only as reviewed 旁证 — do not re-adopt."
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "V2 Max weekly absolute tokens",
+      "sides": [
+        { "id": "v2-linuxdo-max-weekly-approx-8yi-screenshot-claim", "value": "~8亿/周 CN Max" },
+        { "id": "v2-linuxdo-intl-max-5h-1p2yi-implies-week-4yi", "value": "~4～4.8亿/周 intl Max" },
+        { "id": "v2-v2ex-max-rough-10yi-and-40pct-in-lt2days", "value": "~10亿/周 oral" }
+      ],
+      "resolution": "Record all; do not choose. Peak mix, CN vs intl, and grandfather no-weekly Max differ."
+    },
+    {
+      "topic": "V2 Pro weekly absolute tokens",
+      "sides": [
+        { "id": "v2-linuxdo-pro-multiweek-1p08B-tokens", "value": "~2.66亿/周 derived" },
+        { "id": "v2-linuxdo-pro-week-approx-2yi-oral", "value": "~2亿 oral vs 4–5亿/天体感 contradiction" },
+        { "id": "v2-v2ex-pro-5h-20M-peak-half-hour", "value": "5h=20M peak implies much smaller week if scaled naively" }
+      ],
+      "resolution": "Record all; V2 only."
+    },
+    {
+      "topic": "V3 Lite Flash weekly vs official 95% table",
+      "sides": [
+        { "id": "official", "value": "1.46～2.92亿/周 @95%" },
+        { "id": "v3-reddit-lite-flash-session-logs-snippet", "value": "~3.20亿/周 credit-scaled from session logs" }
+      ],
+      "resolution": "Potential overshoot; re-verify Reddit primary text + cache%/peak before any adoption change. Do not change adopted values this round."
+    }
+  ],
+  "notFound": [
+    {
+      "what": "V3 Lite/Pro/Max panel screenshot with absolute token count AND quota percentage for a saturated weekly window on GLM-5.3 or GLM-5.3-Flash",
+      "priorityTier": 1,
+      "status": "notFound"
+    },
+    {
+      "what": "V3 controlled ccusage/tool total from 0%→100% weekly (or 5h) with stated plan tier, model, cache rate, peak/off-peak",
+      "priorityTier": 2,
+      "status": "notFound"
+    },
+    {
+      "what": "Independent community measurement reproducing official Pro GLM-5.3 2.90～5.80亿/周 or Flash 8.77～17.55亿/周 at stated ~95% cache",
+      "priorityTier": 1,
+      "status": "notFound"
+    },
+    {
+      "what": "Video transcript or screenshot write-up with OCR-able V3 usage meter for weekly full burn",
+      "priorityTier": 1,
+      "status": "notFound"
+    },
+    {
+      "what": "GitHub issue with attached V3 billing CSV / fee detail export allowing full token reverse-engineering for a named Lite/Pro/Max week",
+      "priorityTier": 2,
+      "status": "notFound"
+    }
+  ],
+  "comparisonToOfficial": {
+    "note": "Do not change adopted.csv / build_adopted.py from this file alone.",
+    "V3": {
+      "Flash_vs_5_3_ratio": {
+        "officialCoefficients": "~3×",
+        "v2exOral": "3× (URL found)",
+        "redditOral": "3×",
+        "assessment": "Ratio claim is well-supported; absolute token table still lacks independent panel/ccusage confirmation."
+      },
+      "Lite_Flash_weekly": {
+        "official95Yi": "1.46～2.92",
+        "bestCommunityCandidate": "Reddit session-log scale ≈3.20亿 (LOW confidence, snippet-only, above official upper)",
+        "assessment": "Insufficient to confirm or refute official table."
+      },
+      "Pro_GLM53_weekly": {
+        "official95Yi": "2.90～5.80",
+        "bestCommunityCandidate": null,
+        "assessment": "notFound for V3 absolute tokens."
+      },
+      "Pro_Flash_weekly": {
+        "official95Yi": "8.77～17.55",
+        "bestCommunityCandidate": null,
+        "assessment": "notFound for V3 absolute tokens."
+      },
+      "Max_GLM53_weekly": {
+        "official95Yi": "6.76～13.52",
+        "bestCommunityCandidate": null,
+        "assessment": "notFound for V3; V2 Max ~4～10亿 are different SKU/era."
+      }
+    },
+    "V2": {
+      "assessment": "Multiple medium/low community burns exist (Max ~8亿/周 screenshot-claim; Pro ~2.7亿/周 from multi-week cumulative; Lite 5h ~20–40M). Useful historical context only — metering was prompt×multipliers then credits; models were 5.1/5.2. Do not map 1:1 onto V3 95% GLM-5.3 table."
+    }
+  },
+  "recommendation": {
+    "adoptNow": false,
+    "keepOfficialTable": true,
+    "actions": [
+      "Record V2EX Flash≈3× primary URL https://www.v2ex.com/t/1237480 for the previously URL-less subscription-quotas note (edit only via build_adopted / future script note — not this round's allowed files).",
+      "Do not change adopted GLM weekly/monthly tokens based on this round.",
+      "If seeking tier-1 evidence next: ask a V3 Pro/Max user for 用量统计 screenshot at week≈100% plus 费用明细 token rows (input/cache/output) for the same window; or run controlled ccusage burn.",
+      "Re-fetch Reddit r/ZaiGLM/1vzvkay with authenticated/browser session to upgrade the Lite Flash 63.97M/5h claim from snippet→verbatim before any numeric use.",
+      "Keep V2 Max 8亿 and intl Max ~4亿 as conflicting V2 archive only."
+    ],
+    "strongestEvidenceThisRound": [
+      {
+        "rank": 1,
+        "id": "v2exFlash3xClaimResolution",
+        "why": "Locates the previously URL-less 'V2EX Flash≈3×' claim; aligns with official coefficients."
+      },
+      {
+        "rank": 2,
+        "id": "v2-linuxdo-max-weekly-approx-8yi-screenshot-claim",
+        "why": "Best absolute weekly burn with screenshot claim — but V2/5.2, not V3 table verification."
+      },
+      {
+        "rank": 3,
+        "id": "v2-linuxdo-pro-multiweek-1p08B-tokens",
+        "why": "Multi-week Pro cumulative 1.08B with stated weekly fills — V2 only."
+      },
+      {
+        "rank": 4,
+        "id": "v3-reddit-lite-flash-session-logs-snippet",
+        "why": "Only V3 absolute-token candidate; blocked primary page + above official upper → low confidence."
+      }
+    ]
+  },
+  "searchCoverage": {
+    "enginesQueries": [
+      "GLM Coding Plan 额度 实测 V2EX OR linux.do GLM-5.3",
+      "site:v2ex.com GLM Coding Plan Flash 额度 OR 积分",
+      "site:v2ex.com GLM Flash 3倍 OR 额度 5.3",
+      "site:linux.do GLM Coding Plan 额度 OR token OR 周额度",
+      "site:linux.do Max 周限额跑满 OR 蹬完 GLM",
+      "site:github.com GLM Coding Plan quota OR credits OR usage",
+      "site:reddit.com GLM Coding Plan OR zhipu coding quota OR tokens",
+      "\"GLM Coding\" OR bigmodel (额度 OR quota OR tokens) on X",
+      "\"63.97M\" OR \"319.86M\" GLM Flash coding plan"
+    ],
+    "sitesOpened": [
+      "https://www.v2ex.com/t/1237480",
+      "https://www.v2ex.com/t/1221372",
+      "https://www.v2ex.com/t/1217031",
+      "https://www.v2ex.com/t/1222277",
+      "https://www.v2ex.com/t/1231115",
+      "https://linux.do/t/topic/2447284",
+      "https://linux.do/t/topic/2428435",
+      "https://codingplan.org/plans/zhipu",
+      "https://docs.bigmodel.cn/cn/coding-plan/overview",
+      "https://github.com/guyinwonder168/opencode-glm-quota/blob/main/README.md",
+      "https://www.marktechpost.com/2026/08/26/z-ai-releases-glm-5-3-flash-a-320b-a18b-natively-multimodal-moe-with-a-1m-token-context/",
+      "https://caifuhao.eastmoney.com/news/20260827081039617395750"
+    ],
+    "blockedOrPartial": [
+      "reddit.com / old.reddit.com (network security block) — snippets only",
+      "linux.do/t/topic/2410022 (challenge page on one fetch; content recovered via search snippets + related threads)"
+    ]
+  }
+}

@@ -41,6 +41,8 @@ VENDOR_OF = {
     "minimax": "MiniMax",
     "aliyun": "Alibaba",
     "opencode": "OpenCode",
+    "command_code": "Command Code",
+    "ollama": "Ollama",
     "deepseek": "DeepSeek",
 }
 VENDOR_COLORS = {
@@ -53,6 +55,8 @@ VENDOR_COLORS = {
     "MiniMax": "#FF5FA2",
     "Alibaba": "#FF4D4F",
     "OpenCode": "#00BCD4",
+    "Command Code": "#7B61FF",
+    "Ollama": "#00A86B",
     "DeepSeek": "#2F5BFF",
     "Gemini": "#7CC12A",
 }
@@ -78,14 +82,15 @@ def output_stem(view: str, board: dict | None, language: str, table: bool = Fals
 VENDOR_CODES = {
     "OpenAI": "OA", "Anthropic": "AN", "xAI": "XA", "Cursor": "CU",
     "Kimi": "KI", "GLM": "GL", "MiniMax": "MM", "Alibaba": "AL",
-    "OpenCode": "OC", "DeepSeek": "DS", "Gemini": "GE",
+    "OpenCode": "OC", "Command Code": "CC", "Ollama": "OL",
+    "DeepSeek": "DS", "Gemini": "GE",
 }
 TEXT = {
     "zh": {
         "quotas_title": "订阅额度总览 · 套餐 × 实际服务模型",
         "prices_title": "真实单价总览 · 订阅与 API 统一对比",
         "quotas_subtitle": "月 = 4 周，饱和使用；全口径 token；按量 API 无月额度，不参与额度排序",
-        "prices_subtitle": "订阅：月费 ÷ 饱和月用量（月 = 4 周）｜API：公开标价 × 实测 token 分布",
+        "prices_subtitle": "美元/credits与API三段价统一按97.5%缓存 / 2.15%输入 / 0.35%输出折算；直接total-token实测不重算",
         "quotas_axis": "月可用 token（亿，对数轴）",
         "prices_axis": "真实单价（美元 / 百万 token，对数轴）",
         "quotas_order": "额度从高到低",
@@ -100,7 +105,7 @@ TEXT = {
         "quotas_title": "Monthly token allowance | Subscription plan x served model",
         "prices_title": "Effective token price | Subscriptions and APIs compared",
         "quotas_subtitle": "4 weeks per month, full utilization, all token types; pay-as-you-go APIs have no monthly allowance",
-        "prices_subtitle": "Subscriptions: monthly fee / saturated monthly usage (4 weeks) | APIs: list prices weighted by observed token mix",
+        "prices_subtitle": "Dollar/credit and API rates use 97.5% cache / 2.15% input / 0.35% output; direct total-token measurements are not normalized",
         "quotas_axis": "Monthly tokens (billions, log scale)",
         "prices_axis": "Effective price (USD per million tokens, log scale)",
         "quotas_order": "Highest allowance first",
@@ -217,12 +222,12 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
     ]
     widths = [max(text_width(c) for c in [h] + [b[i] for b in body])
               for i, h in enumerate(head)]
-    line = "  ".join(pad(h, w) for h, w in zip(head, widths))
+    line = "  ".join(pad(h, w) for h, w in zip(head, widths)).rstrip()
     sep = "  ".join("-" * w for w in widths)
     out = [text[f"{view}_title"], text[f"{view}_subtitle"], text["shared"],
            text["footer"], evidence_note(language), exchange_note(language),
            ("汇率来源：" if language == "zh" else "FX source: ") + CONVENTIONS["exchangeRate"]["source"], line, sep] + [
-        "  ".join(pad(c, w) for c, w in zip(b, widths)) for b in body
+        "  ".join(pad(c, w) for c, w in zip(b, widths)).rstrip() for b in body
     ]
     if board:
         out = [frontier_caption(board), frontier_rule(language)] + out
