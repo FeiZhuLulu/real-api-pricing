@@ -49,18 +49,18 @@ VENDOR_OF = {
     "deepseek": "DeepSeek",
 }
 VENDOR_COLORS = {
-    "OpenAI": "#19B37A",
-    "Anthropic": "#FF8A3D",
-    "xAI": "#8E6CF7",
-    "Cursor": "#FFC233",
+    "OpenAI": "#00A86B",
+    "Anthropic": "#F07826",
+    "xAI": "#B65CFF",
+    "Cursor": "#FFB81C",
     "Kimi": "#2FA8FF",
     "GLM": "#1E1E1E",
-    "MiniMax": "#FF5FA2",
-    "Alibaba": "#FF4D4F",
-    "OpenCode": "#00BCD4",
-    "Command Code": "#D81BCC",
-    "Ollama": "#00A86B",
-    "DeepSeek": "#2F5BFF",
+    "MiniMax": "#D23A7D",
+    "Alibaba": "#FF6F61",
+    "OpenCode": "#00C0A8",
+    "Command Code": "#708090",
+    "Ollama": "#A0785C",
+    "DeepSeek": "#1F75FE",
     "Gemini": "#7CC12A",
 }
 VIEW_CN = {"quotas": "额度", "prices": "单价"}
@@ -178,7 +178,11 @@ def frontier_rows(rows: list[dict], points: list[dict], board: str) -> list[dict
             raise ValueError("derived/points.json is stale; run scripts/compute.py first")
         candidates.append({**row, "board_score": point[f"{board}__score"],
                            "board_variant": point[f"{board}__variant"],
-                           "board_mapping": point[f"{board}__mapping_kind"]})
+                           "board_harness": point[f"{board}__agent_harness"],
+                           "board_effort": point[f"{board}__reasoning_effort"],
+                           "board_mapping": point[f"{board}__mapping_kind"],
+                           "board_mapping_confidence": point[f"{board}__mapping_confidence"],
+                           "board_mapping_note": point[f"{board}__mapping_note"]})
     return [row for row in candidates if not any(
         float(other["real_usd_per_mtok"]) <= float(row["real_usd_per_mtok"])
         and other["board_score"] >= row["board_score"]
@@ -214,7 +218,9 @@ def exchange_note(language: str) -> str:
 
 def write_text_table(rows: list[dict], view: str, language: str, board: dict | None = None) -> None:
     text = TEXT[language]
-    head = text["headers"] + ([board["metric"], "得分版本" if language == "zh" else "Score variant", "映射" if language == "zh" else "Mapping"] if board else [])
+    head = text["headers"] + ([board["metric"], "得分版本" if language == "zh" else "Score variant",
+                                "Harness", "思考强度" if language == "zh" else "Reasoning effort",
+                                "映射" if language == "zh" else "Mapping"] if board else [])
     body = [
         [
             str(i), plan_name(r, language),
@@ -222,7 +228,8 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
             DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
             r["real_usd_per_mtok"], r["confidence"],
-        ] + ([f"{r['board_score']:g}", r["board_variant"], r["board_mapping"]] if board else [])
+        ] + ([f"{r['board_score']:g}", r["board_variant"], r["board_harness"] or "—",
+              r["board_effort"] or "—", r["board_mapping"]] if board else [])
         for i, r in enumerate(rows, 1)
     ]
     widths = [max(text_width(c) for c in [h] + [b[i] for b in body])
@@ -456,6 +463,10 @@ def main() -> None:
             "frontier": [{"id": f"{r['plan_id']}::{r['served_model']}", "model": r["served_model"],
                           "price_usd_per_mtok": float(r["real_usd_per_mtok"]),
                           "score": r["board_score"], "variant": r["board_variant"],
+                          "agent_harness": r["board_harness"], "reasoning_effort": r["board_effort"],
+                          "mapping_kind": r["board_mapping"],
+                          "mapping_confidence": r["board_mapping_confidence"],
+                          "mapping_note": r["board_mapping_note"],
                           "confidence": r["confidence"]} for r in sorted_rows(selected, "prices")],
             "unscored": [p["id"] for p in data["points"] if p.get(f"{board_id}__score") is None],
         }

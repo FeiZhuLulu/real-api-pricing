@@ -26,6 +26,16 @@ for source,destination in exported:
     assert destination.is_file(), destination
     assert hashlib.sha256(source.read_bytes()).digest() == hashlib.sha256(destination.read_bytes()).digest(), destination
 assert set(ROOT.joinpath('charts').rglob('*.svg')) == {d for _,d in exported if d.suffix == '.svg'}
+
+# Frontier exports must preserve benchmark configuration identity.
+frontier = json.loads((ROOT / '_build' / '前沿筛选结果.json').read_text(encoding='utf-8'))
+for board in frontier['boards'].values():
+    for row in board['frontier']:
+        for field in ('agent_harness', 'reasoning_effort', 'mapping_kind',
+                      'mapping_confidence', 'mapping_note'):
+            assert field in row
+for table in ROOT.joinpath('_build').glob('前沿*.txt'):
+    assert any('Harness' in line for line in table.read_text(encoding='utf-8').splitlines()), table
 for doc in [ROOT/'README.md',ROOT/'README.zh.md',ROOT/'BUILD.md',ROOT/'SOURCES.md',ROOT/'charts/README.md']:
     for target in re.findall(r'\]\(([^)]+)\)', doc.read_text(encoding='utf-8')):
         if not target.startswith(('http:', 'https:', '#')):

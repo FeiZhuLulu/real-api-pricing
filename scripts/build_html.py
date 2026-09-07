@@ -54,7 +54,7 @@ TEMPLATE = r"""<!doctype html>
 <div class="foot">数据：<code>data/adopted.csv</code>（取舍与出处见 <code>scripts/build_adopted.py</code>）· 四张榜单各自独立绘制，快照与来源见标题及项目记录 · AA Coding Agent 分数属于官网标明的 harness×模型配置 · 美元/credits额度与按量 API 三段价统一按项目标准负载（<span id="mix"></span>）折算；直接 total-token 实测不重复归一</div>
 <script>
 const DATA = __DATA__;
-const VENDOR_COLOR = {OpenAI:"#19B37A",Anthropic:"#FF8A3D",xAI:"#8E6CF7",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#FF5FA2",Alibaba:"#FF4D4F",DeepSeek:"#2F5BFF",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFC233",OpenCode:"#00BCD4","Command Code":"#D81BCC",Ollama:"#00A86B",other:"#00BCD4"};
+const VENDOR_COLOR = {OpenAI:"#00A86B",Anthropic:"#F07826",xAI:"#B65CFF",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#D23A7D",Alibaba:"#FF6F61",DeepSeek:"#1F75FE",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFB81C",OpenCode:"#00C0A8","Command Code":"#708090",Ollama:"#A0785C",other:"#00C0A8"};
 const FRONTIER_COLOR="#111111";
 const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.vendor;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
@@ -136,11 +136,11 @@ function draw(){
     const g=subs.filter(p=>channel(p)===v&&!fid.has(p.id));if(!g.length)continue;
     traces.push({name:v,type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:g.map(p=>p.real_usd_per_mtok),y:g.map(p=>p[yk]),
       text:g.map(p=>p.label),textposition:g.map(p=>posOf.get(p.id)),textfont:{size:9,color:"#888"},
-      marker:{size:8,symbol:"square",color:VENDOR_COLOR[v],opacity:0.45,line:{width:0}},hovertemplate:g.map(hov)});
+      marker:{size:8,symbol:"square",color:VENDOR_COLOR[v],opacity:0.68,line:{width:0}},hovertemplate:g.map(hov)});
   }
   if(met.length)traces.push({name:"按量 API",type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:met.map(p=>p.real_usd_per_mtok),y:met.map(p=>p[yk]),
     text:met.map(p=>p.label),textposition:"bottom center",textfont:{size:9,color:"#666"},
-    marker:{size:9,symbol:"diamond-open",color:met.map(color),opacity:0.5,line:{width:1.3}},hovertemplate:met.map(hov)});
+    marker:{size:9,symbol:"diamond-open",color:met.map(color),opacity:0.68,line:{width:1.3}},hovertemplate:met.map(hov)});
   const visible=subs.concat(met),xs=visible.map(p=>p.real_usd_per_mtok),ys=visible.map(p=>p[yk]);
   const xrange=xs.length?[Math.log10(Math.max(...xs))+0.13,Math.log10(Math.min(...xs))-0.16]:[0,-3];
   const span=ys.length?Math.max(1,Math.max(...ys)-Math.min(...ys)):1;
@@ -161,7 +161,7 @@ function draw(){
     legend:{orientation:"h",y:1.07,x:0,font:{size:11},traceorder:"normal"},margin,paper_bgcolor:"#fff",plot_bgcolor:"#fff",font:{family:'Segoe UI, Microsoft YaHei, sans-serif',size:11,color:"#666"},hovermode:"closest",hoverlabel:{align:"left",bgcolor:"#fff",font:{size:12}}};
   Plotly.react("chart",traces,layout,{responsive:true,displaylogo:false,toImageButtonOptions:{format:"svg",filename:"帕累托_"+board}});
   document.getElementById("stats").textContent=`${subs.length} 个订阅位置 · ${met.length} 个 API 位置 · ${front.length} 个前沿位置`;
-  document.getElementById("front-details").innerHTML="<table><thead><tr><th>模型 · 套餐</th><th>评测配置</th><th>$/MTok</th><th>分数</th><th>额度置信度</th><th>映射</th></tr></thead><tbody>"+front.flatMap(p=>p.members).map(p=>`<tr><td>${escapeHtml(p.label)}</td><td>${escapeHtml(fmt(p[vk]))}</td><td>${priceLabel(p.real_usd_per_mtok)}</td><td>${p[yk]}</td><td>${p.confidence}</td><td>${p[board+"__mapping_kind"]}</td></tr>`).join("")+"</tbody></table>";
+  document.getElementById("front-details").innerHTML="<table><thead><tr><th>模型 · 套餐</th><th>评测配置</th><th>Harness</th><th>Effort</th><th>$/MTok</th><th>分数</th><th>额度置信度</th><th>映射</th></tr></thead><tbody>"+front.flatMap(p=>p.members).map(p=>`<tr><td>${escapeHtml(p.label)}</td><td>${escapeHtml(fmt(p[vk]))}</td><td>${escapeHtml(fmt(p[board+"__agent_harness"]))}</td><td>${escapeHtml(fmt(p[board+"__reasoning_effort"]))}</td><td>${priceLabel(p.real_usd_per_mtok)}</td><td>${p[yk]}</td><td>${p.confidence}</td><td>${p[board+"__mapping_kind"]}</td></tr>`).join("")+"</tbody></table>";
   const missing=[...new Set(DATA.points.filter(p=>p[yk]==null&&(tier==="full"||p.tier==="main")).map(p=>p.model_display))];
   document.getElementById("unscored").textContent="订阅与按量API共同参与当前范围的帕累托前沿。无榜单分数未纳入："+(missing.join(" / ")||"无")+"。分数取对应模型或服务变体的已存档结果；连线仅为视觉引导，中间位置不代表可购方案。";
 }

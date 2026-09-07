@@ -15,10 +15,10 @@ BOARDS = {
     "aa_intelligence_index": ("AA智力榜", "Artificial Analysis"),
     "aa_coding_agent_index": ("AA编程Agent榜", "AA Coding Agent"),
 }
-COLORS = {"OpenAI": "#19B37A", "Claude": "#FF8A3D", "xAI": "#8E6CF7",
-          "Cursor": "#FFC233", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
-          "MiniMax": "#FF5FA2", "Alibaba": "#FF4D4F", "OpenCode": "#00BCD4",
-          "Command Code": "#D81BCC", "Ollama": "#00A86B", "DeepSeek": "#2F5BFF",
+COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
+          "Cursor": "#FFB81C", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
+          "MiniMax": "#D23A7D", "Alibaba": "#FF6F61", "OpenCode": "#00C0A8",
+          "Command Code": "#708090", "Ollama": "#A0785C", "DeepSeek": "#1F75FE",
           "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
             ("anthropic", "Claude"),
@@ -196,9 +196,9 @@ def draw(board, meta, points, tier, language="zh"):
             s += [f'<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
                   f'<circle r="4" fill="{c}"/>']
         elif p["billing"] == "metered":
-            s.append(f'<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="{c}" stroke-width="1.5" opacity=".44"/>')
+            s.append(f'<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="{c}" stroke-width="1.5" opacity=".68"/>')
         else:
-            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".48"/>')
+            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".68"/>')
         s.append('</g>')
     for p in reversed(frontier):
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
