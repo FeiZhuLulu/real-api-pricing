@@ -44,11 +44,10 @@ for board_id, (display, metric, tag) in BOARDS.items():
         assert (OUT / f"{stem}.png").is_file()
         chart = next(c for c in manifest if c["stem"] == stem)
         selected = [p for p in board_rows if tier == "full" or p["tier"] == "main"]
-        subs = [p for p in selected if p["billing"] == "subscription"]
-        frontier = [p for p in subs if not any(
+        frontier = [p for p in selected if not any(
             q["real_usd_per_mtok"] <= p["real_usd_per_mtok"] and q[key] >= p[key]
             and (q["real_usd_per_mtok"] < p["real_usd_per_mtok"] or q[key] > p[key])
-            for q in subs
+            for q in selected
         )]
         tree = ET.parse(OUT / f"{stem}.svg")
         point_groups = tree.findall('.//s:g[@class="point"]', ns)

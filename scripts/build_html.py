@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""derived/points.json → out/帕累托交互图.html：单文件 Plotly 交互图，可切换 Y 轴榜单、悬停看公式明细。"""
+"""derived/points.json → _build/帕累托交互图.html：单文件 Plotly 交互图，可切换 Y 轴榜单、悬停看公式明细。"""
 from __future__ import annotations
 
 import json
@@ -40,9 +40,9 @@ TEMPLATE = r"""<!doctype html>
   <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 月 = 4 周）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro保留Opus4.8历史实测。</div>
   <div class="bar">
     <label>Y 轴榜单 <select id="board"></select></label>
-    <label>范围 <select id="tier"><option value="main">精选（主流套餐）</option><option value="full">全量</option></select></label>
+    <label>范围 <select id="tier"><option value="full" selected>全量</option><option value="main">精选（内部对照）</option></select></label>
     <label>标签 <select id="labels"><option value="front">只标前沿</option><option value="all">全部</option><option value="none">不标</option></select></label>
-    <label><input type="checkbox" id="metered" checked> 按量 API 基线</label>
+    <label><input type="checkbox" id="metered" checked> 按量 API（参与前沿）</label>
     <label><input type="checkbox" id="lowconf" checked> low 置信度点</label>
     <span id="stats" style="color:#666"></span>
   </div>
@@ -110,7 +110,7 @@ function draw(){
   const tier=document.getElementById("tier").value;
   let pts=DATA.points.filter(p=>p[yk]!=null&&p.real_usd_per_mtok>0&&(showLow||p.confidence!=="low")&&(tier==="full"||p.tier==="main"));
   const subs=mergeSame(pts.filter(p=>p.billing==="subscription"),yk,vk),met=showM?mergeSame(pts.filter(p=>p.billing==="metered"),yk,vk):[];
-  const front=pareto(subs,yk),fid=new Set(front.map(p=>p.id));
+  const front=pareto(subs.concat(met),yk),fid=new Set(front.map(p=>p.id));
   const hov=p=>hover(p,yk,vk).replace("<extra></extra>",(p.hoverExtra||"")+"<extra></extra>");
   const traces=[];
   // 非前沿点：按 x 排序后交替上下放标签，减少重叠
@@ -129,11 +129,11 @@ function draw(){
   const xrange=xs.length?[Math.log10(Math.max(...xs))+0.13,Math.log10(Math.min(...xs))-0.16]:[0,-3];
   const span=ys.length?Math.max(1,Math.max(...ys)-Math.min(...ys)):1;
   const yrange=ys.length?[Math.min(...ys)-span*0.12,Math.max(...ys)+span*0.24]:[0,1];
-  if(front.length)traces.push({name:"订阅前沿",type:"scatter",mode:"lines",x:[10**xrange[1],...front.map(p=>p.real_usd_per_mtok),10**xrange[0]],y:[front[0][yk],...front.map(p=>p[yk]),front[front.length-1][yk]],line:{color:FRONTIER_COLOR,width:1.7},hoverinfo:"skip"});
+  if(front.length)traces.push({name:"帕累托前沿",type:"scatter",mode:"lines",x:[10**xrange[1],...front.map(p=>p.real_usd_per_mtok),10**xrange[0]],y:[front[0][yk],...front.map(p=>p[yk]),front[front.length-1][yk]],line:{color:FRONTIER_COLOR,width:1.7},hoverinfo:"skip"});
   // 前沿点单独一层，标签放右上（前沿上方按定义是空的）
   traces.push({name:"前沿点",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.real_usd_per_mtok),y:front.map(p=>p[yk]),
-    marker:{size:20,symbol:"square",color:"white",line:{width:1.4,color:front.map(color)}},hovertemplate:front.map(hov)});
-  traces.push({name:"前沿标记",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.real_usd_per_mtok),y:front.map(p=>p[yk]),marker:{size:9,symbol:"square",color:front.map(color)},hovertemplate:front.map(hov)});
+    marker:{size:20,symbol:front.map(p=>p.billing==="metered"?"diamond":"square"),color:"white",line:{width:1.4,color:front.map(color)}},hovertemplate:front.map(hov)});
+  traces.push({name:"前沿标记",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.real_usd_per_mtok),y:front.map(p=>p[yk]),marker:{size:9,symbol:front.map(p=>p.billing==="metered"?"diamond":"square"),color:front.map(color)},hovertemplate:front.map(hov)});
   for(const v of new Set(front.map(channel)))if(!others.some(p=>channel(p)===v))traces.push({name:v,type:"scatter",mode:"markers",x:[null],y:[null],marker:{color:VENDOR_COLOR[v],symbol:"square",size:8},hoverinfo:"skip"});
   const chart=document.getElementById("chart"),margin={l:75,r:35,t:95,b:75};
   const ticks=[10,5,2,1,.5,.2,.1,.05,.02,.01,.005,.002,.001,.0005].filter(x=>Math.log10(x)<=xrange[0]&&Math.log10(x)>=xrange[1]);
@@ -144,10 +144,10 @@ function draw(){
     annotations:labelMode==="none"?[]:frontAnnotations(front,visible,yk,xrange,yrange,Math.max(200,chart.clientWidth-margin.l-margin.r),Math.max(200,chart.clientHeight-margin.t-margin.b)),
     legend:{orientation:"h",y:1.07,x:0,font:{size:11},traceorder:"normal"},margin,paper_bgcolor:"#fff",plot_bgcolor:"#fff",font:{family:'Segoe UI, Microsoft YaHei, sans-serif',size:11,color:"#666"},hovermode:"closest",hoverlabel:{align:"left",bgcolor:"#fff",font:{size:12}}};
   Plotly.react("chart",traces,layout,{responsive:true,displaylogo:false,toImageButtonOptions:{format:"svg",filename:"帕累托_"+board}});
-  document.getElementById("stats").textContent=`${subs.length} 个订阅位置 · ${met.length} 个 API 基线 · ${front.length} 个前沿位置`;
+  document.getElementById("stats").textContent=`${subs.length} 个订阅位置 · ${met.length} 个 API 位置 · ${front.length} 个前沿位置`;
   document.getElementById("front-details").innerHTML="<table><thead><tr><th>模型 · 套餐</th><th>$/MTok</th><th>分数</th><th>置信度</th></tr></thead><tbody>"+front.flatMap(p=>p.members).map(p=>`<tr><td>${escapeHtml(p.label)}</td><td>${priceLabel(p.real_usd_per_mtok)}</td><td>${p[yk]}</td><td>${p.confidence}</td></tr>`).join("")+"</tbody></table>";
   const missing=[...new Set(DATA.points.filter(p=>p[yk]==null&&(tier==="full"||p.tier==="main")).map(p=>p.model_display))];
-  document.getElementById("unscored").textContent="当前范围订阅前沿；API 仅作基线，不参与连线。无榜单分数未纳入："+(missing.join(" / ")||"无")+"。分数取同模型已存档变体最高分；连线仅为视觉引导，中间位置不代表可购套餐。";
+  document.getElementById("unscored").textContent="订阅与按量API共同参与当前范围的帕累托前沿。无榜单分数未纳入："+(missing.join(" / ")||"无")+"。分数取对应模型或服务变体的已存档结果；连线仅为视觉引导，中间位置不代表可购方案。";
 }
 for(const id of ["board","tier","labels","metered","lowconf"])document.getElementById(id).addEventListener("change",draw);
 let resizeTimer;window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(draw,150);});

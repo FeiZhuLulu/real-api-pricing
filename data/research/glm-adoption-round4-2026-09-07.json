@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-09-07",
+  "sourceType": "user_confirmed_scenario_expansion",
+  "resultingAdoptedRows": 179,
+  "decision": "GLM Coding Plan在现有忙时和闲时情景之外，补回峰谷中间值情景；三个情景并列展示，不互相替代。",
+  "scenarios": [
+    {
+      "idSuffix": "peak",
+      "labelZh": "忙时",
+      "creditMultiplier": 1.0,
+      "formula": "周积分 ÷ 统一标准负载加权积分系数 × monthWeeks"
+    },
+    {
+      "idSuffix": "mid",
+      "labelZh": "中间值",
+      "creditMultiplier": 1.5,
+      "formula": "忙时与闲时token额度的算术平均；等于忙时额度×1.5"
+    },
+    {
+      "idSuffix": "offpeak",
+      "labelZh": "闲时",
+      "creditMultiplier": 2.0,
+      "formula": "非峰调用按基础积分消耗50%抵扣；等于忙时额度×2"
+    }
+  ],
+  "sharedAssumptions": {
+    "standardTokenMix": "cache 97.5% / input 2.15% / output 0.35%",
+    "monthWeeksSource": "data/conventions.json#monthWeeks",
+    "confidence": "high",
+    "reason": "官方周积分、三段积分系数与峰谷折扣均为官方绝对表；情景计算使用项目统一标准"
+  },
+  "supersedesForCurrentAdoption": "methodology-adoption-round3-2026-09-07.json中仅展示忙时/闲时的决定；历史文件不覆盖"
+}

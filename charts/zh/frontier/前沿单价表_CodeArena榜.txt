@@ -4,14 +4,14 @@ Code Arena | WebDev Overall | Arena Score | 2026-09-05
 美元/credits与API三段价统一按97.5%缓存 / 2.15%输入 / 0.35%输出折算；直接total-token实测不重算
 同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。
 颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。
-† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。Go为官方典型估算；Composer Fast为产品默认模式。
+† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                        价格/月  服务模型           月额度(亿)  $/MTok   置信度  Arena Score  得分版本
-----  --------------------------  -------  -----------------  ----------  -------  ------  -----------  ----------------------------------
-1     ChatGPT Pro 20x             USD 200  gpt-5.6-luna       2402.4      0.00083  medium  1519         gpt-5.6-luna-xhigh (codex-harness)
-2     Command Code GOAT           USD 10   deepseek-v4-flash  43.274      0.00231  high    1580         deepseek-v4-flash-high
-3     GLM Coding Pro (老客 ¥149)  CNY 149  glm-5.3-flash      57.74       0.00381  high    1605         glm-5.3-flash
-4     GLM Coding Pro (老客 ¥149)  CNY 149  glm-5.3            19.05       0.01154  high    1609         glm-5.3-max
-5     Claude Max 20x (9/14+)      USD 200  claude-opus-5      157         0.01274  medium  1688         claude-opus-5-max
-6     Claude Max 5x (9/14+)       USD 100  claude-opus-5      78.5        0.01274  medium  1688         claude-opus-5-max
+序号  套餐                             价格/月  服务模型           月额度(亿)  $/MTok   置信度  Arena Score  得分版本
+----  -------------------------------  -------  -----------------  ----------  -------  ------  -----------  ----------------------------------
+1     ChatGPT Pro 20x                  USD 200  GPT 5.6 Luna       2402.4      0.00083  medium  1519         gpt-5.6-luna-xhigh (codex-harness)
+2     Command Code GOAT                USD 10   DeepSeek V4 Flash  43.274      0.00231  medium  1580         deepseek-v4-flash-high
+3     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3 Flash      76.99       0.00285  high    1605         glm-5.3-flash
+4     GLM Coding Pro (老客 ¥149) 闲时  CNY 149  GLM 5.3            25.4        0.00865  high    1609         glm-5.3-max
+5     Claude Max 20x (9/14+)           USD 200  Claude Opus 5      157         0.01274  medium  1688         claude-opus-5-max
+6     Claude Max 5x (9/14+)            USD 100  Claude Opus 5      78.5        0.01274  medium  1688         claude-opus-5-max

@@ -74,6 +74,7 @@ def plan_name(plan, language):
                 .replace("阿里云百炼", "Alibaba Cloud")
                 .replace("Kimi 会员", "Kimi Membership")
                 .replace("闲时", "off-peak")
+                .replace("中间值", "midpoint")
                 .replace("忙时", "peak"))
     return plan.replace(" (9/14+)", " · 9/14+").replace(" (老客 ¥149)", " · 老客 ¥149")
 
@@ -118,7 +119,7 @@ def draw(board, meta, points, tier, language="zh"):
              and (tier == "full" or p["tier"] == "main")]
     subs = merge([p for p in valid if p["billing"] == "subscription"], key)
     api = merge([p for p in valid if p["billing"] == "metered"], key)
-    frontier = pareto(subs, key)
+    frontier = pareto(subs + api, key)
     ids = {p["id"] for p in frontier}
     xmin = min((p["real_usd_per_mtok"] for p in valid), default=.001) / 1.48
     xmax = max((p["real_usd_per_mtok"] for p in valid), default=1) * 1.6
@@ -134,11 +135,11 @@ def draw(board, meta, points, tier, language="zh"):
     stem = f"帕累托_{BOARDS[board][0]}{suffix}{lang_suffix}"
     scope = ("Full" if tier == "full" else "Selected") if language == "en" else ("全量" if tier == "full" else "精选")
     headline = "Real price × model capability" if language == "en" else "真实单价 × 模型能力"
-    frontier_caption = f"Subscription frontier · {scope}" if language == "en" else f"订阅前沿 · {scope}"
+    frontier_caption = f"Pareto frontier · {scope}" if language == "en" else f"帕累托前沿 · {scope}"
     snapshot_caption = "Leaderboard snapshot  " if language == "en" else "榜单快照  "
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="940" viewBox="0 0 1440 940" role="img" aria-labelledby="title desc">',
-         f'<title id="title">{escape(meta["name"])} · {"Subscription Pareto frontier" if language == "en" else "订阅帕累托前沿"} · {scope}</title>',
-         '<desc id="desc">Real unit price uses a logarithmic scale and gets cheaper to the right. Higher scores are better. The line connects subscription frontier points; APIs are reference baselines.</desc>' if language == "en" else '<desc id="desc">价格为对数轴，越右越便宜；分数越高越好。所有点来自项目采用数据。折线仅连接订阅前沿，API 为比较基线。</desc>',
+         f'<title id="title">{escape(meta["name"])} · {"Pareto frontier" if language == "en" else "帕累托前沿"} · {scope}</title>',
+         '<desc id="desc">Real unit price uses a logarithmic scale and gets cheaper to the right. Higher scores are better. Subscriptions and metered APIs both participate in the Pareto frontier.</desc>' if language == "en" else '<desc id="desc">价格为对数轴，越右越便宜；分数越高越好。订阅和按量API共同参与帕累托前沿。</desc>',
          '<style>text{font-family:"Microsoft YaHei","Segoe UI",sans-serif} .serif{font-family:"Times New Roman",serif} .number{font-family:"Segoe UI",sans-serif;font-variant-numeric:tabular-nums} .label-name{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round} .point:hover{opacity:1}</style>',
          '<rect width="1440" height="940" fill="#FAF9F6"/>',
          text(56, 32, "REAL API PRICING", 10, "#90968D", extra='letter-spacing="2.1"'),
@@ -174,11 +175,14 @@ def draw(board, meta, points, tier, language="zh"):
     for p in subs + api:
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
         c = COLORS.get(channel(p), "#58655E")
-        is_front = p["id"] in ids and p["billing"] == "subscription"
+        is_front = p["id"] in ids
         tooltip_labels = [f'{q["model_display"]} · {plan_name(q["plan"], language)}' for q in p["members"]]
         tooltip = " / ".join(tooltip_labels) + f" · {fmt_price(p['real_usd_per_mtok'])}/MTok · {p[key]} · {p['confidence']}"
         s.append(f'<g class="point" data-billing="{p["billing"]}" data-frontier="{str(is_front).lower()}" data-price="{p["real_usd_per_mtok"]}" data-score="{p[key]}" data-x="{x:.3f}" data-y="{y:.3f}" transform="translate({x:.3f} {y:.3f})"><title>{escape(tooltip)}</title>')
-        if is_front:
+        if is_front and p["billing"] == "metered":
+            s += [f'<path d="M0 -12L12 0 0 12 -12 0Z" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
+                  f'<path d="M0 -4L4 0 0 4 -4 0Z" fill="{c}"/>']
+        elif is_front:
             s += [f'<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
                   f'<circle r="4" fill="{c}"/>']
         elif p["billing"] == "metered":
@@ -208,11 +212,11 @@ def draw(board, meta, points, tier, language="zh"):
         s += [f'<rect x="{xx}" y="826" width="8" height="8" fill="{c}"/>', text(xx + 17, 834, name, 12, "#687168")]
         xx += max(83, len(name) * 7 + 38)
     api_mark_x = xx + (190 if language == "en" else 129)
-    s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Subscription frontier" if language == "en" else "订阅前沿", 12, "#687168"),
+    s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Pareto frontier" if language == "en" else "帕累托前沿", 12, "#687168"),
           f'<path d="M{api_mark_x} 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>',
-          text(api_mark_x + 14, 834, "API baseline" if language == "en" else "API 基线", 12, "#687168"),
+          text(api_mark_x + 14, 834, "Metered API" if language == "en" else "按量 API", 12, "#687168"),
           text(56, 874, "Month = 4 weeks · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged" if language == "en" else "月=4周 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算", 12, "#727B72"),
-          text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API baselines / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 基线 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
+          text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API positions / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 位置 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
           text(56, 898, ((
               "AA Coding Agent: each score belongs to the shown harness × model; the best official configuration is used per exact model."
               if board == "aa_coding_agent_index" else
@@ -222,7 +226,7 @@ def draw(board, meta, points, tier, language="zh"):
               if board == "aa_coding_agent_index" else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
           )), 11, "#929A90"),
-          text(56, 919, "Metered APIs are excluded from the subscription frontier; line segments are visual guides, not purchasable plans." if language == "en" else "按量 API 不参与订阅前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。", 11, "#929A90"),
+          text(56, 919, "Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans." if language == "en" else "订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。", 11, "#929A90"),
           text(1384, 919, meta["url"].replace("https://", ""), 11, "#929A90", "end"), '</svg>']
     OUT.mkdir(exist_ok=True)
     (OUT / f"{stem}.svg").write_text("\n".join(s), encoding="utf-8")

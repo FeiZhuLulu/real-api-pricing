@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-09-07",
+  "sourceType": "user_confirmed_methodology_update",
+  "resultingAdoptedRows": 167,
+  "decisions": {
+    "glmTimeBands": "GLM Coding Plan不再取忙时/闲时中位，按同一套餐和模型分别展示忙时、闲时两个情景点。两者均用项目统一标准负载与官方周积分/三段积分系数换算。",
+    "dollarPoolConfidence": "OpenCode Go、Command Code GOAT、Ollama Pro/Max所有美元或credits额度折算点统一从high降为medium；官方额度和价表可靠，但最终token依赖项目标准负载。",
+    "claudeAndChatgpt": "Claude Max 5x保持78.5亿，ChatGPT Plus Sol保持6.16亿。Claude单用户消息数旁证与Pro 20x缩放出的Plus 7.18亿只保留在research，不进入README主说明。",
+    "cacheWrite": "项目标准负载暂不单列cache write；公开说明厂商另收缓存写入费时，换算可能偏高估token。",
+    "apiFrontier": "订阅与按量API共同参与帕累托筛选、连线和前沿条形；API不再仅作基线。"
+  },
+  "maintenanceFixes": [
+    "AGENTS更新Cursor round8、统一标准负载、_build到charts发布链和全量默认规则",
+    "PUBLICATION保留首次81行历史事实并补当前数据已扩展",
+    "conventions.role与sourcePriority更新",
+    "交互图默认全量",
+    "前沿条形标题去掉精选，OpenCode Go脚注改为美元池除以统一标准负载",
+    "补齐新模型DISPLAY名称",
+    "Composer Standard/Fast按对应榜单变体绑定",
+    "monthWeeks接入GLM、SuperGrok、Kimi和Claude Max公式",
+    "SuperGrok按127272629 token/周保留5.09/20.4/50.9并写清精确公式",
+    "Composer倍率说明改为代码实际统一标准负载倍率",
+    "monthly_yi先统一保留三位，再由其生成monthly_tokens和单价，消除派生行的微小显示差",
+    "README补Code Arena范围、Luna派生、Claude Max生效日期和亿/billion换算"
+  ],
+  "supersedesForCurrentAdoption": [
+    "data/research/token-mix-audit-round2-2026-09-07.json中的GLM中位展示",
+    "data/research/code-subscriptions-round1-2026-09-06.json中的Command Code/Ollama候选置信度"
+  ]
+}

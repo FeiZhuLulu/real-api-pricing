@@ -34,12 +34,17 @@ DISPLAY = {
     "minimax-m3": "MiniMax M3", "minimax-m2.7": "MiniMax M2.7", "minimax-m2.5": "MiniMax M2.5",
     "qwen3.8-max": "Qwen3.8 Max", "qwen3.8-flash": "Qwen3.8 Flash", "qwen3.7-max": "Qwen3.7 Max",
     "qwen3.7-plus": "Qwen3.7 Plus", "qwen3.6-plus": "Qwen3.6 Plus",
-    "deepseek-v4-flash": "DeepSeek V4 Flash", "deepseek-v4-pro": "DeepSeek V4 Pro",
+    "deepseek-v4-flash": "DeepSeek V4 Flash", "deepseek-v4-flash-fast": "DeepSeek V4 Flash Fast", "deepseek-v4-pro": "DeepSeek V4 Pro",
     "deepseek-v4-flash-vision-exp": "DeepSeek V4 Flash Vision Exp",
-    "gemini-3.1-pro": "Gemini 3.1 Pro", "gemini-3.7-flash": "Gemini 3.7 Flash",
+    "gemini-3.1-pro": "Gemini 3.1 Pro", "gemini-3.7-flash": "Gemini 3.7 Flash", "gemini-3.8-flash": "Gemini 3.8 Flash",
     "mimo-v2.5": "MiMo V2.5", "mimo-v2.5-pro": "MiMo V2.5 Pro", "longcat-2.0": "LongCat 2.0",
-    "muse-spark-1.3-contributor": "Muse Spark 1.3 Contributor", "muse-spark-1.2-contributor": "Muse Spark 1.2 Contributor",
-    "hy3": "Hy3", "hy4-preview": "Hy4 preview", "omen-alpha": "Omen Alpha", "composer-2.5": "Composer 2.5",
+    "muse-spark-1.3": "Muse Spark 1.3", "muse-spark-1.3-contributor": "Muse Spark 1.3 Contributor",
+    "muse-spark-1.2": "Muse Spark 1.2", "muse-spark-1.2-contributor": "Muse Spark 1.2 Contributor",
+    "glm-5.2-fast": "GLM 5.2 Fast", "inkling": "Inkling", "inkling-small": "Inkling Small",
+    "kimi-k2.7-code-highspeed": "Kimi K2.7 Code HighSpeed", "nemotron-3-ultra": "Nemotron 3 Ultra",
+    "qwen3.8-27b": "Qwen3.8 27B", "qwen3.8-max-0902": "Qwen3.8 Max 0902",
+    "step-3.5-flash": "Step 3.5 Flash", "step-3.7-flash": "Step 3.7 Flash",
+    "hy3": "Hy3", "hy4-preview": "Hy4 Preview", "omen-alpha": "Omen Alpha", "composer-2.5": "Composer 2.5",
 }
 VENDOR = {
     "gpt": "OpenAI", "claude": "Anthropic", "grok": "xAI", "kimi": "Kimi", "glm": "Zhipu", "minimax": "MiniMax",
@@ -57,8 +62,14 @@ def load_scores() -> dict[str, dict[str, dict]]:
     best: dict[str, dict[str, dict]] = {b: {} for b in BOARDS}
     for s in (s for archive in score_archives() for s in archive["scores"]):
         b, m = s["boardId"], s["model"]
-        if b in best and (m not in best[b] or s["score"] > best[b][m]["score"]):
-            best[b][m] = s
+        if b not in best:
+            continue
+        keys = [m]
+        if m == "composer-2.5":
+            keys.append("composer-2.5-fast" if "Fast" in s["variantLabel"] else "composer-2.5-standard")
+        for key in keys:
+            if key not in best[b] or s["score"] > best[b][key]["score"]:
+                best[b][key] = s
     return best
 
 
@@ -89,8 +100,11 @@ def main() -> None:
                 real_usd_per_mtok=real, list_blended_usd_per_mtok=round(lb, 4) if lb else None,
                 d=round(real / lb, 4) if lb else None, confidence=r["confidence"], tier=r["chart_tier"], source=r["source"], note=r["decision_note"],
             )
+            score_key = model
+            if model == "composer-2.5":
+                score_key = "composer-2.5-fast" if "composer_fast" in r["plan_id"] else "composer-2.5-standard"
             for b in BOARDS:
-                s = scores[b].get(model)
+                s = scores[b].get(score_key) or scores[b].get(model)
                 p[f"{b}__score"] = s["score"] if s else None
                 p[f"{b}__variant"] = s["variantLabel"] if s else None
             points.append(p)
