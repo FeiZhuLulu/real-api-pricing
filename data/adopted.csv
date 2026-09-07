@@ -1,7 +1,7 @@
 ﻿plan_id,plan_name,billing,price,currency,price_usd,served_model,monthly_tokens,monthly_yi,real_usd_per_mtok,confidence,chart_tier,source,decision_note
 chatgpt_plus,ChatGPT Plus,subscription,20,USD,20,gpt-5.6-sol,616000000,6.16,0.03247,medium,main,awesome-coding-plan 2026-07-30 实测,
 chatgpt_pro_5x,ChatGPT Pro 5x,subscription,100,USD,100,gpt-5.6-sol,3080000000,30.8,0.03247,medium,full,Plus × 官方 5x,flat.json 写 38.9 与官方 5x 不符，改 30.8
-chatgpt_pro_20x,ChatGPT Pro 20x,subscription,200,USD,200,gpt-5.6-sol,12320000000,123.2,0.01623,high,main,Plus × 官方 20x,用户拍板 123.2；两个独立印证：OpenAI 社区健康周 7.87 亿 = 24% → 131 亿/月；《财经》2026-08 跑满实测 109 亿/月；文章 200 亿作废
+chatgpt_pro_20x,ChatGPT Pro 20x,subscription,200,USD,200,gpt-5.6-sol,12320000000,123.2,0.01623,high,main,Plus × 官方 20x,用户拍板 123.2；两个独立印证：OpenAI 社区健康周 7.87 亿 = 24% → 131 亿/月；《财经》2026-08 跑满实测 109 亿/月；文章 200 亿作废；第三方旁证：OpenClawFarm 网关 2026-08-21~09-06 对正价 Pro 20x 账号 250 个百分点的 raw token 实测 139.5 亿/月（段间 108~154 亿，实际负载 cache 94.7%，直接给出 total tokens、不再按标准负载归一），见 chatgpt-pro20x-gateway-measurement-2026-09-06.json；采用值未改
 claude_pro,Claude Pro,subscription,20,USD,20,claude-opus-4.8,1588000000,15.88,0.01259,medium,main,awesome-coding-plan 实测,Opus4.8历史实测保留，现服务Opus5未重测；round5候选Opus5约1.9亿依赖假定周消息数，用户未确认，不作为实测收紧证据
 claude_max_20x,Claude Max 20x (9/14+),subscription,200,USD,200,claude-opus-5,15700000000,157.0,0.01274,medium,main,Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json,旧80亿→157亿，9/14起永久口径：47.2亿/周×4÷1.5×1.25≈157；参考区间110~200亿，单点medium。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126；历史413/117等旁证保留，不直接采用
 claude_max_5x,Claude Max 5x (9/14+),subscription,100,USD,100,claude-opus-5,7850000000,78.5,0.01274,medium,full,用户明确20x周池仅为5x的2倍；claude-adoption-round6-2026-09-06.json,旧35.6亿→78.5亿，9/14起永久口径157÷2；low→medium按用户确认周池关系推算，非独立实测；不采用36亿消息数候选或70亿/旧2.25倍率；5h窗口4倍关系不套周池
@@ -154,3 +154,8 @@ deepseek_v4_pro_offpeak,DeepSeek V4 Pro API 闲时,metered,,USD,,deepseek-v4-pro
 deepseek_v4_pro_peak,DeepSeek V4 Pro API 忙时,metered,,USD,,deepseek-v4-pro,,,0.08514,high,main,api-docs.deepseek.com,标价 cached 0.044/in 1.32/out 3.96 × 项目统一标准负载 97.5%/2.15%/0.35%
 openai_sol_api,GPT-5.6 Sol API,metered,,USD,,gpt-5.6-sol,,,0.546,high,main,developers.openai.com,标价 cached 0.4/in 4.0/out 20.0 × 项目统一标准负载 97.5%/2.15%/0.35%
 xai_grok46_api,Grok 4.6 API (<200k),metered,,USD,,grok-4.6,,,0.5515,high,main,docs.x.ai,标价 cached 0.5/in 2.0/out 6.0 × 项目统一标准负载 97.5%/2.15%/0.35%
+anthropic_opus5_api,Claude Opus 5 API,metered,,USD,,claude-opus-5,,,0.6825,high,main,platform.claude.com/docs/en/about-claude/pricing,标价 cached 0.5/in 5.0/out 25.0 × 项目统一标准负载 97.5%/2.15%/0.35%
+anthropic_sonnet5_api,Claude Sonnet 5 API,metered,,USD,,claude-sonnet-5,,,0.273,high,main,platform.claude.com/docs/en/about-claude/pricing,标价 cached 0.2/in 2.0/out 10.0 × 项目统一标准负载 97.5%/2.15%/0.35%
+anthropic_fable5_api,Claude Fable 5 API,metered,,USD,,claude-fable-5,,,1.365,high,main,platform.claude.com/docs/en/about-claude/pricing,标价 cached 1.0/in 10.0/out 50.0 × 项目统一标准负载 97.5%/2.15%/0.35%
+openai_terra_api,GPT-5.6 Terra API,metered,,USD,,gpt-5.6-terra,,,0.28,high,main,developers.openai.com,标价 cached 0.2/in 2.0/out 12.0 × 项目统一标准负载 97.5%/2.15%/0.35%
+openai_luna_api,GPT-5.6 Luna API,metered,,USD,,gpt-5.6-luna,,,0.028,high,main,developers.openai.com,标价 cached 0.02/in 0.2/out 1.2 × 项目统一标准负载 97.5%/2.15%/0.35%
