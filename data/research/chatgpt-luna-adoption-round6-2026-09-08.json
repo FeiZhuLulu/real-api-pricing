@@ -1,0 +1,79 @@
+{
+  "collectedAt": "2026-09-08",
+  "scopeNote": "GPT-5.6 Luna 订阅额度专项采用记录。新增用户自己的 ChatGPT Plus 面板 total tokens + 周额度百分比，并保留 GitHub #8 的 Pro 20x 美元等效口述作为独立比例旁证。历史 research 文件不改。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-5.6-luna",
+      "evidenceType": "user_dashboard_backcalculation",
+      "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/10#issuecomment-5576865371",
+      "sourceDate": "2026-09-08",
+      "userConfirmation": "Issue #10 截图为用户自己的 ChatGPT Plus 实测。",
+      "observed": {
+        "weeklyUsedFractionDisplayed": 0.06,
+        "totalTokens": 112666769,
+        "inputTokens": 2941040,
+        "outputTokens": 369313,
+        "reasoningTokensSubsetOfOutput": 182609,
+        "cacheReadTokens": 109356416,
+        "cacheReadShareOfTotal": 0.9706181953,
+        "inputShareOfTotal": 0.0261038816,
+        "outputShareOfTotal": 0.0032779231
+      },
+      "calculation": {
+        "weeklyTokensCentral": 1877779483.3333335,
+        "monthlyTokensCentralExact": 7511117933.333334,
+        "adoptedMonthlyTokens": 7511000000,
+        "adoptedMonthlyYi": 75.11,
+        "formula": "112,666,769 / 6% * 4 weeks",
+        "roundedPercentMonthlyLow": 6933339630.769231,
+        "roundedPercentMonthlyHigh": 8193946836.363636,
+        "roundedPercentNote": "若面板6%为四舍五入整数，则真实占比约5.5%~6.5%，对应69.33~81.94亿/月。中心值仍按显示6%采用。"
+      },
+      "tokenCountingNote": "截图三大类 cache read + input + output 正好等于 total；reasoning 是 output 子集，不重复相加。直接采用 total tokens，不按项目标准负载再次归一。",
+      "confidence": "high",
+      "decision": "替换旧的 Sol额度 × 19.5 credits混合价比派生值120.12亿/月。"
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "priceUsd": 200,
+      "model": "gpt-5.6-luna / gpt-5.6-sol",
+      "evidenceType": "community_usd_equivalent_report",
+      "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/8#issuecomment-5573605351",
+      "sourceDate": "2026-09-08",
+      "claim": "社区用户称 Luna x20 先前实测 API 美元等效不到 $1,200/周，Sol x20 约 $2,000/周；旧资料把两者统一按 $2,000 计算并不准确。",
+      "ratio": {
+        "communityLunaToSolUsdEquivalent": 0.6,
+        "plusMeasurementToOldEqualPoolLuna": 0.6252913753,
+        "note": "75.11 / 120.12 = 0.625，与1200/2000=0.6接近。"
+      },
+      "crossCheck": {
+        "lunaObservedMixApiValueAtSixPercentUsd": 3.21851192,
+        "lunaPlusFullWeekApiEquivalentUsd": 53.6418653333,
+        "lunaPro20FullWeekApiEquivalentUsd": 1072.8373066667,
+        "pricesPerMTokenUsd": {
+          "cacheRead": 0.02,
+          "input": 0.2,
+          "output": 1.2
+        },
+        "note": "按截图实际token组成和公开Luna API价折算，Plus满周约$53.64，乘20约$1,073/周，符合‘不到$1,200’。"
+      },
+      "confidence": "medium",
+      "decision": "仅作为不同模型并非共享同一美元等效池的旁证；不直接用美元口述换token。Pro 5x/20x的token中心值仍由Plus Luna直接实测分别乘官方5x/20x。"
+    }
+  ],
+  "adopted": {
+    "chatgpt_plus_gpt_5_6_luna_monthlyYi": 75.11,
+    "chatgpt_pro_5x_gpt_5_6_luna_monthlyYi": 375.56,
+    "chatgpt_pro_20x_gpt_5_6_luna_monthlyYi": 1502.22
+  },
+  "superseded": {
+    "method": "Sol monthly tokens × 19.5, assuming the same subscription credit pool across Sol and Luna",
+    "valuesMonthlyYi": {
+      "chatgpt_plus": 120.12,
+      "chatgpt_pro_5x": 600.6,
+      "chatgpt_pro_20x": 2402.4
+    }
+  }
+}
