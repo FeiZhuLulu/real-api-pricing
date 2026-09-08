@@ -7,20 +7,7 @@ const REPO_API = "https://api.github.com/repos/FeiZhuLulu/real-api-pricing";
 
 function contributeIssueUrl(): string {
   const title = "补充数据 / Contribute evidence";
-  const body = [
-    "## 证据 / Evidence",
-    "",
-    "- 月费 / Monthly fee:",
-    "- 模型 / Model:",
-    "- 额度 / Allowance:",
-    "- 来源 / Source:",
-    "- 日期 / Date:",
-    "",
-    "> 请附截图并遮蔽个人资料。",
-    "> Please attach screenshots and mask personal information.",
-    "",
-  ].join("\n");
-  const params = new URLSearchParams({ title, body });
+  const params = new URLSearchParams({ title, template: "contribute-data.md" });
   return `${REPO}/issues/new?${params.toString()}`;
 }
 

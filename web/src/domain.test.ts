@@ -36,7 +36,12 @@ import {
   tableRows,
   visiblePoints,
 } from "./domain";
-import type { Point, Row, SiteData } from "./types";
+import {
+  FRONTIER_RADIUS,
+  placeTextLabels,
+  placementRect,
+} from "./chartLabels";
+import type { Group, Point, Row, SiteData } from "./types";
 const data: SiteData = unpackData(JSON.parse(
   readFileSync(new URL("../public/data/site.json", import.meta.url), "utf8"),
 ));
@@ -325,6 +330,89 @@ test("Language conversion only changes display units and labels", () => {
     displayPlan("GLM (老客 ¥149) 闲时", "en"),
     "GLM (v2 ¥149) Off-peak",
   );
+});
+test("Chart names never overlap each other and leave the plot rather than collide", () => {
+  const box = { left: 60, top: 20, right: 660, bottom: 420, width: 600, height: 400 };
+  const group = (id: string, name: string): Group => {
+    const r = row(id, 0.01, 1500);
+    r.point = { ...r.point, model_display: name };
+    return { key: id, price: 0.01, score: 1500, rows: [r] };
+  };
+  const place = (
+    spots: { x: number; y: number }[],
+    names: string[],
+    area = box,
+  ) => {
+    const gs = names.map((n, i) => group(`g${i}`, n));
+    const markers = gs.map((g, i) => ({
+      key: g.key,
+      x: spots[i].x,
+      y: spots[i].y,
+      r: FRONTIER_RADIUS,
+    }));
+    const anchors = new Map(markers.map((m) => [m.key, m]));
+    const placements = placeTextLabels(gs, anchors, markers, area, false);
+    const rects = placements.map((p) => {
+      const m = anchors.get(p.key)!;
+      return placementRect(p, m.x, m.y);
+    });
+    return { placements, rects, markers };
+  };
+  const names = [
+    "Claude Opus 5",
+    "GPT 5.6 Luna",
+    "GLM 5.3 Flash",
+    "DeepSeek V4 Flash",
+    "Kimi K3",
+    "月之暗面 K2.7 标准",
+  ];
+  const spread = names.map((_, i) => ({ x: 120 + i * 95, y: 80 + (i % 3) * 90 }));
+  const wide = place(spread, names);
+  assert.equal(wide.placements.length, names.length);
+  wide.rects.forEach((a, i) => {
+    assert.ok(a.left >= box.left && a.right <= box.right, `${i} inside x`);
+    assert.ok(a.top >= box.top && a.bottom <= box.bottom, `${i} inside y`);
+    wide.rects.slice(i + 1).forEach((b) => {
+      const overlap =
+        a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      assert.ok(!overlap, "names must not overlap");
+    });
+    // The name stays beside its own marker instead of floating away.
+    const m = wide.markers[i];
+    assert.ok(
+      Math.hypot(
+        Math.min(Math.abs(a.left - m.x), Math.abs(a.right - m.x)),
+        Math.min(Math.abs(a.top - m.y), Math.abs(a.bottom - m.y)),
+      ) <= FRONTIER_RADIUS + 60,
+    );
+  });
+  // With no room left, names are dropped instead of stacked on each other.
+  const tight = { left: 0, top: 0, right: 220, bottom: 90, width: 220, height: 90 };
+  const crowded = place(
+    names.map((_, i) => ({ x: 100 + (i % 2) * 10, y: 40 + i * 6 })),
+    names,
+    tight,
+  );
+  assert.ok(crowded.placements.length < names.length);
+  crowded.rects.forEach((a, i) =>
+    crowded.rects.slice(i + 1).forEach((b) => {
+      const overlap =
+        a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      assert.ok(!overlap, "crowded names must not overlap");
+    }),
+  );
+});
+test("Labels yield to ordinary points when every candidate slot is occupied", () => {
+  const r = row("blocked", 0.01, 1500);
+  r.point = { ...r.point, model_display: "Claude Opus 5" };
+  const g: Group = { key: r.key, price: 0.01, score: 1500, rows: [r] };
+  const anchor = { key: g.key, x: 120, y: 100, r: FRONTIER_RADIUS };
+  const dots = [];
+  for (let x = 6; x < 240; x += 12)
+    for (let y = 6; y < 200; y += 12)
+      dots.push({ key: `dot-${x}-${y}`, x, y, r: 6 });
+  assert.deepEqual(placeTextLabels([g], new Map([[g.key, anchor]]), dots,
+    { left: 0, top: 0, right: 240, bottom: 200, width: 240, height: 200 }, false), []);
 });
 test("CSV escapes formula-like text and embedded quotes without changing numeric source values", () => {
   const r = row("csv", 0.002, 20);

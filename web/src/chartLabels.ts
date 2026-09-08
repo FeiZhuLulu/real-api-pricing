@@ -1,11 +1,16 @@
 import type { Annotations, Image } from "plotly.js";
 import type { Group } from "./types";
 import { manufacturer } from "./domain";
-import { providerLogoUrl } from "./ProviderLogo";
 
 export type LabelMode = "frontier" | "all" | "none";
 
 export const LOGO_SIZE = 28;
+/** Clearance radius of a frontier logo badge and of a plain scatter dot. */
+export const FRONTIER_RADIUS = LOGO_SIZE / 2;
+export const DOT_RADIUS = 6;
+
+/** Where the label box sits relative to the end of its leader line. */
+export type LabelAnchor = "center" | "left" | "right";
 
 export interface ArenaPlacement {
   key: string;
@@ -15,6 +20,10 @@ export interface ArenaPlacement {
   provider: string;
   ax: number;
   ay: number;
+  anchor: LabelAnchor;
+  width: number;
+  height: number;
+  radius: number;
 }
 
 export interface FrontierLogoView {
@@ -30,14 +39,19 @@ export interface FrontierLogoView {
 }
 
 export interface TextLabelView extends ArenaPlacement {
-  x0: number;
-  y0: number;
-  x1: number;
-  y1: number;
+  left: number;
+  top: number;
+  lead: { x1: number; y1: number; x2: number; y2: number } | null;
   inPlot: boolean;
 }
 
-const logoDataCache = new Map<string, Promise<string>>();
+/** A marker a label must not cover: pixel centre plus its clearance radius. */
+export interface AnchorPoint {
+  key: string;
+  x: number;
+  y: number;
+  r: number;
+}
 
 /** Bottom cards: all points when labels=all, otherwise frontier (incl. none). */
 export function cardGroups(
@@ -97,34 +111,155 @@ function densify(gs: Group[], front: Group[], cap = 28): Group[] {
   return selected;
 }
 
-const SLOT_BASE = [
-  [1, -1],
-  [-1, -1],
-  [1, 1],
-  [-1, 1],
-  [1.35, 0.1],
-  [-1.35, 0.1],
-  [0.55, -1.55],
-  [-0.55, -1.55],
-  [0.55, 1.55],
-  [-0.55, 1.55],
-  [1.6, -0.75],
-  [-1.6, -0.75],
-  [1.6, 0.75],
-  [-1.6, 0.75],
-] as const;
+/**
+ * Candidate directions, best first: straight above/below (leader is a short
+ * vertical tick), then straight aside, then the diagonals.
+ */
+const DIRECTIONS: { dx: number; dy: number; anchor: LabelAnchor }[] = [
+  { dx: 0, dy: -1, anchor: "center" },
+  { dx: 0, dy: 1, anchor: "center" },
+  { dx: 1, dy: 0, anchor: "left" },
+  { dx: -1, dy: 0, anchor: "right" },
+  { dx: 0.8, dy: -0.8, anchor: "left" },
+  { dx: -0.8, dy: -0.8, anchor: "right" },
+  { dx: 0.8, dy: 0.8, anchor: "left" },
+  { dx: -0.8, dy: 0.8, anchor: "right" },
+];
+/** Gap between the marker edge and the label box, tried nearest first. */
+const RING_GAPS = [8, 22, 40];
 
-function estimateLabelSize(label: string, mobile: boolean) {
-  const font = mobile ? 10 : 11;
-  const padX = 14;
-  const padY = 8;
-  const width = Math.min(
-    mobile ? 168 : 220,
-    Math.ceil(label.length * font * 0.62) + padX,
-  );
-  const height = font + padY;
-  return { width, height };
+const sizeCache = new Map<string, { width: number; height: number }>();
+let probe: HTMLElement | null | undefined;
+
+/**
+ * Measure a name with a hidden copy of the real label element, so the reserved
+ * box matches the rendered font, letter spacing, padding and border exactly —
+ * for CJK as well as Latin names.
+ */
+export function measureLabel(label: string, mobile: boolean) {
+  const cap = mobile ? 168 : 224;
+  if (probe === undefined) {
+    if (typeof document === "undefined") probe = null;
+    else {
+      probe = document.createElement("div");
+      probe.className = "arena-name-label";
+      probe.setAttribute("aria-hidden", "true");
+      probe.style.cssText =
+        "left:-10000px;top:0;visibility:hidden;max-width:none;transition:none";
+      document.body.appendChild(probe);
+    }
+  }
+  // The label font follows a media query, so the current size is part of the key.
+  const cacheKey = `${cap}|${probe ? getComputedStyle(probe).fontSize : mobile}|${label}`;
+  const hit = sizeCache.get(cacheKey);
+  if (hit) return hit;
+  let size: { width: number; height: number };
+  if (probe) {
+    probe.style.fontSize = mobile ? "10px" : "11px";
+    probe.style.padding = mobile ? "2px 6px" : "3px 7px";
+    probe.textContent = label;
+    const rect = probe.getBoundingClientRect();
+    // One extra pixel: sub-pixel text widths would otherwise trigger ellipsis.
+    size = {
+      width: Math.min(cap, Math.ceil(rect.width + 1)),
+      height: Math.ceil(rect.height),
+    };
+  } else {
+    const font = mobile ? 10 : 11;
+    const text = [...label].reduce(
+      (n, c) => n + (c.charCodeAt(0) > 255 ? font : font * 0.58),
+      0,
+    );
+    size = {
+      width: Math.min(cap, Math.ceil(text) + (mobile ? 12 : 14) + 2),
+      height: Math.round(font * 1.25) + (mobile ? 4 : 6) + 2,
+    };
+  }
+  sizeCache.set(cacheKey, size);
+  return size;
 }
+
+export type LabelRect = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+};
+type Box = LabelRect;
+
+function labelBox(
+  x: number,
+  y: number,
+  slot: { ax: number; ay: number; anchor: LabelAnchor },
+  size: { width: number; height: number },
+): Box {
+  const left =
+    slot.anchor === "center"
+      ? x + slot.ax - size.width / 2
+      : slot.anchor === "left"
+        ? x + slot.ax
+        : x + slot.ax - size.width;
+  const top = y + slot.ay - size.height / 2;
+  return {
+    left,
+    top,
+    right: left + size.width,
+    bottom: top + size.height,
+  };
+}
+
+/** Rectangle a finished placement occupies once its point lands on (x, y). */
+export const placementRect = (
+  placement: ArenaPlacement,
+  x: number,
+  y: number,
+): LabelRect => labelBox(x, y, placement, placement);
+
+type Segment = { x1: number; y1: number; x2: number; y2: number };
+
+/** Leader from the marker edge to the nearest point of the label border. */
+function leaderSegment(
+  x: number,
+  y: number,
+  box: Box,
+  radius: number,
+): Segment | null {
+  const cx = Math.min(Math.max(x, box.left), box.right);
+  const cy = Math.min(Math.max(y, box.top), box.bottom);
+  const length = Math.hypot(cx - x, cy - y);
+  if (length <= radius + 1) return null;
+  const t = radius / length;
+  return {
+    x1: x + (cx - x) * t,
+    y1: y + (cy - y) * t,
+    x2: cx,
+    y2: cy,
+  };
+}
+
+const side = (a: Segment, px: number, py: number) =>
+  Math.sign(
+    (a.x2 - a.x1) * (py - a.y1) - (a.y2 - a.y1) * (px - a.x1),
+  );
+
+function segmentsCross(a: Segment, b: Segment): boolean {
+  return (
+    side(a, b.x1, b.y1) * side(a, b.x2, b.y2) < 0 &&
+    side(b, a.x1, a.y1) * side(b, a.x2, a.y2) < 0
+  );
+}
+
+const boxesOverlap = (a: Box, b: Box, pad: number) =>
+  a.left < b.right + pad &&
+  a.right > b.left - pad &&
+  a.top < b.bottom + pad &&
+  a.bottom > b.top - pad;
+
+const boxCoversMarker = (a: Box, m: AnchorPoint) =>
+  m.x > a.left - m.r &&
+  m.x < a.right + m.r &&
+  m.y > a.top - m.r &&
+  m.y < a.bottom + m.r;
 
 export type PlotBox = {
   left: number;
@@ -140,6 +275,7 @@ type PlotAxis = {
   _length?: number;
   d2l: (v: number) => number;
   l2p: (v: number) => number;
+  r2l?: (v: number) => number;
   range?: number[];
 };
 
@@ -176,17 +312,45 @@ export function plotBox(layout: PlotLayout): PlotBox | null {
   };
 }
 
+function rangeLinear(ax: PlotAxis): [number, number] | null {
+  const range = ax.range;
+  if (!range || range.length < 2) return null;
+  const toLinear = ax.r2l ?? Number;
+  const lo = toLinear(range[0]);
+  const hi = toLinear(range[1]);
+  if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo === hi) return null;
+  return [lo, hi];
+}
+
+/**
+ * Pixel position derived from the live axis ranges instead of l2p.
+ * While Plotly pans it updates ax.range on every frame but only recomputes the
+ * l2p scale when the drag ends, so l2p would leave the overlay behind.
+ */
 export function dataToPixel(
   layout: PlotLayout,
   price: number,
   score: number,
+  box?: PlotBox | null,
 ): { x: number; y: number } | null {
   const xa = layout.xaxis;
   const ya = layout.yaxis;
   if (!xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) return null;
+  const xLin = xa.d2l(price);
+  const yLin = ya.d2l(score);
+  if (!Number.isFinite(xLin) || !Number.isFinite(yLin)) return null;
+  const area = box ?? plotBox(layout);
+  const xr = area && rangeLinear(xa);
+  const yr = area && rangeLinear(ya);
+  if (area && xr && yr) {
+    return {
+      x: area.left + ((xLin - xr[0]) / (xr[1] - xr[0])) * area.width,
+      y: area.bottom - ((yLin - yr[0]) / (yr[1] - yr[0])) * area.height,
+    };
+  }
   return {
-    x: xa._offset + xa.l2p(xa.d2l(price)),
-    y: ya._offset + ya.l2p(ya.d2l(score)),
+    x: xa._offset + xa.l2p(xLin),
+    y: ya._offset + ya.l2p(yLin),
   };
 }
 
@@ -215,7 +379,7 @@ export function frontierLogoViews(
   const half = LOGO_SIZE / 2;
   const out: FrontierLogoView[] = [];
   for (const g of front) {
-    const pt = dataToPixel(layout, g.price, g.score);
+    const pt = dataToPixel(layout, g.price, g.score, box);
     if (!pt) continue;
     out.push({
       key: g.key,
@@ -232,109 +396,92 @@ export function frontierLogoViews(
   return out;
 }
 
+const BLOCKED = 1000;
+
 /**
- * Place text-only labels using real pixel anchors and plot size.
- * Leader (ax, ay) is from the data/logo pixel to the label anchor.
+ * Arena-style placement: try the nearest clear slot around each marker, keep the
+ * leader short, and drop a name outright when every slot would collide with
+ * another name, a marker or the plot edge. Groups are placed in the order given
+ * (frontier first), so the important names win the good slots.
  */
 export function placeTextLabels(
   groups: Group[],
-  anchors: Map<string, { x: number; y: number }>,
+  anchors: Map<string, AnchorPoint>,
+  markers: AnchorPoint[],
   box: PlotBox,
   mobile: boolean,
 ): ArenaPlacement[] {
   if (!groups.length) return [];
-  const base = mobile ? 44 : 58;
-  const vy = mobile ? 30 : 34;
-  const options = SLOT_BASE.map(([sx, sy]) => ({
-    ax: Math.round(sx * base),
-    ay: Math.round(sy * vy),
-  }));
-  const ordered = [...groups].sort(
-    (a, b) => a.score - b.score || a.price - b.price,
-  );
-  const placed: {
-    key: string;
-    ax: number;
-    ay: number;
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
-  }[] = [];
+  const placed: { box: Box; lead: Segment | null }[] = [];
+  const out: ArenaPlacement[] = [];
 
-  for (let i = 0; i < ordered.length; i++) {
-    const g = ordered[i]!;
+  for (const g of groups) {
     const anchor = anchors.get(g.key);
     if (!anchor) continue;
-    const size = estimateLabelSize(modelLabel(g), mobile);
-    let best = options[i % options.length]!;
-    let bestPen = Infinity;
-    for (let si = 0; si < options.length; si++) {
-      const slot = options[si]!;
-      // Label box anchored near the leader tail; left-side labels extend left.
-      const tailX = anchor.x + slot.ax;
-      const tailY = anchor.y + slot.ay;
-      const left =
-        slot.ax >= 0 ? tailX - 4 : tailX - size.width + 4;
-      const top = tailY - size.height / 2;
-      const right = left + size.width;
-      const bottom = top + size.height;
-      let pen = si === i % options.length ? 0 : 0.25;
-      if (left < box.left + 2) pen += (box.left + 2 - left) * 0.08;
-      if (right > box.right - 2) pen += (right - (box.right - 2)) * 0.08;
-      if (top < box.top + 2) pen += (box.top + 2 - top) * 0.08;
-      if (bottom > box.bottom - 2) pen += (bottom - (box.bottom - 2)) * 0.08;
-      if (left < box.left - 8 || right > box.right + 8) pen += 20;
-      if (top < box.top - 8 || bottom > box.bottom + 8) pen += 20;
-      for (const p of placed) {
-        const ox = Math.min(right, p.right) - Math.max(left, p.left);
-        const oy = Math.min(bottom, p.bottom) - Math.max(top, p.top);
-        if (ox > 0 && oy > 0) pen += 14 + ox * 0.05 + oy * 0.05;
-      }
-      // Keep names clear of every logo, including neighbouring frontier points.
-      const logoPad = LOGO_SIZE / 2 + 4;
-      for (const other of anchors.values()) {
+    const label = modelLabel(g);
+    const size = measureLabel(label, mobile);
+    let best: { slot: (typeof DIRECTIONS)[number] & { ax: number; ay: number }; box: Box; lead: Segment | null } | null = null;
+    let bestPenalty = Infinity;
+    let index = 0;
+    for (const gap of RING_GAPS) {
+      for (const dir of DIRECTIONS) {
+        const distance = anchor.r + gap;
+        const slot = {
+          ...dir,
+          ax: Math.round(dir.dx * distance),
+          ay: Math.round(
+            dir.dy * (distance + (dir.anchor === "center" ? size.height / 2 : 0)),
+          ),
+        };
+        const rect = labelBox(anchor.x, anchor.y, slot, size);
+        const lead = leaderSegment(anchor.x, anchor.y, rect, anchor.r);
+        let penalty = index++ * 0.6;
         if (
-          right > other.x - logoPad && left < other.x + logoPad &&
-          bottom > other.y - logoPad && top < other.y + logoPad
-        ) pen += 40;
-      }
-      if (pen < bestPen) {
-        bestPen = pen;
-        best = slot;
+          rect.left < box.left + 2 ||
+          rect.right > box.right - 2 ||
+          rect.top < box.top + 2 ||
+          rect.bottom > box.bottom - 2
+        ) {
+          penalty += BLOCKED;
+        }
+        for (const other of placed) {
+          if (boxesOverlap(rect, other.box, 3)) penalty += BLOCKED;
+        }
+        for (const marker of markers) {
+          if (marker.key === g.key) continue;
+          if (boxCoversMarker(rect, marker)) {
+            penalty += BLOCKED;
+          }
+        }
+        if (lead) {
+          penalty += Math.hypot(lead.x2 - lead.x1, lead.y2 - lead.y1) * 0.08;
+          for (const other of placed) {
+            if (other.lead && segmentsCross(lead, other.lead)) penalty += 35;
+          }
+        }
+        if (penalty < bestPenalty) {
+          bestPenalty = penalty;
+          best = { slot, box: rect, lead };
+        }
       }
     }
-    const tailX = anchor.x + best.ax;
-    const tailY = anchor.y + best.ay;
-    const left = best.ax >= 0 ? tailX - 4 : tailX - size.width + 4;
-    const top = tailY - size.height / 2;
-    placed.push({
+    if (!best || bestPenalty >= BLOCKED) continue;
+    placed.push({ box: best.box, lead: best.lead });
+    out.push({
       key: g.key,
-      ax: best.ax,
-      ay: best.ay,
-      left,
-      top,
-      right: left + size.width,
-      bottom: top + size.height,
+      price: g.price,
+      score: g.score,
+      label,
+      provider: labelProvider(g),
+      ax: best.slot.ax,
+      ay: best.slot.ay,
+      anchor: best.slot.anchor,
+      width: size.width,
+      height: size.height,
+      radius: anchor.r,
     });
   }
-
-  const byKey = new Map(placed.map((p) => [p.key, p]));
-  return groups.flatMap((g) => {
-    const p = byKey.get(g.key);
-    if (!p) return [];
-    return [
-      {
-        key: g.key,
-        price: g.price,
-        score: g.score,
-        label: modelLabel(g),
-        provider: labelProvider(g),
-        ax: p.ax,
-        ay: p.ay,
-      },
-    ];
-  });
+  return out;
 }
 
 export function textLabelViews(
@@ -345,75 +492,24 @@ export function textLabelViews(
   if (!box) return [];
   const out: TextLabelView[] = [];
   for (const p of placements) {
-    const pt = dataToPixel(layout, p.price, p.score);
+    const pt = dataToPixel(layout, p.price, p.score, box);
     if (!pt) continue;
-    const x1 = pt.x + p.ax;
-    const y1 = pt.y + p.ay;
-    const size = estimateLabelSize(p.label, box.width < 420);
-    const left = p.ax >= 0 ? x1 - 4 : x1 - size.width + 4;
-    const top = y1 - size.height / 2;
+    const rect = labelBox(pt.x, pt.y, p, p);
     const visible =
-      inPlotBox(pt.x, pt.y, box, -LOGO_SIZE / 2) &&
-      left < box.right &&
-      left + size.width > box.left &&
-      top < box.bottom &&
-      top + size.height > box.top;
+      inPlotBox(pt.x, pt.y, box, -p.radius) &&
+      rect.left < box.right &&
+      rect.right > box.left &&
+      rect.top < box.bottom &&
+      rect.bottom > box.top;
     out.push({
       ...p,
-      x0: pt.x,
-      y0: pt.y,
-      x1,
-      y1,
+      left: rect.left,
+      top: rect.top,
+      lead: leaderSegment(pt.x, pt.y, rect, p.radius),
       inPlot: visible,
     });
   }
   return out;
-}
-
-async function toDataUrl(url: string): Promise<string> {
-  if (url.startsWith("data:")) return url;
-  const hit = logoDataCache.get(url);
-  if (hit) return hit;
-  const job = fetch(url)
-    .then(async (res) => {
-      if (!res.ok) return url;
-      const ctype = res.headers.get("content-type") ?? "";
-      if (ctype.includes("svg") || url.includes(".svg")) {
-        const text = await res.text();
-        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(text)}`;
-      }
-      const blob = await res.blob();
-      return await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result));
-        reader.onerror = () => reject(reader.error);
-        reader.readAsDataURL(blob);
-      });
-    })
-    .catch(() => url);
-  logoDataCache.set(url, job);
-  return job;
-}
-
-export async function resolveLogoDataUrl(
-  provider: string,
-): Promise<string | undefined> {
-  const url = providerLogoUrl(provider);
-  if (!url) return undefined;
-  return toDataUrl(url);
-}
-
-export async function logoUrlMap(
-  providers: string[],
-): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  await Promise.all(
-    [...new Set(providers)].map(async (provider) => {
-      const src = await resolveLogoDataUrl(provider);
-      if (src) map.set(provider, src);
-    }),
-  );
-  return map;
 }
 
 function escapeHtml(s: string): string {
@@ -439,24 +535,28 @@ export function buildExportDecorationsFromLayout(
 ): {
   annotations: Partial<Annotations>[];
   images: Array<Partial<Image> & Record<string, unknown>>;
+  shapes: Array<Record<string, unknown>>;
 } {
   const box = plotBox(layout);
   const xa = layout.xaxis;
   const ya = layout.yaxis;
   const annotations: Partial<Annotations>[] = [];
   const images: Array<Partial<Image> & Record<string, unknown>> = [];
+  const shapes: Array<Record<string, unknown>> = [];
   if (!box || !xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) {
-    return { annotations, images };
+    return { annotations, images, shapes };
   }
+  const toPaperX = (px: number) => (px - box.left) / box.width;
+  const toPaperY = (py: number) => 1 - (py - box.top) / box.height;
 
   for (const g of front) {
     const src = logos.get(labelProvider(g));
     if (!src) continue;
-    const xLin = xa.d2l(g.price);
-    const yLin = ya.d2l(g.score);
-    // Plot-area normalized coords (Plotly paper for images/annotations).
-    const fx = xa.l2p(xLin) / box.width;
-    const fy = 1 - ya.l2p(yLin) / box.height;
+    const pt = dataToPixel(layout, g.price, g.score, box);
+    if (!pt) continue;
+    // Plot-area normalized coords (Plotly paper for images/annotations/shapes).
+    const fx = toPaperX(pt.x);
+    const fy = toPaperY(pt.y);
     if (fx < -0.05 || fx > 1.05 || fy < -0.05 || fy > 1.05) continue;
     images.push({
       source: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
@@ -478,22 +578,34 @@ export function buildExportDecorationsFromLayout(
 
   const fontSize = mobile ? 10 : 11;
   for (const p of textPlacements) {
+    const pt = dataToPixel(layout, p.price, p.score, box);
+    if (!pt) continue;
+    const rect = labelBox(pt.x, pt.y, p, p);
+    const lead = leaderSegment(pt.x, pt.y, rect, p.radius);
+    if (lead) {
+      // Annotation arrows cannot be dashed, so leaders are dotted shapes.
+      shapes.push({
+        type: "line",
+        xref: "paper",
+        yref: "paper",
+        x0: toPaperX(lead.x1),
+        y0: toPaperY(lead.y1),
+        x1: toPaperX(lead.x2),
+        y1: toPaperY(lead.y2),
+        line: { color: "#aab1ba", width: 1, dash: "dot" },
+        layer: "above",
+      });
+    }
     annotations.push({
-      x: Math.log10(p.price),
-      y: p.score,
-      xref: "x",
-      yref: "y",
-      ax: p.ax,
-      ay: p.ay,
-      axref: "pixel",
-      ayref: "pixel",
-      xanchor: p.ax >= 0 ? "left" : "right",
+      x: toPaperX(pt.x + p.ax),
+      y: toPaperY(pt.y + p.ay),
+      xref: "paper",
+      yref: "paper",
+      xanchor:
+        p.anchor === "center" ? "center" : p.anchor === "left" ? "left" : "right",
+      yanchor: "middle",
       text: escapeHtml(p.label),
-      showarrow: true,
-      arrowhead: 0,
-      arrowwidth: 1,
-      arrowcolor: "#9aa3ad",
-      standoff: LOGO_SIZE / 2,
+      showarrow: false,
       bgcolor: "rgba(255,255,255,0.96)",
       bordercolor: "#e1e4e8",
       borderwidth: 1,
@@ -504,10 +616,10 @@ export function buildExportDecorationsFromLayout(
         family:
           "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
       },
-      align: p.ax >= 0 ? "left" : "right",
+      align: "center",
       captureevents: false,
     });
   }
 
-  return { annotations, images };
+  return { annotations, images, shapes };
 }

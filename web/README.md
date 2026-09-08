@@ -95,4 +95,16 @@ The Intelligence Index uses v4.3 and Coding Agent Index uses v1.4, captured on S
 
 The site payload omits mapping fields that exactly match their referenced configuration. `unpackData` restores them before use; a deep-equality test checks every restored mapping against the original derived data. Complete source downloads remain available. This saves about 289 KB in the static upload without dropping data.
 
-Latest verified preview: https://real-api-pricing-r3pgysog6-feizhululus-projects.vercel.app (deployment `dpl_46Lvkra2NBjmz3oT5tpsCtcKZZcm`). Frontier points now use centered provider-logo buttons; names sit beside them with leader lines, and the model cards below remain. Kimi uses a black K with a blue dot. PNG/SVG export embeds the same logo markers and retains the detail key. Production has not been promoted.
+Earlier verified preview: https://real-api-pricing-r3pgysog6-feizhululus-projects.vercel.app (deployment `dpl_46Lvkra2NBjmz3oT5tpsCtcKZZcm`). Frontier points use centered provider logos; names sit beside them with leader lines, and the model cards below remain. Kimi uses a black K with a blue dot. PNG/SVG export embeds the same logo markers and retains the detail key. Production URL: https://real-api-pricing-feizhululus-projects.vercel.app .
+
+Rankings and the detail table use separate bounded scroll panels rather than pagination. Ranking PNG/SVG and table CSV exports include all filtered rows. The contribution link opens `.github/ISSUE_TEMPLATE/contribute-data.md` on GitHub.
+
+### Scatter overlay: names, hover and panning (2026-09-09)
+
+The logo markers and model names are HTML drawn over the Plotly canvas (`chartLabels.ts` + `Chart.tsx`), so three rules keep them part of the chart instead of a second layer floating above it:
+
+- **Positions come from the live axis ranges, not `l2p`.** While Plotly pans it rewrites `axis.range` every frame but only rebuilds the pixel scale when the gesture ends, so `l2p` lags a drag. `dataToPixel` maps through `range` instead, and `plotly_relayouting` reprojects the overlay on every animation frame. Slots are only re-solved on `plotly_relayout`/`plotly_afterplot`/resize, so names travel with their points during a drag rather than reshuffling.
+- **Names take the nearest free slot.** `placeTextLabels` tries above, below, right, left, then the diagonals, at three distances from the marker edge, and scores each candidate on label collisions, covered markers, crossing leaders, leader length and plot-edge overflow. A name with no clear slot is dropped instead of stacked; the point, its hover card and the table still carry it. Widths come from a hidden copy of the real label element, so CJK and Latin names reserve exactly what they render.
+- **Hover and click belong to Plotly.** The overlay is `pointer-events: none`, which is why hovering a logo used to show nothing while hovering just beside it worked. Traces use `hoverinfo: "none"` and `plotly_hover` feeds a styled React card, plus a scaled logo or a grown dot for the hovered point. Frontier hit targets are the first trace and share the dot radius: Plotly keeps the earliest trace on a distance tie and its distance floor (`1 - 3/radius`) favours small markers, so a fat invisible marker would lose its own point to a neighbouring dot.
+
+Exports rebake the same geometry into Plotly paper coordinates: logos as images, names as arrow-less annotations, leaders as dotted shapes, since annotation arrows cannot be dashed.
