@@ -76,13 +76,13 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02529" data-score="62.6388" data-x="816.590" data-y="349.276" transform="translate(816.590 349.276)"><title>Kimi K3 · Kimi Membership 199 · $0.02529/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02023" data-score="62.6388" data-x="851.469" data-y="349.276" transform="translate(851.469 349.276)"><title>Kimi K3 · Kimi Membership 199 · $0.02023/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06295" data-score="62.6388" data-x="674.111" data-y="349.276" transform="translate(674.111 349.276)"><title>Kimi K3 · Kimi Membership 99 · $0.06295/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05036" data-score="62.6388" data-x="708.975" data-y="349.276" transform="translate(708.975 349.276)"><title>Kimi K3 · Kimi Membership 99 · $0.05036/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02961" data-score="62.6388" data-x="791.950" data-y="349.276" transform="translate(791.950 349.276)"><title>Kimi K3 · Kimi Membership 699 · $0.02961/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02369" data-score="62.6388" data-x="826.801" data-y="349.276" transform="translate(826.801 349.276)"><title>Kimi K3 · Kimi Membership 699 · $0.02369/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.14901" data-score="38.1218" data-x="539.485" data-y="653.803" transform="translate(539.485 653.803)"><title>Qwen3.7 Plus · Alibaba Cloud Coding Plan Pro · $0.14901/MTok · 38.1218 · mediumClaude Code - Qwen3.7 Plus (thinking) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -260,7 +260,7 @@
 <text x="991.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Pareto frontier</text>
 <path d="M1142 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1156.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
-<text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Month = 4 weeks · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
+<text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
 <text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >42 subscription positions / 9 API positions / 4 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>

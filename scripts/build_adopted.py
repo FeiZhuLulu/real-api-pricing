@@ -2,7 +2,7 @@
 """生成 data/adopted.csv：每个 (套餐, 实际服务模型) 一行，一个采用值。
 
 所有取舍在这里写死并注明理由；原始多源数据留在 data/subscription-quotas*.json 不动。
-真实单价 = 月费(USD) / 月 token（全口径：输入+缓存读+缓存写+输出一视同仁，月=4周，饱和使用）。
+真实单价 = 月费(USD) / 月 token（全口径：输入+缓存读+缓存写+输出一视同仁；默认月=4周，厂商独立月池除外；饱和使用）。
 """
 from __future__ import annotations
 
@@ -25,6 +25,7 @@ CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
 CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
 KIMI_199_USED_TOKENS = 243_739_068
 KIMI_199_USED_FRACTION = 0.84
+KIMI_MONTHLY_TO_WEEKLY = 5
 
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
 
@@ -46,7 +47,11 @@ def chatgpt_luna_monthly_yi(plan_multiplier: float = 1) -> float:
 
 
 def kimi_199_monthly_yi() -> float:
-    return round(KIMI_199_USED_TOKENS / KIMI_199_USED_FRACTION * MONTH_WEEKS / YI, 2)
+    return round(
+        KIMI_199_USED_TOKENS / KIMI_199_USED_FRACTION
+        * KIMI_MONTHLY_TO_WEEKLY / YI,
+        2,
+    )
 
 
 # OpenCode Go 官方给的是共享美元池、每模型月 Usage 和三段价格；按项目统一标准负载折 token。
@@ -253,11 +258,11 @@ SUBS = [
     ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.6", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
     ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.6", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
     ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
-    # Kimi 国内 —— 199 档本机 ccusage 反推，其余按官网倍率 1x/4x/20x/60x
-    ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", kimi_199_monthly_yi(), "medium", f"本机ccusage {KIMI_199_USED_TOKENS}/{KIMI_199_USED_FRACTION:.0%}×{MONTH_WEEKS:g}周；kimi199-round5-swe17-2026-09-05.json", "额度11.61亿不变，high→medium：占比为用户约数，样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7短时面板的模型/统计窗口不同，未替换基准；ACP14.28为旧模型未采"),
-    ("kimi_moderato_cn", "Kimi 会员 99", 99, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 4 / 20, 2), "medium", "199档×官方4/20", "继承199档K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
+    # Kimi 国内 —— 月池是周池的5倍（不是项目通用4周）；199档本机ccusage反推，其余按官网1x/4x/20x/60x
+    ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", kimi_199_monthly_yi(), "medium", f"本机ccusage {KIMI_199_USED_TOKENS}/{KIMI_199_USED_FRACTION:.0%}反推周额度×Kimi月池{KIMI_MONTHLY_TO_WEEKLY:g}倍；kimi-adoption-round6-2026-09-08.json", "旧11.61亿→14.51亿：用户确认Kimi月池=周池×5，旧值误套项目通用4周；样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7短时面板的模型/统计窗口不同，未替换基准；ACP14.28为旧模型旁证，不直接采用"),
+    ("kimi_moderato_cn", "Kimi 会员 99", 99, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 4 / 20, 2), "medium", "199档×官方4/20；kimi-adoption-round6-2026-09-08.json", "旧2.32亿→2.90亿：随199档改用周池×5；继承K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
     ("kimi_andante_cn", "Kimi 会员 49", 49, "CNY", "kimi-k3", round(kimi_199_monthly_yi() / 20, 2), "medium", "199档×官方1/20", ""),
-    ("kimi_allegro_cn", "Kimi 会员 699", 699, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 60 / 20, 2), "medium", "199档×官方60/20", "继承199档K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
+    ("kimi_allegro_cn", "Kimi 会员 699", 699, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 60 / 20, 2), "medium", "199档×官方60/20；kimi-adoption-round6-2026-09-08.json", "旧34.83亿→43.53亿：随199档改用周池×5；继承K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
     # Kimi 海外 —— 不画：官方 Code credits 倍率 1×/5×/15×/30× 与国内 1/4/20/60× 体系不同，且无绝对 token 证据
     # 智谱 —— 官方周积分与三段积分系数按项目统一标准负载换算；忙时与闲时分开按月展示。
     *glm_rows(),
@@ -341,7 +346,7 @@ def is_main(pid: str, model: str) -> bool:
 
 
 EXCLUDED_SUBSCRIPTIONS = {
-    ("kimi_andante_cn", "kimi-k3"): "旧0.58亿为199档×1/20推算，2026-09-05用户确认‘就是不能调用，移除’；官方https://www.kimi.com/code/docs/kimi-code/models限定Moderato及以上可调用K3；不虚构K2.7替代额度"
+    ("kimi_andante_cn", "kimi-k3"): "旧0.58亿为199档按4周×1/20推算；即使按Kimi周池×5修正为0.73亿，也因2026-09-05用户确认‘就是不能调用’而继续排除；官方https://www.kimi.com/code/docs/kimi-code/models限定Moderato及以上可调用K3；不虚构K2.7替代额度"
 }
 
 FIELDS = ["plan_id", "plan_name", "billing", "price", "currency", "price_usd", "served_model",
