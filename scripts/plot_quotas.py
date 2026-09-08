@@ -92,13 +92,13 @@ TEXT = {
     "zh": {
         "quotas_title": "订阅额度总览 · 套餐 × 实际服务模型",
         "prices_title": "真实单价总览 · 订阅与 API 统一对比",
-        "quotas_subtitle": "月 = 4 周，饱和使用；全口径 token；按量 API 无月额度，不参与额度排序",
+        "quotas_subtitle": "默认月 = 4 周，Kimi独立月池 = 周池×5；饱和使用；全口径 token；按量 API 无月额度",
         "prices_subtitle": "美元/credits与API三段价统一按97.5%缓存 / 2.15%输入 / 0.35%输出折算；直接total-token实测不重算",
         "quotas_axis": "月可用 token（亿，对数轴）",
         "prices_axis": "真实单价（美元 / 百万 token，对数轴）",
         "quotas_order": "额度从高到低",
         "prices_order": "单价从低到高",
-        "mixed_note": "除前两条外，其余条形仍按对数轴。01、02 按对 03 的真实倍数重画（01≈6.1×03，02≈1.5×03）；01 横放不下则在右缘折下，穿越右栏处半透明。",
+        "mixed_note": "除前两条外，其余条形仍按对数轴。01、02 按对 03 的真实倍数重画（01≈{ratio1:.1f}×03，02≈{ratio2:.1f}×03）；01 横放不下则在右缘折下，穿越右栏处半透明。",
         "footer": "颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。",
         "shared": "同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。",
         "headers": ["序号", "套餐", "价格/月", "服务模型", "月额度(亿)", "$/MTok", "置信度"],
@@ -107,13 +107,13 @@ TEXT = {
     "en": {
         "quotas_title": "Monthly token allowance | Subscription plan x served model",
         "prices_title": "Effective token price | Subscriptions and APIs compared",
-        "quotas_subtitle": "4 weeks per month, full utilization, all token types; pay-as-you-go APIs have no monthly allowance",
+        "quotas_subtitle": "Default month = 4 weeks; Kimi monthly pool = 5× weekly; full utilization, all token types; APIs have no allowance",
         "prices_subtitle": "Dollar/credit and API rates use 97.5% cache / 2.15% input / 0.35% output; direct total-token measurements are not normalized",
         "quotas_axis": "Monthly tokens (billions, log scale)",
         "prices_axis": "Effective price (USD per million tokens, log scale)",
         "quotas_order": "Highest allowance first",
         "prices_order": "Lowest price first",
-        "mixed_note": "All bars except 01–02 stay on the log scale. Bars 01–02 are redrawn as true multiples of 03 (~6.1× and ~1.5×); 01 folds down the right edge if needed and turns translucent where it crosses the right column.",
+        "mixed_note": "All bars except 01–02 stay on the log scale. Bars 01–02 are redrawn as true multiples of 03 (~{ratio1:.1f}× and ~{ratio2:.1f}×); 01 folds down the right edge if needed and turns translucent where it crosses the right column.",
         "footer": "Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.",
         "shared": "Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.",
         "headers": ["No.", "Plan", "Monthly fee", "Served model", "Monthly tokens (B)", "USD/MTok", "Confidence"],
@@ -204,8 +204,8 @@ def frontier_rule(language: str) -> str:
 
 def evidence_note(language: str) -> str:
     if language == "zh":
-        return "† Kimi：¥199样本以K3-256K为主，约84%反推11.61亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。"
-    return "† Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default."
+        return "† Kimi：¥199样本以K3-256K为主，约84%反推周池，月池按Kimi规则取周池5倍得14.51亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。"
+    return "† Kimi: CNY199 uses a K3-256K-dominant / ~84% weekly sample; Kimi's monthly pool is 5× the weekly pool, giving 1.451B tokens. Other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default."
 
 
 def exchange_note(language: str) -> str:
@@ -334,8 +334,8 @@ def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
         ann += f"  = {ratio:.1f}×03"
         left_end = tax.bbox.x1 / fw
         if drop > 0:
-            fig.text(fold_x + 0.003, max(y_fig - drop, 0.16), ann,
-                     transform=fig.transFigure, ha="left", va="top", fontsize=10,
+            fig.text(0.995, max(y_fig - drop, 0.16), ann,
+                     transform=fig.transFigure, ha="right", va="top", fontsize=10,
                      fontweight="bold", color="#20252B", zorder=23,
                      bbox=dict(facecolor="white", alpha=0.9, edgecolor="none", pad=1.1))
         else:
@@ -354,7 +354,14 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     half = (len(rows) + ncols - 1) // ncols
     mixed_scale = bool(mixed_scale and view == "quotas" and board is None and ncols == 2)
     mixed = None
-    fig, axes = plt.subplots(1, ncols, figsize=(16, 9) if board else (24, 13.5),
+    if board:
+        figsize = (16, 9)
+    elif mixed_scale:
+        # 两栏各约 87 行；13.5 英寸时 10pt 标签的实际行距不足，会互相覆盖。
+        figsize = (24, 18)
+    else:
+        figsize = (24, 13.5)
+    fig, axes = plt.subplots(1, ncols, figsize=figsize,
                              sharex=True, squeeze=False)
     axes = axes[0]
     if board:
@@ -427,7 +434,9 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     else:
         y0 = 0.082 if mixed_scale else 0.068
         if mixed_scale:
-            fig.text(0.5, 0.096, text["mixed_note"], ha="center", fontsize=9, color="#505A64")
+            mixed_note = text["mixed_note"].format(
+                ratio1=values[0] / values[2], ratio2=values[1] / values[2])
+            fig.text(0.5, 0.096, mixed_note, ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0, text["footer"], ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0 - 0.018, text["shared"], ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0 - 0.036, evidence_note(language), ha="center", fontsize=9, color="#505A64")

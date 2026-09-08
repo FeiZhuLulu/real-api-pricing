@@ -96,13 +96,13 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02908" data-score="1625" data-x="794.772" data-y="351.000" transform="translate(794.772 351.000)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02529" data-score="1674" data-x="816.590" data-y="290.137" transform="translate(816.590 290.137)"><title>Kimi K3 · Kimi 会员 199 · $0.02529/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02023" data-score="1674" data-x="851.469" data-y="290.137" transform="translate(851.469 290.137)"><title>Kimi K3 · Kimi 会员 199 · $0.02023/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06295" data-score="1674" data-x="674.111" data-y="290.137" transform="translate(674.111 290.137)"><title>Kimi K3 · Kimi 会员 99 · $0.06295/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05036" data-score="1674" data-x="708.975" data-y="290.137" transform="translate(708.975 290.137)"><title>Kimi K3 · Kimi 会员 99 · $0.05036/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02961" data-score="1674" data-x="791.950" data-y="290.137" transform="translate(791.950 290.137)"><title>Kimi K3 · Kimi 会员 699 · $0.02961/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02369" data-score="1674" data-x="826.801" data-y="290.137" transform="translate(826.801 290.137)"><title>Kimi K3 · Kimi 会员 699 · $0.02369/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.08211" data-score="1609" data-x="632.595" data-y="370.874" transform="translate(632.595 370.874)"><title>GLM 5.3 · GLM Lite (新客 ¥118) 忙时 · $0.08211/MTok · 1609 · highglm-5.3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -476,7 +476,7 @@
 <text x="1074.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
 <path d="M1164 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1178.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
-<text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >月=4周 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
+<text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
 <text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >109 个订阅位置 / 11 个 API 位置 / 5 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>

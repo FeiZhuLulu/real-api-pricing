@@ -4,7 +4,7 @@ Effective token price | Subscriptions and APIs compared
 Dollar/credit and API rates use 97.5% cache / 2.15% input / 0.35% output; direct total-token measurements are not normalized
 Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.
 Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.
-† Kimi: CNY199 uses a K3-256K-dominant sample / ~84%; other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default.
+† Kimi: CNY199 uses a K3-256K-dominant / ~84% weekly sample; Kimi's monthly pool is 5× the weekly pool, giving 1.451B tokens. Other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default.
 FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate.
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 No.  Plan                                     Monthly fee  Served model   Monthly tokens (B)  USD/MTok  Confidence  Intelligence Index  Score variant        Harness  Reasoning effort  Mapping

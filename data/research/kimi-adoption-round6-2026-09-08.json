@@ -1,0 +1,60 @@
+{
+  "collectedAt": "2026-09-08",
+  "scopeNote": "Kimi 国内订阅月池与周池关系专项更正。追加用户确认与既有面板比例交叉检查；不修改历史 research 文件。",
+  "items": [
+    {
+      "planId": "kimi_allegretto_cn",
+      "model": "kimi-k3",
+      "evidenceType": "user_confirmation",
+      "source": "user_confirmation_2026-09-08",
+      "quote": "kimi的订阅月额度是周额度的5倍",
+      "decision": "Kimi 使用独立的月池/周池倍率5，不套 data/conventions.json 的项目通用 monthWeeks=4。",
+      "confidence": "high"
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "model": "kimi-for-coding",
+      "evidenceType": "dashboard_ratio_cross_check",
+      "source": "https://www.v2ex.com/t/1235826",
+      "observed": {
+        "totalTokens": 11913113,
+        "weeklyUsedFraction": 0.0378,
+        "monthlyUsedFraction": 0.0076
+      },
+      "calculation": {
+        "weeklyTokens": 315161719.5767196,
+        "monthlyTokens": 1567514868.4210527,
+        "monthlyToWeeklyRatio": 4.973684210526316,
+        "formula": "同一token样本分别除以周/月使用率；等价地 3.78% / 0.76% = 4.9737"
+      },
+      "note": "同一面板样本独立支持月池约为周池5倍；模型为K2.7 Code，仅用于验证池周期比例，不替换K3-256K为主的周token基准。",
+      "confidence": "high"
+    }
+  ],
+  "adoptionCalculation": {
+    "weeklyUsedTokens": 243739068,
+    "weeklyUsedFraction": 0.84,
+    "weeklyTokens": 290165557.14285713,
+    "monthlyToWeeklyRatio": 5,
+    "monthlyTokensExact": 1450827785.7142856,
+    "adoptedMonthlyYi199": 14.51,
+    "adoptedMonthlyYi99": 2.9,
+    "adoptedMonthlyYi699": 43.53,
+    "tierRatios": {
+      "kimi_99_to_199": "4/20",
+      "kimi_699_to_199": "60/20"
+    },
+    "roundingNote": "沿用脚本现行顺序：¥199先取14.51亿，再按套餐倍率派生¥99和¥699。"
+  },
+  "superseded": {
+    "method": "Kimi周token基准乘项目通用4周",
+    "valuesMonthlyYi": {
+      "kimi_99": 2.32,
+      "kimi_199": 11.61,
+      "kimi_699": 34.83
+    }
+  },
+  "exclusion": {
+    "kimi_49": "继续排除：该档无K3调用权限；月池倍率更正不改变服务模型可用性。"
+  }
+}

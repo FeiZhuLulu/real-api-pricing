@@ -37,7 +37,7 @@ TEMPLATE = r"""<!doctype html>
 </style></head><body>
 <header>
   <h1><mark>帕累托前沿</mark> 真实单价 × 评测配置参考</h1>
-  <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 月 = 4 周）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro保留Opus4.8历史实测。</div>
+  <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 默认月 = 4 周；Kimi独立月池=周池×5）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro保留Opus4.8历史实测。</div>
   <div class="bar">
     <label>Y 轴榜单 <select id="board"></select></label>
     <label>评测配置 <select id="configuration"><option value="all">全部配置（参考映射）</option><option value="summary">最高分汇总（参考）</option></select></label>
