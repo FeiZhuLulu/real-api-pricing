@@ -1,0 +1,52 @@
+{
+  "collectedAt": "2026-09-08",
+  "scopeNote": "Kimi 国内会员 K2.7 Code Standard 采用决策。承接 kimi-k27-round7-2026-09-08.json 的多源证据，不覆盖历史文件。",
+  "userDecision": {
+    "quote": "可以，就这样",
+    "acceptedProposal": "K2.7 Standard，¥199采用15.68亿/月，confidence=medium；decision_note记录可信范围约15.6~16.7亿，不取区间中点。"
+  },
+  "adoption": {
+    "servedModel": "kimi-k2.7-code",
+    "basePlanId": "kimi_allegretto_cn",
+    "basePlanPriceCny": 199,
+    "observedTokens": 11913113,
+    "observedMonthlyUsedFraction": 0.0076,
+    "monthlyTokensExact": 1567514868.4210527,
+    "adoptedMonthlyYi": 15.68,
+    "confidence": "medium",
+    "plausibleRangeMonthlyYi": [15.6, 16.7],
+    "source": "https://v2ex.com/t/1235826",
+    "reason": "15.68亿来自纯K2.7直接月百分比反推；699档独立混合大样本按官方3倍缩回约16.74亿，只作量级旁证。单一纯模型账号证据本身high，但跨账号与时期采用为medium。"
+  },
+  "derivedTiers": [
+    {
+      "planId": "kimi_andante_cn",
+      "priceCny": 49,
+      "officialMultiplier": 1,
+      "monthlyYi": 0.78,
+      "note": "K2.7 Standard所有会员可用；¥49仅排除K3。"
+    },
+    {
+      "planId": "kimi_moderato_cn",
+      "priceCny": 99,
+      "officialMultiplier": 4,
+      "monthlyYi": 3.14
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "priceCny": 199,
+      "officialMultiplier": 20,
+      "monthlyYi": 15.68
+    },
+    {
+      "planId": "kimi_allegro_cn",
+      "priceCny": 699,
+      "officialMultiplier": 60,
+      "monthlyYi": 47.04
+    }
+  ],
+  "exclusions": {
+    "kimi-for-coding-highspeed": "未采用：尚无可用绝对token样本；不能把Standard样本直接套给3倍消耗的HighSpeed。",
+    "kimi-k2.6": "未采用到Kimi当前订阅：只有2026-05旧时期满周样本与第三方套餐换算，不能外推当前K2.7/K3额度。"
+  }
+}

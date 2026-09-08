@@ -16,32 +16,52 @@ Each chart uses scores from its named leaderboard only. Code Arena here specific
 
 ## Data snapshot
 
-Snapshot: 2026-09-07. Each row is one **plan × actual served model**; allowances of different models under the same plan are alternatives and must not be added together.
+AA Intelligence now uses **Intelligence Index v4.3** (announced September 7, 2026); AA Coding Agent remains **v1.4**. The new intelligence methodology replaces the old snapshot as a whole: lower numerical scores are not evidence of model regression across index versions. All configurations within the selected snapshot are retained, including explicitly marked AA estimates. Historical evidence stays in `data/research/`.
+
+Snapshot: 2026-09-09. Each row is one **plan × actual served model**; allowances of different models under the same plan are alternatives and must not be added together.
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | 184 |
-| Subscription points with monthly allowance | 173 |
+| All adopted plan × model points | 188 |
+| Subscription points with monthly allowance | 177 |
 | Metered API baselines | 11 |
 | OpenCode Go / Command Code GOAT / Ollama models | 28 / 38 / 20 |
-| Code Arena / Agent Arena scored points | 134 / 138 |
-| AA Intelligence / AA Coding Agent scored points | 131 / 59 |
+| Code Arena / Agent Arena scored points | 138 / 142 |
+| AA Intelligence / AA Coding Agent scored points | 169 / 73 |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
 
 ## Monthly allowance overview
 
-All 173 subscription plan × model points, sorted by monthly usable tokens. The standard chart keeps a single logarithmic scale; the hybrid-scale view makes the two very large ChatGPT allowances easier to compare.
+The 177 subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
 
-[English SVG](charts/en/overview/monthly-allowance-overview.svg) · [中文 SVG](charts/zh/overview/额度总览.svg) · [English PNG](charts/en/overview/monthly-allowance-overview.png) · [中文 PNG](charts/zh/overview/额度总览.png) · [Hybrid-scale view](charts/en/overview/monthly-allowance-overview-hybrid-scale.svg)
+### $0–30
 
-![Monthly allowance overview](charts/en/overview/monthly-allowance-overview.svg)
+[English SVG](charts/en/overview/monthly-allowance-overview-fee-0-30-usd.svg) · [中文 SVG](charts/zh/overview/额度总览_月费0-30美元.svg) · [English PNG](charts/en/overview/monthly-allowance-overview-fee-0-30-usd.png) · [中文 PNG](charts/zh/overview/额度总览_月费0-30美元.png)
 
-**Full table:** [English TXT](charts/en/overview/monthly-allowance-overview-table.txt) · [中文 TXT](charts/zh/overview/额度总览表.txt)
+![Monthly allowance $0–30](charts/en/overview/monthly-allowance-overview-fee-0-30-usd.svg)
+
+**Table:** [English TXT](charts/en/overview/monthly-allowance-overview-fee-0-30-usd-table.txt) · [中文 TXT](charts/zh/overview/额度总览表_月费0-30美元.txt)
+
+### >$30–$100
+
+[English SVG](charts/en/overview/monthly-allowance-overview-fee-30-100-usd.svg) · [中文 SVG](charts/zh/overview/额度总览_月费30-100美元.svg) · [English PNG](charts/en/overview/monthly-allowance-overview-fee-30-100-usd.png) · [中文 PNG](charts/zh/overview/额度总览_月费30-100美元.png)
+
+![Monthly allowance >$30–$100](charts/en/overview/monthly-allowance-overview-fee-30-100-usd.svg)
+
+**Table:** [English TXT](charts/en/overview/monthly-allowance-overview-fee-30-100-usd-table.txt) · [中文 TXT](charts/zh/overview/额度总览表_月费30-100美元.txt)
+
+### >$100 and ≤$300
+
+[English SVG](charts/en/overview/monthly-allowance-overview-fee-100-300-usd.svg) · [中文 SVG](charts/zh/overview/额度总览_月费100-300美元.svg) · [English PNG](charts/en/overview/monthly-allowance-overview-fee-100-300-usd.png) · [中文 PNG](charts/zh/overview/额度总览_月费100-300美元.png)
+
+![Monthly allowance >$100 and ≤$300](charts/en/overview/monthly-allowance-overview-fee-100-300-usd.svg)
+
+**Table:** [English TXT](charts/en/overview/monthly-allowance-overview-fee-100-300-usd-table.txt) · [中文 TXT](charts/zh/overview/额度总览表_月费100-300美元.txt)
 
 ## Real unit price overview
 
-All 184 subscription and API points on one comparable $/MTok scale.
+All 188 subscription and API points on one comparable $/MTok scale.
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 

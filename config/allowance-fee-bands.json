@@ -1,0 +1,5 @@
+[
+  {"id":"0-30","min":0,"max":30,"minInclusive":true,"maxInclusive":true,"label":"$0–30","labelZh":"$0–30（含 $30）","labelEn":"$0–30 (inclusive)"},
+  {"id":"30-100","min":30,"max":100,"minInclusive":false,"maxInclusive":true,"label":">$30–$100","labelZh":">$30 且 ≤$100","labelEn":">$30 and ≤$100"},
+  {"id":"100-300","min":100,"max":300,"minInclusive":false,"maxInclusive":true,"label":">$100–$300","labelZh":">$100 且 ≤$300","labelEn":">$100 and ≤$300"}
+]

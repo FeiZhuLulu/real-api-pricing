@@ -63,6 +63,8 @@ def text(x, y, content, size=14, fill="#222522", anchor="start", weight=400, ext
 
 
 def plan_name(plan, language):
+    if plan.startswith("GLM "):
+        plan = plan.replace("老客", "v2").replace("新客", "v3")
     plan = plan.replace("Claude ", "").replace("ChatGPT ", "").replace("GLM Coding ", "GLM ")
     if language == "en":
         return (plan.replace(" (9/14+)", " · from Sep 14")
@@ -90,6 +92,8 @@ def label_lines(p, language, board=None):
         plans = ["Max 5x / 20x · " + ("from Sep 14" if language == "en" else "9/14+")]
     models = list(dict.fromkeys(q["model_display"] for q in p["members"]))
     name = " / ".join(models)
+    if board and any(q.get(board + "__score_is_estimated") for q in p["members"]):
+        name += " [AA estimate]" if language == "en" else " [AA估计]"
     if board:
         effort = p.get(board + "__reasoning_effort")
         harness = p.get(board + "__agent_harness")
@@ -106,10 +110,16 @@ def label_position(p, board, x, y):
     if model == "claude-opus-5":
         return x - 24, y - 49, "end"
     if model == "claude-opus-4.8":
-        return (x + 24, y + 43, "start") if board == "aa_intelligence_index" else (x - 24, y + 13, "end")
+        if board == "aa_intelligence_index":
+            return x + 24, y + 43, "start"
+        if board == "aa_coding_agent_index":
+            return x - 24, y + 47, "end"
+        return x - 24, y + 13, "end"
     if model == "claude-sonnet-5":
         return x + 22, y - 54, "start"
     if model == "glm-5.3":
+        if board == "aa_intelligence_index":
+            return x + 24, y - 72, "start"
         return x + 24, y - (58 if board == "arena_code" else 31), "start"
     if model == "glm-5.3-flash":
         return x + 23, y - 40, "start"
@@ -118,6 +128,8 @@ def label_position(p, board, x, y):
     if model == "gpt-5.6-luna":
         return x + 5, y + 57, "end"
     if model == "gpt-5.6-terra":
+        if board == "aa_intelligence_index":
+            return x - 24, y + 65, "end"
         return x + 24, y - 55, "start"
     return x - 20, y - 52, "end"
 
@@ -158,7 +170,7 @@ def draw(board, meta, points, tier, language="zh"):
          text(384, 143, frontier_caption, 16, "#858B81", weight=300),
          text(1388, 76, BOARDS[board][1], 31, "#343A33", "end", extra='class="serif"'),
          text(1388, 107, snapshot_caption + meta["snapshot"], 12, "#737771", "end"),
-         text(1388, 136, meta["metric"], 12, "#737771", "end"),
+         text(1388, 136, meta["metric"] + (" " + meta["name"].rsplit(" ", 1)[1] if " v" in meta["name"] else ""), 12, "#737771", "end"),
          '<rect x="40" y="184" width="1360" height="612" rx="20" fill="#FFFFFF"/>']
 
     ticks = [.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 5, 10]

@@ -25,6 +25,22 @@ ADOPTED = os.path.join(ROOT, "data", "adopted.csv")
 OUT_DIR = os.path.join(ROOT, "_build")
 with open(os.path.join(ROOT, "data", "conventions.json"), encoding="utf-8") as f:
     CONVENTIONS = json.load(f)
+with open(os.path.join(ROOT, "config", "allowance-fee-bands.json"), encoding="utf-8") as f:
+    FEE_BANDS = json.load(f)
+
+
+def fee_band_rows(rows: list[dict], band: dict) -> list[dict]:
+    """Partition by adopted USD monthly fee; never recompute adopted quotas."""
+    result = []
+    for row in rows:
+        if row["billing"] != "subscription" or not row["monthly_tokens"] or not row["price_usd"]:
+            continue
+        fee = float(row["price_usd"])
+        lower = fee >= band["min"] if band["minInclusive"] else fee > band["min"]
+        upper = fee <= band["max"] if band["maxInclusive"] else fee < band["max"]
+        if lower and upper:
+            result.append(row)
+    return result
 
 if os.path.isfile("C:/Windows/Fonts/msyh.ttc"):
     font_manager.fontManager.addfont("C:/Windows/Fonts/msyh.ttc")
@@ -72,13 +88,15 @@ BOARD_CN = {
 }
 
 
-def output_stem(view: str, board: dict | None, language: str, table: bool = False) -> str:
+def output_stem(view: str, board: dict | None, language: str, table: bool = False, fee_band: dict | None = None) -> str:
     """中文文件名：单价总览 / 前沿单价_Arena榜，英文版加 _英文，文字表加 表。"""
     base = f"前沿{VIEW_CN[view]}" if board else f"{VIEW_CN[view]}总览"
     if table:
         base += "表"
     if board:
         base += f"_{BOARD_CN[board['id']]}"
+    if fee_band:
+        base += f"_月费{fee_band['id']}美元"
     return base + ("_英文" if language == "en" else "")
 
 
@@ -98,7 +116,7 @@ TEXT = {
         "prices_axis": "真实单价（美元 / 百万 token，对数轴）",
         "quotas_order": "额度从高到低",
         "prices_order": "单价从低到高",
-        "mixed_note": "除前两条外，其余条形仍按对数轴。01、02 按对 03 的真实倍数重画（01≈{ratio1:.1f}×03，02≈{ratio2:.1f}×03）；01 横放不下则在右缘折下，穿越右栏处半透明。",
+        "mixed_note": "03及以后保持对数轴；仅重画01、02，其像素长度分别为03的{ratio1:.1f}×和{ratio2:.1f}×。01超出左栏后沿左栏右缘折下，不再穿越右栏。",
         "footer": "颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。",
         "shared": "同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。",
         "headers": ["序号", "套餐", "价格/月", "服务模型", "月额度(亿)", "$/MTok", "置信度"],
@@ -113,7 +131,7 @@ TEXT = {
         "prices_axis": "Effective price (USD per million tokens, log scale)",
         "quotas_order": "Highest allowance first",
         "prices_order": "Lowest price first",
-        "mixed_note": "All bars except 01–02 stay on the log scale. Bars 01–02 are redrawn as true multiples of 03 (~{ratio1:.1f}× and ~{ratio2:.1f}×); 01 folds down the right edge if needed and turns translucent where it crosses the right column.",
+        "mixed_note": "Rows 03 onward stay on the log scale. Only rows 01–02 are redrawn at {ratio1:.1f}× and {ratio2:.1f}× row 03's pixel length; row 01 folds down at the right edge of the left column and never crosses the right column.",
         "footer": "Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.",
         "shared": "Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.",
         "headers": ["No.", "Plan", "Monthly fee", "Served model", "Monthly tokens (B)", "USD/MTok", "Confidence"],
@@ -128,6 +146,8 @@ def vendor_of(plan_id: str) -> str:
 
 def plan_name(row: dict, language: str) -> str:
     name = row["plan_name"]
+    if name.startswith("GLM "):
+        name = name.replace("老客", "v2").replace("新客", "v3")
     if row["plan_id"].startswith("kimi_"):
         name += " †"
     if language == "en":
@@ -204,8 +224,8 @@ def frontier_rule(language: str) -> str:
 
 def evidence_note(language: str) -> str:
     if language == "zh":
-        return "† Kimi：¥199样本以K3-256K为主，约84%反推周池，月池按Kimi规则取周池5倍得14.51亿，非纯1M实测；其余档位按比例推算。OpenCode Go按官方美元池和三段价套统一标准负载换算；Composer Fast为产品默认模式。"
-    return "† Kimi: CNY199 uses a K3-256K-dominant / ~84% weekly sample; Kimi's monthly pool is 5× the weekly pool, giving 1.451B tokens. Other tiers are scaled. OpenCode Go uses official dollar pools and rates under the standard workload. Composer Fast is the product default."
+        return "† Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算。OpenCode Go按官方美元池和三段价套统一标准负载换算。"
+    return "† Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. OpenCode Go uses official dollar pools and rates under the standard workload."
 
 
 def exchange_note(language: str) -> str:
@@ -216,7 +236,7 @@ def exchange_note(language: str) -> str:
     return f"FX: 1 USD = {rate:g} CNY ({fx['date']}, {fx['labelEn']}); CNY monthly fees divided by this rate."
 
 
-def write_text_table(rows: list[dict], view: str, language: str, board: dict | None = None) -> None:
+def write_text_table(rows: list[dict], view: str, language: str, board: dict | None = None, fee_band: dict | None = None) -> None:
     text = TEXT[language]
     head = text["headers"] + ([board["metric"], "得分版本" if language == "zh" else "Score variant",
                                 "Harness", "思考强度" if language == "zh" else "Reasoning effort",
@@ -243,7 +263,9 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
     ]
     if board:
         out = [frontier_caption(board), frontier_rule(language)] + out
-    path = os.path.join(OUT_DIR, output_stem(view, board, language, table=True) + ".txt")
+    if fee_band:
+        out.insert(0, ("订阅月费：" if language == "zh" else "Monthly subscription fee: ") + fee_band["labelZh" if language == "zh" else "labelEn"])
+    path = os.path.join(OUT_DIR, output_stem(view, board, language, table=True, fee_band=fee_band) + ".txt")
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
     print(f"wrote {len(rows)} rows -> {path}")
@@ -272,19 +294,15 @@ def _fig_box(y0, h, ax, fig):
 
 
 def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
-    """其余条保持对数。01、02 条长 = (额度/03) × 03 的像素长；放不下就在右缘折下。"""
+    """03起保持对数；01、02按对03的像素倍数重画，超长部分在左栏右缘折下。"""
     fig.canvas.draw()
-    renderer = fig.canvas.get_renderer()
-    tax, rax = axes[0], axes[-1]
+    tax = axes[0]
     fw, fh = fig.bbox.width, fig.bbox.height
     bars, values, rows = mixed["bars"], mixed["values"], mixed["rows"]
     ref = values[2]
     x0_fig = tax.transData.transform((baseline, 0))[0] / fw
+    x1_fig = tax.bbox.x1 / fw
     ref_len = tax.transData.transform((ref, 0))[0] / fw - x0_fig
-    right_labels = rax.yaxis.get_ticklabels()
-    plot_l = rax.bbox.x0 / fw
-    fold_x = 0.968
-    x_cap = fold_x
 
     def add_rect(x, y, w, h, color, alpha=1.0, z=6):
         if w <= 1e-4 or h <= 1e-4:
@@ -294,59 +312,27 @@ def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
             facecolor=color, alpha=alpha, lw=0, clip_on=False, zorder=z))
 
     for j in (0, 1):
-        def zone_alpha(x_mid, row=j):
-            if x_mid < plot_l - 0.002:
-                if row < len(right_labels) and right_labels[row].get_window_extent(renderer).width:
-                    lab_x0 = right_labels[row].get_window_extent(renderer).x0 / fw
-                    if x_mid >= lab_x0 - 0.004:
-                        return 0.16
-                return 1.0
-            return 0.22
-
         color = VENDOR_COLORS[vendor_of(rows[j]["plan_id"])]
         ratio = values[j] / ref
-        target_px = ref_len * ratio * fw
         y_fig, h_fig = _fig_box(bars[j].get_y(), bars[j].get_height(), tax, fig)
-        if j < len(right_labels) and right_labels[j].get_window_extent(renderer).width:
-            lab_x = right_labels[j].get_window_extent(renderer).x0 / fw - 0.003
-        else:
-            lab_x = plot_l
-        horiz = min(target_px / fw, x_cap - x0_fig)
-        drop = max(0.0, (target_px - horiz * fw) / fh)
-        cuts = sorted({x0_fig, lab_x, plot_l, x0_fig + horiz})
-        cuts = [c for c in cuts if x0_fig - 1e-6 <= c <= x0_fig + horiz + 1e-6]
-        for a, b in zip(cuts, cuts[1:]):
-            add_rect(a, y_fig, b - a, h_fig, color, zone_alpha((a + b) / 2))
-        if drop > 0:
-            vx = x0_fig + horiz - h_fig
-            add_rect(vx, y_fig - drop, h_fig, drop, color, 1.0, z=7)
-            add_rect(vx, y_fig, h_fig, h_fig, color, 1.0, z=7)
-        # 只有横条真压到右栏行名时才重描；02 的数字绝不写进槽里
-        if drop > 0 and j < len(right_labels):
-            lab = right_labels[j]
-            bb = lab.get_window_extent(renderer)
-            lab.set_alpha(0)
-            fig.text(bb.x0 / fw, (bb.y0 + bb.y1) / 2 / fh, lab.get_text(),
-                     transform=fig.transFigure, ha="left", va="center",
-                     fontsize=10, color="#20252B", zorder=24,
-                     fontfamily="Microsoft YaHei")
+        target = ref_len * ratio
+        horizontal = min(target, x1_fig - x0_fig)
+        add_rect(x0_fig, y_fig, horizontal, h_fig, color)
+        drop = max(0.0, (target - horizontal) * fw / fh)
+        if drop:
+            fold_x = x1_fig - h_fig
+            add_rect(fold_x, y_fig - drop, h_fig, drop + h_fig, color, alpha=0.28, z=7)
         ann = annotation_of(rows[j], values[j], view, language, None)
         ann += f"  = {ratio:.1f}×03"
-        left_end = tax.bbox.x1 / fw
-        if drop > 0:
-            fig.text(0.995, max(y_fig - drop, 0.16), ann,
-                     transform=fig.transFigure, ha="right", va="top", fontsize=10,
-                     fontweight="bold", color="#20252B", zorder=23,
-                     bbox=dict(facecolor="white", alpha=0.9, edgecolor="none", pad=1.1))
-        else:
-            fig.text(left_end - 0.008, y_fig + h_fig / 2, ann,
-                     transform=fig.transFigure, ha="right", va="center", fontsize=10,
-                     fontweight="bold", color="#20252B", zorder=23,
-                     bbox=dict(facecolor="white", alpha=0.88, edgecolor="none", pad=0.8))
+        fig.text(x1_fig - 0.006 if drop else x0_fig + horizontal + 0.004,
+                 y_fig + h_fig / 2, ann, transform=fig.transFigure,
+                 ha="right" if drop else "left", va="center", fontsize=9.5,
+                 fontweight="bold", color="#20252B", zorder=23,
+                 bbox=dict(facecolor="white", alpha=0.9, edgecolor="none", pad=0.8))
 
 
 def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
-         mixed_scale: bool = False) -> None:
+         mixed_scale: bool = False, fee_band: dict | None = None) -> None:
     text = TEXT[language]
     values = [monthly_value(r, language) if view == "quotas"
               else float(r["real_usd_per_mtok"]) for r in rows]
@@ -355,22 +341,23 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     mixed_scale = bool(mixed_scale and view == "quotas" and board is None and ncols == 2)
     mixed = None
     if board:
-        figsize = (16, 9)
-    elif mixed_scale:
-        # 两栏各约 87 行；13.5 英寸时 10pt 标签的实际行距不足，会互相覆盖。
-        figsize = (24, 18)
+        figsize = (18, 10)
     else:
-        figsize = (24, 13.5)
+        # 两栏总览保持每行约 0.28 英寸的有效高度；数据增长时自动增高。
+        figsize = (24, max(8, half * 0.38 + 3.2)) if fee_band else (24, max(18, half * 0.31 + 3.2))
     fig, axes = plt.subplots(1, ncols, figsize=figsize,
                              sharex=True, squeeze=False)
     axes = axes[0]
     if board:
-        fig.subplots_adjust(left=0.38, right=0.98, top=0.80, bottom=0.21)
+        fig.subplots_adjust(left=0.35, right=0.98, top=0.81, bottom=0.20)
     else:
-        fig.subplots_adjust(left=0.205, right=0.928 if mixed_scale else 0.99,
-                           top=0.86, bottom=0.148 if mixed_scale else 0.135, wspace=1.04)
+        fig.subplots_adjust(left=0.205, right=0.99, top=0.90, bottom=0.09, wspace=1.04)
+    if fee_band:
+        fig.subplots_adjust(top=1 - 1.65 / figsize[1], bottom=2.0 / figsize[1])
     baseline = min(values) * 0.60
-    xhi = max(values) * (1.40 if view == "quotas" else (8 if board else 12))
+    # 前沿额度图的最大条目仍需给右侧数值/置信度留出完整文本宽度。
+    xhi = max(values) * (2.20 if view == "quotas" and board else
+                         1.40 if view == "quotas" else (8 if board else 12))
 
     for col, ax in enumerate(axes):
         start = col * half
@@ -413,37 +400,42 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
                     bbox=dict(facecolor="white", alpha=0.72, edgecolor="none", pad=1.0))
 
     title = text[f"{view}_title"]
+    if fee_band:
+        title += " | " + ("月费 " if language == "zh" else "Monthly fee ") + fee_band["labelZh" if language == "zh" else "labelEn"].replace("$", r"\$")
     if mixed_scale:
         title += " · 混合比例" if language == "zh" else " | mixed scale"
     if board:
         title = ("最高配置参考前沿 · " if language == "zh" else "Top-configuration reference frontier | ") + title
-    fig.suptitle(title, fontsize=18 if board else 21, y=0.975, fontweight="bold")
-    fig.text(0.5, 0.925 if board else 0.94,
+    fig.suptitle(title, fontsize=18 if board else 21, y=1 - 0.15 / figsize[1] if fee_band else 0.978, fontweight="bold")
+    fig.text(0.5, 1 - 0.65 / figsize[1] if fee_band else 0.925 if board else 0.952,
              frontier_caption(board) if board else text[f"{view}_subtitle"],
              ha="center", fontsize=10 if board else 11, color="#505A64")
     providers = {vendor_of(r["plan_id"]) for r in rows}
     legend = [(name, color) for name, color in VENDOR_COLORS.items() if name in providers]
     handles = [plt.Rectangle((0, 0), 1, 1, color=color) for _, color in legend]
     fig.legend(handles, [f"{VENDOR_CODES[name]}  {name}" for name, _ in legend], loc="lower center",
-               bbox_to_anchor=(0.5, 0.86 if board else 0.900), ncol=len(legend),
+               bbox_to_anchor=(0.5, 1 - 1.2 / figsize[1] if fee_band else 0.86 if board else 0.916), ncol=len(legend),
                fontsize=11, frameon=False, handlelength=1.6, columnspacing=1.8)
     if board:
         footnotes = [frontier_rule(language), text["shared"], text["footer"], exchange_note(language)]
         for y, note in zip((0.115, 0.085, 0.055, 0.025), footnotes):
             fig.text(0.5, y, note, ha="center", fontsize=8, color="#505A64")
+    elif fee_band:
+        for y, note in zip((1.05, 0.77, 0.49, 0.21), [text["footer"], text["shared"], evidence_note(language), exchange_note(language)]):
+            fig.text(0.5, y / figsize[1], note, ha="center", fontsize=9, color="#505A64")
     else:
-        y0 = 0.082 if mixed_scale else 0.068
+        y0 = 0.062
         if mixed_scale:
             mixed_note = text["mixed_note"].format(
                 ratio1=values[0] / values[2], ratio2=values[1] / values[2])
-            fig.text(0.5, 0.096, mixed_note, ha="center", fontsize=9, color="#505A64")
+            fig.text(0.5, 0.076, mixed_note, ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0, text["footer"], ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0 - 0.018, text["shared"], ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0 - 0.036, evidence_note(language), ha="center", fontsize=9, color="#505A64")
         fig.text(0.5, y0 - 0.054, exchange_note(language), ha="center", fontsize=9, color="#505A64")
     if mixed:
         draw_mixed_vs_third(fig, axes, mixed, baseline, view, language)
-    stem = output_stem(view, board, language) + ("_混合比例" if mixed_scale else "")
+    stem = output_stem(view, board, language, fee_band=fee_band) + ("_混合比例" if mixed_scale else "")
     for ext in ("png", "svg"):
         fig.savefig(os.path.join(OUT_DIR, f"{stem}.{ext}"), dpi=160)
     plt.close(fig)
@@ -454,6 +446,15 @@ def main() -> None:
     with open(ADOPTED, encoding="utf-8-sig") as f:
         rows = [r for r in csv.DictReader(f) if r["real_usd_per_mtok"]]
     os.makedirs(OUT_DIR, exist_ok=True)
+    for band in FEE_BANDS:
+        selected = sorted_rows(fee_band_rows(rows, band), "quotas")
+        if selected:
+            for language in ("zh", "en"):
+                write_text_table(selected, "quotas", language, fee_band=band)
+                plot(selected, "quotas", language, fee_band=band)
+    import sys
+    if "--fee-bands-only" in sys.argv:
+        return
     for view in ("quotas", "prices"):
         ordered = sorted_rows(rows, view)
         for language in ("zh", "en"):

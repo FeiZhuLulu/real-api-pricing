@@ -26,6 +26,8 @@ CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
 KIMI_199_USED_TOKENS = 243_739_068
 KIMI_199_USED_FRACTION = 0.84
 KIMI_MONTHLY_TO_WEEKLY = 5
+KIMI_K27_199_USED_TOKENS = 11_913_113
+KIMI_K27_199_MONTHLY_USED_FRACTION = 0.0076
 
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
 
@@ -50,6 +52,14 @@ def kimi_199_monthly_yi() -> float:
     return round(
         KIMI_199_USED_TOKENS / KIMI_199_USED_FRACTION
         * KIMI_MONTHLY_TO_WEEKLY / YI,
+        2,
+    )
+
+
+def kimi_k27_199_monthly_yi() -> float:
+    return round(
+        KIMI_K27_199_USED_TOKENS
+        / KIMI_K27_199_MONTHLY_USED_FRACTION / YI,
         2,
     )
 
@@ -263,6 +273,11 @@ SUBS = [
     ("kimi_moderato_cn", "Kimi 会员 99", 99, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 4 / 20, 2), "medium", "199档×官方4/20；kimi-adoption-round6-2026-09-08.json", "旧2.32亿→2.90亿：随199档改用周池×5；继承K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
     ("kimi_andante_cn", "Kimi 会员 49", 49, "CNY", "kimi-k3", round(kimi_199_monthly_yi() / 20, 2), "medium", "199档×官方1/20", ""),
     ("kimi_allegro_cn", "Kimi 会员 699", 699, "CNY", "kimi-k3", round(kimi_199_monthly_yi() * 60 / 20, 2), "medium", "199档×官方60/20；kimi-adoption-round6-2026-09-08.json", "旧34.83亿→43.53亿：随199档改用周池×5；继承K3-256K为主的混合负载估算，不是K3 1M纯模型实测"),
+    # K2.7 Standard —— ¥199纯模型面板直接按月百分比反推；其余档按官方Code credits 1x/4x/20x/60x
+    ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k2.7-code", kimi_k27_199_monthly_yi(), "medium", f"V2EX纯K2.7面板 {KIMI_K27_199_USED_TOKENS}/{KIMI_K27_199_MONTHLY_USED_FRACTION:.2%}=15.68亿；kimi-k27-round7-2026-09-08.json；kimi-k27-adoption-round8-2026-09-08.json", "新增K2.7 Standard独立点：采用直接月%反推15.68亿，不与较弱的699档混合样本取中点；可信范围约15.6~16.7亿。单一纯模型账号证据high，但跨账号/时期采用降为medium"),
+    ("kimi_moderato_cn", "Kimi 会员 99", 99, "CNY", "kimi-k2.7-code", round(kimi_k27_199_monthly_yi() * 4 / 20, 2), "medium", "199档×官方4/20；kimi-k27-adoption-round8-2026-09-08.json", "新增3.14亿：继承199档15.68亿与官方Code credits倍率；非独立实测"),
+    ("kimi_andante_cn", "Kimi 会员 49", 49, "CNY", "kimi-k2.7-code", round(kimi_k27_199_monthly_yi() / 20, 2), "medium", "199档×官方1/20；K2.7 Standard所有会员可用；kimi-k27-adoption-round8-2026-09-08.json", "新增0.78亿：继承199档15.68亿与官方Code credits倍率；非独立实测。该档仅排除K3，不排除K2.7 Standard"),
+    ("kimi_allegro_cn", "Kimi 会员 699", 699, "CNY", "kimi-k2.7-code", round(kimi_k27_199_monthly_yi() * 60 / 20, 2), "medium", "199档×官方60/20；kimi-k27-adoption-round8-2026-09-08.json", "新增47.04亿：继承199档15.68亿与官方Code credits倍率；独立699档K2.7占主导混合大样本缩回199档约16.74亿，仅作范围旁证"),
     # Kimi 海外 —— 不画：官方 Code credits 倍率 1×/5×/15×/30× 与国内 1/4/20/60× 体系不同，且无绝对 token 证据
     # 智谱 —— 官方周积分与三段积分系数按项目统一标准负载换算；忙时与闲时分开按月展示。
     *glm_rows(),
@@ -346,7 +361,7 @@ def is_main(pid: str, model: str) -> bool:
 
 
 EXCLUDED_SUBSCRIPTIONS = {
-    ("kimi_andante_cn", "kimi-k3"): "旧0.58亿为199档按4周×1/20推算；即使按Kimi周池×5修正为0.73亿，也因2026-09-05用户确认‘就是不能调用’而继续排除；官方https://www.kimi.com/code/docs/kimi-code/models限定Moderato及以上可调用K3；不虚构K2.7替代额度"
+    ("kimi_andante_cn", "kimi-k3"): "旧0.58亿为199档按4周×1/20推算；即使按Kimi周池×5修正为0.73亿，也因2026-09-05用户确认‘就是不能调用’而继续排除；官方https://www.kimi.com/code/docs/kimi-code/models限定Moderato及以上可调用K3；同档可用的K2.7 Standard已作为独立点纳入"
 }
 
 FIELDS = ["plan_id", "plan_name", "billing", "price", "currency", "price_usd", "served_model",

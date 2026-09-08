@@ -1,6 +1,7 @@
 """Export all full-data charts with bilingual filenames and a browsable index."""
 import json
 import shutil
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +35,8 @@ def exports():
             name = base
             if language == 'en':
                 name = ('monthly-allowance' if base.startswith('额度') else 'real-price') + '-overview'
+                if '_月费' in base:
+                    name += '-fee-' + base.split('_月费', 1)[1].removesuffix('美元') + '-usd'
                 if '混合比例' in base:
                     name += '-hybrid-scale'
                 if '表' in base:
@@ -52,7 +55,8 @@ def main():
     exported = []
     for source, destination in exports():
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, destination)
+        if '--fee-bands-only' not in sys.argv or '_月费' in source.stem:
+            shutil.copyfile(source, destination)
         exported.append(destination)
     lines = ['# Charts / 图表目录', '',
              'All Pareto charts use the full dataset. Static charts summarize the highest archived configuration reference. / 帕累托图均使用全量套餐；静态图为最高存档配置参考汇总。', '',

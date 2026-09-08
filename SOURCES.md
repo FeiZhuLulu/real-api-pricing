@@ -20,6 +20,15 @@ The project's original software is licensed under [MIT](LICENSE). This does not 
 - Reference record: `data/research/caijing-2026-08.json`. Its historical statements may differ from current adoption decisions.
 - No open-content license has been verified. Article text, illustrations and other protected material are not covered by this project's MIT license. Attribution does not itself grant republication permission. The article URL could not be retrieved during the 2026-09-06 license check; its bibliographic details above come from the existing evidence record.
 
+## Lobe Icons / Simple Icons
+
+- [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons), MIT, Copyright (c) 2023 LobeHub. Used for most provider SVG marks in `web/src/assets/provider-logos/`.
+- [Simple Icons](https://github.com/simple-icons/simple-icons), CC0. Used for the Xiaomi mark.
+- Command Code uses the complete official avatar (dark plate + rounded frame + ⌘), not a cropped command-only extraction.
+- StepFun five-square mark follows the icon in [stepfun.com](https://www.stepfun.com/assets/logo-B0FsyLQP.svg); the lime–cyan gradient follows the current public avatar.
+- Compact reconstructions (Zhipu Z, OpenCode window) are this project's 22px traces from official rasters, not brand kits.
+- Brand logos remain trademarks of their owners and are used only to identify the corresponding model developer.
+
 ## Leaderboards and other evidence
 
 - [Code Arena](https://arena.ai/leaderboard/code) and [Agent Arena](https://arena.ai/leaderboard/agent): separate score snapshots.

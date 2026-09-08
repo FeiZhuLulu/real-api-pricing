@@ -1,0 +1,140 @@
+{
+  "collectedAt": "2026-09-08",
+  "scopeNote": "Kimi 国内会员 K2.7 Code（kimi-for-coding）绝对 token 额度补充搜集。只收 Kimi 自家会员池；OpenCode Go、Command Code、Ollama 等第三方套餐不作为 Kimi 会员额度。互相冲突的账号与时期样本全部保留，本轮不修改 adopted。",
+  "target": {
+    "plan": "Kimi 会员 199 / Allegretto (CN)",
+    "model": "kimi-for-coding (K2.7 Code Standard)",
+    "requiredEvidence": "同一账号、明确套餐与模型，同时给出 total tokens 和 7天或月额度百分比"
+  },
+  "findings": [
+    {
+      "evidenceType": "dashboard_ratio_direct",
+      "source": "https://v2ex.com/t/1235826",
+      "publishedAt": "2026-08-20",
+      "plan": "Kimi 会员 199 / Allegretto",
+      "model": "kimi-for-coding (K2.7 Code Standard)",
+      "observed": {
+        "totalTokens": 11913113,
+        "weeklyUsedFraction": 0.0378,
+        "monthlyUsedFraction": 0.0076,
+        "cacheTokens": 11542080,
+        "cacheHitFraction": 0.974
+      },
+      "calculation": {
+        "weeklyTokens": 315161719.5767196,
+        "monthlyTokensFromMonthlyPercent": 1567514868.4210527,
+        "monthlyToWeeklyRatio": 4.973684210526316
+      },
+      "confidence": "high",
+      "note": "当前唯一满足纯K2.7、精确total、周%、月%同一记录的样本。百分比有显示取整误差。"
+    },
+    {
+      "evidenceType": "large_mixed_monthly_sample",
+      "source": "https://linux.do/t/topic/2627414",
+      "publishedAt": "2026-07-21",
+      "plan": "Kimi 会员 699 / Allegro",
+      "model": "kimi-for-coding (K2.7 Code Standard) 为主，混有 K3",
+      "observed": {
+        "k27CacheHitInputTokens": 1152946265,
+        "k27UncachedInputTokens": 57484705,
+        "k27OutputTokens": 6457591,
+        "k27TotalTokens": 1216888561,
+        "k3TotalTokens": 204692753,
+        "combinedTotalTokens": 1421581314,
+        "monthlyUsedFraction": 0.283
+      },
+      "calculation": {
+        "naiveCombinedMonthlyTokens699": 5023255526.501767,
+        "naiveEquivalentMonthlyTokens199ByOfficialTierRatio3": 1674418508.8339224,
+        "differenceVsV2exPureK27Fraction": 0.06819967814803321
+      },
+      "confidence": "medium",
+      "note": "独立账号、大样本，K2.7占raw token约85.6%。但月百分比对K2.7与K3混合扣减，厂商内部模型权重未知；等raw token与按699/199=60/20缩放仅作量级旁证，不可直接采用。"
+    },
+    {
+      "evidenceType": "small_post_cut_sample",
+      "source": "https://zhiqiang.org/it/kimi-3x-quote.html",
+      "publishedAt": "2026-07-24",
+      "plan": "Kimi 会员 199 / Allegretto",
+      "model": "作者称切回 kimi-for-coding（K2.7）",
+      "observed": {
+        "inputTokens": 169000,
+        "outputTokens": 8000,
+        "totalTokens": 177000,
+        "weeklyUsedFraction": 0.013
+      },
+      "calculation": {
+        "weeklyTokens": 13615384.615384614,
+        "monthlyTokensAtFiveWeeks": 68076923.07692307
+      },
+      "confidence": "low",
+      "note": "极小单请求，作者先用K3再切K2.7，无法确认1.3%是否严格为该请求增量；与8月纯K2.7样本相差约23倍。保留为账号/时期削额或扣费权重异常证据，不用于采用。"
+    },
+    {
+      "evidenceType": "usage_scale_anecdote",
+      "source": "https://linux.do/t/topic/2617259",
+      "publishedAt": "2026-07-20",
+      "plan": "Kimi 会员 199 / Allegretto",
+      "model": "K2.7 Code Standard",
+      "observed": {
+        "approxDailyTokens": 100000000,
+        "approxFiveHourWindowsInDay": 3
+      },
+      "confidence": "low",
+      "note": "用户口述同强度下一天约1亿token、接近3个5h窗口；无精确周/月百分比，只能说明3亿级周池并非明显不可能。"
+    },
+    {
+      "evidenceType": "historical_predecessor_full_week",
+      "source": "https://linux.do/t/topic/2226916",
+      "publishedAt": "2026-05-22",
+      "plan": "Kimi 会员 199 / Allegretto",
+      "model": "K2.6（K2.7发布前）",
+      "observed": {
+        "weeklyLimitReached": true,
+        "inputTokens": 734467900,
+        "outputTokens": 3958602,
+        "totalTokens": 738426502,
+        "cacheTokens": 686196541,
+        "cacheHitFraction": 0.934
+      },
+      "confidence": "medium",
+      "note": "完整满周token日志，但属于K2.6旧时期，不外推到K2.7；证明Kimi额度在模型/时期之间曾有大幅变化。"
+    },
+    {
+      "evidenceType": "official_policy",
+      "source": "https://www.kimi.com/code/docs/",
+      "checkedAt": "2026-09-08",
+      "model": "kimi-for-coding / kimi-for-coding-highspeed",
+      "observed": {
+        "standardAvailableToAllMembers": true,
+        "highspeedRequiresAllegrettoOrAbove": true,
+        "absoluteTokenQuotaPublished": false
+      },
+      "confidence": "high",
+      "note": "官方确认模型权限和共享会员额度，但未公布K2.7绝对token额度。HighSpeed与Standard必须分开，不能把Standard样本套给HighSpeed。"
+    }
+  ],
+  "reconciliation": {
+    "bestSupportedRangeMonthlyTokens199": {
+      "low": 1567514868.4210527,
+      "high": 1674418508.8339224,
+      "unit": "tokens/month",
+      "basis": "8月纯K2.7直接反推 + 7月699档K2.7占主导大样本按官方套餐3倍缩回，仅作为范围"
+    },
+    "materialContradiction": "7月24日极小样本反推仅0.68亿/月，约为主证据的1/23；模型切换、百分比增量与账号/时期口径均不清楚。",
+    "remainingGap": "仍缺第二个独立账号、纯K2.7 Standard、精确total与周/月百分比同屏的大样本；K2.7 HighSpeed没有可采用绝对token样本。"
+  },
+  "adoptionDecision": {
+    "status": "hold",
+    "reason": "新增独立大样本与V2EX主值同量级，但它混用K3；同时存在显著时期/账号冲突。先保留15.68亿/月为high候选，不写入adopted，等待第二个纯K2.7同等级样本或用户拍板。"
+  },
+  "searchLog": {
+    "queriesCovered": [
+      "kimi-for-coding total tokens weekly monthly percentage",
+      "K2.7 Code Kimi 199/699 quota panel",
+      "LinuxDo/V2EX direct user measurements",
+      "GitHub public usage and quota logs"
+    ],
+    "stopReason": "后续结果重复同一V2EX样本、仅给主观用量或只暴露quota API实现，没有新的token+百分比独立记录；继续泛搜边际收益低。"
+  }
+}

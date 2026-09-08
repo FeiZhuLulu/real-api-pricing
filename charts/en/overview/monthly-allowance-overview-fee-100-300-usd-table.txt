@@ -1,0 +1,34 @@
+Monthly subscription fee: >$100 and ≤$300
+Monthly token allowance | Subscription plan x served model
+Default month = 4 weeks; Kimi monthly pool = 5× weekly; full utilization, all token types; APIs have no allowance
+Allowances within a plan are not additive. Claude Max (9/14+): estimated permanent allowances from 2026-09-14, not current boosted limits. Source: adopted.csv.
+Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers indicate row order, not model capability. Ties listed sequentially.
+† Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. OpenCode Go uses official dollar pools and rates under the standard workload.
+FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate.
+FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
+No.  Plan                                Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence
+---  ----------------------------------  -----------  ---------------  ------------------  --------  ----------
+1    ChatGPT Pro 20x                     USD 200      GPT 5.6 Luna     150.222             0.00133   medium
+2    Claude Max 20x (9/14+)              USD 200      Claude Sonnet 5  39.25               0.0051    medium
+3    ChatGPT Pro 20x                     USD 200      GPT 5.6 Terra    24.024              0.00833   medium
+4    Cursor Ultra (Standard)             USD 200      Composer 2.5     19.8926             0.01005   medium
+5    GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3 Flash    17.965              0.00885   high
+6    Claude Max 20x (9/14+)              USD 200      Claude Opus 5    15.7                0.01274   medium
+7    Claude Max 20x (9/14+)              USD 200      Claude Opus 4.8  15.7                0.01274   low
+8    GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3 Flash    13.473              0.0118    high
+9    ChatGPT Pro 20x                     USD 200      GPT 5.6 Sol      12.32               0.01623   high
+10   MiniMax Token Plan Ultra (Global)   USD 132      MiniMax M3       9.8                 0.01347   high
+11   ChatGPT Pro 20x                     USD 200      GPT 5.5          9.6096              0.02081   medium
+12   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3 Flash    8.982               0.01771   high
+13   Cursor Ultra                        USD 200      Grok 4.6         7.737               0.02585   medium
+14   Cursor Ultra                        USD 200      Grok 4.5         7.737               0.02585   medium
+15   Cursor Ultra (Composer Fast)        USD 200      Composer 2.5     7.0587              0.02833   medium
+16   GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3          5.926               0.02684   high
+17   SuperGrok Heavy                     USD 300      Grok 4.6         5.09                0.05894   medium
+18   SuperGrok Heavy                     USD 300      Grok 4.5         5.09                0.05894   medium
+19   Kimi CN CNY 699 †                   CNY 699      Kimi K2.7 Code   4.704               0.02192   medium
+20   GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3          4.445               0.03578   high
+21   Kimi CN CNY 699 †                   CNY 699      Kimi K3          4.353               0.02369   medium
+22   Cursor Ultra (Fast)                 USD 200      Grok 4.6         3.074               0.06506   high
+23   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3          2.963               0.05367   high
+24   Claude Max 20x (9/14+)              USD 200      Claude Fable 5   1.2077              0.1656    low

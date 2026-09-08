@@ -174,6 +174,10 @@ draw();
 
 def main() -> None:
     data = json.loads(POINTS.read_text(encoding="utf-8"))
+    for point in data["points"]:
+        if point.get("plan", "").startswith("GLM "):
+            for field in ("plan", "label"):
+                point[field] = point[field].replace("老客", "v2").replace("新客", "v3")
     data["configuration_points"] = json.loads((ROOT / "derived/benchmark-points.json").read_text(encoding="utf-8"))
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(TEMPLATE.replace("__DATA__", json.dumps(data, ensure_ascii=False)), encoding="utf-8")
