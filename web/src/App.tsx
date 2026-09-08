@@ -8,8 +8,6 @@ import {
   Check,
   CheckSquare,
   CaretDown,
-  CaretLeft,
-  CaretRight,
   DownloadSimple,
   FunnelSimple,
   GithubLogo,
@@ -180,7 +178,7 @@ function Explorer({ data }: { data: SiteData }) {
   >(null);
   const [detail, setDetail] = useState<Row[] | null>(null);
   const [modelSearch, setModelSearch] = useState("");
-  const [page, setPage] = useState(0);
+  const tableScroll = useRef<HTMLDivElement>(null);
   const [toast, setToast] = useState("");
   const chart = useRef<ChartHandle | null>(null);
   const zh = state.lang === "zh";
@@ -212,9 +210,6 @@ function Explorer({ data }: { data: SiteData }) {
     window.addEventListener("hashchange", change);
     return () => window.removeEventListener("hashchange", change);
   }, [data]);
-  useEffect(() => {
-    setPage(0);
-  }, [state]);
   useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(""), 5000);
@@ -347,8 +342,10 @@ function Explorer({ data }: { data: SiteData }) {
       </button>
     </th>
   );
-  const visible = shown.slice(page * 50, (page + 1) * 50);
-  const pages = Math.max(1, Math.ceil(shown.length / 50));
+  const rowSignature = shown.map((row) => row.key).join("|");
+  useEffect(() => {
+    if (tableScroll.current) tableScroll.current.scrollTop = 0;
+  }, [rowSignature]);
   return (
     <>
       <header className="site-header">
@@ -768,8 +765,8 @@ function Explorer({ data }: { data: SiteData }) {
                           "越右越便宜，越高能力越强。点击数据点查看证据。",
                         )
                       : t(
-                          "Select any row to inspect its sources. All results remain available across pages and in the table below.",
-                          "点击任意一行查看来源。翻页可浏览全部结果，下方保留完整明细。",
+                          "Scroll inside the list to browse all results. Select any row to inspect its sources.",
+                          "在列表窗口内滚动浏览全部结果，点击任意一行查看来源。",
                         )}
                   </span>
                 </div>
@@ -887,7 +884,7 @@ function Explorer({ data }: { data: SiteData }) {
                   )}
                 </span>
               </div>
-              <div className="table-scroll">
+              <div className="table-scroll" ref={tableScroll} role="region" tabIndex={0} aria-label={t("Scrollable data table", "可滚动数据明细表")}>
                 <table>
                   <thead>
                     <tr>
@@ -909,7 +906,7 @@ function Explorer({ data }: { data: SiteData }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {visible.map((r, i) => (
+                    {shown.map((r, i) => (
                       <tr
                         key={r.key}
                         onClick={() => setDetail([r])}
@@ -919,7 +916,7 @@ function Explorer({ data }: { data: SiteData }) {
                             : ""
                         }
                       >
-                        <td className="row-number">{page * 50 + i + 1}</td>
+                        <td className="row-number">{i + 1}</td>
                         <td>
                           <button
                             className="model-cell"
@@ -1000,35 +997,7 @@ function Explorer({ data }: { data: SiteData }) {
                   </div>
                 )}
               </div>
-              <div className="pagination">
-                <span>
-                  {shown.length
-                    ? `${page * 50 + 1}–${Math.min((page + 1) * 50, shown.length)}`
-                    : "0"}{" "}
-                  {t("of", "/")} {shown.length}
-                </span>
-                <div>
-                  <button
-                    className="icon-button"
-                    disabled={page === 0}
-                    onClick={() => setPage((p) => p - 1)}
-                    aria-label={t("Previous page", "上一页")}
-                  >
-                    <CaretLeft size={17} />
-                  </button>
-                  <span>
-                    {page + 1} / {pages}
-                  </span>
-                  <button
-                    className="icon-button"
-                    disabled={page + 1 >= pages}
-                    onClick={() => setPage((p) => p + 1)}
-                    aria-label={t("Next page", "下一页")}
-                  >
-                    <CaretRight size={17} />
-                  </button>
-                </div>
-              </div>
+              <p className="ranking-status">{shown.length} {t("rows · scroll inside the table", "行 · 在表格内滚动浏览")}</p>
             </section>
           </>
         )}

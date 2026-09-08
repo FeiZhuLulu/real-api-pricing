@@ -5,30 +5,34 @@ import type {
   PlotlyHTMLElement,
   PlotMouseEvent,
 } from "plotly.js";
-import type { Row, State, SiteData } from "./types";
-import { BrandMarks } from "./ProviderLogo";
+import type { Group, Row, State, SiteData } from "./types";
+import { BrandMarks, logoUrlMap } from "./ProviderLogo";
 import { wheelRange } from "./wheelZoom";
 import {
   groups,
   pareto,
   frontierPath,
   displayPlan,
+  accessLine,
   color,
   price,
   allowance,
   number,
 } from "./domain";
 import {
+  type AnchorPoint,
   type ArenaPlacement,
   type FrontierLogoView,
+  type PlotBox,
   type PlotLayout,
   type TextLabelView,
-  LOGO_SIZE,
+  DOT_RADIUS,
+  FRONTIER_RADIUS,
   buildExportDecorationsFromLayout,
   cardGroups,
+  dataToPixel,
   frontierLogoViews,
   labelProvider,
-  logoUrlMap,
   placeTextLabels,
   plotBox,
   textLabelGroups,
@@ -71,6 +75,13 @@ export default function Chart({
   const [dragMode, setDragMode] = useState<"pan" | "zoom">("pan");
   const [logos, setLogos] = useState<FrontierLogoView[]>([]);
   const [labels, setLabels] = useState<TextLabelView[]>([]);
+  const [area, setArea] = useState<PlotBox | null>(null);
+  const [hover, setHover] = useState<{
+    key: string;
+    x: number;
+    y: number;
+    front: boolean;
+  } | null>(null);
   const chartGroups = state.view === "pareto" ? groups(rows) : [];
   const frontGroups =
     state.view === "pareto" ? pareto(chartGroups) : [];
@@ -95,6 +106,7 @@ export default function Chart({
     setError("");
     setLogos([]);
     setLabels([]);
+    setHover(null);
     import("plotly.js-basic-dist-min")
       .then(async ({ default: Plotly }) => {
         if (cancelled) return;
@@ -126,10 +138,13 @@ export default function Chart({
         let textGroups: ReturnType<typeof textLabelGroups> = [];
         let logoMap = new Map<string, string>();
         let textPlacements: ArenaPlacement[] = [];
+        let plotted: Group[] = [];
+        let frontKeys = new Set<string>();
         if (state.view === "pareto") {
           const gs = groups(rows);
           front = pareto(gs);
-          const frontKeys = new Set(front.map((g) => g.key));
+          plotted = gs;
+          frontKeys = new Set(front.map((g) => g.key));
           textGroups = textLabelGroups(gs, front, state.labels);
           logoMap = await logoUrlMap(front.map((g) => labelProvider(g)));
           if (cancelled) return;
@@ -150,8 +165,11 @@ export default function Chart({
               hoverinfo: "skip",
             });
           }
-          // Non-frontier: faded small dots. Frontier: invisible hit targets under logos.
-          for (const isFront of [false, true]) {
+          // Frontier first: invisible hit targets under the logos. Plotly keeps
+          // the earliest trace when two points tie on hover distance, and its
+          // distance floor (1 - 3/radius) favours small markers, so these must
+          // match the dot radius or a neighbouring dot would steal the hover.
+          for (const isFront of [true, false]) {
             const selected = gs.filter((g) => frontKeys.has(g.key) === isFront);
             for (const g of selected) rowLookup.set(g.key, g.rows);
             traces.push({
@@ -162,14 +180,12 @@ export default function Chart({
               customdata: selected.map((g) => g.key),
               marker: {
                 color: selected.map((g) => color(g.rows[0].point)),
-                size: isFront ? LOGO_SIZE : 8,
+                size: 8,
                 opacity: isFront ? 0 : 0.43,
                 line: { color: "#fff", width: isFront ? 0 : 1.4 },
               },
-              hovertemplate: selected.map(
-                (g) =>
-                  `<b>${escape(g.rows[0].point.model_display)}</b><br>${escape(displayPlan(g.rows[0].point.plan, state.lang))}${g.rows.length > 1 ? ` · +${g.rows.length - 1} ${zh ? "条参考" : "references"}` : ""}<br>${price(g.price)} / MTok · ${number(g.score, state.lang)}<br>${escape(g.rows[0].mapping?.variant ?? "")}<br><i>${zh ? "点击查看来源" : "Click to inspect sources"}</i><extra></extra>`,
-              ),
+              // Hover text is our own card: keep the events, drop Plotly's label.
+              hoverinfo: "none",
             });
           }
           layout.xaxis = {
@@ -309,38 +325,52 @@ export default function Chart({
         const fullOf = (node: HTMLElement) =>
           (node as unknown as { _fullLayout?: PlotLayout })._fullLayout;
 
-        const syncOverlay = () => {
+        /**
+         * Reproject the overlay onto the current axis ranges. `resolve` re-runs
+         * the collision solver; during a drag we keep the chosen slots so the
+         * names travel with their points instead of jumping around.
+         */
+        const syncOverlay = (resolve = true) => {
           if (cancelled || state.view !== "pareto") {
             setLogos([]);
             setLabels([]);
+            setArea(null);
             textPlacements = [];
             return;
           }
           const full = fullOf(el);
           if (!full) return;
-          const logoViews = frontierLogoViews(front, full, logoMap);
-          setLogos(logoViews);
           const box = plotBox(full);
+          setArea(box);
+          setLogos(frontierLogoViews(front, full, logoMap));
           if (!box || !textGroups.length) {
             setLabels([]);
             textPlacements = [];
             return;
           }
-          const anchors = new Map<string, { x: number; y: number }>();
-          for (const v of logoViews) {
-            if (v.inPlot) anchors.set(v.key, { x: v.x, y: v.y });
+          if (resolve) {
+            const anchors = new Map<string, AnchorPoint>();
+            const markers: AnchorPoint[] = [];
+            for (const g of plotted) {
+              const pt = dataToPixel(full, g.price, g.score, box);
+              if (!pt) continue;
+              const marker = {
+                key: g.key,
+                x: pt.x,
+                y: pt.y,
+                r: frontKeys.has(g.key) ? FRONTIER_RADIUS : DOT_RADIUS,
+              };
+              markers.push(marker);
+              anchors.set(g.key, marker);
+            }
+            textPlacements = placeTextLabels(
+              textGroups,
+              anchors,
+              markers,
+              box,
+              mobile,
+            );
           }
-          for (const g of textGroups) {
-            if (anchors.has(g.key)) continue;
-            const xa = full.xaxis;
-            const ya = full.yaxis;
-            if (!xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) continue;
-            anchors.set(g.key, {
-              x: xa._offset + xa.l2p(xa.d2l(g.price)),
-              y: ya._offset + ya.l2p(ya.d2l(g.score)),
-            });
-          }
-          textPlacements = placeTextLabels(textGroups, anchors, box, mobile);
           setLabels(textLabelViews(textPlacements, full));
         };
 
@@ -360,9 +390,15 @@ export default function Chart({
             });
           },
         };
-        plot.removeAllListeners?.("plotly_click");
-        plot.removeAllListeners?.("plotly_relayout");
-        plot.removeAllListeners?.("plotly_afterplot");
+        for (const event of [
+          "plotly_click",
+          "plotly_relayout",
+          "plotly_relayouting",
+          "plotly_afterplot",
+          "plotly_hover",
+          "plotly_unhover",
+        ])
+          plot.removeAllListeners?.(event);
         plot.on("plotly_click", (event: PlotMouseEvent) => {
           const key = event.points[0]?.customdata;
           if (typeof key === "string") {
@@ -370,8 +406,35 @@ export default function Chart({
             if (selected) selection.current(selected);
           }
         });
-        plot.on("plotly_relayout", syncOverlay);
-        plot.on("plotly_afterplot", syncOverlay);
+        plot.on("plotly_hover", (event: PlotMouseEvent) => {
+          const point = event.points[0];
+          const key = point?.customdata;
+          if (typeof key !== "string" || state.view !== "pareto") return;
+          const full = fullOf(el);
+          const box = full && plotBox(full);
+          const pt =
+            full && box
+              ? dataToPixel(full, Number(point.x), Number(point.y), box)
+              : null;
+          if (pt) setHover({ key, x: pt.x, y: pt.y, front: frontKeys.has(key) });
+        });
+        plot.on("plotly_unhover", () => setHover(null));
+        plot.on("plotly_relayout", () => {
+          setHover(null);
+          syncOverlay();
+        });
+        plot.on("plotly_afterplot", () => syncOverlay());
+        // Fired continuously while dragging or wheel-zooming: keep the overlay
+        // glued to the plot instead of catching up after the gesture ends.
+        let dragFrame = 0;
+        plot.on("plotly_relayouting", () => {
+          setHover(null);
+          if (dragFrame) return;
+          dragFrame = requestAnimationFrame(() => {
+            dragFrame = 0;
+            syncOverlay(false);
+          });
+        });
         syncOverlay();
         const shell = el.parentElement!;
         let wheelFrame = 0;
@@ -462,20 +525,25 @@ export default function Chart({
               let exportText: ArenaPlacement[] = [];
               if (exportFull && textGroups.length) {
                 const box = plotBox(exportFull);
-                const anchors = new Map<string, { x: number; y: number }>();
                 if (box) {
-                  for (const g of [...front, ...textGroups]) {
-                    const xa = exportFull.xaxis;
-                    const ya = exportFull.yaxis;
-                    if (!xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) continue;
-                    anchors.set(g.key, {
-                      x: xa._offset + xa.l2p(xa.d2l(g.price)),
-                      y: ya._offset + ya.l2p(ya.d2l(g.score)),
-                    });
+                  const anchors = new Map<string, AnchorPoint>();
+                  const markers: AnchorPoint[] = [];
+                  for (const g of plotted) {
+                    const pt = dataToPixel(exportFull, g.price, g.score, box);
+                    if (!pt) continue;
+                    const marker = {
+                      key: g.key,
+                      x: pt.x,
+                      y: pt.y,
+                      r: frontKeys.has(g.key) ? FRONTIER_RADIUS : DOT_RADIUS,
+                    };
+                    markers.push(marker);
+                    anchors.set(g.key, marker);
                   }
                   exportText = placeTextLabels(
                     textGroups,
                     anchors,
+                    markers,
                     box,
                     false,
                   );
@@ -489,10 +557,11 @@ export default function Chart({
                     exportFull,
                     false,
                   )
-                : { annotations: [], images: [] };
+                : { annotations: [], images: [], shapes: [] };
               await Plotly.relayout(exportHost, {
                 annotations: [...baked.annotations, ...keyAnnotations],
                 images: baked.images,
+                shapes: baked.shapes,
               });
               await Plotly.downloadImage(exportHost, {
                 format,
@@ -516,10 +585,17 @@ export default function Chart({
         cleanup = () => {
           shell.removeEventListener("wheel", wheel);
           cancelAnimationFrame(wheelFrame);
+          cancelAnimationFrame(dragFrame);
           observer.disconnect();
-          plot.removeAllListeners?.("plotly_click");
-          plot.removeAllListeners?.("plotly_relayout");
-          plot.removeAllListeners?.("plotly_afterplot");
+          for (const event of [
+            "plotly_click",
+            "plotly_relayout",
+            "plotly_relayouting",
+            "plotly_afterplot",
+            "plotly_hover",
+            "plotly_unhover",
+          ])
+            plot.removeAllListeners?.(event);
         };
         setLoading(false);
       })
@@ -536,6 +612,7 @@ export default function Chart({
       controls.current = null;
       setLogos([]);
       setLabels([]);
+      setHover(null);
     };
   }, [
     rows,
@@ -548,6 +625,33 @@ export default function Chart({
     handle,
     small,
   ]);
+  const hoverGroup = hover
+    ? chartGroups.find((g) => g.key === hover.key)
+    : undefined;
+  const hoverPoint = hoverGroup?.rows[0]?.point;
+  // Approximate box used only to decide which side of the point the card opens.
+  const CARD_WIDTH = 246;
+  const CARD_HEIGHT = 146;
+  const hoverCard =
+    hover && area && hoverGroup
+      ? (() => {
+          const gap = (hover.front ? FRONTIER_RADIUS : DOT_RADIUS) + 10;
+          const right = hover.x + gap;
+          const below = hover.y + gap;
+          const left =
+            right + CARD_WIDTH > area.right - 4
+              ? hover.x - gap - CARD_WIDTH
+              : right;
+          const top =
+            below + CARD_HEIGHT > area.bottom - 4
+              ? hover.y - gap - CARD_HEIGHT
+              : below;
+          return {
+            left: Math.max(4, Math.min(left, area.right - CARD_WIDTH - 4)),
+            top: Math.max(4, Math.min(top, area.bottom - CARD_HEIGHT - 4)),
+          };
+        })()
+      : null;
   return (
     <>
       <div
@@ -580,18 +684,20 @@ export default function Chart({
         aria-label={zh ? "交互数据图表" : "Interactive data chart"}
       >
         <div ref={host} className="plot" />
-        {(logos.some((l) => l.inPlot) || labels.some((l) => l.inPlot)) && (
-          <div className="arena-label-layer">
-            <svg className="arena-label-leaders" aria-hidden="true">
+        {(logos.some((l) => l.inPlot) ||
+          labels.some((l) => l.inPlot) ||
+          hover) && (
+          <div className="arena-label-layer" aria-hidden="true">
+            <svg className="arena-label-leaders">
               {labels
-                .filter((c) => c.inPlot)
+                .filter((c) => c.inPlot && c.lead)
                 .map((c) => (
                   <line
                     key={`line-${c.key}`}
-                    x1={c.x0}
-                    y1={c.y0}
-                    x2={c.x1}
-                    y2={c.y1}
+                    x1={c.lead!.x1}
+                    y1={c.lead!.y1}
+                    x2={c.lead!.x2}
+                    y2={c.lead!.y2}
                   />
                 ))}
             </svg>
@@ -600,35 +706,74 @@ export default function Chart({
               .map((c) => (
                 <div
                   key={`name-${c.key}`}
-                  className={`arena-name-label ${c.ax >= 0 ? "from-left" : "from-right"}`}
-                  style={{ left: c.x1, top: c.y1 }}
-                  aria-hidden="true"
+                  className={`arena-name-label${hover?.key === c.key ? " is-hovered" : ""}`}
+                  style={{ left: c.left, top: c.top, maxWidth: c.width }}
                 >
                   {c.label}
                 </div>
               ))}
+            {hover && !hover.front && hoverPoint && (
+              <span
+                className="point-halo"
+                style={{
+                  left: hover.x,
+                  top: hover.y,
+                  background: color(hoverPoint),
+                }}
+              />
+            )}
             {logos
               .filter((l) => l.inPlot)
               .map((l) => (
-                <button
+                <span
                   key={`logo-${l.key}`}
-                  type="button"
-                  className="arena-logo-mark"
+                  className={`arena-logo-mark${hover?.key === l.key ? " is-hovered" : ""}`}
                   style={{ left: l.x, top: l.y }}
-                  title={l.label}
-                  aria-label={l.label}
-                  onClick={() => {
-                    const selected = chartGroups.find((g) => g.key === l.key);
-                    if (selected) selection.current(selected.rows);
-                  }}
                 >
                   {l.logoUrl ? (
                     <img src={l.logoUrl} alt="" width={20} height={20} />
                   ) : (
                     <span>{l.provider.slice(0, 2)}</span>
                   )}
-                </button>
+                </span>
               ))}
+          </div>
+        )}
+        {hoverCard && hoverGroup && hoverPoint && (
+          <div className="point-hover-card" style={hoverCard} aria-hidden="true">
+            <div className="hover-title">
+              <BrandMarks point={hoverPoint} />
+              <b>
+                {[
+                  ...new Set(hoverGroup.rows.map((r) => r.point.model_display)),
+                ].join(" / ")}
+              </b>
+            </div>
+            <div className="hover-plan">
+              {displayPlan(hoverPoint.plan, state.lang)} ·{" "}
+              {accessLine(hoverPoint)}
+            </div>
+            {hoverGroup.rows[0]?.mapping?.variant && (
+              <div className="hover-variant">
+                {hoverGroup.rows[0].mapping.variant}
+              </div>
+            )}
+            <div className="hover-stats">
+              <span>
+                <small>{zh ? "真实单价" : "Real price"}</small>
+                {price(hoverGroup.price)} <i>/ MTok</i>
+              </span>
+              <span>
+                <small>{zh ? "分数" : "Score"}</small>
+                {number(hoverGroup.score, state.lang)}
+              </span>
+            </div>
+            <div className="hover-foot">
+              {hoverGroup.rows.length > 1
+                ? `+${hoverGroup.rows.length - 1} ${zh ? "条参考 · " : "references · "}`
+                : ""}
+              {zh ? "点击查看来源" : "Click to inspect sources"}
+            </div>
           </div>
         )}
         {loading && (

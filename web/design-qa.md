@@ -93,3 +93,27 @@ Header adds bilingual GitHub Issue evidence template and Star link/count via pub
 - Kimi SVG and its assembly recipe now specify a black K and blue dot.
 - AA data checks: 149 current AA configurations match raw scores, variants, harnesses and estimate flags. 188 points, 204 configurations, 886 references; prices, quotas and both Arena boards remain unchanged. All 18 web tests and TypeScript/Vite build pass.
 - Final preview opened successfully and Code Arena logo buttons/cards were confirmed online: https://real-api-pricing-r3pgysog6-feizhululus-projects.vercel.app . A subsequent remote AA-page screenshot call timed out; AA v4.3 and estimate details had already been inspected locally. No production promotion.
+
+## Overlay, label and hover rework — 2026-09-09
+
+The user reported three defects from screenshots: names stayed behind while the chart was dragged, names crossed each other and their neighbours, and hovering a frontier logo showed nothing while hovering beside it did. Pan stays on the left button; right-button-only dragging was rejected as undiscoverable and unavailable on touch.
+
+Browser verification in a real Chrome window at 1280×900 and at a 500px-wide window:
+
+- Drag instrumentation confirmed `plotly_relayouting` firing mid-gesture; a pan moved a logo by −439px and its name by exactly the same offset, keeping the leader length. After the drag, logos and names still sat on the frontier line, and off-screen points dropped their marks.
+- Frontier-only mode: five names, none truncated, none overlapping, short dotted leaders. First attempt truncated every name because measurement used an Inter stack while the page renders DM Sans, and then lost a sub-pixel to rounding; measurement now uses a hidden copy of the real label element plus one pixel.
+- All-points mode before coordinator review: 28 names placed with no label-to-label overlap. AA Intelligence: six frontier names, no overlap.
+- Hover on each of the five frontier logos returned that exact point. Before the trace-order and hit-radius fix, the GLM 5.3 logo reported a neighbouring GLM 5.3 Flash point at a different price. A non-frontier dot hover grew the dot and returned its own plan.
+- Click through a logo still opens the matching evidence dialog (Claude Opus 5 with both coincident Max references). Ranking views render no overlay nodes.
+- PNG and SVG exports downloaded and inspected: logos on coordinates, adjacent names with dotted leaders, numbered key retained.
+- 20 tests pass, including a new placement regression test (no overlaps, inside the plot box, names dropped when a tight box leaves no room). TypeScript and the production build pass.
+
+Not verified: a real touch device, and the deployed preview. `logoUrlMap` moved from `chartLabels.ts` to `ProviderLogo.tsx` so the placement geometry can be tested under Node.
+
+### Coordinator review and independent scrolling
+
+- Ranking and detail-table pagination removed. Each panel has native bounded scrolling, a sticky header, keyboard access and independent scroll position. Browser checks covered desktop wheel isolation, End reaching row 188, 390px layout, no-results search and the 36-row middle fee band including $100. All 177 subscription allowances remain available.
+- Full ranking PNG downloaded at 1100 × 10282 with all 188 filtered rows; CSV still uses the entire selection.
+- Review found label-to-marker collisions were only soft penalties. They are now hard exclusions. A clean browser reload showed 23 placeable names and all 5 frontier logos in Code Arena all-label mode, with no label-to-point overlap. Added a regression test for a point-filled plot.
+- Relayout clears stale hover cards. Label measurement explicitly uses the requested mobile/export font size and padding, independent of the current viewport.
+- The contribution entry uses the repository's bilingual Issue template, covering providers, subscription plans, cached/uncached input, output, quota periods, usage percentages and sources.
