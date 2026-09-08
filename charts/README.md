@@ -12,6 +12,9 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 | Pareto Aa Intelligence / 帕累托_AA智力榜 | [SVG](en/pareto/pareto-aa-intelligence.svg) | [SVG](zh/pareto/帕累托_AA智力榜.svg) | [PNG](en/pareto/pareto-aa-intelligence.png) | [PNG](zh/pareto/帕累托_AA智力榜.png) |
 | Pareto Agent Arena / 帕累托_AgentArena榜 | [SVG](en/pareto/pareto-agent-arena.svg) | [SVG](zh/pareto/帕累托_AgentArena榜.svg) | [PNG](en/pareto/pareto-agent-arena.png) | [PNG](zh/pareto/帕累托_AgentArena榜.png) |
 | Pareto Code Arena / 帕累托_CodeArena榜 | [SVG](en/pareto/pareto-code-arena.svg) | [SVG](zh/pareto/帕累托_CodeArena榜.svg) | [PNG](en/pareto/pareto-code-arena.png) | [PNG](zh/pareto/帕累托_CodeArena榜.png) |
+| Monthly Allowance Overview Fee 0 30 Usd / 额度总览_月费0-30美元 | [SVG](en/overview/monthly-allowance-overview-fee-0-30-usd.svg) | [SVG](zh/overview/额度总览_月费0-30美元.svg) | [PNG](en/overview/monthly-allowance-overview-fee-0-30-usd.png) | [PNG](zh/overview/额度总览_月费0-30美元.png) |
+| Monthly Allowance Overview Fee 100 300 Usd / 额度总览_月费100-300美元 | [SVG](en/overview/monthly-allowance-overview-fee-100-300-usd.svg) | [SVG](zh/overview/额度总览_月费100-300美元.svg) | [PNG](en/overview/monthly-allowance-overview-fee-100-300-usd.png) | [PNG](zh/overview/额度总览_月费100-300美元.png) |
+| Monthly Allowance Overview Fee 30 100 Usd / 额度总览_月费30-100美元 | [SVG](en/overview/monthly-allowance-overview-fee-30-100-usd.svg) | [SVG](zh/overview/额度总览_月费30-100美元.svg) | [PNG](en/overview/monthly-allowance-overview-fee-30-100-usd.png) | [PNG](zh/overview/额度总览_月费30-100美元.png) |
 | Monthly Allowance Overview Hybrid Scale / 额度总览_混合比例 | [SVG](en/overview/monthly-allowance-overview-hybrid-scale.svg) | [SVG](zh/overview/额度总览_混合比例.svg) | [PNG](en/overview/monthly-allowance-overview-hybrid-scale.png) | [PNG](zh/overview/额度总览_混合比例.png) |
 | Monthly Allowance Overview / 额度总览 | [SVG](en/overview/monthly-allowance-overview.svg) | [SVG](zh/overview/额度总览.svg) | [PNG](en/overview/monthly-allowance-overview.png) | [PNG](zh/overview/额度总览.png) |
 | Real Price Overview / 单价总览 | [SVG](en/overview/real-price-overview.svg) | [SVG](zh/overview/单价总览.svg) | [PNG](en/overview/real-price-overview.png) | [PNG](zh/overview/单价总览.png) |
@@ -45,4 +48,10 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 - [zh/overview/单价总览表.txt](zh/overview/单价总览表.txt)
 - [en/overview/real-price-overview-table.txt](en/overview/real-price-overview-table.txt)
 - [zh/overview/额度总览表.txt](zh/overview/额度总览表.txt)
+- [zh/overview/额度总览表_月费0-30美元.txt](zh/overview/额度总览表_月费0-30美元.txt)
+- [en/overview/monthly-allowance-overview-fee-0-30-usd-table.txt](en/overview/monthly-allowance-overview-fee-0-30-usd-table.txt)
+- [zh/overview/额度总览表_月费100-300美元.txt](zh/overview/额度总览表_月费100-300美元.txt)
+- [en/overview/monthly-allowance-overview-fee-100-300-usd-table.txt](en/overview/monthly-allowance-overview-fee-100-300-usd-table.txt)
+- [zh/overview/额度总览表_月费30-100美元.txt](zh/overview/额度总览表_月费30-100美元.txt)
+- [en/overview/monthly-allowance-overview-fee-30-100-usd-table.txt](en/overview/monthly-allowance-overview-fee-30-100-usd-table.txt)
 - [en/overview/monthly-allowance-overview-table.txt](en/overview/monthly-allowance-overview-table.txt)

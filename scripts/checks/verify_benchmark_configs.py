@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
-from compute import SCORE_FILES, BOARDS
+from compute import SCORE_FILES, BOARDS, current_score_records
 from benchmark_configs import candidates, configuration
 
 def read(name):
@@ -15,13 +15,25 @@ def read(name):
 configs = read("derived/benchmark-configurations.json")
 links = read("derived/benchmark-points.json")
 points = read("derived/points.json")["points"]
-expected = [(file, record) for file in SCORE_FILES
-            for record in read("data/research/" + file)["scores"] if record["boardId"] in BOARDS]
+expected = current_score_records([(file, read("data/research/" + file)) for file in SCORE_FILES])
+# Updating a benchmark replaces the full snapshot, even when a removed model had
+# a higher old score. Other boards and all efforts of the new snapshot survive.
+old = {"boards": [{"boardId": "aa_intelligence_index"}, {"boardId": "arena_code"}],
+       "scores": [{"boardId": "aa_intelligence_index", "model": "removed", "score": 99},
+                  {"boardId": "arena_code", "model": "keep", "score": 1000}]}
+new = {"boards": [{"boardId": "aa_intelligence_index"}],
+       "scores": [{"boardId": "aa_intelligence_index", "model": "new", "score": 40},
+                  {"boardId": "aa_intelligence_index", "model": "new", "score": 30}]}
+assert current_score_records([("old", old), ("new", new)]) == [
+    ("old", old["scores"][1]), *(('new', r) for r in new["scores"])]
+assert current_score_records([("old", old), ("empty", {"boards": new["boards"], "scores": []})]) == [
+    ("old", old["scores"][1])]
 assert len(configs) == len(expected)
 assert len({c["configuration_id"] for c in configs}) == len(configs)
 for c, (file, record) in zip(configs, expected):
     assert c["archive"] == file and c["raw_record"] == record
     sec = record.get("secondary", {})
+    assert c["score_is_estimated"] == sec.get("intelligenceIndexIsEstimated", record.get("scoreIsEstimated"))
     assert c["mean_cost_usd_per_task"] == sec.get("meanCostUsdPerTask")
     assert c["median_cost_usd_per_task"] == sec.get("medianCostPerTaskUsd")
     assert c["score_low"] == (record["score"] - sec["ciMinus"] if "ciMinus" in sec else None)

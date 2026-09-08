@@ -1,0 +1,34 @@
+订阅月费：>$100 且 ≤$300
+订阅额度总览 · 套餐 × 实际服务模型
+默认月 = 4 周，Kimi独立月池 = 周池×5；饱和使用；全口径 token；按量 API 无月额度
+同套餐各模型额度不可相加。Claude Max (9/14+)：2026-09-14起永久额度估算，非当前活动期上限。数据：adopted.csv。
+颜色 = 套餐/API 提供方；置信度 [H] 高 / [M] 中 / [L] 低；编号为排序序号，同值依次列出，不代表模型能力排名。
+† Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算。OpenCode Go按官方美元池和三段价套统一标准负载换算。
+汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
+汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
+序号  套餐                               价格/月   服务模型         月额度(亿)  $/MTok   置信度
+----  ---------------------------------  --------  ---------------  ----------  -------  ------
+1     ChatGPT Pro 20x                    USD 200   GPT 5.6 Luna     1502.22     0.00133  medium
+2     Claude Max 20x (9/14+)             USD 200   Claude Sonnet 5  392.5       0.0051   medium
+3     ChatGPT Pro 20x                    USD 200   GPT 5.6 Terra    240.24      0.00833  medium
+4     Cursor Ultra (Standard)            USD 200   Composer 2.5     198.926     0.01005  medium
+5     GLM Coding Max (v3 ¥1078) 闲时     CNY 1078  GLM 5.3 Flash    179.65      0.00885  high
+6     Claude Max 20x (9/14+)             USD 200   Claude Opus 5    157         0.01274  medium
+7     Claude Max 20x (9/14+)             USD 200   Claude Opus 4.8  157         0.01274  low
+8     GLM Coding Max (v3 ¥1078) 中间值   CNY 1078  GLM 5.3 Flash    134.73      0.0118   high
+9     ChatGPT Pro 20x                    USD 200   GPT 5.6 Sol      123.2       0.01623  high
+10    MiniMax Token Plan Ultra (Global)  USD 132   MiniMax M3       98          0.01347  high
+11    ChatGPT Pro 20x                    USD 200   GPT 5.5          96.096      0.02081  medium
+12    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078  GLM 5.3 Flash    89.82       0.01771  high
+13    Cursor Ultra                       USD 200   Grok 4.6         77.37       0.02585  medium
+14    Cursor Ultra                       USD 200   Grok 4.5         77.37       0.02585  medium
+15    Cursor Ultra (Composer Fast)       USD 200   Composer 2.5     70.587      0.02833  medium
+16    GLM Coding Max (v3 ¥1078) 闲时     CNY 1078  GLM 5.3          59.26       0.02684  high
+17    SuperGrok Heavy                    USD 300   Grok 4.6         50.9        0.05894  medium
+18    SuperGrok Heavy                    USD 300   Grok 4.5         50.9        0.05894  medium
+19    Kimi 会员 699 †                    CNY 699   Kimi K2.7 Code   47.04       0.02192  medium
+20    GLM Coding Max (v3 ¥1078) 中间值   CNY 1078  GLM 5.3          44.45       0.03578  high
+21    Kimi 会员 699 †                    CNY 699   Kimi K3          43.53       0.02369  medium
+22    Cursor Ultra (Fast)                USD 200   Grok 4.6         30.74       0.06506  high
+23    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078  GLM 5.3          29.63       0.05367  high
+24    Claude Max 20x (9/14+)             USD 200   Claude Fable 5   12.077      0.1656   low

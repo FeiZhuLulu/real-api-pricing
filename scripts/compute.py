@@ -20,6 +20,7 @@ SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
     "scores-aa-coding-agent-round1-2026-09-06.json",
+    "scores-aa-round3-2026-09-09.json",
 )
 
 
@@ -50,7 +51,7 @@ DISPLAY = {
 VENDOR = {
     "gpt": "OpenAI", "claude": "Anthropic", "grok": "xAI", "kimi": "Kimi", "glm": "Zhipu", "minimax": "MiniMax",
     "qwen": "Alibaba", "deepseek": "DeepSeek", "gemini": "Google", "mimo": "Xiaomi", "hy": "Tencent", "composer": "Cursor",
-    "longcat": "Meituan", "muse": "Muse", "omen": "OpenCode",
+    "longcat": "Meituan", "muse": "Muse", "omen": "OpenCode", "step": "StepFun",
 }
 
 
@@ -59,10 +60,19 @@ def vendor_of(model: str) -> str:
 
 
 def load_scores() -> list[dict]:
-    """Keep every archived configuration, including lower efforts and unknown harnesses."""
-    return [configuration(s, name) for name in SCORE_FILES
-            for s in json.loads((RESEARCH / name).read_text(encoding="utf-8"))["scores"]
-            if s["boardId"] in BOARDS]
+    """Keep all configurations in each board's selected snapshot, never mix versions."""
+    archives = [(name, json.loads((RESEARCH / name).read_text(encoding="utf-8")))
+                for name in SCORE_FILES]
+    return [configuration(record, name) for name, record in current_score_records(archives)]
+
+
+def current_score_records(archives):
+    # Files are explicitly ordered oldest to newest. A complete new board snapshot
+    # replaces that board as a whole, including models removed from its coverage.
+    latest = {b["boardId"]: name for name, archive in archives for b in archive["boards"]
+              if b["boardId"] in BOARDS}
+    return [(name, record) for name, archive in archives for record in archive["scores"]
+            if latest.get(record["boardId"]) == name]
 
 
 def load_list_blended() -> dict[str, float]:
@@ -118,7 +128,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-07", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
+        generatedAt="2026-09-09", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")

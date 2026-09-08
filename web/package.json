@@ -1,0 +1,30 @@
+{
+  "name": "real-api-pricing-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data": "node scripts/build-data.mjs",
+    "dev": "npm run data && vite --host 0.0.0.0",
+    "build": "npm run data && tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "npm run data && tsx --test src/domain.test.ts"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "csv-parse": "^6.1.0",
+    "plotly.js-basic-dist-min": "^3.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/plotly.js": "^3.0.7",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3"
+  }
+}
