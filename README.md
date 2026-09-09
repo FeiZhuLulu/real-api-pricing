@@ -1,4 +1,4 @@
-## [Explore the interactive website →](https://real-api-pricing-feizhululus-projects.vercel.app)
+## [Explore the interactive website →](https://real-api-pricing.vercel.app)
 
 Compare models, prices and allowances · English / 中文
 
