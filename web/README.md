@@ -95,7 +95,7 @@ The Intelligence Index uses v4.3 and Coding Agent Index uses v1.4, captured on S
 
 The site payload omits mapping fields that exactly match their referenced configuration. `unpackData` restores them before use; a deep-equality test checks every restored mapping against the original derived data. Complete source downloads remain available. This saves about 289 KB in the static upload without dropping data.
 
-Earlier verified preview: https://real-api-pricing-r3pgysog6-feizhululus-projects.vercel.app (deployment `dpl_46Lvkra2NBjmz3oT5tpsCtcKZZcm`). Frontier points use centered provider logos; names sit beside them with leader lines, and the model cards below remain. Kimi uses a black K with a blue dot. PNG/SVG export embeds the same logo markers and retains the detail key. Production URL: https://real-api-pricing-feizhululus-projects.vercel.app .
+Earlier verified preview: https://real-api-pricing-r3pgysog6-feizhululus-projects.vercel.app (deployment `dpl_46Lvkra2NBjmz3oT5tpsCtcKZZcm`). Frontier points use centered provider logos; names sit beside them with leader lines, and the model cards below remain. Kimi uses a black K with a blue dot. PNG/SVG export embeds the same logo markers and retains the detail key. Production URL: https://real-api-pricing.vercel.app .
 
 Rankings and the detail table use separate bounded scroll panels rather than pagination. Ranking PNG/SVG and table CSV exports include all filtered rows. The contribution link opens `.github/ISSUE_TEMPLATE/contribute-data.md` on GitHub.
 
