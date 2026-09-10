@@ -11,6 +11,21 @@ export function matchesFeeBand(fee: number | null, id: string): boolean {
     (band.maxInclusive ? fee <= band.max : fee < band.max)
   );
 }
+export function matchesBudget(
+  fee: number | null,
+  min: number | null,
+  max: number | null,
+): boolean {
+  if (min === null && max === null) return true;
+  if (fee === null || !Number.isFinite(fee)) return false;
+  return (min === null || fee >= min) && (max === null || fee <= max);
+}
+export function isValidBudgetRange(
+  min: number | null,
+  max: number | null,
+): boolean {
+  return min === null || max === null || min <= max;
+}
 export const filterKeys: FilterKey[] = [
   "vendors",
   "channels",
@@ -41,6 +56,8 @@ export const colors: Record<string, string> = {
 };
 export const defaultState = (): State => ({
   feeBand: "all",
+  budgetMin: null,
+  budgetMax: null,
   lang: "en",
   view: "pareto",
   board: "arena_code",
@@ -87,6 +104,7 @@ export function visiblePoints(data: SiteData, s: State): Point[] {
       matches(s.plans, p.plan) &&
       matches(s.billing, p.billing) &&
       matches(s.confidence, p.confidence) &&
+      matchesBudget(p.price_usd, s.budgetMin, s.budgetMax) &&
       (s.view !== "allowance" ||
         (p.billing !== "metered" &&
           p.monthly_yi !== null &&
@@ -238,6 +256,21 @@ export function restore(
     for (const [key, values] of Object.entries(enums)) {
       if (values.includes(raw[key])) Object.assign(state, { [key]: raw[key] });
       else if (raw[key] !== undefined) warning = true;
+    }
+    for (const key of ["budgetMin", "budgetMax"] as const) {
+      const value = raw[key];
+      if (value === undefined || value === null) {
+        if (value === null) state[key] = null;
+        continue;
+      }
+      if (typeof value === "number" && Number.isFinite(value) && value >= 0)
+        state[key] = value;
+      else warning = true;
+    }
+    if (!isValidBudgetRange(state.budgetMin, state.budgetMax)) {
+      state.budgetMin = null;
+      state.budgetMax = null;
+      warning = true;
     }
     if (typeof raw.board === "string" && Object.hasOwn(data.boards, raw.board))
       state.board = raw.board;

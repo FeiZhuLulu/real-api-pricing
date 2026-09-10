@@ -82,6 +82,8 @@ export type FilterKey =
   | "modes";
 export interface State {
   feeBand: string;
+  budgetMin: number | null;
+  budgetMax: number | null;
   lang: Lang;
   view: View;
   board: string;

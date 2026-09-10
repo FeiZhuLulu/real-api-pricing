@@ -1033,6 +1033,77 @@ footer a {
   background: none;
   color: #86988c;
 }
+.budget-filter {
+  border: 0;
+  padding: 0;
+  margin: 0 0 25px;
+  min-width: 0;
+}
+.budget-filter legend {
+  font-size: 12px;
+  font-weight: 550;
+  width: 100%;
+  padding: 0 0 9px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 13px;
+}
+.budget-filter legend button {
+  float: right;
+  font-size: 10px;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: #86988c;
+}
+.budget-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: flex-end;
+  gap: 12px;
+  max-width: 420px;
+}
+.budget-inputs label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  font-size: 11px;
+  color: #727b87;
+}
+.budget-input {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #dfe2e5;
+  border-radius: 7px;
+  background: #fff;
+}
+.budget-input b {
+  padding-left: 10px;
+  color: #8a929b;
+  font-size: 12px;
+  font-weight: 500;
+}
+.budget-input input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  padding: 9px 10px 9px 5px;
+  background: transparent;
+  color: #202329;
+  font-size: 12px;
+}
+.budget-separator {
+  padding-bottom: 9px;
+  color: #8a929b;
+}
+.budget-filter > small {
+  margin-top: 10px;
+  line-height: 1.55;
+}
+.budget-error {
+  color: #b04a44;
+}
 .filter-options {
   max-height: 170px;
   overflow: auto;

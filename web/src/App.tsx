@@ -45,6 +45,7 @@ import {
   displayPlan,
   filterKeys,
   groups,
+  isValidBudgetRange,
   manufacturer,
   number,
   options,
@@ -94,6 +95,22 @@ function saveLanguage(lang: Lang) {
   } catch {
     /* Storage is optional. */
   }
+}
+function parseBudgetInput(value: string): number | null {
+  if (!value.trim()) return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+}
+function budgetLabel(
+  min: number | null,
+  max: number | null,
+  lang: Lang,
+): string {
+  const unit = lang === "zh" ? " / 月" : " / mo";
+  if (min === null && max === null) return lang === "zh" ? "不限" : "Any";
+  if (min === null) return `≤${price(max)}${unit}`;
+  if (max === null) return `≥${price(min)}${unit}`;
+  return `${price(min)}–${price(max)}${unit}`;
 }
 function downloadText(content: string, filename: string, mime: string) {
   const url = URL.createObjectURL(new Blob([content], { type: mime }));
@@ -240,6 +257,16 @@ function Explorer({ data }: { data: SiteData }) {
   const activeFilters = filterKeys.flatMap((k) =>
     state[k].map((v) => ({ k, v })),
   );
+  const budgetActive = state.budgetMin !== null || state.budgetMax !== null;
+  const budgetRangeInvalid =
+    !isValidBudgetRange(state.budgetMin, state.budgetMax);
+  const activeFilterCount = activeFilters.length + (budgetActive ? 1 : 0);
+  const budgetCeiling = useMemo(() => {
+    const fees = data.points
+      .map((p) => p.price_usd)
+      .filter((fee): fee is number => fee !== null && Number.isFinite(fee));
+    return fees.length ? Math.ceil(Math.max(...fees)) : 0;
+  }, [data]);
   const changeSelection = (ids: string[], checked: boolean) => {
     const next = new Set(selectedIds);
     for (const id of ids) checked ? next.add(id) : next.delete(id);
@@ -604,7 +631,7 @@ function Explorer({ data }: { data: SiteData }) {
                 </button>
                 <button
                   className={
-                    activeFilters.length
+                    activeFilterCount
                       ? "filter-button has-filters"
                       : "filter-button"
                   }
@@ -612,8 +639,8 @@ function Explorer({ data }: { data: SiteData }) {
                 >
                   <FunnelSimple size={17} />
                   {t("Filters", "筛选")}
-                  {activeFilters.length > 0 && (
-                    <span className="count">{activeFilters.length}</span>
+                  {activeFilterCount > 0 && (
+                    <span className="count">{activeFilterCount}</span>
                   )}
                 </button>
                 {state.view === "pareto" && (
@@ -650,11 +677,25 @@ function Explorer({ data }: { data: SiteData }) {
                   {pts.length} {t("points in view", "个数据点")}
                 </span>
               </div>
-              {(activeFilters.length > 0 || state.selected !== null) && (
+              {(activeFilterCount > 0 || state.selected !== null) && (
                 <div className="chips">
                   {state.selected !== null && (
                     <button onClick={() => patch({ selected: null })}>
                       {selectedIds.size} {t("selected points", "已选数据点")}
+                      <X size={12} />
+                    </button>
+                  )}
+                  {budgetActive && (
+                    <button
+                      onClick={() =>
+                        patch({ budgetMin: null, budgetMax: null })
+                      }
+                    >
+                      {t("Budget", "预算")}: {budgetLabel(
+                        state.budgetMin,
+                        state.budgetMax,
+                        state.lang,
+                      )}
                       <X size={12} />
                     </button>
                   )}
@@ -1182,6 +1223,81 @@ function Explorer({ data }: { data: SiteData }) {
                   "同组条件取并集，不同组共同筛选。评测配置筛选影响分数参考，无匹配分数的套餐仍保留在表格中。",
                 )}
               </p>
+              <fieldset className="budget-filter">
+                <legend>
+                  {t("Monthly budget", "月预算")}
+                  {budgetActive && (
+                    <button
+                      onClick={() =>
+                        patch({ budgetMin: null, budgetMax: null })
+                      }
+                    >
+                      {t("Clear", "清除")}
+                    </button>
+                  )}
+                </legend>
+                <div className="budget-inputs">
+                  <label>
+                    <span>{t("Minimum", "最低")}</span>
+                    <span className="budget-input">
+                      <b>$</b>
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        inputMode="decimal"
+                        value={state.budgetMin ?? ""}
+                        placeholder="0"
+                        aria-label={t("Minimum monthly budget", "最低月预算")}
+                        aria-invalid={budgetRangeInvalid}
+                        aria-describedby="budget-range-help budget-range-error"
+                        onChange={(e) =>
+                          patch({ budgetMin: parseBudgetInput(e.target.value) })
+                        }
+                      />
+                    </span>
+                  </label>
+                  <span className="budget-separator">–</span>
+                  <label>
+                    <span>{t("Maximum", "最高")}</span>
+                    <span className="budget-input">
+                      <b>$</b>
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        inputMode="decimal"
+                        value={state.budgetMax ?? ""}
+                        placeholder={String(budgetCeiling)}
+                        aria-label={t("Maximum monthly budget", "最高月预算")}
+                        aria-invalid={budgetRangeInvalid}
+                        aria-describedby="budget-range-help budget-range-error"
+                        onChange={(e) =>
+                          patch({ budgetMax: parseBudgetInput(e.target.value) })
+                        }
+                      />
+                    </span>
+                  </label>
+                </div>
+                <small id="budget-range-help">
+                  {t(
+                    "USD per month. Plans without a fixed monthly fee, such as metered APIs, are excluded when a range is active.",
+                    "美元 / 月。启用范围后，没有固定月费的套餐（例如按量 API）会被排除。",
+                  )}
+                </small>
+                {budgetRangeInvalid && (
+                  <small
+                    id="budget-range-error"
+                    className="budget-error"
+                    role="alert"
+                  >
+                    {t(
+                      "Minimum budget must not exceed maximum budget.",
+                      "最低预算不能高于最高预算。",
+                    )}
+                  </small>
+                )}
+              </fieldset>
               <div className="filter-grid">
                 {filterKeys.map((k) => (
                   <fieldset key={k}>
@@ -1211,12 +1327,20 @@ function Explorer({ data }: { data: SiteData }) {
               <div className="panel-bottom">
                 <button
                   onClick={() =>
-                    patch(Object.fromEntries(filterKeys.map((k) => [k, []])))
+                    patch({
+                      ...Object.fromEntries(filterKeys.map((k) => [k, []])),
+                      budgetMin: null,
+                      budgetMax: null,
+                    })
                   }
                 >
                   {t("Clear all filters", "清除全部筛选")}
                 </button>
-                <button className="primary" onClick={() => setPanel(null)}>
+                <button
+                  className="primary"
+                  disabled={budgetRangeInvalid}
+                  onClick={() => setPanel(null)}
+                >
                   {t("Show results", "查看结果")} · {pts.length}
                 </button>
               </div>

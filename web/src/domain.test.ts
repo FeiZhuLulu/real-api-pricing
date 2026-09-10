@@ -19,6 +19,8 @@ import { readFileSync } from "node:fs";
 import { parse } from "csv-parse/sync";
 import {
   matchesFeeBand,
+  matchesBudget,
+  isValidBudgetRange,
   feeBands,
   allowance,
   csv,
@@ -88,6 +90,77 @@ test("Monthly fee bands have exact non-overlapping boundaries and preserve all e
     visiblePoints(data, { ...filtered, view: "price" }).length,
     data.points.length,
   );
+});
+
+test("Budget ranges use inclusive monthly-fee bounds and reject unpriced plans when active", () => {
+  assert.equal(isValidBudgetRange(null, null), true);
+  assert.equal(isValidBudgetRange(30, null), true);
+  assert.equal(isValidBudgetRange(null, 100), true);
+  assert.equal(isValidBudgetRange(30, 100), true);
+  assert.equal(isValidBudgetRange(100, 30), false);
+  assert.equal(matchesBudget(30, 30, 100), true);
+  assert.equal(matchesBudget(100, 30, 100), true);
+  assert.equal(matchesBudget(29.99, 30, 100), false);
+  assert.equal(matchesBudget(100.01, 30, 100), false);
+  assert.equal(matchesBudget(null, 30, null), false);
+  assert.equal(matchesBudget(null, null, null), true);
+  assert.equal(matchesBudget(50, 100, 30), false);
+
+  const budget = {
+    ...defaultState(),
+    budgetMin: 30,
+    budgetMax: 100,
+  };
+  const filtered = visiblePoints(data, budget);
+  assert.ok(filtered.length > 0);
+  assert.ok(
+    filtered.every(
+      (p) =>
+        p.price_usd !== null && p.price_usd >= 30 && p.price_usd <= 100,
+    ),
+  );
+  assert.equal(filtered.some((p) => p.billing === "metered"), false);
+});
+
+test("Budget ranges round-trip through shared URLs while legacy links stay unbounded", () => {
+  const budget = {
+    ...defaultState(),
+    budgetMin: 30,
+    budgetMax: 100,
+  };
+  const restored = restore(serialize(budget), data);
+  assert.equal(restored.state.budgetMin, 30);
+  assert.equal(restored.state.budgetMax, 100);
+
+  const legacyHash =
+    "#" +
+    new URLSearchParams({
+      s: JSON.stringify({ v: 1, lang: "en", view: "pareto" }),
+    }).toString();
+  const legacy = restore(legacyHash, data);
+  assert.equal(legacy.warning, false);
+  assert.equal(legacy.state.budgetMin, null);
+  assert.equal(legacy.state.budgetMax, null);
+
+  const reversedHash =
+    "#" +
+    new URLSearchParams({
+      s: JSON.stringify({ v: 1, budgetMin: 100, budgetMax: 30 }),
+    }).toString();
+  const reversed = restore(reversedHash, data);
+  assert.equal(reversed.warning, true);
+  assert.equal(reversed.state.budgetMin, null);
+  assert.equal(reversed.state.budgetMax, null);
+
+  const invalidHash =
+    "#" +
+    new URLSearchParams({
+      s: JSON.stringify({ v: 1, budgetMin: -1, budgetMax: "100" }),
+    }).toString();
+  const invalid = restore(invalidHash, data);
+  assert.equal(invalid.warning, true);
+  assert.equal(invalid.state.budgetMin, null);
+  assert.equal(invalid.state.budgetMax, null);
 });
 const adopted = parse(
   readFileSync(new URL("../../data/adopted.csv", import.meta.url), "utf8"),
