@@ -1,0 +1,50 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs",
+  "scope": "核对用户指出的「1$ ≈ 7M Credits」是否与中文「1M Credit = ¥1」冲突。不改 adopted。",
+  "userInstruction": "用户看到 1$ ≈ 7M Credits，质疑上一轮按 1M Credit = ¥1 的折算。",
+  "prior": "data/research/stepfun-step-plan-round1-2026-09-10.json",
+  "officialBilingual": {
+    "zh": {
+      "url": "https://platform.stepfun.com/docs/zh/step-plan/overview",
+      "quote": "Credit 与支付金额按 1M Credit = ¥1 换算（即 100 万 Credit 对应 ¥1 的模型用量）。",
+      "exact": true
+    },
+    "en": {
+      "url": "https://platform.stepfun.ai/docs/en/step-plan/overview",
+      "quote": "Credits convert to payment at approximately $1 ≈ 7M Credits (7 million Credits correspond to about $1 of model usage).",
+      "exact": false,
+      "note": "英文写 approximately / about，是汇率取整，不是另一套 Credit 定义。"
+    }
+  },
+  "equivalence": {
+    "zhRule": "1M Credit = ¥1",
+    "enRuleRounded": "$1 ≈ 7M Credit",
+    "projectFx": 6.7787,
+    "impliedCreditsPerUsdAtProjectFx": 6.7787,
+    "officialEnRounding": 7.0,
+    "samePoolSizes": {
+      "mini": "400M",
+      "plus": "1600M",
+      "pro": "8000M",
+      "max": "40000M"
+    }
+  },
+  "tokenImpact": {
+    "ifConsistentCurrency": "额度（亿 token）不变。Credit÷标价是同一比例，汇率只出现在真实美元单价。",
+    "ifMixEn7WithCnyListAndProjectFx": "会把额度系统性压低约 3.2%（7.0/6.7787）。不要混用。",
+    "adoptRecommendation": "继续用中文精确口径 1M Credit = ¥1 + 人民币三段价 + conventions.usdPerCny。英文 $1≈7M 只作对照，不另开一套数。"
+  },
+  "englishStickerPricesDifferent": {
+    "url": "https://platform.stepfun.ai/docs/en/step-plan/overview",
+    "note": "国际站标价不是人民币÷6.7787。Credit 池相同，月费不同，只影响真实单价，不影响折 token。",
+    "tiers": [
+      {"id": "flash_mini", "monthlyCreditsM": 400, "cny": 49, "usdListed": 6.99, "cnyOverFx": 7.23},
+      {"id": "flash_plus", "monthlyCreditsM": 1600, "cny": 99, "usdListed": 9.99, "cnyOverFx": 14.60},
+      {"id": "flash_pro", "monthlyCreditsM": 8000, "cny": 199, "usdListed": 29, "cnyOverFx": 29.36},
+      {"id": "flash_max", "monthlyCreditsM": 40000, "cny": 699, "usdListed": 99, "cnyOverFx": 103.12}
+    ],
+    "plusGap": "Plus 国际站 $9.99 vs 国内 ¥99≈$14.60，差约 32%。若入库要先定画国内站还是国际站。"
+  },
+  "candidatesUnchanged": true
+}

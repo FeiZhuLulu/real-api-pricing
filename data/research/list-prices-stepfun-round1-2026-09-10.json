@@ -1,0 +1,28 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs",
+  "scope": "阶跃开放平台按量三段价，供 compute.py 标价混合比。不改 adopted。",
+  "models": [
+    {
+      "model": "step-3.5-flash",
+      "vendor": "StepFun",
+      "input": 0.7,
+      "cachedInput": 0.14,
+      "output": 2.1,
+      "currency": "CNY",
+      "source": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+      "checkedAt": "2026-09-10",
+      "note": "step-3.5-flash-2603 同价，不单列。"
+    },
+    {
+      "model": "step-3.7-flash",
+      "vendor": "StepFun",
+      "input": 1.35,
+      "cachedInput": 0.27,
+      "output": 8.1,
+      "currency": "CNY",
+      "source": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+      "checkedAt": "2026-09-10"
+    }
+  ]
+}

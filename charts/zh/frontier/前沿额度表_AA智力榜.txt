@@ -7,12 +7,14 @@ Artificial Analysis Intelligence Index v4.3 | Intelligence Index | 2026-09-09
 † Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算。OpenCode Go按官方美元池和三段价套统一标准负载换算。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                           价格/月  服务模型       月额度(亿)  $/MTok   置信度  Intelligence Index  得分版本             Harness  思考强度  映射
-----  -----------------------------  -------  -------------  ----------  -------  ------  ------------------  -------------------  -------  --------  -----------------------------
-1     ChatGPT Pro 20x                USD 200  GPT 5.6 Luna   1502.22     0.00133  medium  37.5048             GPT-5.6 Luna (max)   —        max       model_configuration_reference
-2     ChatGPT Pro 20x                USD 200  GPT 5.6 Terra  240.24      0.00833  medium  42.2515             GPT-5.6 Terra (max)  —        max       model_configuration_reference
-3     Claude Max 20x (9/14+)         USD 200  Claude Opus 5  157         0.01274  medium  50.7002             Claude Opus 5 (max)  —        max       model_configuration_reference
-4     OpenCode Go                    USD 10   MiMo V2.5      89.286      0.00112  medium  22.3039             MiMo-V2.5            —        —         model_configuration_reference
-5     Claude Max 5x (9/14+)          USD 100  Claude Opus 5  78.5        0.01274  medium  50.7002             Claude Opus 5 (max)  —        max       model_configuration_reference
-6     GLM Coding Pro (v2 ¥149) 闲时  CNY 149  GLM 5.3 Flash  76.99       0.00285  high    41.9074             GLM-5.3-Flash        —        —         model_configuration_reference
-7     GLM Coding Pro (v2 ¥149) 闲时  CNY 149  GLM 5.3        25.4        0.00865  high    44.8557             GLM-5.3 (max)        —        max       model_configuration_reference
+序号  套餐                           价格/月  服务模型        月额度(亿)  $/MTok   置信度  Intelligence Index  得分版本                           Harness  思考强度  映射
+----  -----------------------------  -------  --------------  ----------  -------  ------  ------------------  ---------------------------------  -------  --------  -----------------------------
+1     Step Plan Max (¥699)           CNY 699  Step 3.5 Flash  2517.31     0.00041  medium  16.9641             Step 3.5 Flash 2603 [AA estimate]  —        —         model_configuration_reference
+2     ChatGPT Pro 20x                USD 200  GPT 5.6 Luna    1502.22     0.00133  medium  37.5048             GPT-5.6 Luna (max)                 —        max       model_configuration_reference
+3     Step Plan Max (¥699)           CNY 699  Step 3.7 Flash  1247.56     0.00083  medium  19.4813             Step 3.7 Flash [AA estimate]       —        —         model_configuration_reference
+4     ChatGPT Pro 20x                USD 200  GPT 5.6 Terra   240.24      0.00833  medium  42.2515             GPT-5.6 Terra (max)                —        max       model_configuration_reference
+5     Claude Max 20x (9/14+)         USD 200  Claude Opus 5   157         0.01274  medium  50.7002             Claude Opus 5 (max)                —        max       model_configuration_reference
+6     OpenCode Go                    USD 10   MiMo V2.5       89.286      0.00112  medium  22.3039             MiMo-V2.5                          —        —         model_configuration_reference
+7     Claude Max 5x (9/14+)          USD 100  Claude Opus 5   78.5        0.01274  medium  50.7002             Claude Opus 5 (max)                —        max       model_configuration_reference
+8     GLM Coding Pro (v2 ¥149) 闲时  CNY 149  GLM 5.3 Flash   76.99       0.00285  high    41.9074             GLM-5.3-Flash                      —        —         model_configuration_reference
+9     GLM Coding Pro (v2 ¥149) 闲时  CNY 149  GLM 5.3         25.4        0.00865  high    44.8557             GLM-5.3 (max)                      —        max       model_configuration_reference

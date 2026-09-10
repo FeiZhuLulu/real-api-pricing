@@ -1,0 +1,214 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs + community search",
+  "scope": "核对阶跃星辰自家 Step Plan 是否已入库，并搜集官方 Credit 额度与社区实测。本轮不改 adopted.csv、不改 scripts/build_adopted.py。",
+  "userInstruction": "用户指出 StepFun 好像还没入数据库；官方其实给了清晰 token 额度，但仍想看社区实测。",
+  "method": "Coordinator 直接抓官网文档与社区检索。Agent Bridge 本轮 Not connected，未派 Grok。不编数；互相矛盾的来源并列。LINUX DO 帖只记标题与现象，不收录用户粘贴的 API Key。",
+  "existingEvidenceReviewed": [
+    "scripts/build_adopted.py 无 stepfun_* / 跃问 / 阶跃自家 plan；仅 Command Code GOAT 转售 step-3.7-flash / step-3.5-flash",
+    "data/adopted.csv command_code_goat::step-3.7-flash 4.226亿 / 0.02366；command_code_goat::step-3.5-flash 8.811亿 / 0.01135",
+    "data/subscriptions.json、data/raw 无阶跃订阅条目",
+    "data/research/ 无既有 stepfun / step-plan 专档"
+  ],
+  "currentDatabase": {
+    "firstPartyStepPlan": false,
+    "thirdPartyOnly": [
+      {
+        "planId": "command_code_goat",
+        "servedModel": "step-3.7-flash",
+        "monthlyYi": 4.226,
+        "realUsdPerMtok": 0.02366,
+        "basis": "Command Code 每模型 $20 credits ÷ 官网三段价"
+      },
+      {
+        "planId": "command_code_goat",
+        "servedModel": "step-3.5-flash",
+        "monthlyYi": 8.811,
+        "realUsdPerMtok": 0.01135,
+        "basis": "Command Code 每模型 $20 credits ÷ 官网三段价"
+      }
+    ]
+  },
+  "official": {
+    "product": "Step Plan（2026-06-18 起官网也称新套餐为 Token Plan）",
+    "notYuewenConsumer": "跃问 C 端不是本轮对象。公开资料里带绝对额度的是开放平台 Step Plan，不是 yuewen 网页会员。",
+    "overview": "https://platform.stepfun.com/docs/zh/step-plan/overview",
+    "upgradeNotice": "https://platform.stepfun.com/docs/zh/step-plan/upgrade-notice",
+    "pricing": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+    "reasoningApi": "https://platform.stepfun.com/docs/zh/step-plan/integrations/reasoning-api",
+    "step37ModelPage": "https://platform.stepfun.com/docs/zh/guides/models/step-3.7-flash",
+    "console": "https://platform.stepfun.com/step-plan",
+    "baseUrl": "https://api.stepfun.com/step_plan/v1",
+    "checkedAt": "2026-09-10",
+    "meteringQuote": "Credit 与支付金额按 1M Credit = ¥1 换算（即 100 万 Credit 对应 ¥1 的模型用量）。",
+    "billingQuote": "计费逻辑与开放平台一致，最终按开放平台实际计费金额折算为 Step Plan 总额度消耗。",
+    "poolQuote": "Credit 按月一次性发放至当月「月池」，月内任意时段消耗，月末清零、不结转至下一周期。",
+    "upgradeDate": "2026-06-18",
+    "oldCodingPlanStillExists": {
+      "note": "已开自动续费的旧 Coding Plan 可继续按请求次数（Prompt）+ 5h/周限额续订；未开自动续费到期后只能买新版 Token Plan。升级单向不可回退。",
+      "doNotAdoptOldPromptCounts": true
+    },
+    "tiers": [
+      {"id": "flash_mini", "name": "Flash Mini", "monthlyCreditM": 400, "monthlyCny": 49, "quarterlyCny": 129, "yearlyCny": 456},
+      {"id": "flash_plus", "name": "Flash Plus", "monthlyCreditM": 1600, "monthlyCny": 99, "quarterlyCny": 269, "yearlyCny": 936},
+      {"id": "flash_pro", "name": "Flash Pro", "monthlyCreditM": 8000, "monthlyCny": 199, "quarterlyCny": 539, "yearlyCny": 1860},
+      {"id": "flash_max", "name": "Flash Max", "monthlyCreditM": 40000, "monthlyCny": 699, "quarterlyCny": 1889, "yearlyCny": 6666}
+    ],
+    "creditUnit": {
+      "definition": "1M Credit = ¥1 开放平台标价用量",
+      "implication": "档位表里的 400M/1600M/8000M/40000M 就是当月可消耗的人民币标价额度，不是 4 亿/16 亿 token。"
+    },
+    "topUpPacks": [
+      {"name": "小油包", "cny": 49, "creditM": 400, "periodDays": 30},
+      {"name": "大油包", "cny": 99, "creditM": 1600, "periodDays": 30}
+    ],
+    "studioExtra": "Studio 另赠相当于套餐 40% 的专属创作额度；与 Step Plan API 月池分开，折 token 时不要加进去。",
+    "supportedReasoningModels": [
+      "step-3.7-flash",
+      "step-3.5-flash",
+      "step-3.5-flash-2603",
+      "step-router-v1"
+    ],
+    "otherSupportedModels": [
+      "stepaudio-2.5-realtime",
+      "stepaudio-2.5-chat",
+      "stepaudio-2.5-tts",
+      "stepaudio-2.5-asr",
+      "step-image-edit-2"
+    ],
+    "listPricesCnyPer1M": {
+      "step-3.7-flash": {"cachedInput": 0.27, "input": 1.35, "output": 8.1, "source": "pricing/details + step-3.7-flash 模型页"},
+      "step-3.5-flash": {"cachedInput": 0.14, "input": 0.7, "output": 2.1, "source": "pricing/details"},
+      "step-3.5-flash-2603": {"cachedInput": 0.14, "input": 0.7, "output": 2.1, "source": "pricing/details；与 3.5-flash 同价"}
+    },
+    "router": {
+      "model": "step-router-v1",
+      "engines": ["deepseek-v4-pro", "step-3.7-flash"],
+      "billing": "按实际命中引擎的开放平台单价扣 Credit",
+      "deepseekListPriceOnStepFunPage": "notFound",
+      "doNotPlotRouterAsOwnServedModel": true
+    },
+    "speed": "全档统一高速，不对速度额外收费；无忙时/闲时倍率。",
+    "rateLimit": "Step Plan 不适用按累计充值金额划分的 RPM/TPM 阶梯限速。"
+  },
+  "formulaIfAdoptOfficial": {
+    "status": "candidate-only，未写入 adopted",
+    "mix": "conventions.json standardTokenMix：cache 0.975 / input 0.0215 / output 0.0035",
+    "usdPerCny": 6.7787,
+    "fxSource": "data/conventions.json exchangeRate 2026-09-04",
+    "yi": "monthlyCreditM / blendedCnyPer1M / 100",
+    "realUsdPerMtok": " (monthlyCny / usdPerCny) / (yi * 100) ",
+    "blendedCnyPer1M": {
+      "step-3.5-flash": 0.1589,
+      "step-3.7-flash": 0.320625
+    },
+    "candidates": [
+      {"plan": "Flash Mini ¥49", "model": "step-3.5-flash", "monthlyYi": 25.173, "realUsdPerMtok": 0.00287},
+      {"plan": "Flash Plus ¥99", "model": "step-3.5-flash", "monthlyYi": 100.692, "realUsdPerMtok": 0.00145},
+      {"plan": "Flash Pro ¥199", "model": "step-3.5-flash", "monthlyYi": 503.461, "realUsdPerMtok": 0.00058},
+      {"plan": "Flash Max ¥699", "model": "step-3.5-flash", "monthlyYi": 2517.306, "realUsdPerMtok": 0.00041},
+      {"plan": "Flash Mini ¥49", "model": "step-3.7-flash", "monthlyYi": 12.476, "realUsdPerMtok": 0.00579},
+      {"plan": "Flash Plus ¥99", "model": "step-3.7-flash", "monthlyYi": 49.903, "realUsdPerMtok": 0.00293},
+      {"plan": "Flash Pro ¥199", "model": "step-3.7-flash", "monthlyYi": 249.513, "realUsdPerMtok": 0.00118},
+      {"plan": "Flash Max ¥699", "model": "step-3.7-flash", "monthlyYi": 1247.563, "realUsdPerMtok": 0.00083}
+    ],
+    "listPriceDiscountVsPayg": {
+      "mini": "¥49 买到 ¥400 标价用量 ≈ 8.16×",
+      "plus": "¥99 买到 ¥1600 ≈ 16.16×",
+      "pro": "¥199 买到 ¥8000 ≈ 40.20×",
+      "max": "¥699 买到 ¥40000 ≈ 57.22×"
+    },
+    "confidenceIfAdopted": "medium",
+    "confidenceNote": "官方绝对 Credit 表 + 官方三段价 + 项目标准负载，等级与 OpenCode/Command Code 官方 credits 折算相同；没有面板 token+% 或打满实测，不能标 high。"
+  },
+  "scoresAvailable": {
+    "aa_intelligence": {
+      "step-3.7-flash": 19.4813,
+      "step-3.5-flash-2603": 16.9641,
+      "step-3.5-flash": 16.6169,
+      "source": "derived/benchmark-configurations.csv / scores-aa-round3-2026-09-09.json"
+    },
+    "aa_coding_agent": "not in current mapping as scored rows",
+    "code_arena": "notFound in current score snapshots as exact served-model rows",
+    "agent_arena": "notFound in current score snapshots as exact served-model rows",
+    "open_design": "explicit no exact officialName row"
+  },
+  "community": {
+    "searched": [
+      "V2EX Step Plan / 阶跃 额度 实测",
+      "LINUX DO Step Plan Credit 剩余 / 用完",
+      "知乎 / 大佬说 / CSDN / GitHub coding-plans",
+      "《财经》2026-08 月刊 Token 套餐打满（V2EX t/1239593 + 163 转载）"
+    ],
+    "panelTokenPlusPercent": "notFound",
+    "controlledBurn1to100": "notFound",
+    "items": [
+      {
+        "id": "old-prompt-plan-github-2026-03-28",
+        "evidenceType": "third_party_summary_obsolete",
+        "source": "https://github.com/AIddlx/coding-plans/blob/main/阶跃星辰_Coding_Plan_记录.md",
+        "sourceDate": "2026-03-28",
+        "quote": "Flash Mini 5小时限额 100 prompts；周限额 400 prompts。用户反馈：5小时用量和每周用量其实挺多的，简单的文本编辑工作根本用不满5小时。",
+        "usableForCurrentAdoption": false,
+        "note": "旧 Coding Plan 按次口径，已被 2026-06-18 Credit 月池取代。不能把 prompt 数当 token。"
+      },
+      {
+        "id": "zhihu-csdn-echo-old-prompts",
+        "evidenceType": "third_party_summary_obsolete",
+        "sources": [
+          "https://zhuanlan.zhihu.com/p/2022419354629751795",
+          "https://blog.csdn.net/weixin_44733660/article/details/160397630"
+        ],
+        "quote": "仍转载 Mini ~100 prompts/5h、Pro ~1500 prompts/5h 等旧表。",
+        "usableForCurrentAdoption": false
+      },
+      {
+        "id": "locdd-token-plan-switch",
+        "evidenceType": "qualitative_forum",
+        "source": "https://www.locdd.com/t/topic/61821",
+        "sourceDate": "2026-06-18",
+        "quote": "才发现也改了 现有套餐存续期间不变……按次数的绝版了。他家模型干点小活还行 主要是速度快。",
+        "tokenNumbers": null,
+        "usableForCurrentAdoption": false
+      },
+      {
+        "id": "v2ex-free-trial-invite-spam",
+        "evidenceType": "forum_no_measurement",
+        "source": "https://www.v2ex.com/t/1221541",
+        "sourceDate": "2026-06-19",
+        "note": "免费 15 天体验招募帖，回复几乎全是邀请码，无面板 token 或打满数。",
+        "usableForCurrentAdoption": false
+      },
+      {
+        "id": "linuxdo-credit-remaining-100-key-dumps",
+        "evidenceType": "forum_ui_label_only",
+        "sources": [
+          "https://linux.do/t/topic/2625110",
+          "https://linux.do/t/topic/2808884"
+        ],
+        "sourceDate": "2026-07-21 / 约两周前",
+        "quote": "标题写 Stepfun Mini Plan Credit用量 剩余 100%；帖内是分享 Step Plan Base URL 与密钥。",
+        "implication": "控制台用量按 Credit 百分比展示，不是 token 行。无人给出 token 数 + 占比，无法反推。",
+        "keysRecorded": false,
+        "usableForCurrentAdoption": false
+      },
+      {
+        "id": "caijing-2026-08-burn-excludes-step",
+        "evidenceType": "independent_burn_test_other_vendors",
+        "sources": [
+          "https://www.v2ex.com/t/1239593",
+          "https://www.163.com/dy/article/L4ILFQL60519DDOA.html"
+        ],
+        "note": "《财经》7–8 月用 OpenCode 打干多家 Token 套餐周额度。转载正文检索无「阶跃 / Step Plan / StepFun」。不能当作 Step 实测。",
+        "usableForCurrentAdoption": false
+      }
+    ]
+  },
+  "decisionNeeded": [
+    "是否按官方 Credit 月池 + 标准负载折 token 入库 Step Plan 四档 × 3.5/3.7（medium）。",
+    "step-3.5-flash-2603 是否单独成点，还是与 step-3.5-flash 同价合并。",
+    "要不要等面板 token+% 或打满实测再入库。",
+    "官方按量 API（非订阅）是否另开 METERED 点；本轮未采。"
+  ],
+  "notAdopted": true
+}

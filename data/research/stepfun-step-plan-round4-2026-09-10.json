@@ -1,0 +1,40 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "adoption-decision",
+  "scope": "用户确认按国内站 Credit 月池入库 Step Plan，并用官方五方标电青配色。",
+  "userInstruction": "更新上这个数据；用这张青柠到青的圆标和颜色。",
+  "adopted": {
+    "site": "CN",
+    "rule": "1M Credit = ¥1 + 人民币三段价 + conventions 标准负载",
+    "notAdopted": [
+      "国际站 $6.99/$9.99/$29/$99 月费",
+      "英文 $1≈7M + 四舍五入美元三段价（仅 3.7 会少 3.2%）",
+      "旧 Coding Plan Prompt/5h",
+      "Studio 40% 创作额度",
+      "step-3.5-flash-2603 独立点",
+      "step-router-v1 独立点"
+    ],
+    "confidence": "medium",
+    "rows": [
+      {"planId": "stepfun_mini_cn", "model": "step-3.5-flash", "monthlyYi": 25.173, "realUsdPerMtok": 0.00287},
+      {"planId": "stepfun_plus_cn", "model": "step-3.5-flash", "monthlyYi": 100.692, "realUsdPerMtok": 0.00145},
+      {"planId": "stepfun_pro_cn", "model": "step-3.5-flash", "monthlyYi": 503.461, "realUsdPerMtok": 0.00058},
+      {"planId": "stepfun_max_cn", "model": "step-3.5-flash", "monthlyYi": 2517.306, "realUsdPerMtok": 0.00041},
+      {"planId": "stepfun_mini_cn", "model": "step-3.7-flash", "monthlyYi": 12.476, "realUsdPerMtok": 0.00579},
+      {"planId": "stepfun_plus_cn", "model": "step-3.7-flash", "monthlyYi": 49.903, "realUsdPerMtok": 0.00293},
+      {"planId": "stepfun_pro_cn", "model": "step-3.7-flash", "monthlyYi": 249.513, "realUsdPerMtok": 0.00118},
+      {"planId": "stepfun_max_cn", "model": "step-3.7-flash", "monthlyYi": 1247.563, "realUsdPerMtok": 0.00083}
+    ]
+  },
+  "brand": {
+    "mark": "web/src/assets/provider-logos/stepfun.svg",
+    "chartColor": "#00F4E5",
+    "gradient": ["#67FBB1", "#00F4E5", "#1ACDEE"],
+    "sampledFrom": "user-provided official avatar"
+  },
+  "prior": [
+    "data/research/stepfun-step-plan-round1-2026-09-10.json",
+    "data/research/stepfun-step-plan-round2-2026-09-10.json",
+    "data/research/stepfun-step-plan-round3-2026-09-10.json"
+  ]
+}

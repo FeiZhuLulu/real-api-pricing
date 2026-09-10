@@ -37,7 +37,7 @@ export const colors: Record<string, string> = {
   Ollama: "#A0785C",
   Xiaomi: "#FFA000",
   Tencent: "#26C6DA",
-  StepFun: "#00D4C8",
+  StepFun: "#00F4E5",
 };
 export const defaultState = (): State => ({
   feeBand: "all",

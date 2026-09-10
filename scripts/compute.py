@@ -27,6 +27,7 @@ LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
     "list-prices-deepseek-v41-round1-2026-09-09.json",
     "list-prices-deepseek-v41-round2-2026-09-10.json",
+    "list-prices-stepfun-round1-2026-09-10.json",
 )
 
 

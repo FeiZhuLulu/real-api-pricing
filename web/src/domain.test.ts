@@ -115,6 +115,15 @@ test("DeepSeek V4.1 Flash uses official USD off-peak and peak API prices", () =>
   assert.equal(offPeak.real_usd_per_mtok, 0.00825);
   assert.equal(peak.real_usd_per_mtok, 0.0165);
 });
+test("Step Plan CN uses official Credit pools and CNY list prices", () => {
+  const mini35 = data.points.find((p) => p.id === "stepfun_mini_cn::step-3.5-flash")!;
+  const max37 = data.points.find((p) => p.id === "stepfun_max_cn::step-3.7-flash")!;
+  assert.equal(mini35.monthly_yi, 25.173);
+  assert.equal(mini35.real_usd_per_mtok, 0.00287);
+  assert.equal(mini35.channel, "StepFun");
+  assert.equal(max37.monthly_yi, 1247.563);
+  assert.equal(accessLine(mini35), "StepFun");
+});
 test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
   const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
   assert.equal(p.monthly_yi, 48.485);

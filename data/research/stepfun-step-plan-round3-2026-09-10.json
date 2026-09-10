@@ -1,0 +1,69 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs + local cross-check",
+  "scope": "用户要求再测算 $1≈7M 与 1M=¥1 两套口径准不准。不改 adopted。",
+  "prior": [
+    "data/research/stepfun-step-plan-round1-2026-09-10.json",
+    "data/research/stepfun-step-plan-round2-2026-09-10.json"
+  ],
+  "pricesRecheckedAt": "2026-09-10",
+  "prices": {
+    "zh": {
+      "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+      "step-3.5-flash": {"cachedInput": 0.14, "input": 0.7, "output": 2.1, "currency": "CNY"},
+      "step-3.7-flash": {"cachedInput": 0.27, "input": 1.35, "output": 8.1, "currency": "CNY"}
+    },
+    "en": {
+      "url": "https://platform.stepfun.ai/docs/en/guides/pricing/details",
+      "step-3.5-flash": {"cachedInput": 0.02, "input": 0.10, "output": 0.30, "currency": "USD"},
+      "step-3.7-flash": {"cachedInput": 0.04, "input": 0.20, "output": 1.15, "currency": "USD"}
+    }
+  },
+  "standardMix": {"cache": 0.975, "input": 0.0215, "output": 0.0035},
+  "usdPerCny": 6.7787,
+  "verdict": {
+    "step-3.5-flash": {
+      "match": true,
+      "impliedFx": {"cache": 7.0, "input": 7.0, "output": 7.0},
+      "blendedCny": 0.1589,
+      "blendedUsd": 0.0227,
+      "note": "英文价 = 人民币价 ÷ 7 恰好。CNY 路径与 $1=7M+USD 价路径额度差 0%。"
+    },
+    "step-3.7-flash": {
+      "match": false,
+      "impliedFx": {"cache": 6.75, "input": 6.75, "output": 7.0435},
+      "blendedCny": 0.320625,
+      "blendedUsd": 0.047325,
+      "cnyOver7": 0.04580357,
+      "usdPathYiGapPct": -3.21,
+      "note": "英文三段价是四舍五入，不是 CNY/7。缓存/输入偏贵（0.03857→0.04，0.19286→0.20），输出略便宜（1.157→1.15）。标准负载下 USD 路径额度少 3.2%。"
+    }
+  },
+  "candidates": {
+    "useForCnSite": "1M Credit=¥1 + 人民币三段价",
+    "rows": [
+      {"tier": "Mini", "model": "step-3.5-flash", "yiCny": 25.173, "yiUsd7": 25.173},
+      {"tier": "Plus", "model": "step-3.5-flash", "yiCny": 100.692, "yiUsd7": 100.692},
+      {"tier": "Pro", "model": "step-3.5-flash", "yiCny": 503.461, "yiUsd7": 503.461},
+      {"tier": "Max", "model": "step-3.5-flash", "yiCny": 2517.306, "yiUsd7": 2517.306},
+      {"tier": "Mini", "model": "step-3.7-flash", "yiCny": 12.476, "yiUsd7": 12.075},
+      {"tier": "Plus", "model": "step-3.7-flash", "yiCny": 49.903, "yiUsd7": 48.298},
+      {"tier": "Pro", "model": "step-3.7-flash", "yiCny": 249.513, "yiUsd7": 241.491},
+      {"tier": "Max", "model": "step-3.7-flash", "yiCny": 1247.563, "yiUsd7": 1207.456}
+    ]
+  },
+  "mixSensitivityMini35": [
+    {"cache": 0.80, "yi": 15.57},
+    {"cache": 0.90, "yi": 19.91},
+    {"cache": 0.95, "yi": 23.135},
+    {"cache": 0.975, "yi": 25.173},
+    {"cache": 0.99, "yi": 26.578}
+  ],
+  "commandCodeSameUsdPrices": {
+    "step-3.5-flash": 8.811,
+    "step-3.7-flash": 4.226,
+    "note": "Command Code 用的就是国际站美元三段价；$20 / 混合价 与 adopted 现数一致。"
+  },
+  "notPanelMeasured": true,
+  "script": "_build/check_stepfun_credits.py"
+}

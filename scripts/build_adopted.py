@@ -265,6 +265,44 @@ GLM_WEEKLY_CREDITS = {"lite": 10_000, "pro": 60_000, "max": 140_000}
 GLM_CREDIT_RATES = {"glm-5.3": (1.7, 6.9, 24), "glm-5.3-flash": (0.56, 2.3, 8)}
 
 
+# 阶跃 Step Plan 国内站：官方 Credit 月池，1M Credit = ¥1，按开放平台人民币三段价折 token。
+# 证据：platform.stepfun.com/docs/zh/step-plan/overview；pricing/details；
+#       data/research/stepfun-step-plan-round1-2026-09-10.json、round3-2026-09-10.json。
+STEPFUN_TIERS = (
+    ("stepfun_mini_cn", "Step Plan Mini (¥49)", 49, 400),
+    ("stepfun_plus_cn", "Step Plan Plus (¥99)", 99, 1600),
+    ("stepfun_pro_cn", "Step Plan Pro (¥199)", 199, 8000),
+    ("stepfun_max_cn", "Step Plan Max (¥699)", 699, 40000),
+)
+STEPFUN_MODELS = (
+    ("step-3.5-flash", 0.14, 0.7, 2.1),
+    ("step-3.7-flash", 0.27, 1.35, 8.1),
+)
+STEPFUN_SOURCE = (
+    "https://platform.stepfun.com/docs/zh/step-plan/overview 官方 Credit 月池 1M Credit=¥1；"
+    "https://platform.stepfun.com/docs/zh/guides/pricing/details 人民币三段价；"
+    "stepfun-step-plan-round1-2026-09-10.json；stepfun-step-plan-round3-2026-09-10.json；"
+    "stepfun-step-plan-round4-2026-09-10.json"
+)
+
+
+def stepfun_rows() -> list[tuple]:
+    rows = []
+    for pid, name, price, credit_m in STEPFUN_TIERS:
+        for model, cached, inp, out in STEPFUN_MODELS:
+            yi = round(credit_m / blended(cached, inp, out) / 100, 3)
+            rows.append((
+                pid, name, price, "CNY", model, yi, "medium", STEPFUN_SOURCE,
+                f"新增{yi:g}亿：国内站月度{credit_m:g}M Credit÷统一标准负载加权价；"
+                f"1M Credit=¥1，cached/input/output=¥{cached:g}/{inp:g}/{out:g}。"
+                "英文 $1≈7M 与人民币口径对 3.5 差 0%、对 3.7 因美元价四舍五入少 3.2%，采用中文精确口径。"
+                "未采用旧 Coding Plan Prompt/5h 表；未加 Studio 40% 创作额度；"
+                "step-3.5-flash-2603 与 3.5 同价不单列；step-router-v1 不画独立点。"
+                "无面板 token+% 或打满实测，按官方绝对 Credit+价表",
+            ))
+    return rows
+
+
 def glm_rows() -> list[tuple]:
     rows = []
     prices = {"new": {"lite": 118, "pro": 538, "max": 1078}, "old": {"lite": 49, "pro": 149, "max": 469}}
@@ -341,6 +379,8 @@ SUBS = [
     # Ollama Cloud Pro/Max —— 官方 credits × 官方价表；DeepSeek 用 off-peak。
     *ollama_rows("ollama_pro", "Ollama Pro", 20, OLLAMA_PRO_CREDITS_USD),
     *ollama_rows("ollama_max", "Ollama Max", 100, OLLAMA_MAX_CREDITS_USD),
+    # 阶跃 Step Plan 国内站 —— 官方 Credit 月池 × 人民币三段价；国际站月费不同、不另画。
+    *stepfun_rows(),
 ]
 
 # ---- 同一套餐内推更多模型：(基准 plan_id, 基准模型, 新模型, token 倍率, 置信度, 依据, 是否进精选图)

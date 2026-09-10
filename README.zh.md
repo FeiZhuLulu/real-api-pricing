@@ -26,19 +26,19 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 | 覆盖范围 | 行数 |
 |---|---:|
-| 全部采用的套餐 × 模型点 | 188 |
-| 有月额度的订阅点 | 175 |
+| 全部采用的套餐 × 模型点 | 196 |
+| 有月额度的订阅点 | 183 |
 | 按量 API 基准点 | 13 |
-| OpenCode Go / Command Code GOAT / Ollama 模型 | 27 / 37 / 20 |
+| OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 20 / 8 |
 | Code Arena / Agent Arena 有分点 | 136 / 140 |
-| AA 智力榜 / AA 编程 Agent 榜有分点 | 165 / 71 |
+| AA 智力榜 / AA 编程 Agent 榜有分点 | 173 / 71 |
 | OpenDesign Arena 有分点 | 65 |
 
 **下载数据：** [采用值 CSV](data/adopted.csv) · [完整计算结果 CSV](derived/points.csv) · [完整计算结果 JSON](derived/points.json) · [数据说明及缺分清单](data/README.md) · [分日期原始证据](data/research/)
 
 ## 月额度总览
 
-175 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
+183 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
 
 ### $0–30
 
@@ -66,7 +66,7 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ## 真实单价总览
 
-把全部 188 个订阅和 API 点放在同一套 $/MTok 口径下比较。
+把全部 196 个订阅和 API 点放在同一套 $/MTok 口径下比较。
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 

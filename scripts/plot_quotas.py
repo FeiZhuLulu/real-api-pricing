@@ -63,6 +63,7 @@ VENDOR_OF = {
     "command_code": "Command Code",
     "ollama": "Ollama",
     "deepseek": "DeepSeek",
+    "stepfun": "StepFun",
 }
 VENDOR_COLORS = {
     "OpenAI": "#00A86B",
@@ -78,6 +79,7 @@ VENDOR_COLORS = {
     "Ollama": "#A0785C",
     "DeepSeek": "#1F75FE",
     "Gemini": "#7CC12A",
+    "StepFun": "#00F4E5",
 }
 VIEW_CN = {"quotas": "额度", "prices": "单价"}
 BOARD_CN = {
@@ -105,7 +107,7 @@ VENDOR_CODES = {
     "OpenAI": "OA", "Anthropic": "AN", "xAI": "XA", "Cursor": "CU",
     "Kimi": "KI", "GLM": "GL", "MiniMax": "MM", "Alibaba": "AL",
     "OpenCode": "OC", "Command Code": "CC", "Ollama": "OL",
-    "DeepSeek": "DS", "Gemini": "GE",
+    "DeepSeek": "DS", "Gemini": "GE", "StepFun": "SF",
 }
 TEXT = {
     "zh": {

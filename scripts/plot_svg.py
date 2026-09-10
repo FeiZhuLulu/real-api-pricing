@@ -20,13 +20,14 @@ COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
           "Cursor": "#FFB81C", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
           "MiniMax": "#D23A7D", "Alibaba": "#FF6F61", "OpenCode": "#00C0A8",
           "Command Code": "#708090", "Ollama": "#A0785C", "DeepSeek": "#1F75FE",
-          "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA"}
+          "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA",
+          "StepFun": "#00F4E5"}
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
             ("anthropic", "Claude"),
             ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
             ("glm", "GLM"), ("minimax", "MiniMax"), ("aliyun", "Alibaba"),
             ("opencode", "OpenCode"), ("command_code", "Command Code"), ("ollama", "Ollama"),
-            ("deepseek", "DeepSeek")]
+            ("deepseek", "DeepSeek"), ("stepfun", "StepFun")]
 WIDTH, HEIGHT = 1440, 940
 LEFT, RIGHT, TOP, BOTTOM = 120, 1338, 233, 705
 

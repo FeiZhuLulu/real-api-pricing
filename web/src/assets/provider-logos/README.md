@@ -10,7 +10,7 @@ Alibaba uses the Qwen mark; Tencent uses Hunyuan; Meituan uses LongCat; Google u
 
 ## Sources
 
-Most marks are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT). Xiaomi is from [Simple Icons](https://github.com/simple-icons/simple-icons) (CC0). Command Code uses the complete official avatar (rounded frame + ⌘), not a cropped command-only mark. StepFun uses the official five-square geometry from stepfun.com with the current public avatar gradient. Zhipu Z and the OpenCode window are traced from official rasters.
+Most marks are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT). Xiaomi is from [Simple Icons](https://github.com/simple-icons/simple-icons) (CC0). Command Code uses the complete official avatar (rounded frame + ⌘), not a cropped command-only mark. StepFun uses the official five-square mark; the circle gradient is sampled from the current public avatar (lime #67FBB1 → aqua #00F4E5 → cyan #1ACDEE). Chart solid color is the mid aqua #00F4E5. Zhipu Z and the OpenCode window are traced from official rasters.
 
 Brand marks remain trademarks of their owners. Rebuild recipe: `_assemble.py` (expects a `_fetch/` cache of upstream SVGs).
 

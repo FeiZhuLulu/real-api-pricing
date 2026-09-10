@@ -1,20 +1,20 @@
 # Data / 数据
 
-Current snapshot: 2026-09-10. The adopted dataset contains 188 plan × model rows: 175 subscription rows and 13 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
+Current snapshot: 2026-09-10. The adopted dataset contains 196 plan × model rows: 183 subscription rows and 13 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
 
 These files are the public redacted edition. Original local evidence is backed up outside Git; see [PUBLICATION.md](../PUBLICATION.md). 本目录为公开脱敏版，保留数值、来源与取舍记录，原件仅存于 Git 忽略的本地备份。
 
-当前采用数据共188条“套餐 × 模型”：175条订阅、13条按量API，包括OpenCode Go 27个模型、Command Code GOAT 37个模型、Ollama Pro/Max各10个模型。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但仍保留在额度和单价数据中。
+当前采用数据共196条“套餐 × 模型”：183条订阅、13条按量API，包括OpenCode Go 27个模型、Command Code GOAT 37个模型、Ollama Pro/Max各10个模型、Step Plan 国内站8个点。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但仍保留在额度和单价数据中。
 
 美元/credits额度、三段价格与模型间价格比统一按 `conventions.json` 的标准负载换算：缓存读取97.5%、普通输入2.15%、输出0.35%。直接给出total tokens的面板、日志、跑满实测和官方绝对token表不重复归一；只有total tokens和费用百分比但缺token类型拆分时，保留观测并标明限制。GLM已从官方95%缓存示例表改为按官方周积分、三段积分系数和统一标准负载重算，并将忙时、中间值与闲时拆成独立情景点。当前标准不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。完整分类见 [`token-mix-audit-round2-2026-09-07.json`](research/token-mix-audit-round2-2026-09-07.json)。
 
 | Board / 榜单 | Scored rows / 有分行 | Unscored rows / 缺分行 |
 |---|---:|---:|
-| Code Arena | 136 / 188 | 52 |
-| Agent Arena | 140 / 188 | 48 |
-| AA Intelligence | 165 / 188 | 23 |
-| AA Coding Agent | 71 / 188 | 117 |
-| OpenDesign Arena | 65 / 188 | 123 |
+| Code Arena | 136 / 196 | 60 |
+| Agent Arena | 140 / 196 | 56 |
+| AA Intelligence | 173 / 196 | 23 |
+| AA Coding Agent | 71 / 196 | 125 |
+| OpenDesign Arena | 65 / 196 | 131 |
 
 具体缺分模型以 [`points.csv`](../derived/points.csv) / [`points.json`](../derived/points.json) 的空分数字段为准；不为缺失模型补造分数。
 
