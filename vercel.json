@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npm --prefix web ci && npm --prefix web run build",
+  "installCommand": "echo skipped",
+  "outputDirectory": "web/dist",
+  "headers": [
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
