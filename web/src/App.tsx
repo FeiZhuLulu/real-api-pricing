@@ -67,6 +67,7 @@ const boardLabels: Record<string, string> = {
   aa_intelligence_index: "AA Intelligence",
   aa_coding_agent_index: "AA Coding Agent",
   open_design_arena: "OpenDesign Arena",
+  terminal_bench_4: "Terminal-Bench 4.0",
 };
 const boardZh: Record<string, string> = {
   arena_code: "Code Arena · 网页开发",
@@ -74,6 +75,7 @@ const boardZh: Record<string, string> = {
   aa_intelligence_index: "AA 智力榜",
   aa_coding_agent_index: "AA 编程 Agent",
   open_design_arena: "OpenDesign 设计榜",
+  terminal_bench_4: "Terminal-Bench 4.0 终端榜",
 };
 const filterLabels: Record<FilterKey, [string, string]> = {
   vendors: ["Model developer", "模型厂商"],
@@ -1643,8 +1645,8 @@ function Method({
           </h2>
           <p>
             {t(
-              "Each leaderboard uses one selected snapshot; different benchmark versions are never mixed. Code Arena refers to WebDev Overall, not general coding ability. All configurations in that snapshot are shown by default; highest-score summaries are optional references. Harness, reasoning effort, service mode, and known score intervals are retained.",
-              "每张榜单使用一份选定快照，不混合不同版本的分数。Code Arena 指 WebDev Overall，不代表通用编程能力。默认保留该快照的全部配置，最高分汇总仅为可选参考。保留框架、推理强度、模式与已知分数区间。",
+              "Each leaderboard uses one selected snapshot; different benchmark versions are never mixed. Code Arena refers to WebDev Overall, not general coding ability. The default view is each model's highest-score configuration; every archived configuration and the reasoning-effort filter remain available. Harness, reasoning effort, service mode, and known score intervals are retained.",
+              "每张榜单使用一份选定快照，不混合不同版本的分数。Code Arena 指 WebDev Overall，不代表通用编程能力。默认取每个模型的最高分配置；全部存档配置和推理强度筛选仍可切换。保留框架、推理强度、模式与已知分数区间。",
             )}
           </p>
           <p>

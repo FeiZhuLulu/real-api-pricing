@@ -40,7 +40,8 @@ TEMPLATE = r"""<!doctype html>
   <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 默认月 = 4 周；Kimi独立月池=周池×5）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro保留Opus4.8历史实测。</div>
   <div class="bar">
     <label>Y 轴榜单 <select id="board"></select></label>
-    <label>评测配置 <select id="configuration"><option value="all">全部配置（参考映射）</option><option value="summary">最高分汇总（参考）</option></select></label>
+    <label>评测配置 <select id="configuration"><option value="summary" selected>最高分汇总（默认）</option><option value="all">全部配置（参考映射）</option></select></label>
+    <label>思考强度 <select id="effort"><option value="best" selected>最高分档（默认）</option></select></label>
     <label>范围 <select id="tier"><option value="full" selected>全量</option><option value="main">精选（内部对照）</option></select></label>
     <label>标签 <select id="labels"><option value="front">只标前沿</option><option value="all">全部</option><option value="none">不标</option></select></label>
     <label><input type="checkbox" id="metered" checked> 按量 API（参与前沿）</label>
@@ -62,6 +63,13 @@ const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">"
 const priceLabel=x=>"$"+Number(x.toPrecision(5)).toString();
 const sel=document.getElementById("board");
 for(const [id,b] of Object.entries(DATA.boards)){const o=document.createElement("option");o.value=id;o.textContent=b.name;sel.appendChild(o);}
+const effortSel=document.getElementById("effort");
+const EFFORT_ORDER=["max","xhigh","high","medium","low","none","thinking"];
+function syncEffortOptions(){
+  const vals=[...new Set(DATA.configuration_points.filter(c=>c.board===sel.value&&c.reasoning_effort).map(c=>c.reasoning_effort))];
+  vals.sort((a,b)=>{const i=EFFORT_ORDER.indexOf(a),j=EFFORT_ORDER.indexOf(b);return(i<0?99:i)-(j<0?99:j)||a.localeCompare(b);});
+  effortSel.innerHTML='<option value="best">最高分档（默认）</option>'+vals.map(v=>`<option value="${v}">${v}</option>`).join("");
+}
 document.getElementById("mix").textContent="缓存读取 "+(DATA.mix.cache*100).toFixed(1)+"% / 普通输入 "+(DATA.mix.input*100).toFixed(2)+"% / 输出 "+(DATA.mix.output*100).toFixed(2)+"%";
 
 function pareto(pts,yk){let best=-Infinity,f=[];for(const p of [...pts].sort((a,b)=>a.real_usd_per_mtok-b.real_usd_per_mtok||b[yk]-a[yk])){if(p[yk]>best){best=p[yk];f.push(p);}}return f;}
@@ -115,11 +123,15 @@ function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
 function draw(){
   const board=sel.value,yk=board+"__score",vk=board+"__variant",meta=DATA.boards[board];
   const labelMode=document.getElementById("labels").value,showM=document.getElementById("metered").checked,showLow=document.getElementById("lowconf").checked;
-  const tier=document.getElementById("tier").value;
+  const tier=document.getElementById("tier").value,effortV=effortSel.value||"best";
   let pts=DATA.points.filter(p=>p[yk]!=null&&p.real_usd_per_mtok>0&&(showLow||p.confidence!=="low")&&(tier==="full"||p.tier==="main"));
-  if(document.getElementById("configuration").value==="all"){
+  const confMode=document.getElementById("configuration").value;
+  if(confMode==="all"||effortV!=="best"){
     const base=new Map(pts.map(p=>[p.id,p]));
-    pts=DATA.configuration_points.filter(c=>c.board===board&&base.has(c.point_id)).map(c=>{
+    let confs=DATA.configuration_points.filter(c=>c.board===board&&base.has(c.point_id));
+    if(effortV!=="best")confs=confs.filter(c=>c.reasoning_effort===effortV);
+    if(confMode!=="all"){const best=new Map();for(const c of confs){const cur=best.get(c.point_id);if(!cur||c.score>cur.score)best.set(c.point_id,c);}confs=[...best.values()];}
+    pts=confs.map(c=>{
       const p={...base.get(c.point_id),id:c.point_id+"::"+c.configuration_id};
       for(const [k,v] of Object.entries(c))if(k!=="point_id"&&k!=="board")p[board+"__"+k]=v;
       return p;
@@ -162,11 +174,13 @@ function draw(){
   Plotly.react("chart",traces,layout,{responsive:true,displaylogo:false,toImageButtonOptions:{format:"svg",filename:"帕累托_"+board}});
   document.getElementById("stats").textContent=`${subs.length} 个订阅位置 · ${met.length} 个 API 位置 · ${front.length} 个前沿位置`;
   document.getElementById("front-details").innerHTML="<table><thead><tr><th>模型 · 套餐</th><th>评测配置</th><th>Harness</th><th>Effort</th><th>$/MTok</th><th>分数</th><th>额度置信度</th><th>映射</th></tr></thead><tbody>"+front.flatMap(p=>p.members).map(p=>`<tr><td>${escapeHtml(p.label)}</td><td>${escapeHtml(fmt(p[vk]))}</td><td>${escapeHtml(fmt(p[board+"__agent_harness"]))}</td><td>${escapeHtml(fmt(p[board+"__reasoning_effort"]))}</td><td>${priceLabel(p.real_usd_per_mtok)}</td><td>${p[yk]}</td><td>${p.confidence}</td><td>${p[board+"__mapping_kind"]}</td></tr>`).join("")+"</tbody></table>";
-  const missing=[...new Set(DATA.points.filter(p=>p[yk]==null&&(tier==="full"||p.tier==="main")).map(p=>p.model_display))];
-  document.getElementById("unscored").textContent="订阅与按量API共同参与当前范围的帕累托前沿。无榜单分数未纳入："+(missing.join(" / ")||"无")+"。分数取对应模型或服务变体的已存档结果；连线仅为视觉引导，中间位置不代表可购方案。";
+  const missing=[...new Set(DATA.points.filter(p=>(tier==="full"||p.tier==="main")&&(p[yk]==null||(effortV!=="best"&&!DATA.configuration_points.some(c=>c.point_id===p.id&&c.board===board&&c.reasoning_effort===effortV)))).map(p=>p.model_display))];
+  document.getElementById("unscored").textContent="订阅与按量API共同参与当前范围的帕累托前沿。"+(effortV!=="best"?"无该 effort 档分数":"无榜单分数")+"未纳入："+(missing.join(" / ")||"无")+"。分数取对应模型或服务变体的已存档结果；连线仅为视觉引导，中间位置不代表可购方案。";
 }
-for(const id of ["board","tier","labels","metered","lowconf","configuration"])document.getElementById(id).addEventListener("change",draw);
+for(const id of ["tier","labels","metered","lowconf","configuration","effort"])document.getElementById(id).addEventListener("change",draw);
+sel.addEventListener("change",()=>{syncEffortOptions();draw();});
 let resizeTimer;window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(draw,150);});
+syncEffortOptions();
 draw();
 </script></body></html>
 """

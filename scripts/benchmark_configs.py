@@ -3,7 +3,7 @@ import hashlib
 import json
 import re
 
-AGENT_BOARDS = {"arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena"}
+AGENT_BOARDS = {"arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4"}
 OPEN_DESIGN_MODELS = {
     "GPT-6 Astra": "gpt-6-astra",
     "DeepSeek V4.1 Flash": "deepseek-v4.1-flash",

@@ -20,7 +20,7 @@ for p in ROOT.joinpath('data').rglob('*.json'):
     json.loads(p.read_text(encoding='utf-8-sig'))
 
 exported = list(exports())
-assert len(exported) == 115
+assert len(exported) == 131
 assert len({d for _,d in exported}) == len(exported)
 for source,destination in exported:
     assert destination.is_file(), destination
@@ -43,9 +43,9 @@ for doc in [ROOT/'README.md',ROOT/'README.zh.md',ROOT/'BUILD.md',ROOT/'SOURCES.m
 for doc,lang in [('README.md','en'),('README.zh.md','zh')]:
     s=(ROOT/doc).read_text(encoding='utf-8')
     pictures=re.findall(r'!\[[^\]]*\]\(([^)]+)\)',s)
-    assert len(pictures)==9 and all(p.startswith(f'charts/{lang}/') for p in pictures)
-    assert s.count('[English SVG]')==9 and s.count('[中文 SVG]')==9
-    assert s.count('[English PNG]')==9 and s.count('[中文 PNG]')==9
+    assert len(pictures)==10 and all(p.startswith(f'charts/{lang}/') for p in pictures)
+    assert s.count('[English SVG]')==10 and s.count('[中文 SVG]')==10
+    assert s.count('[English PNG]')==10 and s.count('[中文 PNG]')==10
 print(f'PASS: {len(adopted)} adopted rows, {len(exported)} exported files match build hashes, all JSON and bilingual links valid')
 for board in data['boards']:
     missing=sorted({p['model'] for p in data['points'] if p[board+'__score'] is None})

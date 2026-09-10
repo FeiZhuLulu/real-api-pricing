@@ -53,7 +53,7 @@ export const defaultState = (): State => ({
   harness: [],
   effort: [],
   modes: [],
-  configuration: "all",
+  configuration: "summary",
   frontier: true,
   labels: "frontier",
   query: "",

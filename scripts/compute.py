@@ -15,13 +15,14 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena")
+BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
     "scores-aa-coding-agent-round1-2026-09-06.json",
     "scores-aa-round3-2026-09-09.json",
     "scores-open-design-round1-2026-09-09.json",
+    "scores-terminal-bench4-round1-2026-09-10.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
@@ -36,8 +37,8 @@ def score_archives():
             for name in SCORE_FILES if (RESEARCH / name).exists()]
 
 DISPLAY = {
-    "gpt-5.6-sol": "GPT 5.6 Sol", "gpt-5.6-terra": "GPT 5.6 Terra", "gpt-5.6-luna": "GPT 5.6 Luna", "gpt-5.5": "GPT 5.5",
-    "claude-opus-5": "Claude Opus 5", "claude-fable-5": "Claude Fable 5", "claude-sonnet-5": "Claude Sonnet 5", "claude-opus-4.8": "Claude Opus 4.8",
+    "gpt-5.6-sol": "GPT 5.6 Sol", "gpt-5.6-terra": "GPT 5.6 Terra", "gpt-5.6-luna": "GPT 5.6 Luna", "gpt-5.5": "GPT 5.5", "gpt-6-astra": "GPT-6 Astra",
+    "claude-opus-5": "Claude Opus 5", "claude-fable-5": "Claude Fable 5", "claude-fable-5.1": "Claude Fable 5.1", "claude-sonnet-5": "Claude Sonnet 5", "claude-opus-4.8": "Claude Opus 4.8",
     "grok-4.6": "Grok 4.6", "grok-4.5": "Grok 4.5", "kimi-k3": "Kimi K3", "kimi-k2.7-code": "Kimi K2.7 Code", "kimi-k2.6": "Kimi K2.6",
     "glm-5.3": "GLM 5.3", "glm-5.3-flash": "GLM 5.3 Flash", "glm-5.2": "GLM 5.2", "glm-5.1": "GLM 5.1",
     "minimax-m3": "MiniMax M3", "minimax-m2.7": "MiniMax M2.7", "minimax-m2.5": "MiniMax M2.5",
@@ -137,7 +138,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-10", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
+        generatedAt="2026-09-11", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")

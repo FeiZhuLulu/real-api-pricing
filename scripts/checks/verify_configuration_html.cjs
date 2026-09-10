@@ -44,4 +44,15 @@ for (const board of Object.keys(summary.boards)) {
   element('metered').checked = true;
 }
 assert(html.includes('<option value="all">全部配置'));
-console.log('PASS: all five boards render every configuration and summary; mapping/cost details and API toggle verified');
+// Effort selection restricts summary view to configurations at that level.
+element('board').value = 'terminal_bench_4';
+element('configuration').value = 'summary';
+element('effort').value = 'high';
+vm.runInContext('draw()', context);
+{
+  const hover = render.traces.flatMap(t=>t.hovertemplate||[]).join('\n');
+  assert(hover.includes('Grok Build - Grok 4.6 (high)'), 'high effort keeps Grok 4.6');
+  assert(!hover.includes('Claude Code - Opus 5 (max)'), 'high effort drops max-only models');
+}
+element('effort').value = '';
+console.log('PASS: all six boards render every configuration and summary; mapping/cost details, effort filter and API toggle verified');

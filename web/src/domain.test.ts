@@ -136,7 +136,7 @@ test("Default selection includes every adopted point, including unscored models"
 });
 test("All boards preserve all references; optional summary takes only matching maximum", () => {
   for (const board of Object.keys(data.boards)) {
-    const s = { ...defaultState(), board };
+    const s = { ...defaultState(), board, configuration: "all" as const };
     const rows = rowsFor(data, s);
     assert.equal(
       rows.filter((r) => r.mapping).length,

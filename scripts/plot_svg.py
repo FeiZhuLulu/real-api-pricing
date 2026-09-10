@@ -15,6 +15,7 @@ BOARDS = {
     "aa_intelligence_index": ("AA智力榜", "Artificial Analysis"),
     "aa_coding_agent_index": ("AA编程Agent榜", "AA Coding Agent"),
     "open_design_arena": ("OpenDesign设计榜", "OpenDesign Arena"),
+    "terminal_bench_4": ("TB4终端榜", "Terminal-Bench 4.0"),
 }
 COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
           "Cursor": "#FFB81C", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
@@ -128,6 +129,9 @@ def label_position(p, board, x, y):
     if model in {"deepseek-v4-flash", "deepseek-v4.1-flash"}:
         return x - 24, y + 49, "end"
     if model == "gpt-5.6-luna":
+        # TB4 全量里 Luna 分数最低（17.27%），标签整体下移会压过图框下缘。
+        if board == "terminal_bench_4":
+            return x + 5, y + 25, "end"
         return x + 5, y + 57, "end"
     if model == "gpt-5.6-terra":
         if board == "aa_intelligence_index":
@@ -245,13 +249,13 @@ def draw(board, meta, points, tier, language="zh"):
               "OpenDesign Harness reference; product/quota alignment unverified, not channel measurements."
               if board == "open_design_arena" else
               "Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements."
-              if board == "aa_coding_agent_index" else
+              if board in ("aa_coding_agent_index", "terminal_bench_4") else
               "Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model."
           ) if language == "en" else (
               "OpenDesign Harness 配置参考；产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board == "open_design_arena" else
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
-              if board == "aa_coding_agent_index" else
+              if board in ("aa_coding_agent_index", "terminal_bench_4") else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
           )), 11, "#929A90"),
           text(56, 919, "Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans." if language == "en" else "订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。", 11, "#929A90"),
