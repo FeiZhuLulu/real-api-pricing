@@ -1,0 +1,97 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs + user confirmation",
+  "source": "https://opencode.ai/docs/go/",
+  "relatedSources": [
+    "https://opencode.ai/zen/go/v1/models"
+  ],
+  "checkedAt": "2026-09-10",
+  "scope": "仅核对 OpenCode Go 的 DeepSeek 行。Command Code / Ollama 本轮未改采用。未重采其余非 DeepSeek 模型。",
+  "userInstruction": "用户确认 DeepSeek V4.1 Flash 已发布；要求先看已更新的 OpenCode。随后明确：V4 Flash / Vision 已下线，采用集直接删除，不必保留 OpenCode 价表上仍在的旧 SKU。",
+  "officialSharedLimitsUnchanged": {
+    "perMonthUsd": 60,
+    "quote": "Each model has the following usage limits: 5-hour — 20% of the monthly limit; weekly — 50%; and monthly — 100%."
+  },
+  "peakHours": "01:00-04:00 and 06:00-10:00 UTC, Monday through Friday; all other hours, including weekends, are Off-Peak",
+  "formula": "min(60, perModelMonthlyUsageUsd) / (0.975*cacheRead + 0.0215*input + 0.0035*output) / 100 亿",
+  "models": [
+    {
+      "officialDisplayName": "DeepSeek V4.1 Flash",
+      "officialApiId": "deepseek-flash",
+      "proposedModelId": "deepseek-v4.1-flash",
+      "action": "add",
+      "perModelMonthlyUsageUsd": 15,
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+        "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+      },
+      "adopt": {
+        "variant": "Off-Peak",
+        "blendedUsdPer1M": 0.00825,
+        "monthlyYi": 18.182,
+        "realUsdPerMtok": 0.0055,
+        "reason": "官网价表 Monthly limit 写 $15。高峰2×保留为 variant。served_model 用 deepseek-v4.1-flash 对接榜单，不写 API slug deepseek-flash。"
+      },
+      "officialQuote": "DeepSeek V4.1 Flash (Off-Peak) Input $0.15 Output $0.60 Cached Read $0.003 Cached Write - Monthly limit $15",
+      "officialEstimateRequestsPerMonth": 32500,
+      "typicalTokensPerRequest": { "input": 410, "cacheRead": 71300, "output": 310 }
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash",
+      "officialApiId": "deepseek-v4-flash",
+      "proposedModelId": "deepseek-v4-flash",
+      "action": "drop-retired",
+      "perModelMonthlyUsageUsd": 30,
+      "oldAdopted": {
+        "cachedInput": 0.007,
+        "input": 0.22,
+        "output": 0.66,
+        "monthlyYi": 21.637,
+        "realUsdPerMtok": 0.00462
+      },
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+        "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+      },
+      "officialQuote": "DeepSeek V4 Flash (Off-Peak) Input $0.15 Output $0.60 Cached Read $0.003 Cached Write - Monthly limit $30",
+      "note": "用户 2026-09-10 确认已下线，采用集删除。官网价表仍列 Usage $30 且价已改成与 V4.1 相同，但不再画点。"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash Vision Exp",
+      "officialApiId": "deepseek-v4-flash-vision-exp",
+      "proposedModelId": "deepseek-v4-flash-vision-exp",
+      "action": "drop-retired",
+      "perModelMonthlyUsageUsd": 15,
+      "oldAdopted": {
+        "cachedInput": 0.007,
+        "input": 0.22,
+        "output": 0.66,
+        "monthlyYi": 10.819,
+        "realUsdPerMtok": 0.00924
+      },
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+        "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+      },
+      "officialQuote": "DeepSeek V4 Flash Vision Exp (Off-Peak) Input $0.15 Output $0.60 Cached Read $0.003 Cached Write - Monthly limit $15",
+      "note": "用户 2026-09-10 确认已下线，采用集删除。"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Pro",
+      "officialApiId": "deepseek-v4-pro",
+      "proposedModelId": "deepseek-v4-pro",
+      "action": "keep",
+      "perModelMonthlyUsageUsd": 15,
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.022, "input": 0.66, "output": 1.98 },
+        "peak": { "cachedInput": 0.044, "input": 1.32, "output": 3.96 }
+      },
+      "note": "OpenCode 价表仍是旧 V4 Pro 价，未改。DeepSeek 官方称 2026-09-14 12:00+08 起会把 deepseek-v4-pro 路由到 V4.1 Flash；本轮不预改 OpenCode 的 Pro 点。"
+    }
+  ],
+  "notChangedThisRound": [
+    "Command Code GOAT 已上架 V4.1 Flash（闲时 $0.003/$0.15/$0.60，Monthly credits $60），本轮先不改；仍列旧 V4 Flash / Vision / Fast / Pro",
+    "Ollama Pro/Max 价表仍只有 deepseek-v4-flash / deepseek-v4-pro，旧闲时价，无 V4.1",
+    "OpenCode GLM-5.3-Flash 官网 Monthly limit 现为 $60（采用仍 $15）；非本轮范围"
+  ]
+}

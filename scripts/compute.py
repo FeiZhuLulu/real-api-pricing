@@ -15,12 +15,18 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index")
+BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
     "scores-aa-coding-agent-round1-2026-09-06.json",
     "scores-aa-round3-2026-09-09.json",
+    "scores-open-design-round1-2026-09-09.json",
+)
+LIST_PRICE_FILES = (
+    "list-prices-2026-09.json",
+    "list-prices-deepseek-v41-round1-2026-09-09.json",
+    "list-prices-deepseek-v41-round2-2026-09-10.json",
 )
 
 
@@ -36,7 +42,7 @@ DISPLAY = {
     "minimax-m3": "MiniMax M3", "minimax-m2.7": "MiniMax M2.7", "minimax-m2.5": "MiniMax M2.5",
     "qwen3.8-max": "Qwen3.8 Max", "qwen3.8-flash": "Qwen3.8 Flash", "qwen3.7-max": "Qwen3.7 Max",
     "qwen3.7-plus": "Qwen3.7 Plus", "qwen3.6-plus": "Qwen3.6 Plus",
-    "deepseek-v4-flash": "DeepSeek V4 Flash", "deepseek-v4-flash-fast": "DeepSeek V4 Flash Fast", "deepseek-v4-pro": "DeepSeek V4 Pro",
+    "deepseek-v4.1-flash": "DeepSeek V4.1 Flash", "deepseek-v4-flash": "DeepSeek V4 Flash", "deepseek-v4-flash-fast": "DeepSeek V4 Flash Fast", "deepseek-v4-pro": "DeepSeek V4 Pro",
     "deepseek-v4-flash-vision-exp": "DeepSeek V4 Flash Vision Exp",
     "gemini-3.1-pro": "Gemini 3.1 Pro", "gemini-3.7-flash": "Gemini 3.7 Flash", "gemini-3.8-flash": "Gemini 3.8 Flash",
     "mimo-v2.5": "MiMo V2.5", "mimo-v2.5-pro": "MiMo V2.5 Pro", "longcat-2.0": "LongCat 2.0",
@@ -77,9 +83,11 @@ def current_score_records(archives):
 
 def load_list_blended() -> dict[str, float]:
     out = {}
-    for m in json.loads((RESEARCH / "list-prices-2026-09.json").read_text(encoding="utf-8"))["models"]:
-        cached = m["cachedInput"] if m["cachedInput"] is not None else m["input"] * 0.1
-        out[m["model"]] = STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * m["input"] + STANDARD_MIX["output"] * m["output"]
+    for name in LIST_PRICE_FILES:
+        for m in json.loads((RESEARCH / name).read_text(encoding="utf-8"))["models"]:
+            cached = m["cachedInput"] if m["cachedInput"] is not None else m["input"] * 0.1
+            rate = CONVENTIONS["usdPerCny"] if m["currency"] == "CNY" else 1
+            out[m["model"]] = (STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * m["input"] + STANDARD_MIX["output"] * m["output"]) / rate
     return out
 
 
@@ -128,7 +136,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-09", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
+        generatedAt="2026-09-10", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")

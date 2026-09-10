@@ -14,6 +14,7 @@ BOARDS = {
     "arena_agent_mode": ("AgentArena榜", "Agent Arena"),
     "aa_intelligence_index": ("AA智力榜", "Artificial Analysis"),
     "aa_coding_agent_index": ("AA编程Agent榜", "AA Coding Agent"),
+    "open_design_arena": ("OpenDesign设计榜", "OpenDesign Arena"),
 }
 COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
           "Cursor": "#FFB81C", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
@@ -123,7 +124,7 @@ def label_position(p, board, x, y):
         return x + 24, y - (58 if board == "arena_code" else 31), "start"
     if model == "glm-5.3-flash":
         return x + 23, y - 40, "start"
-    if model == "deepseek-v4-flash":
+    if model in {"deepseek-v4-flash", "deepseek-v4.1-flash"}:
         return x - 24, y + 49, "end"
     if model == "gpt-5.6-luna":
         return x + 5, y + 57, "end"
@@ -240,10 +241,14 @@ def draw(board, meta, points, tier, language="zh"):
           text(56, 874, "Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged" if language == "en" else "默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算", 12, "#727B72"),
           text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API positions / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 位置 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
           text(56, 898, ((
+              "OpenDesign Harness reference; product/quota alignment unverified, not channel measurements."
+              if board == "open_design_arena" else
               "Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements."
               if board == "aa_coding_agent_index" else
               "Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model."
           ) if language == "en" else (
+              "OpenDesign Harness 配置参考；产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
+              if board == "open_design_arena" else
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board == "aa_coding_agent_index" else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"

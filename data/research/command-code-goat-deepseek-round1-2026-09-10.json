@@ -1,0 +1,106 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs + user screenshot",
+  "source": "https://commandcode.ai/docs/plans/goat",
+  "relatedSources": [
+    "https://commandcode.ai/pricing"
+  ],
+  "checkedAt": "2026-09-10",
+  "scope": "仅核对 Command Code GOAT 的 DeepSeek 行。Ollama 本轮未改采用。未重采其余非 DeepSeek 模型。",
+  "userInstruction": "用户确认 Command Code 已上架 DeepSeek V4.1 Flash。V4 Flash / Vision 已下线，采用集直接删除。",
+  "officialSharedLimitsUnchanged": {
+    "per5hUsd": 14,
+    "perWeekUsd": 35,
+    "perMonthUsd": 70,
+    "quote": "5-hour limit - $14 of usage; Weekly limit - $35 of usage; Monthly limit - $70 of usage"
+  },
+  "peakHours": "01:00-04:00 and 06:00-10:00 UTC, Monday through Friday; Off-Peak shown 17h/day",
+  "formula": "min(70, perModelMonthlyCreditsUsd) / (0.975*cacheRead + 0.0215*input + 0.0035*output) / 100 亿",
+  "models": [
+    {
+      "officialDisplayName": "DeepSeek V4.1 Flash",
+      "proposedModelId": "deepseek-v4.1-flash",
+      "action": "add",
+      "table": "Every model",
+      "perModelMonthlyCreditsUsd": 40,
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+        "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+      },
+      "adopt": {
+        "variant": "Off-Peak",
+        "blendedUsdPer1M": 0.00825,
+        "monthlyYi": 48.485,
+        "realUsdPerMtok": 0.00206,
+        "reason": "官网 Every model 表 Monthly credits $40。高峰 2× 保留为 variant。served_model 用 deepseek-v4.1-flash 对接榜单。"
+      },
+      "officialQuote": "DeepSeek V4.1 Flash Input $0.15 Output $0.60 Cache Read $0.003 Cache Write - Monthly credits $40"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash (latest)",
+      "proposedModelId": "deepseek-v4-flash",
+      "action": "drop-retired",
+      "table": "Every model",
+      "perModelMonthlyCreditsUsd": 60,
+      "oldAdopted": {
+        "cachedInput": 0.007,
+        "input": 0.22,
+        "output": 0.66,
+        "monthlyYi": 43.274,
+        "realUsdPerMtok": 0.00231
+      },
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+        "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+      },
+      "officialQuote": "DeepSeek V4 Flash (latest) Input $0.15 Output $0.60 Cache Read $0.003 Cache Write - Monthly credits $60",
+      "note": "用户确认已下线，采用集删除。官网 Every model 表仍列 $60 且价已改成与 V4.1 相同，但不再画点。"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash Vision (exp)",
+      "proposedModelId": "deepseek-v4-flash-vision-exp",
+      "action": "drop-retired",
+      "table": "New models",
+      "perModelMonthlyCreditsUsd": 20,
+      "oldAdopted": {
+        "cachedInput": 0.007,
+        "input": 0.22,
+        "output": 0.66,
+        "monthlyYi": 14.425,
+        "realUsdPerMtok": 0.00693
+      },
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.007, "input": 0.22, "output": 0.66 },
+        "peak": { "cachedInput": 0.014, "input": 0.44, "output": 1.32 }
+      },
+      "officialQuote": "DeepSeek V4 Flash Vision (exp) Input $0.22 Output $0.66 Cache Read $0.007 Cache Write - Monthly credits $20",
+      "note": "用户确认已下线，采用集删除。官网 New models 表仍列旧价 $20。"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Flash Fast",
+      "proposedModelId": "deepseek-v4-flash-fast",
+      "action": "keep",
+      "table": "New models",
+      "perModelMonthlyCreditsUsd": 20,
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.07, "input": 0.28, "output": 0.56 }
+      },
+      "note": "官网三段价未改；New models 默认 $20；与 Flash 额度分开。本轮保持。"
+    },
+    {
+      "officialDisplayName": "DeepSeek V4 Pro (latest)",
+      "proposedModelId": "deepseek-v4-pro",
+      "action": "keep",
+      "table": "Every model",
+      "perModelMonthlyCreditsUsd": 20,
+      "pricesPer1MUsd": {
+        "offPeak": { "cachedInput": 0.022, "input": 0.66, "output": 1.98 },
+        "peak": { "cachedInput": 0.044, "input": 1.32, "output": 3.96 }
+      },
+      "note": "Command Code 价表仍是旧 V4 Pro 价，未改。本轮不预改 Pro 点。"
+    }
+  ],
+  "notChangedThisRound": [
+    "Ollama Pro/Max 价表仍只有 deepseek-v4-flash / deepseek-v4-pro，旧闲时价，无 V4.1"
+  ]
+}

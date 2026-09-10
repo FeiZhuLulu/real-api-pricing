@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowUp,
@@ -15,7 +15,9 @@ import {
   Info,
   LinkSimple,
   MagnifyingGlass,
+  Moon,
   SlidersHorizontal,
+  Sun,
   Table,
   X,
 } from "@phosphor-icons/react";
@@ -64,12 +66,14 @@ const boardLabels: Record<string, string> = {
   arena_agent_mode: "Agent Arena",
   aa_intelligence_index: "AA Intelligence",
   aa_coding_agent_index: "AA Coding Agent",
+  open_design_arena: "OpenDesign Arena",
 };
 const boardZh: Record<string, string> = {
   arena_code: "Code Arena · 网页开发",
   arena_agent_mode: "Agent Arena",
   aa_intelligence_index: "AA 智力榜",
   aa_coding_agent_index: "AA 编程 Agent",
+  open_design_arena: "OpenDesign 设计榜",
 };
 const filterLabels: Record<FilterKey, [string, string]> = {
   vendors: ["Model developer", "模型厂商"],
@@ -91,6 +95,21 @@ function localLanguage() {
 function saveLanguage(lang: Lang) {
   try {
     localStorage.setItem("pricing-language", lang);
+  } catch {
+    /* Storage is optional. */
+  }
+}
+type Theme = "light" | "dark";
+function localTheme(): Theme {
+  try {
+    return localStorage.getItem("pricing-theme") === "dark" ? "dark" : "light";
+  } catch {
+    return "light";
+  }
+}
+function saveTheme(theme: Theme) {
+  try {
+    localStorage.setItem("pricing-theme", theme);
   } catch {
     /* Storage is optional. */
   }
@@ -132,6 +151,11 @@ function CheckBox({
 export default function App() {
   const [data, setData] = useState<SiteData | null>(null);
   const [loadError, setLoadError] = useState("");
+  const [theme, setTheme] = useState<Theme>(localTheme);
+  useLayoutEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    saveTheme(theme);
+  }, [theme]);
   useEffect(() => {
     const abort = new AbortController();
     fetch("/data/site.json", { signal: abort.signal })
@@ -164,9 +188,17 @@ export default function App() {
         <p>Loading the latest data…</p>
       </main>
     );
-  return <Explorer data={data} />;
+  return <Explorer data={data} theme={theme} onThemeChange={setTheme} />;
 }
-function Explorer({ data }: { data: SiteData }) {
+function Explorer({
+  data,
+  theme,
+  onThemeChange,
+}: {
+  data: SiteData;
+  theme: Theme;
+  onThemeChange: (theme: Theme) => void;
+}) {
   const initial = useMemo(
     () => restore(location.hash, data, localLanguage()),
     [data],
@@ -381,6 +413,22 @@ function Explorer({ data }: { data: SiteData }) {
           </nav>
           <div className="header-actions">
             <HeaderActions lang={state.lang} />
+            <button
+              className="icon-button theme-toggle"
+              onClick={() => onThemeChange(theme === "dark" ? "light" : "dark")}
+              aria-label={
+                theme === "dark"
+                  ? t("Switch to light mode", "切换为浅色模式")
+                  : t("Switch to dark mode", "切换为深色模式")
+              }
+              title={
+                theme === "dark"
+                  ? t("Light mode", "浅色模式")
+                  : t("Dark mode", "深色模式")
+              }
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
             <button
               className="language"
               onClick={() => patch({ lang: zh ? "en" : "zh" })}
@@ -751,6 +799,7 @@ function Explorer({ data }: { data: SiteData }) {
                   rows={rows}
                   state={state}
                   data={data}
+                  theme={theme}
                   onSelect={setDetail}
                   handle={chart}
                 />

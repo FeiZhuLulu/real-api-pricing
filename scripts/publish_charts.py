@@ -12,6 +12,7 @@ BOARDS = {
     'AgentArena榜': ('agent-arena', 'Agent Arena'),
     'AA智力榜': ('aa-intelligence', 'AA Intelligence'),
     'AA编程Agent榜': ('aa-coding-agent', 'AA Coding Agent'),
+    'OpenDesign设计榜': ('open-design-arena', 'OpenDesign Arena'),
 }
 
 

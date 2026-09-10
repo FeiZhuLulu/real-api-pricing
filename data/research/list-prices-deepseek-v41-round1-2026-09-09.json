@@ -1,0 +1,30 @@
+{
+  "collectedAt": "2026-09-09",
+  "sourceType": "user-provided dashboard screenshot",
+  "source": "用户在本项目会话提供的 DeepSeek 用量信息截图",
+  "announcement": "我们将于北京时间2026年9月10日12:00起，调整flash系列定价：空闲时段输入缓存命中单价0.02元、输入缓存未命中单价1元、输出单价4元；高峰时段价格为空闲时段价格的2倍。请合理安排您的使用。",
+  "effectiveAt": "2026-09-10T12:00:00+08:00",
+  "models": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "vendor": "DeepSeek",
+      "input": 1.0,
+      "cachedInput": 0.02,
+      "output": 4.0,
+      "currency": "CNY",
+      "variants": {
+        "peak": {
+          "input": 2.0,
+          "cachedInput": 0.04,
+          "output": 8.0,
+          "note": "截图明确高峰时段为空闲时段价格的2倍"
+        }
+      },
+      "source": "用户提供截图",
+      "checkedAt": "2026-09-09",
+      "effectiveAt": "2026-09-10T12:00:00+08:00",
+      "confidence": "high",
+      "note": "用户明确要求 DeepSeek V4.1 Flash 先按截图价格采用。采用空闲时段为基础标价，并另列高峰2倍情景；币种为人民币，计算时按 data/conventions.json 的项目汇率换算美元。"
+    }
+  ]
+}

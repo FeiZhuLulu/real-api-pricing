@@ -1,0 +1,310 @@
+{
+  "collectedAt": "2026-09-09",
+  "scope": "Second-pass search for any independent GLM Coding Plan absolute-token evidence after glm-community-round1-2026-09-07.json. All sources allowed: official docs, quota API captures, V2EX, linux.do, HN, Reddit, GitHub monitors, jia.je, ACP, blogs. Do not change adopted.csv from this file.",
+  "method": "Coordinator web search + primary-page fetch + GitHub code/issue lookup + browser attempt on Reddit. Reddit still blocked (403 / network policy). linux.do full threads often JS-walled. No invented numbers; contradictions kept side-by-side. V1/V2 retained and tagged; must not be mixed into V3 5.3 adoption.",
+  "existingEvidenceReviewed": [
+    "data/research/glm-community-round1-2026-09-07.json",
+    "data/research/glm-adoption-round4-2026-09-07.json",
+    "data/research/quotas-web-2026-09.json",
+    "data/research/caijing-2026-08.json",
+    "scripts/build_adopted.py glm_rows()"
+  ],
+  "officialLive2026-09-09": {
+    "cn": "https://docs.bigmodel.cn/cn/coding-plan/overview",
+    "en": "https://docs.z.ai/devpack/overview",
+    "teamCn": "https://docs.bigmodel.cn/cn/coding-plan/team",
+    "nightCampaign": "https://docs.bigmodel.cn/cn/coding-plan/notice/event-glm-5.3-flash",
+    "personalCreditsUnchanged": {
+      "Lite": { "per5h": 2000, "perWeek": 10000 },
+      "Pro": { "per5h": 12000, "perWeek": 60000 },
+      "Max": { "per5h": 28000, "perWeek": 140000 }
+    },
+    "teamNowAlsoCredits": {
+      "note": "Live team page is credit-based, not the old absolute-token seats. jia.je still lists the retired 0.6亿/3亿 and 1.6亿/8亿 token seats.",
+      "Standard": { "per5h": 15000, "perWeek": 66000, "official95Glm53YiWeek": "3.19～6.38" },
+      "Premium": { "per5h": 35000, "perWeek": 155000, "official95Glm53YiWeek": "7.49～14.97" }
+    },
+    "creditCoefficientsUnchanged": {
+      "GLM-5.3": { "input": 6.9, "cachedInput": 1.7, "output": 24 },
+      "GLM-5.3-Flash": { "input": 2.3, "cachedInput": 0.56, "output": 8 }
+    },
+    "official95TableUnchanged": {
+      "unit": "亿 Tokens/周",
+      "GLM-5.3": { "Lite": "0.48～0.97", "Pro": "2.90～5.80", "Max": "6.76～13.52" },
+      "GLM-5.3-Flash": { "Lite": "1.46～2.92", "Pro": "8.77～17.55", "Max": "20.47～40.95" }
+    },
+    "nightCampaign": {
+      "window": "2026-09-03 to 2026-09-20, 23:00–09:00 UTC+8",
+      "zcodeFlash": "credit cost 0",
+      "otherAgentsFlash": "standard available quota ×2",
+      "glm53": "still standard rules",
+      "caveat": "If 5h or weekly cap already hit, campaign is blocked until reset"
+    }
+  },
+  "items": [
+    {
+      "id": "v3-openusage-lite-credit-api-98pct-week",
+      "planGeneration": "V3",
+      "priorityTier": 2,
+      "evidenceType": "live_quota_api_capture",
+      "planId": "glm_coding_lite",
+      "planVersion": "credits / API reports version internally as V3",
+      "model": "unspecified",
+      "source": "https://github.com/robinebers/openusage/blob/70dea9a8fa21ed205aa9ad625b416a1e7792d5a1/Tests/OpenUsageTests/ZAILiveResponseMappingTests.swift",
+      "related": [
+        "https://github.com/robinebers/openusage/blob/70dea9a8fa21ed205aa9ad625b416a1e7792d5a1/docs/providers/zai.md",
+        "https://github.com/robinebers/openusage/issues/1104"
+      ],
+      "sourceDate": "2026-08-13",
+      "quote": "Captured from a GLM Coding Lite plan on 2026-08-13. CREDIT_LIMIT 5h usage=2000 currentValue=0 remaining=2000 percentage=0; CREDIT_LIMIT week usage=10000 currentValue=9855 remaining=145 percentage=98; level=lite",
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "creditsImplied": { "weeklyUsed": 9855, "weeklyCap": 10000, "fiveHourCap": 2000 },
+      "weeklyTokensImplied": null,
+      "confidence": "high_as_credit_caps_only",
+      "limitations": [
+        "Hard confirmation that V3 Lite weekly cap is 10000 credits and that a real account burned 98% of a week.",
+        "No input/cache/output token rows, no model mix, no peak/off-peak split.",
+        "Quota endpoint no longer returns absolute tokens (renamed TOKENS_LIMIT → CREDIT_LIMIT).",
+        "Cannot convert 9855 credits to tokens without the fee-detail mix."
+      ]
+    },
+    {
+      "id": "v2-openusage-pro-percent-only",
+      "planGeneration": "V2",
+      "priorityTier": 4,
+      "evidenceType": "live_quota_api_capture",
+      "planId": "glm_coding_pro",
+      "source": "https://github.com/robinebers/openusage/blob/70dea9a8fa21ed205aa9ad625b416a1e7792d5a1/Tests/OpenUsageTests/ZAILiveResponseMappingTests.swift",
+      "sourceDate": "2026-06-29",
+      "quote": "Captured from a GLM Coding Pro plan on 2026-06-29. TOKENS_LIMIT 5h percentage=17; TOKENS_LIMIT week percentage=3; TIME_LIMIT monthly search remaining=1000; level=pro",
+      "canReverseEngineerWeeklyMonthlyFullTokens": false,
+      "confidence": "high_as_percent_only",
+      "limitations": "Already percentage-only before V3. No absolute tokens."
+    },
+    {
+      "id": "v1-jiaje-lite-40m-per-5h-tested",
+      "planGeneration": "V1",
+      "priorityTier": 1,
+      "evidenceType": "controlled_community_measurement_plus_quota_api",
+      "planId": "glm_coding_lite_cn",
+      "planPrice": "¥40-era / V1 Lite ~120 prompts/5h, no weekly cap",
+      "model": "GLM-4.7 (still held after GLM-5 launch on 2026-02-12)",
+      "source": "https://jia.je/kb/software/coding_plan.html",
+      "sourceDate": "2026-01-30 measured; 2026-02-12 retested",
+      "quote": "通过实际测试，猜测 GLM Coding Plan 的 Lite 套餐用量限制是每 5 小时所有请求的 input + output tokens 总和不超过 40M tokens（意味着每次 prompt 对应 40M/120=333K tokens），这和 open.bigmodel.cn/api/monitor/usage/quota/limit 接口返回的结果一致（2026/02/12 后该接口只返回百分比，不返回 token 数）。2026/02/12 测下来 GLM-4.7 的用量限制不变，Lite 依然是 40M/5h。",
+      "window": "saturated 5h",
+      "tokenBreakdown": {
+        "input": "included in total",
+        "cacheRead": "included in total; later note says vibe-coding input+output is ~99.5% input of which 90-95% cached",
+        "output": "included in total",
+        "totalCounted": 40000000,
+        "allTokenTypesCounted": "input+output as returned by quota API; cache write unclear"
+      },
+      "canReverseEngineerWeeklyMonthlyFullTokens": "V1 had no weekly cap; theoretical month 30*24/5*40M=5.76B if every window saturated",
+      "fiveHourTokensImplied": 40000000,
+      "weeklyTokensImplied": null,
+      "confidence": "high",
+      "limitations": [
+        "Best independent absolute-token measurement found in either round.",
+        "V1 Lite / GLM-4.7. After Feb 12 the same API stopped returning token counts.",
+        "Do not map 40M/5h onto V3 2000-credit Lite."
+      ]
+    },
+    {
+      "id": "v1-v2ex-lite-zcode-50m-per-5h-oral",
+      "planGeneration": "V1",
+      "priorityTier": 3,
+      "evidenceType": "community_oral",
+      "planId": "glm_coding_lite_cn",
+      "model": "GLM-5.3 on V1 Lite (ZCode 1.5x)",
+      "source": "https://www.v2ex.com/t/1236832",
+      "sourceDate": "2026-08-24",
+      "quote": "V1 老套餐 Lite 只有 5h 限额，使用 ZCode 是 1.5x 限额，大概是 5000 万 token。",
+      "fiveHourTokensImplied": 50000000,
+      "confidence": "medium",
+      "limitations": "Oral; ZCode 1.5x grandfather perk. Same order as jia.je 40M. No weekly cap on V1. Not V3."
+    },
+    {
+      "id": "v2-hn-pro-7m-is-2pct-week",
+      "planGeneration": "V2",
+      "priorityTier": 2,
+      "evidenceType": "community_partial_usage_percent",
+      "planId": "glm_coding_pro",
+      "planPrice": "$30 (V2 Pro list at the time)",
+      "model": "GLM-5.1",
+      "source": "https://news.ycombinator.com/item?id=47708846",
+      "sourceDate": "2026-04-09",
+      "quote": "I bought a $30 Z.ai Coding Plan sub to go with it. 7 million tokens has only gone through 2% of my weekly usage using the GLM-5.1 model.",
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 350000000,
+      "derivation": "7e6 / 0.02 = 350e6 = 3.50亿/周; ×4周 = 14.0亿/月",
+      "monthlyTokensImplied": 1400000000,
+      "confidence": "medium",
+      "limitations": [
+        "Integer 2% rounding band is 1.5–2.5% → week 2.80～4.67亿.",
+        "V2 / GLM-5.1 / international $30 Pro. Peak multiplier and cache mix unknown.",
+        "Same order as later official V3 Pro 95% table 2.90～5.80亿/周, but different SKU/era."
+      ]
+    },
+    {
+      "id": "v2-v2ex-intl-max-30m-is-5pct-week",
+      "planGeneration": "V2",
+      "priorityTier": 2,
+      "evidenceType": "community_partial_usage_percent",
+      "planId": "glm_coding_max_intl",
+      "planPrice": "international Max (~$144 cited in same thread)",
+      "model": "unspecified (GLM-5.2 era)",
+      "source": "https://www.v2ex.com/t/1224836",
+      "sourceDate": "2026-07-04",
+      "author": "CyouYamato",
+      "quote": "zhipu 海外版 3 千万+token 非高峰期消耗了 max 计划的周限 5%。折算每个月大概 24-30 亿 token。",
+      "peakOffPeak": "off-peak",
+      "canReverseEngineerWeeklyMonthlyFullTokens": true,
+      "weeklyTokensImplied": 600000000,
+      "derivation": "30M+ / 5% ≥ 6.00亿/周; poster states 24–30亿/月",
+      "monthlyTokensImplied": 2400000000,
+      "confidence": "medium",
+      "limitations": "5% integer band 4.5–5.5%. Conflicts with same-thread 9M=20% of 5h → 45M/5h if that were the binding cap. V2 intl Max."
+    },
+    {
+      "id": "v2-v2ex-intl-max-9m-is-20pct-5h",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_partial_usage_percent",
+      "planId": "glm_coding_max_intl",
+      "source": "https://www.v2ex.com/t/1224836",
+      "sourceDate": "2026-07-06",
+      "author": "cherishwinner334",
+      "quote": "max 计划国际版，900w token 大约占了 5h 限额的 20% ，满蹬的情况下，大概可以月 60 亿 token 没问题。",
+      "fiveHourTokensImplied": 45000000,
+      "derivation": "9e6 / 0.20 = 45M/5h. Month 60亿 implies ~33.6 saturated 5h windows (no weekly bind), i.e. V1-style arithmetic, not V2 week=5×5h.",
+      "monthlyTokensImplied": 6000000000,
+      "confidence": "low",
+      "limitations": "Conflicts with CyouYamato 6亿/周. 60亿/月 only works if weekly cap does not bind. Do not use as V3 Max."
+    },
+    {
+      "id": "v2-v2ex-cn-pro-60m-max-200m-per-5h-oral",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_oral",
+      "planId": "glm_coding_pro_cn / glm_coding_max_cn",
+      "source": "https://www.v2ex.com/t/1224836",
+      "sourceDate": "2026-07-03",
+      "author": "DeadLion",
+      "quote": "国内版现在的新套餐 pro 5h 限额 6kw token ，下午高峰期 3 倍 如果全在高峰期用就只能用到 2kw ，周限等于 5 个 5h 。max 5h 2 亿",
+      "fiveHourTokensImplied": { "proOffPeakOr1x": 60000000, "proPeak": 20000000, "max1x": 200000000 },
+      "confidence": "low",
+      "limitations": "Oral, no screenshot. V2 prompt-era with 3× peak. Same order as ACP Pro 30M/5h and linux.do Max ~8亿/周 if 200M×5=10亿."
+    },
+    {
+      "id": "v2-v2ex-intl-max-130m-per-hour-1b-per-day",
+      "planGeneration": "V2-or-V1-grandfather",
+      "priorityTier": 4,
+      "evidenceType": "community_oral_throughput",
+      "planId": "glm_coding_max_intl",
+      "source": "https://www.v2ex.com/t/1224836",
+      "sourceDate": "2026-07-03",
+      "author": "tutugreen",
+      "quote": "Z.AI 国际版 Max ，老号一小时能蹬 130M（凌晨 3 点的 agent loop），一天蹬一个 B，放国内 team 套餐的话，两个多小时就用完一周了",
+      "confidence": "low",
+      "limitations": "Throughput of an old Max, not a clean weekly cap. Implies either no weekly bind or a very large pool. Cannot use for V3."
+    },
+    {
+      "id": "v2-acp-glm51-lite-pro-table",
+      "planGeneration": "V2",
+      "priorityTier": 3,
+      "evidenceType": "community_comparison_table",
+      "planId": "glm_coding_lite / glm_coding_pro",
+      "model": "glm-5.1",
+      "source": "https://github.com/mahonzhan/awesome-coding-plan",
+      "sourceDate": "README still carrying these GLM rows as of 2026-09-09; quota TOKEN numbers did not change after 2026-07-30",
+      "quote": "GLM Coding Plan Lite（使用海外版订阅测试 glm-5.1）5h 90/600万, week 600/3200万, mo 2400/1.28亿; Pro 5h 450/3000万, week 3000/1.6亿, mo 12000/6.4亿",
+      "lite": { "fiveHour": 6000000, "week": 32000000, "month": 128000000 },
+      "pro": { "fiveHour": 30000000, "week": 160000000, "month": 640000000 },
+      "confidence": "medium_as_measured_usage_not_saturation",
+      "limitations": "ACP table for other vendors is often saturated-week. GLM rows look like observed usage (Lite 6M/5h << jia.je 40M cap). International, glm-5.1, V2 prompts. Not V3 5.3."
+    },
+    {
+      "id": "v3-v2ex-official-90pct-table-restated",
+      "planGeneration": "V3",
+      "priorityTier": 4,
+      "evidenceType": "community_restatement_of_official",
+      "source": "https://www.v2ex.com/t/1231115",
+      "sourceDate": "2026-07-31",
+      "quote": "Lite：0.43～0.87 亿/周；Pro：2.63～5.26；Max：6.13～12.26（90.9% cache, GLM-5.2, then-current official table）",
+      "confidence": "high_as_official_copy",
+      "limitations": "Not independent. Live official table is now 95/96/98% for GLM-5.3/Flash, slightly higher."
+    },
+    {
+      "id": "v3-promo-linuxdo-flash-6yi-overnight",
+      "planGeneration": "V3-promo",
+      "priorityTier": 4,
+      "evidenceType": "promo_usage_not_plan_cap",
+      "source": "https://linux.do/t/topic/2831966",
+      "sourceDate": "2026-08-30",
+      "quote": "我6亿昨晚就没了哈哈；max套餐，5天就花完了 用这个额度3倍",
+      "confidence": "high_as_promo_not_plan",
+      "limitations": "Weekend/gift Flash pools and the later Sep 3–20 night campaign. Not paid weekly credits. Full thread JS-walled this round."
+    }
+  ],
+  "quotaApiHistory": {
+    "before2026-02-12": "open.bigmodel.cn/api/monitor/usage/quota/limit returned absolute token remaining; jia.je used this to confirm Lite 40M/5h",
+    "after2026-02-12": "same endpoint returns percentages only (TOKENS_LIMIT)",
+    "after2026-07-30-V3": "type renamed CREDIT_LIMIT; Lite capture shows usage/currentValue/remaining in credits (2000 / 10000), still no tokens",
+    "currentEndpoints": [
+      "GET https://api.z.ai/api/monitor/usage/quota/limit",
+      "GET https://open.bigmodel.cn/api/monitor/usage/quota/limit",
+      "GET https://api.z.ai/api/biz/subscription/list"
+    ],
+    "implication": "Public quota monitors (glm-plan-usage, glm-quota-hud, CodexQuota, coding-quota, OpenUsage) cannot recover absolute tokens. Token recovery now requires 财务-费用明细 rows for the same window."
+  },
+  "conflicts": [
+    {
+      "topic": "V2 international Max weekly tokens",
+      "sides": [
+        { "id": "v2-v2ex-intl-max-30m-is-5pct-week", "value": "≥6.00亿/周 off-peak" },
+        { "id": "v2-v2ex-intl-max-9m-is-20pct-5h", "value": "45M/5h and claimed 60亿/月 if no weekly bind" },
+        { "id": "round1-v2-linuxdo-intl-max-5h-1p2yi-implies-week-4yi", "value": "~4～4.8亿/周" },
+        { "id": "round1-v2-linuxdo-max-weekly-approx-8yi", "value": "~8亿/周 CN Max" }
+      ],
+      "resolution": "Record all. CN vs intl, peak mix, and grandfather no-weekly Max differ."
+    },
+    {
+      "topic": "V2 Pro weekly tokens",
+      "sides": [
+        { "id": "v2-hn-pro-7m-is-2pct-week", "value": "3.50亿/周 implied" },
+        { "id": "v2-acp-glm51-lite-pro-table", "value": "1.6亿/周 observed, not necessarily full" },
+        { "id": "round1-v2-linuxdo-pro-multiweek-1p08B-tokens", "value": "~2.66亿/周" },
+        { "id": "v2-v2ex-cn-pro-60m-max-200m-per-5h-oral", "value": "60M/5h ×5 = 3.00亿/周 if 1×" }
+      ],
+      "resolution": "Cluster around 1.6～3.5亿/周 for V2 Pro. Official V3 Pro 95% is 2.90～5.80. Same order, different metering."
+    }
+  ],
+  "notFound": [
+    {
+      "what": "V3 Lite/Pro/Max 用量统计 screenshot with absolute tokens AND weekly % for a near-full week on GLM-5.3 or Flash",
+      "status": "notFound"
+    },
+    {
+      "what": "V3 财务-费用明细 export (input/cache/output) aligned to a named credit window",
+      "status": "notFound"
+    },
+    {
+      "what": "V3 ccusage 0%→100% weekly with plan tier, model, cache rate, peak/off-peak",
+      "status": "notFound"
+    },
+    {
+      "what": "Reddit r/ZaiGLM/1vzvkay full text (63.97M / 2k credits Flash). Still 403.",
+      "status": "blocked"
+    }
+  ],
+  "recommendation": {
+    "adoptNow": false,
+    "keepOfficialCreditFormula": true,
+    "reason": "Still no V3 absolute-token + percentage pair. New high-value evidence confirms credit caps via API and strengthens V1/V2 historical measurements only.",
+    "whatWouldUnlockAdoption": [
+      "Any V3 Pro/Max/Lite 用量统计 at week≈100% plus same-window 费用明细 token rows",
+      "Or a user-owned ccusage/OpenCode ledger + credit % for one clean week"
+    ]
+  }
+}

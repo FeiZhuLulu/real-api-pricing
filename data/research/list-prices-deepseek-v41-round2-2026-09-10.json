@@ -1,0 +1,52 @@
+{
+  "collectedAt": "2026-09-10",
+  "sourceType": "official-docs + user confirmation",
+  "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "sourceZh": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "checkedAt": "2026-09-10",
+  "effectiveAt": "2026-09-10T12:00:00+08:00",
+  "userConfirmation": "用户本轮确认 V4.1 Flash 已发布并给出官方美元/人民币价；旧 V4 已下线，本轮不改旧 V4 采用点。",
+  "officialNotes": [
+    "官方现用模型名 deepseek-flash，模型版本 DeepSeek-V4.1-Flash。旧名 deepseek-v4-flash / deepseek-v4-flash-vision-exp 仍可调用，但对应模型已下线，请求由 V4.1 Flash 服务并按 Flash 价计费。",
+    "官方称将有序下线 V4 Pro：北京时间 2026-09-14 12:00 之后至 V4.1 Pro 上线前，deepseek-v4-pro 请求将路由到 V4.1 Flash 并按 Flash 价计费。本轮按用户要求不改旧 V4 Pro 采用点。",
+    "闲时价为高峰价的一半。高峰：UTC 周一至周五 01:00-04:00 与 06:00-10:00（北京时间 09:00-12:00、14:00-18:00）。"
+  ],
+  "models": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "officialApiName": "deepseek-flash",
+      "modelVersion": "DeepSeek-V4.1-Flash",
+      "vendor": "DeepSeek",
+      "input": 0.3,
+      "cachedInput": 0.006,
+      "output": 1.2,
+      "currency": "USD",
+      "variants": {
+        "offPeak": {
+          "input": 0.15,
+          "cachedInput": 0.003,
+          "output": 0.6,
+          "currency": "USD"
+        },
+        "cnyOffPeak": {
+          "input": 1.0,
+          "cachedInput": 0.02,
+          "output": 4.0,
+          "currency": "CNY"
+        },
+        "cnyPeak": {
+          "input": 2.0,
+          "cachedInput": 0.04,
+          "output": 8.0,
+          "currency": "CNY"
+        }
+      },
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "sourceZh": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "checkedAt": "2026-09-10",
+      "effectiveAt": "2026-09-10T12:00:00+08:00",
+      "confidence": "high",
+      "note": "采用官方美元标价，不再用人民币÷项目汇率。与既有 DeepSeek V4 Flash/Pro API 点同一口径。round1 仅有用户截图人民币价，本文件覆盖为现行官方价表。项目 served_model 仍用 deepseek-v4.1-flash，以对接 OpenDesign 等榜单精确型号，不改成 API slug deepseek-flash。"
+    }
+  ]
+}

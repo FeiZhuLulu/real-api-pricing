@@ -54,12 +54,14 @@ export default function Chart({
   rows,
   state,
   data,
+  theme,
   onSelect,
   handle,
 }: {
   rows: Row[];
   state: State;
   data: SiteData;
+  theme: "light" | "dark";
   onSelect: (rows: Row[]) => void;
   handle: React.RefObject<ChartHandle | null>;
 }) {
@@ -97,6 +99,26 @@ export default function Chart({
     return () => media.removeEventListener("change", change);
   }, []);
   const zh = state.lang === "zh";
+  const dark = theme === "dark";
+  const chartTheme = dark
+    ? {
+        text: "#aeb5bf",
+        surface: "#15181c",
+        elevated: "#1d2126",
+        border: "#353b44",
+        ink: "#eef0f2",
+        frontier: "#eef0f2",
+        grid: "#292e35",
+      }
+    : {
+        text: "#737780",
+        surface: "#fff",
+        elevated: "#fff",
+        border: "#e1e4e8",
+        ink: "#20242a",
+        frontier: "#282b32",
+        grid: "#f0f1f3",
+      };
   useEffect(() => {
     let cancelled = false;
     let cleanup = () => {};
@@ -118,18 +140,18 @@ export default function Chart({
             family:
               "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
             size: 12,
-            color: "#737780",
+            color: chartTheme.text,
           },
-          paper_bgcolor: "#fff",
-          plot_bgcolor: "#fff",
+          paper_bgcolor: chartTheme.surface,
+          plot_bgcolor: chartTheme.surface,
           margin: { l: mobile ? 50 : 68, r: mobile ? 22 : 48, t: 48, b: 65 },
           showlegend: false,
           hovermode: "closest",
           dragmode: "pan",
           hoverlabel: {
-            bgcolor: "#fff",
-            bordercolor: "#e1e4e8",
-            font: { color: "#20242a", size: 12 },
+            bgcolor: chartTheme.elevated,
+            bordercolor: chartTheme.border,
+            font: { color: chartTheme.ink, size: 12 },
           },
           height: mobile ? 470 : 540,
         };
@@ -161,7 +183,7 @@ export default function Chart({
               mode: "lines",
               x: line.x,
               y: line.y,
-              line: { color: "#282b32", width: 1.6 },
+              line: { color: chartTheme.frontier, width: 1.6 },
               hoverinfo: "skip",
             });
           }
@@ -182,7 +204,10 @@ export default function Chart({
                 color: selected.map((g) => color(g.rows[0].point)),
                 size: 8,
                 opacity: isFront ? 0 : 0.43,
-                line: { color: "#fff", width: isFront ? 0 : 1.4 },
+                line: {
+                  color: dark ? chartTheme.text : chartTheme.surface,
+                  width: dark ? 1.2 : isFront ? 0 : 1.4,
+                },
               },
               // Hover text is our own card: keep the events, drop Plotly's label.
               hoverinfo: "none",
@@ -197,7 +222,7 @@ export default function Chart({
                 : "Real price · USD / million tokens     → Less expensive",
               font: { size: 12 },
             },
-            gridcolor: "#f0f1f3",
+            gridcolor: chartTheme.grid,
             zeroline: false,
             tickprefix: "$",
             tickformat: ".3~g",
@@ -209,7 +234,7 @@ export default function Chart({
               text: data.boards[state.board].metric,
               font: { size: 12 },
             },
-            gridcolor: "#eaecf0",
+            gridcolor: chartTheme.grid,
             zeroline: false,
             ticks: "",
             automargin: true,
@@ -281,7 +306,7 @@ export default function Chart({
               type: "log",
               range: [Math.log10(min) - 0.15, Math.log10(max) + 0.35],
               side: "top",
-              gridcolor: "#f0f1f3",
+              gridcolor: chartTheme.grid,
               title: {
                 text:
                   state.view === "price"
@@ -505,7 +530,7 @@ export default function Chart({
               text: escape(
                 `${i + 1}. ${[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")} · ${price(g.price)} / MTok · ${number(g.score, state.lang)}`,
               ),
-              font: { size: 12, color: "#303740" },
+              font: { size: 12, color: chartTheme.ink },
             }));
             try {
               await Plotly.newPlot(
@@ -624,6 +649,7 @@ export default function Chart({
     data,
     handle,
     small,
+    theme,
   ]);
   const hoverGroup = hover
     ? chartGroups.find((g) => g.key === hover.key)

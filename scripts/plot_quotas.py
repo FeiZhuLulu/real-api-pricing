@@ -85,6 +85,7 @@ BOARD_CN = {
     "arena_agent_mode": "AgentArena榜",
     "aa_intelligence_index": "AA智力榜",
     "aa_coding_agent_index": "AA编程Agent榜",
+    "open_design_arena": "OpenDesign设计榜",
 }
 
 

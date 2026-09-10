@@ -109,12 +109,23 @@ test("All source point values and stable IDs survive the adapter, including null
     );
   }
 });
+test("DeepSeek V4.1 Flash uses official USD off-peak and peak API prices", () => {
+  const offPeak = data.points.find((p) => p.id === "deepseek_v41_flash_offpeak::deepseek-v4.1-flash")!;
+  const peak = data.points.find((p) => p.id === "deepseek_v41_flash_peak::deepseek-v4.1-flash")!;
+  assert.equal(offPeak.real_usd_per_mtok, 0.00825);
+  assert.equal(peak.real_usd_per_mtok, 0.0165);
+});
+test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
+  const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
+  assert.equal(p.monthly_yi, 48.485);
+  assert.equal(p.real_usd_per_mtok, 0.00206);
+});
 test("Default selection includes every adopted point, including unscored models", () => {
   const rows = rowsFor(data, defaultState());
   assert.equal(new Set(rows.map((r) => r.point.id)).size, data.points.length);
   assert.ok(rows.some((r) => r.score === null));
 });
-test("All four boards preserve all references; optional summary takes only matching maximum", () => {
+test("All boards preserve all references; optional summary takes only matching maximum", () => {
   for (const board of Object.keys(data.boards)) {
     const s = { ...defaultState(), board };
     const rows = rowsFor(data, s);
@@ -222,7 +233,7 @@ test("Strict dominance retains both identical plans and drops equal-price lower 
     ["a", "b", "e"],
   );
 });
-test("Four-board frontiers agree with independent pairwise dominance", () => {
+test("All board frontiers agree with independent pairwise dominance", () => {
   for (const board of Object.keys(data.boards)) {
     const gs = groups(rowsFor(data, { ...defaultState(), board }));
     const expected = gs.filter(

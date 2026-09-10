@@ -45,7 +45,7 @@ final result: passed
 
 - Replaced offset model names with numbers centered on the actual markers and a matching clickable model/price/score key. Duplicate-coordinate members remain available: Code Arena number 5 opens both Claude Max 5x and 20x references.
 - Added explicit box-zoom/pan/reset controls and visible zoom-in/out buttons. Browser check: zoom changed the log-axis ticks; Reset view restored the exact original ticks. Box zoom's pressed state switches correctly.
-- Four visible data-entry cards now expose all capability points, 188 real-price rows, 177 subscription allowance rows, and the complete table. Full-table action scrolls to the section and transfers keyboard focus.
+- Four visible data-entry cards now expose all capability points, 188 real-price rows, 175 subscription allowance rows, and the complete table. Full-table action scrolls to the section and transfers keyboard focus.
 - Checked desktop and 390×844 layouts in the browser. Mobile uses two columns for entry cards, wraps chart controls, and retains horizontal ranking scrolling. The numbered markers no longer require guessing which nearby model name belongs to a point.
 - PNG/SVG export calls complete successfully and include the numbered model key in the export layout. The browser reports “Chart exported”; this follow-up did not independently inspect newly saved download files.
 - TypeScript/Vite build and all 15 data/domain tests pass; the adapter continues to verify 188 points, 128 configurations, and 660 references.
@@ -112,8 +112,14 @@ Not verified: a real touch device, and the deployed preview. `logoUrlMap` moved 
 
 ### Coordinator review and independent scrolling
 
-- Ranking and detail-table pagination removed. Each panel has native bounded scrolling, a sticky header, keyboard access and independent scroll position. Browser checks covered desktop wheel isolation, End reaching row 188, 390px layout, no-results search and the 36-row middle fee band including $100. All 177 subscription allowances remain available.
+- Ranking and detail-table pagination removed. Each panel has native bounded scrolling, a sticky header, keyboard access and independent scroll position. Browser checks covered desktop wheel isolation, End reaching row 188, 390px layout, no-results search and the 36-row middle fee band including $100. All 175 subscription allowances remain available.
 - Full ranking PNG downloaded at 1100 × 10282 with all 188 filtered rows; CSV still uses the entire selection.
 - Review found label-to-marker collisions were only soft penalties. They are now hard exclusions. A clean browser reload showed 23 placeable names and all 5 frontier logos in Code Arena all-label mode, with no label-to-point overlap. Added a regression test for a point-filled plot.
 - Relayout clears stale hover cards. Label measurement explicitly uses the requested mobile/export font size and padding, independent of the current viewport.
 - The contribution entry uses the repository's bilingual Issue template, covering providers, subscription plans, cached/uncached input, output, quota periods, usage percentages and sources.
+
+## OpenDesign Arena — 2026-09-09
+
+- Added the fifth independent leaderboard using OpenDesign's 0–100 average task score, not its cost/speed-weighted selection score. The official 13-model archive maps eleven exact identities to 65 adopted plan/model points; two unmatched generations remain archive-only.
+- Desktop Chrome inspection confirmed the fifth tab, metric, snapshot, source link and OpenDesign Harness configuration selector. After adding the V4.1 Flash API baseline, the generated bilingual full-data PNGs were inspected: the two-point frontier has separated labels and endpoint extensions toward the expensive and cheap edges correctly.
+- Website data verification reports 188 points, 217 configurations and 933 references. All 23 tests and the TypeScript/Vite production build pass; the expected Plotly chunk-size advisory remains.

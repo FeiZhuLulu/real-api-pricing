@@ -24,7 +24,7 @@ npm run preview
 
 ## Data and behavior
 
-- Three linked views: price–capability scatterplot, real-price ranking, and monthly-allowance ranking. Four leaderboards remain independent.
+- Three linked views: price–capability scatterplot, real-price ranking, and monthly-allowance ranking. Five leaderboards remain independent.
 - All adopted points and all archived benchmark configurations are selected initially. Model selection expands to channels and individual plan/model points. Empty selection is distinct from selecting everything.
 - Filters within one category are ORed; categories are ANDed. Harness, effort, and mode filters restrict benchmark references. Plans without matching scores stay in the table and in price/allowance views. Those ranking views use one row per plan/model, with any table score labeled as the highest matching reference.
 - The frontier is recomputed for the filtered set with strict dominance. Equal coordinates are grouped only for rendering; every plan/configuration member remains inspectable. Lowest price is on the right. Endpoint extensions cannot imply the highest score at the cheapest price.
@@ -66,7 +66,7 @@ The connector's 4 MB upload limit required excluding three redundant raw CSV mir
 
 ## Validation
 
-See `design-qa.md`. `npm test` covers source fidelity, all four board mappings, intersecting filters, empty and invalid selections, unscored models, API exclusion, strict dominance and ties, endpoint directions, language units, sharing, ordering and CSV export.
+See `design-qa.md`. `npm test` covers source fidelity, all five board mappings, intersecting filters, empty and invalid selections, unscored models, API exclusion, strict dominance and ties, endpoint directions, language units, sharing, ordering and CSV export.
 
 From the repository root, the existing independent check remains applicable:
 
@@ -87,11 +87,11 @@ Monthly-allowance fee bands share `../config/allowance-fee-bands.json` with Pyth
 Latest fee-band preview: https://real-api-pricing-jdhgq7oyu-feizhululus-projects.vercel.app (dpl_8mTPFPEMsuZBsKprEyJT3yr2qzwh). Browser verification confirmed the three fee-band controls and the selected middle band's 18 results.
 
 
-Current presentation (2026-09-08): GLM ¥49/149/469 is v2; ¥118/538/1078 is v3. v1 has no adopted data and is not fabricated. These are presentation aliases; source IDs and historical evidence remain unchanged. The page background is #F5F3ED. Provider marks live in src/assets/provider-logos/; unknown vendors still fall back to a two-letter monogram. $100 now belongs to the middle fee band, giving 117 / 36 / 24 subscriptions per band.
+Current presentation (2026-09-08): GLM ¥49/149/469 is v2; ¥118/538/1078 is v3. v1 has no adopted data and is not fabricated. These are presentation aliases; source IDs and historical evidence remain unchanged. The page background is #F5F3ED. Provider marks live in src/assets/provider-logos/; unknown vendors still fall back to a two-letter monogram. $100 now belongs to the middle fee band, giving 115 / 36 / 24 subscriptions per band.
 
 ### AA snapshot update (2026-09-09)
 
-The Intelligence Index uses v4.3 and Coding Agent Index uses v1.4, captured on September 9. Each board uses one complete current snapshot, retaining its configurations without mixing older index versions. AA estimates are explicitly marked in details, the table and CSV. The data adapter verifies 188 adopted points, 204 configurations and 886 mappings.
+The Intelligence Index uses v4.3 and Coding Agent Index uses v1.4, captured on September 9. Each board uses one complete current snapshot, retaining its configurations without mixing older index versions. AA estimates are explicitly marked in details, the table and CSV. The data adapter verifies 188 adopted points, 217 configurations and 933 mappings.
 
 The site payload omits mapping fields that exactly match their referenced configuration. `unpackData` restores them before use; a deep-equality test checks every restored mapping against the original derived data. Complete source downloads remain available. This saves about 289 KB in the static upload without dropping data.
 

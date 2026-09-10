@@ -44,4 +44,4 @@ for (const board of Object.keys(summary.boards)) {
   element('metered').checked = true;
 }
 assert(html.includes('<option value="all">全部配置'));
-console.log('PASS: all four boards render every configuration and summary; mapping/cost details and API toggle verified');
+console.log('PASS: all five boards render every configuration and summary; mapping/cost details and API toggle verified');

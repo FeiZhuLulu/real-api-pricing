@@ -3,7 +3,22 @@ import hashlib
 import json
 import re
 
-AGENT_BOARDS = {"arena_code", "arena_agent_mode", "aa_coding_agent_index"}
+AGENT_BOARDS = {"arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena"}
+OPEN_DESIGN_MODELS = {
+    "GPT-6 Astra": "gpt-6-astra",
+    "DeepSeek V4.1 Flash": "deepseek-v4.1-flash",
+    "Claude Fable 5.1": "claude-fable-5.1",
+    "GPT-5.6 Sol": "gpt-5.6-sol",
+    "Hunyuan H4 Preview": "hy4-preview",
+    "DeepSeek V4 Pro": "deepseek-v4-pro",
+    "Grok 4.6": "grok-4.6",
+    "Qwen 3.8-Max": "qwen3.8-max",
+    "DeepSeek V4 Flash": "deepseek-v4-flash",
+    "GLM-5.3 Flash": "glm-5.3-flash",
+    "Gemini 3.8 Flash": "gemini-3.8-flash",
+    "Muse Spark 1.3": "muse-spark-1.3",
+    "Kimi K3": "kimi-k3",
+}
 EFFORT = re.compile(r"(?<![a-z0-9])(xhigh|high|medium|low|max|none|thinking)(?![a-z0-9])", re.I)
 
 
@@ -11,15 +26,18 @@ def configuration(record, archive):
     secondary = record.get("secondary", {})
     label = record["variantLabel"]
     estimated = secondary.get("intelligenceIndexIsEstimated", record.get("scoreIsEstimated"))
-    identity = [record["boardId"], record["model"], label, record.get("checkedAt"), archive]
+    model = record.get("model") or (OPEN_DESIGN_MODELS.get(label) if record["boardId"].startswith("open_design_arena") else None)
+    identity = [record["boardId"], model, label, record.get("checkedAt"), archive]
     cid = record["boardId"] + ":" + hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:16]
     effort = EFFORT.search(label)
     harness = secondary.get("agentHarness")
     if harness is None and "codex-harness" in label.lower():
         harness = "Codex"
+    if harness is None and record["boardId"] == "open_design_arena":
+        harness = "OpenDesign"
     minus, plus = secondary.get("ciMinus"), secondary.get("ciPlus")
     return dict(
-        configuration_id=cid, board=record["boardId"], model=record["model"],
+        configuration_id=cid, board=record["boardId"], model=model,
         variant=label + (" [AA estimate]" if estimated else ""),
         score_is_estimated=estimated,
         agent_harness=harness, reasoning_effort=effort.group(1).lower() if effort else None,
@@ -27,7 +45,7 @@ def configuration(record, archive):
                      if record["model"] == "composer-2.5" else None,
         score=record["score"], score_low=record["score"] - minus if minus is not None else None,
         score_high=record["score"] + plus if plus is not None else None,
-        mean_cost_usd_per_task=secondary.get("meanCostUsdPerTask"),
+        mean_cost_usd_per_task=secondary.get("meanCostUsdPerTask", secondary.get("cost")),
         median_cost_usd_per_task=secondary.get("medianCostPerTaskUsd"),
         source=record.get("source"), checked_at=record.get("checkedAt"), archive=archive,
         raw_record=record,

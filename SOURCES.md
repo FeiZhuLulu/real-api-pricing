@@ -33,6 +33,7 @@ The project's original software is licensed under [MIT](LICENSE). This does not 
 
 - [Code Arena](https://arena.ai/leaderboard/code) and [Agent Arena](https://arena.ai/leaderboard/agent): separate score snapshots.
 - [Artificial Analysis Intelligence Index](https://artificialanalysis.ai/leaderboards/models) and [Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents): separate score snapshots; coding-agent configuration names are retained.
+- [OpenDesign Arena](https://open-design.ai/llm-arena-for-design/): 0–100 average task-score snapshot from OpenDesign's private frontend-design benchmark; requirements and design-quality scores are used, while cost/speed recommendation weights are excluded.
 - Official pricing and quota documents, community reports and aggregate local usage measurements: individual sources and adoption rationale are recorded in the data and adoption script.
 
 Source links are attribution and provenance, not a claim that third-party datasets are MIT-licensed. The public edition removes the contributor's account email, machine-specific directories and duplicate verbatim Caijing excerpts. Relevant numeric observations, source URLs, dates and analytical notes remain. Required public author attribution above is intentionally retained. See [PUBLICATION.md](PUBLICATION.md).
