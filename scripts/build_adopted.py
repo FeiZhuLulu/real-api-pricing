@@ -27,6 +27,8 @@ CHATGPT_PLUS_ASTRA_USED_TOKENS = 10_336_745
 CHATGPT_PLUS_ASTRA_USED_FRACTION = 0.26
 DEVIN_MAX_ASTRA_USED_TOKENS = 81_207_229
 DEVIN_MAX_ASTRA_USED_FRACTION = 0.20
+CHATGPT_PRO20X_ASTRA_USED_TOKENS = 120_197_907
+CHATGPT_PRO20X_ASTRA_USED_FRACTION = 0.10
 KIMI_199_USED_TOKENS = 243_739_068
 KIMI_199_USED_FRACTION = 0.84
 KIMI_MONTHLY_TO_WEEKLY = 5
@@ -55,6 +57,14 @@ def chatgpt_luna_monthly_yi(plan_multiplier: float = 1) -> float:
 def chatgpt_astra_monthly_yi() -> float:
     return round(
         CHATGPT_PLUS_ASTRA_USED_TOKENS / CHATGPT_PLUS_ASTRA_USED_FRACTION
+        * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def chatgpt_pro20x_astra_monthly_yi() -> float:
+    return round(
+        CHATGPT_PRO20X_ASTRA_USED_TOKENS / CHATGPT_PRO20X_ASTRA_USED_FRACTION
         * MONTH_WEEKS / YI,
         2,
     )
@@ -354,6 +364,7 @@ SUBS = [
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(20), "medium", "Plus Luna实测×官方20x；GitHub #8社区美元等效旁证；chatgpt-luna-adoption-round6-2026-09-08.json", "旧2402.4亿→1502.22亿：Plus Luna面板反推基准×官方20x；按截图实际token组成折公开API价，约$1073/周，与社区‘Luna x20不到$1200、Sol x20约$2000’同量级。美元等效仅作池比旁证，不直接换token"),
     # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro两档暂不派生：三源对Pro20x周池分歧2.7×（×20派生7.95亿/周、Observatory 8.66亿、issue#8网关21~23亿），用户拍板只上Plus
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；Pro 5x/20x暂不派生（三源分歧2.7×未裁决，见round8/round9）"),
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", chatgpt_pro20x_astra_monthly_yi(), "low", "社区用量截图：gpt-6-astra 两段合计120,197,907 tokens（另含terra+auto-review共35.6M）自述=周额度10%；chatgpt-astra-10pct-window-round10-2026-09-12.json", "新增48.08亿：仅Astra token 120,197,907÷10%×4周，取下限口径；全模型1:1计上限62.3亿；自述10%无面板截图、档位经权重反推仅Pro20x自洽（Plus塞不下/5x权重0.43不合理）；五源对比：×20派生7.95亿/周、Observatory 8.66亿、本条12.0亿、X社区10~23亿；方向支持Pro20x Astra池>20×Plus（Plus端为limited子池），Pro 5x仍无数据不派生"),
     # Devin —— 用户Max账号周窗59%→39%段astra单列反推；swe-2免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板：gpt-6-astra-high total Δ81,207,229 tokens（calls+319，in 957/out 360,125/cache_read 79,102,796/cache_create 1,743,351）= 周额度20pt；devin-usage-round2-2026-09-11.json；https://devin.ai/pricing Max $200/月", "新增16.24亿：81,207,229÷20%×4周；全口径total直接采用不归一；20pt为取整读数差，范围约15.85~16.64亿；cache_read命中率99.9988%异常（超长上下文续跑）已记录；swe-2免费不占额度；Pro $20档无数据不派生"),
     # Anthropic —— Pro保留Opus4.8历史实测；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
@@ -407,6 +418,15 @@ SUBS = [
     *ollama_rows("ollama_max", "Ollama Max", 100, OLLAMA_MAX_CREDITS_USD),
     # 阶跃 Step Plan 国内站 —— 官方 Credit 月池 × 人民币三段价；国际站月费不同、不另画。
     *stepfun_rows(),
+]
+
+# ---- 不计额度（unmetered）订阅点：月费 ÷ 无界可用量 → $0/MTok。无 token 分母，图上用专用刻度位，不进对数换算。
+#   元组：(id, name, price, cur, model, conf, src, note)。促销口径，促销结束必须复核；见 conventions.promotions。
+SWE2_PROMO = CONVENTIONS["promotions"]["devin_swe2"]
+UNMETERED = [
+    ("devin_pro", f"Devin Pro (促销至 {SWE2_PROMO['endDate'][5:].replace('-', '/')})", 20, "USD", "swe-2", "medium",
+     "官推2026-09-10：SWE-2 free for all Pro, Max & Teams subscribers for the next month；用户面板同段swe-2 45.5M tokens不计额度；docs.devin.ai/admin/billing/usage 无并发上限；devin-swe2-round1-2026-09-12.json",
+     f"新增≈$0/MTok（记0）：SWE-2 促销期对 Pro/Max/Teams 不占额度、不计费，无并发上限→分母无界；用户拍板按促销价进前沿并改变前沿，截止 {SWE2_PROMO['endDate']}（用户给定，官推仅写 for the next month）；取最便宜可得档 Pro $20，Max 同 Y 更贵不重复画；促销结束后必须复核计费权重，定价页永久免费口径为 SWE 1.7 不是 SWE-2"),
 ]
 
 # ---- 同一套餐内推更多模型：(基准 plan_id, 基准模型, 新模型, token 倍率, 置信度, 依据, 是否进精选图)
@@ -467,7 +487,7 @@ METERED = [
 # 精选图只画主流套餐 + 前沿相关点，避免 60 个点挤在一起；全量图画全部
 MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
-              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max"}
+              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro"}
 MAIN_EXTRA = {
     ("opencode_go", "deepseek-v4.1-flash"),
     ("opencode_go", "glm-5.3-flash"),
@@ -484,7 +504,7 @@ EXCLUDED_SUBSCRIPTIONS = {
 }
 
 FIELDS = ["plan_id", "plan_name", "billing", "price", "currency", "price_usd", "served_model",
-          "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "confidence", "chart_tier", "source", "decision_note"]
+          "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note"]
 
 
 def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dict:
@@ -499,8 +519,15 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
     tokens = round(monthly_yi * YI)
     return dict(plan_id=pid, plan_name=name, billing="subscription", price=price, currency=cur,
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
-                monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5),
+                monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until="",
                 confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note)
+
+
+def unmetered_row(pid, name, price, cur, model, conf, src, note) -> dict:
+    return dict(plan_id=pid, plan_name=name, billing="subscription", price=price, currency=cur,
+                price_usd=round(price / USD_PER_CNY if cur == "CNY" else price, 2), served_model=model,
+                monthly_tokens="", monthly_yi="", real_usd_per_mtok=0, unmetered="true", promo_until=SWE2_PROMO["endDate"],
+                confidence=conf, chart_tier="main" if is_main(pid, model) else "full", source=src, decision_note=note)
 
 
 def main() -> None:
@@ -523,10 +550,11 @@ def main() -> None:
                if pid in ("cursor_ultra", "cursor_pro_plus") else ""),
             b["chart_tier"],
         ))
+    rows += [unmetered_row(*u) for u in UNMETERED]
     for pid, name, model, cached, inp, out, src in METERED:
         rows.append(dict(plan_id=pid, plan_name=name, billing="metered", price="", currency="USD", price_usd="",
                          served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=round(blended(cached, inp, out), 5),
-                         confidence="high", chart_tier="main", source=src,
+                         unmetered="", promo_until="", confidence="high", chart_tier="main", source=src,
                          decision_note=METERED_NOTES.get(pid, f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}")))
 
     with OUT.open("w", encoding="utf-8-sig", newline="") as f:

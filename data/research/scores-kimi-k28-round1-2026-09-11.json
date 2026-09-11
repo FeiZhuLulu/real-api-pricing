@@ -1,0 +1,146 @@
+{
+  "collectedAt": "2026-09-11",
+  "collector": "devin swe-2-max via Agent Bridge",
+  "scope": "Kimi K2.8 public benchmark / leaderboard evidence only; not quota, not adoption",
+  "productAliasesSeen": [
+    "K2.8 Preview",
+    "Kimi K2.8 Preview",
+    "kimi-for-coding"
+  ],
+  "aliasesNote": "Official public label is 'K2.8 Preview' (Kimi Code docs). Serving model ID on the Kimi Code subscription route is the stable alias 'kimi-for-coding', which resolved to K2.7 Code until 2026-09-11 and now serves K2.8 Preview. 'kimi-for-coding-highspeed' still serves K2.7 Code HighSpeed. No 'K2p8', 'K2.8 Code', 'K2.8 Thinking', 'K2.8 HighSpeed', 'K2.8 256K/1M', or 'K2.8 Max' product labels were seen anywhere; K2.8 Preview exposes reasoning_effort low/high/max (default max), not separate variant models. K2.8 is NOT on the pay-per-token API model list (platform.kimi.ai / platform.moonshot.cn still list only kimi-k3, kimi-k2.7-code(+highspeed), kimi-k2.6).",
+  "proposedProjectModelIds": [
+    {
+      "id": "kimi-k2.8",
+      "reason": "Follows project convention kimi-k2.7-code / kimi-k3; public label is 'K2.8 Preview'. It is the model now served behind kimi-for-coding on all Kimi Code membership tiers (1M context, effort low/high/max, default max). Alternative spelling 'kimi-k2.8-preview' if the coordinator prefers to keep the Preview suffix."
+    }
+  ],
+  "searchLog": [
+    { "query": "K2.8 / kimi / moonshot rows in rendered table", "url": "https://arena.ai/leaderboard/code", "result": "notFound", "note": "webfetch-rendered table, snapshot Sep 8 2026, 128 models. Kimi rows present: kimi-k3-max 1674 (r5), kimi-k2.6 1509 (r41), kimi-k2.7-code 1472 (r50), kimi-k2.5-thinking 1436 (r63), kimi-k2.5-instant 1406 (r73), kimi-k2-thinking-turbo 1323 (r105). No K2.8/k2p8 row." },
+    { "query": "K2.8 / kimi rows in rendered table", "url": "https://lmarena.ai/leaderboard/code", "result": "notFound", "note": "Mirror of arena.ai, identical Sep 8 2026 snapshot and rows; no K2.8." },
+    { "query": "K2.8 / kimi rows in rendered table", "url": "https://arena.ai/leaderboard/agent", "result": "notFound", "note": "Snapshot Sep 9 2026, 43 models. Only Kimi row: 'Kimi K3 (Max)' 6.46% Net Improvement (r8). No K2.8." },
+    { "query": "jina extract + raw HTML slug scan (kimi-k2-8, k2.8, k2p8)", "url": "https://artificialanalysis.ai/leaderboards/models", "result": "notFound", "note": "jina text extract shows Kimi K3 (max) 44, K3 (low) 34, Kimi K2.7 Code 26, Kimi Linear 48B A3B Instruct 7. Raw HTML slug enumeration: kimi-k2, kimi-k2-0905, kimi-k2-5(+non-reasoning), kimi-k2-6(+non-reasoning), kimi-k2-7-code, kimi-k2-thinking, kimi-k3, kimi-k3-low, kimi-linear-48b-a3b-instruct. No k2-8 slug." },
+    { "query": "direct model page", "url": "https://artificialanalysis.ai/models/kimi-k2-8", "result": "notFound", "note": "HTTP 404." },
+    { "query": "raw HTML displayLabel / hostModelSlug enumeration", "url": "https://artificialanalysis.ai/agents/coding-agents", "result": "notFound", "note": "Coding Agent Index v1.5 (components now DeepSWE v1.1 + Terminal-Bench 4.0 + SWE-Atlas-QnA; was v1.4 with TB v2.1 in round1). 13 configurations; only Kimi row: 'Kimi Code CLI - Kimi K3' (hostModelSlug moonshot_kimi-k3). kimi-k2-7-code slug exists in the model selector data but has no index row. No K2.8." },
+    { "query": "embedded #model-rankings-data JSON, ZH+EN", "url": "https://open-design.ai/zh/llm-arena-for-design/", "result": "notFound", "note": "HTTP Last-Modified Fri 11 Sep 2026 16:03:18 GMT. 13 models in payload, ZH/EN identical names; only Kimi entry: 'Kimi K3' score 65.7 (rank 13). No K2.8. EN: https://open-design.ai/llm-arena-for-design/ same roster." },
+    { "query": "SSR RSC payload model_display labels", "url": "https://www.tbench.ai/leaderboard", "result": "notFound", "note": "Terminal-Bench 4.0, leaderboard updated_at 2026-09-10T21:58Z. 14 model labels present (Fable 5, Fable 5.1, Gemini 3.7/3.8 Flash, GLM-5.3, GPT-5.6 Luna/Sol/Terra, GPT-6 Astra, Grok 4.5/4.6, Opus 4.8, Opus 5, Sonnet 5). Zero Kimi rows at all, hence no K2.8." },
+    { "query": "Kimi K2.8 Moonshot release benchmark", "url": "web_search", "result": "found", "note": "News cluster dated 2026-09-11 announcing K2.8 Preview rollout to Kimi Code; all trace to IT Home / official docs. No numeric scores in any article." },
+    { "query": "K2.8 / kimi rows in docs model-ID table", "url": "https://www.kimi.com/code/docs/ (+ /kimi-code/models.html, /kimi-code/whats-new.html, EN mirrors)", "result": "found", "note": "Official K2.8 Preview announcement lives in Kimi Code docs 'What's New' dated 2026-09-11. models.html lists kimi-for-coding = K2.8 Preview." },
+    { "query": "K2.8 blog post / model page", "url": "https://www.kimi.com/blog + https://www.kimi.com/ai-models/", "result": "notFound", "note": "Research blog latest entries: Kimi K3 2026-07-16, PerceptionBench, K2.6. Model pages list only K3, K2.7 Code, K2.6, K2.5. No K2.8 post or model page." },
+    { "query": "K2.8 announcement", "url": "https://www.moonshot.cn/", "result": "notFound", "note": "Homepage still features K3 (2026-07-16) as latest research; no K2.8 mention." },
+    { "query": "K2.8 in API model list / parameter reference", "url": "https://platform.kimi.ai/docs + /docs/api/models-overview + https://platform.moonshot.cn/docs", "result": "notFound", "note": "Pay-per-token API docs list kimi-k3, kimi-k2.7-code series, kimi-k2.6 only. K2.8 Preview is a Kimi Code subscription-side model behind kimi-for-coding, not an open-API model ID as of 2026-09-11." },
+    { "query": "K2.8 model card", "url": "https://huggingface.co/moonshotai", "result": "notFound", "note": "19 models listed; latest is moonshotai/Kimi-K3 (updated ~10 days ago). No K2.8 weights/card; K2.8 Preview not open-sourced so far." },
+    { "query": "K2.8 thread", "url": "https://forum.moonshot.ai/c/announcement", "result": "notFound", "note": "Latest announcement threads: K3 (Jul 22 2026), K2.7 Code (Jun 16). No K2.8 thread." },
+    { "query": "Kimi_Moonshot K2.8 / \"K2.8 Preview\" x.com post", "url": "x.com via web_search", "result": "notFound", "note": "No official X post for K2.8 found in search results (prior launches did get @Kimi_Moonshot posts, e.g. K2.7 Code HighSpeed Jun 15). x.com timeline not directly fetchable; absence here is search-based, not a timeline fetch." },
+    { "query": "\"K2.8\" Kimi SWE-bench Terminal-Bench score / \"kimi-for-coding\" K2.8 benchmark test", "url": "web_search", "result": "notFound", "note": "No third-party or vendor numeric benchmark for K2.8 published as of 2026-09-11. Articles only repeat the qualitative 'close to K3' claim." }
+  ],
+  "officialAnnouncement": {
+    "found": true,
+    "urls": [
+      "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+      "https://www.kimi.com/code/docs/kimi-code/whats-new.html",
+      "https://www.kimi.com/code/docs/kimi-code/models.html"
+    ],
+    "publishedAt": "2026-09-11",
+    "channel": "Kimi Code docs 'What's New' changelog entry 'K2.8 Preview — September 11, 2026'. No blog post, no HF card, no API-docs model entry, no X post found; docs entry is the only official announcement located.",
+    "claimedScores": [],
+    "qualitativeClaims": [
+      "K2.8 Preview is now fully rolled out in Kimi Code; Model ID unchanged, still `kimi-for-coding` (EN docs, verbatim).",
+      "Performance close to K3, with more efficient thinking (EN docs heading, verbatim; ZH: 综合性能接近 K3，思考效率更高).",
+      "Coding and agent capabilities are improved across the board, with significantly more efficient thinking than K2.7 Code (EN docs, verbatim).",
+      "Same thinking levels as K3: low / high / max (default max). With thinking turned off, requests to the K3 series and K2.8 Preview are served by K2.8 Preview (no thinking) (EN docs, verbatim).",
+      "A context window of up to 1M is available across all membership tiers (EN docs, verbatim).",
+      "models.html table: kimi-for-coding = K2.8 Preview, context 1048576, reasoning_effort low/high/max default max, image+video input, all membership tiers callable; kimi-for-coding-highspeed remains K2.7 Code HighSpeed (262144 context, Allegretto+)."
+    ]
+  },
+  "boards": [
+    {
+      "boardId": "arena_code",
+      "name": "Code Arena | WebDev Overall",
+      "url": "https://arena.ai/leaderboard/code",
+      "metric": "Arena Score",
+      "snapshotDate": "2026-09-08",
+      "k28Status": "notFound",
+      "note": "Page header: Sep 8, 2026 · 663,027 votes · 128 models. Kimi rows: kimi-k3-max 1674+11/-11 r5; kimi-k2.6 1509 r41; kimi-k2.7-code 1472 r50; kimi-k2.5-thinking 1436 r63; kimi-k2.5-instant 1406 r73; kimi-k2-thinking-turbo 1323 r105. lmarena.ai mirror identical. No K2.8/K2p8 row. Extracted via rendered-table text."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "name": "Agent Arena Overall",
+      "url": "https://arena.ai/leaderboard/agent",
+      "metric": "Net Improvement %",
+      "snapshotDate": "2026-09-09",
+      "k28Status": "notFound",
+      "note": "Page header: Sep 9, 2026 · 1,587,202 sessions · 43 models. Only Kimi row: 'Kimi K3 (Max)' 6.46%±0.70% r8. No K2.8 row. Extracted via rendered-table text."
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "notFound",
+      "k28Status": "notFound",
+      "note": "Live fetch 2026-09-11. jina extract Kimi rows: Kimi K3 (max) 44, K3 (low) 34, K2.7 Code 26, Kimi Linear 48B A3B Instruct 7. Raw HTML slug scan (2.7MB page): kimi-k2, kimi-k2-0905, kimi-k2-5(+nr), kimi-k2-6(+nr), kimi-k2-7-code, kimi-k2-thinking, kimi-k3, kimi-k3-low, kimi-linear-48b-a3b-instruct — no k2-8 slug. Model page https://artificialanalysis.ai/models/kimi-k2-8 returns 404."
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "name": "Artificial Analysis Coding Agent Index v1.5",
+      "url": "https://artificialanalysis.ai/agents/coding-agents",
+      "metric": "Coding Agent Index (equal-weight mean of DeepSWE v1.1, Terminal-Bench 4.0, SWE-Atlas-QnA)",
+      "snapshotDate": "notFound",
+      "k28Status": "notFound",
+      "note": "Live fetch 2026-09-11. Index bumped to v1.5 since round1 (Terminal-Bench v2.1 → 4.0). 13 configurations displayed ('13 of 13 models'). displayLabels: Antigravity SDK - Gemini 3.8 Flash (high); Claude Code - Fable 5.1 (max) (with fallback); Claude Code - Opus 5 (max); Claude Code - Qwen3.8 Max; Codex - DeepSeek V4 Flash 0731 (max); Codex - DeepSeek V4 Pro 0813 (max); Codex - GPT-5.6 Sol (max); Codex - GPT-6 Astra (max); Grok Build - Grok 4.6 (xhigh); Kimi Code CLI - Kimi K3; Muse Code - Muse Spark 1.3 (max); Muse Code - Muse Spark 1.3 (xhigh); Opencode - GLM-5.3 (max). Only Kimi row = Kimi K3. No K2.8."
+    },
+    {
+      "boardId": "open_design_arena",
+      "name": "OpenDesign Arena · Quality ranking",
+      "url": "https://open-design.ai/zh/llm-arena-for-design/",
+      "urlEn": "https://open-design.ai/llm-arena-for-design/",
+      "metric": "Average task score (0-100)",
+      "snapshotDate": "notFound",
+      "k28Status": "notFound",
+      "note": "HTTP Last-Modified Fri 11 Sep 2026 16:03:18 GMT (updated today). Embedded #model-rankings-data JSON lists 13 models, ZH/EN identical: GPT-6 Astra 82.7, DeepSeek V4.1 Flash 81.2, Claude Fable 5.1 80.3, GPT-5.6 Sol 77.6, Hunyuan H4 Preview 74.6, DeepSeek V4 Pro 72.9, Grok 4.6 72.4, Qwen 3.8-Max 72.0, DeepSeek V4 Flash 70.6, GLM-5.3 Flash 69.8, Gemini 3.8 Flash 68.9, Muse Spark 1.3 66.6, Kimi K3 65.7. Only Kimi entry = K3. No K2.8."
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-10",
+      "k28Status": "notFound",
+      "note": "RSC payload leaderboard updated_at 2026-09-10T21:58:00Z. 14 model labels enumerated (Fable 5/5.1, Gemini 3.7/3.8 Flash, GLM-5.3, GPT-5.6 Luna/Sol/Terra, GPT-6 Astra, Grok 4.5/4.6, Opus 4.8/5, Sonnet 5). Zero Kimi rows on the entire board — not just K2.8."
+    }
+  ],
+  "scores": [],
+  "scoresNote": "No numeric score for K2.8 exists on any checked board or in the official announcement as of 2026-09-11. The only official claims are qualitative ('performance close to K3', 'significantly more efficient thinking than K2.7 Code'); recorded under officialAnnouncement.qualitativeClaims, not as numbers. Launch-day model; boards have not ingested it yet.",
+  "notFound": [
+    { "boardId": "arena_code", "url": "https://arena.ai/leaderboard/code", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["kimi-k3-max", "kimi-k2.7-code", "kimi-k2.6", "kimi-k2.5-thinking", "kimi-k2.5-instant", "kimi-k2-thinking-turbo"], "note": "Snapshot Sep 8 2026, 128 models. Also checked lmarena.ai mirror — identical." },
+    { "boardId": "arena_agent_mode", "url": "https://arena.ai/leaderboard/agent", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["Kimi K3 (Max)"], "note": "Snapshot Sep 9 2026, 43 models." },
+    { "boardId": "aa_intelligence_index", "url": "https://artificialanalysis.ai/leaderboards/models", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["Kimi K3 (max)", "Kimi K3 (low)", "Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.6 (Non-reasoning)", "Kimi K2.5", "Kimi K2 Thinking", "Kimi Linear 48B A3B Instruct"], "note": "No k2-8 slug in raw HTML; /models/kimi-k2-8 is 404. 'K2 Horizon' / 'K2-V2' rows belong to MBZUAI, not Moonshot — not mapped." },
+    { "boardId": "aa_coding_agent_index", "url": "https://artificialanalysis.ai/agents/coding-agents", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["Kimi Code CLI - Kimi K3", "kimi-k2-7-code (selector only, no row)"], "note": "v1.5, 13 configurations." },
+    { "boardId": "open_design_arena", "url": "https://open-design.ai/zh/llm-arena-for-design/", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["Kimi K3"], "note": "13 models; EN mirror identical." },
+    { "boardId": "terminal_bench_4", "url": "https://www.tbench.ai/leaderboard", "checkedAt": "2026-09-11", "nearbyNamesSeen": [], "note": "No Kimi rows at all on TB4 board (14 labels listed in boards[].note)." },
+    { "boardId": "vendor_claimed", "url": "https://www.kimi.com/blog + https://www.moonshot.cn/ + https://huggingface.co/moonshotai + https://forum.moonshot.ai/c/announcement", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["Kimi K3", "Kimi K2.7 Code", "Kimi K2.6"], "note": "No K2.8 blog post, model card, HF weights, or forum thread. Only the Kimi Code docs changelog entry carries the announcement; it contains zero numeric scores." },
+    { "boardId": "vendor_claimed", "url": "x.com/@Kimi_Moonshot (via search)", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["K2.7 Code HighSpeed launch post Jun 15 2026"], "note": "No official K2.8 X post surfaced; x.com not directly fetchable — search-based absence." },
+    { "boardId": "third_party_other", "url": "https://platform.kimi.ai/docs/api/models-overview", "checkedAt": "2026-09-11", "nearbyNamesSeen": ["kimi-k3", "kimi-k2.7-code", "kimi-k2.7-code-highspeed", "kimi-k2.6"], "note": "Pay-per-token API has no K2.8 model ID; TokenPost (tr.tokenpost.com/news/blockchain/50501) independently notes the same." }
+  ],
+  "thirdPartyCoverage": [
+    { "url": "https://www.ithome.com/1/001/319.htm", "publishedAt": "2026-09-11T16:00:46+08:00", "outlet": "IT Home (original report other outlets cite)", "content": "Repeats official claims verbatim: K2.8 Preview fully live on Kimi Code today, Model ID unchanged kimi-for-coding, overall performance close to K3, higher thinking efficiency, coding+agent capabilities improved vs K2.7 Code, all tiers get up to 1M context, low/high/max thinking default max, no-thinking requests for K3 series and K2.8 Preview route to K2.8 Preview. No numbers." },
+    { "url": "https://www.panews.io/articles/01a08fd0-31d0-77a4-9192-85b0fff4aed8", "publishedAt": "2026-09-11", "outlet": "PANews (cites IT Home)", "content": "Same claims, no scores." },
+    { "url": "https://en.theblockbeats.news/flash/366591", "publishedAt": "2026-09-11", "outlet": "BlockBeats", "content": "Same claims, no scores." },
+    { "url": "https://www.techflowpost.com/newsletter/135883", "publishedAt": "2026-09-11", "outlet": "TechFlow Post", "content": "Same claims, no scores." },
+    { "url": "https://lookonchain.com/feeds/72589", "publishedAt": "2026-09-11", "outlet": "Lookonchain", "content": "Same claims, no scores. Adds contrast vs K2.7 Code 256K context." },
+    { "url": "https://news.cnyes.com/news/id/6604588", "publishedAt": "2026-09-11", "outlet": "鉅亨網 cnyes", "content": "Same claims, no scores." },
+    { "url": "https://tr.tokenpost.com/news/blockchain/50501", "publishedAt": "2026-09-11", "outlet": "TokenPost (Turkish)", "content": "Same claims; explicitly notes K2.8 is absent from Moonshot's official API model list (only K3, K2.7 Code, K2.6) and that the 'close to K3' performance criteria are unverified." }
+  ],
+  "contradictions": [],
+  "k28ServingFacts": {
+    "servedAs": "kimi-for-coding (Kimi Code subscription route, api.kimi.com/coding)",
+    "aliasStabilityWarning": "kimi-for-coding previously resolved to K2.7 Code; since 2026-09-11 it resolves to K2.8 Preview. Project rows keyed to the old backend need a serving-model decision by the coordinator.",
+    "context": "1048576 (1M) all membership tiers per models.html",
+    "effort": "reasoning_effort low/high/max, default max; thinking-off requests route to K2.8 Preview without thinking",
+    "modalities": "image + video input per models.html",
+    "notOnOpenApi": "No kimi-k2.8 model ID on platform.kimi.ai / platform.moonshot.cn as of 2026-09-11",
+    "highspeed": "kimi-for-coding-highspeed remains K2.7 Code HighSpeed — no K2.8 HighSpeed variant announced"
+  },
+  "tempArtifacts": "_build/kimi-k28/ (tbench.html, aa-coding.html, aa-models.html, opendesign-zh/en.html, zh_model-rankings-data.json) — gitignored",
+  "doNotAdoptYet": "Coordinator will decide. This file is evidence only."
+}

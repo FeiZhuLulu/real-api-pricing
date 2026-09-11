@@ -23,6 +23,7 @@ SCORE_FILES = (
     "scores-aa-round3-2026-09-09.json",
     "scores-open-design-round1-2026-09-09.json",
     "scores-terminal-bench4-round1-2026-09-10.json",
+    "scores-terminal-bench4-round2-selfreport-2026-09-12.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
@@ -55,11 +56,12 @@ DISPLAY = {
     "qwen3.8-27b": "Qwen3.8 27B", "qwen3.8-max-0902": "Qwen3.8 Max 0902",
     "step-3.5-flash": "Step 3.5 Flash", "step-3.7-flash": "Step 3.7 Flash",
     "hy3": "Hy3", "hy4-preview": "Hy4 Preview", "omen-alpha": "Omen Alpha", "composer-2.5": "Composer 2.5",
+    "swe-2": "SWE-2",
 }
 VENDOR = {
     "gpt": "OpenAI", "claude": "Anthropic", "grok": "xAI", "kimi": "Kimi", "glm": "Zhipu", "minimax": "MiniMax",
     "qwen": "Alibaba", "deepseek": "DeepSeek", "gemini": "Google", "mimo": "Xiaomi", "hy": "Tencent", "composer": "Cursor",
-    "longcat": "Meituan", "muse": "Muse", "omen": "OpenCode", "step": "StepFun",
+    "longcat": "Meituan", "muse": "Muse", "omen": "OpenCode", "step": "StepFun", "swe": "Cognition",
 }
 
 
@@ -77,10 +79,12 @@ def load_scores() -> list[dict]:
 def current_score_records(archives):
     # Files are explicitly ordered oldest to newest. A complete new board snapshot
     # replaces that board as a whole, including models removed from its coverage.
+    # Archives flagged "supplement" only append rows (e.g. vendor self-reports) to the
+    # current snapshot and never replace it.
     latest = {b["boardId"]: name for name, archive in archives for b in archive["boards"]
-              if b["boardId"] in BOARDS}
+              if b["boardId"] in BOARDS and not archive.get("supplement")}
     return [(name, record) for name, archive in archives for record in archive["scores"]
-            if latest.get(record["boardId"]) == name]
+            if latest.get(record["boardId"]) == name or archive.get("supplement")]
 
 
 def load_list_blended() -> dict[str, float]:
@@ -95,7 +99,7 @@ def load_list_blended() -> dict[str, float]:
 
 def main() -> None:
     scores, list_blended = load_scores(), load_list_blended()
-    boards_meta = {b["boardId"]: b for archive in score_archives() for b in archive["boards"]}
+    boards_meta = {b["boardId"]: b for archive in score_archives() if not archive.get("supplement") for b in archive["boards"]}
 
     points, configuration_points = [], []
     with (DATA / "adopted.csv").open(encoding="utf-8-sig") as f:
@@ -111,6 +115,7 @@ def main() -> None:
                 monthly_yi=float(r["monthly_yi"]) if r["monthly_yi"] else None,
                 real_usd_per_mtok=real, list_blended_usd_per_mtok=round(lb, 4) if lb else None,
                 d=round(real / lb, 4) if lb else None, confidence=r["confidence"], tier=r["chart_tier"], source=r["source"], note=r["decision_note"],
+                unmetered=r.get("unmetered") == "true", promo_until=r.get("promo_until") or None,
             )
             for b in BOARDS:
                 options = candidates(r, scores, b)

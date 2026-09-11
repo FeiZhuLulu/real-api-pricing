@@ -160,13 +160,21 @@ export function tableRows(rows: Row[], s: State): Row[] {
       );
     });
 }
+/** Unmetered ($0) groups are drawn this far to the right of the cheapest priced group. */
+export const ZERO_SLOT_RATIO = 3.5;
+export const isUnmetered = (p: Point) =>
+  !!p.unmetered && p.real_usd_per_mtok === 0;
+export function zeroSlot(prices: number[]): number {
+  const priced = prices.filter((v) => v > 0);
+  return (priced.length ? Math.min(...priced) : 0.001) / ZERO_SLOT_RATIO;
+}
 export function groups(rows: Row[]): Group[] {
   const map = new Map<string, Group>();
   for (const r of rows)
     if (
       r.score !== null &&
       Number.isFinite(r.score) &&
-      r.point.real_usd_per_mtok > 0
+      (r.point.real_usd_per_mtok > 0 || isUnmetered(r.point))
     ) {
       const key = `${r.point.real_usd_per_mtok}|${r.score}`;
       const g = map.get(key);
@@ -175,11 +183,15 @@ export function groups(rows: Row[]): Group[] {
         map.set(key, {
           key,
           price: r.point.real_usd_per_mtok,
+          plotPrice: r.point.real_usd_per_mtok,
           score: r.score,
           rows: [r],
         });
     }
-  return [...map.values()];
+  const out = [...map.values()];
+  const slot = zeroSlot(out.map((g) => g.price));
+  for (const g of out) if (g.price === 0) g.plotPrice = slot;
+  return out;
 }
 export function pareto(gs: Group[]): Group[] {
   let best = -Infinity;
@@ -200,7 +212,7 @@ export function frontierPath(
 ) {
   if (!front.length) return { x: [], y: [] };
   return {
-    x: [minPrice, ...front.map((g) => g.price), maxPrice],
+    x: [minPrice, ...front.map((g) => g.plotPrice), maxPrice],
     y: [
       front[0].score,
       ...front.map((g) => g.score),
@@ -277,7 +289,9 @@ export const number = (n: number | null, lang = "en", digits = 3) =>
 export const price = (n: number | null) =>
   n === null
     ? "—"
-    : "$" +
+    : n === 0
+      ? "≈$0"
+      : "$" +
       new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(n);
 export const allowance = (p: Point, lang: string) =>
   p.monthly_yi === null
@@ -287,7 +301,16 @@ export const allowance = (p: Point, lang: string) =>
 export const safeUrl = (url: string) =>
   /^https?:\/\//i.test(url) || url.startsWith("/data/") ? url : undefined;
 export const manufacturer = (vendor: string) =>
-  vendor === "Muse" ? "Meta" : vendor;
+  vendor === "Muse" ? "Meta" : vendor === "Cognition" ? "Devin" : vendor;
+/** Short promo/unmetered qualifier for a $0 point, or "" for priced points. */
+export function unmeteredNote(p: Point, lang: string): string {
+  if (!isUnmetered(p)) return "";
+  const until = p.promo_until;
+  if (!until) return lang === "zh" ? "不计额度" : "unmetered";
+  return lang === "zh"
+    ? `促销至 ${until}，不计额度`
+    : `promo until ${until}, unmetered`;
+}
 export const isThirdParty = (p: Point) => p.channel !== manufacturer(p.vendor);
 export const accessLine = (p: Point) =>
   isThirdParty(p)
@@ -305,6 +328,7 @@ export function displayPlan(plan: string, lang: string): string {
     闲时: "Off-peak",
     中间值: "Midpoint",
     忙时: "Peak",
+    "促销至 ": "promo until ",
   };
   return Object.entries(words).reduce(
     (s, [from, to]) => s.replaceAll(from, to),

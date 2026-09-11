@@ -11,6 +11,7 @@ import {
   price,
   tableRows,
   feeBands,
+  unmeteredNote,
 } from "./domain";
 
 const escape = (s: string) =>
@@ -56,17 +57,23 @@ export default function Ranking({
   }, [signature, state.view]);
   const value = (r: Row) =>
     isPrice ? r.point.real_usd_per_mtok : r.point.monthly_yi!;
-  const values = sorted.map(value),
+  // Unmetered $0 rows have no log position: they get the shortest bar.
+  const values = sorted.map(value).filter((v) => v > 0),
     low = values.length ? Math.min(...values) : 0,
     high = values.length ? Math.max(...values) : 0;
   const bar = (r: Row) =>
-    high === low
-      ? 100
-      : 8 +
-        (92 * (Math.log10(value(r)) - Math.log10(low))) /
-          (Math.log10(high) - Math.log10(low));
+    value(r) <= 0
+      ? 3
+      : high === low
+        ? 100
+        : 8 +
+          (92 * (Math.log10(value(r)) - Math.log10(low))) /
+            (Math.log10(high) - Math.log10(low));
   const formatted = (r: Row) =>
-    isPrice ? price(value(r)) : allowance(r.point, state.lang);
+    isPrice
+      ? price(value(r)) +
+        (value(r) === 0 ? " · " + unmeteredNote(r.point, state.lang) : "")
+      : allowance(r.point, state.lang);
   const unit = isPrice ? "USD / MTok" : zh ? "token / 月" : "tokens / month";
   const heading = isPrice
     ? zh

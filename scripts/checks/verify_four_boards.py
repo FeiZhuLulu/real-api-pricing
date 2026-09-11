@@ -36,7 +36,7 @@ rows = []
 for board_id, (display, metric, tag) in BOARDS.items():
     key = f"{board_id}__score"
     assert data["boards"][board_id]["metric"] == metric
-    board_rows = [p for p in data["points"] if p[key] is not None and p["real_usd_per_mtok"] > 0]
+    board_rows = [p for p in data["points"] if p[key] is not None and (p["real_usd_per_mtok"] > 0 or p.get("unmetered"))]
     assert board_rows
     missing = sorted({p["model"] for p in data["points"] if p[key] is None})
     for tier in ("main", "full"):

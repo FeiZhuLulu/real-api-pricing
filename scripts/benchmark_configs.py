@@ -26,6 +26,7 @@ def configuration(record, archive):
     secondary = record.get("secondary", {})
     label = record["variantLabel"]
     estimated = secondary.get("intelligenceIndexIsEstimated", record.get("scoreIsEstimated"))
+    self_reported = bool(secondary.get("selfReported"))
     model = record.get("model") or (OPEN_DESIGN_MODELS.get(label) if record["boardId"].startswith("open_design_arena") else None)
     identity = [record["boardId"], model, label, record.get("checkedAt"), archive]
     cid = record["boardId"] + ":" + hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:16]
@@ -38,8 +39,8 @@ def configuration(record, archive):
     minus, plus = secondary.get("ciMinus"), secondary.get("ciPlus")
     return dict(
         configuration_id=cid, board=record["boardId"], model=model,
-        variant=label + (" [AA estimate]" if estimated else ""),
-        score_is_estimated=estimated,
+        variant=label + (" [AA estimate]" if estimated else "") + (" [vendor self-report]" if self_reported else ""),
+        score_is_estimated=estimated, score_is_self_reported=self_reported,
         agent_harness=harness, reasoning_effort=effort.group(1).lower() if effort else None,
         service_mode={"cursor cli - composer 2.5 fast": "fast", "cursor cli - composer 2.5": "standard"}.get(label.lower())
                      if record["model"] == "composer-2.5" else None,
@@ -67,13 +68,14 @@ def mapping(record):
         mapping_confidence="low" if agent else "medium",
         mapping_note=("Exact served-model reference only; product harness and quota-measurement effort are unverified. "
                       "Not a benchmark measurement of this subscription or API channel." if agent else
-                      "Exact served-model reference; quota-measurement effort is unverified."),
+                      "Exact served-model reference; quota-measurement effort is unverified.")
+                     + (" Vendor self-reported score, not an official leaderboard run." if record.get("score_is_self_reported") else ""),
         quota_effort_matched=None,
     )
 
 
 def score_fields(record):
-    keys = ("configuration_id", "variant", "score", "score_is_estimated", "agent_harness", "reasoning_effort", "service_mode",
+    keys = ("configuration_id", "variant", "score", "score_is_estimated", "score_is_self_reported", "agent_harness", "reasoning_effort", "service_mode",
             "score_low", "score_high", "mean_cost_usd_per_task", "median_cost_usd_per_task", "source")
     fields = {k: record[k] if record else None for k in keys}
     fields.update(mapping(record) if record else {k: None for k in

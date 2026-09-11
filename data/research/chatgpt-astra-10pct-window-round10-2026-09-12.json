@@ -1,0 +1,45 @@
+{
+  "collectedAt": "2026-09-12",
+  "scopeNote": "用户转来一份第三方 Codex 用量统计截图：自称占周额度 10%。按 token 构成反推档位与 Astra 周池。未改 adopted。",
+  "items": [
+    {
+      "claim": "某用户用量统计：857 次请求，输入总量 155,418,243（缓存命中 149,899,392，96.4%）、输出 364,187；其中 gpt-6-astra ≤272K：413 次/输入 65,255,022/输出 202,453；>272K（整请求 2×费率）：178 次/输入 54,551,738/输出 188,694；gpt-5.6-terra：52 次/12,368,863/31,335；codex-auto-review：214 次/23,242,620/21,705。按官网 API 价折算 ≈$228.76。该用户称占其周额度 10%。",
+      "evidenceType": "community_screenshot_breakdown",
+      "source": "用户转贴截图（2026-09-12）",
+      "sourceDate": "2026-09-12",
+      "observed": {
+        "totalTokens": 155782430,
+        "astraTokens": 120197907,
+        "terraTokens": 12400198,
+        "autoReviewTokens": 23264325,
+        "apiDollarEquivalentUsd": 228.76,
+        "claimedWeeklyPct": 10
+      },
+      "confidence": "low（自述 10%，未见面板截图）"
+    },
+    {
+      "claim": "档位反推：Plus 锚 1.75M token/点下 Astra 120M 即使按 1× Sol 权重也需 69 点，排除 Plus；Pro 5x 锚 6.98M/点反推 Astra 权重 0.43× Sol 不合理；Pro 20x 锚 34.9M/点反推 Astra ≈2.75× Sol（lichengzhe 1.5–1.7 与 Observatory 4.15 之间）——最自洽为 Pro 20x。",
+      "evidenceType": "derived_inference",
+      "source": "同上截图 + 既有锚点",
+      "sourceDate": "2026-09-12",
+      "confidence": "medium（依赖成本加权假设）"
+    },
+    {
+      "claim": "若为 Pro 20x 且 10% 属实：Astra 周池 ≈12.0（仅 Astra token）~15.6 亿（全模型 1:1），折月 48~62 亿，真实单价 $0.032~0.042/MTok。四源对比：×20 派生 7.95 亿/周、Observatory 8.66 亿、本条 12~15.6 亿、lichengzhe 21~23 亿——仍未收敛，支持『Pro20x Astra 池 > 20× Plus』方向，lichengzhe 高值或仍含 reset 水分。",
+      "evidenceType": "cross_source_comparison",
+      "source": "round7/8/9 与本文件",
+      "sourceDate": "2026-09-12",
+      "confidence": "low-medium"
+    }
+  ],
+  "adopted": {
+    "chatgpt_pro_20x_gpt_6_astra_monthlyYi": 48.08,
+    "basis": "用户 2026-09-12 拍板采用本条（五源中位数来源）。取下限口径：仅 Astra token 120,197,907 ÷ 10% × 4 周；上限口径（全模型 1:1）为 62.3 亿。confidence=low：自述 10% 无面板图。",
+    "realUsdPerMtok": 0.0416
+  },
+  "notFound": [
+    "该用户的订阅档位自述（Pro 5x 还是 20x）",
+    "10% 读数的面板截图与读取时刻（是否跨 09-07 全局重置）",
+    "codex-auto-review 是否计入用户额度"
+  ]
+}

@@ -57,12 +57,33 @@ def merge(points, key):
 
 
 def fmt_price(x):
-    return "$" + f"{x:.5f}".rstrip("0").rstrip(".")
+    return "≈$0" if x == 0 else "$" + f"{x:.5f}".rstrip("0").rstrip(".")
+
+
+def promo_text(p, language):
+    """不计额度点的价格行：$0 + 促销截止；无促销日期时只写 unmetered。"""
+    until = p.get("promo_until")
+    if until:
+        mm, dd = until[5:7].lstrip("0"), until[8:10].lstrip("0")
+        return f"≈$0 · promo until {mm}/{dd}, unmetered" if language == "en" else f"≈$0 · 促销至{mm}/{dd}，不计额度"
+    return "≈$0 · unmetered" if language == "en" else "≈$0 · 不计额度"
 
 
 def text(x, y, content, size=14, fill="#222522", anchor="start", weight=400, extra=""):
     return (f'<text x="{x:.3f}" y="{y:.3f}" font-size="{size}" fill="{fill}" '
             f'text-anchor="{anchor}" font-weight="{weight}" {extra}>{escape(str(content))}</text>')
+
+
+def devin_logo(r, fill, opacity=1.0, cx=0.0, cy=0.0):
+    """Devin 标志：三个竖边六边形（左上、左下、右）由中心枢连接。r 为单个六边形外接圆半径。"""
+    centers = [(-0.82, -1.18), (-0.82, 1.18), (1.18, 0.0)]
+    parts = []
+    for ox, oy in centers:
+        pts = [(cx + (ox + math.cos(math.radians(30 + 60 * k))) * r, cy + (oy + math.sin(math.radians(30 + 60 * k))) * r) for k in range(6)]
+        parts.append("M" + " L".join(f"{x:.2f},{y:.2f}" for x, y in pts) + "Z")
+    hub = " ".join(f"M{cx + (ox * .45) * r:.2f},{cy + (oy * .45) * r:.2f} L{cx + (ox * .95) * r:.2f},{cy + (oy * .95) * r:.2f}" for ox, oy in centers)
+    return (f'<path d="{" ".join(parts)}" fill="{fill}" opacity="{opacity}" stroke="{fill}" stroke-width="{r * .18:.2f}" stroke-linejoin="round"/>'
+            f'<path d="{hub}" stroke="{fill}" stroke-width="{r * .9:.2f}" stroke-linecap="round" opacity="{opacity}" fill="none"/>')
 
 
 def plan_name(plan, language):
@@ -71,6 +92,7 @@ def plan_name(plan, language):
     plan = plan.replace("Claude ", "").replace("ChatGPT ", "").replace("GLM Coding ", "GLM ")
     if language == "en":
         return (plan.replace(" (9/14+)", " · from Sep 14")
+                .replace(" (促销至 10/31)", " · promo until Oct 31")
                 .replace(" (老客 ¥149)", " · existing ¥149")
                 .replace(" (老客 ¥49)", " · existing ¥49")
                 .replace(" (老客 ¥469)", " · existing ¥469")
@@ -82,7 +104,7 @@ def plan_name(plan, language):
                 .replace("闲时", "off-peak")
                 .replace("中间值", "midpoint")
                 .replace("忙时", "peak"))
-    return plan.replace(" (9/14+)", " · 9/14+").replace(" (老客 ¥149)", " · 老客 ¥149")
+    return plan.replace(" (9/14+)", " · 9/14+").replace(" (老客 ¥149)", " · 老客 ¥149").replace(" (促销至 10/31)", " · 促销至 10/31")
 
 
 def label_lines(p, language, board=None):
@@ -97,6 +119,8 @@ def label_lines(p, language, board=None):
     name = " / ".join(models)
     if board and any(q.get(board + "__score_is_estimated") for q in p["members"]):
         name += " [AA estimate]" if language == "en" else " [AA估计]"
+    if board and any(q.get(board + "__score_is_self_reported") for q in p["members"]):
+        name += " [self-reported]" if language == "en" else " [厂商自报]"
     if board:
         effort = p.get(board + "__reasoning_effort")
         harness = p.get(board + "__agent_harness")
@@ -104,7 +128,8 @@ def label_lines(p, language, board=None):
             name += " · " + effort
         if harness:
             name = harness + " · " + name
-    return name, " / ".join(plans), fmt_price(p["real_usd_per_mtok"])
+    price = promo_text(p, language) if p.get("unmetered") else fmt_price(p["real_usd_per_mtok"])
+    return name, " / ".join(plans), price
 
 
 def label_position(p, board, x, y):
@@ -137,24 +162,35 @@ def label_position(p, board, x, y):
         if board == "aa_intelligence_index":
             return x - 24, y + 65, "end"
         return x + 24, y - 55, "start"
+    if model == "swe-2":
+        # 不计额度点贴右边界，标签只能往左上放，且要避开 TB4 里 Luna 的下方标签。
+        return x - 30, y + 34, "end"
     return x - 20, y - 52, "end"
 
 
 def draw(board, meta, points, tier, language="zh"):
     key = board + "__score"
-    valid = [p for p in points if p.get(key) is not None and (p.get("real_usd_per_mtok") or 0) > 0
+    valid = [p for p in points if p.get(key) is not None
+             and ((p.get("real_usd_per_mtok") or 0) > 0 or p.get("unmetered"))
              and (tier == "full" or p["tier"] == "main")]
     subs = merge([p for p in valid if p["billing"] == "subscription"], key)
     api = merge([p for p in valid if p["billing"] == "metered"], key)
     frontier = pareto(subs + api, key)
     ids = {p["id"] for p in frontier}
-    xmin = min((p["real_usd_per_mtok"] for p in valid), default=.001) / 1.48
-    xmax = max((p["real_usd_per_mtok"] for p in valid), default=1) * 1.6
+    priced = [p["real_usd_per_mtok"] for p in valid if p["real_usd_per_mtok"] > 0]
+    has_zero = any(p["real_usd_per_mtok"] == 0 for p in valid)
+    xmin = min(priced, default=.001) / 1.48
+    xmax = max(priced, default=1) * 1.6
+    # 不计额度（$0）点不进对数换算：在最右侧留一个专用刻度位，对数轴到 xmin 为止。
+    zero_slot = 0.055 if has_zero else 0
+    log_right = RIGHT - (RIGHT - LEFT) * zero_slot
     ystep = 50 if board == "arena_code" else 5
     ymin = math.floor(min((p[key] for p in valid), default=0) / ystep) * ystep - ystep * .2
     ymax = math.ceil(max((p[key] for p in valid), default=10) / ystep) * ystep + ystep * .4
     def sx(v):
-        return LEFT + math.log(xmax / v) / math.log(xmax / xmin) * (RIGHT - LEFT)
+        if v == 0:
+            return RIGHT - 22
+        return LEFT + math.log(xmax / v) / math.log(xmax / xmin) * (log_right - LEFT)
     def sy(v):
         return BOTTOM - (v - ymin) / (ymax - ymin) * (BOTTOM - TOP)
     suffix = "_全量" if tier == "full" else ""
@@ -185,6 +221,12 @@ def draw(board, meta, points, tier, language="zh"):
             x = sx(tick)
             s += [f'<path d="M{x:.3f} {TOP}V{BOTTOM}" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>',
                   text(x, 735, "$" + f"{tick:g}", 12, "#747B74", "middle", extra='class="number"')]
+    if has_zero:
+        bx = (log_right + sx(0)) / 2 - 8
+        s += [f'<path d="M{log_right:.3f} {TOP}V{BOTTOM}" stroke="#D6DBD5" stroke-dasharray="4 4"/>',
+              f'<path d="M{bx:.3f} {BOTTOM - 6}l5 -7 5 7M{bx + 6:.3f} {BOTTOM + 6}l5 -7 5 7" stroke="#8B958D" stroke-width="1.2" fill="none"/>',
+              text(sx(0), 735, "≈$0", 12, "#747B74", "middle", extra='class="number"'),
+              text(sx(0), 750, "unmetered" if language == "en" else "不计额度", 9.5, "#8B958D", "middle")]
     for tick in range(math.ceil(ymin / ystep) * ystep, math.floor(ymax / ystep) * ystep + 1, ystep):
         y = sy(tick)
         s += [f'<path d="M{LEFT} {y:.3f}H{RIGHT}" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>',
@@ -210,6 +252,13 @@ def draw(board, meta, points, tier, language="zh"):
         if is_front and p["billing"] == "metered":
             s += [f'<path d="M0 -12L12 0 0 12 -12 0Z" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
                   f'<path d="M0 -4L4 0 0 4 -4 0Z" fill="{c}"/>']
+        elif channel(p) == "Devin":
+            # Devin 渠道用官方标志形状代替方块；前沿点外框保留，内部放标志。
+            if is_front:
+                s += [f'<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
+                      devin_logo(3.5, c)]
+            else:
+                s.append(devin_logo(2.4, c, .68))
         elif is_front:
             s += [f'<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="{c}" stroke-width="1.35"/>',
                   f'<circle r="4" fill="{c}"/>']
@@ -237,7 +286,8 @@ def draw(board, meta, points, tier, language="zh"):
     present = [(name, c) for name, c in COLORS.items() if any(channel(p) == name for p in valid)]
     xx = 57
     for name, c in present:
-        s += [f'<rect x="{xx}" y="826" width="8" height="8" fill="{c}"/>', text(xx + 17, 834, name, 12, "#687168")]
+        s += [devin_logo(2.4, c, cx=xx + 4, cy=830) if name == "Devin" else f'<rect x="{xx}" y="826" width="8" height="8" fill="{c}"/>',
+              text(xx + 17, 834, name, 12, "#687168")]
         xx += max(83, len(name) * 7 + 38)
     api_mark_x = xx + (190 if language == "en" else 129)
     s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Pareto frontier" if language == "en" else "帕累托前沿", 12, "#687168"),
@@ -257,7 +307,9 @@ def draw(board, meta, points, tier, language="zh"):
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board in ("aa_coding_agent_index", "terminal_bench_4") else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
-          )), 11, "#929A90"),
+          )) + ((" ≈$0 = SWE-2 promo: unmetered on Devin Pro/Max/Teams until 2026-10-31, not permanent; TB4 score self-reported by Cognition."
+                 if language == "en" else " ≈$0 为 SWE-2 促销价：Devin Pro/Max/Teams 至 2026-10-31 不计额度，非永久口径；TB4 分数为 Cognition 自报。")
+                if has_zero else ""), 11, "#929A90"),
           text(56, 919, "Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans." if language == "en" else "订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。", 11, "#929A90"),
           text(1384, 919, meta["url"].replace("https://", ""), 11, "#929A90", "end"), '</svg>']
     OUT.mkdir(exist_ok=True)

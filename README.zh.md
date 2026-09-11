@@ -26,20 +26,20 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 | 覆盖范围 | 行数 |
 |---|---:|
-| 全部采用的套餐 × 模型点 | 200 |
-| 有月额度的订阅点 | 187 |
+| 全部采用的套餐 × 模型点 | 202 |
+| 有月额度的订阅点 | 188 |
 | 按量 API 基准点 | 13 |
 | OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 22 / 8 |
 | Code Arena / Agent Arena 有分点 | 136 / 140 |
 | AA 智力榜 / AA 编程 Agent 榜有分点 | 173 / 71 |
-| OpenDesign Arena 有分点 | 65 |
-| Terminal-Bench 4.0 有分点 | 66 |
+| OpenDesign Arena 有分点 | 70 |
+| Terminal-Bench 4.0 有分点 | 70 |
 
 **下载数据：** [采用值 CSV](data/adopted.csv) · [完整计算结果 CSV](derived/points.csv) · [完整计算结果 JSON](derived/points.json) · [数据说明及缺分清单](data/README.md) · [分日期原始证据](data/research/)
 
 ## 月额度总览
 
-187 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
+188 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
 
 ### $0–30
 
@@ -119,7 +119,7 @@ OpenDesign 的 13 模型完整效果榜已存档，其中 11 个模型与当前�
 
 AA 编程 Agent 分数属于已测试的 harness × 模型 × effort 配置。静态图和 `points.*` 明确为**最高存档配置参考汇总**，不代表各订阅/API渠道实测；额度样本的effort、产品harness是否对齐仍未验证。更高effort不自动提高每百万token单价，但可能增加每任务token消耗。
 
-Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，18 行全部存档，包括 GPT-6 Astra 的五个 effort 档。GPT-6 Astra 与 Claude Fable 5.1 暂无采用行，只保留榜单记录并列入缺分，不做近似。
+Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，18 行全部存档，包括 GPT-6 Astra 的五个 effort 档。Claude Fable 5.1 暂无采用行，只保留榜单记录并列入缺分，不做近似。另有一行补充档追加在官方快照之后、不替换快照：**SWE-2 · Devin Pro** 27.3%，来自 Cognition 发布博客的自报数字（官方榜无 SWE-2 行）。SWE-2 在促销期内对 Pro/Max/Teams 订阅者不计额度，官推只写 "the next month"，本项目记为截止 2026-10-31，因此真实单价显示为 **≈$0/MTok**、放在专用刻度位，并成为前沿最便宜端点。这是促销价而非永久口径，促销结束后必须复核。
 
 [全配置交互图](charts/zh/pareto/帕累托交互图.html) 默认展示每模型最高分汇总，可切换全部存档配置，并提供思考强度档位选择。下载HTML后本地打开，Plotly需要联网。目前全部采用参考映射，尚不是已验证产品配置的严格前沿。
 

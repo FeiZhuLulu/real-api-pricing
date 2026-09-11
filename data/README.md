@@ -1,21 +1,21 @@
 # Data / 数据
 
-Current snapshot: 2026-09-11. The adopted dataset contains 200 plan × model rows: 187 subscription rows and 13 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
+Current snapshot: 2026-09-12. The adopted dataset contains 202 plan × model rows: 189 subscription rows (188 with a monthly allowance plus one unmetered promotional row, Devin Pro × SWE-2 at ≈$0/MTok until 2026-10-31) and 13 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
 
 These files are the public redacted edition. Original local evidence is backed up outside Git; see [PUBLICATION.md](../PUBLICATION.md). 本目录为公开脱敏版，保留数值、来源与取舍记录，原件仅存于 Git 忽略的本地备份。
 
-当前采用数据共200条“套餐 × 模型”：187条订阅、13条按量API，包括OpenCode Go 27个模型、Command Code GOAT 37个模型、Ollama Pro/Max各11个模型、Step Plan 国内站8个点、Devin Max 1个点。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但仍保留在额度和单价数据中。
+当前采用数据共202条“套餐 × 模型”：189条订阅（188条有月额度，另1条不计额度促销点 Devin Pro × SWE-2，≈$0/MTok，促销至2026-10-31）、13条按量API，包括OpenCode Go 27个模型、Command Code GOAT 37个模型、Ollama Pro/Max各11个模型、Step Plan 国内站8个点、Devin Max 1个点、ChatGPT Pro 20x Astra 1个点。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但仍保留在额度和单价数据中。
 
 美元/credits额度、三段价格与模型间价格比统一按 `conventions.json` 的标准负载换算：缓存读取97.5%、普通输入2.15%、输出0.35%。直接给出total tokens的面板、日志、跑满实测和官方绝对token表不重复归一；只有total tokens和费用百分比但缺token类型拆分时，保留观测并标明限制。GLM已从官方95%缓存示例表改为按官方周积分、三段积分系数和统一标准负载重算，并将忙时、中间值与闲时拆成独立情景点。当前标准不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。完整分类见 [`token-mix-audit-round2-2026-09-07.json`](research/token-mix-audit-round2-2026-09-07.json)。
 
 | Board / 榜单 | Scored rows / 有分行 | Unscored rows / 缺分行 |
 |---|---:|---:|
-| Code Arena | 136 / 200 | 64 |
-| Agent Arena | 140 / 200 | 60 |
-| AA Intelligence | 173 / 200 | 27 |
-| AA Coding Agent | 71 / 200 | 129 |
-| OpenDesign Arena | 69 / 200 | 131 |
-| Terminal-Bench 4.0 | 68 / 200 | 132 |
+| Code Arena | 136 / 202 | 66 |
+| Agent Arena | 140 / 202 | 62 |
+| AA Intelligence | 173 / 202 | 29 |
+| AA Coding Agent | 71 / 202 | 131 |
+| OpenDesign Arena | 70 / 202 | 132 |
+| Terminal-Bench 4.0 | 70 / 202 | 132 |
 
 具体缺分模型以 [`points.csv`](../derived/points.csv) / [`points.json`](../derived/points.json) 的空分数字段为准；不为缺失模型补造分数。
 

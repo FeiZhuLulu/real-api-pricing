@@ -5,7 +5,7 @@ charts=json.loads((root/'_build/SVG坐标核对.json').read_text(encoding='utf-8
 ns={'s':'http://www.w3.org/2000/svg'}
 for chart in charts:
  k=chart['board']+'__score';tier=chart['tier']
- pts=[p for p in data['points'] if p[k] is not None and p['real_usd_per_mtok']>0 and (tier=='full' or p['tier']=='main')]
+ pts=[p for p in data['points'] if p[k] is not None and (p['real_usd_per_mtok']>0 or p.get('unmetered')) and (tier=='full' or p['tier']=='main')]
  f=[p for p in pts if not any(q['real_usd_per_mtok']<=p['real_usd_per_mtok'] and q[k]>=p[k] and (q['real_usd_per_mtok']<p['real_usd_per_mtok'] or q[k]>p[k]) for q in pts)]
  svg=ET.parse(root/'_build'/f"{chart['stem']}.svg");els=svg.findall('.//s:g[@class="point"]',ns)
  actual={(float(e.attrib['data-price']),float(e.attrib['data-score']),e.attrib['data-billing']) for e in els}
@@ -13,9 +13,14 @@ for chart in charts:
  front={(float(e.attrib['data-price']),float(e.attrib['data-score'])) for e in els if e.attrib['data-frontier']=='true'}
  assert front=={(p['real_usd_per_mtok'],p[k]) for p in f}
  xmin,xmax,ymin,ymax=chart['bounds']
+ has_zero=any(float(e.attrib['data-price'])==0 for e in els)
+ width=1338-1218*.055-120 if has_zero else 1218
  for el in els:
   p=float(el.attrib['data-price']);s=float(el.attrib['data-score']);x=float(el.attrib['data-x']);y=float(el.attrib['data-y'])
-  assert abs(x-(120+math.log(xmax/p)/math.log(xmax/xmin)*1218))<.00051
+  if p==0:
+   assert abs(x-1316)<.00051
+  else:
+   assert abs(x-(120+math.log(xmax/p)/math.log(xmax/xmin)*width))<.00051
   assert abs(y-(705-(s-ymin)/(ymax-ymin)*472))<.00051
   assert 120<=x<=1338 and 233<=y<=705
  line=svg.find('.//s:path[@id="frontier"]',ns).attrib['d']; pairs=re.findall(r'([\d.]+),([\d.]+)',line)

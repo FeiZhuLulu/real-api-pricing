@@ -1,0 +1,36 @@
+{
+  "collectedAt": "2026-09-12",
+  "scopeNote": "X 社区对 Codex/ChatGPT 订阅侧 GPT-6 Astra 周额度的数据（用户澄清：截图为 Codex 用量面板，非 Devin）。用户(FeiZ)自述统计≈32亿/月。未改 adopted。",
+  "items": [
+    {
+      "claim": "LumioAI @McQueenCui 发帖『GPT 周限18亿 Astra』并贴 Codex 用量面板截图：『9月7日 使用了 18.7亿 个 Token』（每日/每周/累计 tab）。",
+      "evidenceType": "community_report_screenshot",
+      "source": "https://x.com/McQueenCui （用户转贴截图，2026-09-12）",
+      "sourceDate": "2026-09-11",
+      "observed": {"dailyTokensYi": 18.7, "date": "2026-09-07", "claimedWeeklyCapYi": 18},
+      "confidence": "low",
+      "note": "9月7日恰为官方全局重置日，单日 18.7亿 若属实说明该账号档位很高（Pro 20x 量级）。『周限18亿』为其断言；用户当场回复『我统计的就是32左右，你这个算了重置吗』。"
+    },
+    {
+      "claim": "Tequila Sunset @Rainnystone 回复：少用子代理时 Astra 周额度大概能做到 15~20亿 token；子代理用得多的话可能在 10亿 左右。",
+      "evidenceType": "community_report",
+      "source": "同上 X 线程",
+      "sourceDate": "2026-09-11",
+      "observed": {"weeklyTokensYi": {"lightSubagent": "15~20", "heavySubagent": "~10"}},
+      "confidence": "low",
+      "note": "机制自洽：子代理各自带上下文、缓存不共享，按成本计权的额度下同样 % 换到的 raw token 更少。10~20亿/周 与 10%截图反推的 12~15.6亿、LumioAI 的18亿、lichengzhe 的21~23亿（或含reset水分）互相靠拢。"
+    },
+    {
+      "claim": "Pro20x Astra 周池五源汇总（截至 2026-09-12）：×20 派生 7.95亿 / Observatory 09-08 8.66亿 / 10%截图反推 12~15.6亿 / Tequila 口述 10~20亿 / LumioAI 断言 ~18亿 / lichengzhe 网关 21~23亿。Cluster 收敛于 ~12~20亿/周（25~50× Plus），×20 派生明显偏低——支持『Plus 端 Astra 为 limited 子池，非 Pro 池的 1/20』的官方 FAQ 口径。",
+      "evidenceType": "cross_source_comparison",
+      "source": "round7/8/9/10 与本文件",
+      "sourceDate": "2026-09-12",
+      "confidence": "medium"
+    }
+  ],
+  "notFound": [
+    "上述各来源的账号档位明示（均按 Pro 20x 语境理解，未逐一确认）",
+    "LumioAI 面板的周/累计 tab 完整读数",
+    "OpenAI 对 Astra 在周池内计权方式（raw token vs 成本加权）的官方说明"
+  ]
+}

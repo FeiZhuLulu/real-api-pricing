@@ -16,6 +16,17 @@
     "previousRate": 7.2,
     "note": "2026-09-05为周六，采用最近交易日9月4日中间价；非银行卡实际结算价。100美元=677.87人民币。"
   },
+  "unmeteredPolicy": "订阅内明确不占额度、无并发上限的模型：真实单价记 0、显示为 ≈$0/MTok（分母无界，趋于 0 而非精确 0），X 轴以专用‘不计额度’刻度位表示、不进对数换算；参与前沿。促销口径必须标截止日并在到期后复核。",
+  "promotions": {
+    "devin_swe2": {
+      "startDate": "2026-09-10",
+      "endDate": "2026-10-31",
+      "labelZh": "SWE-2 促销：Pro/Max/Teams 不计额度",
+      "labelEn": "SWE-2 promo: unmetered on Pro/Max/Teams",
+      "endDateBasis": "用户 2026-09-12 给定；官推仅写 for the next month",
+      "evidence": "data/research/devin-swe2-round1-2026-09-12.json"
+    }
+  },
   "monthWeeks": 4,
   "monthWeeksAlt": "30/7 只作灵敏度",
   "tokenPolicy": "所有 token 一视同仁；美元额度和三段价统一按项目标准负载折算",

@@ -1,0 +1,33 @@
+{
+  "collectedAt": "2026-09-12",
+  "supplement": true,
+  "supplementNote": "补充档：只向 terminal_bench_4 当前官方快照（scores-terminal-bench4-round1-2026-09-10.json）追加厂商自报行，不替换官方快照。compute.py 对 supplement=true 的档按追加处理。",
+  "boards": [
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-03",
+      "note": "与 round1 同一板面元数据；本档不改快照日期。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "terminal_bench_4",
+      "model": "swe-2",
+      "variantLabel": "Devin CLI - SWE-2 (best effort)",
+      "score": 27.3,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "Cognition",
+        "agentHarness": "Devin CLI",
+        "reasoningEffort": null,
+        "effortNote": "博客附录 A：报各 reasoning-effort 中最高分，未指明是 medium/high/max 中哪一档"
+      },
+      "source": "https://cognition.com/blog/swe-2",
+      "checkedAt": "2026-09-12",
+      "note": "厂商自报，非 tbench.ai 官方榜运行。Cognition 博客 Coding benchmark results 表 Terminal-Bench 4 列 27.3%。同表 Astra/Sol/Grok 4.6 与官方榜一致，Fable 5.1 55.8 与官方榜 57.88 不一致。无 CI、无成本/token 数据。见 devin-swe2-round1-2026-09-12.json。"
+    }
+  ]
+}

@@ -450,7 +450,8 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
 
 def main() -> None:
     with open(ADOPTED, encoding="utf-8-sig") as f:
-        rows = [r for r in csv.DictReader(f) if r["real_usd_per_mtok"]]
+        # 不计额度（$0）点无 token 分母且无法上对数条形图，总览与前沿精简版不画；只在帕累托图上以专用刻度位呈现。
+        rows = [r for r in csv.DictReader(f) if r["real_usd_per_mtok"] and float(r["real_usd_per_mtok"]) > 0]
     os.makedirs(OUT_DIR, exist_ok=True)
     for band in FEE_BANDS:
         selected = sorted_rows(fee_band_rows(rows, band), "quotas")

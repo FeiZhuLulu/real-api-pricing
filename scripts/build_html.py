@@ -59,8 +59,11 @@ const VENDOR_COLOR = {OpenAI:"#00A86B",Anthropic:"#F07826",xAI:"#B65CFF",Kimi:"#
 const FRONTIER_COLOR="#111111";
 const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.id.startsWith("stepfun_")?"StepFun":p.id.startsWith("devin_")?"Devin":p.vendor;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
+// Devin 渠道用六边形近似官方标志（Plotly 无自定义路径标记）；静态 SVG 用完整标志。
+const symbolOf=(p,base)=>channel(p)==="Devin"?"hexagon":base;
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const priceLabel=x=>"$"+Number(x.toPrecision(5)).toString();
+const priceLabel=x=>x===0?"≈$0":"$"+Number(x.toPrecision(5)).toString();
+const promoText=p=>p.promo_until?`促销至 ${p.promo_until}，不计额度`:"不计额度";
 const sel=document.getElementById("board");
 for(const [id,b] of Object.entries(DATA.boards)){const o=document.createElement("option");o.value=id;o.textContent=b.name;sel.appendChild(o);}
 const effortSel=document.getElementById("effort");
@@ -76,8 +79,8 @@ function pareto(pts,yk){let best=-Infinity,f=[];for(const p of [...pts].sort((a,
 function fmt(v){return v==null?"—":v;}
 function hover(p,yk,vk){
   const board=yk.replace(/__score$/, ""),field=k=>p[board+"__"+k];
-  const price=p.billing==="metered"?"按量 API（标价 × 项目标准负载）":`$${p.price_usd} ÷ ${p.monthly_yi} 亿 token`;
-  return `<b>${p.label}</b><br>真实单价 <b>$${p.real_usd_per_mtok}/MTok</b><br>${price}`
+  const price=p.unmetered?`$${p.price_usd} ÷ 无界（${promoText(p)}）→ ≈$0 促销价，非永久口径`:p.billing==="metered"?"按量 API（标价 × 项目标准负载）":`$${p.price_usd} ÷ ${p.monthly_yi} 亿 token`;
+  return `<b>${p.label}</b><br>真实单价 <b>${priceLabel(p.real_usd_per_mtok)}/MTok</b><br>${price}`
    +(p.d!=null?`<br>标价混合 $${p.list_blended_usd_per_mtok}/MTok → d = ${(p.d*100).toFixed(1)}%`:"")
    +`<br>Y：${fmt(p[yk])}（${escapeHtml(fmt(p[vk]))}）`
    +`<br>Harness：${escapeHtml(fmt(field("agent_harness")))} · effort：${fmt(field("reasoning_effort"))}`
@@ -97,7 +100,7 @@ function mergeSame(pts,yk,vk){
 }
 // 标签只移动注释框，数据坐标保持不动。按屏幕空间避让点、线和已放置的标签。
 function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
-  const px=p=>(xrange[0]-Math.log10(p.real_usd_per_mtok))/(xrange[0]-xrange[1])*width;
+  const px=p=>(xrange[0]-Math.log10(p.plot_x))/(xrange[0]-xrange[1])*width;
   const py=p=>height-(p[yk]-yrange[0])/(yrange[1]-yrange[0])*height;
   const placed=[],obstacles=pts.map(p=>[px(p),py(p)]),line=front.map(p=>[px(p),py(p)]);
   if(line.length){line.unshift([width,line[0][1]]);line.push([0,line[line.length-1][1]]);}
@@ -105,7 +108,7 @@ function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
   return [...front].reverse().map(p=>{
     const models=[...new Set(p.members.map(q=>q[yk.replace(/__score$/, "__variant")]||q.model_display))].join(" / ");
     const plans=[...new Set(p.members.map(q=>q.plan.replace("Claude ","").replace("ChatGPT ","")))];
-    const rows=[models,...plans,priceLabel(p.real_usd_per_mtok)+" / MTok"];
+    const rows=[models,...plans,p.unmetered?"≈$0 · "+promoText(p):priceLabel(p.real_usd_per_mtok)+" / MTok"];
     const w=Math.min(width-12,Math.max(...rows.map(s=>[...s].reduce((n,c)=>n+(c.charCodeAt(0)>255?12:6.6),0)))+18),h=rows.length*17+12;
     const x=px(p),y=py(p);let best=null;
     for(const dy of [-h/2-23,-h/2-70,h/2+24,-h/2-125,h/2+78,-h/2-180,h/2+130])for(const dx of [0,w/2+20,-w/2-20,w+25,-w-25]){
@@ -117,14 +120,14 @@ function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
       if(!best||score<best.score)best={...b,cx,cy,score};
     }
     placed.push(best);
-    return {x:Math.log10(p.real_usd_per_mtok),y:p[yk],xref:"x",yref:"y",text:rows.map((s,i)=>i===0?"<b>"+escapeHtml(s)+"</b>":escapeHtml(s)).join("<br>"),showarrow:true,arrowhead:0,arrowwidth:0.8,arrowcolor:"#bbb",standoff:12,ax:best.cx-x,ay:best.cy-y,xanchor:"center",yanchor:"middle",align:"center",bgcolor:"rgba(255,255,255,0.96)",borderpad:5,font:{size:11,color:"#222"}};
+    return {x:Math.log10(p.plot_x),y:p[yk],xref:"x",yref:"y",text:rows.map((s,i)=>i===0?"<b>"+escapeHtml(s)+"</b>":escapeHtml(s)).join("<br>"),showarrow:true,arrowhead:0,arrowwidth:0.8,arrowcolor:"#bbb",standoff:12,ax:best.cx-x,ay:best.cy-y,xanchor:"center",yanchor:"middle",align:"center",bgcolor:"rgba(255,255,255,0.96)",borderpad:5,font:{size:11,color:"#222"}};
   });
 }
 function draw(){
   const board=sel.value,yk=board+"__score",vk=board+"__variant",meta=DATA.boards[board];
   const labelMode=document.getElementById("labels").value,showM=document.getElementById("metered").checked,showLow=document.getElementById("lowconf").checked;
   const tier=document.getElementById("tier").value,effortV=effortSel.value||"best";
-  let pts=DATA.points.filter(p=>p[yk]!=null&&p.real_usd_per_mtok>0&&(showLow||p.confidence!=="low")&&(tier==="full"||p.tier==="main"));
+  let pts=DATA.points.filter(p=>p[yk]!=null&&(p.real_usd_per_mtok>0||p.unmetered)&&(showLow||p.confidence!=="low")&&(tier==="full"||p.tier==="main"));
   const confMode=document.getElementById("configuration").value;
   if(confMode==="all"||effortV!=="best"){
     const base=new Map(pts.map(p=>[p.id,p]));
@@ -137,6 +140,10 @@ function draw(){
       return p;
     });
   }
+  // $0（不计额度）点不进对数换算：放在最便宜正价再往右约半个数量级的专用刻度位。
+  const priced=pts.filter(p=>p.real_usd_per_mtok>0).map(p=>p.real_usd_per_mtok),hasZero=pts.some(p=>p.real_usd_per_mtok===0);
+  const zeroX=priced.length?Math.min(...priced)/3.5:0.0003;
+  for(const p of pts)p.plot_x=p.real_usd_per_mtok>0?p.real_usd_per_mtok:zeroX;
   const subs=mergeSame(pts.filter(p=>p.billing==="subscription"),yk,vk),met=showM?mergeSame(pts.filter(p=>p.billing==="metered"),yk,vk):[];
   const front=pareto(subs.concat(met),yk),fid=new Set(front.map(p=>p.id));
   const hov=p=>hover(p,yk,vk).replace("<extra></extra>",(p.hoverExtra||"")+"<extra></extra>");
@@ -146,28 +153,31 @@ function draw(){
   const posOf=new Map(others.map((p,i)=>[p.id,["top center","bottom center","middle left","middle right"][i%4]]));
   for(const v of Object.keys(VENDOR_COLOR)){
     const g=subs.filter(p=>channel(p)===v&&!fid.has(p.id));if(!g.length)continue;
-    traces.push({name:v,type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:g.map(p=>p.real_usd_per_mtok),y:g.map(p=>p[yk]),
+    traces.push({name:v,type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:g.map(p=>p.plot_x),y:g.map(p=>p[yk]),
       text:g.map(p=>p.label),textposition:g.map(p=>posOf.get(p.id)),textfont:{size:9,color:"#888"},
-      marker:{size:8,symbol:"square",color:VENDOR_COLOR[v],opacity:0.68,line:{width:0}},hovertemplate:g.map(hov)});
+      marker:{size:8,symbol:v==="Devin"?"hexagon":"square",color:VENDOR_COLOR[v],opacity:0.68,line:{width:0}},hovertemplate:g.map(hov)});
   }
-  if(met.length)traces.push({name:"按量 API",type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:met.map(p=>p.real_usd_per_mtok),y:met.map(p=>p[yk]),
+  if(met.length)traces.push({name:"按量 API",type:"scatter",mode:labelMode==="all"?"markers+text":"markers",x:met.map(p=>p.plot_x),y:met.map(p=>p[yk]),
     text:met.map(p=>p.label),textposition:"bottom center",textfont:{size:9,color:"#666"},
     marker:{size:9,symbol:"diamond-open",color:met.map(color),opacity:0.68,line:{width:1.3}},hovertemplate:met.map(hov)});
-  const visible=subs.concat(met),xs=visible.map(p=>p.real_usd_per_mtok),ys=visible.map(p=>p[yk]);
+  const visible=subs.concat(met),xs=visible.map(p=>p.plot_x),ys=visible.map(p=>p[yk]);
   const xrange=xs.length?[Math.log10(Math.max(...xs))+0.13,Math.log10(Math.min(...xs))-0.16]:[0,-3];
   const span=ys.length?Math.max(1,Math.max(...ys)-Math.min(...ys)):1;
   const yrange=ys.length?[Math.min(...ys)-span*0.12,Math.max(...ys)+span*0.24]:[0,1];
-  if(front.length)traces.push({name:"帕累托前沿",type:"scatter",mode:"lines",x:[10**xrange[1],...front.map(p=>p.real_usd_per_mtok),10**xrange[0]],y:[front[0][yk],...front.map(p=>p[yk]),front[front.length-1][yk]],line:{color:FRONTIER_COLOR,width:1.7},hoverinfo:"skip"});
+  if(front.length)traces.push({name:"帕累托前沿",type:"scatter",mode:"lines",x:[10**xrange[1],...front.map(p=>p.plot_x),10**xrange[0]],y:[front[0][yk],...front.map(p=>p[yk]),front[front.length-1][yk]],line:{color:FRONTIER_COLOR,width:1.7},hoverinfo:"skip"});
   // 前沿点单独一层，标签放右上（前沿上方按定义是空的）
-  traces.push({name:"前沿点",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.real_usd_per_mtok),y:front.map(p=>p[yk]),
-    marker:{size:20,symbol:front.map(p=>p.billing==="metered"?"diamond":"square"),color:"white",line:{width:1.4,color:front.map(color)}},hovertemplate:front.map(hov)});
-  traces.push({name:"前沿标记",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.real_usd_per_mtok),y:front.map(p=>p[yk]),marker:{size:9,symbol:front.map(p=>p.billing==="metered"?"diamond":"square"),color:front.map(color)},hovertemplate:front.map(hov)});
-  for(const v of new Set(front.map(channel)))if(!others.some(p=>channel(p)===v))traces.push({name:v,type:"scatter",mode:"markers",x:[null],y:[null],marker:{color:VENDOR_COLOR[v],symbol:"square",size:8},hoverinfo:"skip"});
+  traces.push({name:"前沿点",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.plot_x),y:front.map(p=>p[yk]),
+    marker:{size:20,symbol:front.map(p=>p.billing==="metered"?"diamond":symbolOf(p,"square")),color:"white",line:{width:1.4,color:front.map(color)}},hovertemplate:front.map(hov)});
+  traces.push({name:"前沿标记",showlegend:false,type:"scatter",mode:"markers",x:front.map(p=>p.plot_x),y:front.map(p=>p[yk]),marker:{size:9,symbol:front.map(p=>p.billing==="metered"?"diamond":symbolOf(p,"square")),color:front.map(color)},hovertemplate:front.map(hov)});
+  for(const v of new Set(front.map(channel)))if(!others.some(p=>channel(p)===v))traces.push({name:v,type:"scatter",mode:"markers",x:[null],y:[null],marker:{color:VENDOR_COLOR[v],symbol:v==="Devin"?"hexagon":"square",size:8},hoverinfo:"skip"});
   const chart=document.getElementById("chart"),margin={l:75,r:35,t:95,b:75};
-  const ticks=[10,5,2,1,.5,.2,.1,.05,.02,.01,.005,.002,.001,.0005].filter(x=>Math.log10(x)<=xrange[0]&&Math.log10(x)>=xrange[1]);
+  const ticks=[10,5,2,1,.5,.2,.1,.05,.02,.01,.005,.002,.001,.0005].filter(x=>Math.log10(x)<=xrange[0]&&Math.log10(x)>=xrange[1]&&(!hasZero||x>zeroX*1.8));
+  const tickvals=hasZero?[...ticks,zeroX]:ticks,ticktext=hasZero?[...ticks.map(x=>"$"+x),"≈$0<br>不计额度"]:ticks.map(x=>"$"+x);
+  const shapes=hasZero?[{type:"line",xref:"x",yref:"paper",x0:Math.log10(zeroX*1.8),x1:Math.log10(zeroX*1.8),y0:0,y1:1,line:{color:"#cfd4cf",width:1,dash:"dot"}}]:[];
   const layout={
-    title:{text:`${meta.name}  ·  快照 ${meta.snapshot} · 配置参考，非渠道实测`,x:0.04,y:0.98,font:{size:13}},
-    xaxis:{type:"log",range:xrange,title:{text:"真实单价 $ / MTok    → 越右越便宜",standoff:18},tickvals:ticks,ticktext:ticks.map(x=>"$"+x),gridcolor:"#ececec",griddash:"dash",zeroline:false},
+    title:{text:`${meta.name}  ·  快照 ${meta.snapshot} · 配置参考，非渠道实测`+(hasZero?" · ≈$0 为促销价（不计额度），非永久口径":""),x:0.04,y:0.98,font:{size:13}},
+    shapes,
+    xaxis:{type:"log",range:xrange,title:{text:"真实单价 $ / MTok    → 越右越便宜",standoff:18},tickvals,ticktext,gridcolor:"#ececec",griddash:"dash",zeroline:false},
     yaxis:{range:yrange,title:{text:meta.metric,standoff:12},gridcolor:"#ececec",griddash:"dash",zeroline:false,ticksuffix:meta.metric.includes("%")?"%":""},
     annotations:labelMode==="none"?[]:frontAnnotations(front,visible,yk,xrange,yrange,Math.max(200,chart.clientWidth-margin.l-margin.r),Math.max(200,chart.clientHeight-margin.t-margin.b)),
     legend:{orientation:"h",y:1.07,x:0,font:{size:11},traceorder:"normal"},margin,paper_bgcolor:"#fff",plot_bgcolor:"#fff",font:{family:'Segoe UI, Microsoft YaHei, sans-serif',size:11,color:"#666"},hovermode:"closest",hoverlabel:{align:"left",bgcolor:"#fff",font:{size:12}}};

@@ -58,6 +58,8 @@ import {
   serialize,
   tableRows,
   visiblePoints,
+  isUnmetered,
+  unmeteredNote,
 } from "./domain";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
@@ -1454,6 +1456,16 @@ function Details({
                 "Metered API · public token prices weighted by the project standard workload.",
                 "按量 API · 三段公开标价按项目标准负载加权。",
               )
+            ) : isUnmetered(p) ? (
+              <>
+                {price(p.price_usd)} {t("/ month", "/ 月")} ÷{" "}
+                {t("unbounded usage", "无界可用量")} → ≈$0 / MTok ·{" "}
+                {unmeteredNote(p, lang)} ·{" "}
+                {t(
+                  "promotional price, not a permanent allowance",
+                  "促销价，非永久口径",
+                )}
+              </>
             ) : (
               <>
                 {price(p.price_usd)} {t("/ month", "/ 月")}

@@ -124,6 +124,28 @@ test("Step Plan CN uses official Credit pools and CNY list prices", () => {
   assert.equal(max37.monthly_yi, 1247.563);
   assert.equal(accessLine(mini35), "StepFun");
 });
+test("Devin Pro SWE-2 is an unmetered $0 promo point that joins and leads the TB4 frontier on a dedicated slot", () => {
+  const p = data.points.find((p) => p.id === "devin_pro::swe-2")!;
+  assert.ok(p);
+  assert.equal(p.real_usd_per_mtok, 0);
+  assert.equal(p.unmetered, true);
+  assert.equal(p.promo_until, "2026-10-31");
+  assert.equal(p.monthly_yi, null);
+  assert.equal(p.channel, "Devin");
+  assert.equal(accessLine(p), "Devin");
+  const rows = rowsFor(data, { ...defaultState(), board: "terminal_bench_4" });
+  const gs = groups(rows);
+  const zero = gs.find((g) => g.price === 0)!;
+  assert.ok(zero, "unmetered group is plotted");
+  assert.ok(zero.plotPrice > 0 && zero.plotPrice < Math.min(...gs.filter((g) => g.price > 0).map((g) => g.price)));
+  assert.equal(zero.rows[0].mapping?.score_is_self_reported, true);
+  const front = pareto(gs);
+  assert.equal(front[0].key, zero.key);
+  assert.ok(front.every((g, i) => i === 0 || g.price > 0));
+  // Allowance ranking has no token denominator for it; price ranking keeps it.
+  assert.ok(!rowsFor(data, { ...defaultState(), view: "allowance" }).some((r) => r.point.id === p.id));
+  assert.ok(rowsFor(data, { ...defaultState(), view: "price" }).some((r) => r.point.id === p.id));
+});
 test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
   const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
   assert.equal(p.monthly_yi, 48.485);
@@ -356,7 +378,7 @@ test("Chart names never overlap each other and leave the plot rather than collid
   const group = (id: string, name: string): Group => {
     const r = row(id, 0.01, 1500);
     r.point = { ...r.point, model_display: name };
-    return { key: id, price: 0.01, score: 1500, rows: [r] };
+    return { key: id, price: 0.01, plotPrice: 0.01, score: 1500, rows: [r] };
   };
   const place = (
     spots: { x: number; y: number }[],
@@ -425,7 +447,7 @@ test("Chart names never overlap each other and leave the plot rather than collid
 test("Labels yield to ordinary points when every candidate slot is occupied", () => {
   const r = row("blocked", 0.01, 1500);
   r.point = { ...r.point, model_display: "Claude Opus 5" };
-  const g: Group = { key: r.key, price: 0.01, score: 1500, rows: [r] };
+  const g: Group = { key: r.key, price: 0.01, plotPrice: 0.01, score: 1500, rows: [r] };
   const anchor = { key: g.key, x: 120, y: 100, r: FRONTIER_RADIUS };
   const dots = [];
   for (let x = 6; x < 240; x += 12)

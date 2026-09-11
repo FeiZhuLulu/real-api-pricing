@@ -102,7 +102,7 @@ function densify(gs: Group[], front: Group[], cap = 28): Group[] {
   for (const g of rest) {
     if (selected.length >= cap) break;
     const far = selected.every((s) => {
-      const dLog = Math.abs(Math.log10(g.price) - Math.log10(s.price));
+      const dLog = Math.abs(Math.log10(g.plotPrice) - Math.log10(s.plotPrice));
       const dScore = Math.abs(g.score - s.score) / span;
       return dLog >= 0.2 || dScore >= 0.05;
     });
@@ -379,11 +379,11 @@ export function frontierLogoViews(
   const half = LOGO_SIZE / 2;
   const out: FrontierLogoView[] = [];
   for (const g of front) {
-    const pt = dataToPixel(layout, g.price, g.score, box);
+    const pt = dataToPixel(layout, g.plotPrice, g.score, box);
     if (!pt) continue;
     out.push({
       key: g.key,
-      price: g.price,
+      price: g.plotPrice,
       score: g.score,
       provider: labelProvider(g),
       label: modelLabel(g),
@@ -469,7 +469,7 @@ export function placeTextLabels(
     placed.push({ box: best.box, lead: best.lead });
     out.push({
       key: g.key,
-      price: g.price,
+      price: g.plotPrice,
       score: g.score,
       label,
       provider: labelProvider(g),
@@ -552,7 +552,7 @@ export function buildExportDecorationsFromLayout(
   for (const g of front) {
     const src = logos.get(labelProvider(g));
     if (!src) continue;
-    const pt = dataToPixel(layout, g.price, g.score, box);
+    const pt = dataToPixel(layout, g.plotPrice, g.score, box);
     if (!pt) continue;
     // Plot-area normalized coords (Plotly paper for images/annotations/shapes).
     const fx = toPaperX(pt.x);

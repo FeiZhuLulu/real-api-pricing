@@ -26,20 +26,20 @@ Snapshot: 2026-09-09. Each row is one **plan × actual served model**; allowance
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | 200 |
-| Subscription points with monthly allowance | 187 |
+| All adopted plan × model points | 202 |
+| Subscription points with monthly allowance | 188 |
 | Metered API baselines | 13 |
 | OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 22 / 8 |
 | Code Arena / Agent Arena scored points | 136 / 140 |
 | AA Intelligence / AA Coding Agent scored points | 173 / 71 |
-| OpenDesign Arena scored points | 69 |
-| Terminal-Bench 4.0 scored points | 68 |
+| OpenDesign Arena scored points | 70 |
+| Terminal-Bench 4.0 scored points | 70 |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
 
 ## Monthly allowance overview
 
-The 187 subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
+The 188 subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
 
 ### $0–30
 
@@ -119,7 +119,7 @@ OpenDesign's full 13-model quality ranking is archived. Eleven exact model ident
 
 AA Coding Agent scores describe tested harness × model × effort configurations. Static charts and `points.*` are explicitly **highest archived configuration reference summaries**. They are not measurements of each subscription/API channel; quota-measurement effort and product harness alignment remain unverified. Higher effort does not automatically change $/MTok; it can change tokens consumed per task.
 
-Terminal-Bench 4.0 is the official 66-task leaderboard hosted by Stanford / Harbor / the Laude Institute (snapshot 2026-09-03). Each published row is a harness × model × effort configuration, and all 18 rows are archived including GPT-6 Astra's five effort levels. GPT-6 Astra and Claude Fable 5.1 have no adopted plan row yet, so they stay archive-only and are listed as unscored rather than approximated.
+Terminal-Bench 4.0 is the official 66-task leaderboard hosted by Stanford / Harbor / the Laude Institute (snapshot 2026-09-03). Each published row is a harness × model × effort configuration, and all 18 rows are archived including GPT-6 Astra's five effort levels. Claude Fable 5.1 has no adopted plan row yet, so it stays archive-only and is listed as unscored rather than approximated. One supplemental row is appended to the official snapshot without replacing it: **SWE-2 · Devin Pro** at 27.3%, Cognition's self-reported figure from its launch post (the official board has no SWE-2 row). SWE-2 is unmetered for Pro/Max/Teams subscribers during a promotion that Cognition announced as "the next month" and that we record as ending 2026-10-31, so its real price is shown as **≈$0/MTok** on a dedicated axis slot and it becomes the cheapest frontier point. This is a promotional price, not a permanent allowance; the point must be re-evaluated when the promotion ends.
 
 [All-configuration interactive view (Chinese)](charts/zh/pareto/帕累托交互图.html) defaults to the highest-score summary per model and offers every archived configuration plus a reasoning-effort selector as options. Download the HTML and open it locally with network access for Plotly. All configurations currently use reference mappings, not a verified product-configuration frontier.
 

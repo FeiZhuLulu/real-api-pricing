@@ -4,13 +4,13 @@
 
 ## Files
 
-openai, anthropic, xai, cursor, kimi, zhipu, minimax, alibaba, opencode, deepseek, google, command-code, ollama, xiaomi, tencent, meta, microsoft, meituan, stepfun.
+openai, anthropic, xai, cursor, kimi, zhipu, minimax, alibaba, opencode, deepseek, google, command-code, ollama, xiaomi, tencent, meta, microsoft, meituan, stepfun, devin.
 
-Alibaba uses the Qwen mark; Tencent uses Hunyuan; Meituan uses LongCat; Google uses the official G. Muse Spark uses the Meta mark. Step models use the StepFun five-square mark. Third-party rows show the reseller first, then the model manufacturer.
+Alibaba uses the Qwen mark; Tencent uses Hunyuan; Meituan uses LongCat; Google uses the official G. Muse Spark uses the Meta mark. Step models use the StepFun five-square mark. Devin (channel) and Cognition (SWE models) both use the Devin three-hexagon mark. Third-party rows show the reseller first, then the model manufacturer.
 
 ## Sources
 
-Most marks are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT). Xiaomi is from [Simple Icons](https://github.com/simple-icons/simple-icons) (CC0). Command Code uses the complete official avatar (rounded frame + ⌘), not a cropped command-only mark. StepFun uses the official five-square mark; the circle gradient is sampled from the current public avatar (lime #67FBB1 → aqua #00F4E5 → cyan #1ACDEE). Chart solid color is the mid aqua #00F4E5. Zhipu Z and the OpenCode window are traced from official rasters.
+Most marks are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT). Xiaomi is from [Simple Icons](https://github.com/simple-icons/simple-icons) (CC0). Command Code uses the complete official avatar (rounded frame + ⌘), not a cropped command-only mark. StepFun uses the official five-square mark; the circle gradient is sampled from the current public avatar (lime #67FBB1 → aqua #00F4E5 → cyan #1ACDEE). Chart solid color is the mid aqua #00F4E5. Zhipu Z and the OpenCode window are traced from official rasters. Devin is redrawn by hand from the official avatar (three vertical-sided hexagons joined at a notched hub).
 
 Brand marks remain trademarks of their owners. Rebuild recipe: `_assemble.py` (expects a `_fetch/` cache of upstream SVGs).
 

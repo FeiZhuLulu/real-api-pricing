@@ -1,0 +1,86 @@
+{
+  "collectedAt": "2026-09-12",
+  "scopeNote": "Devin Pro/Max 上 SWE-2 的计费口径与 TB4 分数来源。SWE-2 当前对 Pro、Max、Teams 订阅者免费且不占额度，但这是一次性促销（官推原话 for the next month），不是永久口径。用户拍板：按促销价画进前沿并改变前沿，标注促销截止 2026-10-31，促销结束后再重新处理。",
+  "items": [
+    {
+      "planId": "devin_pro",
+      "planName": "Devin Pro",
+      "priceUsd": 20,
+      "priceSource": "https://docs.devin.ai/admin/billing/self-serve（Pro $20/month；Max $200/month）；https://devin.ai/pricing",
+      "model": "swe-2",
+      "panelModelName": "swe-2-high",
+      "evidenceType": "official_announcement_plus_user_dashboard",
+      "evidence": [
+        {
+          "kind": "official_tweet",
+          "source": "https://x.com/cognition_labs（2026-09-10），经 https://aitop.news/item/31077 转录",
+          "quote": "SWE-2 is available today in Devin across Desktop and CLI. We're making it free for all Pro, Max & Teams subscribers for the next month.",
+          "sourceDate": "2026-09-10"
+        },
+        {
+          "kind": "official_blog",
+          "source": "https://cognition.com/blog/swe-2",
+          "quote": "SWE-2 is available starting today in Devin Desktop and CLI. We're also rolling it out on Devin Web and Fusion.",
+          "note": "博客正文未提免费/额度；仅宣布可用性。",
+          "sourceDate": "2026-09-10"
+        },
+        {
+          "kind": "official_pricing_page",
+          "source": "https://devin.ai/pricing",
+          "quote": "Pro: Free use of SWE 1.7 and leading open source models",
+          "note": "定价页永久免费口径写的是 SWE 1.7；SWE-2 促销结束后按何权重计额度未公布。"
+        },
+        {
+          "kind": "official_docs",
+          "source": "https://docs.devin.ai/admin/billing/usage",
+          "quote": "there are no concurrent session limits",
+          "note": "无并发上限，因此吞吐约束不构成有限分母；用户确认按无界处理。"
+        },
+        {
+          "kind": "third_party",
+          "source": "https://www.techtimes.com/articles/327315/20260911/cognition-swe-2-beats-frontier-coding-ai-64-lower-cost-using-single-run-rl-training.htm",
+          "quote": "Cognition has launched a one-month free promotion giving all Pro, Max, and Teams subscribers unlimited SWE-2 access",
+          "sourceDate": "2026-09-11"
+        },
+        {
+          "kind": "user_dashboard",
+          "source": "devin-usage-round1-2026-09-11.json / devin-usage-round2-2026-09-11.json",
+          "quote": "同一 59%→39% 段 swe-2-high total Δ 45,524,513 tokens 不计入周额度；用户 2026-09-11 确认 swe-2 免费。",
+          "sourceDate": "2026-09-11"
+        }
+      ],
+      "userConfirmation": "用户 2026-09-12 拍板：(a) 吞吐分母与无限无区别，不编吞吐上限；(b) 画进图并改变前沿；(c) 标注促销价、促销截止 2026-10-31；(d) 促销结束后再处理。",
+      "promotion": {
+        "startDate": "2026-09-10",
+        "endDate": "2026-10-31",
+        "endDateBasis": "用户 2026-09-12 给出的截止日；官推仅写 for the next month，未给精确日期",
+        "scope": "Pro / Max / Teams 订阅者，SWE-2 不占周额度、不计费"
+      },
+      "calculation": {
+        "monthlyTokens": null,
+        "realUsdPerMtok": 0,
+        "formula": "月费 ÷ 无界可用量 → 0；真实单价记 0、显示为 ≈$0/MTok，X 轴以专用‘不计额度’刻度位表示，不参与对数换算",
+        "cheapestQualifyingPlan": "Devin Pro $20；Max $200 同一 Y 更贵不重复画"
+      },
+      "tokenCountingNote": "无 token 分母；monthly_tokens 留空，unmetered=true。",
+      "confidence": "medium（官推 + 用户面板双重确认免费；但为促销口径，且截止日为用户给定）",
+      "decision": "采用 devin_pro × swe-2 ≈ $0/MTok（数据记 0）（促销至 2026-10-31）。进前沿。促销结束后必须复核：若 SWE-2 开始占额度，改为按面板段反推正常流程。"
+    }
+  ],
+  "scoreEvidence": {
+    "board": "terminal_bench_4",
+    "model": "swe-2",
+    "score": 27.3,
+    "source": "https://cognition.com/blog/swe-2 Coding benchmark results 表，Terminal-Bench 4 列",
+    "methodology": "博客附录 A：有公开结果的转载公开结果，否则用 Devin CLI harness（开放权重模型）自测，报各 effort 中最高分。SWE-2 行为 Cognition 自测；tbench.ai 官方榜 2026-09-03 快照无 SWE-2 行。",
+    "crossCheck": "同表 Astra 57.9 / Sol 37.3 / Grok 4.6 20.3 与官方榜 57.88 / 37.27 / 20.3 一致；Fable 5.1 55.8 与官方榜 57.88 不一致（疑为旧快照）；Kimi K3 21.5、SWE-1.7 7.6 亦为自测。",
+    "userConfirmation": "用户 2026-09-12：按自报的算，展开后显示来源。",
+    "recorded": "scores-terminal-bench4-round2-selfreport-2026-09-12.json（supplement 模式，不替换官方快照）",
+    "otherBoards": "FrontierCode 1.1 Main 50.0 / DeepSWE 1.1 73.0 / Terminal-Bench 2.1 92.8 仅记录，项目无对应榜不入图"
+  },
+  "notFound": [
+    "促销结束后 SWE-2 在 Pro/Max 额度中的计费权重",
+    "Cognition 官方给出的精确促销截止日期",
+    "tbench.ai 官方榜的 SWE-2 行"
+  ]
+}
