@@ -1,0 +1,60 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "GitHub issue #8 新增 Pro 20x Astra 网关实测（lichengzhe，OpenClawFarm 同方法）。与 Observatory（round8）、本项目 Plus 直测（round7）三方互证时出现 2.7× 分歧，暂不改采用值，留待用户拍板或更干净周窗数据。",
+  "items": [
+    {
+      "claim": "Pro 20x 账号网关实测：近纯 Astra 段（4 段、约 93% Astra、合计 18pt）得 18.8 / 21.0 / 21.7 / 21.7 M token/百分点；多模型联合拟合（20 段 82pt，Sol 固定 34.9M/pt、Terra/Luna 按官方价比固定）得 Astra 23.3M/pt，残差 sd 0.9pt。→ 全 Astra 周池约 21~23 亿、四周 84~93 亿/月、单价约 $0.022~0.024/MTok。",
+      "evidenceType": "community_gateway_measurement",
+      "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/8",
+      "sourceDate": "2026-09-10",
+      "quote": "近纯 Astra 时段（4 段、约 93% Astra、合计 18 点）| 18.8 / 21.0 / 21.7 / 21.7 M/点 … 多模型联合拟合（20 段、82 点）Astra 23.3 M/点，残差 sd 0.9 点 … 100% Astra 时的一周 ≈ 21–23 亿",
+      "observed": {
+        "nearPureSegmentsTokensPerPointM": [18.8, 21.0, 21.7, 21.7],
+        "jointFitTokensPerPointM": 23.3,
+        "jointFitResidualSdPoints": 0.9,
+        "weeklyTokensYi": "21~23",
+        "monthlyYi": "84~93",
+        "loadMix": {"cache": 0.957, "uncachedInput": 0.039, "output": 0.0039},
+        "requests": 8601,
+        "totalTokens": 1030000000,
+        "astraVsSolQuotaPerToken": "1.5~1.7x"
+      },
+      "confidence": "medium",
+      "note": "测量者自承 Astra 09-05 才接入、数据只有两天；窗口恰跨 09-07 全局重置（且此前 09-03/04/05 有 banked reset），若测量段跨过 reset 则 % 被回打、池子被高估。承诺跑满完整周窗后再补干净版。"
+    },
+    {
+      "claim": "三源对 Pro20x Astra 周池的估计出现 2.7× 分歧：本项目 Plus 直测×20 → 7.95 亿/周；Observatory 09-08 单账号 → 8.66 亿/周；lichengzhe 网关 → 21~23 亿/周。",
+      "evidenceType": "cross_source_conflict",
+      "source": "round7 round8 与本文件",
+      "sourceDate": "2026-09-11",
+      "table": {
+        "plus_x20_derived_weeklyYi": 7.95,
+        "observatory_pro20x_weeklyYi": 8.66,
+        "lichengzhe_pro20x_weeklyYi": "21~23"
+      },
+      "analysis": "候选解释：(a) lichengzhe 窗口跨 09-07 全局重置或含 banked reset → 池高估约 2.7×（23.3/8.66=2.69），与官方「重置不提额」不矛盾但无法实锤；(b) Astra 权重按档或按 effort 变化（其样本 effort low~medium）；(c) Observatory 单账号偏低。无第二份 09-07 后独立 Pro20x 纯 Astra 打满样本前无法裁决。",
+      "confidence": "high（分歧本身）；low（各自为常态池的程度）"
+    },
+    {
+      "claim": "Astra 相对 Sol 的订阅内 quota/token 消耗比：lichengzhe 拟合 1.5~1.7×（与 r/codex 美元等效口述 ~1.5× 同向）；Observatory 现测 4.15×；本项目 Plus 侧以 Sol 采用基准（1.54 亿/周）÷ Plus Astra 实测（0.398 亿/周）= 3.87×。",
+      "evidenceType": "cross_source_conflict",
+      "source": "issue#8 / codex-quota.manetli.com / round7",
+      "sourceDate": "2026-09-11",
+      "note": "1.5~1.7× 与 4.1× 两个阵营各自有来源；若 Plus 的 Astra 实为 limited 子池（官方 FAQ 口径），则 Plus 侧 3.87× 不是权重而是节流差异，统一加权池模型整体存疑。"
+    },
+    {
+      "claim": "issue #8 正文最早引用的社区口径：Pro 20x「两天 1.7 亿 token 耗 22% 额度 → Astra 一周约 7.7 亿 token」，折月约 30.8 亿。用户 2026-09-11 回忆为『astra 28亿』并认为 ~32 亿较合理——与本项目 Plus 直测×20 派生 31.81 亿/月吻合。",
+      "evidenceType": "community_report",
+      "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/8 (issue body)",
+      "sourceDate": "2026-09-10",
+      "quote": "干了好多活两天只耗了1.7亿Token，然后耗了22%的额度，这样算下来，Astra一周大概就7.7亿Token的样子",
+      "confidence": "low",
+      "note": "lichengzhe 在同一 issue 指出该社区数字的 token 口径不明：若只数未命中输入+输出（按其负载构成折算 0.9M/点），则对应 0.9 亿/周而非 7.7 亿。口径存疑，仅作量级旁证。用户拍板：尽管 32 亿看着合理，Pro 两档仍暂不采用，只挂 Plus 实测。"
+    }
+  ],
+  "relatedIssueNote": "issue #8 另有 suyanga 更正 Luna x20 美元等效口径（< $1200/周 vs Sol ~$2000/周）已在 round6 采纳；MHJoy99 请求补全各档 Astra 额度——Plus 已实测、Pro 两档待裁决、Business 未覆盖。",
+  "notFound": [
+    "lichengzhe 测量窗口是否跨过 09-07 全局重置的明确说明",
+    "Pro 5x 档 Astra 的任何 token+% 数据"
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "第八轮联网证据：GPT-6 Astra 在 ChatGPT Plus / Pro 5x / Pro 20x 的周窗额度与权重、官方是否确认 Pro20x=Plus×20、Astra 上线期 banked/global reset 是否等于临时提额、GPT-6 Pro（Chat）与 Work/Codex 池是否分离、以及 2026-09-07 全局重置之后能否代表常态。先读过 chatgpt-astra-adoption-round7、chatgpt-pro20x-gateway-measurement、chatgpt-luna-adoption-round6、chatgpt-local-round5，本文件只追加新证据，不改已有 research / adopted / scripts。口径提醒：官方只给 5h local messages 区间；周绝对 token 从未公布。",
+  "items": [
+    {
+      "claim": "官方 Help Center 与 Codex 定价页仅公布 Astra 每 5 小时 local messages 估计区间：Plus 5–45 / Pro 5x 25–225 / Pro 20x 100–900（表观精确 5×/20×）；并写明这些不是固定消息上限，实际随任务/模型/设置变化，且「weekly limits may also apply」——但不给周窗绝对 token 或 credits。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+      "sourceDate": "2026-09-11",
+      "quote": "The table below shows estimated local messages per five-hour period. These are not fixed message limits. Actual usage varies by task, model and settings, and weekly limits may also apply. | GPT-6 Astra | 5-45 | 25-225 | 100-900 |",
+      "confidence": "high",
+      "crossLinks": [
+        "https://chatgpt.com/codex/pricing/",
+        "https://developers.openai.com/codex/llms-full.txt"
+      ],
+      "note": "英文定价页与 Help 表一致。简体中文/繁中/日文定价页同一表格写成 Astra Plus 3–30 / Pro5x 15–150 / Pro20x 60–600（仍是 5×/20×，但绝对区间更小）；本轮以英文 Help 为准记录，中文页差异列入旁证。"
+    },
+    {
+      "claim": "中文 Codex 定价页 Astra 5h 区间低于英文：Plus 3–30 / Pro 5x 15–150 / Pro 20x 60–600；Sol/Terra/Luna 与英文相同。仍呈精确 5×/20×，但说明「local messages」区间可能按语言/区域展示不同数字，不能直接当绝对额度。",
+      "evidenceType": "official_doc",
+      "source": "https://chatgpt.com/zh-Hans-CN/codex/pricing/",
+      "sourceDate": "2026-09-11",
+      "quote": "| GPT-6 Astra | 3-30 | 15-150 | 60-600 | 3-30 | 按用量计费 |",
+      "confidence": "medium",
+      "note": "同站繁中、日文页亦为 3–30 / 15–150 / 60–600。未找到官方解释中英文数字为何不同。"
+    },
+    {
+      "claim": "官方明确：Astra 上线补偿是 banked reset（09-03、09-04 各一次）+ 09-07 全局自动重置；重置「恢复额度」，「不会永久提高套餐限额，也不会改变单次任务消耗多少额度」。未找到「双倍周池 / temporary boost with end date」的官方表述——只有重置，不是提额。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+      "sourceDate": "2026-09-11",
+      "quote": "On Sep 3, 2026 and Sep 4, 2026, eligible existing Plus, Pro and Business subscribers in good standing received a banked reset on each day. ... On Sep 7, 2026, an automatic reset refreshed eligible Plus, Pro and Business usage limits. It did not add a saved reset. ... A reset restores your allowance. It does not permanently increase your plan’s limits or change how much allowance a task uses.",
+      "confidence": "high",
+      "crossLinks": [
+        "https://help.openai.com/articles/20001498-how-banked-codex-resets-work"
+      ]
+    },
+    {
+      "claim": "banked reset 专文再次确认：09-03/09-04 为 Astra rollout 发放的可保存重置；09-07 为立即生效的 global reset，不可存为 banked。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/20001498-how-banked-codex-resets-work",
+      "sourceDate": "2026-09-11",
+      "quote": "As a part of the GPT-6 Astra rollout, we provided banked resets to eligible new or existing accounts on Plus, Pro or Business plans. ... Note: On September 7, 2026, we provided a global reset to Plus, Pro and Business users - this reset applies immediately to your account, and cannot be saved for later, and will not appear as a banked reset.",
+      "confidence": "high"
+    },
+    {
+      "claim": "Codex 负责人 Tibo（@thsottiaux）在 X 上宣布 09-07 全局重置：约 6pm PST 落地；随后确认「All reset for everyone. Enjoy the week with Astra。」——与 Help Center 日期一致。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/thsottiaux/status/2097043464538264003",
+      "sourceDate": "2026-09-07",
+      "quote": "We will do a global reset of the usage for all paid subscriptions so that you can keep enjoying Astra after burning through all of it doing fun 3D modeling in blender. The work week is about to start. Lands around 6pm PST today.",
+      "confidence": "high",
+      "crossLinks": [
+        "https://x.com/thsottiaux/status/2097174560412246215"
+      ],
+      "followUpQuote": "All reset for everyone. Enjoy the week with Astra. (2026-09-08)"
+    },
+    {
+      "claim": "Tibo 另宣布 09-05（Astra 提前放量日）再发一次 full banked reset 给全部 Plus/Pro/Business；并称若当日 8pm PT 前新建/升级也可拿。仍是重置，不是改倍率。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/thsottiaux/status/2096035437299237298",
+      "sourceDate": "2026-09-05",
+      "quote": "Because we are beyond happy to have Astra rolled out today ahead of schedule ... we will do the full banked reset today too for all Plus, Pro and Business users. Lands end of day. ... If you create the account or upgrade before 8pm PT you will get it too.",
+      "confidence": "high"
+    },
+    {
+      "claim": "Tibo 明确表述：Codex 的 Pro 20X「quite precisely 20X the usage of the Plus subscription」，且 20X 指周额度（weekly usage limits）；Pro 两档均无 5h 限制。该帖针对 Claude「20x 名不副实」的对比，时间在 Astra 上线前（2026-08-31），但是官方对 Codex 周池倍率的直接口径。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/thsottiaux/status/2094254532020818191",
+      "sourceDate": "2026-08-31",
+      "quote": "For clarity, while both are called 20X, in Codex they apply specifically to weekly usage limits. And we also don't have 5h limits for both Pro plans. The Pro 20X is quite precisely 20X the usage of the Plus subscription, so it does exactly what it says on the tin.",
+      "confidence": "high",
+      "note": "Astra 上线后未见 Tibo 改口说倍率变了；2026-09-10 仍称「We have made no changes since the launch of Astra。」"
+    },
+    {
+      "claim": "官方：Chat 里的 GPT-6 Pro（由 Astra 驱动）额度与 Work/Codex 共享池分离。Pro $200：Chat 每周 200 条 GPT-6 Pro；另有 Sol Pro 每日 170 条，且两模型合计每日 200 条。Pro $100：GPT-6 Pro 与 Sol Pro 共用每周 50 条。Plus 有 Work/Codex 的 Astra，但没有 Chat 的 GPT-6 Pro。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt",
+      "sourceDate": "2026-09-11",
+      "quote": "GPT-6 Pro has usage limits. ... The limits below apply to Chat; ChatGPT Work and Codex have separate allowances. | Pro $200 | 200 messages per week | Separate 170 messages per day for GPT-5.6 Sol Pro. Both models together are also limited to 200 messages per day. | Pro $100 | 50 messages per week | One shared allowance of 50 messages per week across GPT-6 Pro and GPT-5.6 Sol Pro. |",
+      "confidence": "high",
+      "crossLinks": [
+        "https://help.openai.com/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ],
+      "additionalQuote": "In Chat, GPT-6 Pro is powered by Astra and is available on eligible Pro, Business and Enterprise plans. Its message limits are separate from the shared Work and Codex allowance and vary by plan. Plus includes Astra in Work and Codex, but not GPT-6 Pro in Chat."
+    },
+    {
+      "claim": "官方：Work 与 Codex 共用同一套餐 included allowance；「Different models can use different amounts of your allowance for the same task」——支持按模型加权，但未公布 Astra 订阅内权重表。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex",
+      "sourceDate": "2026-09-11",
+      "quote": "Work and Codex share the usage allowance included with your plan. ... Different models can use different amounts of your allowance for the same task. Larger inputs and outputs, higher reasoning settings, Fast mode and tasks with multiple steps can also increase usage.",
+      "confidence": "high"
+    },
+    {
+      "claim": "Business/Enterprise Rate Card 公布 Astra 购买 credits 价：250 / 25 / 1,250 credits per 1M（input / cached input / output），约为 Sol（100 / 10 / 500）的 2.5×；并写 Chat 计量与 Work/Codex 的 Astra 分开。这是 credits 标价比，不是订阅周池权重的官方表。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/articles/11481834-chatgpt-rate-card-business-enterpriseedu",
+      "sourceDate": "2026-09-11",
+      "quote": "GPT-6 Pro is powered by GPT-6 Astra. When billed using credits, GPT-6 Pro costs 50 credits per Chat message, the same rate as GPT-5.6 Sol Pro. Chat usage is metered separately from Astra usage in Work and Codex. ... | GPT-6 Astra | 250 credits | 25 credits | 1,250 credits |",
+      "confidence": "high",
+      "note": "API 标价 Astra input $10 / cached $1 / output $50（developers.openai.com/api/docs/models/gpt-6-astra），相对 Sol 亦约 2–2.5× 量级；与订阅内 Observatory 实测 ~4.1× quota/token（含缓存）不完全同数，不可直接等同。"
+    },
+    {
+      "claim": "Codex Quota Observatory（单匿名 Pro 20× 账号）在 09-07 全局重置之后给出 Astra 纯模型段：headline 2026-09-08、7 个可比样本、35 pts → rawContextPerPoint=8,657,662 → 全周 865,766,240 tokens（约 8.66 亿）；同窗 credits 折算约 32,641。日趋势 09-04~09-08 稳定在约 8.4–8.9M tokens/百分点，未见促销期「池子突然变大」的跳变。",
+      "evidenceType": "community_measurement",
+      "source": "https://codex-quota.manetli.com/",
+      "sourceDate": "2026-09-11",
+      "quote": "GPT-6 Astra 865.8M context / 100 pts observed · 4.1× quota/token vs Sol ... Astra 8.66M tokens / 1% Sep 8, 2026 UTC · 7 samples · 35 pts ... One-account observational benchmark.",
+      "confidence": "medium",
+      "machineReadable": "https://codex-quota.manetli.com/api/public-stats",
+      "observed": {
+        "plan": "chatgpt_pro_20x",
+        "model": "gpt-6-astra",
+        "serviceTier": "standard",
+        "rawContextPerPoint": 8657662,
+        "fullWindowRawContext": 865766240,
+        "creditsPerPoint": 326.4,
+        "fullWindowCredits": 32641,
+        "headlineSampleCount": 7,
+        "headlineQuotaPoints": 35,
+        "headlineStartDay": "2026-09-08",
+        "headlineEndDay": "2026-09-08",
+        "trendRawContextPerPoint": {
+          "2026-09-04": 8419169,
+          "2026-09-05": 8384564,
+          "2026-09-06": 8492421,
+          "2026-09-07": 8940742,
+          "2026-09-08": 8642988
+        },
+        "siteConfidence": "medium",
+        "disclosure": "single anonymous Pro 20× account; not a universal OpenAI allowance"
+      },
+      "crossCheckWithRound7Plus": {
+        "plusAstraWeeklyFromRound7": 39756711.5,
+        "pro20xObservatoryWeekly": 865766240,
+        "impliedMultiplier": 21.78,
+        "note": "相对本项目 Plus Astra 直测周池约 3976 万，Observatory Pro20x Astra 周池约 8.66 亿 → 倍率约 21.8×，贴近官方 20×（面板 % 取整与单账号方差范围内）。若按 Observatory 自己的 capacityFactor=0.05 折回 Plus，得约 4329 万/周，略高于 round7 的 3976 万（约 +8.9%）。"
+      },
+      "note": "这是目前公开网上少有的「Pro20x + Astra + token 与 used_percent 同框」且落在 09-07 重置之后的数据集。站点同时把 Plus/Pro5x 标为 modeled_ratio（0.05 / 0.25），不是独立 Plus 账号实测。"
+    },
+    {
+      "claim": "同一 Observatory 显示 Pro20x 上 Astra 相对 Sol 的 quota/token ≈ 4.1×（Sol 35.9M tokens/1% vs Astra 8.66M tokens/1%）。这与历史 research 里引用的 Observatory 权重 Astra=2×（相对 Sol=1×）不一致——要么权重已更新，要么旧 2× 是早期近似。订阅内 raw token 池随模型变，不能拿 Sol 周池直接当 Astra 周池。",
+      "evidenceType": "community_measurement",
+      "source": "https://codex-quota.manetli.com/api/public-stats",
+      "sourceDate": "2026-09-11",
+      "quote": "modelSeries gpt-5.6-sol rawContextPerPoint=35903173; gpt-6-astra rawContextPerPoint=8657662 → ratio≈4.15× quota per token vs Sol",
+      "confidence": "medium",
+      "note": "Business Rate Card credits 比约 2.5×；实测 4.1× 含缓存读权重差异与负载差异。round7 用旧 Astra=2× 与 Luna=0.04× 互证 Plus Astra，与本次 4.1× 口径冲突——后续采用需用户拍板用哪条权重。"
+    },
+    {
+      "claim": "OpenAI 开发者社区 Pro20x 用户（2026-09-08/09，已过 09-07 全局重置）给出 token 与周 % 同框：09-08 约 21.8 小时内 2.180B tokens 只动 6 个百分点；随后约 7 小时 472.9M tokens 却动 65 个百分点——同账号同周窗内「每 token 耗额度」差约 50×。作者称无周重置、缓存命中反而升高；多人跟帖称额度被「nuke」后部分被 Support 回滚。属计费异常/延迟入账嫌疑，不能当常态 Astra 池大小。",
+      "evidenceType": "community_measurement",
+      "source": "https://community.openai.com/t/insane-usage-burn-rate-swing-on-pro-20x-potential-bug/1396093",
+      "sourceDate": "2026-09-09",
+      "quote": "On September 8, between 04:56 and 22:59, the logs recorded 2.180 billion tokens, while the weekly allowance moved by 6 percentage points. Over the following seven hours, ending at 05:58 on September 9, they recorded 472.9 million tokens, while the allowance moved by another 65 percentage points. There was no weekly reset between those readings. That works out to roughly 50 times more allowance consumed per recorded token in the second period.",
+      "confidence": "medium",
+      "note": "高价值在于证明 09-08 起仍有剧烈计费噪音；低价值在于不能稳定反推周池。若用第一段粗算：2.180B/6%≈363 亿 tokens/周——远高于 Observatory Astra 纯模型 8.66 亿，说明该段必为混合模型（帖内 chart 含多模型）或低估了 % 权重。"
+    },
+    {
+      "claim": "GitHub openai/codex#43029：Pro 20x 用户称 GPT-6 Astra Ultra 约 1 小时任务（含 3 个 subagents）消耗约 30% 周额度；未附 token 数，无法高置信反推周池。",
+      "evidenceType": "community_report",
+      "source": "https://github.com/openai/codex/issues/43029",
+      "sourceDate": "2026-09-05",
+      "quote": "During a roughly one-hour coding task, approximately 30% of my weekly allowance was consumed. ... Exact per-run token counts and server-side quota accounting are not included in this report.",
+      "confidence": "low",
+      "note": "日期在 banked reset 促销窗口内；仅 %、无 token。"
+    },
+    {
+      "claim": "GitHub openai/codex#43222：Pro 账号 rollout 同框记录 rate_limits（plan_type=pro，周窗 10080 分钟）与模型切换；Astra 活跃段周 used_percent 约 64%→70%，之后 Sol 继续推到 95%。作者强调无法把全部 Δ% 归因于 Astra，且无完整「纯 Astra Δtoken/Δ%」表。",
+      "evidenceType": "community_measurement",
+      "source": "https://github.com/openai/codex/issues/43222",
+      "sourceDate": "2026-09-06",
+      "quote": "The token_count.rate_limits records use limit_id: \"codex\", plan_type: \"pro\", and a 10,080-minute weekly window. ... During the 00:00–02:53 Astra-active tail, other local Sol/auto-review threads were also active, so I do not attribute the entire 64%→70% movement to Astra.",
+      "confidence": "low",
+      "note": "机制证据（rollout 可同框）强于数值证据；促销期窗口。"
+    },
+    {
+      "claim": "r/codex：Pro 20x 用户按 API 美元等效比较——Sol 约 $22–24 / 每 1% 周额度，Astra 约 $15 / 每 1%（已计入 Astra 更高 API 单价后仍更「亏」）。指向订阅内 Astra 权重可能重于单纯 API 标价比，不直接给出 raw token 周池。",
+      "evidenceType": "community_report",
+      "source": "https://www.reddit.com/r/codex/comments/1w8vlnr/astra_appears_to_consume_50_more_subscription/",
+      "sourceDate": "2026-09-06",
+      "quote": "I'm on Pro 20x. With Sol, I get around $22 to $24 of API-equivalent usage per 1% of my weekly quota. With Astra, it's around $15. ... That's roughly 50% more quota burned for the same API pricing value.",
+      "confidence": "low",
+      "note": "美元等效口述；无 raw token 表。与 Observatory 4.1× quota/token vs Sol API≈2.5× 的方向一致（订阅扣得比标价比更狠）。"
+    },
+    {
+      "claim": "r/codex：有人在 banked reset 前后对比 Astra 主导负载的 token 与 %（重置前 85%→99% 用约 114.88M total tokens / 14pt；重置后 0%→14% 用约 63.88M / 14pt），怀疑 banked 后额度减半；Tibo 回复否认：「There is no difference between usage you get before or after a reset。」",
+      "evidenceType": "community_measurement",
+      "source": "https://www.reddit.com/r/codex/comments/1w8vlnr/",
+      "sourceDate": "2026-09-06",
+      "quote": "Not the case. There is no difference between usage you get before or after a reset. (Tibo, via OP update citing X)",
+      "confidence": "low",
+      "note": "原帖标题另链到 banked-reset 分析帖 https://www.reddit.com/r/codex/s/vXWABtNGAL ；样本短、模型混杂，作者自己也说体感与数字不完全一致。官方否认「重置后池变小」。"
+    },
+    {
+      "claim": "V2EX：多名 Pro 用户口述全程 Astra 时周 API 等效约 $1400–1500（相对先前 Sol 主导约 $2400），归因于 Astra「使用量惩罚倍率」约 1.8×，不是宣称周 token 池本身缩到 1/20。无 token+% 同框截图可核。",
+      "evidenceType": "community_report",
+      "source": "https://www.v2ex.com/t/1240473",
+      "sourceDate": "2026-09-08",
+      "quote": "和小伙伴拼车使用，之前大概有 2400 多刀，前几天刷新额度后，降到 1800 ，今天刷新后直接给哥们干到 1500 了 ... 全程 Astra 大概 1440 ... Astra 本身就有使用量惩罚倍率，之前看人说差不多是 1.8X 左右。",
+      "confidence": "low"
+    },
+    {
+      "claim": "Plus 账号编排实测（第三方 guide，2026-09-07）：一次 Astra(low)+Luna(medium) 混合任务 13m49s，5h 窗 0%→66%、周窗 31%→42%（Δ11pt）；Astra root 合计约 4.79M total tokens。混合负载，不能单独反推 Astra 周池，但证明 CLI rollout 可同框 % 与 token。",
+      "evidenceType": "community_measurement",
+      "source": "https://github.com/donvito/codex-astra-luna-orchestrator/blob/main/guides/token-usage.md",
+      "sourceDate": "2026-09-07",
+      "quote": "Codex 0.153.4 , Plus plan, 2026-09-07. ... Rate limit: 5h window 0% to 66%, 7d window 31% to 42%. ... root gpt-6-astra / low ... Total 4,794,378",
+      "confidence": "low",
+      "note": "日期恰在全局重置日；若重置穿插其中则 % 轨迹可能污染。"
+    },
+    {
+      "claim": "定价页 FAQ：GPT-6 Astra「included within the existing Codex usage allowance」on $100/$200 Pro 与 $100 Business；Plus 与 $20 Business 为 limited Astra，可用 credits 加量。强调 Astra 吃的是已有共享池，不是另开独立周池。",
+      "evidenceType": "official_doc",
+      "source": "https://chatgpt.com/codex/pricing/",
+      "sourceDate": "2026-09-11",
+      "quote": "GPT-6 Astra is included within the existing Codex usage allowance on the $100 and $200 Pro plans and the $100 Business plan. Plus and the $20 Business plan include limited GPT-6 Astra usage, with the option to purchase credits for additional access.",
+      "confidence": "high"
+    },
+    {
+      "claim": "2026-09-10 起 OpenAI 暂停 ChatGPT Pro $200（20x）新购与升级，理由是 Astra 需求过大；现有订阅继续续费。这是供给侧限流，不是改周池绝对值的公告。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/thsottiaux/status/2098113585683808624",
+      "sourceDate": "2026-09-10",
+      "quote": "To make sure our current users have an incredible experience and continued access to Astra, we are going to pause subscriptions to our $200 Pro plan. ... There is no impact to existing accounts ...",
+      "confidence": "high",
+      "crossLinks": [
+        "https://help.openai.com/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex"
+      ],
+      "additionalQuote": "Help Center banner: New sign-ups and upgrades to the ChatGPT Pro $200 plan are temporarily paused. Existing Pro $200 subscriptions will continue to renew as usual."
+    }
+  ],
+  "synthesis": {
+    "officialWeeklyAbsoluteTokens": "未公布",
+    "officialPlanMultiplierStance": "5h 消息表表观精确 5×/20×；Tibo 称 Codex 周池 Pro20x「quite precisely 20× Plus」；Help 称重置不永久提额",
+    "promoVsBaseline": "09-03/04/05 banked + 09-07 global 均为重置（把 % 打回可用），官方否认重置改变池大小；未找到「双倍额度至某截止日期」的官方文案",
+    "gpt6ProChatVsCodex": "分离：Chat GPT-6 Pro 有独立消息周/日限额；Work+Codex 共享另一套 allowance",
+    "bestPostResetPro20xAstraEvidence": "Observatory 2026-09-08：Pro20x Astra ≈ 8.66 亿 tokens/周（medium，单账号）",
+    "impliedPro20xVsPlusFromCrossFile": "8.66e8 / 3.976e7 ≈ 21.8× ≈ 官方 20×；与 gateway 促销期「19×–58×」叙事冲突，后者更可能被 banked/global reset 与混模污染",
+    "weightCaveat": "Observatory 现测 Astra≈4.1× Sol quota/token；旧 research 用的 Astra=2× 权重需重新审视"
+  },
+  "notFound": [
+    "官方公布的 Astra（或任一模型）周窗绝对 token / credits 数值表",
+    "官方公布的订阅内模型权重表（Sol/Terra/Luna/Astra 各扣多少周池单位）——仅有「不同模型消耗不同」的定性句 + Business credits 价",
+    "官方「Astra 上线临时双倍周额度 / temporary boost」及明确截止日期的文案（只找到 banked/global reset）",
+    "第二份独立于 Observatory 的、09-07 之后 Pro 20x 纯 Astra、token 与 used_percent 同框且可复核的完整打满样本",
+    "Pro 5x 账号的 Astra token+% 同框实测",
+    "官方解释中英文定价页 Astra 5h 区间为何不同（英 5–45 vs 中/日 3–30）",
+    "linux.do / V2EX 上可核验的 Pro20x Astra raw token 与周 % 同框截图（本轮只见到美元等效口述）",
+    "OpenAI changelog / developers.openai.com 上单独列出订阅周池绝对值的条目"
+  ]
+}

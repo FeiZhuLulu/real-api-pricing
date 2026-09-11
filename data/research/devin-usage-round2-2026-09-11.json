@@ -1,0 +1,59 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "Devin Max 采用记录。round1（devin-usage-round1-2026-09-11.json）的 59%→39%（20pt）段补齐 output/cache_create/calls 列，用户确认该 20pt 是周额度口径且采用 astra 单列数据反推；swe-2 免费不占额度。新增 devin_max × gpt-6-astra 采用点。",
+  "items": [
+    {
+      "planId": "devin_max",
+      "planName": "Devin Max",
+      "priceUsd": 200,
+      "priceSource": "https://devin.ai/pricing（Max $200/month，周额度、无日上限）；https://docs.devin.ai/admin/billing/self-serve（Max: larger weekly usage quota, no daily cap）",
+      "model": "gpt-6-astra",
+      "panelModelName": "gpt-6-astra-high",
+      "evidenceType": "user_dashboard_backcalculation",
+      "source": "用户本人 Devin Max 账号用量抽取，2026-09-11；同一 20pt 段的完整列",
+      "sourceDate": "2026-09-11",
+      "userConfirmation": "用户直接提供分模型 token Δ 表，并确认：(a) 该段消耗 20% 周额度；(b) 采用 astra 单列数据；(c) swe-2 免费不计入额度。",
+      "observedSegment": {
+        "remainingFrom": 0.59,
+        "remainingTo": 0.39,
+        "deltaPercentPoints": 20,
+        "window": "周额度（用户确认；Devin Max 官方口径为周池、无日上限）",
+        "modelRow": {
+          "model": "gpt-6-astra-high",
+          "callsDelta": 319,
+          "inputDelta": 957,
+          "outputDelta": 360125,
+          "cacheReadDelta": 79102796,
+          "cacheCreateDelta": 1743351,
+          "totalDelta": 81207229
+        },
+        "verification": "957 + 360125 + 79102796 + 1743351 = 81207229，与 total Δ 自洽"
+      },
+      "calculation": {
+        "weeklyTokens": 406036145,
+        "monthlyTokensExact": 1624144580,
+        "adoptedMonthlyTokens": 1624000000,
+        "adoptedMonthlyYi": 16.24,
+        "formula": "81,207,229 / 20% × 4 周",
+        "roundedPercentMonthlyLow": 1584758649,
+        "roundedPercentMonthlyHigh": 1663834382,
+        "roundedPercentNote": "20pt 为两个取整读数之差，真实占比约 19.5%~20.5%，对应约 15.85~16.64 亿/月。中心值按显示 20pt 采用。"
+      },
+      "tokenCountingNote": "全口径：input + output + cache_read + cache_create 一视同仁，直接采用面板 total Δ=81,207,229，不按项目标准负载归一。",
+      "anomalies": [
+        "astra 段 cache_read 79.1M 对 fresh input 仅 957，命中率 99.9988%（含 cache_create 分母 97.84%）：疑似超长上下文会话反复续跑或 cache_read 计数口径含重复读；total 口径已含全部读/写，反推仍成立但单段构成极端",
+        "同段 swe-2 45.5M tokens 与 summarizer/compactor 15.2 万 tokens 不计入：swe-2 用户确认免费；summarizer/compactor 若计费仅占总耗 0.19%，不影响反推"
+      ],
+      "confidence": "high（用户面板直接数据；单段、命中率异常已在 anomalies 记录）",
+      "decision": "采用。新增 devin_max × gpt-6-astra = 16.24 亿/月，真实单价约 $0.1232/MTok。"
+    }
+  ],
+  "adopted": {
+    "devin_max_gpt_6_astra_monthlyYi": 16.24
+  },
+  "notFound": [
+    "Devin 官方公布的周池绝对 token / ACU 数值",
+    "Devin Pro ($20) 档的 token+% 同框数据",
+    "第二段独立 Devin Max 打满样本复核命中率异常"
+  ]
+}

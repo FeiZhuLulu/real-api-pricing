@@ -62,6 +62,7 @@ const channels = {
   ollama: "Ollama",
   deepseek: "DeepSeek",
   stepfun: "StepFun",
+  devin: "Devin",
 };
 const channel = (p) =>
   Object.entries(channels).find(([prefix]) => p.id.startsWith(prefix))?.[1] ||

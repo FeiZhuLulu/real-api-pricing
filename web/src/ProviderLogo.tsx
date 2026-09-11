@@ -35,6 +35,7 @@ const slugs: Record<string, string> = {
   Muse: "meta",
   StepFun: "stepfun",
   Step: "stepfun",
+  Devin: "devin",
 };
 /** Local provider logo URL from the bundled asset glob (no external fetch). */
 export function providerLogoUrl(provider: string): string | undefined {

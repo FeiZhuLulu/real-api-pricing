@@ -13,180 +13,184 @@ No.  Plan                                Monthly fee  Served model              
 4    Step Plan Pro (¥199)                CNY 199      Step 3.5 Flash              50.3461             0.00058   medium
 5    Claude Max 20x (9/14+)              USD 200      Claude Sonnet 5             39.25               0.0051    medium
 6    ChatGPT Pro 5x                      USD 100      GPT 5.6 Luna                37.556              0.00266   medium
-7    Step Plan Pro (¥199)                CNY 199      Step 3.7 Flash              24.9513             0.00118   medium
-8    ChatGPT Pro 20x                     USD 200      GPT 5.6 Terra               24.024              0.00833   medium
-9    Ollama Max                          USD 100      DeepSeek V4 Flash           21.6372             0.00462   medium
-10   Cursor Ultra (Standard)             USD 200      Composer 2.5                19.8926             0.01005   medium
-11   Claude Max 5x (9/14+)               USD 100      Claude Sonnet 5             19.625              0.0051    low
-12   GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3 Flash               17.965              0.00885   high
-13   GLM Coding Max (v2 ¥469) Off-peak   CNY 469      GLM 5.3 Flash               17.965              0.00385   high
-14   Claude Max 20x (9/14+)              USD 200      Claude Opus 5               15.7                0.01274   medium
-15   Claude Max 20x (9/14+)              USD 200      Claude Opus 4.8             15.7                0.01274   low
-16   GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3 Flash               13.473              0.0118    high
-17   GLM Coding Max (v2 ¥469) Midpoint   CNY 469      GLM 5.3 Flash               13.473              0.00514   high
-18   OpenCode Go                         USD 10       Muse Spark 1.3 Contributor  12.5                0.0008    medium
-19   OpenCode Go                         USD 10       Muse Spark 1.2 Contributor  12.5                0.0008    medium
-20   ChatGPT Pro 20x                     USD 200      GPT 5.6 Sol                 12.32               0.01623   high
-21   Step Plan Plus (¥99)                CNY 99       Step 3.5 Flash              10.0692             0.00145   medium
-22   MiniMax Token Plan Ultra (Global)   USD 132      MiniMax M3                  9.8                 0.01347   high
-23   ChatGPT Pro 20x                     USD 200      GPT 5.5                     9.6096              0.02081   medium
-24   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3 Flash               8.982               0.01771   high
-25   GLM Coding Max (v2 ¥469) Peak       CNY 469      GLM 5.3 Flash               8.982               0.0077    high
-26   OpenCode Go                         USD 10       MiMo V2.5                   8.9286              0.00112   medium
-27   Ollama Max                          USD 100      GLM 5.3 Flash               8.7655              0.01141   medium
-28   Claude Max 5x (9/14+)               USD 100      Claude Opus 5               7.85                0.01274   medium
-29   Cursor Ultra                        USD 200      Grok 4.6                    7.737               0.02585   medium
-30   Cursor Ultra                        USD 200      Grok 4.5                    7.737               0.02585   medium
-31   GLM Coding Pro (v3 ¥538) Off-peak   CNY 538      GLM 5.3 Flash               7.699               0.01031   high
-32   GLM Coding Pro (v2 ¥149) Off-peak   CNY 149      GLM 5.3 Flash               7.699               0.00285   high
-33   ChatGPT Plus                        USD 20       GPT 5.6 Luna                7.511               0.00266   high
-34   MiniMax Token Plan Ultra            CNY 469      MiniMax M3                  7.1                 0.00974   high
-35   Cursor Ultra (Composer Fast)        USD 200      Composer 2.5                7.0587              0.02833   medium
-36   Ollama Max                          USD 100      DeepSeek V4 Pro             7.0472              0.01419   medium
-37   ChatGPT Pro 5x                      USD 100      GPT 5.6 Terra               6.006               0.01665   medium
-38   GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3                     5.926               0.02684   high
-39   GLM Coding Max (v2 ¥469) Off-peak   CNY 469      GLM 5.3                     5.926               0.01168   high
-40   GLM Coding Pro (v3 ¥538) Midpoint   CNY 538      GLM 5.3 Flash               5.774               0.01375   high
-41   GLM Coding Pro (v2 ¥149) Midpoint   CNY 149      GLM 5.3 Flash               5.774               0.00381   high
-42   Cursor Pro+ (Standard)              USD 60       Composer 2.5                5.3047              0.01131   low
-43   MiniMax Token Plan Max (Global)     USD 55       MiniMax M3                  5.1                 0.01078   high
-44   SuperGrok Heavy                     USD 300      Grok 4.6                    5.09                0.05894   medium
-45   SuperGrok Heavy                     USD 300      Grok 4.5                    5.09                0.05894   medium
-46   Step Plan Plus (¥99)                CNY 99       Step 3.7 Flash              4.9903              0.00293   medium
-47   Command Code GOAT                   USD 10       DeepSeek V4.1 Flash         4.8485              0.00206   medium
-48   Kimi CN CNY 699 †                   CNY 699      Kimi K2.7 Code              4.704               0.02192   medium
-49   Command Code GOAT                   USD 10       MiMo V2.5                   4.4643              0.00224   medium
-50   GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3                     4.445               0.03578   high
-51   GLM Coding Max (v2 ¥469) Midpoint   CNY 469      GLM 5.3                     4.445               0.01557   high
-52   Kimi CN CNY 699 †                   CNY 699      Kimi K3                     4.353               0.02369   medium
-53   Ollama Max                          USD 100      MiniMax M2.7                4.3384              0.02305   medium
-54   Ollama Pro                          USD 20       DeepSeek V4 Flash           4.3274              0.00462   medium
-55   Command Code GOAT                   USD 10       Muse Spark 1.3 Contributor  4.1667              0.0024    medium
-56   Command Code GOAT                   USD 10       Muse Spark 1.2 Contributor  4.1667              0.0024    medium
-57   Claude Pro                          USD 20       Claude Sonnet 5             3.97                0.00504   medium
-58   GLM Coding Pro (v3 ¥538) Peak       CNY 538      GLM 5.3 Flash               3.85                0.02061   high
-59   GLM Coding Pro (v2 ¥149) Peak       CNY 149      GLM 5.3 Flash               3.85                0.00571   high
-60   OpenCode Go                         USD 10       LongCat 2.0                 3.6364              0.00275   medium
-61   ChatGPT Pro 5x                      USD 100      GPT 5.6 Sol                 3.08                0.03247   medium
-62   Cursor Ultra (Fast)                 USD 200      Grok 4.6                    3.074               0.06506   high
-63   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3                     2.963               0.05367   high
-64   GLM Coding Max (v2 ¥469) Peak       CNY 469      GLM 5.3                     2.963               0.02335   high
-65   GLM Coding Pro (v3 ¥538) Off-peak   CNY 538      GLM 5.3                     2.54                0.03125   high
-66   GLM Coding Pro (v2 ¥149) Off-peak   CNY 149      GLM 5.3                     2.54                0.00865   high
-67   Step Plan Mini (¥49)                CNY 49       Step 3.5 Flash              2.5173              0.00287   medium
-68   ChatGPT Pro 5x                      USD 100      GPT 5.5                     2.4024              0.04163   medium
-69   Ollama Max                          USD 100      MiniMax M3                  2.1692              0.0461    medium
-70   Cursor Pro+                         USD 60       Grok 4.6                    2.0632              0.02908   medium
-71   SuperGrok Plus                      USD 100      Grok 4.6                    2.04                0.04902   medium
-72   GLM Coding Pro (v3 ¥538) Midpoint   CNY 538      GLM 5.3                     1.905               0.04166   high
-73   GLM Coding Pro (v2 ¥149) Midpoint   CNY 149      GLM 5.3                     1.905               0.01154   high
-74   Cursor Pro+ (Composer Fast)         USD 60       Composer 2.5                1.8823              0.03188   low
-75   OpenCode Go                         USD 10       DeepSeek V4.1 Flash         1.8182              0.0055    medium
-76   MiniMax Token Plan Max              CNY 119      MiniMax M3                  1.8                 0.00975   high
-77   Command Code GOAT                   USD 10       Hy3                         1.7873              0.0056    medium
-78   Ollama Pro                          USD 20       GLM 5.3 Flash               1.7531              0.01141   medium
-79   MiniMax Token Plan Plus (Global)    USD 22       MiniMax M3                  1.7                 0.01294   high
-80   MiniMax Token Plan Plus (Global)    USD 22       MiniMax M2.7                1.7                 0.01294   medium
-81   Claude Pro                          USD 20       Claude Opus 4.8             1.588               0.01259   medium
-82   Kimi CN CNY 199 †                   CNY 199      Kimi K2.7 Code              1.568               0.01872   medium
-83   OpenCode Go                         USD 10       Hy3                         1.532               0.00653   medium
-84   OpenCode Go                         USD 10       Qwen3.8 Flash               1.4656              0.00682   medium
-85   Kimi CN CNY 199 †                   CNY 199      Kimi K3                     1.451               0.02023   medium
-86   Ollama Pro                          USD 20       DeepSeek V4 Pro             1.4094              0.01419   medium
-87   Ollama Max                          USD 100      Kimi K2.7 Code              1.3657              0.07322   medium
-88   Ollama Max                          USD 100      GLM 5.1                     1.3175              0.0759    medium
-89   OpenCode Go                         USD 10       Omen Alpha                  1.3155              0.0076    medium
-90   GLM Coding Lite (v3 ¥118) Off-peak  CNY 118      GLM 5.3 Flash               1.283               0.01357   high
-91   GLM Coding Lite (v2 ¥49) Off-peak   CNY 49       GLM 5.3 Flash               1.283               0.00563   high
-92   GLM Coding Pro (v3 ¥538) Peak       CNY 538      GLM 5.3                     1.27                0.06249   high
-93   GLM Coding Pro (v2 ¥149) Peak       CNY 149      GLM 5.3                     1.27                0.01731   high
-94   Command Code GOAT                   USD 10       MiMo V2.5 Pro               1.2573              0.00795   medium
-95   Step Plan Mini (¥49)                CNY 49       Step 3.7 Flash              1.2476              0.00579   medium
-96   Cursor Pro (Standard)               USD 20       Composer 2.5                1.2084              0.01655   medium
-97   Claude Max 20x (9/14+)              USD 200      Claude Fable 5              1.2077              0.1656    low
-98   Command Code GOAT                   USD 10       Qwen3.8 27B                 1.2048              0.0083    medium
-99   ChatGPT Plus                        USD 20       GPT 5.6 Terra               1.2012              0.01665   medium
-100  Command Code GOAT                   USD 10       GLM 5.3 Flash               1.1687              0.00856   medium
-101  OpenCode Go                         USD 10       Qwen3.7 Plus                1.1278              0.00887   medium
-102  Ollama Max                          USD 100      GLM 5.3                     1.0033              0.09967   medium
-103  Ollama Max                          USD 100      GLM 5.2                     1.0033              0.09967   medium
-104  Command Code GOAT                   USD 10       Qwen3.8 Flash               0.9669              0.01034   medium
-105  GLM Coding Lite (v3 ¥118) Midpoint  CNY 118      GLM 5.3 Flash               0.962               0.0181    high
-106  GLM Coding Lite (v2 ¥49) Midpoint   CNY 49       GLM 5.3 Flash               0.962               0.00751   high
-107  OpenCode Go                         USD 10       MiMo V2.5 Pro               0.9415              0.01062   medium
-108  Claude Max 5x (9/14+)               USD 100      Claude Fable 5              0.9235              0.10828   low
-109  Command Code GOAT                   USD 10       Step 3.5 Flash              0.8811              0.01135   medium
-110  OpenCode Go                         USD 10       MiniMax M3                  0.8677              0.01152   medium
-111  OpenCode Go                         USD 10       MiniMax M2.7                0.8677              0.01152   medium
-112  OpenCode Go                         USD 10       MiniMax M2.5                0.8677              0.01152   medium
-113  Ollama Pro                          USD 20       MiniMax M2.7                0.8677              0.02305   medium
-114  OpenCode Go                         USD 10       Qwen3.6 Plus                0.8571              0.01167   medium
-115  Ollama Max                          USD 100      Kimi K3                     0.7326              0.1365    medium
-116  Command Code GOAT                   USD 10       GPT 5.6 Luna                0.7143              0.014     medium
-117  Command Code GOAT                   USD 10       MiniMax M3                  0.6797              0.01471   medium
-118  GLM Coding Lite (v3 ¥118) Peak      CNY 118      GLM 5.3 Flash               0.642               0.02711   high
-119  GLM Coding Lite (v2 ¥49) Peak       CNY 49       GLM 5.3 Flash               0.642               0.01126   high
-120  ChatGPT Plus                        USD 20       GPT 5.6 Sol                 0.616               0.03247   medium
-121  MiniMax Token Plan Plus             CNY 49       MiniMax M3                  0.6                 0.01205   high
-122  MiniMax Token Plan Plus             CNY 49       MiniMax M2.7                0.6                 0.01205   medium
-123  OpenCode Go                         USD 10       GPT 5.6 Luna                0.5357              0.01867   medium
-124  SuperGrok                           USD 30       Grok 4.6                    0.509               0.05894   high
-125  SuperGrok                           USD 30       Grok 4.5                    0.509               0.05894   medium
-126  ChatGPT Plus                        USD 20       GPT 5.5                     0.4805              0.04162   medium
-127  Cursor Pro                          USD 20       Grok 4.6                    0.47                0.04255   medium
-128  Command Code GOAT                   USD 10       DeepSeek V4 Pro             0.4698              0.02129   medium
-129  OpenCode Go                         USD 10       Hy4 Preview                 0.4436              0.02254   medium
-130  OpenCode Go                         USD 10       GLM 5.3 Flash               0.4383              0.02282   medium
-131  Ollama Pro                          USD 20       MiniMax M3                  0.4338              0.0461    medium
-132  Cursor Pro (Composer Fast)          USD 20       Composer 2.5                0.4288              0.04664   medium
-133  GLM Coding Lite (v3 ¥118) Off-peak  CNY 118      GLM 5.3                     0.423               0.04115   high
-134  GLM Coding Lite (v2 ¥49) Off-peak   CNY 49       GLM 5.3                     0.423               0.01709   high
-135  Command Code GOAT                   USD 10       Step 3.7 Flash              0.4226              0.02366   medium
-136  Command Code GOAT                   USD 10       Qwen3.7 Plus                0.3579              0.02794   medium
-137  OpenCode Go                         USD 10       DeepSeek V4 Pro             0.3524              0.02838   medium
-138  GLM Coding Lite (v3 ¥118) Midpoint  CNY 118      GLM 5.3                     0.317               0.05491   high
-139  GLM Coding Lite (v2 ¥49) Midpoint   CNY 49       GLM 5.3                     0.317               0.0228    high
-140  OpenCode Go                         USD 10       Kimi K2.6                   0.3151              0.03174   medium
-141  Kimi CN CNY 99 †                    CNY 99       Kimi K2.7 Code              0.314               0.04651   medium
-142  Command Code GOAT                   USD 10       Hy4 Preview                 0.2957              0.03382   medium
-143  Kimi CN CNY 99 †                    CNY 99       Kimi K3                     0.29                0.05036   medium
-144  Command Code GOAT                   USD 10       Qwen3.6 Plus                0.2779              0.03598   medium
-145  OpenCode Go                         USD 10       Kimi K2.7 Code              0.2731              0.03662   medium
-146  Command Code GOAT                   USD 10       Kimi K2.7 Code              0.2731              0.03662   medium
-147  Ollama Pro                          USD 20       Kimi K2.7 Code              0.2731              0.07323   medium
-148  Ollama Pro                          USD 20       GLM 5.1                     0.2635              0.0759    medium
-149  Command Code GOAT                   USD 10       DeepSeek V4 Flash Fast      0.2624              0.03811   medium
-150  Command Code GOAT                   USD 10       GLM 5.2                     0.2341              0.04272   medium
-151  GLM Coding Lite (v3 ¥118) Peak      CNY 118      GLM 5.3                     0.212               0.08211   high
-152  GLM Coding Lite (v2 ¥49) Peak       CNY 49       GLM 5.3                     0.212               0.0341    high
-153  OpenCode Go                         USD 10       GLM 5.2                     0.2007              0.04983   medium
-154  OpenCode Go                         USD 10       GLM 5.1                     0.2007              0.04983   medium
-155  Ollama Pro                          USD 20       GLM 5.3                     0.2007              0.09965   medium
-156  Ollama Pro                          USD 20       GLM 5.2                     0.2007              0.09965   medium
-157  Alibaba Cloud CN Coding Plan Pro    CNY 200      Qwen3.7 Plus                0.198               0.14901   medium
-158  Alibaba Cloud Coding Plan Pro       USD 50       Qwen3.7 Plus                0.198               0.25253   low
-159  Command Code GOAT                   USD 10       Gemini 3.8 Flash            0.1954              0.05118   medium
-160  Command Code GOAT                   USD 10       Gemini 3.7 Flash            0.1954              0.05118   medium
-161  Command Code GOAT                   USD 10       Inkling Small               0.1779              0.05621   medium
-162  SuperGrok Lite                      USD 10       Grok 4.6                    0.15                0.06667   low
-163  Ollama Pro                          USD 20       Kimi K3                     0.1465              0.13652   medium
-164  Command Code GOAT                   USD 10       Nemotron 3 Ultra            0.1446              0.06916   medium
-165  Command Code GOAT                   USD 10       Muse Spark 1.3              0.1064              0.09398   medium
-166  Command Code GOAT                   USD 10       Muse Spark 1.2              0.1064              0.09398   medium
-167  Command Code GOAT                   USD 10       GPT 5.6 Sol                 0.1                 0.1       medium
-168  Command Code GOAT                   USD 10       Inkling                     0.0993              0.1007    medium
-169  Kimi CN CNY 49 †                    CNY 49       Kimi K2.7 Code              0.078               0.09267   medium
-170  Command Code GOAT                   USD 10       GLM 5.3                     0.0669              0.14948   medium
-171  Command Code GOAT                   USD 10       Qwen3.8 Max                 0.065               0.15385   medium
-172  Command Code GOAT                   USD 10       Qwen3.8 Max 0902            0.065               0.15385   medium
-173  Command Code GOAT                   USD 10       Qwen3.7 Max                 0.0581              0.17212   medium
-174  OpenCode Go                         USD 10       Qwen3.7 Max                 0.0529              0.18904   medium
-175  OpenCode Go                         USD 10       GLM 5.3                     0.0502              0.1992    medium
-176  Command Code GOAT                   USD 10       Kimi K3                     0.0488              0.20492   medium
-177  OpenCode Go                         USD 10       Qwen3.8 Max                 0.0487              0.20534   medium
-178  Command Code GOAT                   USD 10       Kimi K2.7 Code HighSpeed    0.0455              0.21978   medium
-179  OpenCode Go                         USD 10       Kimi K3                     0.0366              0.27322   medium
-180  Command Code GOAT                   USD 10       Grok 4.5                    0.0363              0.27548   medium
-181  Command Code GOAT                   USD 10       Grok 4.6                    0.0363              0.27548   medium
-182  Command Code GOAT                   USD 10       GLM 5.2 Fast                0.034               0.29412   medium
-183  OpenCode Go                         USD 10       Grok 4.6                    0.0272              0.36765   medium
+7    Ollama Max                          USD 100      DeepSeek V4.1 Flash         36.3636             0.00275   medium
+8    Step Plan Pro (¥199)                CNY 199      Step 3.7 Flash              24.9513             0.00118   medium
+9    ChatGPT Pro 20x                     USD 200      GPT 5.6 Terra               24.024              0.00833   medium
+10   Ollama Max                          USD 100      DeepSeek V4 Flash           21.6372             0.00462   medium
+11   Cursor Ultra (Standard)             USD 200      Composer 2.5                19.8926             0.01005   medium
+12   Claude Max 5x (9/14+)               USD 100      Claude Sonnet 5             19.625              0.0051    low
+13   GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3 Flash               17.965              0.00885   high
+14   GLM Coding Max (v2 ¥469) Off-peak   CNY 469      GLM 5.3 Flash               17.965              0.00385   high
+15   Claude Max 20x (9/14+)              USD 200      Claude Opus 5               15.7                0.01274   medium
+16   Claude Max 20x (9/14+)              USD 200      Claude Opus 4.8             15.7                0.01274   low
+17   GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3 Flash               13.473              0.0118    high
+18   GLM Coding Max (v2 ¥469) Midpoint   CNY 469      GLM 5.3 Flash               13.473              0.00514   high
+19   OpenCode Go                         USD 10       Muse Spark 1.3 Contributor  12.5                0.0008    medium
+20   OpenCode Go                         USD 10       Muse Spark 1.2 Contributor  12.5                0.0008    medium
+21   ChatGPT Pro 20x                     USD 200      GPT 5.6 Sol                 12.32               0.01623   high
+22   Step Plan Plus (¥99)                CNY 99       Step 3.5 Flash              10.0692             0.00145   medium
+23   MiniMax Token Plan Ultra (Global)   USD 132      MiniMax M3                  9.8                 0.01347   high
+24   ChatGPT Pro 20x                     USD 200      GPT 5.5                     9.6096              0.02081   medium
+25   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3 Flash               8.982               0.01771   high
+26   GLM Coding Max (v2 ¥469) Peak       CNY 469      GLM 5.3 Flash               8.982               0.0077    high
+27   OpenCode Go                         USD 10       MiMo V2.5                   8.9286              0.00112   medium
+28   Ollama Max                          USD 100      GLM 5.3 Flash               8.7655              0.01141   medium
+29   Claude Max 5x (9/14+)               USD 100      Claude Opus 5               7.85                0.01274   medium
+30   Cursor Ultra                        USD 200      Grok 4.6                    7.737               0.02585   medium
+31   Cursor Ultra                        USD 200      Grok 4.5                    7.737               0.02585   medium
+32   GLM Coding Pro (v3 ¥538) Off-peak   CNY 538      GLM 5.3 Flash               7.699               0.01031   high
+33   GLM Coding Pro (v2 ¥149) Off-peak   CNY 149      GLM 5.3 Flash               7.699               0.00285   high
+34   ChatGPT Plus                        USD 20       GPT 5.6 Luna                7.511               0.00266   high
+35   Ollama Pro                          USD 20       DeepSeek V4.1 Flash         7.2727              0.00275   medium
+36   MiniMax Token Plan Ultra            CNY 469      MiniMax M3                  7.1                 0.00974   high
+37   Cursor Ultra (Composer Fast)        USD 200      Composer 2.5                7.0587              0.02833   medium
+38   Ollama Max                          USD 100      DeepSeek V4 Pro             7.0472              0.01419   medium
+39   ChatGPT Pro 5x                      USD 100      GPT 5.6 Terra               6.006               0.01665   medium
+40   GLM Coding Max (v3 ¥1078) Off-peak  CNY 1078     GLM 5.3                     5.926               0.02684   high
+41   GLM Coding Max (v2 ¥469) Off-peak   CNY 469      GLM 5.3                     5.926               0.01168   high
+42   GLM Coding Pro (v3 ¥538) Midpoint   CNY 538      GLM 5.3 Flash               5.774               0.01375   high
+43   GLM Coding Pro (v2 ¥149) Midpoint   CNY 149      GLM 5.3 Flash               5.774               0.00381   high
+44   Cursor Pro+ (Standard)              USD 60       Composer 2.5                5.3047              0.01131   low
+45   MiniMax Token Plan Max (Global)     USD 55       MiniMax M3                  5.1                 0.01078   high
+46   SuperGrok Heavy                     USD 300      Grok 4.6                    5.09                0.05894   medium
+47   SuperGrok Heavy                     USD 300      Grok 4.5                    5.09                0.05894   medium
+48   Step Plan Plus (¥99)                CNY 99       Step 3.7 Flash              4.9903              0.00293   medium
+49   Command Code GOAT                   USD 10       DeepSeek V4.1 Flash         4.8485              0.00206   medium
+50   Kimi CN CNY 699 †                   CNY 699      Kimi K2.7 Code              4.704               0.02192   medium
+51   Command Code GOAT                   USD 10       MiMo V2.5                   4.4643              0.00224   medium
+52   GLM Coding Max (v3 ¥1078) Midpoint  CNY 1078     GLM 5.3                     4.445               0.03578   high
+53   GLM Coding Max (v2 ¥469) Midpoint   CNY 469      GLM 5.3                     4.445               0.01557   high
+54   Kimi CN CNY 699 †                   CNY 699      Kimi K3                     4.353               0.02369   medium
+55   Ollama Max                          USD 100      MiniMax M2.7                4.3384              0.02305   medium
+56   Ollama Pro                          USD 20       DeepSeek V4 Flash           4.3274              0.00462   medium
+57   Command Code GOAT                   USD 10       Muse Spark 1.3 Contributor  4.1667              0.0024    medium
+58   Command Code GOAT                   USD 10       Muse Spark 1.2 Contributor  4.1667              0.0024    medium
+59   Claude Pro                          USD 20       Claude Sonnet 5             3.97                0.00504   medium
+60   GLM Coding Pro (v3 ¥538) Peak       CNY 538      GLM 5.3 Flash               3.85                0.02061   high
+61   GLM Coding Pro (v2 ¥149) Peak       CNY 149      GLM 5.3 Flash               3.85                0.00571   high
+62   OpenCode Go                         USD 10       LongCat 2.0                 3.6364              0.00275   medium
+63   ChatGPT Pro 5x                      USD 100      GPT 5.6 Sol                 3.08                0.03247   medium
+64   Cursor Ultra (Fast)                 USD 200      Grok 4.6                    3.074               0.06506   high
+65   GLM Coding Max (v3 ¥1078) Peak      CNY 1078     GLM 5.3                     2.963               0.05367   high
+66   GLM Coding Max (v2 ¥469) Peak       CNY 469      GLM 5.3                     2.963               0.02335   high
+67   GLM Coding Pro (v3 ¥538) Off-peak   CNY 538      GLM 5.3                     2.54                0.03125   high
+68   GLM Coding Pro (v2 ¥149) Off-peak   CNY 149      GLM 5.3                     2.54                0.00865   high
+69   Step Plan Mini (¥49)                CNY 49       Step 3.5 Flash              2.5173              0.00287   medium
+70   ChatGPT Pro 5x                      USD 100      GPT 5.5                     2.4024              0.04163   medium
+71   Ollama Max                          USD 100      MiniMax M3                  2.1692              0.0461    medium
+72   Cursor Pro+                         USD 60       Grok 4.6                    2.0632              0.02908   medium
+73   SuperGrok Plus                      USD 100      Grok 4.6                    2.04                0.04902   medium
+74   GLM Coding Pro (v3 ¥538) Midpoint   CNY 538      GLM 5.3                     1.905               0.04166   high
+75   GLM Coding Pro (v2 ¥149) Midpoint   CNY 149      GLM 5.3                     1.905               0.01154   high
+76   Cursor Pro+ (Composer Fast)         USD 60       Composer 2.5                1.8823              0.03188   low
+77   OpenCode Go                         USD 10       DeepSeek V4.1 Flash         1.8182              0.0055    medium
+78   MiniMax Token Plan Max              CNY 119      MiniMax M3                  1.8                 0.00975   high
+79   Command Code GOAT                   USD 10       Hy3                         1.7873              0.0056    medium
+80   Ollama Pro                          USD 20       GLM 5.3 Flash               1.7531              0.01141   medium
+81   MiniMax Token Plan Plus (Global)    USD 22       MiniMax M3                  1.7                 0.01294   high
+82   MiniMax Token Plan Plus (Global)    USD 22       MiniMax M2.7                1.7                 0.01294   medium
+83   Devin Max                           USD 200      GPT-6 Astra                 1.624               0.12315   high
+84   Claude Pro                          USD 20       Claude Opus 4.8             1.588               0.01259   medium
+85   Kimi CN CNY 199 †                   CNY 199      Kimi K2.7 Code              1.568               0.01872   medium
+86   OpenCode Go                         USD 10       Hy3                         1.532               0.00653   medium
+87   OpenCode Go                         USD 10       Qwen3.8 Flash               1.4656              0.00682   medium
+88   Kimi CN CNY 199 †                   CNY 199      Kimi K3                     1.451               0.02023   medium
+89   Ollama Pro                          USD 20       DeepSeek V4 Pro             1.4094              0.01419   medium
+90   Ollama Max                          USD 100      Kimi K2.7 Code              1.3657              0.07322   medium
+91   Ollama Max                          USD 100      GLM 5.1                     1.3175              0.0759    medium
+92   OpenCode Go                         USD 10       Omen Alpha                  1.3155              0.0076    medium
+93   GLM Coding Lite (v3 ¥118) Off-peak  CNY 118      GLM 5.3 Flash               1.283               0.01357   high
+94   GLM Coding Lite (v2 ¥49) Off-peak   CNY 49       GLM 5.3 Flash               1.283               0.00563   high
+95   GLM Coding Pro (v3 ¥538) Peak       CNY 538      GLM 5.3                     1.27                0.06249   high
+96   GLM Coding Pro (v2 ¥149) Peak       CNY 149      GLM 5.3                     1.27                0.01731   high
+97   Command Code GOAT                   USD 10       MiMo V2.5 Pro               1.2573              0.00795   medium
+98   Step Plan Mini (¥49)                CNY 49       Step 3.7 Flash              1.2476              0.00579   medium
+99   Cursor Pro (Standard)               USD 20       Composer 2.5                1.2084              0.01655   medium
+100  Claude Max 20x (9/14+)              USD 200      Claude Fable 5              1.2077              0.1656    low
+101  Command Code GOAT                   USD 10       Qwen3.8 27B                 1.2048              0.0083    medium
+102  ChatGPT Plus                        USD 20       GPT 5.6 Terra               1.2012              0.01665   medium
+103  Command Code GOAT                   USD 10       GLM 5.3 Flash               1.1687              0.00856   medium
+104  OpenCode Go                         USD 10       Qwen3.7 Plus                1.1278              0.00887   medium
+105  Ollama Max                          USD 100      GLM 5.3                     1.0033              0.09967   medium
+106  Ollama Max                          USD 100      GLM 5.2                     1.0033              0.09967   medium
+107  Command Code GOAT                   USD 10       Qwen3.8 Flash               0.9669              0.01034   medium
+108  GLM Coding Lite (v3 ¥118) Midpoint  CNY 118      GLM 5.3 Flash               0.962               0.0181    high
+109  GLM Coding Lite (v2 ¥49) Midpoint   CNY 49       GLM 5.3 Flash               0.962               0.00751   high
+110  OpenCode Go                         USD 10       MiMo V2.5 Pro               0.9415              0.01062   medium
+111  Claude Max 5x (9/14+)               USD 100      Claude Fable 5              0.9235              0.10828   low
+112  Command Code GOAT                   USD 10       Step 3.5 Flash              0.8811              0.01135   medium
+113  OpenCode Go                         USD 10       MiniMax M3                  0.8677              0.01152   medium
+114  OpenCode Go                         USD 10       MiniMax M2.7                0.8677              0.01152   medium
+115  OpenCode Go                         USD 10       MiniMax M2.5                0.8677              0.01152   medium
+116  Ollama Pro                          USD 20       MiniMax M2.7                0.8677              0.02305   medium
+117  OpenCode Go                         USD 10       Qwen3.6 Plus                0.8571              0.01167   medium
+118  Ollama Max                          USD 100      Kimi K3                     0.7326              0.1365    medium
+119  Command Code GOAT                   USD 10       GPT 5.6 Luna                0.7143              0.014     medium
+120  Command Code GOAT                   USD 10       MiniMax M3                  0.6797              0.01471   medium
+121  GLM Coding Lite (v3 ¥118) Peak      CNY 118      GLM 5.3 Flash               0.642               0.02711   high
+122  GLM Coding Lite (v2 ¥49) Peak       CNY 49       GLM 5.3 Flash               0.642               0.01126   high
+123  ChatGPT Plus                        USD 20       GPT 5.6 Sol                 0.616               0.03247   medium
+124  MiniMax Token Plan Plus             CNY 49       MiniMax M3                  0.6                 0.01205   high
+125  MiniMax Token Plan Plus             CNY 49       MiniMax M2.7                0.6                 0.01205   medium
+126  OpenCode Go                         USD 10       GPT 5.6 Luna                0.5357              0.01867   medium
+127  SuperGrok                           USD 30       Grok 4.6                    0.509               0.05894   high
+128  SuperGrok                           USD 30       Grok 4.5                    0.509               0.05894   medium
+129  ChatGPT Plus                        USD 20       GPT 5.5                     0.4805              0.04162   medium
+130  Cursor Pro                          USD 20       Grok 4.6                    0.47                0.04255   medium
+131  Command Code GOAT                   USD 10       DeepSeek V4 Pro             0.4698              0.02129   medium
+132  OpenCode Go                         USD 10       Hy4 Preview                 0.4436              0.02254   medium
+133  OpenCode Go                         USD 10       GLM 5.3 Flash               0.4383              0.02282   medium
+134  Ollama Pro                          USD 20       MiniMax M3                  0.4338              0.0461    medium
+135  Cursor Pro (Composer Fast)          USD 20       Composer 2.5                0.4288              0.04664   medium
+136  GLM Coding Lite (v3 ¥118) Off-peak  CNY 118      GLM 5.3                     0.423               0.04115   high
+137  GLM Coding Lite (v2 ¥49) Off-peak   CNY 49       GLM 5.3                     0.423               0.01709   high
+138  Command Code GOAT                   USD 10       Step 3.7 Flash              0.4226              0.02366   medium
+139  Command Code GOAT                   USD 10       Qwen3.7 Plus                0.3579              0.02794   medium
+140  OpenCode Go                         USD 10       DeepSeek V4 Pro             0.3524              0.02838   medium
+141  GLM Coding Lite (v3 ¥118) Midpoint  CNY 118      GLM 5.3                     0.317               0.05491   high
+142  GLM Coding Lite (v2 ¥49) Midpoint   CNY 49       GLM 5.3                     0.317               0.0228    high
+143  OpenCode Go                         USD 10       Kimi K2.6                   0.3151              0.03174   medium
+144  Kimi CN CNY 99 †                    CNY 99       Kimi K2.7 Code              0.314               0.04651   medium
+145  Command Code GOAT                   USD 10       Hy4 Preview                 0.2957              0.03382   medium
+146  Kimi CN CNY 99 †                    CNY 99       Kimi K3                     0.29                0.05036   medium
+147  Command Code GOAT                   USD 10       Qwen3.6 Plus                0.2779              0.03598   medium
+148  OpenCode Go                         USD 10       Kimi K2.7 Code              0.2731              0.03662   medium
+149  Command Code GOAT                   USD 10       Kimi K2.7 Code              0.2731              0.03662   medium
+150  Ollama Pro                          USD 20       Kimi K2.7 Code              0.2731              0.07323   medium
+151  Ollama Pro                          USD 20       GLM 5.1                     0.2635              0.0759    medium
+152  Command Code GOAT                   USD 10       DeepSeek V4 Flash Fast      0.2624              0.03811   medium
+153  Command Code GOAT                   USD 10       GLM 5.2                     0.2341              0.04272   medium
+154  GLM Coding Lite (v3 ¥118) Peak      CNY 118      GLM 5.3                     0.212               0.08211   high
+155  GLM Coding Lite (v2 ¥49) Peak       CNY 49       GLM 5.3                     0.212               0.0341    high
+156  OpenCode Go                         USD 10       GLM 5.2                     0.2007              0.04983   medium
+157  OpenCode Go                         USD 10       GLM 5.1                     0.2007              0.04983   medium
+158  Ollama Pro                          USD 20       GLM 5.3                     0.2007              0.09965   medium
+159  Ollama Pro                          USD 20       GLM 5.2                     0.2007              0.09965   medium
+160  Alibaba Cloud CN Coding Plan Pro    CNY 200      Qwen3.7 Plus                0.198               0.14901   medium
+161  Alibaba Cloud Coding Plan Pro       USD 50       Qwen3.7 Plus                0.198               0.25253   low
+162  Command Code GOAT                   USD 10       Gemini 3.8 Flash            0.1954              0.05118   medium
+163  Command Code GOAT                   USD 10       Gemini 3.7 Flash            0.1954              0.05118   medium
+164  Command Code GOAT                   USD 10       Inkling Small               0.1779              0.05621   medium
+165  ChatGPT Plus                        USD 20       GPT-6 Astra                 0.159               0.12579   high
+166  SuperGrok Lite                      USD 10       Grok 4.6                    0.15                0.06667   low
+167  Ollama Pro                          USD 20       Kimi K3                     0.1465              0.13652   medium
+168  Command Code GOAT                   USD 10       Nemotron 3 Ultra            0.1446              0.06916   medium
+169  Command Code GOAT                   USD 10       Muse Spark 1.3              0.1064              0.09398   medium
+170  Command Code GOAT                   USD 10       Muse Spark 1.2              0.1064              0.09398   medium
+171  Command Code GOAT                   USD 10       GPT 5.6 Sol                 0.1                 0.1       medium
+172  Command Code GOAT                   USD 10       Inkling                     0.0993              0.1007    medium
+173  Kimi CN CNY 49 †                    CNY 49       Kimi K2.7 Code              0.078               0.09267   medium
+174  Command Code GOAT                   USD 10       GLM 5.3                     0.0669              0.14948   medium
+175  Command Code GOAT                   USD 10       Qwen3.8 Max                 0.065               0.15385   medium
+176  Command Code GOAT                   USD 10       Qwen3.8 Max 0902            0.065               0.15385   medium
+177  Command Code GOAT                   USD 10       Qwen3.7 Max                 0.0581              0.17212   medium
+178  OpenCode Go                         USD 10       Qwen3.7 Max                 0.0529              0.18904   medium
+179  OpenCode Go                         USD 10       GLM 5.3                     0.0502              0.1992    medium
+180  Command Code GOAT                   USD 10       Kimi K3                     0.0488              0.20492   medium
+181  OpenCode Go                         USD 10       Qwen3.8 Max                 0.0487              0.20534   medium
+182  Command Code GOAT                   USD 10       Kimi K2.7 Code HighSpeed    0.0455              0.21978   medium
+183  OpenCode Go                         USD 10       Kimi K3                     0.0366              0.27322   medium
+184  Command Code GOAT                   USD 10       Grok 4.5                    0.0363              0.27548   medium
+185  Command Code GOAT                   USD 10       Grok 4.6                    0.0363              0.27548   medium
+186  Command Code GOAT                   USD 10       GLM 5.2 Fast                0.034               0.29412   medium
+187  OpenCode Go                         USD 10       Grok 4.6                    0.0272              0.36765   medium

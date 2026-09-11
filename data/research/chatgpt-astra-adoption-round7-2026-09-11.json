@@ -1,0 +1,106 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "ChatGPT Plus 用户面板 Codex Astra（gpt-6-astra）专项采用记录。用户本人账号 2026-09-11 晚周窗剩余 26%→0% 的 token 抽取（input + cache_read 两列；output/reasoning 未在本次抽取中，按 Codex 历史构成约占 <1%）。同一文件附记本周窗各模型缓存命中率。历史 research 文件不改。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-6-astra",
+      "evidenceType": "user_dashboard_backcalculation",
+      "source": "用户本人 ChatGPT Plus 账号 Codex 用量抽取，2026-09-11 晚",
+      "sourceDate": "2026-09-11",
+      "userConfirmation": "用户直接提供分段 token 与百分比数据。",
+      "window": "周窗自 2026-09-06 起，今晚 exhausted（剩余 26%→0%）",
+      "observed": {
+        "segments": [
+          {
+            "remainingFrom": 0.26,
+            "remainingTo": 0.04,
+            "deltaPercentPoints": 22,
+            "inputTokens": 301948,
+            "cacheReadTokens": 8325376,
+            "totalTokens": 8627324,
+            "cacheHitRate": 0.9650009666960462
+          },
+          {
+            "remainingFrom": 0.04,
+            "remainingTo": 0.0,
+            "deltaPercentPoints": 4,
+            "inputTokens": 34029,
+            "cacheReadTokens": 1675392,
+            "totalTokens": 1709421,
+            "cacheHitRate": 0.9800932596475648
+          }
+        ],
+        "wholeDay": {
+          "deltaPercentPoints": 26,
+          "inputTokens": 335977,
+          "cacheReadTokens": 10000768,
+          "totalTokens": 10336745,
+          "cacheHitRate": 0.9674968280633797
+        }
+      },
+      "calculation": {
+        "weeklyTokensCentral": 39756711.5,
+        "monthlyTokensCentralExact": 159026846.2,
+        "adoptedMonthlyTokens": 159000000,
+        "adoptedMonthlyYi": 1.59,
+        "formula": "10,336,745 / 26% * 4 weeks",
+        "segmentWeeklyEstimates": {
+          "segment1_22pt": 39215109,
+          "segment2_4pt": 42735525,
+          "note": "4pt 段相对误差大（面板取整），仅作范围旁证；采用整段 26pt"
+        },
+        "roundedPercentMonthlyLow": 153136963,
+        "roundedPercentMonthlyHigh": 165387920,
+        "roundedPercentNote": "26pt 为两个取整读数之差，真实占比约 25%~27%，对应 1.53~1.65 亿/月。中心值仍按显示 26pt 采用。"
+      },
+      "crossCheck": {
+        "method": "Observatory 加权单位口径：周池按加权 token 计，Sol=1x / Terra=0.4x / Luna=0.04x / Astra=2x",
+        "lunaWeeklyRawTokens": 1877779483,
+        "weightedPoolUnits": 75111179,
+        "astraWeeklyRawImplied": 37555590,
+        "astraMonthlyYiImplied": 1.5,
+        "note": "Luna 实测（chatgpt-luna-adoption-round6）× 权重比 0.04/2 → Astra 应得 3756 万/周（1.50 亿/月）；本次直测 3976 万/周（1.59 亿/月），偏高 5.9%，在面板 % 取整与权重近似范围内吻合。两条独立路径互证。【round8 修正：Observatory 现测 Astra≈4.1× Sol quota/token（Pro20x，09-08），与旧记 2× 冲突；改用 Plus Sol 基准（1.54亿/周）÷ 本测 3976万 = 3.87×，与 4.1× 同量级——说明统一加权池模型本身不严格，本条互证降权看待；Plus 直测值不依赖权重模型，不受影响。】",
+        "poolRatioCheck": "订阅内实测 raw token 池比 Luna:Astra ≈ 47.2x（18.78 亿/3976 万），与 Observatory 权重比 2x/0.04x=50x 接近；Astra 暂无官方三段价记录，未做标价比对"
+      },
+      "tokenCountingNote": "本次抽取只含 input + cache_read 两列，未含 output/reasoning；Luna 同法实测 output 占 0.33%，此处缺失项对反推影响 <1%。直接采用 total，不按项目标准负载再次归一。",
+      "confidence": "high",
+      "decision": "新增 chatgpt_plus / gpt-6-astra 独立点 1.59 亿/月；Pro 5x/20x 按官方倍率派生（与 Luna 同法）。"
+    },
+    {
+      "planId": "chatgpt_pro_5x",
+      "priceUsd": 100,
+      "model": "gpt-6-astra",
+      "evidenceType": "derived_official_multiplier",
+      "calculation": "1.59 亿 × 5 = 7.95 亿/月",
+      "confidence": "medium",
+      "decision": "曾按 Luna 同法派生 7.95 亿；2026-09-11 用户拍板撤回——Pro 档 Astra 周池三源分歧 2.7×（见 chatgpt-astra-issue8-round9），派生值暂不采用，只保留 Plus 独立点。"
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "priceUsd": 200,
+      "model": "gpt-6-astra",
+      "evidenceType": "derived_official_multiplier",
+      "calculation": "1.59 亿 × 20 = 31.81 亿/月",
+      "confidence": "medium",
+      "decision": "曾派生 31.81 亿并入库；2026-09-11 用户拍板撤回——Observatory 09-08 直测 34.63 亿/月（21.8×）与 issue#8 网关 84~93 亿/月（53~58×）分歧未裁决，先只保留 Plus 实测点。chatgpt-pro20x-gateway-measurement 中含大量 Astra 段但为混合负载，仅作量级旁证。"
+    }
+  ],
+  "weeklyWindowCacheHitRates": {
+    "windowSince": "2026-09-06",
+    "windowState": "exhausted 时点",
+    "astra": 0.9686695022727288,
+    "luna": 0.9734836209812816,
+    "thirdUnlabeled": 0.9605046544857986,
+    "note": "第三个数值用户未标注对象，原样记录"
+  },
+  "adopted": {
+    "chatgpt_plus_gpt_6_astra_monthlyYi": 1.59
+  },
+  "withdrawn": {
+    "chatgpt_pro_5x_gpt_6_astra_monthlyYi": 7.95,
+    "chatgpt_pro_20x_gpt_6_astra_monthlyYi": 31.81,
+    "reason": "用户 2026-09-11 拍板：Pro 档三源分歧 2.7× 未裁决（×20 派生 / Observatory 34.6 亿直测 / issue#8 网关 84~93 亿），暂不派生，待更干净周窗证据"
+  }
+}

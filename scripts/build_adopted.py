@@ -23,6 +23,10 @@ SUPERGROK_WEEKLY_TOKENS = 127_272_629
 SUPERGROK_PANEL_USD = 25
 CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
 CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
+CHATGPT_PLUS_ASTRA_USED_TOKENS = 10_336_745
+CHATGPT_PLUS_ASTRA_USED_FRACTION = 0.26
+DEVIN_MAX_ASTRA_USED_TOKENS = 81_207_229
+DEVIN_MAX_ASTRA_USED_FRACTION = 0.20
 KIMI_199_USED_TOKENS = 243_739_068
 KIMI_199_USED_FRACTION = 0.84
 KIMI_MONTHLY_TO_WEEKLY = 5
@@ -44,6 +48,22 @@ def chatgpt_luna_monthly_yi(plan_multiplier: float = 1) -> float:
     return round(
         CHATGPT_PLUS_LUNA_USED_TOKENS / CHATGPT_PLUS_LUNA_USED_FRACTION
         * MONTH_WEEKS * plan_multiplier / YI,
+        2,
+    )
+
+
+def chatgpt_astra_monthly_yi() -> float:
+    return round(
+        CHATGPT_PLUS_ASTRA_USED_TOKENS / CHATGPT_PLUS_ASTRA_USED_FRACTION
+        * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def devin_max_astra_monthly_yi() -> float:
+    return round(
+        DEVIN_MAX_ASTRA_USED_TOKENS / DEVIN_MAX_ASTRA_USED_FRACTION
+        * MONTH_WEEKS / YI,
         2,
     )
 
@@ -234,6 +254,7 @@ def command_code_goat_rows() -> list[tuple]:
 OLLAMA_PRO_CREDITS_USD = 60
 OLLAMA_MAX_CREDITS_USD = 300
 OLLAMA_MODELS = (
+    ("deepseek-v4.1-flash", 0.003, 0.15, 0.60, "Off-Peak；Peak=2×（Ollama 峰窗 12:00–18:00 UTC Mon–Fri，金额对齐 DeepSeek 官方 V4.1 Flash 但窗口不同）；2026-09-10 起分批上线；Ollama 仅此一个 V4.1 变体；ollama-deepseek-v41-round1-2026-09-11.json"),
     ("deepseek-v4-flash", 0.007, 0.22, 0.66, "Off-Peak；Peak=2×（12:00–18:00 UTC Mon–Fri），与项目/OpenCode DeepSeek 峰谷口径一致"),
     ("deepseek-v4-pro", 0.022, 0.66, 1.98, "Off-Peak；Peak=2×（12:00–18:00 UTC Mon–Fri），与项目/OpenCode DeepSeek 峰谷口径一致"),
     ("glm-5.3", 0.26, 1.4, 4.4, "官网三段价"),
@@ -254,7 +275,8 @@ def ollama_rows(plan_id: str, plan_name: str, price_usd: float, credits_usd: flo
         rows.append((
             plan_id, plan_name, price_usd, "USD", model, yi, "medium",
             "https://ollama.com/pricing 官方 usage credits 与三段价；"
-            "https://ollama.com/blog/transparent-pricing；code-subscriptions-round1-2026-09-06.json",
+            "https://ollama.com/blog/transparent-pricing；code-subscriptions-round1-2026-09-06.json；"
+            "ollama-deepseek-v41-round1-2026-09-11.json",
             f"新增{yi:g}亿：共享月池 ${credits_usd:g} ÷ 统一标准负载加权价；{variant_note}。"
             "同套餐各模型额度不可相加（共享池按单模型打满）；无面板 token+% 截图，按官方绝对credits+价表",
         ))
@@ -330,6 +352,10 @@ SUBS = [
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(), "high", "用户Plus面板：112,666,769 total tokens = 周额度约6%；chatgpt-luna-adoption-round6-2026-09-08.json", "旧120.12亿（Sol基准×统一credits价比19.5）→75.11亿：112,666,769÷6%×4周；直接保留面板total，不再套标准负载。6%若为整数四舍五入，范围约69.33~81.94亿/月；实测token构成为cache read 97.06%、普通输入2.61%、输出0.33%"),
     ("chatgpt_pro_5x", "ChatGPT Pro 5x", 100, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(5), "medium", "Plus Luna实测×官方5x；chatgpt-luna-adoption-round6-2026-09-08.json", "旧600.6亿→375.56亿：Plus Luna面板反推基准×官方5x；非Pro 5x账号独立实测"),
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(20), "medium", "Plus Luna实测×官方20x；GitHub #8社区美元等效旁证；chatgpt-luna-adoption-round6-2026-09-08.json", "旧2402.4亿→1502.22亿：Plus Luna面板反推基准×官方20x；按截图实际token组成折公开API价，约$1073/周，与社区‘Luna x20不到$1200、Sol x20约$2000’同量级。美元等效仅作池比旁证，不直接换token"),
+    # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro两档暂不派生：三源对Pro20x周池分歧2.7×（×20派生7.95亿/周、Observatory 8.66亿、issue#8网关21~23亿），用户拍板只上Plus
+    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；Pro 5x/20x暂不派生（三源分歧2.7×未裁决，见round8/round9）"),
+    # Devin —— 用户Max账号周窗59%→39%段astra单列反推；swe-2免费不占额度，Max官方为周池无日上限
+    ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板：gpt-6-astra-high total Δ81,207,229 tokens（calls+319，in 957/out 360,125/cache_read 79,102,796/cache_create 1,743,351）= 周额度20pt；devin-usage-round2-2026-09-11.json；https://devin.ai/pricing Max $200/月", "新增16.24亿：81,207,229÷20%×4周；全口径total直接采用不归一；20pt为取整读数差，范围约15.85~16.64亿；cache_read命中率99.9988%异常（超长上下文续跑）已记录；swe-2免费不占额度；Pro $20档无数据不派生"),
     # Anthropic —— Pro保留Opus4.8历史实测；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
     #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用
     ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-4.8", 15.88, "medium", "awesome-coding-plan 实测", "Opus4.8历史实测保留，现服务Opus5未重测；round5候选Opus5约1.9亿依赖假定周消息数，用户未确认，不作为实测收紧证据"),
@@ -441,7 +467,7 @@ METERED = [
 # 精选图只画主流套餐 + 前沿相关点，避免 60 个点挤在一起；全量图画全部
 MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
-              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn"}
+              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max"}
 MAIN_EXTRA = {
     ("opencode_go", "deepseek-v4.1-flash"),
     ("opencode_go", "glm-5.3-flash"),

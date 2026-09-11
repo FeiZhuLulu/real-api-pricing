@@ -55,9 +55,9 @@ TEMPLATE = r"""<!doctype html>
 <div class="foot">数据：<code>data/adopted.csv</code>（取舍与出处见 <code>scripts/build_adopted.py</code>）· 四张榜单各自独立绘制，快照与来源见标题及项目记录 · AA Coding Agent 分数属于官网标明的 harness×模型配置 · 美元/credits额度与按量 API 三段价统一按项目标准负载（<span id="mix"></span>）折算；直接 total-token 实测不重复归一</div>
 <script>
 const DATA = __DATA__;
-const VENDOR_COLOR = {OpenAI:"#00A86B",Anthropic:"#F07826",xAI:"#B65CFF",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#D23A7D",Alibaba:"#FF6F61",DeepSeek:"#1F75FE",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFB81C",OpenCode:"#00C0A8","Command Code":"#708090",Ollama:"#A0785C",StepFun:"#00F4E5",other:"#00C0A8"};
+const VENDOR_COLOR = {OpenAI:"#00A86B",Anthropic:"#F07826",xAI:"#B65CFF",Kimi:"#2FA8FF",Zhipu:"#1E1E1E",MiniMax:"#D23A7D",Alibaba:"#FF6F61",DeepSeek:"#1F75FE",Google:"#7CC12A",Xiaomi:"#FFA000",Tencent:"#26C6DA",Cursor:"#FFB81C",OpenCode:"#00C0A8","Command Code":"#708090",Ollama:"#A0785C",StepFun:"#00F4E5",Devin:"#7C3AED",other:"#00C0A8"};
 const FRONTIER_COLOR="#111111";
-const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.id.startsWith("stepfun_")?"StepFun":p.vendor;
+const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.id.startsWith("stepfun_")?"StepFun":p.id.startsWith("devin_")?"Devin":p.vendor;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const priceLabel=x=>"$"+Number(x.toPrecision(5)).toString();

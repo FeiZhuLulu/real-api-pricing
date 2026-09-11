@@ -1,0 +1,135 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "第一轮联网证据：Ollama Cloud 上 DeepSeek V4.1 的官方模型 slug、三段标价（含峰谷）、上下文、Pro/Max usage credits 是否仍为 $60/$300、是否有每模型 cap、上线公告。先读过 data/research/code-subscriptions-round1-2026-09-06.json（Ollama Pro/Max credits 与当时价表）和 data/research/list-prices-deepseek-v41-round2-2026-09-10.json（DeepSeek 官方 V4.1 Flash 美元价），本文件只追加，不改已有 research / adopted / scripts。价格一律 USD per 1M tokens。顺手核对 pricing 页既有模型价相对 round1 是否变化，只记变化。",
+  "baselineCompared": {
+    "ollamaCreditsAndPrices": "data/research/code-subscriptions-round1-2026-09-06.json providers.ollama_cloud (fetchedAt 2026-09-06)",
+    "deepseekOfficialV41FlashUsd": "data/research/list-prices-deepseek-v41-round2-2026-09-10.json (off-peak cached/input/output $0.003/$0.15/$0.60; peak 2×)"
+  },
+  "items": [
+    {
+      "claim": "Ollama Cloud 上 DeepSeek V4.1 官方模型名为 deepseek-v4.1-flash；云端调用 slug 为 deepseek-v4.1-flash:cloud。library/search 仅此一个 V4.1 变体，未见 deepseek-v4.1 或 deepseek-v4.1-pro。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/library/deepseek-v4.1-flash",
+      "sourceDate": "2026-09-11",
+      "quote": "ollama run deepseek-v4.1-flash:cloud … deepseek-v4.1-flash:cloud · 1M context window · Text, Image",
+      "confidence": "high",
+      "crossLinks": [
+        "https://ollama.com/pricing",
+        "https://ollama.com/search?q=deepseek-v4.1&c=cloud"
+      ],
+      "note": "pricing 表第一行链接 /library/deepseek-v4.1-flash；cloud 筛选搜索 deepseek-v4.1 仅返回 deepseek-v4.1-flash（另有旧 deepseek-v4-flash 命中，属 V4 非 V4.1）。"
+    },
+    {
+      "claim": "Ollama pricing 页 Model pricing 表（Prices are per million tokens）给出 deepseek-v4.1-flash 非高峰/基础价：Input $0.15 / Cached input $0.003 / Output $0.60。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/pricing",
+      "sourceDate": "2026-09-11",
+      "quote": "| deepseek-v4.1-flash | $0.15 | $0.003 | $0.60 |",
+      "confidence": "high",
+      "note": "列顺序为 Model | Input | Cached input | Output。与模型页 Base 列一致。"
+    },
+    {
+      "claim": "Ollama 对该模型有 Peak pricing，且价为 Base 的 2×：Input $0.30 / Cached input $0.006 / Output $1.20。峰谷窗口为 Ollama 自定：UTC 周一至周五 12:00–18:00（不是 DeepSeek 官方 API 的 01–04 & 06–10 UTC）。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/pricing",
+      "sourceDate": "2026-09-11",
+      "quote": "Peak pricing applies between 12:00 and 18:00 UTC, Monday to Friday. | deepseek-v4.1-flash | $0.30 | $0.006 | $1.20 |",
+      "confidence": "high",
+      "crossLinks": [
+        "https://ollama.com/library/deepseek-v4.1-flash"
+      ],
+      "note": "模型页 Cost /1M tokens 亦标 Base/Peak：$0.15/$0.30 input、$0.003/$0.006 cached、$0.60/$1.20 output。金额与 DeepSeek 官方 V4.1 Flash 美元峰谷价一致（见 list-prices-deepseek-v41-round2），但峰谷时段跟 Ollama DeepSeek 既有口径（round1 已记 12–18 UTC），与 DeepSeek 自家高峰窗不同。"
+    },
+    {
+      "claim": "Ollama 官方 X 账号声明：per-token 价与 DeepSeek API 一致，并含 off-peak；模型已在 Ollama cloud 全量上线，可用 Pro / Max / Team，也可 Free 账号按量付费。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/ollama/status/2098290160035373524",
+      "sourceDate": "2026-09-11",
+      "quote": "DeepSeek-V4.1-Flash is now fully rolled out and available on Ollama's cloud: … Per-token pricing matches the DeepSeek API, including off-peak pricing … Get started with Ollama's Pro, Max, and Team plans, or pay as you go with a free account with no service fees",
+      "confidence": "high",
+      "note": "时间戳 2026-09-11 05:58:53 GMT。此前同账号分两步宣布：先 Max/Team（2026-09-10 23:12 UTC，status/2098188014119985406），再 Pro（2026-09-11 02:22 UTC，status/2098235674793242770）。"
+    },
+    {
+      "claim": "模型页标明上下文长度 1M tokens；云端 tag 为 deepseek-v4.1-flash:cloud；输入模态 Text, Image；参数量展示 763B parameters（readme 写 552B backbone MoE）。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/library/deepseek-v4.1-flash",
+      "sourceDate": "2026-09-11",
+      "quote": "Context 1M tokens … Size 763B parameters … deepseek-v4.1-flash:cloud · 1M context window · Text, Image … multimodal Mixture-of-Experts (MoE) model with 552B backbone parameters and support for contexts of up to one million tokens",
+      "confidence": "high",
+      "note": "采用额度时用上下文=1M；参数量页眉 763B 与 readme 552B backbone 并存，不进计价，仅作型号旁证。"
+    },
+    {
+      "claim": "Ollama Pro 仍为 $20/mo，含 $60 of usage credits per month；Max 仍为 $100/mo，含 $300 of usage credits per month。相对 code-subscriptions-round1（2026-09-06）无变化。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/pricing",
+      "sourceDate": "2026-09-11",
+      "quote": "Pro … $20 / mo. … $60 of usage credits per month … Max … $100 / mo. … $300 of usage credits per month",
+      "confidence": "high",
+      "crossLinks": [
+        "https://ollama.com/blog/transparent-pricing"
+      ],
+      "note": "blog/transparent-pricing（2026-08-31）同文：Pro $20→$60 usage；Max $100→$300 usage。本轮 pricing 页复核未改。"
+    },
+    {
+      "claim": "Ollama 计价为共享月度 usage credits 按各模型公开 $/1M 扣减；pricing FAQ 未给出 deepseek-v4.1-flash（或任一模型）的独立每模型月度 cap。与 Command Code / OpenCode Go 的 per-model allowance 不同。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/pricing",
+      "sourceDate": "2026-09-11",
+      "quote": "Pro, Max, and Team plans include a set dollar amount of usage credits each month. … Usage is measured in tokens at each model's rates. The model pricing table lists the input, cached input, and output price per million tokens for every cloud model.",
+      "confidence": "high",
+      "note": "官方 X 亦写 Get started with Pro, Max, and Team（或 Free pay-as-you-go），未提该模型单独额度上限。结论：两档订阅共享池均可烧到该模型；无每模型 cap 的官方数字 → 折 token 时用整池 $60/$300。"
+    },
+    {
+      "claim": "上线时间线：library 页标记 Updated yesterday / Published 约 2026-09-10；官方 X 于 2026-09-10 起按 Max/Team→Pro→全量 分批放开。本轮未找到 ollama.com/blog 专文公告 DeepSeek-V4.1-Flash。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/ollama/status/2098188014119985406",
+      "sourceDate": "2026-09-10",
+      "quote": "DeepSeek-V4.1-Flash is now being rolled out on Ollama's cloud, starting with Max and Team accounts. We are quickly adding more capacity to roll it out to all subscribers.",
+      "confidence": "high",
+      "crossLinks": [
+        "https://x.com/ollama/status/2098235674793242770",
+        "https://x.com/ollama/status/2098290160035373524",
+        "https://ollama.com/library/deepseek-v4.1-flash"
+      ],
+      "note": "公告主来源为 @ollama X，不是 blog。blog 目录本轮只复核到 transparent-pricing（2026-08-31）谈 credits 改版，无 V4.1 专文。"
+    },
+    {
+      "claim": "相对 code-subscriptions-round1（2026-09-06）价表快照：本轮要求核对的既有模型 deepseek-v4-flash、deepseek-v4-pro、glm-5.3、glm-5.3-flash、glm-5.2、glm-5.1、kimi-k3、kimi-k2.7-code、minimax-m3、minimax-m2.7 的 cached/input/output（及 DeepSeek 峰谷）均未变；唯一新增行是 deepseek-v4.1-flash。",
+      "evidenceType": "official_page",
+      "source": "https://ollama.com/pricing",
+      "sourceDate": "2026-09-11",
+      "quote": "deepseek-v4-flash $0.22 / $0.007 / $0.66 (peak $0.44 / $0.014 / $1.32); deepseek-v4-pro $0.66 / $0.022 / $1.98 (peak $1.32 / $0.044 / $3.96); glm-5.3 $1.40 / $0.26 / $4.40; glm-5.3-flash $0.15 / $0.03 / $0.50; glm-5.2 $1.40 / $0.26 / $4.40; glm-5.1 $1.00 / $0.20 / $3.20; kimi-k3 $3.00 / $0.30 / $15.00; kimi-k2.7-code $0.95 / $0.19 / $4.00; minimax-m3 $0.60 / $0.12 / $2.40; minimax-m2.7 $0.30 / $0.06 / $1.20",
+      "confidence": "high",
+      "note": "与 round1 modelPricesPer1MFromPricingPage.rows 逐项比对一致。变化=仅新增 deepseek-v4.1-flash（见上条）；其余不重抄全表。Peak 窗原文仍是 12:00–18:00 UTC Mon–Fri，未改。"
+    }
+  ],
+  "synthesis": {
+    "modelSlug": "deepseek-v4.1-flash",
+    "cloudRunSlug": "deepseek-v4.1-flash:cloud",
+    "variantsOnOllama": ["deepseek-v4.1-flash"],
+    "noVariantsFound": ["deepseek-v4.1", "deepseek-v4.1-pro"],
+    "pricesPer1MUsd": {
+      "offPeakOrBase": { "cachedInput": 0.003, "input": 0.15, "output": 0.6 },
+      "peak": { "cachedInput": 0.006, "input": 0.3, "output": 1.2 }
+    },
+    "peakWindow": "12:00–18:00 UTC, Monday to Friday (Ollama page; 2× of base)",
+    "contextTokens": 1000000,
+    "creditsUnchanged": {
+      "pro": { "priceUsdPerMonth": 20, "monthlyCreditsUsd": 60 },
+      "max": { "priceUsdPerMonth": 100, "monthlyCreditsUsd": 300 }
+    },
+    "perModelCap": "notFound_on_official_pricing_or_model_page",
+    "availability": "Pro / Max / Team included credits; Free pay-as-you-go also stated by @ollama",
+    "matchesDeepseekOfficialUsdAmounts": true,
+    "peakWindowDiffersFromDeepseekOfficialApi": true,
+    "announcementPrimary": "https://x.com/ollama/status/2098290160035373524",
+    "otherModelPriceChangesVsRound1": "none_among_checked_list; only_new_row_deepseek-v4.1-flash"
+  },
+  "notFound": [
+    "ollama.com/blog 上专门宣布 DeepSeek-V4.1-Flash / deepseek-v4.1-flash 上线的 changelog 或 blog 帖（仅有 X @ollama 分批/全量公告 + library 页）",
+    "Ollama 上 deepseek-v4.1 或 deepseek-v4.1-pro（无 Flash 后缀）云端模型页或 pricing 行",
+    "deepseek-v4.1-flash 的官方每模型月度 credits/usage cap（Ollama 只公布共享池 $60/$300）",
+    "Free 档 starter usage credits 的固定美元数额（页上只写 starter amount，未给数字）",
+    "官方说明 Ollama Peak 窗（12–18 UTC）与 DeepSeek API Peak 窗（01–04 & 06–10 UTC）为何不同——仅能确认两边金额对齐、窗口不同"
+  ]
+}

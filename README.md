@@ -26,20 +26,20 @@ Snapshot: 2026-09-09. Each row is one **plan × actual served model**; allowance
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | 196 |
-| Subscription points with monthly allowance | 183 |
+| All adopted plan × model points | 200 |
+| Subscription points with monthly allowance | 187 |
 | Metered API baselines | 13 |
-| OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 20 / 8 |
+| OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 22 / 8 |
 | Code Arena / Agent Arena scored points | 136 / 140 |
 | AA Intelligence / AA Coding Agent scored points | 173 / 71 |
-| OpenDesign Arena scored points | 65 |
-| Terminal-Bench 4.0 scored points | 66 |
+| OpenDesign Arena scored points | 69 |
+| Terminal-Bench 4.0 scored points | 68 |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
 
 ## Monthly allowance overview
 
-The 183 subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
+The 187 subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
 
 ### $0–30
 
@@ -67,7 +67,7 @@ The 183 subscription plan × model points are split by adopted USD monthly fee s
 
 ## Real unit price overview
 
-All 196 subscription and API points on one comparable $/MTok scale.
+All 200 subscription and API points on one comparable $/MTok scale.
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 

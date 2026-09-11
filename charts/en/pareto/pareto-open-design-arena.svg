@@ -42,12 +42,19 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Average task score</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,352.026 L1263.991,352.026 L1338.000,352.026" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,321.243 L491.752,321.243 L1263.991,352.026 L1338.000,352.026" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="77.6" data-x="743.411" data-y="425.904" transform="translate(743.411 425.904)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 77.6 · mediumGPT-5.6 Sol · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / GPT-5.6 Sol · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01623" data-score="77.6" data-x="874.321" data-y="425.904" transform="translate(874.321 425.904)"><title>GPT 5.6 Sol · Pro 20x · $0.01623/MTok · 77.6 · highGPT-5.6 Sol · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.12579" data-score="82.7" data-x="487.748" data-y="321.243" transform="translate(487.748 321.243)"><title>GPT-6 Astra · Plus · $0.12579/MTok · 82.7 · highGPT-6 Astra · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.12315" data-score="82.7" data-x="491.752" data-y="321.243" transform="translate(491.752 321.243)"><title>GPT-6 Astra · Devin Max · $0.12315/MTok · 82.7 · highGPT-6 Astra · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#7C3AED" stroke-width="1.35"/>
+<circle r="4" fill="#7C3AED"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.05894" data-score="72.4" data-x="630.860" data-y="532.617" transform="translate(630.860 532.617)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05894/MTok · 72.4 · highGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Grok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
@@ -185,6 +192,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="72.4" data-x="339.764" data-y="532.617" transform="translate(339.764 532.617)"><title>Grok 4.6 · Command Code GOAT · $0.27548/MTok · 72.4 · mediumGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00275" data-score="81.2" data-x="1209.453" data-y="352.026" transform="translate(1209.453 352.026)"><title>DeepSeek V4.1 Flash · Ollama Pro / DeepSeek V4.1 Flash · Ollama Max · $0.00275/MTok · 81.2 · mediumDeepSeek V4.1 Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / DeepSeek V4.1 Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#A0785C" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00462" data-score="70.6" data-x="1111.516" data-y="569.557" transform="translate(1111.516 569.557)"><title>DeepSeek V4 Flash · Ollama Pro / DeepSeek V4 Flash · Ollama Max · $0.00462/MTok · 70.6 · mediumDeepSeek V4 Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / DeepSeek V4 Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#A0785C" opacity=".68"/>
 </g>
@@ -224,6 +234,12 @@
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.5515" data-score="72.4" data-x="208.727" data-y="532.617" transform="translate(208.727 532.617)"><title>Grok 4.6 · Grok 4.6 API (&lt;200k) · $0.5515/MTok · 72.4 · highGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#B65CFF" stroke-width="1.5" opacity=".68"/>
 </g>
+<g class="front-label" data-model="gpt-6-astra">
+<path d="M485.894,307.435Q485.894,288.243 477.752,288.243" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="471.752" y="269.243" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">OpenDesign · GPT-6 Astra</text>
+<text x="471.752" y="289.243" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Devin Max</text>
+<text x="471.752" y="309.243" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.12315</text>
+</g>
 <g class="front-label" data-model="deepseek-v4.1-flash">
 <path d="M1257.282,365.442Q1257.282,388.026 1245.991,388.026" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
 <text x="1239.991" y="401.026" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">OpenDesign · DeepSeek V4.1 Flash</text>
@@ -248,12 +264,14 @@
 <text x="705.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Ollama</text>
 <rect x="771" y="826" width="8" height="8" fill="#1F75FE"/>
 <text x="788.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >DeepSeek</text>
-<path d="M874 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="904.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Pareto frontier</text>
-<path d="M1055 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="1069.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
+<rect x="865" y="826" width="8" height="8" fill="#7C3AED"/>
+<text x="882.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Devin</text>
+<path d="M957 830h22" stroke="#303630" stroke-width="1.65"/>
+<text x="987.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Pareto frontier</text>
+<path d="M1138 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
+<text x="1152.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >52 subscription positions / 8 API positions / 1 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >55 subscription positions / 8 API positions / 2 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >OpenDesign Harness reference; product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >open-design.ai/zh/llm-arena-for-design/</text>

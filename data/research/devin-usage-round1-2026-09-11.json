@@ -1,0 +1,63 @@
+{
+  "collectedAt": "2026-09-11",
+  "scopeNote": "Devin 订阅用量抽取首记。用户本人 Devin 账号一段 59%→39%（20pt）的分模型 token Δ。只记录，不采用：窗口口径（周/月/ACU 周期）未确认，且缓存命中率异常高，需更多段验证后再谈反推。",
+  "items": [
+    {
+      "planId": "devin",
+      "evidenceType": "user_dashboard_backcalculation_raw",
+      "source": "用户本人 Devin 账号用量抽取，2026-09-11",
+      "sourceDate": "2026-09-11",
+      "userConfirmation": "用户直接提供；并确认 swe-2 是免费的。",
+      "observedSegment": {
+        "remainingFrom": 0.59,
+        "remainingTo": 0.39,
+        "deltaPercentPoints": 20,
+        "byModel": {
+          "gpt-6-astra-high": {
+            "inputDelta": 957,
+            "cacheReadDelta": 79102796,
+            "totalDelta": 79103753,
+            "cacheHitRate": 0.9999879019646514
+          },
+          "swe-2-high": {
+            "inputDelta": 2198554,
+            "cacheReadDelta": 43325959,
+            "totalDelta": 45524513,
+            "cacheHitRate": 0.9517061500471186,
+            "free": true,
+            "freeNote": "用户 2026-09-11 确认 swe-2 免费；是否消耗该百分比额度未证实"
+          },
+          "summarizer": {
+            "inputDelta": 42220,
+            "cacheReadDelta": 12320,
+            "totalDelta": 54540,
+            "cacheHitRate": 0.2258892555922588
+          },
+          "compactor": {
+            "inputDelta": 97461,
+            "cacheReadDelta": 0,
+            "totalDelta": 97461,
+            "cacheHitRate": 0.0
+          }
+        },
+        "totalInputDelta": 2339192,
+        "totalCacheReadDelta": 122441075,
+        "totalTokens": 124780267,
+        "cacheHitRate": 0.9812535102204902,
+        "cacheCreateDelta": 1743351,
+        "cacheHitRateIncludingCreateInDenominator": 0.967732957178003
+      },
+      "quotaImplication": {
+        "ifAllModelsConsume": "124,780,267 / 20pt → 池 ≈ 6.24 亿/窗口",
+        "ifSwe2FreeNotCounted": "79,255,754 / 20pt → 池 ≈ 3.96 亿/窗口",
+        "note": "窗口周期未知（无法直接×4 得月）；两种口径并列记录，不自行择一"
+      },
+      "anomalies": [
+        "gpt-6-astra-high 命中率 99.9988%：79.1M cache_read 对应仅 957 fresh input，疑似同一会话超长上下文反复续跑或计数口径含重复 cache 读",
+        "整段命中率 98.13%（含 cache_write 口径 96.77%），显著高于本机 Codex 同周 Astra 96.87%/Luna 97.35%"
+      ],
+      "confidence": "low（机制有效但窗口与计费口径未确认，命中率异常待复核）",
+      "decision": "不采用。待补：Devin 额度窗口周期定义、swe-2 是否占额度百分比、更多分段样本。"
+    }
+  ]
+}

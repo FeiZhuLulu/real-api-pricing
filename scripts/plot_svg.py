@@ -22,9 +22,9 @@ COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
           "MiniMax": "#D23A7D", "Alibaba": "#FF6F61", "OpenCode": "#00C0A8",
           "Command Code": "#708090", "Ollama": "#A0785C", "DeepSeek": "#1F75FE",
           "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA",
-          "StepFun": "#00F4E5"}
+          "StepFun": "#00F4E5", "Devin": "#7C3AED"}
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
-            ("anthropic", "Claude"),
+            ("anthropic", "Claude"), ("devin", "Devin"),
             ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
             ("glm", "GLM"), ("minimax", "MiniMax"), ("aliyun", "Alibaba"),
             ("opencode", "OpenCode"), ("command_code", "Command Code"), ("ollama", "Ollama"),
