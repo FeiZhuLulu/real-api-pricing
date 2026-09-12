@@ -74,8 +74,16 @@ export function textLabelGroups(
   return densify(gs, front);
 }
 
-export function modelLabel(g: Group): string {
-  return [...new Set(g.rows.map((r) => r.point.model_display))].join(" / ");
+export function modelLabel(g: Group, lang = "en"): string {
+  const name = [...new Set(g.rows.map((r) => r.point.model_display))].join(
+    " / ",
+  );
+  const tag = g.rows.some((r) => r.mapping?.score_is_self_reported)
+    ? lang === "zh"
+      ? " [厂商自报]"
+      : " [self-reported]"
+    : "";
+  return name + tag;
 }
 
 export function labelProvider(g: Group): string {
@@ -373,6 +381,7 @@ export function frontierLogoViews(
   front: Group[],
   layout: PlotLayout,
   logos: Map<string, string>,
+  lang = "en",
 ): FrontierLogoView[] {
   const box = plotBox(layout);
   if (!box) return [];
@@ -386,7 +395,7 @@ export function frontierLogoViews(
       price: g.plotPrice,
       score: g.score,
       provider: labelProvider(g),
-      label: modelLabel(g),
+      label: modelLabel(g, lang),
       x: pt.x,
       y: pt.y,
       logoUrl: logos.get(labelProvider(g)),
@@ -410,6 +419,7 @@ export function placeTextLabels(
   markers: AnchorPoint[],
   box: PlotBox,
   mobile: boolean,
+  lang = "en",
 ): ArenaPlacement[] {
   if (!groups.length) return [];
   const placed: { box: Box; lead: Segment | null }[] = [];
@@ -418,7 +428,7 @@ export function placeTextLabels(
   for (const g of groups) {
     const anchor = anchors.get(g.key);
     if (!anchor) continue;
-    const label = modelLabel(g);
+    const label = modelLabel(g, lang);
     const size = measureLabel(label, mobile);
     let best: { slot: (typeof DIRECTIONS)[number] & { ax: number; ay: number }; box: Box; lead: Segment | null } | null = null;
     let bestPenalty = Infinity;

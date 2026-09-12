@@ -62,6 +62,7 @@ const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
 // Devin 渠道用六边形近似官方标志（Plotly 无自定义路径标记）；静态 SVG 用完整标志。
 const symbolOf=(p,base)=>channel(p)==="Devin"?"hexagon":base;
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const locVariant=s=>String(s).replaceAll("[vendor self-report]","[厂商自报]").replaceAll("[AA estimate]","[AA 估计值]");
 const priceLabel=x=>x===0?"≈$0":"$"+Number(x.toPrecision(5)).toString();
 const promoText=p=>p.promo_until?`促销至 ${p.promo_until}，不计额度`:"不计额度";
 const sel=document.getElementById("board");
@@ -82,7 +83,7 @@ function hover(p,yk,vk){
   const price=p.unmetered?`$${p.price_usd} ÷ 无界（${promoText(p)}）→ ≈$0 促销价，非永久口径`:p.billing==="metered"?"按量 API（标价 × 项目标准负载）":`$${p.price_usd} ÷ ${p.monthly_yi} 亿 token`;
   return `<b>${p.label}</b><br>真实单价 <b>${priceLabel(p.real_usd_per_mtok)}/MTok</b><br>${price}`
    +(p.d!=null?`<br>标价混合 $${p.list_blended_usd_per_mtok}/MTok → d = ${(p.d*100).toFixed(1)}%`:"")
-   +`<br>Y：${fmt(p[yk])}（${escapeHtml(fmt(p[vk]))}）`
+   +`<br>Y：${fmt(p[yk])}（${escapeHtml(locVariant(fmt(p[vk])))}）`
    +`<br>Harness：${escapeHtml(fmt(field("agent_harness")))} · effort：${fmt(field("reasoning_effort"))}`
    +`<br>分数区间：${fmt(field("score_low"))} ～ ${fmt(field("score_high"))}`
    +`<br>来源任务成本（非订阅）：mean $${fmt(field("mean_cost_usd_per_task"))} / median $${fmt(field("median_cost_usd_per_task"))}`
@@ -106,7 +107,7 @@ function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
   if(line.length){line.unshift([width,line[0][1]]);line.push([0,line[line.length-1][1]]);}
   for(let i=1;i<line.length;i++){const [x,y]=line[i-1],[xx,yy]=line[i];const n=Math.max(2,Math.ceil(Math.hypot(xx-x,yy-y)/10));for(let j=1;j<n;j++)obstacles.push([x+(xx-x)*j/n,y+(yy-y)*j/n]);}
   return [...front].reverse().map(p=>{
-    const models=[...new Set(p.members.map(q=>q[yk.replace(/__score$/, "__variant")]||q.model_display))].join(" / ");
+    const models=[...new Set(p.members.map(q=>locVariant(q[yk.replace(/__score$/, "__variant")]||q.model_display)))].join(" / ");
     const plans=[...new Set(p.members.map(q=>q.plan.replace("Claude ","").replace("ChatGPT ","")))];
     const rows=[models,...plans,p.unmetered?"≈$0 · "+promoText(p):priceLabel(p.real_usd_per_mtok)+" / MTok"];
     const w=Math.min(width-12,Math.max(...rows.map(s=>[...s].reduce((n,c)=>n+(c.charCodeAt(0)>255?12:6.6),0)))+18),h=rows.length*17+12;

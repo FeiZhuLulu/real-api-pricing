@@ -19,6 +19,8 @@ import {
   allowance,
   number,
   unmeteredNote,
+  selfReportTag,
+  variantLabel,
   ZERO_SLOT_RATIO,
 } from "./domain";
 import {
@@ -408,7 +410,7 @@ export default function Chart({
           if (!full) return;
           const box = plotBox(full);
           setArea(box);
-          setLogos(frontierLogoViews(front, full, logoMap));
+          setLogos(frontierLogoViews(front, full, logoMap, state.lang));
           if (!box || !textGroups.length) {
             setLabels([]);
             textPlacements = [];
@@ -435,6 +437,7 @@ export default function Chart({
               markers,
               box,
               mobile,
+              state.lang,
             );
           }
           setLabels(textLabelViews(textPlacements, full));
@@ -569,7 +572,7 @@ export default function Chart({
               yanchor: "top" as const,
               showarrow: false,
               text: escape(
-                `${i + 1}. ${[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")} · ${price(g.price)} / MTok${g.price === 0 ? " · " + unmeteredNote(g.rows[0].point, state.lang) : ""} · ${number(g.score, state.lang)}`,
+                `${i + 1}. ${[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")} · ${price(g.price)} / MTok${g.price === 0 ? " · " + unmeteredNote(g.rows[0].point, state.lang) : ""} · ${number(g.score, state.lang)}${g.rows[0].mapping?.score_is_self_reported ? " · " + selfReportTag(state.lang) : ""}`,
               ),
               font: { size: 12, color: chartTheme.ink },
             }));
@@ -612,6 +615,7 @@ export default function Chart({
                     markers,
                     box,
                     false,
+                    state.lang,
                   );
                 }
               }
@@ -822,7 +826,7 @@ export default function Chart({
             </div>
             {hoverGroup.rows[0]?.mapping?.variant && (
               <div className="hover-variant">
-                {hoverGroup.rows[0].mapping.variant}
+                {variantLabel(hoverGroup.rows[0].mapping.variant, state.lang)}
               </div>
             )}
             <div className="hover-stats">
@@ -836,6 +840,9 @@ export default function Chart({
               <span>
                 <small>{zh ? "分数" : "Score"}</small>
                 {number(hoverGroup.score, state.lang)}
+                {hoverGroup.rows[0]?.mapping?.score_is_self_reported && (
+                  <i> · {selfReportTag(state.lang)}</i>
+                )}
               </span>
             </div>
             <div className="hover-foot">
@@ -884,6 +891,9 @@ export default function Chart({
                     {g.price === 0 ? ` · ${unmeteredNote(g.rows[0].point, state.lang)}` : ""}
                     {" · "}
                     {number(g.score, state.lang)}
+                    {g.rows[0].mapping?.score_is_self_reported
+                      ? ` · ${selfReportTag(state.lang)}`
+                      : ""}
                   </small>
                 </span>
               </button>

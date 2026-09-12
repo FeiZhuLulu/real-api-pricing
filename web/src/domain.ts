@@ -311,6 +311,17 @@ export function unmeteredNote(p: Point, lang: string): string {
     ? `促销至 ${until}，不计额度`
     : `promo until ${until}, unmetered`;
 }
+/** Short badge for a vendor self-reported score. */
+export function selfReportTag(lang: string): string {
+  return lang === "zh" ? "厂商自报" : "self-reported";
+}
+/** Localize the bracketed provenance tags baked into variant names. */
+export function variantLabel(variant: string, lang: string): string {
+  if (lang !== "zh") return variant;
+  return variant
+    .replaceAll("[vendor self-report]", "[厂商自报]")
+    .replaceAll("[AA estimate]", "[AA 估计值]");
+}
 export const isThirdParty = (p: Point) => p.channel !== manufacturer(p.vendor);
 export const accessLine = (p: Point) =>
   isThirdParty(p)
@@ -353,6 +364,7 @@ export function csv(rows: Row[], lang: string): string {
           "评测配置",
           "分数",
           "AA 估计值",
+          "厂商自报",
           "Harness",
           "Effort",
           "分数来源",
@@ -373,6 +385,7 @@ export function csv(rows: Row[], lang: string): string {
           "Benchmark configuration",
           "Score",
           "AA estimated score",
+          "Vendor self-reported",
           "Harness",
           "Effort",
           "Score source",
@@ -402,6 +415,7 @@ export function csv(rows: Row[], lang: string): string {
         r.mapping?.variant,
         r.score,
         r.mapping?.score_is_estimated,
+        r.mapping?.score_is_self_reported,
         r.mapping?.agent_harness,
         r.mapping?.reasoning_effort,
         r.mapping?.source,

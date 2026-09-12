@@ -57,6 +57,7 @@ import {
   safeUrl,
   serialize,
   tableRows,
+  variantLabel,
   visiblePoints,
   isUnmetered,
   unmeteredNote,
@@ -1027,6 +1028,7 @@ function Explorer({
                         <td className="numeric">
                           {number(r.score, state.lang, 2)}
                           {r.mapping?.score_is_estimated && <small>{t("AA estimate", "AA 估计值")}</small>}
+                          {r.mapping?.score_is_self_reported && <small>{t("vendor self-report", "厂商自报")}</small>}
                         </td>
                         <td>
                           <span className={`confidence ${r.point.confidence}`}>
@@ -1511,10 +1513,10 @@ function Details({
               const m = r.mapping!;
               return (
                 <section className="configuration-detail" key={r.key}>
-                  <strong>{m.variant}</strong>
+                  <strong>{variantLabel(m.variant, lang)}</strong>
                   <dl>
                     <dt>{t("Score", "分数")}</dt>
-                    <dd>{number(m.score, lang, 4)}{m.score_is_estimated ? t(" · AA estimate; independent evaluation pending", " · AA 估计值，独立评测待完成") : ""}</dd>
+                    <dd>{number(m.score, lang, 4)}{m.score_is_estimated ? t(" · AA estimate; independent evaluation pending", " · AA 估计值，独立评测待完成") : ""}{m.score_is_self_reported ? t(" · vendor self-report, not an official leaderboard run", " · 厂商自报成绩，非官方榜单数据") : ""}</dd>
                     <dt>{t("Score interval", "分数区间")}</dt>
                     <dd>
                       {number(m.score_low, lang)} – {number(m.score_high, lang)}
