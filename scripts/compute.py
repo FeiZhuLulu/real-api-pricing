@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4")
+BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4", "deepswe_1_1")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
@@ -25,6 +25,8 @@ SCORE_FILES = (
     "scores-open-design-round1-2026-09-09.json",
     "scores-terminal-bench4-round1-2026-09-10.json",
     "scores-terminal-bench4-round2-selfreport-2026-09-12.json",
+    "scores-deepswe-1.1-2026-09-12.json",
+    "scores-deepswe-selfreport-2026-09-12.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",

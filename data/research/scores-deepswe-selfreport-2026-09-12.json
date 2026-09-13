@@ -1,0 +1,25 @@
+{
+  "collectedAt": "2026-09-12",
+  "supplement": true,
+  "baseSnapshot": "scores-deepswe-1.1-2026-09-12.json",
+  "boards": [],
+  "scores": [
+    {
+      "boardId": "deepswe_1_1",
+      "model": "deepseek-v4.1-flash",
+      "variantLabel": "mini-swe-agent - DeepSeek V4.1 Flash (max)",
+      "score": 74.2,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "DeepSeek",
+        "agentHarness": "mini-swe-agent",
+        "reasoningEffort": "max",
+        "contextWindowTokens": 1000000,
+        "temperature": 1.0,
+        "topP": 0.95
+      },
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "checkedAt": "2026-09-12"
+    }
+  ]
+}

@@ -91,6 +91,7 @@ BOARD_CN = {
     "aa_coding_agent_index": "AA编程Agent榜",
     "open_design_arena": "OpenDesign设计榜",
     "terminal_bench_4": "TB4终端榜",
+    "deepswe_1_1": "DeepSWE榜",
 }
 
 

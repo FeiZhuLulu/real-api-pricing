@@ -14,12 +14,13 @@ BOARDS = {
     "aa_coding_agent_index": ("Artificial Analysis Coding Agent Index", "Coding Agent Index", "AA编程Agent榜"),
     "open_design_arena": ("OpenDesign Arena · Quality ranking", "Average task score", "OpenDesign设计榜"),
     "terminal_bench_4": ("Terminal-Bench 4.0", "Resolution Rate %", "TB4终端榜"),
+    "deepswe_1_1": ("DeepSWE v1.1", "Pass@1 %", "DeepSWE榜"),
 }
 
 data = json.loads((ROOT / "derived/points.json").read_text(encoding="utf-8"))
 manifest = json.loads((OUT / "SVG坐标核对.json").read_text(encoding="utf-8"))
 assert set(data["boards"]) == set(BOARDS)
-assert len(manifest) == 24
+assert len(manifest) == len(BOARDS) * 4
 
 html = (OUT / "帕累托交互图.html").read_text(encoding="utf-8")
 for board_id in BOARDS:
@@ -94,4 +95,4 @@ report += [
 
 for row in rows:
     print(f"{row[0]} {row[1]} {row[2]}: {row[3]} rows, {row[4]} positions, {row[5]} frontier")
-print("PASS: six boards, twenty-four SVG/PNG pairs, English text, HTML syntax and official benchmark provenance verified")
+print(f"PASS: {len(BOARDS)} boards, {len(manifest)} SVG/PNG pairs, English text, HTML syntax and official benchmark provenance verified")
