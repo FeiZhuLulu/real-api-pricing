@@ -3,7 +3,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from plot_quotas import chart_variant
+from plot_quotas import chart_variant, frontier_height
+
+assert [frontier_height(n) for n in (1, 2, 3, 4, 6, 11)] == [6, 6, 8, 10, 10, 10]
 
 for harness in ("DeepSeek Harness Minimal", "mini-swe-agent"):
     variant = f"{harness} - DeepSeek V4.1 Flash (max) [vendor self-report]"
