@@ -27,7 +27,7 @@ new = {"boards": [{"boardId": "aa_intelligence_index"}],
 assert current_score_records([("old", old), ("new", new)]) == [
     ("old", old["scores"][1]), *(('new', r) for r in new["scores"])]
 assert current_score_records([("old", old), ("empty", {"boards": new["boards"], "scores": []})]) == [
-     ("old", old["scores"][1])]
+    ("old", old["scores"][1])]
 assert len(configs) == len(expected)
 supplement = {"boards": new["boards"], "supplement": True, "baseSnapshot": "old",
               "scores": [{"boardId": "aa_intelligence_index", "model": "new", "score": 90}]}

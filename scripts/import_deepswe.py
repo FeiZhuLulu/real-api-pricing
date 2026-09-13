@@ -1,9 +1,8 @@
 """Import a saved official DeepSWE v1.1 leaderboard JSON."""
+import argparse
 import json
-import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
 MODELS = {
     "claude-opus-4-8": "claude-opus-4.8", "claude-sonnet-4-6": "claude-sonnet-4.6",
     "gemini-3-1-pro-preview": "gemini-3.1-pro-preview",
@@ -20,7 +19,12 @@ URL = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 
 
 def main():
-    data = json.loads(Path(sys.argv[1]).read_text())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("input", type=Path)
+    parser.add_argument("--date", required=True, help="Collection date (YYYY-MM-DD)")
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
+    data = json.loads(args.input.read_text(encoding="utf-8"))
     assert data["n_tasks_in_set"] == 113
     scores = []
     for row in data["rows"]:
@@ -42,19 +46,18 @@ def main():
                 "config": row["config"],
                 "costBasis": row.get("cost_basis"),
             },
-            "source": URL, "checkedAt": "2026-09-12",
+            "source": URL, "checkedAt": args.date,
         })
     archive = {
-        "collectedAt": "2026-09-12", "generatedAt": data["generated_at"],
+        "collectedAt": args.date, "generatedAt": data["generated_at"],
         "taskCount": data["n_tasks_in_set"], "unit": data["unit"],
         "boards": [{"boardId": "deepswe_1_1", "name": "DeepSWE v1.1",
                     "metric": "Pass@1 %", "url": "https://deepswe.datacurve.ai/",
                     "snapshotDate": data["generated_at"][:10]}],
         "scores": scores,
     }
-    target = ROOT / "data/research/scores-deepswe-1.1-2026-09-12.json"
-    target.write_text(json.dumps(archive, ensure_ascii=False, indent=2) + "\n")
-    print(f"{len(scores)} configurations -> {target}")
+    args.output.write_text(json.dumps(archive, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"{len(scores)} configurations -> {args.output}")
 
 
 if __name__ == "__main__":
