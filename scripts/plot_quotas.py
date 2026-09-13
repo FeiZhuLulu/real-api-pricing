@@ -10,6 +10,7 @@ import csv
 import json
 import math
 import os
+import textwrap
 import unicodedata
 
 import matplotlib
@@ -278,6 +279,19 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
     print(f"wrote {len(rows)} rows -> {path}")
 
 
+def chart_variant(row: dict) -> str:
+    variant = row["board_variant"]
+    if len(variant) <= 60:
+        return variant
+    harness = row.get("board_harness")
+    marker = " [vendor self-report]"
+    if harness and variant.startswith(harness + " - "):
+        model = variant.removeprefix(harness + " - ")
+        source = " · vendor self-report" if model.endswith(marker) else ""
+        return model.removesuffix(marker) + "\n" + harness + source
+    return textwrap.fill(variant, width=60, break_long_words=False, break_on_hyphens=False)
+
+
 def annotation_of(row: dict, value: float, view: str, language: str,
                   board: dict | None) -> str:
     value_label = f"{value:g}" if view == "quotas" else f"${value:g}"
@@ -380,7 +394,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         separator = "\n" if board else " · "
         labels = [
             f"{start + i:02d}. " + (plan_name(r, language) if r["billing"] == "metered"
-                                   else f"{plan_name(r, language)}{separator}{r['board_variant'] if board else DISPLAY.get(r['served_model'], r['served_model'])}")
+                                   else f"{plan_name(r, language)}{separator}{chart_variant(r) if board else DISPLAY.get(r['served_model'], r['served_model'])}")
             for i, r in enumerate(chunk, 1)
         ]
         ax.set_yticks(range(len(chunk)), labels, fontsize=12 if board else 10)
