@@ -15,6 +15,23 @@
   "scores": [
     {
       "boardId": "terminal_bench_4",
+      "model": "deepseek-v4.1-flash",
+      "variantLabel": "DeepSeek Harness Minimal - DeepSeek V4.1 Flash (max)",
+      "score": 31.2,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "DeepSeek",
+        "agentHarness": "DeepSeek Harness Minimal",
+        "reasoningEffort": "max",
+        "contextWindowTokens": 1000000,
+        "temperature": 1.0,
+        "topP": 0.95
+      },
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "checkedAt": "2026-09-12"
+    },
+    {
+      "boardId": "terminal_bench_4",
       "model": "swe-2",
       "variantLabel": "Devin CLI - SWE-2 (best effort)",
       "score": 27.3,

@@ -27,8 +27,15 @@ new = {"boards": [{"boardId": "aa_intelligence_index"}],
 assert current_score_records([("old", old), ("new", new)]) == [
     ("old", old["scores"][1]), *(('new', r) for r in new["scores"])]
 assert current_score_records([("old", old), ("empty", {"boards": new["boards"], "scores": []})]) == [
-    ("old", old["scores"][1])]
+     ("old", old["scores"][1])]
 assert len(configs) == len(expected)
+supplement = {"boards": new["boards"], "supplement": True, "baseSnapshot": "old",
+              "scores": [{"boardId": "aa_intelligence_index", "model": "new", "score": 90}]}
+assert ("extra", supplement["scores"][0]) in current_score_records([("old", old), ("extra", supplement)])
+assert current_score_records([("old", old), ("extra", supplement), ("new", new)]) == current_score_records([
+    ("old", old), ("new", new)])
+assert current_score_records([("old", old), ("extra", supplement),
+                              ("empty", {"boards": new["boards"], "scores": []})]) == [("old", old["scores"][1])]
 assert len({c["configuration_id"] for c in configs}) == len(configs)
 for c, (file, record) in zip(configs, expected):
     assert c["archive"] == file and c["raw_record"] == record
@@ -81,4 +88,9 @@ assert all(c["mean_cost_usd_per_task"] is not None for c in open_design)
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.00825
 assert indexed["deepseek_v41_flash_peak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.0165
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["open_design_arena__score"] == 81.2
+assert indexed["opencode_go::deepseek-v4.1-flash"]["aa_intelligence_index__score"] == 39.5454
+assert indexed["opencode_go::deepseek-v4.1-flash"]["terminal_bench_4__score"] == 31.2
+assert indexed["opencode_go::deepseek-v4.1-flash"]["terminal_bench_4__score_is_self_reported"] is True
+assert indexed["chatgpt_plus::gpt-6-astra"]["aa_intelligence_index__score"] == 52.8141
+assert indexed["chatgpt_plus::gpt-6-astra"]["aa_intelligence_index__configuration_count"] == 5
 print(f"PASS: {len(configs)} configurations preserved, {len(links)} explicit mappings, exact modes, source CIs/costs and price inputs verified")

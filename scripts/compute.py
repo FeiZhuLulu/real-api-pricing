@@ -21,6 +21,7 @@ SCORE_FILES = (
     "scores-code-arena-round1-2026-09-06.json",
     "scores-aa-coding-agent-round1-2026-09-06.json",
     "scores-aa-round3-2026-09-09.json",
+    "scores-aa-intelligence-2026-09-12.json",
     "scores-open-design-round1-2026-09-09.json",
     "scores-terminal-bench4-round1-2026-09-10.json",
     "scores-terminal-bench4-round2-selfreport-2026-09-12.json",
@@ -84,7 +85,12 @@ def current_score_records(archives):
     latest = {b["boardId"]: name for name, archive in archives for b in archive["boards"]
               if b["boardId"] in BOARDS and not archive.get("supplement")}
     return [(name, record) for name, archive in archives for record in archive["scores"]
-            if latest.get(record["boardId"]) == name or archive.get("supplement")]
+            if latest.get(record["boardId"]) == name or (
+                archive.get("supplement") and (
+                    "baseSnapshot" not in archive
+                    or archive["baseSnapshot"] == latest.get(record["boardId"])
+                )
+            )]
 
 
 def load_list_blended() -> dict[str, float]:
@@ -143,7 +149,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-11", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
+        generatedAt="2026-09-12", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")
