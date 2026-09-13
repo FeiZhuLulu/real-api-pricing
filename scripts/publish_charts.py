@@ -47,6 +47,8 @@ def exports():
         elif base.startswith('前沿'):
             category = 'frontier'
             prefix, tag = base.split('_', 1)
+            if tag == 'DeepSWE榜' and source.suffix in ('.svg', '.png'):
+                continue
             slug, title = BOARDS[tag]
             name = base if language == 'zh' else f'frontier-{"allowance" if "额度" in prefix else "price"}-{slug}' + ('-table' if '表' in prefix else '')
         else:

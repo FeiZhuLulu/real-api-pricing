@@ -352,10 +352,6 @@ def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
                  bbox=dict(facecolor="white", alpha=0.9, edgecolor="none", pad=0.8))
 
 
-def frontier_height(row_count: int) -> int:
-    return min(10, max(6, 2 * row_count + 2))
-
-
 def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
          mixed_scale: bool = False, fee_band: dict | None = None) -> None:
     text = TEXT[language]
@@ -366,7 +362,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     mixed_scale = bool(mixed_scale and view == "quotas" and board is None and ncols == 2)
     mixed = None
     if board:
-        figsize = (18, frontier_height(len(rows)))
+        figsize = (18, 10)
     else:
         # 两栏总览保持每行约 0.28 英寸的有效高度；数据增长时自动增高。
         figsize = (24, max(8, half * 0.38 + 3.2)) if fee_band else (24, max(18, half * 0.31 + 3.2))
@@ -374,7 +370,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
                              sharex=True, squeeze=False)
     axes = axes[0]
     if board:
-        fig.subplots_adjust(left=0.35, right=0.98, top=1 - 1.9 / figsize[1], bottom=2 / figsize[1])
+        fig.subplots_adjust(left=0.35, right=0.98, top=0.81, bottom=0.20)
     else:
         fig.subplots_adjust(left=0.205, right=0.99, top=0.90, bottom=0.09, wspace=1.04)
     if fee_band:
@@ -431,20 +427,20 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         title += " · 混合比例" if language == "zh" else " | mixed scale"
     if board:
         title = ("最高配置参考前沿 · " if language == "zh" else "Top-configuration reference frontier | ") + title
-    fig.suptitle(title, fontsize=18 if board else 21, y=1 - 0.15 / figsize[1] if fee_band else 1 - 0.22 / figsize[1] if board else 0.978, fontweight="bold")
-    fig.text(0.5, 1 - 0.65 / figsize[1] if fee_band else 1 - 0.75 / figsize[1] if board else 0.952,
+    fig.suptitle(title, fontsize=18 if board else 21, y=1 - 0.15 / figsize[1] if fee_band else 0.978, fontweight="bold")
+    fig.text(0.5, 1 - 0.65 / figsize[1] if fee_band else 0.925 if board else 0.952,
              frontier_caption(board) if board else text[f"{view}_subtitle"],
              ha="center", fontsize=10 if board else 11, color="#505A64")
     providers = {vendor_of(r["plan_id"]) for r in rows}
     legend = [(name, color) for name, color in VENDOR_COLORS.items() if name in providers]
     handles = [plt.Rectangle((0, 0), 1, 1, color=color) for _, color in legend]
     fig.legend(handles, [f"{VENDOR_CODES[name]}  {name}" for name, _ in legend], loc="lower center",
-               bbox_to_anchor=(0.5, 1 - 1.2 / figsize[1] if fee_band else 1 - 1.4 / figsize[1] if board else 0.916), ncol=len(legend),
+               bbox_to_anchor=(0.5, 1 - 1.2 / figsize[1] if fee_band else 0.86 if board else 0.916), ncol=len(legend),
                fontsize=11, frameon=False, handlelength=1.6, columnspacing=1.8)
     if board:
         footnotes = [frontier_rule(language), text["shared"], text["footer"], exchange_note(language)]
-        for y, note in zip((1.15, 0.85, 0.55, 0.25), footnotes):
-            fig.text(0.5, y / figsize[1], note, ha="center", fontsize=8, color="#505A64")
+        for y, note in zip((0.115, 0.085, 0.055, 0.025), footnotes):
+            fig.text(0.5, y, note, ha="center", fontsize=8, color="#505A64")
     elif fee_band:
         for y, note in zip((1.05, 0.77, 0.49, 0.21), [text["footer"], text["shared"], evidence_note(language), exchange_note(language)]):
             fig.text(0.5, y / figsize[1], note, ha="center", fontsize=9, color="#505A64")
@@ -512,7 +508,8 @@ def main() -> None:
                 continue
             for language in ("zh", "en"):
                 write_text_table(ordered, view, language, board)
-                plot(ordered, view, language, board)
+                if board_id != "deepswe_1_1":
+                    plot(ordered, view, language, board)
     with open(os.path.join(OUT_DIR, "前沿筛选结果.json"), "w", encoding="utf-8") as f:
         json.dump({"criterion": frontier_rule("en"), "boards": selections}, f, ensure_ascii=False, indent=2)
 
