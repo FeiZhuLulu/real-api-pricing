@@ -221,9 +221,29 @@ export function frontierPath(
   };
 }
 export function serialize(s: State): string {
-  return (
-    "#" + new URLSearchParams({ s: JSON.stringify({ v: 1, ...s }) }).toString()
-  );
+  const d = defaultState();
+  const p = new URLSearchParams();
+  // The URL language always wins over the stored preference, so it is written
+  // even when it matches the default.
+  p.set("lang", s.lang);
+  if (s.view !== d.view) p.set("view", s.view);
+  if (s.board !== d.board) p.set("board", s.board);
+  if (s.configuration !== d.configuration) p.set("config", s.configuration);
+  if (s.labels !== d.labels) p.set("labels", s.labels);
+  if (s.feeBand !== d.feeBand) p.set("fee", s.feeBand);
+  if (s.query) p.set("q", s.query);
+  if (s.sort !== d.sort) p.set("sort", s.sort);
+  if (s.direction !== d.direction) p.set("dir", s.direction);
+  if (!s.frontier) p.set("frontier", "0");
+  if (s.selected !== null) {
+    // An explicit empty selection serializes as a lone "sel=" so it stays
+    // distinct from an absent parameter (which means "select everything").
+    if (s.selected.length)
+      for (const id of s.selected) p.append("sel", id);
+    else p.set("sel", "");
+  }
+  for (const k of filterKeys) for (const v of s[k]) p.append(k, v);
+  return "#" + p.toString();
 }
 export function restore(
   hash: string,
@@ -233,10 +253,64 @@ export function restore(
   const state = defaultState();
   if (storedLang === "zh") state.lang = "zh";
   if (!hash || hash === "#") return { state, warning: false };
+  const params = new URLSearchParams(hash.slice(1));
+  const legacy = params.get("s");
+  if (legacy !== null) return restoreLegacy(legacy, state, data);
+  let warning = false;
+  const enums: Record<string, [keyof State, string[]]> = {
+    lang: ["lang", ["en", "zh"]],
+    view: ["view", ["pareto", "price", "allowance", "method"]],
+    config: ["configuration", ["all", "summary"]],
+    labels: ["labels", ["frontier", "all", "none"]],
+    fee: ["feeBand", ["all", ...feeBands.map((b) => b.id)]],
+    sort: ["sort", ["price", "model", "plan", "score", "allowance", "fee"]],
+    dir: ["direction", ["asc", "desc"]],
+  };
+  for (const [key, [field, values]] of Object.entries(enums)) {
+    const value = params.get(key);
+    if (value === null) continue;
+    if (values.includes(value)) Object.assign(state, { [field]: value });
+    else warning = true;
+  }
+  const board = params.get("board");
+  if (board !== null) {
+    if (Object.hasOwn(data.boards, board)) state.board = board;
+    else warning = true;
+  }
+  const frontier = params.get("frontier");
+  if (frontier !== null) {
+    if (frontier === "0") state.frontier = false;
+    else if (frontier === "1") state.frontier = true;
+    else warning = true;
+  }
+  const query = params.get("q");
+  if (query !== null) state.query = query;
+  if (params.has("sel")) {
+    const wanted = params.getAll("sel").filter((id) => id !== "");
+    if (!wanted.length) state.selected = [];
+    else {
+      const ids = new Set(data.points.map((p) => p.id));
+      state.selected = wanted.filter((id) => ids.has(id));
+      if (state.selected.length !== wanted.length) warning = true;
+    }
+  }
+  const opts = options(data);
+  for (const k of filterKeys) {
+    if (!params.has(k)) continue;
+    const wanted = params.getAll(k);
+    state[k] = wanted.filter((v) => opts[k].includes(v));
+    if (state[k].length !== wanted.length) warning = true;
+  }
+  return { state, warning };
+}
+/** The original "#s=<json>" share format; kept so old links still resolve. */
+function restoreLegacy(
+  s: string,
+  state: State,
+  data: SiteData,
+): { state: State; warning: boolean } {
   try {
-    const raw = JSON.parse(
-      new URLSearchParams(hash.slice(1)).get("s") || "null",
-    );
+    const raw = JSON.parse(s);
     if (!raw || raw.v !== 1) return { state, warning: true };
     let warning = false;
     const enums = {
@@ -332,6 +406,12 @@ export function displayPlan(plan: string, lang: string): string {
     plan = plan.replaceAll("老客", "v2").replaceAll("新客", "v3");
   if (lang === "zh") return plan;
   const words: Record<string, string> = {
+    // Same-name CN/global tiers are merged into one point priced at the
+    // international USD list; English shows the international tier name.
+    "Kimi 会员 199": "Kimi Allegretto",
+    "Kimi 会员 99": "Kimi Moderato",
+    "Kimi 会员 699": "Kimi Allegro",
+    "Kimi 会员 49": "Kimi Andante (CN)",
     "Kimi 会员 ": "Kimi CN CNY ",
     阿里云百炼: "Alibaba Cloud CN",
     新客: "New",

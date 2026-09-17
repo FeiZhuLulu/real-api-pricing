@@ -3,6 +3,7 @@ import { ArrowRight, MagnifyingGlass } from "@phosphor-icons/react";
 import type { Row, State } from "./types";
 import type { ChartHandle } from "./Chart";
 import { BrandMarks } from "./ProviderLogo";
+import ResizeHandle from "./ResizeHandle";
 import {
   accessLine,
   allowance,
@@ -202,9 +203,14 @@ export default function Ranking({
               <span className="rank-identity">
                 <strong className="model-with-logo">
                   <BrandMarks point={r.point} />
-                  {r.point.model_display}
+                  <span className="model-name">
+                    {r.point.model_display}
+                    <span className="rank-plan">
+                      {" · "}
+                      {displayPlan(r.point.plan, state.lang)}
+                    </span>
+                  </span>
                 </strong>
-                <span>{displayPlan(r.point.plan, state.lang)}</span>
                 <small>
                   <i style={{ background: color(r.point) }} />
                   {accessLine(r.point)} ·{" "}
@@ -221,15 +227,22 @@ export default function Ranking({
                 />
               </span>
               <span className="rank-value">
-                <strong>{formatted(r)}</strong>
+                <strong>
+                  {isPrice ? price(value(r)) : allowance(r.point, state.lang)}
+                </strong>
                 <small>
                   {isPrice
-                    ? r.point.monthly_yi === null
+                    ? r.point.billing === "metered"
                       ? zh
                         ? "按量计费"
                         : "Pay as you go"
-                      : allowance(r.point, state.lang) +
-                        (zh ? " token / 月" : " tokens / mo")
+                      : r.point.monthly_yi === null
+                        ? unmeteredNote(r.point, state.lang) +
+                          " · " +
+                          price(r.point.price_usd) +
+                          (zh ? " / 月" : " / mo")
+                        : allowance(r.point, state.lang) +
+                          (zh ? " token / 月" : " tokens / mo")
                     : price(r.point.price_usd) + (zh ? " / 月" : " / mo")}
                 </small>
               </span>
@@ -245,11 +258,19 @@ export default function Ranking({
           </div>
         )}
       </div>
+      <ResizeHandle
+        target={scrollRef}
+        label={
+          zh
+            ? "拖动调整列表高度，双击恢复"
+            : "Drag to resize the list · double-click to reset"
+        }
+      />
       <div className="ranking-status">
         {sorted.length}{" "}
         {zh
-          ? "条筛选结果 · 列表内滚动浏览 · 图片导出全部筛选行"
-          : "filtered rows · scroll inside the list · image export includes all filtered rows"}
+          ? "条筛选结果 · 列表内滚动浏览 · 图片导出全部筛选行 · 拖动下方把手可加高"
+          : "filtered rows · scroll inside the list · image export includes all filtered rows · drag the grip below to make it taller"}
       </div>
     </section>
   );

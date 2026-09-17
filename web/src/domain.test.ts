@@ -299,15 +299,59 @@ test("Share links round-trip language, board, exact empty selection and all view
     view: "allowance" as const,
     selected: [],
     board: "aa_coding_agent_index",
-    channels: ["Cursor"],
+    channels: ["Cursor", "OpenAI"],
     labels: "none" as const,
     frontier: false,
-    query: "Luna / 中文",
+    query: "Luna / 中文 mix",
     direction: "desc" as const,
   };
-  const restored = restore(serialize(s), data);
+  const hash = serialize(s);
+  assert.ok(!hash.includes("%7B"), "short params, not a JSON blob");
+  const restored = restore(hash, data);
   assert.deepEqual(restored.state, s);
   assert.equal(restored.warning, false);
+});
+test("Default state serializes to a minimal hash and selection states stay distinct", () => {
+  assert.equal(serialize(defaultState()), "#lang=en");
+  const ids = [data.points[0].id, data.points[1].id];
+  assert.deepEqual(
+    restore(serialize({ ...defaultState(), selected: ids }), data).state
+      .selected,
+    ids,
+  );
+  assert.deepEqual(
+    restore(serialize({ ...defaultState(), selected: [] }), data).state
+      .selected,
+    [],
+  );
+  assert.equal(
+    restore(serialize({ ...defaultState(), frontier: false }), data).state
+      .frontier,
+    false,
+  );
+  assert.equal(
+    restore(serialize(defaultState()), data).state.selected,
+    null,
+  );
+});
+test("Legacy #s=<json> share links still restore with the same validation", () => {
+  const legacy =
+    "#s=" +
+    encodeURIComponent(
+      JSON.stringify({ v: 1, view: "price", channels: ["Cursor"] }),
+    );
+  const restored = restore(legacy, data);
+  assert.equal(restored.warning, false);
+  assert.equal(restored.state.view, "price");
+  assert.deepEqual(restored.state.channels, ["Cursor"]);
+});
+test("Unknown enum values in a short link warn and fall back to defaults", () => {
+  const restored = restore("#lang=zh&view=nope", data);
+  assert.equal(restored.warning, true);
+  assert.equal(restored.state.view, "pareto");
+  assert.equal(restored.state.lang, "zh");
+  assert.equal(restore("#board=__proto__", data).warning, true);
+  assert.equal(restore("#board=__proto__", data).state.board, "arena_code");
 });
 test("Invalid saved values are ignored with notice; explicit language overrides local preference", () => {
   const s = {

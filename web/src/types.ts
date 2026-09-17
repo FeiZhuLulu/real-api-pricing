@@ -4,6 +4,10 @@ export interface Point {
   id: string;
   plan_id: string;
   plan: string;
+  /** International plan name for merged CN/global tiers, e.g. "Kimi Allegretto". */
+  plan_en?: string | null;
+  /** Domestic list price shown alongside the international USD fee, e.g. "¥199". */
+  local_price?: string | null;
   model: string;
   model_display: string;
   vendor: string;

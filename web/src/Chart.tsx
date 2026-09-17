@@ -41,6 +41,7 @@ import {
   plotBox,
   textLabelGroups,
   textLabelViews,
+  clearLabelSizeCache,
 } from "./chartLabels";
 
 export interface ChartHandle {
@@ -142,7 +143,7 @@ export default function Chart({
         let layout: Partial<Layout> = {
           font: {
             family:
-              "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+              '"DM Sans Variable", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif',
             size: 12,
             color: chartTheme.text,
           },
@@ -505,6 +506,18 @@ export default function Chart({
           });
         });
         syncOverlay();
+        // Label widths measured before the web font arrives are stale: drop
+        // the measurement cache and re-place names once fonts are ready.
+        const fontsLoaded = () => {
+          if (!cancelled) {
+            clearLabelSizeCache();
+            syncOverlay();
+          }
+        };
+        if (typeof document !== "undefined" && document.fonts) {
+          void document.fonts.ready.then(fontsLoaded);
+          document.fonts.addEventListener("loadingdone", fontsLoaded);
+        }
         const shell = el.parentElement!;
         let wheelFrame = 0;
         let pendingRanges: { x: [number, number]; y: [number, number] } | null = null;
@@ -653,6 +666,7 @@ export default function Chart({
         });
         observer.observe(el);
         cleanup = () => {
+          document.fonts?.removeEventListener("loadingdone", fontsLoaded);
           shell.removeEventListener("wheel", wheel);
           cancelAnimationFrame(wheelFrame);
           cancelAnimationFrame(dragFrame);

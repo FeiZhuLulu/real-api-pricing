@@ -25,6 +25,7 @@ import Chart from "./Chart";
 import HeaderActions from "./HeaderActions";
 import { unpackData } from "./loadData";
 import Ranking from "./Ranking";
+import ResizeHandle from "./ResizeHandle";
 import ProviderLogo, { BrandMarks } from "./ProviderLogo";
 import { feeBands } from "./domain";
 import type { ChartHandle } from "./Chart";
@@ -105,12 +106,21 @@ function saveLanguage(lang: Lang) {
   }
 }
 type Theme = "light" | "dark";
-function localTheme(): Theme {
+function storedTheme(): Theme | null {
   try {
-    return localStorage.getItem("pricing-theme") === "dark" ? "dark" : "light";
+    const value = localStorage.getItem("pricing-theme");
+    return value === "dark" || value === "light" ? value : null;
   } catch {
-    return "light";
+    return null;
   }
+}
+function localTheme(): Theme {
+  const stored = storedTheme();
+  if (stored) return stored;
+  return typeof matchMedia !== "undefined" &&
+    matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 function saveTheme(theme: Theme) {
   try {
@@ -159,8 +169,20 @@ export default function App() {
   const [theme, setTheme] = useState<Theme>(localTheme);
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
-    saveTheme(theme);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#111315" : "#ffffff");
   }, [theme]);
+  // Until the user picks a theme explicitly, follow the OS preference.
+  useEffect(() => {
+    if (typeof matchMedia === "undefined") return;
+    const media = matchMedia("(prefers-color-scheme: dark)");
+    const change = () => {
+      if (!storedTheme()) setTheme(media.matches ? "dark" : "light");
+    };
+    media.addEventListener("change", change);
+    return () => media.removeEventListener("change", change);
+  }, []);
   useEffect(() => {
     const abort = new AbortController();
     fetch("/data/site.json", { signal: abort.signal })
@@ -193,7 +215,16 @@ export default function App() {
         <p>Loading the latest data…</p>
       </main>
     );
-  return <Explorer data={data} theme={theme} onThemeChange={setTheme} />;
+  return (
+    <Explorer
+      data={data}
+      theme={theme}
+      onThemeChange={(next) => {
+        saveTheme(next);
+        setTheme(next);
+      }}
+    />
+  );
 }
 function Explorer({
   data,
@@ -1052,7 +1083,14 @@ function Explorer({
                   </div>
                 )}
               </div>
-              <p className="ranking-status">{shown.length} {t("rows · scroll inside the table", "行 · 在表格内滚动浏览")}</p>
+              <ResizeHandle
+                target={tableScroll}
+                label={t(
+                  "Drag to resize the table · double-click to reset",
+                  "拖动调整表格高度，双击恢复",
+                )}
+              />
+              <p className="ranking-status">{shown.length} {t("rows · scroll inside the table · drag the grip below to make it taller", "行 · 在表格内滚动浏览 · 拖动下方把手可加高")}</p>
             </section>
           </>
         )}
