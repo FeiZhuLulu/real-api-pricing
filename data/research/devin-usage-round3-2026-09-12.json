@@ -1,0 +1,23 @@
+{
+  "collectedAt": "2026-09-12",
+  "scopeNote": "Devin Max × gpt-6-astra 段命中率口径裁定。round2（devin-usage-round2-2026-09-11.json） anomalies 里并列了两个命中率：裸读命中率 99.9988% 与含 cache_create 分母的 97.84%。用户裁定：按 97.84% 记，99.9988% 是口径假象不采用。不改历史文件，仅更正采用侧记录口径；额度数值不变。",
+  "items": [
+    {
+      "planId": "devin_max",
+      "model": "gpt-6-astra",
+      "evidenceType": "user_ruling_on_metric_convention",
+      "source": "用户 2026-09-12 口径裁定",
+      "sourceDate": "2026-09-12",
+      "userConfirmation": "用户原话：97.84%按这个记，99.9988明显是有问题的",
+      "ruling": {
+        "adoptedCacheHitRate": 0.9784,
+        "adoptedFormula": "cache_read / (input + cache_read + cache_create) = 79,102,796 / 80,847,104 = 97.84%",
+        "rejectedMetric": "cache_read / (input + cache_read) = 99.9988%",
+        "rejectedReason": "口径假象：fresh input 仅 957 接近 0，首次读全部计入 cache_create，导致裸读命中率虚高；不代表真实命中水平"
+      },
+      "note": "仅影响命中率记录口径；devin_max × gpt-6-astra 额度 16.24亿/月 不变（全口径 total Δ 反推与命中率无关）。超长上下文反复续跑导致的极端段构成仍在 round2 anomalies 记录。",
+      "confidence": "high（用户拍板口径）",
+      "decision": "采用。build_adopted.py 的 devin_max decision_note 改记 97.84%。"
+    }
+  ]
+}

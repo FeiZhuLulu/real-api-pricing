@@ -23,12 +23,11 @@
       "note": "测量者自承 Astra 09-05 才接入、数据只有两天；窗口恰跨 09-07 全局重置（且此前 09-03/04/05 有 banked reset），若测量段跨过 reset 则 % 被回打、池子被高估。承诺跑满完整周窗后再补干净版。"
     },
     {
-      "claim": "三源对 Pro20x Astra 周池的估计出现 2.7× 分歧：本项目 Plus 直测×20 → 7.95 亿/周；Observatory 09-08 单账号 → 8.66 亿/周；lichengzhe 网关 → 21~23 亿/周。",
+      "claim": "Pro20x Astra 周池多源分歧：Observatory 09-08 单账号 → 8.66 亿/周；lichengzhe 网关 → 21~23 亿/周（2.7× 差）。【2026-09-13 删除原第三源 Plus×20 派生值：派生法弃用，不计入对比】",
       "evidenceType": "cross_source_conflict",
       "source": "round7 round8 与本文件",
       "sourceDate": "2026-09-11",
       "table": {
-        "plus_x20_derived_weeklyYi": 7.95,
         "observatory_pro20x_weeklyYi": 8.66,
         "lichengzhe_pro20x_weeklyYi": "21~23"
       },
@@ -43,7 +42,7 @@
       "note": "1.5~1.7× 与 4.1× 两个阵营各自有来源；若 Plus 的 Astra 实为 limited 子池（官方 FAQ 口径），则 Plus 侧 3.87× 不是权重而是节流差异，统一加权池模型整体存疑。"
     },
     {
-      "claim": "issue #8 正文最早引用的社区口径：Pro 20x「两天 1.7 亿 token 耗 22% 额度 → Astra 一周约 7.7 亿 token」，折月约 30.8 亿。用户 2026-09-11 回忆为『astra 28亿』并认为 ~32 亿较合理——与本项目 Plus 直测×20 派生 31.81 亿/月吻合。",
+      "claim": "issue #8 正文最早引用的社区口径：Pro 20x「两天 1.7 亿 token 耗 22% 额度 → Astra 一周约 7.7 亿 token」，折月约 30.8 亿。用户 2026-09-11 回忆为『astra 28亿』并认为 ~32 亿较合理。",
       "evidenceType": "community_report",
       "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/8 (issue body)",
       "sourceDate": "2026-09-10",

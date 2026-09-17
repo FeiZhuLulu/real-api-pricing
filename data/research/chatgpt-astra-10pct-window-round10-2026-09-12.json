@@ -25,7 +25,7 @@
       "confidence": "medium（依赖成本加权假设）"
     },
     {
-      "claim": "若为 Pro 20x 且 10% 属实：Astra 周池 ≈12.0（仅 Astra token）~15.6 亿（全模型 1:1），折月 48~62 亿，真实单价 $0.032~0.042/MTok。四源对比：×20 派生 7.95 亿/周、Observatory 8.66 亿、本条 12~15.6 亿、lichengzhe 21~23 亿——仍未收敛，支持『Pro20x Astra 池 > 20× Plus』方向，lichengzhe 高值或仍含 reset 水分。",
+      "claim": "若为 Pro 20x 且 10% 属实：Astra 周池 ≈12.0（仅 Astra token）~15.6 亿（全模型 1:1），折月 48~62 亿，真实单价 $0.032~0.042/MTok。多源对比：Observatory 8.66 亿/周、本条 12~15.6 亿、X 社区 10~20 亿、lichengzhe 21~23 亿——方向支持『Pro20x Astra 池远超 20× Plus』（Plus 端为 limited 子池，×20 派生法已弃用删除）。",
       "evidenceType": "cross_source_comparison",
       "source": "round7/8/9 与本文件",
       "sourceDate": "2026-09-12",
@@ -33,9 +33,8 @@
     }
   ],
   "adopted": {
-    "chatgpt_pro_20x_gpt_6_astra_monthlyYi": 48.08,
-    "basis": "用户 2026-09-12 拍板采用本条（五源中位数来源）。取下限口径：仅 Astra token 120,197,907 ÷ 10% × 4 周；上限口径（全模型 1:1）为 62.3 亿。confidence=low：自述 10% 无面板图。",
-    "realUsdPerMtok": 0.0416
+    "chatgpt_pro_20x_gpt_6_astra": "removed 2026-09-13",
+    "basis": "2026-09-12 曾按本条采用（下限口径 120,197,907÷10%×4），2026-09-13 用户决定 Pro20x Astra 多源分歧未裁决前暂不展示，整点撤回；Pro 5x 仍无数据。"
   },
   "notFound": [
     "该用户的订阅档位自述（Pro 5x 还是 20x）",

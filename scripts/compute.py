@@ -107,9 +107,11 @@ def main() -> None:
             model = r["served_model"]
             real = float(r["real_usd_per_mtok"])
             lb = list_blended.get(model)
+            plan_en = r.get("plan_name_en") or None
             p = dict(
-                id=f"{r['plan_id']}::{model}", plan=r["plan_name"], billing=r["billing"], model=model,
+                id=f"{r['plan_id']}::{model}", plan=r["plan_name"], plan_en=plan_en, billing=r["billing"], model=model,
                 model_display=DISPLAY.get(model, model), vendor=vendor_of(model),
+                local_price=f"¥{r['price']}" if plan_en and r["currency"] == "CNY" else None,
                 label=r["plan_name"] if r["billing"] == "metered" else f"{DISPLAY.get(model, model)} · {r['plan_name']}",
                 price_usd=float(r["price_usd"]) if r["price_usd"] else None,
                 monthly_yi=float(r["monthly_yi"]) if r["monthly_yi"] else None,

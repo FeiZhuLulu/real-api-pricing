@@ -151,6 +151,9 @@ def vendor_of(plan_id: str) -> str:
 
 
 def plan_name(row: dict, language: str) -> str:
+    if language == "en" and row.get("plan_name_en"):
+        # 国内外同名档并点：英文图用国际版名（如 Kimi Allegretto），差价在月费列注明
+        return row["plan_name_en"] + (" †" if row["plan_id"].startswith("kimi_") else "")
     name = row["plan_name"]
     if name.startswith("GLM "):
         name = name.replace("老客", "v2").replace("新客", "v3")
@@ -158,6 +161,7 @@ def plan_name(row: dict, language: str) -> str:
         name += " †"
     if language == "en":
         for original, translated in {
+            "Kimi 会员 49": "Kimi Andante (CN)",
             "Kimi 会员 ": "Kimi CN ",
             "新客": "New",
             "老客": "Existing",
@@ -170,6 +174,16 @@ def plan_name(row: dict, language: str) -> str:
         if row["plan_id"].startswith("kimi_"):
             name = name.replace("Kimi CN ", "Kimi CN CNY ")
     return name
+
+
+def fee_text(row: dict, language: str) -> str:
+    if not row["price"]:
+        return TEXT[language]["metered"]
+    if row.get("plan_name_en") and row["currency"] == "CNY":
+        # 并点行：¥ 为国内实付，$ 为国际版标价（price_usd）
+        usd = float(row["price_usd"])
+        return f"¥{row['price']}（国际 ${usd:g}）" if language == "zh" else f"${usd:g} · CN ¥{row['price']}"
+    return f"{row['currency']} {row['price']}"
 
 
 def text_width(s: str) -> int:
@@ -230,16 +244,16 @@ def frontier_rule(language: str) -> str:
 
 def evidence_note(language: str) -> str:
     if language == "zh":
-        return "† Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算。OpenCode Go按官方美元池和三段价套统一标准负载换算。"
-    return "† Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. OpenCode Go uses official dollar pools and rates under the standard workload."
+        return "† Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算；同名档国内外并点，月费/单价按国际版美元标价（$19/$39/$99），¥价为国内实付。OpenCode Go按官方美元池和三段价套统一标准负载换算。"
+    return "† Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. Same-name CN/global tiers are merged; fee and unit price use the international USD list ($19/$39/$99), ¥ is the domestic list price. OpenCode Go uses official dollar pools and rates under the standard workload."
 
 
 def exchange_note(language: str) -> str:
     fx = CONVENTIONS["exchangeRate"]
     rate = CONVENTIONS["usdPerCny"]
     if language == "zh":
-        return f"汇率：1 USD = {rate:g} CNY（{fx['date']}，{fx['labelZh']}）；人民币月费 ÷ 汇率换算美元。"
-    return f"FX: 1 USD = {rate:g} CNY ({fx['date']}, {fx['labelEn']}); CNY monthly fees divided by this rate."
+        return f"汇率：1 USD = {rate:g} CNY（{fx['date']}，{fx['labelZh']}）；人民币月费 ÷ 汇率换算美元（Kimi 同名并点档除外，按国际版美元标价）。"
+    return f"FX: 1 USD = {rate:g} CNY ({fx['date']}, {fx['labelEn']}); CNY monthly fees divided by this rate (merged same-name Kimi tiers use the international USD list instead)."
 
 
 def write_text_table(rows: list[dict], view: str, language: str, board: dict | None = None, fee_band: dict | None = None) -> None:
@@ -250,7 +264,7 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
     body = [
         [
             str(i), plan_name(r, language),
-            f"{r['currency']} {r['price']}" if r["price"] else text["metered"],
+            fee_text(r, language),
             DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
             r["real_usd_per_mtok"], r["confidence"],

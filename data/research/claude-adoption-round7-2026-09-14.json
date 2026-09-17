@@ -1,0 +1,26 @@
+{
+  "recordedAt": "2026-09-14",
+  "sourceType": "user_decision_and_worker_report_review",
+  "trigger": "Antigravity 汇报 Claude 全档用量表（Pro/5x/20x × Opus5/Fable5/Fable5.1）；用户两轮裁定：①5x 与 20x Fable 不成 2× 不合理；②不许推测造数，无实测就明说",
+  "decision": {
+    "weeklyPoolRatio20xTo5x": 2,
+    "weeklyCap": "Fable 系列合计限周池 50%（官方 Help Center，high）",
+    "fable5MonthlyYi": {"claude_max_20x": 12.077, "claude_max_5x": 9.235, "formula": "20x: 157×0.5/6.5；5x: 78.5×0.5/4.25", "conflict": "5x 实测权重 4.25 使 5x/20x Fable 比为 76% 而非池比 2×；统一 6.5× 可保 2× 但 5x 无实测。用户裁定按实测数据来，矛盾记录在案；若不接受矛盾值则不挂点"},
+    "fable51Subscription": {"status": "not_adopted_no_measurement", "note": "用户拍板撤掉：官方仅称 5.1 与 5 计量规则相同（ClaudeDevs 2026-09-01 'subscription usage remains unchanged'；Help Center 'work the same way'），但未公布 5.1 相对 Opus 的权重标定（round1 notFound）——无实测不推。曾短暂挂 12.077/6.038 亿名义池点后撤；API 标价行保留（官方定价表实测）"},
+    "claudeProFable": 0,
+    "claudeProFableNote": "官方：Pro/Team standard 不计入套餐周额度，首条即走 usage credits（high）",
+    "confidence": "low"
+  },
+  "antigravityReportReview": {
+    "adopted": ["Max 三档 Opus 5 月量 157/78.5/15.7~15.88亿 与现行一致", "Pro 上 Fable=0 与官方一致"],
+    "rejected": [
+      "用 5h 窗口营销倍率 5× 推 Pro 周池（78.5÷5=15.7）——红线#5 禁止；真规律是周池按价线性 $1≈0.785亿/月",
+      "「等效交付轮次折合 3.0/5.9亿」是轮次口径不是 token 口径，不能进 X 轴",
+      "5x Fable=6.04亿 用统一 6.5× 凑 2×，5x 档无实测支撑",
+      "自称「最终明确」但未覆盖 Sonnet5/Opus4.8 派生行；未落 research 文件，usagebar/#79773/#93894 新引用暂不可追溯"
+    ],
+    "proOpus5Status": "15.7亿 恰与 Opus4.8 历史实测 15.88亿 吻合，为旁证非新实测；round5 的 ~1.9亿 候选仍未裁决，Pro 点维持 claude-opus-4.8/15.88亿"
+  },
+  "openQuestion": "5x Fable 权重 4.25（实测偏软）与 2× 池比矛盾挂起：等 typed-meter 以外的 5x 档 Fable 实测，或用户裁定不挂点",
+  "relatedFiles": ["claude-fable51-round1-2026-09-13.json", "claude-adoption-round6-2026-09-06.json", "quotas-web-2026-09.json"]
+}
