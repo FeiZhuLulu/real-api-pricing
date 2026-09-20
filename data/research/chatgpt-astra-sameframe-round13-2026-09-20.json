@@ -1,0 +1,151 @@
+{
+  "collectedAt": "2026-09-20",
+  "scopeNote": "第十三轮：用户转供的 Grok 搜集批次——只收 Codex 内 GPT-6 Astra 且 token 与用量条同框的实测（Plus 与 Pro 20x）。其中 V2EX msg7086 已在 round12 归档（本文件标注去重），其余为本轮新证据。口径：全 token 一视同仁；月=4周；饱和使用。",
+  "priorContext": {
+    "round12": "data/research/chatgpt-astra-round12-2026-09-16.json — Pro20x Astra 周池 8亿簇(Observatory 8.53/V2EX 8.07/sdmat>8) vs 高端簇(12~23亿) 未裁决，用户拍板暂不挂点",
+    "round7": "data/research/chatgpt-astra-adoption-round7-2026-09-11.json — Plus Astra 采用 1.59亿/月（用户面板 10.34M=26pt）"
+  },
+  "items": [
+    {
+      "id": "g1",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "Plus，Astra Low 一个功能：输入72,402+cache 1,200,256+输出7,468+reasoning 2,964=1,283,090 total → 5h窗29%、周额度2%。",
+      "weeklyTokens": 64154500,
+      "monthlyTokens": 256618000,
+      "evidenceType": "community_measurement",
+      "confidence": "low",
+      "note": "周池反推64.2M→2.57亿/月；2%取整区间1.5~2.5%→月1.71~3.42亿，低读数噪声大。"
+    },
+    {
+      "id": "g2",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "Plus，Astra 当主 agent 跑2.5h：5h窗260%（打满还超，靠重置/credits跑完）、周额度43%；uncached token占比14.2%、总token占比13.8%。",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "evidenceType": "community_report",
+      "confidence": "low",
+      "note": "无总token绝对值，两个占比口径不明（疑为uncached占总token14.2%、该session占周13.8%?），不可反推。"
+    },
+    {
+      "id": "g3",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "Plus，Astra 编排轮询：输入10,463,897(其中cache 10,406,016)+输出8,948+reasoning 3,266 ≈10.48M → 5h窗53%→100%约33分钟。",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "evidenceType": "community_measurement",
+      "confidence": "low",
+      "note": "若该session独占47pt→Plus Astra 5h窗≈22.3M；若连同前53%→≈10.5M。窗口口径不清，仅作5h窗规模参照。"
+    },
+    {
+      "id": "g4",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "Plus，Astra vs Luna 同账号对照：Astra uncached输入0.514M+cache 3.948M+输出0.016M=4.478M → 周额度14%（同帖Luna 31%为对照）。",
+      "weeklyTokens": 31985714,
+      "monthlyTokens": 127942856,
+      "evidenceType": "community_measurement",
+      "confidence": "medium",
+      "note": "周池反推32.0M→1.28亿/月；与采用值1.59亿（周池39.8M）同量级，略低。"
+    },
+    {
+      "id": "g5a",
+      "plan": "chatgpt_pro_20x",
+      "model": "gpt-6-astra",
+      "claim": "Pro 20x，Astra为主：输入114.41M(cache 108.09M)+输出465.5k=114.88M total，其中Astra 592次/95.47M → 周额度85%→99%（+14pt，约5h）。",
+      "weeklyTokens": 682000000,
+      "monthlyTokens": 2728000000,
+      "evidenceType": "community_measurement",
+      "confidence": "medium",
+      "note": "纯Astra口径：95.47M/14%→周池6.82亿→27.3亿/月；全token口径114.88M/14%→8.21亿→32.8亿/月。真值在两者之间（非Astra部分也占额度），取中~7.5亿/周。"
+    },
+    {
+      "id": "g5b",
+      "plan": "chatgpt_pro_20x",
+      "model": "gpt-6-astra",
+      "claim": "同账号 banked reset 之后：输入63.60M(cache 61.39M)+输出284.7k=63.88M，Astra 381次/52.75M → 周额度0%→14%（约2h）。",
+      "weeklyTokens": 376785714,
+      "monthlyTokens": 1507142856,
+      "evidenceType": "community_measurement",
+      "confidence": "low",
+      "note": "反推周池3.77亿(Astra口径)~4.56亿(全token)→15.1~18.3亿/月，明显低于8亿簇。banked reset周可能存在结转/口径差异，记为低端离群。"
+    },
+    {
+      "id": "g6",
+      "plan": "chatgpt_pro_20x",
+      "model": "gpt-6-astra",
+      "claim": "【已归档=round12 V2EX msg7086】Pro 20x 全Astra lightweight/medium无Fast：605.07M total → 周额度75%，外推整周8.07亿。",
+      "weeklyTokens": 806765991,
+      "monthlyTokens": 3227063964,
+      "evidenceType": "community_measurement",
+      "confidence": "medium",
+      "note": "去重标注：与 chatgpt-astra-round12-2026-09-16.json item msg7086 为同一来源。"
+    },
+    {
+      "id": "g7",
+      "plan": "chatgpt_pro",
+      "model": "gpt-6-astra",
+      "claim": "Pro 一号（档位未注明x），Astra high：当天中午周2%→半夜45%；每轮重发约125k上下文，3~10会话并行。无当日总token。",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "evidenceType": "community_report",
+      "confidence": "low",
+      "note": "无量化对照，仅定性。"
+    },
+    {
+      "id": "g8",
+      "plan": "chatgpt_pro_20x",
+      "model": "gpt-6-astra",
+      "claim": "Pro 20x Astra重度一周打满：主机器21.97亿 total（其中Astra 7.088亿）→ 周额度0%→100%，墙钟24小时5分。",
+      "weeklyTokens": 708800000,
+      "monthlyTokens": 2835200000,
+      "evidenceType": "community_measurement",
+      "confidence": "medium",
+      "note": "混合模型周，Astra份额7.09亿是周池Astra当量的下限（其余14.9亿非Astra token同样占额度）；若按全token=87.9亿/月则隐含权重≈1.4×Sol不合理，判为非Astra部分低权重放大。支持8亿簇方向。"
+    },
+    {
+      "id": "g9",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "V2EX Plus：一人一个5h窗约600万token、当天两窗1160万；另一人打满一个5h窗周额度-16%、约1200万token→反推Plus周约7000万。",
+      "weeklyTokens": 75000000,
+      "monthlyTokens": 300000000,
+      "evidenceType": "community_measurement",
+      "confidence": "low",
+      "note": "Plus周池75M→3.0亿/月，为本批Plus最高估值；'约1200万'为口述近似。"
+    },
+    {
+      "id": "g10",
+      "plan": "chatgpt_plus",
+      "model": "gpt-6-astra",
+      "claim": "X：Astra Medium 17分钟打满5h窗、周额度-20%；无token数。",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "evidenceType": "community_report",
+      "confidence": "low",
+      "note": "若5h窗≈6~12M（g3/g9参照）→周池30~60M→1.2~2.4亿/月。"
+    }
+  ],
+  "synthesis": {
+    "plusWeeklyPoolYi": {
+      "adopted": 0.3976,
+      "newBatch": {"g4": 0.32, "g1": 0.64, "g9": 0.75, "g10_ref": "0.30~0.60"},
+      "note": "新证据散布1.28~3.0亿/月，与采用值1.59亿同量级且包围之；低%读数噪声大，不改Plus采用值。"
+    },
+    "pro20xWeeklyPoolYi": {
+      "lowCluster": {"observatory_0913": 8.53, "v2ex_msg7086": 8.07, "sdmat_floor": ">8.0", "g5a_range": "6.82~8.21", "g8_astra_floor": 7.09},
+      "highCluster": {"round10_screenshot": "12~15.6", "round11_oral": "10~20", "lichengzhe_gateway": "21~23", "reism4k_oral": 20},
+      "note": "8亿簇现含5条独立来源（含3条token×%同框）；高端簇全部为跨reset或纯口述，裁决为不采。"
+    },
+    "impliedWeightVsSol": "加权周池9.61亿Astra当量 vs Sol 30.8亿/周 → w≈3.20×；低端簇各源隐含w≈3.7~4.5与Observatory实测4.2×同向，round10隐含w≈2.2~2.8",
+    "adoptionImplication": "推翻round12'暂不挂点'：Pro20x Astra采用加权均值9.61亿/周=38.43亿/月，medium——四条外部实测源按验证等级加权（Observatory 8.53×3 / round10 13.8×3 经用户确认10%与档位真实 / g5a 7.52×3 / msg7086 8.07×2）；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值。Pro5x按档间4×派生9.61亿/月，low（prolite同框9.2亿/月量级接近但多代理放大，不直接采）。同源真实测量散布6.8~15.6亿/周提示账号间池子可能不同，加权值是中心而非普适常数。",
+    "pro5xCorroboration": "round12 #45085 prolite：198.4M/86%→2.31亿/周=9.2亿/月，与派生8.3亿接近"
+  },
+  "notFound": [
+    "lichengzhe 承诺的干净周窗补测（issue #8 仍无 9/11 后新数据）",
+    "官方 Astra 周窗绝对 token 表（仍不公布）",
+    "Plus 档位高%段（>50%）的同框样本（本批Plus均为低%噪声段）"
+  ]
+}

@@ -25,6 +25,12 @@ CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
 CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
 CHATGPT_PLUS_ASTRA_USED_TOKENS = 10_336_745
 CHATGPT_PLUS_ASTRA_USED_FRACTION = 0.26
+# Astra Pro20x 周池 —— round13 后按外部实测源加权（round10 的 10% 与 Pro20x 档位经用户确认真实）：
+#   Observatory 8.53×3 + round10 13.8×3 + g5a 7.52×3 + msg7086 8.07×2 = 105.69/11 = 9.61 亿/周；
+#   用户自测≈32亿/月与 lichengzhe 网关 21~23 亿按用户指示不入权；纯口述（Tequila 10~20、LumioAI ~18、
+#   Reism4k ~20）与下限源（sdmat>8、g8≥7.09）不进均值
+CHATGPT_PRO20X_ASTRA_WEEK_YI = 9.61
+CHATGPT_PRO20X_ASTRA_MONTHLY_YI = round(CHATGPT_PRO20X_ASTRA_WEEK_YI * MONTH_WEEKS, 2)
 DEVIN_MAX_ASTRA_USED_TOKENS = 305_025_580
 DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
 KIMI_199_USED_TOKENS = 243_739_068
@@ -34,6 +40,15 @@ KIMI_K27_199_USED_TOKENS = 11_913_113
 KIMI_K27_199_MONTHLY_USED_FRACTION = 0.0076
 CLAUDE_PRO_SESSION_TOKENS = 32_868_513
 CLAUDE_PRO_WEEKLY_FRACTION = 0.07
+# Fable 5.1 —— 首个 token×周% 同框样本（round3，用户提供的 Max 账号同日日志）：
+#   2443 轮 cache读283M+输出2.6M=285.6M raw → /usage 周额度(all models) 0%→19%；次日3017轮→24%线性互验
+CLAUDE_FABLE51_DAY_TOKENS = 285_600_000
+CLAUDE_FABLE51_DAY_WEEKLY_FRACTION = 0.19
+CLAUDE_FABLE_WEEKLY_CAP = 0.5  # 官方：Fable 系列最多占周额度 50%（5 与 5.1 同规则）
+# 该样本隐含 5.1 订阅内权重（每 raw token 相对 Opus=1 的计重）：20x周池39.25亿 ÷ Fable当量周池15.03亿 ≈ 2.61
+CLAUDE_FABLE51_W20X = (CLAUDE_MAX_20X_YI / MONTH_WEEKS) / (
+    CLAUDE_FABLE51_DAY_TOKENS / CLAUDE_FABLE51_DAY_WEEKLY_FRACTION / YI
+)
 
 # Kimi 国内外同名档并为一点（2026-09-14 用户拍板）：月费/单价统一按国际版美元标价，
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
@@ -100,6 +115,14 @@ def claude_pro_opus5_monthly_yi() -> float:
     return round(
         CLAUDE_PRO_SESSION_TOKENS / CLAUDE_PRO_WEEKLY_FRACTION
         * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def claude_fable51_max_monthly_yi() -> float:
+    return round(
+        CLAUDE_FABLE51_DAY_TOKENS / CLAUDE_FABLE51_DAY_WEEKLY_FRACTION
+        * CLAUDE_FABLE_WEEKLY_CAP * MONTH_WEEKS / YI,
         2,
     )
 
@@ -372,9 +395,10 @@ SUBS = [
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(), "high", "用户Plus面板：112,666,769 total tokens = 周额度约6%；chatgpt-luna-adoption-round6-2026-09-08.json", "旧120.12亿（Sol基准×统一credits价比19.5）→75.11亿：112,666,769÷6%×4周；直接保留面板total，不再套标准负载。6%若为整数四舍五入，范围约69.33~81.94亿/月；实测token构成为cache read 97.06%、普通输入2.61%、输出0.33%"),
     ("chatgpt_pro_5x", "ChatGPT Pro 5x", 100, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(5), "medium", "Plus Luna实测×官方5x；chatgpt-luna-adoption-round6-2026-09-08.json", "旧600.6亿→375.56亿：Plus Luna面板反推基准×官方5x；非Pro 5x账号独立实测"),
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(20), "medium", "Plus Luna实测×官方20x；GitHub #8社区美元等效旁证；chatgpt-luna-adoption-round6-2026-09-08.json", "旧2402.4亿→1502.22亿：Plus Luna面板反推基准×官方20x；按截图实际token组成折公开API价，约$1073/周，与社区‘Luna x20不到$1200、Sol x20约$2000’同量级。美元等效仅作池比旁证，不直接换token"),
-    # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro两档暂不派生：三源对Pro20x周池分歧2.7×（×20派生7.95亿/周、Observatory 8.66亿、issue#8网关21~23亿），用户拍板只上Plus
-    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；Pro 5x/20x暂不派生（三源分歧2.7×未裁决，见round8/round9）"),
-    # Pro20x Astra 不展示：多源分歧未裁决（Observatory 8.66亿/周 ~ lichengzhe 21~23亿/周，2.7×），用户拍板先不挂点；Plus端Astra为limited子池，×20派生法弃用
+    # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro20x按round13同框簇挂点（8亿簇5条独立来源），5x按Sol档间4×派生
+    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；round13新增Plus同框32~75M/周散布于1.28~3.0亿/月，与1.59亿同量级不改值；Pro20x已按round13挂点"),
+    # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "4条外部实测源加权：Observatory 8.53亿/周×3、round10截图13.8亿×3、round13同框7.52亿×3、msg7086 8.07亿×2；chatgpt-astra-round12/13", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——外部实测源按验证等级加权（面板同框/连续序列×3、自承假设×2），round10的10%与档位经用户确认由不采改为入权；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{30.8/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
     # Anthropic —— Pro采用shownotover面板截图反推Opus5周池；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
@@ -382,6 +406,9 @@ SUBS = [
     ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合"),
     ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI, "medium", "Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json", f"旧80亿→{CLAUDE_MAX_20X_YI:g}亿，9/14起永久口径：47.2亿/周×{MONTH_WEEKS:g}周÷1.5×1.25后取整；参考区间110~200亿。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126"),
     ("claude_max_5x", "Claude Max 5x (9/14+)", 100, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI / CLAUDE_WEEKLY_20X_TO_5X, "medium", "用户明确20x周池仅为5x的2倍；claude-adoption-round6-2026-09-06.json", "旧35.6亿→78.5亿，9/14起永久口径157÷2；low→medium按用户确认周池关系推算，非独立实测；不采用36亿消息数候选或70亿/旧2.25倍率；5h窗口4倍关系不套周池"),
+    # Fable 5.1 —— round3 首个同框样本（同日 token 日志 × /usage 周%），覆盖 round7"无实测不推"；
+    #   档位按用户判断挂 20x，但月额度绝对值与档位无关（19%直接定池）；若实为5x则隐含权重1.31×而非2.61×
+    ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-fable-5.1", claude_fable51_max_monthly_yi(), "medium", "用户提供样本：Max账号同日 /usage 周额度0%→19% 对应 2443 轮 285.6M raw tokens（cache读283M+输出2.6M）；claude-fable51-round3-2026-09-20.json", f"新增{claude_fable51_max_monthly_yi():g}亿：285.6M÷19%×50%周帽×{MONTH_WEEKS:g}周；次日3017轮→24%互验（预测23.5%）；隐含权重≈{CLAUDE_FABLE51_W20X:.2f}×Opus，远低于Fable5的6.5×，与cache read $1→$0.25降价方向一致；input/cache_write未入样本低估约3~10%；%取整区间29.3~30.9亿；单账号n=1定medium"),
     # xAI —— 面板周额度（用户面板：Super $25 / Plus $100 / Heavy $250）是 Grok 自己的额度美元，不等于公开标价美元
     #   （linux.do 按标价记出 Super $90~110 / Heavy $900，比例相同、整体 3.6×）。所以不用标价换算，而用 Super 档实测 token 标定：
     #   V2EX 受控打满 1.27 亿/周 ÷ $25 = 面板 $1 ≈ 508 万 token，再套到 Plus / Heavy。
@@ -462,8 +489,12 @@ DERIVED = [
     ("claude_max_20x", "claude-opus-5", "claude-fable-5", 0.5 / 6.5, "low", "旧6.152亿→12.077亿；157×0.5/6.5，不再预舍入倍率；订阅内6.5×权重且限周额度50%，9/14永久口径派生；claude-adoption-round6-2026-09-06.json", True),
     ("claude_max_5x", "claude-opus-5", "claude-sonnet-5", RATIO_SONNET, "low", "旧89亿→196.25亿；78.5×标价比2.5，9/14永久口径派生；claude-adoption-round6-2026-09-06.json", False),
     ("claude_max_5x", "claude-opus-5", "claude-fable-5", 0.5 / 4.25, "low", "维持9.235亿：x5档唯一实测权重4.25×（Reddit 1vx0k69，原帖自标typed meter偏软）；注意与用户确认2×池比矛盾——若20x=12.077亿成立则5x按池比应约6.04亿，但那需要无实测的统一权重假设，用户裁定按实测数据来；claude-adoption-round7-2026-09-14.json", False),
-    # Fable 5.1 不挂点：官方只说与 Fable 5 计量规则相同（同池同帽），从未给出 5.1 相对 Opus 的权重标定，round1 记 notFound；用户 2026-09-14 拍板无实测不推
-    # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），也不挂点
+    # Fable 5.1：20x 已按 round3 同框样本挂 30.06亿（SUBS 直测行）；5x 借其隐含权重 2.61 派生，
+    #   注意 Fable5 权重两档本就不同（6.5/4.25），跨档同权重只是假设 → low
+    ("claude_max_5x", "claude-opus-5", "claude-fable-5.1", CLAUDE_FABLE_WEEKLY_CAP / CLAUDE_FABLE51_W20X, "low", f"新增约15.03亿：78.5×0.5/{CLAUDE_FABLE51_W20X:.2f}——借20x同框样本隐含权重派生，非独立实测；Fable5权重两档不同（6.5/4.25）为前车之鉴；claude-fable51-round3-2026-09-20.json", False),
+    # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
+    ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / 4 / 30.8, "low", f"新增约{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}÷4（沿用Sol 20x→5x档间比例）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
+    # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点
     # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5 与 4.6 同价
     ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
     ("cursor_ultra", "grok-4.6", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
