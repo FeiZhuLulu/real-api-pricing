@@ -32,6 +32,8 @@ KIMI_199_USED_FRACTION = 0.84
 KIMI_MONTHLY_TO_WEEKLY = 5
 KIMI_K27_199_USED_TOKENS = 11_913_113
 KIMI_K27_199_MONTHLY_USED_FRACTION = 0.0076
+CLAUDE_PRO_SESSION_TOKENS = 32_868_513
+CLAUDE_PRO_WEEKLY_FRACTION = 0.07
 
 # Kimi 国内外同名档并为一点（2026-09-14 用户拍板）：月费/单价统一按国际版美元标价，
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
@@ -90,6 +92,14 @@ def kimi_k27_199_monthly_yi() -> float:
     return round(
         KIMI_K27_199_USED_TOKENS
         / KIMI_K27_199_MONTHLY_USED_FRACTION / YI,
+        2,
+    )
+
+
+def claude_pro_opus5_monthly_yi() -> float:
+    return round(
+        CLAUDE_PRO_SESSION_TOKENS / CLAUDE_PRO_WEEKLY_FRACTION
+        * MONTH_WEEKS / YI,
         2,
     )
 
@@ -367,9 +377,9 @@ SUBS = [
     # Pro20x Astra 不展示：多源分歧未裁决（Observatory 8.66亿/周 ~ lichengzhe 21~23亿/周，2.7×），用户拍板先不挂点；Plus端Astra为limited子池，×20派生法弃用
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
-    # Anthropic —— Pro保留Opus4.8历史实测；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
-    #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用
-    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-4.8", 15.88, "medium", "awesome-coding-plan 实测", "Opus4.8历史实测保留，现服务Opus5未重测；round5候选Opus5约1.9亿依赖假定周消息数，用户未确认，不作为实测收紧证据"),
+    # Anthropic —— Pro采用shownotover面板截图反推Opus5周池；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
+    #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用；Pro无独立Opus周池（官方文档），7% all-models周读数即绑定约束
+    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合"),
     ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI, "medium", "Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json", f"旧80亿→{CLAUDE_MAX_20X_YI:g}亿，9/14起永久口径：47.2亿/周×{MONTH_WEEKS:g}周÷1.5×1.25后取整；参考区间110~200亿。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126"),
     ("claude_max_5x", "Claude Max 5x (9/14+)", 100, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI / CLAUDE_WEEKLY_20X_TO_5X, "medium", "用户明确20x周池仅为5x的2倍；claude-adoption-round6-2026-09-06.json", "旧35.6亿→78.5亿，9/14起永久口径157÷2；low→medium按用户确认周池关系推算，非独立实测；不采用36亿消息数候选或70亿/旧2.25倍率；5h窗口4倍关系不套周池"),
     # xAI —— 面板周额度（用户面板：Super $25 / Plus $100 / Heavy $250）是 Grok 自己的额度美元，不等于公开标价美元
@@ -445,7 +455,8 @@ DERIVED = [
       for model, rates, old_ratio in (("gpt-5.6-terra", (5, 50, 300), 2),
                                       ("gpt-5.5", (12.5, 125, 750), 0.8))],
     # Anthropic：Sonnet 5 标价 = Opus 的 0.4 → ×2.5；Opus 4.8 与 Opus 5 同价 → ×1；Fable 订阅内权重统一 6.5×（Reddit x5 档 4.25 系 typed meter 软读数、与用户确认 2× 周池比矛盾，不采），且最多占周额度 50%
-    ("claude_pro", "claude-opus-4.8", "claude-sonnet-5", RATIO_SONNET, "medium", "标价比 Opus/Sonnet 2.5×", True),
+    ("claude_pro", "claude-opus-5", "claude-sonnet-5", RATIO_SONNET, "medium", "旧39.7亿→46.95亿：基准随round8换Opus5面板反推18.78亿×标价比2.5；claude-adoption-round8-2026-09-20.json", True),
+    ("claude_pro", "claude-opus-5", "claude-opus-4.8", 1.0, "low", "与Opus5同价同池，round8基准派生；历史实测15.88亿留作round5前证据不覆盖；claude-adoption-round8-2026-09-20.json", False),
     ("claude_max_20x", "claude-opus-5", "claude-sonnet-5", RATIO_SONNET, "medium", "旧200亿→392.5亿，low→medium；157×Opus/Sonnet标价比2.5，9/14永久口径派生，非Sonnet实测；claude-adoption-round6-2026-09-06.json", True),
     ("claude_max_20x", "claude-opus-5", "claude-opus-4.8", 1.0, "low", "旧80亿→157亿；与Opus5同价，9/14永久基准派生；claude-adoption-round6-2026-09-06.json", False),
     ("claude_max_20x", "claude-opus-5", "claude-fable-5", 0.5 / 6.5, "low", "旧6.152亿→12.077亿；157×0.5/6.5，不再预舍入倍率；订阅内6.5×权重且限周额度50%，9/14永久口径派生；claude-adoption-round6-2026-09-06.json", True),

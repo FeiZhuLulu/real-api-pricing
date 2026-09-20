@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-09-20",
+  "sourceType": "user_provided_community_panel_screenshot",
+  "trigger": "用户提供 X 用户 @shownotover 推文与 Claude Code /usage 面板同框截图：Pro $20 跑 Opus 5 (MED effort)，token 明细与 5h/周百分比同时可读",
+  "panelReading": {
+    "source": "X @shownotover 推文（用户提供截图两张：推文正文 + /usage 面板视频帧 0:57/1:00）",
+    "plan": "claude_pro $20",
+    "effort": "MED（作者自注 forgot to use max；effort 只影响消耗速率，不影响池大小）",
+    "sessionCostUsd": 25.72,
+    "duration": {"api": "33m58s", "wall": "1h14m9s", "crunched": "49m18s", "authorClaim": "44 minutes of usage"},
+    "usageByModel": {
+      "claude-haiku-4-5": {"input": 22300, "output": 885, "cacheRead": 0, "cacheWrite": 0, "webSearch": 1, "costUsd": 0.0367},
+      "claude-opus-5": {"input": 228, "output": 208200, "cacheRead": 32200000, "cacheWrite": 436900, "costUsd": 25.68}
+    },
+    "promptCache": "114 requests · 99% of input tokens from cache · no misses · warm (1h TTL, last activity 2m 15s ago)",
+    "sessionPctUsed": 0.58,
+    "sessionResets": "6:10pm Europe/Berlin",
+    "weeklyPctUsed": 0.07,
+    "weeklyScope": "all models（面板底部 Current week (all models) 区段，周条被视频帧截断；7% 取推文文字 '58% of 5h limit used (7% weekly!)'）",
+    "linesChanged": "1958 added / 37 removed"
+  },
+  "derived": {
+    "totalTokens": 32868513,
+    "opus5Tokens": 32845328,
+    "haikuTokens": 23185,
+    "sessionPoolTokens": 56669850,
+    "weeklyPoolTokens": 469550186,
+    "monthlyTokensYi": 18.78,
+    "monthlyRangeYi": [17.53, 20.23],
+    "formula": "monthly = totalTokens / 7% × 4周；区间取周%整数四舍五入 6.5%~7.5%；5h池 = totalTokens / 58%"
+  },
+  "consistencyChecks": [
+    "价格闭合：按已采用 Opus 5 API 标价（in $5 / out $25 / cache read $0.5 / 1h-TTL cache write $10=2×input）重算 = $25.675 ≈ 面板 $25.68，逐分位吻合，证明面板 token 数与项目计价口径一致",
+    "作者自述 '~$1500 API/月' ≈ 25.72÷7%×4 = $1469；'41 hours/月' ≈ 44min÷7%×4 = 41.9h —— 两个外推都与 7% 周读数自洽",
+    "round7 Antigravity 规律 '周池按价线性 $1≈0.785亿/月' 预测 Pro = 15.7亿/月，本次直测 18.78亿 为其 1.20×，同量级",
+    "Opus 4.8 历史实测 15.88亿 × 9/14 永久 +25% 系数 = 19.85亿，与直测 18.78亿 接近（若旧值属基准期口径则强互证；旧值实测时点未标定，仅作旁证）",
+    "周池/5h窗几何比：Pro ≈ 8.3 个满窗/周（469.6M / 56.7M）；对比 issue#82113 Max20x Opus5 下仅 ~3 窗/周 —— Pro 窗口小但周池相对窗口更宽裕，档位差异主要在 5h 窗倍率而非周池线性放大",
+    "饱和可行性：469.6M/周 ÷ 56.7M/窗 ≈ 8.3 窗，远小于每周最多 ~33.6 个 5h 窗，周池可被打满，weekly×4 成立"
+  ],
+  "planStructureCheck": {
+    "question": "Pro 是否存在比 all-models 更紧的独立 Opus 周池（若存在则 7% 不一定是绑定约束）",
+    "finding": "官方 Pro 页（support.claude.com/articles/8325606）仅列 session + 'a weekly usage limit that applies across all models' 一个周池；usage-limit-best-practices(9797557) 的 Opus-only 周表与 tokn.watch 均指 Opus 独立周池为 Max 专属。结论：Pro 单一 all-models 周池即绑定约束，7% 可直接反推。第三方 continuumcode 称 Pro 有独立 Opus 帽，与官方矛盾，不采"
+  },
+  "adoption": {
+    "claudeProOpus5MonthlyYi": 18.78,
+    "confidence": "medium",
+    "confidenceReason": "证据形式为面板截图反推（high 级），但 n=1、周%为整数取整读数（±0.5pt → 17.5~20.2亿）、第三方账号不可复核；待第二来源面板互证可升 high",
+    "resolves": "round5 notFound（Opus5 部署后 Pro 无绝对 token 面板证据）由此条补齐",
+    "killsCandidate": "round5 '约1.9亿/月' 候选作废：其假设周仅 150~250 条有效消息严重偏低，实测单会话 114 请求/32.87M tokens 仅占周池 7%，周池实际约 4.70亿 tokens ≈ 1600+ 请求量级",
+    "previousPoint": "claude_pro = claude-opus-4.8 @ 15.88亿（历史实测保留项）→ 现按 (套餐,实际服务模型) 口径改为 claude-opus-5 @ 18.78亿；Opus 4.8 与 Opus 5 同价同池，保留为 ×1.0 派生点（对齐 Max 档做法）",
+    "derived": "claude_pro sonnet-5 = 18.78 × 2.5 = 46.95亿（Opus/Sonnet 混合标价比）"
+  },
+  "notAdopted": [
+    {
+      "item": "作者外推 '~$1500 API 等效/月'、'41 工作小时/月'",
+      "reason": "美元等效与工时口径不进 X 轴，仅作内部自洽旁证"
+    }
+  ],
+  "caveats": "单样本：一个 MED-effort 会话的一次读数；周%取整使点估有 ±7% 误差带；面板 cache 构成 99% 命中属极端缓存型负载，但池计量按权重 token 与负载无关故不影响池大小反推；无法排除 Anthropic 动态调度（'at our discretion' 条款）导致的账号间差异",
+  "relatedFiles": ["claude-quotas-round5-2026-09.json", "claude-adoption-round6-2026-09-06.json", "claude-adoption-round7-2026-09-14.json"]
+}

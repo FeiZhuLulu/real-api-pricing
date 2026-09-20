@@ -316,7 +316,7 @@ def draw(board, meta, points, tier, language="zh"):
               if board == "open_design_arena" else
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board in ("aa_coding_agent_index", "terminal_bench_4") else
-              "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
+              "Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。"
           )) + ((" ≈$0 = SWE-2 promo: unmetered on Devin Pro/Max/Teams until 2026-10-31, not permanent; TB4 score self-reported by Cognition."
                  if language == "en" else " ≈$0 为 SWE-2 促销价：Devin Pro/Max/Teams 至 2026-10-31 不计额度，非永久口径；TB4 分数为 Cognition 自报。")
                 if has_zero else ""), 11, "#929A90"),

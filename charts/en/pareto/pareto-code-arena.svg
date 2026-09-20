@@ -54,7 +54,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Arena Score</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,272.747 L923.717,272.747 L984.210,370.874 L1157.672,375.842 L1276.748,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,272.747 L951.712,272.747 L984.210,370.874 L1157.672,375.842 L1276.748,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="1617" data-x="777.545" data-y="360.937" transform="translate(777.545 360.937)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 1617 · mediumgpt-5.6-sol-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / gpt-5.6-sol-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -68,12 +68,12 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
 <circle r="4" fill="#00A86B"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01259" data-score="1563" data-x="925.567" data-y="428.011" transform="translate(925.567 428.011)"><title>Claude Opus 4.8 · Pro · $0.01259/MTok · 1563 · mediumclaude-opus-4-8-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01274" data-score="1688" data-x="923.717" data-y="272.747" transform="translate(923.717 272.747)"><title>Claude Opus 5 · Max 20x · from Sep 14 / Claude Opus 5 · Max 5x · from Sep 14 · $0.01274/MTok · 1688 · mediumclaude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / claude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01065" data-score="1688" data-x="951.712" data-y="272.747" transform="translate(951.712 272.747)"><title>Claude Opus 5 · Pro · $0.01065/MTok · 1688 · mediumclaude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01274" data-score="1688" data-x="923.717" data-y="272.747" transform="translate(923.717 272.747)"><title>Claude Opus 5 · Max 20x · from Sep 14 / Claude Opus 5 · Max 5x · from Sep 14 · $0.01274/MTok · 1688 · mediumclaude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / claude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.05894" data-score="1625" data-x="684.395" data-y="351.000" transform="translate(684.395 351.000)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05894/MTok · 1625 · highgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / grok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
@@ -368,7 +368,10 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02081" data-score="1510" data-x="847.052" data-y="493.842" transform="translate(847.052 493.842)"><title>GPT 5.5 · Pro 20x · $0.02081/MTok · 1510 · mediumgpt-5.5-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00504" data-score="1537" data-x="1068.603" data-y="460.305" transform="translate(1068.603 460.305)"><title>Claude Sonnet 5 · Pro · $0.00504/MTok · 1537 · mediumclaude-sonnet-5-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00426" data-score="1537" data-x="1094.872" data-y="460.305" transform="translate(1094.872 460.305)"><title>Claude Sonnet 5 · Pro · $0.00426/MTok · 1537 · mediumclaude-sonnet-5-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01065" data-score="1563" data-x="951.712" data-y="428.011" transform="translate(951.712 428.011)"><title>Claude Opus 4.8 · Pro · $0.01065/MTok · 1563 · lowclaude-opus-4-8-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051" data-score="1537" data-x="1066.754" data-y="460.305" transform="translate(1066.754 460.305)"><title>Claude Sonnet 5 · Max 20x · from Sep 14 / Claude Sonnet 5 · Max 5x · from Sep 14 · $0.0051/MTok · 1537 · mediumclaude-sonnet-5-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / claude-sonnet-5-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -429,10 +432,10 @@
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#00A86B" stroke-width="1.5" opacity=".68"/>
 </g>
 <g class="front-label" data-model="claude-opus-5">
-<path d="M915.999,259.885Q915.999,242.747 905.717,242.747" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="899.717" y="223.747" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5 · max</text>
-<text x="899.717" y="243.747" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x / 20x · from Sep 14</text>
-<text x="899.717" y="263.747" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01274</text>
+<path d="M943.995,259.885Q943.995,242.747 933.712,242.747" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="927.712" y="223.747" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5 · max</text>
+<text x="927.712" y="243.747" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
+<text x="927.712" y="263.747" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01065</text>
 </g>
 <g class="front-label" data-model="glm-5.3">
 <path d="M990.496,357.254Q990.496,331.874 1002.210,331.874" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -479,7 +482,7 @@
 <path d="M1225 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1239.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >112 subscription positions / 11 API positions / 4 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >113 subscription positions / 11 API positions / 4 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >arena.ai/leaderboard/code</text>

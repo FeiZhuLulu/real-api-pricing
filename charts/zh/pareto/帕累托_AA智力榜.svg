@@ -56,7 +56,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Intelligence Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,302.151 L818.307,302.151 L870.866,366.305 L875.984,394.891 L1021.579,398.668 L1125.037,446.994 L1148.365,613.850 L1189.043,644.833 L1284.781,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,302.151 L842.631,302.151 L870.866,366.305 L875.984,394.891 L1021.579,398.668 L1125.037,446.994 L1148.365,613.850 L1189.043,644.833 L1284.781,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="47.0614" data-x="691.306" data-y="342.093" transform="translate(691.306 342.093)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 47.0614 · mediumGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -70,12 +70,12 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
 <circle r="4" fill="#00A86B"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01259" data-score="41.9916" data-x="819.915" data-y="397.743" transform="translate(819.915 397.743)"><title>Claude Opus 4.8 · Pro · $0.01259/MTok · 41.9916 · mediumClaude Opus 4.8 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01274" data-score="50.7002" data-x="818.307" data-y="302.151" transform="translate(818.307 302.151)"><title>Claude Opus 5 · Max 20x · 9/14+ / Claude Opus 5 · Max 5x · 9/14+ · $0.01274/MTok · 50.7002 · mediumClaude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified. / Claude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01065" data-score="50.7002" data-x="842.631" data-y="302.151" transform="translate(842.631 302.151)"><title>Claude Opus 5 · Pro · $0.01065/MTok · 50.7002 · mediumClaude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01274" data-score="50.7002" data-x="818.307" data-y="302.151" transform="translate(818.307 302.151)"><title>Claude Opus 5 · Max 20x · 9/14+ / Claude Opus 5 · Max 5x · 9/14+ · $0.01274/MTok · 50.7002 · mediumClaude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified. / Claude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.05894" data-score="44.405" data-x="610.373" data-y="371.252" transform="translate(610.373 371.252)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05894/MTok · 44.405 · highGrok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified. / Grok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
@@ -482,7 +482,10 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02081" data-score="38.6292" data-x="751.697" data-y="434.652" transform="translate(751.697 434.652)"><title>GPT 5.5 · Pro 20x · $0.02081/MTok · 38.6292 · mediumGPT-5.5 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00504" data-score="38.3577" data-x="944.191" data-y="437.632" transform="translate(944.191 437.632)"><title>Claude Sonnet 5 · Pro · $0.00504/MTok · 38.3577 · mediumClaude Sonnet 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00426" data-score="38.3577" data-x="967.015" data-y="437.632" transform="translate(967.015 437.632)"><title>Claude Sonnet 5 · Pro · $0.00426/MTok · 38.3577 · mediumClaude Sonnet 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01065" data-score="41.9916" data-x="842.631" data-y="397.743" transform="translate(842.631 397.743)"><title>Claude Opus 4.8 · Pro · $0.01065/MTok · 41.9916 · lowClaude Opus 4.8 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051" data-score="38.3577" data-x="942.584" data-y="437.632" transform="translate(942.584 437.632)"><title>Claude Sonnet 5 · Max 20x · 9/14+ / Claude Sonnet 5 · Max 5x · 9/14+ · $0.0051/MTok · 38.3577 · mediumClaude Sonnet 5 (max) · Exact served-model reference; quota-measurement effort is unverified. / Claude Sonnet 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
@@ -543,10 +546,10 @@
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#00A86B" stroke-width="1.5" opacity=".68"/>
 </g>
 <g class="front-label" data-model="claude-opus-5">
-<path d="M810.589,289.289Q810.589,272.151 800.307,272.151" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="794.307" y="253.151" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5 · max</text>
-<text x="794.307" y="273.151" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x / 20x · 9/14+</text>
-<text x="794.307" y="293.151" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01274</text>
+<path d="M834.913,289.289Q834.913,272.151 824.631,272.151" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="818.631" y="253.151" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5 · max</text>
+<text x="818.631" y="273.151" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
+<text x="818.631" y="293.151" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01065</text>
 </g>
 <g class="front-label" data-model="glm-5.3">
 <path d="M875.690,352.102Q875.690,313.305 888.866,313.305" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -621,8 +624,8 @@
 <path d="M1338 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1352.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >148 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
-<text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >149 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
+<text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>
 </svg>
