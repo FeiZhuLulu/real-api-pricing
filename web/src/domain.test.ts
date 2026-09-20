@@ -221,6 +221,7 @@ test("Monthly allowance excludes APIs, preserves unscored subscriptions and does
 test("Harness/effort/mode filters constrain scores without silently losing unscored plans", () => {
   const rows = rowsFor(data, {
     ...defaultState(),
+    board: "terminal_bench_4",
     harness: ["Codex"],
     effort: ["xhigh"],
   });
@@ -351,7 +352,7 @@ test("Unknown enum values in a short link warn and fall back to defaults", () =>
   assert.equal(restored.state.view, "pareto");
   assert.equal(restored.state.lang, "zh");
   assert.equal(restore("#board=__proto__", data).warning, true);
-  assert.equal(restore("#board=__proto__", data).state.board, "arena_code");
+  assert.equal(restore("#board=__proto__", data).state.board, "aa_intelligence_index");
 });
 test("Invalid saved values are ignored with notice; explicit language overrides local preference", () => {
   const s = {
@@ -363,7 +364,7 @@ test("Invalid saved values are ignored with notice; explicit language overrides 
   const result = restore(serialize(s), data, "zh");
   assert.equal(result.warning, true);
   assert.equal(result.state.lang, "en");
-  assert.equal(result.state.board, "arena_code");
+  assert.equal(result.state.board, "aa_intelligence_index");
   assert.deepEqual(result.state.selected, [data.points[0].id]);
   assert.deepEqual(result.state.channels, []);
   assert.equal(restore("#s=%notjson", data).warning, true);

@@ -44,7 +44,7 @@ export const defaultState = (): State => ({
   feeBand: "all",
   lang: "en",
   view: "pareto",
-  board: "arena_code",
+  board: "aa_intelligence_index",
   selected: null,
   vendors: [],
   channels: [],

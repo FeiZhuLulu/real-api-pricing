@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4")
+BOARDS = ("aa_intelligence_index", "terminal_bench_4", "arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
