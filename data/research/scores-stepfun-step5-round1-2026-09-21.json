@@ -1,0 +1,56 @@
+{
+  "collectedAt": "2026-09-21",
+  "supplement": true,
+  "supplementNote": "补充档：只向 aa_intelligence_index 与 terminal_bench_4 当前快照追加 step-5-preview 行，不替换官方快照。两条均来自用户截图，非爬虫 payload。",
+  "boards": [
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "2026-09-09",
+      "note": "与 scores-aa-round3-2026-09-09.json 同一板面元数据；本档不改快照日期。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-03",
+      "note": "与 scores-terminal-bench4-round1-2026-09-10.json 同一板面元数据；本档不改快照日期。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview",
+      "score": 44,
+      "secondary": {
+        "scoreRoundedDisplay": 44,
+        "effort": null
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models（用户 2026-09-21 截图）",
+      "checkedAt": "2026-09-21",
+      "note": "用户提供的 AA 对比图：Step 5 Preview 整数读数 44（无 effort 后缀）。同图 Grok 4.6 high=44、Kimi K3 max=44、Gemini 3.8 Flash high=41、DeepSeek V4 Pro max=36 与项目 9/9 快照吻合；但 Sol max=52（快照47.1）、Astra xhigh=53、Fable 5.1 max=53、Opus 5 max=50（快照50.7→51）——截图疑为 9/9 后更新的 index 版本（顶部列 Last Exam/GDPval/CritPt/AA-Omniscience/AA-LCR v1.1），44 属新版本读数，与 v4.3 快照混用有版本风险，待整榜重拉时复核。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview (High)",
+      "score": 33.3,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "StepFun",
+        "agentHarness": null,
+        "reasoningEffort": "high"
+      },
+      "source": "用户提供阶跃官方发布基准图（DeepSWE v1.1 / StepCodeBench / ProgramBench / Terminal-Bench v4 四表）",
+      "checkedAt": "2026-09-21",
+      "note": "厂商发布图表自报 33.3%（High）。同图 GLM-5.3 max 41.9、Astra max 57.9、Opus 5 max 52.3 对官方快照 41.82/57.88~58.18/51.82，偏差 +0.0~0.5，量级吻合；Kimi K3 max 12.6 偏低异常。harness 未注明，无 CI/成本。"
+    }
+  ],
+  "vendorBenchmarksNotBoards": {
+    "note": "同图其余三表非项目榜单，仅存档：DeepSWE v1.1 Step5(High) 67.7 / K3 67.5 / GLM-5.3 66.9 / Astra 74.1 / Opus5 74.0；StepCodeBench 49.0 / 43.9 / 40.2 / 63.9 / 61.0；ProgramBench 80.5 / 77.8 / 72.0 / 85.4 / 82.3"
+  }
+}

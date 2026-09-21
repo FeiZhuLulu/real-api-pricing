@@ -31,6 +31,11 @@ CHATGPT_PLUS_ASTRA_USED_FRACTION = 0.26
 #   用户自测≈32亿/月与 lichengzhe 网关 21~23 亿按用户指示不入权；纯口述与下限源不进均值
 CHATGPT_PRO20X_ASTRA_WEEK_YI = 9.53
 CHATGPT_PRO20X_ASTRA_MONTHLY_YI = round(CHATGPT_PRO20X_ASTRA_WEEK_YI * MONTH_WEEKS, 2)
+# Sol Pro20x —— 2026-09-21 用户裁定由 Plus×20 派生值改五源实测加权（权重同 Astra round14 惯例：
+#   连续序列/受控打满×3、自述份额×2、社区口述×1；Plus×20=123.2 派生值不入权仅对照）：
+#   Observatory 遥测 143.6×3 + 《财经》打满 109×3 + 网关 139.5×2（含两段Astra，混合负载降权不剔除）
+#   + 社区健康周 131.2×2 + imon139 口述 120×1 = 1419.2/11
+CHATGPT_PRO20X_SOL_MONTHLY_YI = round(1419.2 / 11, 2)
 DEVIN_MAX_ASTRA_USED_TOKENS = 305_025_580
 DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
 # Google AI Pro 周帽 —— round7 用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88%
@@ -347,6 +352,10 @@ GLM_CREDIT_RATES = {"glm-5.3": (1.7, 6.9, 24), "glm-5.3-flash": (0.56, 2.3, 8)}
 # 阶跃 Step Plan 国内站：官方 Credit 月池，1M Credit = ¥1，按开放平台人民币三段价折 token。
 # 证据：platform.stepfun.com/docs/zh/step-plan/overview；pricing/details；
 #       data/research/stepfun-step-plan-round1-2026-09-10.json、round3-2026-09-10.json。
+# step-5-preview（round5）：用户 Plus 面板 + 本机 210M token 实测互验成立；实测负载 cache 79.3%
+# 打不到标准口径 97.5%，采实测 mix 混合价折 token（同 google_ai_pro round7 实测口径先例）。
+STEPFUN_STEP5_TOKENS = (166_038_390, 43_410_633, 720_954)  # 本机实测 cache读/缓外输入/输出
+STEPFUN_STEP5_BLENDED_CNY = sum(t * p for t, p in zip(STEPFUN_STEP5_TOKENS, (0.35, 7.0, 20.0))) / sum(STEPFUN_STEP5_TOKENS)
 STEPFUN_TIERS = (
     ("stepfun_mini_cn", "Step Plan Mini (¥49)", 49, 400),
     ("stepfun_plus_cn", "Step Plan Plus (¥99)", 99, 1600),
@@ -356,12 +365,13 @@ STEPFUN_TIERS = (
 STEPFUN_MODELS = (
     ("step-3.5-flash", 0.14, 0.7, 2.1),
     ("step-3.7-flash", 0.27, 1.35, 8.1),
+    ("step-5-preview", 0.35, 7.0, 20.0),
 )
 STEPFUN_SOURCE = (
     "https://platform.stepfun.com/docs/zh/step-plan/overview 官方 Credit 月池 1M Credit=¥1；"
     "https://platform.stepfun.com/docs/zh/guides/pricing/details 人民币三段价；"
     "stepfun-step-plan-round1-2026-09-10.json；stepfun-step-plan-round3-2026-09-10.json；"
-    "stepfun-step-plan-round4-2026-09-10.json"
+    "stepfun-step-plan-round4-2026-09-10.json；stepfun-step5-panel-round5-2026-09-21.json"
 )
 
 
@@ -369,16 +379,31 @@ def stepfun_rows() -> list[tuple]:
     rows = []
     for pid, name, price, credit_m in STEPFUN_TIERS:
         for model, cached, inp, out in STEPFUN_MODELS:
-            yi = round(credit_m / blended(cached, inp, out) / 100, 3)
-            rows.append((
-                pid, name, price, "CNY", model, yi, "medium", STEPFUN_SOURCE,
-                f"新增{yi:g}亿：国内站月度{credit_m:g}M Credit÷统一标准负载加权价；"
-                f"1M Credit=¥1，cached/input/output=¥{cached:g}/{inp:g}/{out:g}。"
-                "英文 $1≈7M 与人民币口径对 3.5 差 0%、对 3.7 因美元价四舍五入少 3.2%，采用中文精确口径。"
-                "未采用旧 Coding Plan Prompt/5h 表；未加 Studio 40% 创作额度；"
-                "step-3.5-flash-2603 与 3.5 同价不单列；step-router-v1 不画独立点。"
-                "无面板 token+% 或打满实测，按官方绝对 Credit+价表",
-            ))
+            if model == "step-5-preview":
+                yi = round(credit_m / STEPFUN_STEP5_BLENDED_CNY / 100, 3)
+                conf = "high" if pid == "stepfun_plus_cn" else "medium"
+                note = (
+                    f"新增{yi:g}亿：国内站月度{credit_m:g}M Credit÷用户实测负载混合价¥{STEPFUN_STEP5_BLENDED_CNY:.3f}/M"
+                    "（cache 79.3%/输入20.7%/输出0.34%，本机OpenCode+DSH共210.17M tokens大样本）；"
+                    "实测负载打不到97.5% cache，不套标准负载（否则高估3.2×）。"
+                    + ("Plus面板双向验证：控制台Credit消耗378.15M 与本机token×官方三段价期望376.41M 差+0.46%；"
+                       "378.15÷1600=23.63%≈面板剩余77%，官方1600M月池与1M Credit=¥1计费均成立。"
+                       if pid == "stepfun_plus_cn" else
+                       "借用Plus实测负载mix，池额为官方表值、本档未面板验证。")
+                    + "step-5-preview暂无榜单分，帕累托不画、额度/单价总览进图。"
+                )
+            else:
+                yi = round(credit_m / blended(cached, inp, out) / 100, 3)
+                conf = "medium"
+                note = (
+                    f"新增{yi:g}亿：国内站月度{credit_m:g}M Credit÷统一标准负载加权价；"
+                    f"1M Credit=¥1，cached/input/output=¥{cached:g}/{inp:g}/{out:g}。"
+                    "英文 $1≈7M 与人民币口径对 3.5 差 0%、对 3.7 因美元价四舍五入少 3.2%，采用中文精确口径。"
+                    "未采用旧 Coding Plan Prompt/5h 表；未加 Studio 40% 创作额度；"
+                    "step-3.5-flash-2603 与 3.5 同价不单列；step-router-v1 不画独立点。"
+                    "无面板 token+% 或打满实测，按官方绝对 Credit+价表"
+                )
+            rows.append((pid, name, price, "CNY", model, yi, conf, STEPFUN_SOURCE, note))
     return rows
 
 
@@ -405,14 +430,14 @@ SUBS = [
     # OpenAI —— Sol 为 Terra/5.5 基准；Luna 改用 Plus 用户面板实测，Pro 档按官方 5x/20x 推算
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-5.6-sol", 6.16, "medium", "awesome-coding-plan 2026-07-30 实测", ""),
     ("chatgpt_pro_5x", "ChatGPT Pro 5x", 100, "USD", "gpt-5.6-sol", 30.8, "medium", "Plus × 官方 5x", "flat.json 写 38.9 与官方 5x 不符，改 30.8"),
-    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-sol", 123.2, "high", "Plus × 官方 20x", "用户拍板 123.2；两个独立印证：OpenAI 社区健康周 7.87 亿 = 24% → 131 亿/月；《财经》2026-08 跑满实测 109 亿/月；文章 200 亿作废；第三方旁证：OpenClawFarm 网关 2026-08-21~09-06 对正价 Pro 20x 账号 250 个百分点的 raw token 实测 139.5 亿/月（段间 108~154 亿，实际负载 cache 94.7%，直接给出 total tokens、不再按标准负载归一），见 chatgpt-pro20x-gateway-measurement-2026-09-06.json；逐段复核发现汇总仍含两段Astra，139.5亿仅作混合负载旁证，不视为纯Sol实测；采用值未改"),
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-sol", CHATGPT_PRO20X_SOL_MONTHLY_YI, "high", "五源实测加权：Observatory 143.6×3 + 《财经》109×3 + 网关 139.5×2 + 健康周 131.2×2 + imon139 120×1；chatgpt-quotas-round5 / caijing-2026-08 / chatgpt-pro20x-gateway-measurement-2026-09-06", f"用户拍板 123.2（Plus×20 派生）→{CHATGPT_PRO20X_SOL_MONTHLY_YI:g} 亿加权值：权重沿用 Astra round14 惯例，派生值不入权仅对照；网关段间 108~154 亿、含两段 Astra 降权不剔除；健康周 7.87 亿=24%→131 亿；《财经》受控打满 109 亿为最低端；imon139 同帖口述「~30 亿/周」；文章 200 亿作废"),
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(), "high", "用户Plus面板：112,666,769 total tokens = 周额度约6%；chatgpt-luna-adoption-round6-2026-09-08.json", "旧120.12亿（Sol基准×统一credits价比19.5）→75.11亿：112,666,769÷6%×4周；直接保留面板total，不再套标准负载。6%若为整数四舍五入，范围约69.33~81.94亿/月；实测token构成为cache read 97.06%、普通输入2.61%、输出0.33%"),
     ("chatgpt_pro_5x", "ChatGPT Pro 5x", 100, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(5), "medium", "Plus Luna实测×官方5x；chatgpt-luna-adoption-round6-2026-09-08.json", "旧600.6亿→375.56亿：Plus Luna面板反推基准×官方5x；非Pro 5x账号独立实测"),
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-5.6-luna", chatgpt_luna_monthly_yi(20), "medium", "Plus Luna实测×官方20x；GitHub #8社区美元等效旁证；chatgpt-luna-adoption-round6-2026-09-08.json", "旧2402.4亿→1502.22亿：Plus Luna面板反推基准×官方20x；按截图实际token组成折公开API价，约$1073/周，与社区‘Luna x20不到$1200、Sol x20约$2000’同量级。美元等效仅作池比旁证，不直接换token"),
     # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro20x按round13同框簇挂点（8亿簇5条独立来源），5x按Sol档间4×派生
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；round13新增Plus同框32~75M/周散布于1.28~3.0亿/月，与1.59亿同量级不改值；Pro20x已按round13挂点"),
     # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
-    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{30.8/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{CHATGPT_PRO20X_SOL_MONTHLY_YI/4/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
     # Google —— Antigravity 合池按 API worth 计权（官方机制）；round7 用户本地实测补上首个周帽同框
@@ -421,7 +446,7 @@ SUBS = [
     ("google_ai_ultra_20x_us", "Google AI Ultra 20x", 199.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 20, 2), "low", "官方：Ultra $200 = 20× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*20:g}亿：Pro采用值×官方worth倍率20；非独立实测"),
     # Anthropic —— Pro采用shownotover面板截图反推Opus5周池；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
     #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用；Pro无独立Opus周池（官方文档），7% all-models周读数即绑定约束
-    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合"),
+    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合；2026-09-21用户裁定Opus4.8旧测不入权——round8曾按基准期读法×1.25=19.85亿作互证，但round6记录该值含+50%活动期boost，忠实映射为÷1.5×1.25=13.23亿且与面板矛盾，故仅面板单源"),
     ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI, "medium", "Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json", f"旧80亿→{CLAUDE_MAX_20X_YI:g}亿，9/14起永久口径：47.2亿/周×{MONTH_WEEKS:g}周÷1.5×1.25后取整；参考区间110~200亿。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126"),
     ("claude_max_5x", "Claude Max 5x (9/14+)", 100, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI / CLAUDE_WEEKLY_20X_TO_5X, "medium", "用户明确20x周池仅为5x的2倍；claude-adoption-round6-2026-09-06.json", "旧35.6亿→78.5亿，9/14起永久口径157÷2；low→medium按用户确认周池关系推算，非独立实测；不采用36亿消息数候选或70亿/旧2.25倍率；5h窗口4倍关系不套周池"),
     # Fable 5.1 —— round3 首个同框样本（同日 token 日志 × /usage 周%），覆盖 round7"无实测不推"；
@@ -496,7 +521,7 @@ DERIVED = [
     *[(pid, "gpt-5.6-sol", model, blended(10, 100, 500) / blended(*rates), "medium",
        f"https://learn.chatgpt.com/docs/pricing 三段credits（cache/input/output）Sol=10/100/500，对比{rates}；旧倍率{old_ratio}、旧月额度{sol_yi * old_ratio:g}亿作废；保留Sol基准，按项目统一标准负载重算；见audit-round4-2026-09-05.json",
        pid != "chatgpt_pro_5x" and model != "gpt-5.6-terra")
-      for pid, sol_yi in (("chatgpt_plus", 6.16), ("chatgpt_pro_5x", 30.8), ("chatgpt_pro_20x", 123.2))
+      for pid, sol_yi in (("chatgpt_plus", 6.16), ("chatgpt_pro_5x", 30.8), ("chatgpt_pro_20x", CHATGPT_PRO20X_SOL_MONTHLY_YI))
       for model, rates, old_ratio in (("gpt-5.6-terra", (5, 50, 300), 2),
                                       ("gpt-5.5", (12.5, 125, 750), 0.8))],
     # Anthropic：Sonnet 5 标价 = Opus 的 0.4 → ×2.5；Opus 4.8 与 Opus 5 同价 → ×1；Fable 订阅内权重统一 6.5×（Reddit x5 档 4.25 系 typed meter 软读数、与用户确认 2× 周池比矛盾，不采），且最多占周额度 50%
@@ -511,7 +536,7 @@ DERIVED = [
     #   注意 Fable5 权重两档本就不同（6.5/4.25），跨档同权重只是假设 → low
     ("claude_max_5x", "claude-opus-5", "claude-fable-5.1", CLAUDE_FABLE_WEEKLY_CAP / CLAUDE_FABLE51_W20X, "low", f"新增约15.03亿：78.5×0.5/{CLAUDE_FABLE51_W20X:.2f}——借20x同框样本隐含权重派生，非独立实测；Fable5权重两档不同（6.5/4.25）为前车之鉴；claude-fable51-round3-2026-09-20.json", False),
     # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
-    ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / 4 / 30.8, "low", f"新增约{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}÷4（沿用Sol 20x→5x档间比例）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
+    ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / CHATGPT_PRO20X_SOL_MONTHLY_YI, "low", f"{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}→{30.8*CHATGPT_PRO20X_ASTRA_MONTHLY_YI/CHATGPT_PRO20X_SOL_MONTHLY_YI:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}×30.8/{CHATGPT_PRO20X_SOL_MONTHLY_YI:g}（沿用Sol 20x→5x档间比例，基准随Sol 20x加权值联动{CHATGPT_PRO20X_SOL_MONTHLY_YI/30.8:.2f}×）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
     # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点
     # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5 与 4.6 同价
     ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),

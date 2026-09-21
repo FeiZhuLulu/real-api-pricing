@@ -1,0 +1,18 @@
+{
+  "collectedAt": "2026-09-21",
+  "sourceType": "user-provided official pricing table",
+  "scope": "阶跃开放平台 step-5-preview 按量三段价（用户提供的官方 pricing 表），供 compute.py 标价混合比。不改 adopted。",
+  "models": [
+    {
+      "model": "step-5-preview",
+      "vendor": "StepFun",
+      "input": 7.0,
+      "cachedInput": 0.35,
+      "output": 20.0,
+      "currency": "CNY",
+      "source": "https://platform.stepfun.com/docs/zh/guides/pricing/details",
+      "checkedAt": "2026-09-21",
+      "note": "用户 2026-09-21 提供官方表：输入（缓存未命中）7元/1M、缓存命中 0.35元/1M、输出 20元/1M。控制台 Credit 消耗与本机 token×该价表差 +0.46%，见 stepfun-step5-panel-round5-2026-09-21.json。"
+    }
+  ]
+}

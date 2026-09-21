@@ -13287,5 +13287,71 @@
       "checkedAt": "2026-09-12",
       "note": "厂商自报，非 tbench.ai 官方榜运行。Cognition 博客 Coding benchmark results 表 Terminal-Bench 4 列 27.3%。同表 Astra/Sol/Grok 4.6 与官方榜一致，Fable 5.1 55.8 与官方榜 57.88 不一致。无 CI、无成本/token 数据。见 devin-swe2-round1-2026-09-12.json。"
     }
+  },
+  {
+    "configuration_id": "aa_intelligence_index:d3166087a7d0c9f6",
+    "board": "aa_intelligence_index",
+    "model": "step-5-preview",
+    "variant": "Step 5 Preview",
+    "score_is_estimated": null,
+    "score_is_self_reported": false,
+    "agent_harness": null,
+    "reasoning_effort": null,
+    "service_mode": null,
+    "score": 44,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "https://artificialanalysis.ai/leaderboards/models（用户 2026-09-21 截图）",
+    "checked_at": "2026-09-21",
+    "archive": "scores-stepfun-step5-round1-2026-09-21.json",
+    "raw_record": {
+      "boardId": "aa_intelligence_index",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview",
+      "score": 44,
+      "secondary": {
+        "scoreRoundedDisplay": 44,
+        "effort": null
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models（用户 2026-09-21 截图）",
+      "checkedAt": "2026-09-21",
+      "note": "用户提供的 AA 对比图：Step 5 Preview 整数读数 44（无 effort 后缀）。同图 Grok 4.6 high=44、Kimi K3 max=44、Gemini 3.8 Flash high=41、DeepSeek V4 Pro max=36 与项目 9/9 快照吻合；但 Sol max=52（快照47.1）、Astra xhigh=53、Fable 5.1 max=53、Opus 5 max=50（快照50.7→51）——截图疑为 9/9 后更新的 index 版本（顶部列 Last Exam/GDPval/CritPt/AA-Omniscience/AA-LCR v1.1），44 属新版本读数，与 v4.3 快照混用有版本风险，待整榜重拉时复核。"
+    }
+  },
+  {
+    "configuration_id": "terminal_bench_4:2ab16f5e696adc85",
+    "board": "terminal_bench_4",
+    "model": "step-5-preview",
+    "variant": "Step 5 Preview (High) [vendor self-report]",
+    "score_is_estimated": null,
+    "score_is_self_reported": true,
+    "agent_harness": null,
+    "reasoning_effort": "high",
+    "service_mode": null,
+    "score": 33.3,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "用户提供阶跃官方发布基准图（DeepSWE v1.1 / StepCodeBench / ProgramBench / Terminal-Bench v4 四表）",
+    "checked_at": "2026-09-21",
+    "archive": "scores-stepfun-step5-round1-2026-09-21.json",
+    "raw_record": {
+      "boardId": "terminal_bench_4",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview (High)",
+      "score": 33.3,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "StepFun",
+        "agentHarness": null,
+        "reasoningEffort": "high"
+      },
+      "source": "用户提供阶跃官方发布基准图（DeepSWE v1.1 / StepCodeBench / ProgramBench / Terminal-Bench v4 四表）",
+      "checkedAt": "2026-09-21",
+      "note": "厂商发布图表自报 33.3%（High）。同图 GLM-5.3 max 41.9、Astra max 57.9、Opus 5 max 52.3 对官方快照 41.82/57.88~58.18/51.82，偏差 +0.0~0.5，量级吻合；Kimi K3 max 12.6 偏低异常。harness 未注明，无 CI/成本。"
+    }
   }
 ]

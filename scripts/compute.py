@@ -24,12 +24,14 @@ SCORE_FILES = (
     "scores-open-design-round1-2026-09-09.json",
     "scores-terminal-bench4-round1-2026-09-10.json",
     "scores-terminal-bench4-round2-selfreport-2026-09-12.json",
+    "scores-stepfun-step5-round1-2026-09-21.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
     "list-prices-deepseek-v41-round1-2026-09-09.json",
     "list-prices-deepseek-v41-round2-2026-09-10.json",
     "list-prices-stepfun-round1-2026-09-10.json",
+    "list-prices-stepfun-round2-2026-09-21.json",
 )
 
 
@@ -54,7 +56,7 @@ DISPLAY = {
     "glm-5.2-fast": "GLM 5.2 Fast", "inkling": "Inkling", "inkling-small": "Inkling Small",
     "kimi-k2.7-code-highspeed": "Kimi K2.7 Code HighSpeed", "nemotron-3-ultra": "Nemotron 3 Ultra",
     "qwen3.8-27b": "Qwen3.8 27B", "qwen3.8-max-0902": "Qwen3.8 Max 0902",
-    "step-3.5-flash": "Step 3.5 Flash", "step-3.7-flash": "Step 3.7 Flash",
+    "step-3.5-flash": "Step 3.5 Flash", "step-3.7-flash": "Step 3.7 Flash", "step-5-preview": "Step 5 Preview",
     "hy3": "Hy3", "hy4-preview": "Hy4 Preview", "omen-alpha": "Omen Alpha", "composer-2.5": "Composer 2.5",
     "swe-2": "SWE-2",
 }

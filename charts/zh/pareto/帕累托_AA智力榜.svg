@@ -56,11 +56,11 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Intelligence Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,302.151 L842.631,302.151 L870.866,366.305 L875.984,394.891 L1021.579,398.668 L1125.037,446.994 L1148.365,613.850 L1189.043,644.833 L1284.781,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,302.151 L842.631,302.151 L870.866,366.305 L956.002,375.698 L1021.579,398.668 L1125.037,446.994 L1148.365,613.850 L1189.043,644.833 L1284.781,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="47.0614" data-x="691.306" data-y="342.093" transform="translate(691.306 342.093)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 47.0614 · mediumGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01623" data-score="47.0614" data-x="785.440" data-y="342.093" transform="translate(785.440 342.093)"><title>GPT 5.6 Sol · Pro 20x · $0.01623/MTok · 47.0614 · highGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0155" data-score="47.0614" data-x="791.688" data-y="342.093" transform="translate(791.688 342.093)"><title>GPT 5.6 Sol · Pro 20x · $0.0155/MTok · 47.0614 · highGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00266" data-score="37.5048" data-x="1030.944" data-y="446.994" transform="translate(1030.944 446.994)"><title>GPT 5.6 Luna · Plus / GPT 5.6 Luna · Pro 5x · $0.00266/MTok · 37.5048 · highGPT-5.6 Luna (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Luna (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
@@ -452,10 +452,16 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00579" data-score="19.4813" data-x="925.359" data-y="644.833" transform="translate(925.359 644.833)"><title>Step 3.7 Flash · Step Plan Mini (¥49) · $0.00579/MTok · 19.4813 · mediumStep 3.7 Flash [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.03237" data-score="44" data-x="691.724" data-y="375.698" transform="translate(691.724 375.698)"><title>Step 5 Preview · Step Plan Mini (¥49) · $0.03237/MTok · 44 · mediumStep 5 Preview · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00145" data-score="16.9641" data-x="1113.311" data-y="672.464" transform="translate(1113.311 672.464)"><title>Step 3.5 Flash · Step Plan Plus (¥99) · $0.00145/MTok · 16.9641 · mediumStep 3.5 Flash 2603 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00293" data-score="19.4813" data-x="1017.821" data-y="644.833" transform="translate(1017.821 644.833)"><title>Step 3.7 Flash · Step Plan Plus (¥99) · $0.00293/MTok · 19.4813 · mediumStep 3.7 Flash [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01635" data-score="44" data-x="784.440" data-y="375.698" transform="translate(784.440 375.698)"><title>Step 5 Preview · Step Plan Plus (¥99) · $0.01635/MTok · 44 · highStep 5 Preview · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00058" data-score="16.9641" data-x="1237.695" data-y="672.464" transform="translate(1237.695 672.464)"><title>Step 3.5 Flash · Step Plan Pro (¥199) · $0.00058/MTok · 16.9641 · mediumStep 3.5 Flash 2603 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
@@ -464,11 +470,18 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00118" data-score="19.4813" data-x="1141.281" data-y="644.833" transform="translate(1141.281 644.833)"><title>Step 3.7 Flash · Step Plan Pro (¥199) · $0.00118/MTok · 19.4813 · mediumStep 3.7 Flash [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00657" data-score="44" data-x="908.203" data-y="375.698" transform="translate(908.203 375.698)"><title>Step 5 Preview · Step Plan Pro (¥199) · $0.00657/MTok · 44 · mediumStep 5 Preview · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="true" data-price="0.00041" data-score="16.9641" data-x="1284.781" data-y="672.464" transform="translate(1284.781 672.464)"><title>Step 3.5 Flash · Step Plan Max (¥699) · $0.00041/MTok · 16.9641 · mediumStep 3.5 Flash 2603 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00F4E5" stroke-width="1.35"/>
 <circle r="4" fill="#00F4E5"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="true" data-price="0.00083" data-score="19.4813" data-x="1189.043" data-y="644.833" transform="translate(1189.043 644.833)"><title>Step 3.7 Flash · Step Plan Max (¥699) · $0.00083/MTok · 19.4813 · mediumStep 3.7 Flash [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00F4E5" stroke-width="1.35"/>
+<circle r="4" fill="#00F4E5"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00462" data-score="44" data-x="956.002" data-y="375.698" transform="translate(956.002 375.698)"><title>Step 5 Preview · Step Plan Max (¥699) · $0.00462/MTok · 44 · mediumStep 5 Preview · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00F4E5" stroke-width="1.35"/>
 <circle r="4" fill="#00F4E5"/>
 </g>
@@ -481,11 +494,10 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.04163" data-score="38.6292" data-x="657.572" data-y="434.652" transform="translate(657.572 434.652)"><title>GPT 5.5 · Pro 5x · $0.04163/MTok · 38.6292 · mediumGPT-5.5 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00833" data-score="42.2515" data-x="875.984" data-y="394.891" transform="translate(875.984 394.891)"><title>GPT 5.6 Terra · Pro 20x · $0.00833/MTok · 42.2515 · mediumGPT-5.6 Terra (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
-<circle r="4" fill="#00A86B"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00795" data-score="42.2515" data-x="882.322" data-y="394.891" transform="translate(882.322 394.891)"><title>GPT 5.6 Terra · Pro 20x · $0.00795/MTok · 42.2515 · mediumGPT-5.6 Terra (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02081" data-score="38.6292" data-x="751.697" data-y="434.652" transform="translate(751.697 434.652)"><title>GPT 5.5 · Pro 20x · $0.02081/MTok · 38.6292 · mediumGPT-5.5 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01987" data-score="38.6292" data-x="757.972" data-y="434.652" transform="translate(757.972 434.652)"><title>GPT 5.5 · Pro 20x · $0.01987/MTok · 38.6292 · mediumGPT-5.5 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00426" data-score="38.3577" data-x="967.015" data-y="437.632" transform="translate(967.015 437.632)"><title>Claude Sonnet 5 · Pro · $0.00426/MTok · 38.3577 · mediumClaude Sonnet 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
@@ -563,11 +575,11 @@
 <text x="894.866" y="314.305" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro (v2 ¥149) 闲时</text>
 <text x="894.866" y="334.305" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00865</text>
 </g>
-<g class="front-label" data-model="gpt-5.6-terra">
-<path d="M871.077,409.065Q871.077,446.891 857.984,446.891" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="851.984" y="459.891" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">GPT 5.6 Terra · max</text>
-<text x="851.984" y="479.891" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro 20x</text>
-<text x="851.984" y="499.891" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00833</text>
+<g class="front-label" data-model="step-5-preview">
+<path d="M950.144,361.889Q950.144,342.698 942.002,342.698" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="936.002" y="323.698" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Step 5 Preview</text>
+<text x="936.002" y="343.698" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Step Plan Max (¥699)</text>
+<text x="936.002" y="363.698" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00462</text>
 </g>
 <g class="front-label" data-model="glm-5.3-flash">
 <path d="M1031.017,387.009Q1031.017,377.668 1038.579,377.668" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -632,7 +644,7 @@
 <path d="M1421 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1435.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >151 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >155 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>
