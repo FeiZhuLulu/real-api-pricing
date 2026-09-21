@@ -25,14 +25,20 @@ CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
 CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
 CHATGPT_PLUS_ASTRA_USED_TOKENS = 10_336_745
 CHATGPT_PLUS_ASTRA_USED_FRACTION = 0.26
-# Astra Pro20x 周池 —— round13 后按外部实测源加权（round10 的 10% 与 Pro20x 档位经用户确认真实）：
-#   Observatory 8.53×3 + round10 13.8×3 + g5a 7.52×3 + msg7086 8.07×2 = 105.69/11 = 9.61 亿/周；
-#   用户自测≈32亿/月与 lichengzhe 网关 21~23 亿按用户指示不入权；纯口述（Tequila 10~20、LumioAI ~18、
-#   Reism4k ~20）与下限源（sdmat>8、g8≥7.09）不进均值
-CHATGPT_PRO20X_ASTRA_WEEK_YI = 9.61
+# Astra Pro20x 周池 —— round14 后按实测源加权（round10 的 10% 与 Pro20x 档位经用户确认真实）：
+#   Observatory 8.53×3 + round10 13.8×3 + g5a 7.52×3 + msg7086 8.07×2 + 图1用户面板 10.0×3
+#   + 图4(2/3周) 8.18×2 + 图2 X自述 9.25×1 + 图3 sub2后台 10.3×1 = 171.6/18 = 9.53 亿/周；
+#   用户自测≈32亿/月与 lichengzhe 网关 21~23 亿按用户指示不入权；纯口述与下限源不进均值
+CHATGPT_PRO20X_ASTRA_WEEK_YI = 9.53
 CHATGPT_PRO20X_ASTRA_MONTHLY_YI = round(CHATGPT_PRO20X_ASTRA_WEEK_YI * MONTH_WEEKS, 2)
 DEVIN_MAX_ASTRA_USED_TOKENS = 305_025_580
 DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
+# Google AI Pro 周帽 —— round7 用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88%
+#   → raw 周池 5.60 亿。官方按 API worth 合池计权（实证：B1/B2 的 %比 0.405≈worth比 0.407，非 raw比 0.448），
+#   故 raw 额度随负载 mix 变：本样本 cache 82.6%（用户指出 Gemini 实际负载打不到 97% cache）——
+#   采用 raw 实测口径而非标准负载折算（标准负载口径 $120.1 worth/周≈46.9 亿/月，偏高不采）
+GOOGLE_PRO_B_TOTAL_TOKENS = 55_343_000
+GOOGLE_PRO_B_WEEKLY_FRACTION = 0.0988
 KIMI_199_USED_TOKENS = 243_739_068
 KIMI_199_USED_FRACTION = 0.84
 KIMI_MONTHLY_TO_WEEKLY = 5
@@ -91,6 +97,14 @@ def devin_max_astra_monthly_yi() -> float:
     return round(
         DEVIN_MAX_ASTRA_USED_TOKENS / DEVIN_MAX_ASTRA_USED_FRACTION
         * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def google_ai_pro_monthly_yi() -> float:
+    # raw total ÷ 周占比 → 周池 raw；×4周 → 亿/月（用户实测 mix 的"实际可用"口径）
+    return round(
+        GOOGLE_PRO_B_TOTAL_TOKENS / GOOGLE_PRO_B_WEEKLY_FRACTION * MONTH_WEEKS / YI,
         2,
     )
 
@@ -398,9 +412,13 @@ SUBS = [
     # Astra —— 用户Plus账号2026-09-11晚周窗26pt打满直测；Pro20x按round13同框簇挂点（8亿簇5条独立来源），5x按Sol档间4×派生
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；round13新增Plus同框32~75M/周散布于1.28~3.0亿/月，与1.59亿同量级不改值；Pro20x已按round13挂点"),
     # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
-    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "4条外部实测源加权：Observatory 8.53亿/周×3、round10截图13.8亿×3、round13同框7.52亿×3、msg7086 8.07亿×2；chatgpt-astra-round12/13", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——外部实测源按验证等级加权（面板同框/连续序列×3、自承假设×2），round10的10%与档位经用户确认由不采改为入权；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{30.8/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
+    ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{30.8/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
+    # Google —— Antigravity 合池按 API worth 计权（官方机制）；round7 用户本地实测补上首个周帽同框
+    ("google_ai_pro_us", "Google AI Pro", 19.99, "USD", "gemini-3.8-flash", google_ai_pro_monthly_yi(), "high", "用户本地实测：B整段55.343M raw(cache45.69M/in9.26M/out0.40M)=周条+9.88%；gemini-weekly-round7-2026-09-21.json", f"新增{google_ai_pro_monthly_yi():g}亿：55.343M÷9.88%×{MONTH_WEEKS:g}周=周池5.60亿raw；worth计权经B1/B2段内验（%比0.405≈worth比0.407，非raw比0.448），周帽合$120.1 worth；worth池raw额度随负载mix变——本样本cache 82.6%，用户指出Gemini实际负载打不到标准口径的97.5% cache，故采raw实测而非标准负载折算（折算口径46.9亿/月偏高弃用）；LLMDevs Pro~1.0B/周与Ultra~5.0B/周(恰5×)量级吻合；round6的5h锚$20.4→周≈5.9 sprint自洽"),
+    ("google_ai_ultra_5x_us", "Google AI Ultra 5x", 99.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 5, 2), "low", "官方：Ultra $100 = 5× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*5:g}亿：Pro采用值×官方worth倍率5；LLMDevs Ultra~5.0B/周同量级旁证；非独立实测"),
+    ("google_ai_ultra_20x_us", "Google AI Ultra 20x", 199.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 20, 2), "low", "官方：Ultra $200 = 20× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*20:g}亿：Pro采用值×官方worth倍率20；非独立实测"),
     # Anthropic —— Pro采用shownotover面板截图反推Opus5周池；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
     #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用；Pro无独立Opus周池（官方文档），7% all-models周读数即绑定约束
     ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合"),
@@ -533,6 +551,7 @@ METERED = [
 
 # 精选图只画主流套餐 + 前沿相关点，避免 60 个点挤在一起；全量图画全部
 MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
+              "google_ai_pro_us",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
               "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro"}
 MAIN_EXTRA = {

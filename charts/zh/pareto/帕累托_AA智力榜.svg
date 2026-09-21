@@ -70,6 +70,12 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
 <circle r="4" fill="#00A86B"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00892" data-score="41.1864" data-x="866.694" data-y="406.582" transform="translate(866.694 406.582)"><title>Gemini 3.8 Flash · Google AI Pro / Gemini 3.8 Flash · Google AI Ultra 5x · $0.00892/MTok · 41.1864 · highGemini 3.8 Flash (high) · Exact served-model reference; quota-measurement effort is unverified. / Gemini 3.8 Flash (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7CC12A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00446" data-score="41.1864" data-x="960.787" data-y="406.582" transform="translate(960.787 406.582)"><title>Gemini 3.8 Flash · Google AI Ultra 20x · $0.00446/MTok · 41.1864 · lowGemini 3.8 Flash (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7CC12A" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="true" data-price="0.01065" data-score="50.7002" data-x="842.631" data-y="302.151" transform="translate(842.631 302.151)"><title>Claude Opus 5 · Pro · $0.01065/MTok · 50.7002 · mediumClaude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
@@ -617,14 +623,16 @@
 <text x="962.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Ollama</text>
 <rect x="1028" y="826" width="8" height="8" fill="#1F75FE"/>
 <text x="1045.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >DeepSeek</text>
-<rect x="1122" y="826" width="8" height="8" fill="#00F4E5"/>
-<text x="1139.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >StepFun</text>
-<path d="M1218 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="1248.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
-<path d="M1338 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="1352.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
+<rect x="1122" y="826" width="8" height="8" fill="#7CC12A"/>
+<text x="1139.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Google</text>
+<rect x="1205" y="826" width="8" height="8" fill="#00F4E5"/>
+<text x="1222.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >StepFun</text>
+<path d="M1301 830h22" stroke="#303630" stroke-width="1.65"/>
+<text x="1331.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
+<path d="M1421 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
+<text x="1435.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >149 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >151 个订阅位置 / 11 个 API 位置 / 8 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>

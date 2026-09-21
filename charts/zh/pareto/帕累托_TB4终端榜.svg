@@ -87,6 +87,12 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.14265" data-score="58.18" data-x="522.853" data-y="267.020" transform="translate(522.853 267.020)"><title>GPT-6 Astra · Devin Max · $0.14265/MTok · 58.18 · highCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0.11,-1.63 L-1.97,-0.43 L-4.05,-1.63 L-4.05,-4.03 L-1.97,-5.23 L0.11,-4.03Z M0.11,4.03 L-1.97,5.23 L-4.05,4.03 L-4.05,1.63 L-1.97,0.43 L0.11,1.63Z M4.91,1.20 L2.83,2.40 L0.75,1.20 L0.75,-1.20 L2.83,-2.40 L4.91,-1.20Z" fill="#7C3AED" opacity="0.68" stroke="#7C3AED" stroke-width="0.43" stroke-linejoin="round"/><path d="M-0.89,-1.27 L-1.87,-2.69 M-0.89,1.27 L-1.87,2.69 M1.27,0.00 L2.69,0.00" stroke="#7C3AED" stroke-width="2.16" stroke-linecap="round" opacity="0.68" fill="none"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00892" data-score="19.09" data-x="932.140" data-y="615.142" transform="translate(932.140 615.142)"><title>Gemini 3.8 Flash · Google AI Pro / Gemini 3.8 Flash · Google AI Ultra 5x · $0.00892/MTok · 19.09 · highmini-SWE-agent - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / mini-SWE-agent - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7CC12A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00446" data-score="19.09" data-x="1034.480" data-y="615.142" transform="translate(1034.480 615.142)"><title>Gemini 3.8 Flash · Google AI Ultra 20x · $0.00446/MTok · 19.09 · lowmini-SWE-agent - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7CC12A" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="true" data-price="0.01065" data-score="51.82" data-x="905.968" data-y="323.660" transform="translate(905.968 323.660)"><title>Claude Opus 5 · Pro · $0.01065/MTok · 51.82 · mediumClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
@@ -313,14 +319,16 @@
 <text x="583.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Command Code</text>
 <rect x="688" y="826" width="8" height="8" fill="#A0785C"/>
 <text x="705.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Ollama</text>
-<path d="M775.11,828.37 L773.03,829.57 L770.95,828.37 L770.95,825.97 L773.03,824.77 L775.11,825.97Z M775.11,834.03 L773.03,835.23 L770.95,834.03 L770.95,831.63 L773.03,830.43 L775.11,831.63Z M779.91,831.20 L777.83,832.40 L775.75,831.20 L775.75,828.80 L777.83,827.60 L779.91,828.80Z" fill="#7C3AED" opacity="1.0" stroke="#7C3AED" stroke-width="0.43" stroke-linejoin="round"/><path d="M774.11,828.73 L773.13,827.31 M774.11,831.27 L773.13,832.69 M776.27,830.00 L777.69,830.00" stroke="#7C3AED" stroke-width="2.16" stroke-linecap="round" opacity="1.0" fill="none"/>
-<text x="788.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Devin</text>
-<path d="M863 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="893.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
-<path d="M983 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="997.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
+<rect x="771" y="826" width="8" height="8" fill="#7CC12A"/>
+<text x="788.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Google</text>
+<path d="M858.11,828.37 L856.03,829.57 L853.95,828.37 L853.95,825.97 L856.03,824.77 L858.11,825.97Z M858.11,834.03 L856.03,835.23 L853.95,834.03 L853.95,831.63 L856.03,830.43 L858.11,831.63Z M862.91,831.20 L860.83,832.40 L858.75,831.20 L858.75,828.80 L860.83,827.60 L862.91,828.80Z" fill="#7C3AED" opacity="1.0" stroke="#7C3AED" stroke-width="0.43" stroke-linejoin="round"/><path d="M857.11,828.73 L856.13,827.31 M857.11,831.27 L856.13,832.69 M859.27,830.00 L860.69,830.00" stroke="#7C3AED" stroke-width="2.16" stroke-linecap="round" opacity="1.0" fill="none"/>
+<text x="871.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Devin</text>
+<path d="M946 830h22" stroke="#303630" stroke-width="1.65"/>
+<text x="976.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
+<path d="M1066 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
+<text x="1080.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >60 个订阅位置 / 8 个 API 位置 / 4 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >62 个订阅位置 / 8 个 API 位置 / 4 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。 ≈$0 为 SWE-2 促销价：Devin Pro/Max/Teams 至 2026-10-31 不计额度，非永久口径；TB4 分数为 Cognition 自报。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >www.tbench.ai/leaderboard</text>

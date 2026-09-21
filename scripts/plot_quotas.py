@@ -65,6 +65,7 @@ VENDOR_OF = {
     "deepseek": "DeepSeek",
     "stepfun": "StepFun",
     "devin": "Devin",
+    "google_ai": "Gemini",
 }
 VENDOR_COLORS = {
     "OpenAI": "#00A86B",
