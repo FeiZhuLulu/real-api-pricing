@@ -40,14 +40,12 @@
       "variantLabel": "Step 5 Preview (High)",
       "score": 33.3,
       "secondary": {
-        "selfReported": true,
-        "reportedBy": "StepFun",
-        "agentHarness": null,
+        "agentHarness": "Artificial Analysis",
         "reasoningEffort": "high"
       },
-      "source": "用户提供阶跃官方发布基准图（DeepSWE v1.1 / StepCodeBench / ProgramBench / Terminal-Bench v4 四表）",
+      "source": "https://artificialanalysis.ai/（AA 官网 Terminal-Bench 4.0 对比图，用户 2026-09-21 截图，页面注明 Independently benchmarked by Artificial Analysis）",
       "checkedAt": "2026-09-21",
-      "note": "厂商发布图表自报 33.3%（High）。同图 GLM-5.3 max 41.9、Astra max 57.9、Opus 5 max 52.3 对官方快照 41.82/57.88~58.18/51.82，偏差 +0.0~0.5，量级吻合；Kimi K3 max 12.6 偏低异常。harness 未注明，无 CI/成本。"
+      "note": "AA 独立实测 33.3%，非厂商自报；与阶跃发布图 33.3% 完全一致——厂商图引用的即 AA 数（其 Kimi K3 max 12.6% 异常低值也一致）。AA 版 TB4 与 tbench.ai 官方快照是不同 harness 的不同运行（同图 Astra max 59.1 / Opus5 max 49.0 / GLM-5.3 max 41.9 对官方 58.18 / 51.82 / 41.82，量级吻合）。effort 未在 AA 页面标注，厂商图标 (High)。"
     }
   ],
   "vendorBenchmarksNotBoards": {

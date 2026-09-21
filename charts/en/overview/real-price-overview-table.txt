@@ -65,7 +65,7 @@ No.  Plan                                Monthly fee    Served model            
 56   GLM Coding Pro (v3 ¥538) Off-peak   CNY 538        GLM 5.3 Flash               7.699               0.01031   high
 57   Command Code GOAT                   USD 10         Qwen3.8 Flash               0.9669              0.01034   medium
 58   OpenCode Go                         USD 10         MiMo V2.5 Pro               0.9415              0.01062   medium
-59   Claude Pro                          USD 20         Claude Opus 5               1.878               0.01065   medium
+59   Claude Pro                          USD 20         Claude Opus 5               1.878               0.01065   high
 60   Claude Pro                          USD 20         Claude Opus 4.8             1.878               0.01065   low
 61   MiniMax Token Plan Max (Global)     USD 55         MiniMax M3                  5.1                 0.01078   high
 62   GLM Coding Lite (v2 ¥49) Peak       CNY 49         GLM 5.3 Flash               0.642               0.01126   high
@@ -171,27 +171,27 @@ No.  Plan                                Monthly fee    Served model            
 162  GLM Coding Pro (v3 ¥538) Peak       CNY 538        GLM 5.3                     1.27                0.06249   high
 163  Cursor Ultra (Fast)                 USD 200        Grok 4.6                    3.074               0.06506   high
 164  Kimi Moderato †                     $19 · CN ¥99   Kimi K3                     0.29                0.06552   medium
-165  Claude Max 5x (9/14+)               USD 100        Claude Fable 5.1            1.5032              0.06652   low
-166  Claude Max 20x (9/14+)              USD 200        Claude Fable 5.1            3.006               0.06653   medium
-167  SuperGrok Lite                      USD 10         Grok 4.6                    0.15                0.06667   low
-168  Command Code GOAT                   USD 10         Nemotron 3 Ultra            0.1446              0.06916   medium
-169  Ollama Max                          USD 100        Kimi K2.7 Code              1.3657              0.07322   medium
-170  Ollama Pro                          USD 20         Kimi K2.7 Code              0.2731              0.07323   medium
-171  Ollama Pro                          USD 20         GLM 5.1                     0.2635              0.0759    medium
-172  Ollama Max                          USD 100        GLM 5.1                     1.3175              0.0759    medium
-173  GLM Coding Lite (v3 ¥118) Peak      CNY 118        GLM 5.3                     0.212               0.08211   high
-174  DeepSeek V4 Pro API Peak            Pay-as-you-go  DeepSeek V4 Pro             -                   0.08514   high
-175  Kimi Andante (CN) †                 CNY 49         Kimi K2.7 Code              0.078               0.09267   medium
-176  Command Code GOAT                   USD 10         Muse Spark 1.3              0.1064              0.09398   medium
-177  Command Code GOAT                   USD 10         Muse Spark 1.2              0.1064              0.09398   medium
-178  Ollama Pro                          USD 20         GLM 5.3                     0.2007              0.09965   medium
-179  Ollama Pro                          USD 20         GLM 5.2                     0.2007              0.09965   medium
-180  Ollama Max                          USD 100        GLM 5.3                     1.0033              0.09967   medium
-181  Ollama Max                          USD 100        GLM 5.2                     1.0033              0.09967   medium
-182  Command Code GOAT                   USD 10         GPT 5.6 Sol                 0.1                 0.1       medium
-183  Command Code GOAT                   USD 10         Inkling                     0.0993              0.1007    medium
-184  Claude Max 5x (9/14+)               USD 100        Claude Fable 5              0.9235              0.10828   low
-185  ChatGPT Pro 5x                      USD 100        GPT-6 Astra                 0.91                0.10989   low
+165  SuperGrok Lite                      USD 10         Grok 4.6                    0.15                0.06667   low
+166  Command Code GOAT                   USD 10         Nemotron 3 Ultra            0.1446              0.06916   medium
+167  Ollama Max                          USD 100        Kimi K2.7 Code              1.3657              0.07322   medium
+168  Ollama Pro                          USD 20         Kimi K2.7 Code              0.2731              0.07323   medium
+169  Ollama Pro                          USD 20         GLM 5.1                     0.2635              0.0759    medium
+170  Ollama Max                          USD 100        GLM 5.1                     1.3175              0.0759    medium
+171  GLM Coding Lite (v3 ¥118) Peak      CNY 118        GLM 5.3                     0.212               0.08211   high
+172  DeepSeek V4 Pro API Peak            Pay-as-you-go  DeepSeek V4 Pro             -                   0.08514   high
+173  Kimi Andante (CN) †                 CNY 49         Kimi K2.7 Code              0.078               0.09267   medium
+174  Command Code GOAT                   USD 10         Muse Spark 1.3              0.1064              0.09398   medium
+175  Command Code GOAT                   USD 10         Muse Spark 1.2              0.1064              0.09398   medium
+176  Ollama Pro                          USD 20         GLM 5.3                     0.2007              0.09965   medium
+177  Ollama Pro                          USD 20         GLM 5.2                     0.2007              0.09965   medium
+178  Ollama Max                          USD 100        GLM 5.3                     1.0033              0.09967   medium
+179  Ollama Max                          USD 100        GLM 5.2                     1.0033              0.09967   medium
+180  Command Code GOAT                   USD 10         GPT 5.6 Sol                 0.1                 0.1       medium
+181  Command Code GOAT                   USD 10         Inkling                     0.0993              0.1007    medium
+182  Claude Max 5x (9/14+)               USD 100        Claude Fable 5              0.9235              0.10828   low
+183  ChatGPT Pro 5x                      USD 100        GPT-6 Astra                 0.91                0.10989   low
+184  Claude Max 20x (9/14+)              USD 200        Claude Fable 5.1            1.728               0.11574   medium
+185  Claude Max 5x (9/14+)               USD 100        Claude Fable 5.1            0.8639              0.11575   low
 186  ChatGPT Plus                        USD 20         GPT-6 Astra                 0.159               0.12579   high
 187  Ollama Max                          USD 100        Kimi K3                     0.7326              0.1365    medium
 188  Ollama Pro                          USD 20         Kimi K3                     0.1465              0.13652   medium

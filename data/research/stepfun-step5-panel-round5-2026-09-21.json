@@ -75,7 +75,7 @@
       {"planId": "stepfun_max_cn", "model": "step-5-preview", "monthlyYi": 223.343, "realUsdPerMtok": 0.00462}
     ],
     "standardLoadRejected": "标准负载（cache 97.5%）口径混合价仅 ¥0.562/M → Plus 会算成 28.48 亿/月，高估 3.2×；用户确认 step 达不到该负载，不作采用值（3.5/3.7-flash 无实测负载，维持 round4 标准负载口径不变）。",
-    "scores": "用户补图后已入 supplement 档 scores-stepfun-step5-round1-2026-09-21.json：AA index 整数读数 44（疑为 v4.3 之后的新版 index，混版本风险已注明）、Terminal-Bench v4 厂商自报 33.3%（High）。帕累托 AA 榜与 TB4 榜可画。"
+    "scores": "已入 supplement 档 scores-stepfun-step5-round1-2026-09-21.json：AA index 整数读数 44（疑为 v4.3 之后的新版 index，混版本风险已注明）、Terminal-Bench v4 = 33.3%（AA 独立实测，非自报——用户 9/21 补图确认厂商图引用即 AA 数）。帕累托 AA 榜与 TB4 榜已上前沿。"
   },
   "notAdopted": [
     "标准负载折算（高估3.2×，用户裁定弃用）",
