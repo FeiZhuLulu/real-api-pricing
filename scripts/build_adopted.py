@@ -56,10 +56,16 @@ CLAUDE_PRO_WEEKLY_FRACTION = 0.07
 CLAUDE_FABLE51_DAY_TOKENS = 285_600_000
 CLAUDE_FABLE51_DAY_WEEKLY_FRACTION = 0.19
 CLAUDE_FABLE_WEEKLY_CAP = 0.5  # 官方：Fable 系列最多占周额度 50%（5 与 5.1 同规则）
-# 该样本隐含 5.1 订阅内权重（每 raw token 相对 Opus=1 的计重）：20x周池39.25亿 ÷ Fable当量周池15.03亿 ≈ 2.61
-CLAUDE_FABLE51_W20X = (CLAUDE_MAX_20X_YI / MONTH_WEEKS) / (
-    CLAUDE_FABLE51_DAY_TOKENS / CLAUDE_FABLE51_DAY_WEEKLY_FRACTION / YI
-)
+CLAUDE_MAX_20X_WEEKLY_BOOST_YI = 47.2  # skipbit 活动期（+50% boost）周池，round6 永久换算的原始基准
+# 2026-09-21 时间线校正：该样本实测于 9/4~9/5 促销期，19% 分母是活动期池 47.2亿/周（非永久池 39.25亿）。
+#   会话消耗 0.19×47.2=8.97亿 Opus当量；Opus5 部分 raw≈1.13亿（cache读1.12亿+输出110万，input/write未单列→略低估Opus份额→权重略高估）；
+#   Fable5.1 部分 1.725亿 raw 承担其余 → 隐含权重≈4.54×Opus，落在 Fable5 实测 4.25~6.5 区间内自洽。
+#   交叉验证：按美元计权同会话≈$201→永久周池$882→纯Fable $1.04/M混合价→17.0亿/月，与权重法 17.3亿 收敛。
+CLAUDE_FABLE51_OPUS_SHARE_YI = 1.131
+CLAUDE_FABLE51_W = (
+    CLAUDE_MAX_20X_WEEKLY_BOOST_YI * CLAUDE_FABLE51_DAY_WEEKLY_FRACTION
+    - CLAUDE_FABLE51_OPUS_SHARE_YI
+) / (CLAUDE_FABLE51_DAY_TOKENS / YI - CLAUDE_FABLE51_OPUS_SHARE_YI)  # ≈4.54
 
 # Kimi 国内外同名档并为一点（2026-09-14 用户拍板）：月费/单价统一按国际版美元标价，
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
@@ -139,9 +145,9 @@ def claude_pro_opus5_monthly_yi() -> float:
 
 
 def claude_fable51_max_monthly_yi() -> float:
+    # 纯 Fable5.1 月额度 = 月池 × 50%周帽 ÷ 订阅内权重（round9 起按分解权重，不再用混合当量池直推）
     return round(
-        CLAUDE_FABLE51_DAY_TOKENS / CLAUDE_FABLE51_DAY_WEEKLY_FRACTION
-        * CLAUDE_FABLE_WEEKLY_CAP * MONTH_WEEKS / YI,
+        CLAUDE_MAX_20X_YI * CLAUDE_FABLE_WEEKLY_CAP / CLAUDE_FABLE51_W,
         2,
     )
 
@@ -446,12 +452,12 @@ SUBS = [
     ("google_ai_ultra_20x_us", "Google AI Ultra 20x", 199.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 20, 2), "low", "官方：Ultra $200 = 20× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*20:g}亿：Pro采用值×官方worth倍率20；非独立实测"),
     # Anthropic —— Pro采用shownotover面板截图反推Opus5周池；Max采用9/14永久口径估算157亿，非当期boost或纯Opus5硬上限
     #   5x/20x是5h窗口倍率；用户明确20x周池仅为5x的2倍，旧2.25周池比例不再采用；Pro无独立Opus周池（官方文档），7% all-models周读数即绑定约束
-    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "medium", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合；2026-09-21用户裁定Opus4.8旧测不入权——round8曾按基准期读法×1.25=19.85亿作互证，但round6记录该值含+50%活动期boost，忠实映射为÷1.5×1.25=13.23亿且与面板矛盾，故仅面板单源"),
-    ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI, "medium", "Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json", f"旧80亿→{CLAUDE_MAX_20X_YI:g}亿，9/14起永久口径：47.2亿/周×{MONTH_WEEKS:g}周÷1.5×1.25后取整；参考区间110~200亿。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126"),
+    ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5", claude_pro_opus5_monthly_yi(), "high", "X @shownotover Pro /usage 面板：32.87M total = 周池7%（用户提供截图）；claude-adoption-round8-2026-09-20.json；round9 升 high", f"Opus4.8历史15.88亿→Opus5面板反推{claude_pro_opus5_monthly_yi():g}亿：32,868,513 total（opus5 32.85M + haiku 23k）÷7%×{MONTH_WEEKS:g}周；周池4.70亿、5h池56.7M，周池为绑定约束；周%取整区间约17.5~20.2亿；单会话n=1初定medium；round5候选Opus5约1.9亿（假定周消息数）被面板直测推翻作废；标价闭合校验$25.68吻合；2026-09-21用户裁定Opus4.8旧测不入权——round8曾按基准期读法×1.25=19.85亿作互证，但round6记录该值含+50%活动期boost，忠实映射为÷1.5×1.25=13.23亿且与面板矛盾，故仅面板单源；round9同作者第二条40M=周13%记为张力：新周读法12.3亿/续周读法26.7亿/下限读法不约束，基线不可考不入权；2026-09-21用户裁定升high：面板级形式+价格闭合校验+下调后口径+与Max20x周池比8.35×自洽；#3新周读法12.3亿与Max池比将失衡（$20得$100档的相对池份额异常），反证18.78侧。注：曾引'8.28窗/周与Max同构'为旁证，round9检查点反推Max档5h池~7.1亿（非4.74亿满窗读法）后该互证撤回——Max周满窗数~5.5非8.3"),
+    ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI, "medium", "Zenn skipbit实测+用户永久口径；claude-adoption-round6-2026-09-06.json", f"旧80亿→{CLAUDE_MAX_20X_YI:g}亿，9/14起永久口径：47.2亿/周×{MONTH_WEEKS:g}周÷1.5×1.25后取整；参考区间110~200亿。混合模型及非完全同窗样本，非纯Opus5实测硬上限；不取活动期189或裸基准126；round9 alldonesites纯Opus5满窗中位4.74亿（簇4.15~4.74亿三源）为窗容量读数——5h池口径存分歧：chudi检查点反推~7.1亿、官方20×Pro暗示11.34亿，Max周满窗数~5.5而非早记8.3，窗结构不作采用依据；round9时间线校正后Reddit审计转正：「本周」单号21亿cache读=周52%系9/17重置后下调后读数→周池≈40亿→161亿/月与采用值差3%，为纯Opus负载最优周池corroboration；「上周」237亿raw=230%系活动期大池口径不再矛盾；低端张力仅余其5窗假设95亿"),
     ("claude_max_5x", "Claude Max 5x (9/14+)", 100, "USD", "claude-opus-5", CLAUDE_MAX_20X_YI / CLAUDE_WEEKLY_20X_TO_5X, "medium", "用户明确20x周池仅为5x的2倍；claude-adoption-round6-2026-09-06.json", "旧35.6亿→78.5亿，9/14起永久口径157÷2；low→medium按用户确认周池关系推算，非独立实测；不采用36亿消息数候选或70亿/旧2.25倍率；5h窗口4倍关系不套周池"),
     # Fable 5.1 —— round3 首个同框样本（同日 token 日志 × /usage 周%），覆盖 round7"无实测不推"；
     #   档位按用户判断挂 20x，但月额度绝对值与档位无关（19%直接定池）；若实为5x则隐含权重1.31×而非2.61×
-    ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-fable-5.1", claude_fable51_max_monthly_yi(), "medium", "用户提供样本：Max账号同日 /usage 周额度0%→19% 对应 2443 轮 285.6M raw tokens（cache读283M+输出2.6M）；claude-fable51-round3-2026-09-20.json", f"新增{claude_fable51_max_monthly_yi():g}亿：285.6M÷19%×50%周帽×{MONTH_WEEKS:g}周；次日3017轮→24%互验（预测23.5%）；隐含权重≈{CLAUDE_FABLE51_W20X:.2f}×Opus，远低于Fable5的6.5×，与cache read $1→$0.25降价方向一致；input/cache_write未入样本低估约3~10%；%取整区间29.3~30.9亿；单账号n=1定medium"),
+    ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-fable-5.1", claude_fable51_max_monthly_yi(), "medium", "用户提供样本：Max账号同日 /usage 周额度0%→19% 对应 2443 轮 285.6M raw tokens（cache读283M+输出2.6M）；claude-fable51-round3-2026-09-20.json；round9 时间线校正", f"30.06→{claude_fable51_max_monthly_yi():g}亿：样本实测于9/4~5促销期，19%分母是活动期池47.2亿/周非永久池39.25亿——旧算法把混合当量池错挂永久口径且未拆Opus份额；重分解：消耗0.19×47.2=8.97亿当量，Opus份额1.13亿raw权重1，Fable份额1.725亿raw→隐含权重≈{CLAUDE_FABLE51_W:.2f}×Opus（落进Fable5实测4.25~6.5区间自洽）；月额度=157×50%÷{CLAUDE_FABLE51_W:.2f}；美元计权法独立验证得17.0亿；次日3017轮→24%互验（同期口径一致）；单账号n=1定medium"),
     # xAI —— 面板周额度（用户面板：Super $25 / Plus $100 / Heavy $250）是 Grok 自己的额度美元，不等于公开标价美元
     #   （linux.do 按标价记出 Super $90~110 / Heavy $900，比例相同、整体 3.6×）。所以不用标价换算，而用 Super 档实测 token 标定：
     #   V2EX 受控打满 1.27 亿/周 ÷ $25 = 面板 $1 ≈ 508 万 token，再套到 Plus / Heavy。
@@ -534,7 +540,7 @@ DERIVED = [
     ("claude_max_5x", "claude-opus-5", "claude-fable-5", 0.5 / 4.25, "low", "维持9.235亿：x5档唯一实测权重4.25×（Reddit 1vx0k69，原帖自标typed meter偏软）；注意与用户确认2×池比矛盾——若20x=12.077亿成立则5x按池比应约6.04亿，但那需要无实测的统一权重假设，用户裁定按实测数据来；claude-adoption-round7-2026-09-14.json", False),
     # Fable 5.1：20x 已按 round3 同框样本挂 30.06亿（SUBS 直测行）；5x 借其隐含权重 2.61 派生，
     #   注意 Fable5 权重两档本就不同（6.5/4.25），跨档同权重只是假设 → low
-    ("claude_max_5x", "claude-opus-5", "claude-fable-5.1", CLAUDE_FABLE_WEEKLY_CAP / CLAUDE_FABLE51_W20X, "low", f"新增约15.03亿：78.5×0.5/{CLAUDE_FABLE51_W20X:.2f}——借20x同框样本隐含权重派生，非独立实测；Fable5权重两档不同（6.5/4.25）为前车之鉴；claude-fable51-round3-2026-09-20.json", False),
+    ("claude_max_5x", "claude-opus-5", "claude-fable-5.1", CLAUDE_FABLE_WEEKLY_CAP / CLAUDE_FABLE51_W, "low", f"15.03→{78.5*CLAUDE_FABLE_WEEKLY_CAP/CLAUDE_FABLE51_W:g}亿：78.5×0.5/{CLAUDE_FABLE51_W:.2f}——借20x同框样本隐含权重派生（round9 时间线校正后权重2.61→4.54），非独立实测；单权重跨档沿用仍属假设（Fable5 两档不同为前车之鉴）；claude-fable51-round3/round9", False),
     # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
     ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / CHATGPT_PRO20X_SOL_MONTHLY_YI, "low", f"{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}→{30.8*CHATGPT_PRO20X_ASTRA_MONTHLY_YI/CHATGPT_PRO20X_SOL_MONTHLY_YI:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}×30.8/{CHATGPT_PRO20X_SOL_MONTHLY_YI:g}（沿用Sol 20x→5x档间比例，基准随Sol 20x加权值联动{CHATGPT_PRO20X_SOL_MONTHLY_YI/30.8:.2f}×）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
     # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点

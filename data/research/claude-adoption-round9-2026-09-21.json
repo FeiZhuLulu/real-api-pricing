@@ -1,0 +1,138 @@
+{
+  "recordedAt": "2026-09-21",
+  "sourceType": "grok_dispatched_collection + maintainer_derivation",
+  "scope": "Claude 订阅 Opus 5 的 token×用量条 同框证据第二批（Grok 搜集 X/Reddit/linux.do/chudi.dev/alldonesites）。官方面板不显示 cache 分项，cache 拆分只能来自 /cost、会话 transcript、ccusage 类日志——'面板截图+cache 明细'同框不可兼得，两批按可用性分列。",
+  "items": [
+    {
+      "id": "x-opus5-high-137m",
+      "source": "X 帖（档位未标），Opus 5 High",
+      "tokens": 137000000,
+      "usageBar": "5h窗 33%",
+      "wallClock": "1h30m（13 story points / 17 任务）",
+      "derivation": "5h窗池 = 1.37亿÷33% = 4.15亿 raw",
+      "tierInference": "Pro 5h窗池实测仅 0.57亿（shownotover），Max5x 若按5×线性约 2.84亿，4.15亿最接近 Max20x 簇（4.2~4.7亿）；档位未标，仅作 Max20x 窗池旁证",
+      "adopted": "corroboration_only"
+    },
+    {
+      "id": "shownotover-pro-med-32m",
+      "source": "X @shownotover，Pro $20，Opus 5 MED",
+      "tokens": 32000000,
+      "usageBar": "5h窗 58%，周 7%",
+      "wallClock": "44min",
+      "derivation": "即 round8 已采用样本（面板精确值 32.87M）：周池 4.70亿 → 18.78亿/月；5h池 56.7M",
+      "adopted": "already_adopted_round8"
+    },
+    {
+      "id": "shownotover-pro-max-40m",
+      "source": "同一作者第二条，Pro $20，Opus 5 MAX effort",
+      "tokens": 40000000,
+      "usageBar": "周 13%（无5h读数）",
+      "wallClock": "1h24m",
+      "derivation": "若新周起点：周池=40M÷13%=3.08亿→12.3亿/月；若同周续读（上周7%之后）：Δ6%→周池6.67亿→26.7亿/月；若周内有前置用量则仅为下限",
+      "conflict": "与采用值周池4.70亿（18.78亿/月）矛盾：新周读法低35%、续周读法高42%，取整区间均不重叠；基线不可考",
+      "adopted": "tension_not_adopted"
+    },
+    {
+      "id": "shownotover-max-220m",
+      "source": "同一作者，Opus 5 MAX（档位未标）",
+      "tokens": 220000000,
+      "usageBar": "5h窗 50%",
+      "apiEquivalentUsd": 25,
+      "derivation": "5h窗池 = 2.20亿÷50% = 4.40亿 raw → Max20x 窗池簇成员",
+      "note": "美元等价$25 与 token 量级不闭合（220M 按96% cache 结构应≈$100+），可能仅计部分会话或口径不同；窗池反推不受影响",
+      "adopted": "corroboration_only"
+    },
+    {
+      "id": "alldonesites-max20x-window",
+      "source": "alldonesites 用量追踪聚合，Max 20x 纯 Opus 5 窗口",
+      "tokens": "满窗中位 4.74亿（区间 3.98~5.42亿）；cache读4.56亿(96.1%)、cache写1500万、输出280万、新输入约6k",
+      "derivation": "纯 Opus5 满窗容量 4.74亿 raw（三源同簇：4.15/4.40/4.74亿）。站点自按『约5窗/周』外推 23.74亿/周→95亿/月；若按 Pro 同结构 8.3窗/周（周池÷窗池）则 39.3亿/周→157亿/月，恰与采用值一致——窗数为假设，4.74亿窗容量为实测",
+      "adopted": "corroboration_structural",
+      "implication": "Max20x 采用值157亿/月 隐含周池39.25亿 ÷ 实测满窗4.74亿 = 8.28窗/周，与 Pro 独立实测的 8.3窗/周 结构相同，方向互证；95亿/月读法与157亿矛盾，取绝于窗数假设"
+    },
+    {
+      "id": "chudi-dev-max-mixed",
+      "source": "chudi.dev，Max（档未标），同日 Opus5+Fable5.1 混合日志对 status-line",
+      "tokens": "Opus5 部分：cache读1.12亿+输出110万，1120轮；与 Fable 合计打周额度至19%（当天5h峰值59%）",
+      "derivation": "即 round3 已采用的 Fable5.1 同框样本同一数据源（总285.6M=周19%）；Opus5 份额无法从混池反推 Opus 周池",
+      "eraCorrection": "用户补时间线：实测 9/4~5 系 +50% 促销期，19% 分母为活动期池 47.2亿/周——round3 采用值按永久池算高估：重分解隐含权重 2.61→4.54×Opus，Fable5.1 20x 30.06→17.28亿、5x 15.03→8.64亿；美元计权法独立验证 17.0亿",
+      "checkpointSeries": {
+        "points": "15:27 5h17%/周3% → 16:53 39%/7% → 17:44 58%/11% → 22:44 33%/17% → 00:02 8%/19% → 次日07:12 周24%",
+        "perRound": "cache读116,873 / 输出1,126",
+        "p5Derivation": "22:44 滚动窗恰覆盖 17:44→22:44 整段（周净增6%=2.36亿加权）→ 5h池=2.36/33%=7.15亿加权当量（若账号为20x；若5x则3.57亿）。自洽：15:27/16:53/17:44 三点的窗内容量≈当周累计消耗（早期用量几乎全在5h窗内）；00:02 在±0.5pt取整内勉强兼容",
+        "conflict": "Max档5h池三读数互斥：alldonesites满窗4.74亿（若非真正打满则~66%利用率）/ chudi反推7.15亿 / 官方20×Pro暗示11.34亿——差1.5~2.4×，账号动态调度或窗满度口径所致；Max周满窗数由8.3修正为~5.5（≈alldonesites自述'约5窗'），Pro-Max'窗数同构'互证撤回"
+      },
+      "adopted": "adopted_fable51_round3_era_corrected"
+    },
+    {
+      "id": "reddit-max20x-6h-45pct",
+      "source": "Reddit，Max 20x，6小时工作",
+      "usageBar": "周额度约 4~5%",
+      "tokens": null,
+      "adopted": "unusable_no_tokens"
+    },
+    {
+      "id": "linuxdo-opus5-session",
+      "source": "linux.do，一次 Opus 5 Claude Code 会话",
+      "tokens": "cache读298万、cache写19万、输出3.2万（API等价~$3.5）",
+      "usageBar": null,
+      "adopted": "unusable_no_percent"
+    },
+    {
+      "id": "reddit-audit-two-accounts",
+      "source": "Reddit 审计，Max 20x 两号，按 Opus 价表记账",
+      "tokens": "上周双号合计 cache读235亿+未命中输入0.469亿+cache写0.864亿+输出0.111亿≈237.4亿 raw = 230% 周额（双号打满+其一30%补给）；本周单号28h cache读21亿=周52%",
+      "derivation": "时间线校正后转正：「上周」237亿raw=230% 系 9/14 前活动期大池（47.2亿/周）口径，不再与采用值矛盾；「本周」单号28h cache读21亿=周52% 系 9/17 重置后读数 → 周池≈40.4亿（含少量非cache项或至42亿）→ 161~168亿/月，与采用值157亿差3~7%，为纯Opus负载下最优周池corroboration",
+      "adopted": "corroboration_post_change",
+      "note": "混模型按Opus价记账、美元口径不进X轴；低端张力仅余 alldonesites 5窗假设95亿读法"
+    }
+  ],
+  "batch3_fable51_era_split": [
+    {
+      "id": "github-issue-max20x-0902",
+      "era": "pre-change (boost)",
+      "source": "GitHub Issue，Max 20x，9/2",
+      "content": "约22h：周额度0%→88%，Fable周帽99%→100%；Fable5.1 每轮输出~1596 tok（Fable5 为783，~2×）；cache命中~98%；无总token",
+      "value": "首个 Fable 周帽被打满的执行级证据（50%帽为硬约束）；疑点：周0%时Fable已99%与共享池模型矛盾，疑似两条重置时序错位，不进数",
+      "adopted": "context_only"
+    },
+    {
+      "id": "reddit-max5x-coldcache",
+      "era": "pre-change",
+      "source": "Reddit，Max 5x，冷缓存~80万上下文",
+      "content": "一句『Please, continue』= 5h窗 -20%；切 Opus/Sonnet /compact 后 -4%",
+      "value": "隐含5h池仅~1800万加权，与chudi反推5x口径3.57亿差20×，不可信；仅说明冷缓存大上下文的窗消耗极陡",
+      "adopted": "rejected_implausible"
+    },
+    {
+      "id": "linuxdo-4rounds-450k",
+      "era": "pre-change",
+      "source": "linux.do，9/1~2，45万上下文 4轮到99%",
+      "value": "未指明5h帽还是Fable周帽，无token",
+      "adopted": "unusable"
+    },
+    {
+      "id": "talamanderrr-0921",
+      "era": "post-change",
+      "source": "X @talamanderrr，9/21，Claude Code 会话",
+      "content": "墙钟22m51s，cache命中10,419,707/未命中278,777/输出75,582，API等价~$12.19；无百分比",
+      "adopted": "unusable_no_percent"
+    },
+    {
+      "id": "x-panels-0920-21",
+      "era": "post-change",
+      "source": "X 面板截图两张，Max 20x",
+      "content": "5h 4%/周1%/Fable 2%；5h 66%/周52%/Fable 99%",
+      "value": "周52%与Fable帽99%同现——Fable贡献~50%周池即打满子帽，与共享池+50%子帽模型一致（结构corroboration，非数值）",
+      "adopted": "context_corroboration"
+    }
+  ],
+  "adoptionSummary": {
+    "claude_pro::claude-opus-5": "维持 18.78亿/月，2026-09-21 用户裁定升 high（面板级形式 + 与 Max20x 同构 8.28窗/周 独立互证；#3 新周读法 5.4窗/周 会破坏该结构，反证 18.78 侧）。（区间17.5~20.2亿）。新增同作者第二条 40M=周13% 为双向张力：新周读法12.3亿/续周读法26.7亿/下限读法不约束——基线不可考不入权；若用户裁定按新周读法入权×2，则加权 (18.78×3+12.3×2)/5=16.19亿",
+    "claude_max_20x::claude-opus-5": "维持 157亿/月（medium）。周池直证：Reddit本周21亿cache读=52%→~40亿/周→161亿/月差3%；硬下限~155亿（round5峰值周46.4亿未熔断）。注：早前'满窗4.74亿×8.3窗/周与Pro同构'互证撤回——chudi检查点反推Max档5h池~7.1亿（周满窗~5.5），三读数4.74/7.15/11.34亿互斥，P5存疑留档；低端张力仅余 alldonesites 5窗假设95亿",
+    "claude_max_5x::claude-opus-5": "无新证据，维持 78.5亿（20x÷2 用户确认池比）",
+    "claude_max_20x::claude-fable-5.1": "30.06→17.28亿/月：round3样本实为9/4~5促销期实测，19%分母应为活动期池47.2亿/周；分解Opus份额1.13亿raw后隐含Fable权重4.54×Opus（原2.61为口径错误低估）；美元计权法独立验证17.0亿；置信度维持medium（单账号n=1）",
+    "claude_max_5x::claude-fable-5.1": "15.03→8.64亿/月：随权重校正派生"
+  },
+  "relatedFiles": ["claude-adoption-round8-2026-09-20.json", "claude-fable51-round3-2026-09-20.json", "claude-quotas-round5-2026-09.json"]
+}
