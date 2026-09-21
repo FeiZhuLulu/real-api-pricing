@@ -3,6 +3,13 @@
 `AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-22
+
+- **OpenCode Go & Command Code GOAT · DeepSeek V4.1 Flash 促销独立行**：
+  - OpenCode 官方 4× 促销（$15 ➜ $60，2026-09-27 截止）：新增独立促销行 `opencode_go_promo` 72.727 亿/月（$0.00138/MTok，main），常规 18.182 亿保留。
+  - Command Code GOAT 提额促销（$40 ➜ $60，2026-09-28 截止）：新增独立促销行 `command_code_goat_promo` 72.727 亿/月（$0.00148/MTok，main），常规 48.485 亿保留。
+- **Command Code GOAT 实付月费修正**：实测结账账单显示按月固定加收 $0.78 手续费（processing fee），实付 $10.78/月。月费基准由 $10 修正为 $10.78，常规各模型单价按比例上浮约 7.8%。证据：`data/research/command-code-goat-fee-2026-09-22.png`、`data/research/code-promotions-and-fee-2026-09-22.json`。
+
 ## 2026-09-21
 
 - **Google AI Pro · Gemini 3.8 Flash（首个 Google 采用点）**：22.41 亿/月 high。用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88% → 周池 5.60 亿 raw ×4 周。官方按 API worth 合池计权（段内实证：B1:B2 的 %比 0.405 ≈ worth比 0.407，而非 raw比 0.448；周帽合 $120.1 worth），故 raw 额度随负载 mix 变——本样本 cache 82.6%，用户指出 Gemini 实际负载打不到标准口径的 97.5% cache，故采 raw 实测口径（标准负载折算 46.9 亿/月偏高弃用）。Ultra 5x/20x 按官方 worth 倍率派生 112.05/448.2 亿（low）。旁证：round6 的 5h 锚 $20.4 → 周≈5.9 sprint；LLMDevs Pro ~1.0B/周、Ultra ~5.0B/周同量级。证据：`data/research/gemini-weekly-round7-2026-09-21.json`。

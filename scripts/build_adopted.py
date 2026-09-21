@@ -226,6 +226,7 @@ def opencode_go_rows() -> list[tuple]:
 # 证据：https://commandcode.ai/docs/plans/goat 完整两表（Every model + New models）；
 #       data/research/code-subscriptions-round1-2026-09-06.json。cache write 不进统一标准负载。
 COMMAND_CODE_GOAT_SHARED_USD = 70
+COMMAND_CODE_GOAT_PRICE_USD = 10.78
 COMMAND_CODE_GOAT_MODELS = (
     # —— Every model 表（含既有 11 行，勿删）——
     ("gpt-5.6-sol", 70, 0.5, 5.0, 30.0, "官网三段价"),
@@ -282,7 +283,7 @@ COMMAND_CODE_GOAT_NOTES = {
         "新增48.485亿：min(共享月池$70, 模型allowance $40) ÷ 统一标准负载加权价；"
         "官网闲时 cached/input/output=$0.003/$0.15/$0.60，高峰2×。"
         "用户确认 V4 Flash / Vision 已下线，Command Code 这两点删除（旧Flash 43.274亿、Vision 14.425亿）。"
-        "官方请求数仅作交叉检查，不再作为额度主值；忽略 processing fee；同套餐各模型额度不可相加"
+        "官方请求数仅作交叉检查，不再作为额度主值；月费含每月固定 $0.78 手续费实付 $10.78；同套餐各模型额度不可相加"
     ),
 }
 
@@ -296,10 +297,10 @@ def command_code_goat_rows() -> list[tuple]:
         note = COMMAND_CODE_GOAT_NOTES.get(
             model,
             f"新增{yi:g}亿：min(共享月池$70, 模型allowance ${allowance:g}) ÷ 统一标准负载加权价；{variant_note}。"
-            "忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
+            "月费含每月固定 $0.78 手续费实付 $10.78；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
         )
         rows.append((
-            "command_code_goat", "Command Code GOAT", 10, "USD", model, yi, "medium",
+            "command_code_goat", "Command Code GOAT", COMMAND_CODE_GOAT_PRICE_USD, "USD", model, yi, "medium",
             source, note,
         ))
     return rows
@@ -480,6 +481,32 @@ SUBS = [
 # ---- 不计额度（unmetered）订阅点：月费 ÷ 无界可用量 → $0/MTok。无 token 分母，图上用专用刻度位，不进对数换算。
 #   元组：(id, name, price, cur, model, conf, src, note)。促销口径，促销结束必须复核；见 conventions.promotions。
 SWE2_PROMO = CONVENTIONS["promotions"]["devin_swe2"]
+OPENCODE_DS41_PROMO = CONVENTIONS["promotions"]["opencode_ds41_promo"]
+COMMANDCODE_DS41_PROMO = CONVENTIONS["promotions"]["commandcode_ds41_promo"]
+
+PROMO_SUBS = [
+    (
+        "opencode_go_promo",
+        f"OpenCode Go (促销至 {OPENCODE_DS41_PROMO['endDate'][5:].replace('-', '/')})",
+        10, "USD", "deepseek-v4.1-flash",
+        round(60 / blended(0.003, 0.15, 0.60) / 100, 3), "medium",
+        "https://opencode.ai/docs/zh-cn/go/ 官方价格表 4x 促销；code-promotions-and-fee-2026-09-22.json",
+        f"新增72.727亿促销行：限时 4× 额度（$15 ➜ $60，截止 {OPENCODE_DS41_PROMO['endDate']}）；闲时标价；常规 18.182 亿仍保留；官方请求数仅作交叉检查，同套餐各模型额度不可相加",
+        "main",
+        OPENCODE_DS41_PROMO["endDate"],
+    ),
+    (
+        "command_code_goat_promo",
+        f"Command Code GOAT (促销至 {COMMANDCODE_DS41_PROMO['endDate'][5:].replace('-', '/')})",
+        COMMAND_CODE_GOAT_PRICE_USD, "USD", "deepseek-v4.1-flash",
+        round(60 / blended(0.003, 0.15, 0.60) / 100, 3), "medium",
+        "https://commandcode.ai/docs/plans/goat 官方文档限时提额；code-promotions-and-fee-2026-09-22.json",
+        f"新增72.727亿促销行：限时提额至 $60 credits（截止 {COMMANDCODE_DS41_PROMO['endDate']}）；月费按实际实付 ${COMMAND_CODE_GOAT_PRICE_USD:g} 计；常规 48.485 亿仍保留；忽略高峰溢价，同套餐各模型额度不可相加",
+        "main",
+        COMMANDCODE_DS41_PROMO["endDate"],
+    ),
+]
+
 UNMETERED = [
     ("devin_pro", f"Devin Pro (促销至 {SWE2_PROMO['endDate'][5:].replace('-', '/')})", 20, "USD", "swe-2", "medium",
      "官推2026-09-10：SWE-2 free for all Pro, Max & Teams subscribers for the next month；用户面板同段swe-2 45.5M tokens不计额度；docs.devin.ai/admin/billing/usage 无并发上限；devin-swe2-round1-2026-09-12.json",
@@ -558,6 +585,8 @@ MAIN_EXTRA = {
     ("opencode_go", "deepseek-v4.1-flash"),
     ("opencode_go", "glm-5.3-flash"),
     ("command_code_goat", "deepseek-v4.1-flash"),
+    ("opencode_go_promo", "deepseek-v4.1-flash"),
+    ("command_code_goat_promo", "deepseek-v4.1-flash"),
 }
 
 
@@ -573,7 +602,7 @@ FIELDS = ["plan_id", "plan_name", "plan_name_en", "billing", "price", "currency"
           "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note"]
 
 
-def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dict:
+def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None, promo_until=None) -> dict:
     if model == "composer-2.5" and not pid.endswith("_composer_fast"):
         name += " (Standard)"
     intl = KIMI_INTL.get(pid)
@@ -593,7 +622,7 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
     tokens = round(monthly_yi * YI)
     return dict(plan_id=pid, plan_name=name, plan_name_en=name_en, billing="subscription", price=price, currency=cur,
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
-                monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until="",
+                monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until=promo_until or "",
                 confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note)
 
 
@@ -624,6 +653,7 @@ def main() -> None:
                if pid in ("cursor_ultra", "cursor_pro_plus") else ""),
             b["chart_tier"],
         ))
+    rows += [sub_row(*p) for p in PROMO_SUBS]
     rows += [unmetered_row(*u) for u in UNMETERED]
     for pid, name, model, cached, inp, out, src in METERED:
         rows.append(dict(plan_id=pid, plan_name=name, plan_name_en="", billing="metered", price="", currency="USD", price_usd="",
