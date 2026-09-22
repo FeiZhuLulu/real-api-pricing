@@ -494,6 +494,7 @@ PROMO_SUBS = [
         f"新增72.727亿促销行：限时 4× 额度（$15 ➜ $60，截止 {OPENCODE_DS41_PROMO['endDate']}）；闲时标价；常规 18.182 亿仍保留；官方请求数仅作交叉检查，同套餐各模型额度不可相加",
         "main",
         OPENCODE_DS41_PROMO["endDate"],
+        f"OpenCode Go (Promo until {OPENCODE_DS41_PROMO['endDate'][5:].replace('-', '/')})",
     ),
     (
         "command_code_goat_promo",
@@ -504,6 +505,7 @@ PROMO_SUBS = [
         f"新增72.727亿促销行：限时提额至 $60 credits（截止 {COMMANDCODE_DS41_PROMO['endDate']}）；月费按实际实付 ${COMMAND_CODE_GOAT_PRICE_USD:g} 计；常规 48.485 亿仍保留；忽略高峰溢价，同套餐各模型额度不可相加",
         "main",
         COMMANDCODE_DS41_PROMO["endDate"],
+        f"Command Code GOAT (Promo until {COMMANDCODE_DS41_PROMO['endDate'][5:].replace('-', '/')})",
     ),
 ]
 
@@ -602,7 +604,7 @@ FIELDS = ["plan_id", "plan_name", "plan_name_en", "billing", "price", "currency"
           "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note"]
 
 
-def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None, promo_until=None) -> dict:
+def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None, promo_until=None, name_en=None) -> dict:
     if model == "composer-2.5" and not pid.endswith("_composer_fast"):
         name += " (Standard)"
     intl = KIMI_INTL.get(pid)
@@ -612,7 +614,7 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None, promo_
                 f"（旧按国内 ¥{price}÷{USD_PER_CNY:g}≈${price / USD_PER_CNY:.2f}），price/currency 仍记国内实付价；"
                 "额度仍国内档口径，海外同名档绝对 token 未实测，并点仅作价位展示").lstrip("；")
     else:
-        name_en = ""
+        name_en = name_en or ""
         price_usd = price / USD_PER_CNY if cur == "CNY" else price
         if cur == "CNY":
             fx = CONVENTIONS["exchangeRate"]

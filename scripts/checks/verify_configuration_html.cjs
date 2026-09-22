@@ -33,7 +33,8 @@ for (const board of Object.keys(summary.boards)) {
     const hover = render.traces.flatMap(t=>t.hovertemplate||[]).join('\n');
     const expected = view==='all' ? links.filter(c=>c.board===board).map(c=>c.variant)
       : summary.points.map(p=>p[board+'__variant']).filter(Boolean);
-    for(const label of new Set(expected)) assert(hover.includes(label), `${board} ${view} missing ${label}`);
+    const loc = s => s.replaceAll('[vendor self-report]', '[厂商自报]').replaceAll('[AA estimate]', '[AA 估计值]');
+    for(const label of new Set(expected)) assert(hover.includes(loc(label)), `${board} ${view} missing ${label}`);
     assert(hover.includes('quota-measurement effort'));
     assert(hover.includes('来源任务成本（非订阅）'));
     for (const t of render.traces) for(const n of (t.x||[])) assert(n===null || Number.isFinite(n));
