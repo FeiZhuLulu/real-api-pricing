@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-21T22:03:05.018038</dc:date>
+    <dc:date>2026-09-21T22:06:59.634862</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -42,16 +42,16 @@ z
      <g id="line2d_1">
       <path d="M 493.04549 576 
 L 493.04549 136.8 
-" clip-path="url(#pf5f600d27d)" style="fill: none; stroke: #e3e6e8; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p8d5137187d)" style="fill: none; stroke: #e3e6e8; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_2">
       <defs>
-       <path id="m1cb188e35d" d="M 0 0 
+       <path id="m0714c9d17e" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m1cb188e35d" x="493.04549" y="576" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m0714c9d17e" x="493.04549" y="576" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -123,11 +123,11 @@ z
      <g id="line2d_3">
       <path d="M 895.562363 576 
 L 895.562363 136.8 
-" clip-path="url(#pf5f600d27d)" style="fill: none; stroke: #e3e6e8; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p8d5137187d)" style="fill: none; stroke: #e3e6e8; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m1cb188e35d" x="895.562363" y="576" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m0714c9d17e" x="895.562363" y="576" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -1598,7 +1598,7 @@ L 542.897865 195.150857
 L 542.897865 279.226286 
 L 453.6 279.226286 
 z
-" clip-path="url(#pf5f600d27d)" style="fill: #00a86b"/>
+" clip-path="url(#p8d5137187d)" style="fill: #00a86b"/>
    </g>
    <g id="patch_4">
     <path d="M 453.6 320.636571 
@@ -1606,7 +1606,7 @@ L 754.413727 320.636571
 L 754.413727 404.712 
 L 453.6 404.712 
 z
-" clip-path="url(#pf5f600d27d)" style="fill: #7cc12a"/>
+" clip-path="url(#p8d5137187d)" style="fill: #7cc12a"/>
    </g>
    <g id="patch_5">
     <path d="M 453.6 446.122286 
@@ -1614,7 +1614,7 @@ L 906.571042 446.122286
 L 906.571042 530.197714 
 L 453.6 530.197714 
 z
-" clip-path="url(#pf5f600d27d)" style="fill: #f07826"/>
+" clip-path="url(#p8d5137187d)" style="fill: #f07826"/>
    </g>
    <g id="patch_6">
     <path d="M 453.6 576 
@@ -1972,13 +1972,13 @@ z
    <g id="text_9">
     <g id="patch_9">
      <path d="M 910.748241 500.425 
-L 996.922929 500.425 
-L 996.922929 475.895 
+L 995.998241 500.425 
+L 995.998241 475.895 
 L 910.748241 475.895 
 z
 " style="fill: #ffffff; opacity: 0.72"/>
     </g>
-    <!-- $0.01065  AN [M] -->
+    <!-- $0.01065  AN [H] -->
     <g style="fill: #20252b" transform="translate(911.738241 486.565) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-2f" d="M 646 0 
@@ -2000,6 +2000,21 @@ L 646 4691
 L 646 0 
 z
 " transform="scale(0.015625)"/>
+      <path id="NotoSansCJKsc-Regular-29" d="M 646 0 
+L 1235 0 
+L 1235 2214 
+L 3424 2214 
+L 3424 0 
+L 4019 0 
+L 4019 4691 
+L 3424 4691 
+L 3424 2726 
+L 1235 2726 
+L 1235 4691 
+L 646 4691 
+L 646 0 
+z
+" transform="scale(0.015625)"/>
      </defs>
      <use xlink:href="#NotoSansCJKsc-Regular-5"/>
      <use xlink:href="#NotoSansCJKsc-Regular-f6b1" transform="translate(55.5 0)"/>
@@ -2015,8 +2030,8 @@ z
      <use xlink:href="#NotoSansCJKsc-Regular-2f" transform="translate(521.90625 0)"/>
      <use xlink:href="#NotoSansCJKsc-Regular-1" transform="translate(594.203125 0)"/>
      <use xlink:href="#NotoSansCJKsc-Regular-3c" transform="translate(616.609375 0)"/>
-     <use xlink:href="#NotoSansCJKsc-Regular-2e" transform="translate(650.40625 0)"/>
-     <use xlink:href="#NotoSansCJKsc-Regular-3e" transform="translate(731.609375 0)"/>
+     <use xlink:href="#NotoSansCJKsc-Regular-29" transform="translate(650.40625 0)"/>
+     <use xlink:href="#NotoSansCJKsc-Regular-3e" transform="translate(723.203125 0)"/>
     </g>
     <!-- 得分: 68.1498 -->
     <g style="fill: #20252b" transform="translate(911.738241 498.115) scale(0.11 -0.11)">
@@ -6697,21 +6712,6 @@ C 1734 4352 1920 4787 2067 5222
 L 1638 5350 
 z
 " transform="scale(0.015625)"/>
-     <path id="NotoSansCJKsc-Regular-29" d="M 646 0 
-L 1235 0 
-L 1235 2214 
-L 3424 2214 
-L 3424 0 
-L 4019 0 
-L 4019 4691 
-L 3424 4691 
-L 3424 2726 
-L 1235 2726 
-L 1235 4691 
-L 646 4691 
-L 646 0 
-z
-" transform="scale(0.015625)"/>
      <path id="NotoSansCJKsc-Regular-2548" d="M 2931 5376 
 L 2931 4230 
 L 614 4230 
@@ -8916,7 +8916,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pf5f600d27d">
+  <clipPath id="p8d5137187d">
    <rect x="453.6" y="136.8" width="816.48" height="439.2"/>
   </clipPath>
  </defs>

@@ -13577,6 +13577,70 @@
     }
   },
   {
+    "configuration_id": "aa_intelligence_index:d3166087a7d0c9f6",
+    "board": "aa_intelligence_index",
+    "model": "step-5-preview",
+    "variant": "Step 5 Preview",
+    "score_is_estimated": null,
+    "score_is_self_reported": false,
+    "agent_harness": null,
+    "reasoning_effort": null,
+    "service_mode": null,
+    "score": 44,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "https://artificialanalysis.ai/leaderboards/models（用户 2026-09-21 截图）",
+    "checked_at": "2026-09-21",
+    "archive": "scores-stepfun-step5-round1-2026-09-21.json",
+    "raw_record": {
+      "boardId": "aa_intelligence_index",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview",
+      "score": 44,
+      "secondary": {
+        "scoreRoundedDisplay": 44,
+        "effort": null
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models（用户 2026-09-21 截图）",
+      "checkedAt": "2026-09-21",
+      "note": "用户提供的 AA 对比图：Step 5 Preview 整数读数 44（无 effort 后缀）。同图 Grok 4.6 high=44、Kimi K3 max=44、Gemini 3.8 Flash high=41、DeepSeek V4 Pro max=36 与项目 9/9 快照吻合；但 Sol max=52（快照47.1）、Astra xhigh=53、Fable 5.1 max=53、Opus 5 max=50（快照50.7→51）——截图疑为 9/9 后更新的 index 版本（顶部列 Last Exam/GDPval/CritPt/AA-Omniscience/AA-LCR v1.1），44 属新版本读数，与 v4.3 快照混用有版本风险，待整榜重拉时复核。"
+    }
+  },
+  {
+    "configuration_id": "terminal_bench_4:2ab16f5e696adc85",
+    "board": "terminal_bench_4",
+    "model": "step-5-preview",
+    "variant": "Step 5 Preview (High)",
+    "score_is_estimated": null,
+    "score_is_self_reported": false,
+    "agent_harness": "Artificial Analysis",
+    "reasoning_effort": "high",
+    "service_mode": null,
+    "score": 33.3,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "https://artificialanalysis.ai/（AA 官网 Terminal-Bench 4.0 对比图，用户 2026-09-21 截图，页面注明 Independently benchmarked by Artificial Analysis）",
+    "checked_at": "2026-09-21",
+    "archive": "scores-stepfun-step5-round1-2026-09-21.json",
+    "raw_record": {
+      "boardId": "terminal_bench_4",
+      "model": "step-5-preview",
+      "variantLabel": "Step 5 Preview (High)",
+      "score": 33.3,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/（AA 官网 Terminal-Bench 4.0 对比图，用户 2026-09-21 截图，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-21",
+      "note": "AA 独立实测 33.3%，非厂商自报；与阶跃发布图 33.3% 完全一致——厂商图引用的即 AA 数（其 Kimi K3 max 12.6% 异常低值也一致）。AA 版 TB4 与 tbench.ai 官方快照是不同 harness 的不同运行（同图 Astra max 59.1 / Opus5 max 49.0 / GLM-5.3 max 41.9 对官方 58.18 / 51.82 / 41.82，量级吻合）。effort 未在 AA 页面标注，厂商图标 (High)。"
+    }
+  },
+  {
     "configuration_id": "deepswe_1_1:aa4ad931eff45be4",
     "board": "deepswe_1_1",
     "model": "gpt-6-astra",

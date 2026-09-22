@@ -31,12 +31,10 @@ for (const board of Object.keys(summary.boards)) {
     vm.runInContext('draw()', context);
     assert(render.layout.title.text.includes('参考'));
     const hover = render.traces.flatMap(t=>t.hovertemplate||[]).join('\n');
-    const expected = view==='all' ? links.filter(c=>c.board===board).map(c=>c.variant)
-      : summary.points.map(p=>p[board+'__variant']).filter(Boolean);
-    for(const label of new Set(expected)) {
-      const localized = label.replaceAll('[vendor self-report]', '[厂商自报]').replaceAll('[AA estimate]', '[AA 估计值]');
-      assert(hover.includes(localized), `${board} ${view} missing ${label}`);
-    }
+    const loc=s=>String(s).replaceAll("[vendor self-report]","[厂商自报]").replaceAll("[AA estimate]","[AA 估计值]");
+    const expected = (view==='all' ? links.filter(c=>c.board===board).map(c=>c.variant)
+      : summary.points.map(p=>p[board+'__variant']).filter(Boolean)).map(loc);
+    for(const label of new Set(expected)) assert(hover.includes(label), `${board} ${view} missing ${label}`);
     assert(hover.includes('quota-measurement effort'));
     assert(hover.includes('来源任务成本（非订阅）'));
     for (const t of render.traces) for(const n of (t.x||[])) assert(n===null || Number.isFinite(n));
@@ -58,4 +56,4 @@ vm.runInContext('draw()', context);
   assert(!hover.includes('Claude Code - Opus 5 (max)'), 'high effort drops max-only models');
 }
 element('effort').value = '';
-console.log('PASS: all boards render every configuration and summary; mapping/cost details, effort filter and API toggle verified');
+console.log('PASS: all six boards render every configuration and summary; mapping/cost details, effort filter and API toggle verified');

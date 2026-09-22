@@ -1,0 +1,85 @@
+{
+  "collectedAt": "2026-09-21",
+  "sourceType": "user-panel-screenshots + local-measurement cross-check",
+  "scope": "Step Plan Plus（¥99）step-5-preview：用户控制台 Credit 用量与本机 token 实测互验，并把 step-5-preview 按国内站 Credit 月池口径入库。",
+  "userInstruction": "step plan来了，我是99的plan（plus），模型step5preview，用了23%周额度。第一张图是本机实测。后两张是控制台截图，那里的消耗是官方积分消耗，核对对不对得上官方口径。官方api定价 step-5-preview：输入（缓存未命中）7元/1M、输入（缓存命中）0.35元/1M、输出20元/1M。",
+  "prior": [
+    "data/research/stepfun-step-plan-round1-2026-09-10.json",
+    "data/research/stepfun-step-plan-round2-2026-09-10.json",
+    "data/research/stepfun-step-plan-round3-2026-09-10.json",
+    "data/research/stepfun-step-plan-round4-2026-09-10.json"
+  ],
+  "panel": {
+    "plan": "Step Plan Plus ¥99（国内站）",
+    "remainingShown": "剩余77%",
+    "resetShown": "2026-10-20 16:36:48",
+    "usageFilter": "扣费来源 Step Plan，2026-08-22 ~ 2026-09-21",
+    "correction": "用户口述『周额度』；控制台重置时间为月度账期，与 round1 官方『Credit 按月一次性发放至当月月池』一致——这是月池用量 23%，不是周池。",
+    "pagesShown": 2,
+    "note": "用量明细仅 2026-09-20/21 两天有数，订阅约在 09-20 下午开通（重置 10-20 16:36）；两天烧掉月池约 23.6%。"
+  },
+  "consoleCreditRowsMcredit": {
+    "unit": "M Credit（1M Credit = ¥1 开放平台标价用量）",
+    "d1_2026_09_21": [
+      {"hour": "20:00~21:00", "model": "step-5-preview", "calls": 9, "creditM": 11.38},
+      {"hour": "19:00~20:00", "model": "step-5-preview", "calls": 5, "creditM": 16.54},
+      {"hour": "17:00~18:00", "model": "step-5-preview", "calls": 14, "creditM": 33.20},
+      {"hour": "15:00~16:00", "model": "step-5-preview", "calls": 8, "creditM": 14.32},
+      {"hour": "14:00~15:00", "model": "step-5-preview", "calls": 30, "creditM": 38.79},
+      {"hour": "13:00~14:00", "model": "step-5-preview", "calls": 9, "creditM": 6.98},
+      {"hour": "12:00~13:00", "model": "step-5-preview", "calls": 59, "creditM": 62.72},
+      {"hour": "11:00~12:00", "model": "step-5-preview", "calls": 68, "creditM": 36.10},
+      {"hour": "10:00~11:00", "model": "step-5-preview", "calls": 12, "creditM": 8.09},
+      {"hour": "09:00~10:00", "model": "step-5-preview", "calls": 12, "creditM": 8.31}
+    ],
+    "d0_2026_09_20": [
+      {"hour": "23:00~00:00", "model": "step-5-preview", "calls": 29, "creditM": 15.67},
+      {"hour": "22:00~23:00", "model": "step-5-preview", "calls": 21, "creditM": 14.40},
+      {"hour": "21:00~22:00", "model": "step-5-preview", "calls": 68, "creditM": 24.86},
+      {"hour": "20:00~21:00", "model": "step-5-preview", "calls": 62, "creditM": 23.02},
+      {"hour": "19:00~20:00", "model": "step-5-preview", "calls": 81, "creditM": 20.70},
+      {"hour": "18:00~19:00", "model": "step-5-preview", "calls": 80, "creditM": 14.63},
+      {"hour": "17:00~18:00", "model": "step-5-preview", "calls": 129, "creditM": 21.42},
+      {"hour": "16:00~17:00", "model": "step-5-preview", "calls": 53, "creditM": 6.51},
+      {"hour": "15:00~16:00", "model": "step-3.7-flash", "calls": 2, "creditM": 0.02},
+      {"hour": "15:00~16:00", "model": "step-5-preview", "calls": 12, "creditM": 0.49}
+    ],
+    "totalM": 378.15,
+    "step5OnlyM": 378.13
+  },
+  "localMeasurement": {
+    "source": "用户本机实测汇总图（OpenCode + DSH）",
+    "opencode": {"cacheRead": 164053760, "input": 42965263, "output": 720954, "cacheHitShown": "79.2%"},
+    "dsh": {"cacheRead": 1984630, "input": 445370, "output": null, "cacheHitShown": "81.7%"},
+    "total": {"cacheRead": 166038390, "input": 43410633, "output": 720954, "cacheHitShown": "79.3%", "totalTokens": 210169977}
+  },
+  "officialPriceStep5Preview": {
+    "currency": "CNY",
+    "perMTok": {"cachedInput": 0.35, "input": 7.0, "output": 20.0},
+    "source": "用户提供的官方 pricing 表（platform.stepfun.com/docs/zh/guides/pricing/details 同页口径）"
+  },
+  "crossCheck": {
+    "expectedCreditsFromLocalM": 376.41,
+    "consoleCreditsM": 378.15,
+    "diffPct": "+0.46%",
+    "verdict": "官方 Credit 计费与本机 token 实测在 0.5% 内吻合；残差来自一行 step-3.7-flash 0.02M、小时桶边界与在途请求。1M Credit=¥1 计费对 step-5-preview 成立。",
+    "poolCheck": "378.15M ÷ 官方 Plus 月池 1600M = 23.63% 已用（余 76.37%），面板显示剩余 77%——整数取整方向一致，官方 1600M 月池首次得到面板级验证；若把 23% 当精确值反推池为 1644M，差 2.8% 仍在取整区间内。"
+  },
+  "adoption": {
+    "rule": "用户裁定不套项目标准负载：step-5-preview 实测负载打不到 97.5% cache（同 google_ai_pro round7 先例采实测 raw 口径）。月池 Credit ÷ 用户实测 mix 混合价 ¥1.791/M（cache 79.00% / 输入 20.66% / 输出 0.34%，本机 210.17M tokens 大样本）",
+    "confidenceSplit": "stepfun_plus_cn::step-5-preview 升 high（面板+计费双向验证+本档实测负载）；Mini/Pro/Max 借用同一实测 mix、池额为官方表值未面板验证，保持 medium",
+    "rows": [
+      {"planId": "stepfun_mini_cn", "model": "step-5-preview", "monthlyYi": 2.233, "realUsdPerMtok": 0.03237},
+      {"planId": "stepfun_plus_cn", "model": "step-5-preview", "monthlyYi": 8.934, "realUsdPerMtok": 0.01635},
+      {"planId": "stepfun_pro_cn", "model": "step-5-preview", "monthlyYi": 44.669, "realUsdPerMtok": 0.00657},
+      {"planId": "stepfun_max_cn", "model": "step-5-preview", "monthlyYi": 223.343, "realUsdPerMtok": 0.00462}
+    ],
+    "standardLoadRejected": "标准负载（cache 97.5%）口径混合价仅 ¥0.562/M → Plus 会算成 28.48 亿/月，高估 3.2×；用户确认 step 达不到该负载，不作采用值（3.5/3.7-flash 无实测负载，维持 round4 标准负载口径不变）。",
+    "scores": "已入 supplement 档 scores-stepfun-step5-round1-2026-09-21.json：AA index 整数读数 44（疑为 v4.3 之后的新版 index，混版本风险已注明）、Terminal-Bench v4 = 33.3%（AA 独立实测，非自报——用户 9/21 补图确认厂商图引用即 AA 数）。帕累托 AA 榜与 TB4 榜已上前沿。"
+  },
+  "notAdopted": [
+    "标准负载折算（高估3.2×，用户裁定弃用）",
+    "1644M 反推池（官方表 1600M 优先，面板取整无法区分）",
+    "国际站档位（沿用 round4 决定不画）"
+  ]
+}
