@@ -7,10 +7,10 @@ Artificial Analysis Coding Agent Index v1.5 | Coding Agent Index | 2026-09-22
 † Kimi：¥199的K3点以K3-256K为主，约84%反推周池×5得14.51亿；K2.7纯样本11.9M/月0.76%得15.68亿；其余档按官方倍率推算；同名档国内外并点，月费/单价按国际版美元标价（$19/$39/$99），¥价为国内实付。OpenCode Go按官方美元池和三段价套统一标准负载换算。
 汇率：1 USD = 6.7787 CNY（2026-09-04，中国外汇交易中心中间价，新华社转载）；人民币月费 ÷ 汇率换算美元（Kimi 同名并点档除外，按国际版美元标价）。
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-序号  套餐                           价格/月     服务模型          月额度(亿)  $/MTok   置信度  Coding Agent Index  得分版本                                                 Harness                  思考强度  映射
-----  -----------------------------  ----------  ----------------  ----------  -------  ------  ------------------  -------------------------------------------------------  -----------------------  --------  -----------------------------
-1     Google AI Ultra 20x            USD 199.99  Gemini 3.8 Flash  448.2       0.00446  low     41.8632             Antigravity SDK - Gemini 3.8 Flash (high)                Antigravity SDK v0.1.12  high      agent_configuration_reference
-2     GLM Coding Pro (v2 ¥149) 闲时  CNY 149     GLM 5.3           25.4        0.00865  high    53.5548             Opencode - GLM-5.3 ({'reasoning_effort': 'max'})         Opencode                 max       agent_configuration_reference
-3     Claude Pro                     USD 20      Claude Opus 5     18.78       0.01065  high    59.7264             Claude Code - Opus 5 (max)                               Claude Code              max       agent_configuration_reference
-4     ChatGPT Pro 20x                USD 200     GPT-6 Astra       38.12       0.05247  medium  61.645              Codex - GPT-6 Astra (max) ({'reasoning_effort': 'max'})  Codex                    max       agent_configuration_reference
-5     Claude Max 20x (9/14+)         USD 200     Claude Fable 5.1  17.28       0.11574  medium  62.2225             Claude Code - Fable 5.1 (max) (with fallback)            Claude Code              max       agent_configuration_reference
+序号  套餐                           价格/月     服务模型          月额度(亿)  $/MTok   置信度  Coding Agent Index  得分版本                                       Harness                  思考强度  映射
+----  -----------------------------  ----------  ----------------  ----------  -------  ------  ------------------  ---------------------------------------------  -----------------------  --------  -----------------------------
+1     Google AI Ultra 20x            USD 199.99  Gemini 3.8 Flash  448.2       0.00446  low     41.8632             Antigravity SDK - Gemini 3.8 Flash (high)      Antigravity SDK v0.1.12  high      agent_configuration_reference
+2     GLM Coding Pro (v2 ¥149) 闲时  CNY 149     GLM 5.3           25.4        0.00865  high    53.5548             Opencode - GLM-5.3                             Opencode                 max       agent_configuration_reference
+3     Claude Pro                     USD 20      Claude Opus 5     18.78       0.01065  high    59.7264             Claude Code - Opus 5 (max)                     Claude Code              max       agent_configuration_reference
+4     ChatGPT Pro 20x                USD 200     GPT-6 Astra       38.12       0.05247  medium  61.645              Codex - GPT-6 Astra (max)                      Codex                    max       agent_configuration_reference
+5     Claude Max 20x (9/14+)         USD 200     Claude Fable 5.1  17.28       0.11574  medium  62.2225             Claude Code - Fable 5.1 (max) (with fallback)  Claude Code              max       agent_configuration_reference
