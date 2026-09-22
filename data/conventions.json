@@ -39,12 +39,12 @@
     "note": "固定比较口径，不代表任何平台或用户的实际负载；三项合计100%。当前不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。"
   },
   "lowCacheTokenMix": {
-    "cache": 0.790019547,
-    "input": 0.206550115,
-    "output": 0.003430338,
-    "labelZh": "低缓存负载：缓存读取79.0% / 普通输入20.7% / 输出0.34%",
-    "labelEn": "Low-cache workload: 79.0% cache reads / 20.7% fresh input / 0.34% output",
-    "note": "源自 step-5-preview 本机实测 210.17M tokens（2026-09-21，OpenCode+DSH 同窗，evidence: data/research/stepfun-step5-panel-round5-2026-09-21.json）。适用于实测打不到标准 97.5% cache 的订阅额度折算：Step 全系（3.5/3.7 自 2026-09-22 起借用，step5 即本源）、Gemini 实测 82.6% 同族。Google AI Pro 直接采 raw token 实测口径，无需再折算。"
+    "cache": 0.85,
+    "input": 0.1465,
+    "output": 0.0035,
+    "labelZh": "低缓存负载：缓存读取85% / 普通输入14.65% / 输出0.35%",
+    "labelEn": "Low-cache workload: 85% cache reads / 14.65% fresh input / 0.35% output",
+    "note": "2026-09-22 用户裁定的第二档统一负载，用于实测打不到标准 97.5% cache 的渠道（当前：Step 全系；Gemini 实测 82.6% 属同族，但其额度为 raw token 实测口径无需折算）。锚点：step-5-preview 本机实测 mix 79.0%/20.7%/0.34%（210.17M tokens，stepfun-step5-panel-round5-2026-09-21.json）与 Google AI Pro 实测 82.6%，统一取 85% 档；step5 采用值的 decision_note 内保留 79% 实测口径对照数。非cache部分按标准负载的输出占比 0.35% 保留、余量归输入。"
   },
   "sourcePriority": [
     "用户面板截图反推、受控打满实测、官方绝对token或积分表",
