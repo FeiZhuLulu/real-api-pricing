@@ -47,6 +47,7 @@ if os.path.isfile("C:/Windows/Fonts/msyh.ttc"):
     font_manager.fontManager.addfont("C:/Windows/Fonts/msyh.ttc")
 plt.rcParams["font.family"] = ["Microsoft YaHei", "Noto Sans CJK SC", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["svg.hashsalt"] = "real-api-pricing"
 
 VENDOR_OF = {
     "chatgpt": "OpenAI",
@@ -477,7 +478,8 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         draw_mixed_vs_third(fig, axes, mixed, baseline, view, language)
     stem = output_stem(view, board, language, fee_band=fee_band) + ("_混合比例" if mixed_scale else "")
     for ext in ("png", "svg"):
-        fig.savefig(os.path.join(OUT_DIR, f"{stem}.{ext}"), dpi=160)
+        fig.savefig(os.path.join(OUT_DIR, f"{stem}.{ext}"), dpi=160,
+                    **({"metadata": {"Date": None}} if ext == "svg" else {}))
     plt.close(fig)
     print(f"wrote {len(rows)} rows -> {stem}.png/.svg")
 
