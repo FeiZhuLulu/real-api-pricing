@@ -1,6 +1,7 @@
 {
   "collectedAt": "2026-09-12",
   "supplement": true,
+  "baseSnapshot": "scores-terminal-bench4-round1-2026-09-10.json",
   "supplementNote": "补充档：只向 terminal_bench_4 当前官方快照（scores-terminal-bench4-round1-2026-09-10.json）追加厂商自报行，不替换官方快照。compute.py 对 supplement=true 的档按追加处理。",
   "boards": [
     {
@@ -13,6 +14,23 @@
     }
   ],
   "scores": [
+    {
+      "boardId": "terminal_bench_4",
+      "model": "deepseek-v4.1-flash",
+      "variantLabel": "DeepSeek Harness Minimal - DeepSeek V4.1 Flash (max)",
+      "score": 31.2,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "DeepSeek",
+        "agentHarness": "DeepSeek Harness Minimal",
+        "reasoningEffort": "max",
+        "contextWindowTokens": 1000000,
+        "temperature": 1.0,
+        "topP": 0.95
+      },
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "checkedAt": "2026-09-12"
+    },
     {
       "boardId": "terminal_bench_4",
       "model": "swe-2",

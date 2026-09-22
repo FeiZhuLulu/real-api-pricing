@@ -29,6 +29,13 @@ assert current_score_records([("old", old), ("new", new)]) == [
 assert current_score_records([("old", old), ("empty", {"boards": new["boards"], "scores": []})]) == [
     ("old", old["scores"][1])]
 assert len(configs) == len(expected)
+supplement = {"boards": new["boards"], "supplement": True, "baseSnapshot": "old",
+              "scores": [{"boardId": "aa_intelligence_index", "model": "new", "score": 90}]}
+assert ("extra", supplement["scores"][0]) in current_score_records([("old", old), ("extra", supplement)])
+assert current_score_records([("old", old), ("extra", supplement), ("new", new)]) == current_score_records([
+    ("old", old), ("new", new)])
+assert current_score_records([("old", old), ("extra", supplement),
+                              ("empty", {"boards": new["boards"], "scores": []})]) == [("old", old["scores"][1])]
 assert len({c["configuration_id"] for c in configs}) == len(configs)
 for c, (file, record) in zip(configs, expected):
     assert c["archive"] == file and c["raw_record"] == record
@@ -61,7 +68,13 @@ assert len(expected_links) == len(links)
 assert all(p["mapping_note"] and p["mapping_confidence"] and p["quota_effort_matched"] is None for p in links)
 
 # Removing a mode must leave that mode unscored, never borrow the other mode.
-composer = [c for c in configs if c["model"] == "composer-2.5"]
+# Synthetic fixtures: AA Coding Agent Index v1.5 dropped Cursor CLI, so no live
+# configuration carries a service mode any more. The rule still governs the six
+# Composer rows in adopted.csv, which keep their price and allowance but score
+# nowhere until a board covers Composer again.
+composer = [configuration(dict(boardId="aa_coding_agent_index", model="composer-2.5",
+                               variantLabel=label, score=38.3008), "test")
+            for label in ("Cursor CLI - Composer 2.5", "Cursor CLI - Composer 2.5 Fast")]
 for mode in ("standard", "fast"):
     row = dict(served_model="composer-2.5", plan_id="cursor_ultra" + ("_composer_fast" if mode == "fast" else ""))
     assert candidates(row, composer, "aa_coding_agent_index")
@@ -81,4 +94,11 @@ assert all(c["mean_cost_usd_per_task"] is not None for c in open_design)
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.00825
 assert indexed["deepseek_v41_flash_peak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.0165
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["open_design_arena__score"] == 81.2
+# AA round4 (2026-09-22) superseded round3, so the round3-pinned intelligence
+# supplement retired and these two scores now come from round4 itself.
+assert indexed["opencode_go::deepseek-v4.1-flash"]["aa_intelligence_index__score"] == 39.4562
+assert indexed["opencode_go::deepseek-v4.1-flash"]["terminal_bench_4__score"] == 31.2
+assert indexed["opencode_go::deepseek-v4.1-flash"]["terminal_bench_4__score_is_self_reported"] is True
+assert indexed["chatgpt_plus::gpt-6-astra"]["aa_intelligence_index__score"] == 52.6737
+assert indexed["chatgpt_plus::gpt-6-astra"]["aa_intelligence_index__configuration_count"] == 5
 print(f"PASS: {len(configs)} configurations preserved, {len(links)} explicit mappings, exact modes, source CIs/costs and price inputs verified")

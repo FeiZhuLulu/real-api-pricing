@@ -12,6 +12,7 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 | Pareto Aa Intelligence / 帕累托_AA智力榜 | [SVG](en/pareto/pareto-aa-intelligence.svg) | [SVG](zh/pareto/帕累托_AA智力榜.svg) | [PNG](en/pareto/pareto-aa-intelligence.png) | [PNG](zh/pareto/帕累托_AA智力榜.png) |
 | Pareto Agent Arena / 帕累托_AgentArena榜 | [SVG](en/pareto/pareto-agent-arena.svg) | [SVG](zh/pareto/帕累托_AgentArena榜.svg) | [PNG](en/pareto/pareto-agent-arena.png) | [PNG](zh/pareto/帕累托_AgentArena榜.png) |
 | Pareto Code Arena / 帕累托_CodeArena榜 | [SVG](en/pareto/pareto-code-arena.svg) | [SVG](zh/pareto/帕累托_CodeArena榜.svg) | [PNG](en/pareto/pareto-code-arena.png) | [PNG](zh/pareto/帕累托_CodeArena榜.png) |
+| Pareto Deepswe 1 1 / 帕累托_DeepSWE榜 | [SVG](en/pareto/pareto-deepswe-1-1.svg) | [SVG](zh/pareto/帕累托_DeepSWE榜.svg) | [PNG](en/pareto/pareto-deepswe-1-1.png) | [PNG](zh/pareto/帕累托_DeepSWE榜.png) |
 | Pareto Open Design Arena / 帕累托_OpenDesign设计榜 | [SVG](en/pareto/pareto-open-design-arena.svg) | [SVG](zh/pareto/帕累托_OpenDesign设计榜.svg) | [PNG](en/pareto/pareto-open-design-arena.png) | [PNG](zh/pareto/帕累托_OpenDesign设计榜.png) |
 | Pareto Terminal Bench 4 / 帕累托_TB4终端榜 | [SVG](en/pareto/pareto-terminal-bench-4.svg) | [SVG](zh/pareto/帕累托_TB4终端榜.svg) | [PNG](en/pareto/pareto-terminal-bench-4.png) | [PNG](zh/pareto/帕累托_TB4终端榜.png) |
 | Monthly Allowance Overview Fee 0 30 Usd / 额度总览_月费0-30美元 | [SVG](en/overview/monthly-allowance-overview-fee-0-30-usd.svg) | [SVG](zh/overview/额度总览_月费0-30美元.svg) | [PNG](en/overview/monthly-allowance-overview-fee-0-30-usd.png) | [PNG](zh/overview/额度总览_月费0-30美元.png) |
@@ -24,12 +25,14 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 | Frontier Allowance Aa Intelligence / 前沿额度_AA智力榜 | [SVG](en/frontier/frontier-allowance-aa-intelligence.svg) | [SVG](zh/frontier/前沿额度_AA智力榜.svg) | [PNG](en/frontier/frontier-allowance-aa-intelligence.png) | [PNG](zh/frontier/前沿额度_AA智力榜.png) |
 | Frontier Allowance Agent Arena / 前沿额度_AgentArena榜 | [SVG](en/frontier/frontier-allowance-agent-arena.svg) | [SVG](zh/frontier/前沿额度_AgentArena榜.svg) | [PNG](en/frontier/frontier-allowance-agent-arena.png) | [PNG](zh/frontier/前沿额度_AgentArena榜.png) |
 | Frontier Allowance Code Arena / 前沿额度_CodeArena榜 | [SVG](en/frontier/frontier-allowance-code-arena.svg) | [SVG](zh/frontier/前沿额度_CodeArena榜.svg) | [PNG](en/frontier/frontier-allowance-code-arena.png) | [PNG](zh/frontier/前沿额度_CodeArena榜.png) |
+| Frontier Allowance Deepswe 1 1 / 前沿额度_DeepSWE榜 | [SVG](en/frontier/frontier-allowance-deepswe-1-1.svg) | [SVG](zh/frontier/前沿额度_DeepSWE榜.svg) | [PNG](en/frontier/frontier-allowance-deepswe-1-1.png) | [PNG](zh/frontier/前沿额度_DeepSWE榜.png) |
 | Frontier Allowance Open Design Arena / 前沿额度_OpenDesign设计榜 | [SVG](en/frontier/frontier-allowance-open-design-arena.svg) | [SVG](zh/frontier/前沿额度_OpenDesign设计榜.svg) | [PNG](en/frontier/frontier-allowance-open-design-arena.png) | [PNG](zh/frontier/前沿额度_OpenDesign设计榜.png) |
 | Frontier Allowance Terminal Bench 4 / 前沿额度_TB4终端榜 | [SVG](en/frontier/frontier-allowance-terminal-bench-4.svg) | [SVG](zh/frontier/前沿额度_TB4终端榜.svg) | [PNG](en/frontier/frontier-allowance-terminal-bench-4.png) | [PNG](zh/frontier/前沿额度_TB4终端榜.png) |
 | Frontier Price Aa Coding Agent / 前沿单价_AA编程Agent榜 | [SVG](en/frontier/frontier-price-aa-coding-agent.svg) | [SVG](zh/frontier/前沿单价_AA编程Agent榜.svg) | [PNG](en/frontier/frontier-price-aa-coding-agent.png) | [PNG](zh/frontier/前沿单价_AA编程Agent榜.png) |
 | Frontier Price Aa Intelligence / 前沿单价_AA智力榜 | [SVG](en/frontier/frontier-price-aa-intelligence.svg) | [SVG](zh/frontier/前沿单价_AA智力榜.svg) | [PNG](en/frontier/frontier-price-aa-intelligence.png) | [PNG](zh/frontier/前沿单价_AA智力榜.png) |
 | Frontier Price Agent Arena / 前沿单价_AgentArena榜 | [SVG](en/frontier/frontier-price-agent-arena.svg) | [SVG](zh/frontier/前沿单价_AgentArena榜.svg) | [PNG](en/frontier/frontier-price-agent-arena.png) | [PNG](zh/frontier/前沿单价_AgentArena榜.png) |
 | Frontier Price Code Arena / 前沿单价_CodeArena榜 | [SVG](en/frontier/frontier-price-code-arena.svg) | [SVG](zh/frontier/前沿单价_CodeArena榜.svg) | [PNG](en/frontier/frontier-price-code-arena.png) | [PNG](zh/frontier/前沿单价_CodeArena榜.png) |
+| Frontier Price Deepswe 1 1 / 前沿单价_DeepSWE榜 | [SVG](en/frontier/frontier-price-deepswe-1-1.svg) | [SVG](zh/frontier/前沿单价_DeepSWE榜.svg) | [PNG](en/frontier/frontier-price-deepswe-1-1.png) | [PNG](zh/frontier/前沿单价_DeepSWE榜.png) |
 | Frontier Price Open Design Arena / 前沿单价_OpenDesign设计榜 | [SVG](en/frontier/frontier-price-open-design-arena.svg) | [SVG](zh/frontier/前沿单价_OpenDesign设计榜.svg) | [PNG](en/frontier/frontier-price-open-design-arena.png) | [PNG](zh/frontier/前沿单价_OpenDesign设计榜.png) |
 | Frontier Price Terminal Bench 4 / 前沿单价_TB4终端榜 | [SVG](en/frontier/frontier-price-terminal-bench-4.svg) | [SVG](zh/frontier/前沿单价_TB4终端榜.svg) | [PNG](en/frontier/frontier-price-terminal-bench-4.png) | [PNG](zh/frontier/前沿单价_TB4终端榜.png) |
 
@@ -43,6 +46,8 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 - [en/frontier/frontier-price-agent-arena-table.txt](en/frontier/frontier-price-agent-arena-table.txt)
 - [zh/frontier/前沿单价表_CodeArena榜.txt](zh/frontier/前沿单价表_CodeArena榜.txt)
 - [en/frontier/frontier-price-code-arena-table.txt](en/frontier/frontier-price-code-arena-table.txt)
+- [zh/frontier/前沿单价表_DeepSWE榜.txt](zh/frontier/前沿单价表_DeepSWE榜.txt)
+- [en/frontier/frontier-price-deepswe-1-1-table.txt](en/frontier/frontier-price-deepswe-1-1-table.txt)
 - [zh/frontier/前沿单价表_OpenDesign设计榜.txt](zh/frontier/前沿单价表_OpenDesign设计榜.txt)
 - [en/frontier/frontier-price-open-design-arena-table.txt](en/frontier/frontier-price-open-design-arena-table.txt)
 - [zh/frontier/前沿单价表_TB4终端榜.txt](zh/frontier/前沿单价表_TB4终端榜.txt)
@@ -55,6 +60,8 @@ Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% out
 - [en/frontier/frontier-allowance-agent-arena-table.txt](en/frontier/frontier-allowance-agent-arena-table.txt)
 - [zh/frontier/前沿额度表_CodeArena榜.txt](zh/frontier/前沿额度表_CodeArena榜.txt)
 - [en/frontier/frontier-allowance-code-arena-table.txt](en/frontier/frontier-allowance-code-arena-table.txt)
+- [zh/frontier/前沿额度表_DeepSWE榜.txt](zh/frontier/前沿额度表_DeepSWE榜.txt)
+- [en/frontier/frontier-allowance-deepswe-1-1-table.txt](en/frontier/frontier-allowance-deepswe-1-1-table.txt)
 - [zh/frontier/前沿额度表_OpenDesign设计榜.txt](zh/frontier/前沿额度表_OpenDesign设计榜.txt)
 - [en/frontier/frontier-allowance-open-design-arena-table.txt](en/frontier/frontier-allowance-open-design-arena-table.txt)
 - [zh/frontier/前沿额度表_TB4终端榜.txt](zh/frontier/前沿额度表_TB4终端榜.txt)

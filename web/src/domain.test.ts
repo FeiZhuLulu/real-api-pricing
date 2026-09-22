@@ -158,6 +158,19 @@ test("Devin Pro SWE-2 is an unmetered $0 promo point that joins and leads the TB
   assert.ok(!rowsFor(data, { ...defaultState(), view: "allowance" }).some((r) => r.point.id === p.id));
   assert.ok(rowsFor(data, { ...defaultState(), view: "price" }).some((r) => r.point.id === p.id));
 });
+test("DeepSWE keeps effort levels and vendor provenance through the adapter", () => {
+  const state = { ...defaultState(), board: "deepswe_1_1", configuration: "all" as const };
+  const rows = rowsFor(data, state);
+  const astra = rows.filter((r) => r.point.id === "chatgpt_plus::gpt-6-astra");
+  assert.equal(astra.length, 5);
+  assert.equal(astra.reduce((best, r) => r.score! > best.score! ? r : best).mapping?.reasoning_effort, "xhigh");
+  const low = rowsFor(data, { ...state, effort: ["low"] });
+  assert.equal(low.filter((r) => r.point.id === "chatgpt_plus::gpt-6-astra").length, 1);
+  const deepseek = rows.find((r) => r.point.id === "opencode_go::deepseek-v4.1-flash")!;
+  assert.equal(deepseek.score, 74.2);
+  assert.equal(deepseek.mapping?.score_is_self_reported, true);
+  assert.equal(deepseek.mapping?.agent_harness, "mini-SWE");
+});
 test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
   const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
   assert.equal(p.monthly_yi, 48.485);
