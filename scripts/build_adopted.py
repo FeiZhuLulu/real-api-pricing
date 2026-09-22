@@ -76,7 +76,16 @@ CLAUDE_FABLE51_W = (
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
 # 海外同名档绝对 token 未实测（国际 Code 倍率 1/5/15/30× ≠ 国内 1/4/20/60×），并点仅作价位展示。
 # Andante ¥49 无海外同名档，保持国内口径；Vivace $199 仅海外且无额度证据，不画。
+# MiMo Token Plan：mimo.mi.com 同档同池双币种标价（¥ 国内 / $ 国际），国内外并点口径与 Kimi 相同
 KIMI_INTL = {  # plan_id -> (国际版展示名, 国际版月费 USD)
+    "mimo_token_lite_day": ("MiMo Token Plan Lite (Day)", 6),
+    "mimo_token_lite_night": ("MiMo Token Plan Lite (Night 0.8x)", 6),
+    "mimo_token_standard_day": ("MiMo Token Plan Standard (Day)", 16),
+    "mimo_token_standard_night": ("MiMo Token Plan Standard (Night 0.8x)", 16),
+    "mimo_token_pro_day": ("MiMo Token Plan Pro (Day)", 50),
+    "mimo_token_pro_night": ("MiMo Token Plan Pro (Night 0.8x)", 50),
+    "mimo_token_max_day": ("MiMo Token Plan Max (Day)", 100),
+    "mimo_token_max_night": ("MiMo Token Plan Max (Night 0.8x)", 100),
     "kimi_moderato_cn": ("Kimi Moderato", 19),
     "kimi_allegretto_cn": ("Kimi Allegretto", 39),
     "kimi_allegro_cn": ("Kimi Allegro", 99),
@@ -172,6 +181,7 @@ def claude_fable51_max_monthly_yi() -> float:
 # V4 Flash / Vision 已下线，用户要求从采用集删除；现 27 个模型。
 OPENCODE_GO_MODELS = (
     ("grok-4.6", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants"),
+    ("grok-4.7", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
     ("gpt-5.6-luna", 15, 0.02, 0.2, 1.2, "≤272K 标价；>272K 档保留在 research variants"),
     ("glm-5.3-flash", 15, 0.03, 0.15, 0.5, "官网单档"),
     ("glm-5.3", 15, 0.26, 1.4, 4.4, "官网单档"),
@@ -183,6 +193,8 @@ OPENCODE_GO_MODELS = (
     ("longcat-2.0", 60, 0.006, 0.3, 1.2, "官网单档"),
     ("mimo-v2.5", 60, 0.0028, 0.14, 0.28, "官网单档"),
     ("mimo-v2.5-pro", 15, 0.003625, 0.435, 0.87, "官网单档"),
+    ("mimo-v2.6-flash", 60, 0.0028, 0.14, 0.28, "官网单档；Usage $60"),
+    ("mimo-v2.6-pro", 15, 0.003625, 0.435, 0.87, "官网单档；Usage $15；与 v2.5-pro 同 Usage 档"),
     ("minimax-m3", 60, 0.06, 0.3, 1.2, "官网单档"),
     ("minimax-m2.7", 60, 0.06, 0.3, 1.2, "官网单档"),
     ("minimax-m2.5", 60, 0.06, 0.3, 1.2, "价格/Endpoints 表在列；请求估算表未列"),
@@ -269,6 +281,8 @@ COMMAND_CODE_GOAT_MODELS = (
     ("gpt-5.6-luna", 20, 0.02, 0.2, 1.2, "官网三段价"),
     ("qwen3.8-max", 20, 0.25, 2.0, 6.0, "官网三段价"),
     ("mimo-v2.5-pro", 20, 0.0036, 0.435, 0.87, "官网页成交/折扣三段价"),
+    ("grok-4.7", 20, 0.5, 2.0, 6.0, "官网三段价；Every model 表基准$20（限时提升$35至9/27不采）"),
+    ("mimo-v2.6-flash", 30, 0.0028, 0.14, 0.28, "官网三段价；Every model 表基准$30（限时提升$67至9/24不采）"),
     # —— New models 表（新模型默认 2× credits，Gemini 3.7 Flash 例外 $40）——
     ("qwen3.8-max-0902", 20, 0.25, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("hy4-preview", 20, 0.042, 0.834, 2.501, "官网三段价；New models 默认$20"),
@@ -283,6 +297,8 @@ COMMAND_CODE_GOAT_MODELS = (
     ("kimi-k2.7-code-highspeed", 20, 0.38, 1.9, 8.0, "官网三段价；速度变体独立$20，不继承K2.7 Code的$60"),
     ("grok-4.5", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("grok-4.6", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
+    ("mimo-v2.6-pro", 20, 0.0036, 0.435, 0.87, "官网三段价；New models 默认$20"),
+    ("mimo-v2.6-pro-ultraspeed", 10, 0.036, 4.35, 8.70, "官网三段价；官方明示按Pro价10×故仅配$10 credits"),
     ("gemini-3.7-flash", 40, 0.15, 1.5, 7.5, "官网三段价；New models 表写$40"),
     ("glm-5.2-fast", 20, 0.5, 3.0, 10.25, "官网三段价；速度变体独立$20，不继承GLM-5.2的$70"),
     ("inkling", 20, 0.17, 1.0, 4.05, "官网三段价；New models 默认$20"),
@@ -450,6 +466,53 @@ def glm_rows() -> list[tuple]:
     return rows
 
 
+# 小米 MiMo Token Plan：官方月度 Credits 池 ÷ 分模型分类型 burn 率折 token（mimo.mi.com 订阅文档）。
+# Credits 为虚拟计量单位（cached/input/output 每 token 所扣 credits 各不相同），非固定美元面值。
+# 套餐覆盖 8 款：v2.6-pro / v2.6-flash / v2.5-pro / v2.5 / v2.5-asr / tts×3（ASR 按时长、TTS 免费不入图）；
+# V2.6 于 2026-09-22 列入官方支持清单（发布次日文档更新，用户面板截图互证），burn 率与 v2.5 对应档一致。
+# 夜间 00:00-08:00（北京）consumption 0.8× → 同 credits 多换 25% token，与 GLM/DeepSeek 闲时同型，
+# 按惯例拆独立情景点（日间基准 / 夜间0.8×）。首购88折、年付88折不采（一次性/换约折扣）。
+# ¥价与$价同档同池：国内外并点、月费按国际版美元标价（Kimi 并点口径），¥价记入决策注。
+# 证据：data/research/mimo-token-plan-round1-2026-09-22.json
+MIMO_TOKEN_TIERS = (
+    # (tier_slug, name, price_cny, price_usd, monthly_credits)
+    ("lite", "Lite", 39, 6, 4_100_000_000),
+    ("standard", "Standard", 99, 16, 11_000_000_000),
+    ("pro", "Pro", 329, 50, 38_000_000_000),
+    ("max", "Max", 659, 100, 82_000_000_000),
+)
+MIMO_CREDIT_RATES = {  # model -> (cached_input, input, output) credits/token
+    "mimo-v2.6-pro": (2.5, 300, 600),
+    "mimo-v2.6-flash": (2, 100, 200),
+    "mimo-v2.5-pro": (2.5, 300, 600),
+    "mimo-v2.5": (2, 100, 200),
+}
+MIMO_SOURCE = (
+    "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；"
+    "mimo-token-plan-round1-2026-09-22.json"
+)
+
+
+def mimo_rows() -> list[tuple]:
+    rows = []
+    for slug, name, price_cny, price_usd, credits in MIMO_TOKEN_TIERS:
+        for model, rates in MIMO_CREDIT_RATES.items():
+            burn = blended(*rates)
+            base_yi = credits / burn / YI
+            for band, band_label, factor in (("day", "日间", 1.0), ("night", "夜间0.8×", 1 / 0.8)):
+                monthly_yi = round(base_yi * factor, 2)
+                rows.append((
+                    f"mimo_token_{slug}_{band}", f"MiMo Token Plan {name} {band_label}",
+                    price_cny, "CNY", model, monthly_yi, "medium", MIMO_SOURCE,
+                    f"新增{monthly_yi:g}亿：月池{credits / 1e9:g}B Credits÷统一标准负载混合burn {burn:g} credits/token"
+                    f"（该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
+                    + ("；夜间00:00-08:00（北京）consumption×0.8，同credits多换25% token" if band == "night" else "；日间基准消耗档")
+                    + "；套餐覆盖 v2.6-pro/v2.6-flash/v2.5-pro/v2.5 共4款文本模型（2026-09-22文档更新+用户面板互证）；"
+                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）",
+                ))
+    return rows
+
+
 # ---- 订阅：(plan_id, plan_name, price, currency, served_model, monthly_yi, confidence, source, decision_note)
 SUBS = [
     # OpenAI —— Sol 为 Terra/5.5 基准；Luna 改用 Plus 用户面板实测，Pro 档按官方 5x/20x 推算
@@ -530,6 +593,8 @@ SUBS = [
     *ollama_rows("ollama_max", "Ollama Max", 100, OLLAMA_MAX_CREDITS_USD),
     # 阶跃 Step Plan 国内站 —— 官方 Credit 月池 × 人民币三段价；国际站月费不同、不另画。
     *stepfun_rows(),
+    # 小米 MiMo Token Plan —— Credits 月池 × 分模型 burn 率；日/夜两情景点。
+    *mimo_rows(),
 ]
 
 # ---- 不计额度（unmetered）订阅点：月费 ÷ 无界可用量 → $0/MTok。无 token 分母，图上用专用刻度位，不进对数换算。
@@ -595,6 +660,10 @@ METERED = [
     ("deepseek_v4_pro_peak", "DeepSeek V4 Pro API 忙时", "deepseek-v4-pro", 0.044, 1.32, 3.96, "api-docs.deepseek.com"),
     ("openai_sol_api", "GPT-5.6 Sol API", "gpt-5.6-sol", 0.4, 4.0, 20.0, "developers.openai.com"),
     ("xai_grok46_api", "Grok 4.6 API (<200k)", "grok-4.6", 0.5, 2.0, 6.0, "docs.x.ai"),
+    ("xai_grok47_api", "Grok 4.7 API (<200k)", "grok-4.7", 0.5, 2.0, 6.0, "docs.x.ai；2026-09-21发布与4.6同价；>200K档$1/$4/$12保留在research"),
+    ("mimo_v26_pro_api", "MiMo V2.6 Pro API", "mimo-v2.6-pro", 0.0036, 0.435, 0.87, "OpenRouter/GOAT/OpenCode三渠道一致价；小米官方计价页未列V2.6档；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
+    ("mimo_v26_flash_api", "MiMo V2.6 Flash API", "mimo-v2.6-flash", 0.0028, 0.14, 0.28, "同上；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
+    ("mimo_v26_pro_ultraspeed_api", "MiMo V2.6 Pro UltraSpeed API", "mimo-v2.6-pro-ultraspeed", 0.036, 4.35, 8.70, "速度档按Pro价10×（GOAT文档官方明示）；同上"),
     # 2026-09-06 补齐 Claude 与 GPT-5.6 其余档的官方按量价，让 Claude / ChatGPT 订阅点在同榜有 API 基线可比
     ("anthropic_opus5_api", "Claude Opus 5 API", "claude-opus-5", 0.5, 5.0, 25.0, "platform.claude.com/docs/en/about-claude/pricing"),
     ("anthropic_sonnet5_api", "Claude Sonnet 5 API", "claude-sonnet-5", 0.2, 2.0, 10.0, "platform.claude.com/docs/en/about-claude/pricing"),
@@ -608,7 +677,9 @@ METERED = [
 MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
               "google_ai_pro_us",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
-              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro"}
+              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro",
+              "mimo_token_lite_day", "mimo_token_standard_day", "mimo_token_pro_day", "mimo_token_max_day",
+              "mimo_token_lite_night", "mimo_token_standard_night", "mimo_token_pro_night", "mimo_token_max_night"}
 MAIN_EXTRA = {
     ("opencode_go", "deepseek-v4.1-flash"),
     ("opencode_go", "glm-5.3-flash"),
@@ -646,7 +717,7 @@ def workload_of(pid: str, billing: str) -> str:
         return "standard"  # API 标价行恒按标准负载加权
     if pid.startswith("stepfun_"):
         return "lowCache"
-    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_")):
+    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_", "mimo_token_")):
         return "standard"
     return "measured"
 

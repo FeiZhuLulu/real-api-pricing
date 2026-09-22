@@ -1,0 +1,48 @@
+{
+  "collectedAt": "2026-09-22",
+  "subject": "Grok 4.7 与 MiMo-V2.6 系列在各渠道的采用输入（目录价/额度/接口模型ID）",
+  "servedModelEvidence": {
+    "grok-4.7": "xAI 2026-09-21 发布即上线 Grok app（SuperGrok 各档实际服务模型，用户面板实测）、Grok Build、xAI API、OpenCode Go、GOAT；与 4.6 同价，Grok app 旗舰已由 4.6 换为 4.7，4.6 仍可选。Cursor 各档是否已换装 4.7 未证实，本批不采纳换装",
+    "mimo-v2.6": "小米 2026-09-21 发布开源（MIT），Pro=1.02T总/42B激活/1M ctx，Flash=309B/15B；Token Plan 于发布次日把 v2.6-pro/v2.6-flash 列入支持清单（用户订阅页截图互证），与 v2.5 同 burn 率"
+  },
+  "opencodeGo": {
+    "url": "https://opencode.ai/docs/go/",
+    "sharedPoolUsd": 60,
+    "models": [
+      {"model": "grok-4.7", "usageUsd": 15, "input": 2.0, "output": 6.0, "cachedRead": 0.5, "tier": "≤200K", "longContext": {"input": 4.0, "output": 12.0, "cachedRead": 1.0, "tier": ">200K"}},
+      {"model": "mimo-v2.6-flash", "usageUsd": 60, "input": 0.14, "output": 0.28, "cachedRead": 0.0028},
+      {"model": "mimo-v2.6-pro", "usageUsd": 15, "input": 0.435, "output": 0.87, "cachedRead": 0.003625}
+    ],
+    "apiModelIds": {"grok-4.7": "grok-4.7", "mimo-v2.6-flash": "mimo-v2.6-flash", "mimo-v2.6-pro": "mimo-v2.6-pro"},
+    "requestsEstimate": {"grok-4.7": "169/423/845（档1/2/3？页表三列）", "mimo-v2.6-flash": "30,100/75,200/150,400", "mimo-v2.6-pro": "3,250/8,150/16,300"},
+    "note": "官网模型表 Grok 4.7 行 ≤200K $2/$6/$0.50、>200K $4/$12/$1，Usage $15；MiMo-V2.6-Flash Usage $60、Pro $15。请求估算仅交叉检查。"
+  },
+  "commandCodeGoat": {
+    "url": "https://commandcode.ai/docs/plans/goat",
+    "sharedPoolUsd": 70,
+    "everyModelTable": [
+      {"model": "mimo-v2.6-flash", "allowanceUsd": 30, "promoUsd": 67, "promoUntil": "2026-09-24", "input": 0.14, "output": 0.28, "cachedRead": 0.0028},
+      {"model": "grok-4.7", "allowanceUsd": 20, "promoUsd": 35, "promoUntil": "2026-09-27", "input": 2.0, "output": 6.0, "cachedRead": 0.5}
+    ],
+    "newModelsTable": [
+      {"model": "mimo-v2.6-pro", "allowanceUsd": 20, "input": 0.435, "output": 0.87, "cachedRead": 0.0036},
+      {"model": "mimo-v2.6-pro-ultraspeed", "allowanceUsd": 10, "input": 4.35, "output": 8.7, "cachedRead": 0.036}
+    ],
+    "note": "Grok 4.7 进 Every model 表：基准 $20 credits，限时提升 $35（至9/27）；MiMo V2.6 Flash $30 限时 $67（至9/24）。采用基准值不采促销。UltraSpeed 是官方明示的例外——按 Pro 价10×计费故只配 $10 credits（官方原话）"
+  },
+  "xaiApi": {
+    "model": "grok-4.7",
+    "input": 2.0,
+    "output": 6.0,
+    "cachedRead": 0.5,
+    "tier": "≤200K",
+    "longContext": {"input": 4.0, "output": 12.0, "cachedRead": 1.0, "tier": ">200K"},
+    "source": "https://docs.x.ai/developers/models；与 Grok 4.6 同价"
+  },
+  "mimoV26Api": {
+    "mimo-v2.6-pro": {"input": 0.435, "output": 0.87, "cachedRead": 0.0036},
+    "mimo-v2.6-flash": {"input": 0.14, "output": 0.28, "cachedRead": 0.0028},
+    "mimo-v2.6-pro-ultraspeed": {"input": 4.35, "output": 8.7, "cachedRead": 0.036},
+    "source": "OpenRouter Xiaomi provider 价与 OpenCode/GOAT 三渠道一致（小米官方计价页尚未列 V2.6 档）"
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "collectedAt": "2026-09-22",
+  "subject": "小米 MiMo Token Plan 订阅计费结构（mimo.mi.com 官方文档）",
+  "scope": "8 款覆盖模型：mimo-v2.6-pro、mimo-v2.6-flash、mimo-v2.5-pro、mimo-v2.5、mimo-v2.5-asr、mimo-v2.5-tts-voiceclone、mimo-v2.5-tts-voicedesign、mimo-v2.5-tts；V2.6 于 2026-09-22 列入官方 Token Plan 支持清单（发布次日文档更新，用户订阅页截图互证）",
+  "tiers": [
+    {
+      "tier": "Lite",
+      "priceUsd": 6,
+      "priceCny": 39,
+      "monthlyCredits": 4100000000,
+      "annualPriceUsd": 63.36,
+      "annualCredits": 49200000000,
+      "officialTaskEstimate": "约 200 个中高复杂度任务（以 mimo-v2.6-flash 为基准）"
+    },
+    {
+      "tier": "Standard",
+      "priceUsd": 16,
+      "priceCny": 99,
+      "monthlyCredits": 11000000000,
+      "annualPriceUsd": 168.96,
+      "annualCredits": 132000000000,
+      "officialTaskEstimate": "约 1600 个中高复杂度任务（以 mimo-v2.6-flash 为基准）"
+    },
+    {
+      "tier": "Pro",
+      "priceUsd": 50,
+      "priceCny": 329,
+      "monthlyCredits": 38000000000,
+      "annualPriceUsd": 528,
+      "annualCredits": 456000000000,
+      "officialTaskEstimate": "约 5600 个中高复杂度任务（以 mimo-v2.6-flash 为基准）"
+    },
+    {
+      "tier": "Max",
+      "priceUsd": 100,
+      "priceCny": 659,
+      "monthlyCredits": 82000000000,
+      "annualPriceUsd": 1056,
+      "annualCredits": 984000000000,
+      "officialTaskEstimate": "约 12800 个中高复杂度任务（以 mimo-v2.6-flash 为基准）"
+    }
+  ],
+  "creditBurnRates": {
+    "note": "Credits 是套餐内虚拟计量单位，按模型+token类型分开计价，不是固定美元面值；这与 MiniMax/StepFun 的 Credit 体系同型。",
+    "perToken": [
+      {
+        "model": "mimo-v2.6-pro",
+        "cachedInputCredits": 2.5,
+        "inputCredits": 300,
+        "outputCredits": 600
+      },
+      {
+        "model": "mimo-v2.6-flash",
+        "cachedInputCredits": 2,
+        "inputCredits": 100,
+        "outputCredits": 200
+      },
+      {
+        "model": "mimo-v2.5-pro",
+        "cachedInputCredits": 2.5,
+        "inputCredits": 300,
+        "outputCredits": 600
+      },
+      {
+        "model": "mimo-v2.5",
+        "cachedInputCredits": 2,
+        "inputCredits": 100,
+        "outputCredits": 200
+      },
+      {
+        "model": "mimo-v2.5-asr",
+        "creditsPerHour": 30000000,
+        "note": "ASR 按时长计：每小时 30M credits"
+      },
+      {
+        "model": "mimo-v2.5-tts-*",
+        "credits": 0,
+        "note": "3 款 TTS 模型套餐内免费（不计 credits）"
+      }
+    ],
+    "standardWorkloadConversion": {
+      "mix": "项目统一标准负载 cache读97.5%/输入2.15%/输出0.35%",
+      "mimo-v2.6-pro": {
+        "blendedCreditsPerToken": 10.9875,
+        "note": "0.975×2.5 + 0.0215×300 + 0.0035×600（与 v2.5-pro 同 burn 率表）"
+      },
+      "mimo-v2.6-flash": {
+        "blendedCreditsPerToken": 4.8,
+        "note": "0.975×2 + 0.0215×100 + 0.0035×200（与 v2.5 同 burn 率表）"
+      },
+      "monthlyTokensByTier": {
+        "mimo-v2.6-pro": {
+          "Lite": 373151672,
+          "Standard": 1001139207,
+          "Pro": 3458480915,
+          "Max": 7463031020
+        },
+        "mimo-v2.6-flash": {
+          "Lite": 854166667,
+          "Standard": 2291666667,
+          "Pro": 7916666667,
+          "Max": 17083333333
+        },
+        "mimo-v2.5-pro": {
+          "Lite": 373151672,
+          "Standard": 1001139207,
+          "Pro": 3458480915,
+          "Max": 7463031020
+        },
+        "mimo-v2.5": {
+          "Lite": 854166667,
+          "Standard": 2291666667,
+          "Pro": 7916666667,
+          "Max": 17083333333
+        }
+      },
+      "mimo-v2.5-pro": {
+        "blendedCreditsPerToken": 10.9875,
+        "note": "0.975×2.5 + 0.0215×300 + 0.0035×600"
+      },
+      "mimo-v2.5": {
+        "blendedCreditsPerToken": 4.8,
+        "note": "0.975×2 + 0.0215×100 + 0.0035×200"
+      }
+    }
+  },
+  "discounts": {
+    "night": {
+      "factor": 0.8,
+      "windowBeijing": "00:00-08:00",
+      "note": "夜间时段 consumption 按 0.8× 计，即同 credits 多换 25% token；与 DeepSeek 闲时/GLM 闲时系数同型"
+    },
+    "firstPurchase": {
+      "factor": 0.88,
+      "note": "首购 88 折（首月）"
+    },
+    "annual": {
+      "factor": 0.88,
+      "note": "年付价 = 月价×12×0.88（$63.36=6×12×0.88 等），credits 年总量=月量×12；连续包年再享88折"
+    },
+    "oneTimeCreditReset": {
+      "effective": "2026-05-27",
+      "note": "一次性 credits 重置促销：购买/升级时把当期 credits 清零重发（文档注明生效日起）"
+    }
+  },
+  "rules": {
+    "onePlanAtATime": "同一时刻仅可持有一档套餐；升级按差价补款",
+    "exhaustion": "credits 耗尽即停服务，不从余额/按量账户续扣（与 OpenCode 共享池不同——这里 credits 为独立计量池）",
+    "billingCycle": "月付按自然订阅周期滚动重置 credits"
+  },
+  "meteredReference": {
+    "note": "platform.xiaomimimo.com 按量 API 价（页面 2026-04-30 更新，仅列 V2.5 系列；V2.6 官方页尚未更新计价档）",
+    "domesticCnyPerMtok": {
+      "mimo-v2.5-pro": {
+        "≤256K": {
+          "cached": 1.4,
+          "input": 7,
+          "output": 21
+        },
+        "256K-1M": {
+          "cached": 2.8,
+          "input": 14,
+          "output": 42
+        }
+      },
+      "mimo-v2.5": {
+        "≤256K": {
+          "cached": 0.56,
+          "input": 2.8,
+          "output": 14
+        },
+        "256K-1M": {
+          "cached": 1.12,
+          "input": 5.6,
+          "output": 28
+        }
+      },
+      "mimo-v2-flash": {
+        "cached": 0.07,
+        "input": 0.7,
+        "output": 2.1
+      },
+      "webSearchPlugin": {
+        "perKQueries": 25
+      }
+    },
+    "overseasUsdPerMtok": {
+      "mimo-v2.5-pro": {
+        "≤256K": {
+          "cached": 0.2,
+          "input": 1.0,
+          "output": 3.0
+        },
+        "256K-1M": {
+          "cached": 0.4,
+          "input": 2.0,
+          "output": 6.0
+        }
+      },
+      "mimo-v2.5": {
+        "≤256K": {
+          "cached": 0.08,
+          "input": 0.4,
+          "output": 2.0
+        },
+        "256K-1M": {
+          "cached": 0.16,
+          "input": 0.8,
+          "output": 4.0
+        }
+      },
+      "mimo-v2-flash": {
+        "cached": 0.01,
+        "input": 0.1,
+        "output": 0.3
+      },
+      "webSearchPlugin": {
+        "perKQueries": 5
+      }
+    },
+    "v26ApiFromCatalogs": {
+      "mimo-v2.6-pro": {
+        "cached": 0.0036,
+        "input": 0.435,
+        "output": 0.87,
+        "usdPerMtok": true
+      },
+      "mimo-v2.6-flash": {
+        "cached": 0.0028,
+        "input": 0.14,
+        "output": 0.28,
+        "usdPerMtok": true
+      },
+      "mimo-v2.6-pro-ultraspeed": {
+        "cached": 0.036,
+        "input": 4.35,
+        "output": 8.7,
+        "usdPerMtok": true,
+        "note": "速度档，价为 Pro 的10×"
+      },
+      "source": "OpenCode Go / Command Code GOAT / OpenRouter 三渠道一致，与小米官方 V2.6 发布价吻合；官方计价页待更新"
+    }
+  },
+  "historical": {
+    "note": "Token Plan 原始发布档（文档更新于 2026-06-29）用另一套 credit 尺度：Lite 60M / Standard 200M / Pro 700M / Max 1600M，倍率 omni=1×、pro≤256k=2×、pro>256k=4×；v2 系列模型 2026-06-30 下线。现尺度（4.1B/11B/38B/82B + 分模型分类型 burn 率）为当前生效口径。",
+    "v2ModelsRetired": "2026-06-30"
+  },
+  "sources": [
+    "https://mimo.mi.com/docs Token Plan 订阅文档（档位、credits、burn 率、夜间/首购/年付折扣、升级规则）",
+    "https://platform.xiaomimimo.com/docs/zh-CN/pricing 按量计价页（V2.5 系列）",
+    "https://opencode.ai/docs/go/、https://commandcode.ai/docs/plans/goat、OpenRouter 模型页（V2.6 渠道价交叉一致）"
+  ],
+  "coverageUpdate": "2026-09-22 二次核验：官方订阅文档支持清单已由 v2.5 系 6 款更新为 8 款（新增 mimo-v2.6-pro/mimo-v2.6-flash，burn 率分别与 v2.5-pro/v2.5 相同），用户订阅页截图四档均标注「支持 V2.6 全新旗舰模型」；官方任务数估算基准由 mimo-v2.5 改为 mimo-v2.6-flash（200/1600/5600/12800 轮/月）"
+}

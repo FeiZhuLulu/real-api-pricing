@@ -66,6 +66,8 @@ VENDOR_OF = {
     "ollama": "Ollama",
     "deepseek": "DeepSeek",
     "stepfun": "StepFun",
+    "mimo_token": "Xiaomi",
+    "mimo_v26": "Xiaomi",
     "devin": "Devin",
     "google_ai": "Gemini",
 }
@@ -84,6 +86,7 @@ VENDOR_COLORS = {
     "DeepSeek": "#1F75FE",
     "Gemini": "#7CC12A",
     "StepFun": "#00F4E5",
+    "Xiaomi": "#FF6900",
     "Devin": "#7C3AED",
 }
 VIEW_CN = {"quotas": "额度", "prices": "单价"}
@@ -115,6 +118,7 @@ VENDOR_CODES = {
     "Kimi": "KI", "GLM": "GL", "MiniMax": "MM", "Alibaba": "AL",
     "OpenCode": "OC", "Command Code": "CC", "Ollama": "OL",
     "DeepSeek": "DS", "Gemini": "GE", "StepFun": "SF", "Devin": "DV",
+    "Xiaomi": "MI",
 }
 TEXT = {
     "zh": {

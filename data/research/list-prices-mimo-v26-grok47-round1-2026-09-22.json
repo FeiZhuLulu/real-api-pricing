@@ -1,0 +1,62 @@
+{
+ "collectedAt": "2026-09-22",
+ "usdPerCny": 7.2,
+ "models": [
+  {
+   "model": "grok-4.7",
+   "vendor": "xAI / SpaceXAI",
+   "input": 2.0,
+   "cachedInput": 0.5,
+   "output": 6.0,
+   "currency": "USD",
+   "variants": {
+    "longContext": {
+     "input": 4.0,
+     "cachedInput": 1.0,
+     "output": 12.0,
+     "note": "prompt >= 200k tokens; higher rate applies to all tokens in the request"
+    }
+   },
+   "source": "https://docs.x.ai/developers/models",
+   "checkedAt": "2026-09-22",
+   "note": "2026-09-21 发布，与 Grok 4.6 同价同档；官方新闻 https://x.ai/news/grok-4-7"
+  },
+  {
+   "model": "mimo-v2.6-pro",
+   "vendor": "Xiaomi MiMo",
+   "input": 0.435,
+   "cachedInput": 0.0036,
+   "output": 0.87,
+   "currency": "USD",
+   "variants": {},
+   "source": "OpenRouter Xiaomi provider；opencode.ai/docs/go 与 commandcode.ai/docs/plans/goat 三渠道一致",
+   "checkedAt": "2026-09-22",
+   "note": "小米官方计价页（platform.xiaomimimo.com）尚未列 V2.6 档；三渠道价一致按采用。cache read $0.0036 约为输入价0.8%"
+  },
+  {
+   "model": "mimo-v2.6-flash",
+   "vendor": "Xiaomi MiMo",
+   "input": 0.14,
+   "cachedInput": 0.0028,
+   "output": 0.28,
+   "currency": "USD",
+   "variants": {},
+   "source": "OpenRouter Xiaomi provider；opencode.ai/docs/go 与 commandcode.ai/docs/plans/goat 三渠道一致",
+   "checkedAt": "2026-09-22",
+   "note": "cache read $0.0028 为输入价2%"
+  },
+  {
+   "model": "mimo-v2.6-pro-ultraspeed",
+   "vendor": "Xiaomi MiMo",
+   "input": 4.35,
+   "cachedInput": 0.036,
+   "output": 8.7,
+   "currency": "USD",
+   "variants": {},
+   "source": "commandcode.ai/docs/plans/goat（UltraSpeed=Pro价10×官方明示）",
+   "checkedAt": "2026-09-22",
+   "note": "MiMo V2.6 Pro 速度变体，全段价为 Pro 的 10×"
+  }
+ ],
+ "notFound": ["mimo-v2.6-pro 与 mimo-v2.6-flash 的小米官方计价页行（页面仍停在 V2.5 系列，2026-04-30 更新）"]
+}

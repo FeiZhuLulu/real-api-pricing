@@ -56,7 +56,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Intelligence Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,273.011 L535.626,273.011 L647.557,280.489 L873.183,301.307 L902.613,367.164 L1027.037,375.698 L1059.697,399.764 L1105.625,425.574 L1167.529,448.974 L1191.844,582.343 L1282.531,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,273.011 L535.626,273.011 L647.557,280.489 L873.183,301.307 L914.552,353.744 L1027.037,375.698 L1059.697,399.764 L1105.625,425.574 L1167.529,448.974 L1191.844,582.343 L1282.531,672.464 L1338.000,672.464" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="46.9727" data-x="715.460" data-y="343.067" transform="translate(715.460 343.067)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 46.9727 · mediumGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -205,9 +205,8 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01154" data-score="44.7774" data-x="861.828" data-y="367.164" transform="translate(861.828 367.164)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) 中间值 · $0.01154/MTok · 44.7774 · highGLM-5.3 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00865" data-score="44.7774" data-x="902.613" data-y="367.164" transform="translate(902.613 367.164)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) 闲时 · $0.00865/MTok · 44.7774 · highGLM-5.3 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#1E1E1E" stroke-width="1.35"/>
-<circle r="4" fill="#1E1E1E"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00865" data-score="44.7774" data-x="902.613" data-y="367.164" transform="translate(902.613 367.164)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) 闲时 · $0.00865/MTok · 44.7774 · highGLM-5.3 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00571" data-score="41.8075" data-x="961.378" data-y="399.764" transform="translate(961.378 399.764)"><title>GLM 5.3 Flash (v2) · GLM Pro (v2 ¥149) 忙时 · $0.00571/MTok · 41.8075 · highGLM-5.3-Flash · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
@@ -282,6 +281,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.36765" data-score="44.3113" data-x="372.098" data-y="372.281" transform="translate(372.098 372.281)"><title>Grok 4.6 · OpenCode Go · $0.36765/MTok · 44.3113 · mediumGrok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.36765" data-score="46.4465506302286" data-x="372.098" data-y="348.843" transform="translate(372.098 348.843)"><title>Grok 4.7 · OpenCode Go · $0.36765/MTok · 46.4465506302286 · mediumGrok 4.7 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01867" data-score="37.3244" data-x="793.759" data-y="448.974" transform="translate(793.759 448.974)"><title>GPT 5.6 Luna · OpenCode Go · $0.01867/MTok · 37.3244 · mediumGPT-5.6 Luna (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
@@ -314,6 +316,9 @@
 <circle r="4" fill="#00C0A8"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01062" data-score="25.9869" data-x="873.582" data-y="573.423" transform="translate(873.582 573.423)"><title>MiMo V2.5 Pro · OpenCode Go · $0.01062/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01062" data-score="46" data-x="873.582" data-y="353.744" transform="translate(873.582 353.744)"><title>MiMo V2.6 Pro · OpenCode Go · $0.01062/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01152" data-score="29.2203" data-x="862.073" data-y="537.931" transform="translate(862.073 537.931)"><title>MiniMax M3 · OpenCode Go · $0.01152/MTok · 29.2203 · mediumMiniMax-M3 · Exact served-model reference; quota-measurement effort is unverified.</title>
@@ -395,6 +400,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00795" data-score="25.9869" data-x="914.552" data-y="573.423" transform="translate(914.552 573.423)"><title>MiMo V2.5 Pro · Command Code GOAT · $0.00795/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="46.4465506302286" data-x="412.934" data-y="348.843" transform="translate(412.934 348.843)"><title>Grok 4.7 · Command Code GOAT · $0.27548/MTok · 46.4465506302286 · mediumGrok 4.7 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.15385" data-score="45.4152" data-x="495.355" data-y="360.163" transform="translate(495.355 360.163)"><title>Qwen3.8 Max 0902 · Command Code GOAT · $0.15385/MTok · 45.4152 · mediumQwen3.8 Max (0902) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
 </g>
@@ -415,6 +423,10 @@
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.27548" data-score="44.3113" data-x="412.934" data-y="372.281" transform="translate(412.934 372.281)"><title>Grok 4.6 · Command Code GOAT · $0.27548/MTok · 44.3113 · mediumGrok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00795" data-score="46" data-x="914.552" data-y="353.744" transform="translate(914.552 353.744)"><title>MiMo V2.6 Pro · Command Code GOAT · $0.00795/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#708090" stroke-width="1.35"/>
+<circle r="4" fill="#708090"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.05118" data-score="39.6178" data-x="651.079" data-y="423.800" transform="translate(651.079 423.800)"><title>Gemini 3.7 Flash · Command Code GOAT · $0.05118/MTok · 39.6178 · mediumGemini 3.7 Flash (medium) [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
@@ -517,6 +529,78 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00F4E5" stroke-width="1.35"/>
 <circle r="4" fill="#00F4E5"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01609" data-score="46" data-x="814.800" data-y="353.744" transform="translate(814.800 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Lite 日间 · ¥39 / 国际 $6 · $0.01609/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01288" data-score="46" data-x="846.284" data-y="353.744" transform="translate(846.284 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Lite 夜间0.8× · ¥39 / 国际 $6 · $0.01288/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01609" data-score="25.9869" data-x="814.800" data-y="573.423" transform="translate(814.800 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Lite 日间 · ¥39 / 国际 $6 · $0.01609/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01288" data-score="25.9869" data-x="846.284" data-y="573.423" transform="translate(846.284 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Lite 夜间0.8× · ¥39 / 国际 $6 · $0.01288/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00703" data-score="25.1743" data-x="931.953" data-y="582.343" transform="translate(931.953 582.343)"><title>MiMo V2.5 · MiMo Token Plan Lite 日间 · ¥39 / 国际 $6 · $0.00703/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00562" data-score="25.1743" data-x="963.625" data-y="582.343" transform="translate(963.625 582.343)"><title>MiMo V2.5 · MiMo Token Plan Lite 夜间0.8× · ¥39 / 国际 $6 · $0.00562/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01598" data-score="46" data-x="815.771" data-y="353.744" transform="translate(815.771 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Standard 日间 · ¥99 / 国际 $16 · $0.01598/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01279" data-score="46" data-x="847.277" data-y="353.744" transform="translate(847.277 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Standard 夜间0.8× · ¥99 / 国际 $16 · $0.01279/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01598" data-score="25.9869" data-x="815.771" data-y="573.423" transform="translate(815.771 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Standard 日间 · ¥99 / 国际 $16 · $0.01598/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01279" data-score="25.9869" data-x="847.277" data-y="573.423" transform="translate(847.277 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Standard 夜间0.8× · ¥99 / 国际 $16 · $0.01279/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00698" data-score="25.1743" data-x="932.963" data-y="582.343" transform="translate(932.963 582.343)"><title>MiMo V2.5 · MiMo Token Plan Standard 日间 · ¥99 / 国际 $16 · $0.00698/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00558" data-score="25.1743" data-x="964.636" data-y="582.343" transform="translate(964.636 582.343)"><title>MiMo V2.5 · MiMo Token Plan Standard 夜间0.8× · ¥99 / 国际 $16 · $0.00558/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01446" data-score="46" data-x="829.913" data-y="353.744" transform="translate(829.913 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Pro 日间 · ¥329 / 国际 $50 · $0.01446/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01157" data-score="46" data-x="861.460" data-y="353.744" transform="translate(861.460 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Pro 夜间0.8× · ¥329 / 国际 $50 · $0.01157/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01446" data-score="25.9869" data-x="829.913" data-y="573.423" transform="translate(829.913 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Pro 日间 · ¥329 / 国际 $50 · $0.01446/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01157" data-score="25.9869" data-x="861.460" data-y="573.423" transform="translate(861.460 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Pro 夜间0.8× · ¥329 / 国际 $50 · $0.01157/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00632" data-score="25.1743" data-x="947.017" data-y="582.343" transform="translate(947.017 582.343)"><title>MiMo V2.5 · MiMo Token Plan Pro 日间 · ¥329 / 国际 $50 · $0.00632/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00505" data-score="25.1743" data-x="978.757" data-y="582.343" transform="translate(978.757 582.343)"><title>MiMo V2.5 · MiMo Token Plan Pro 夜间0.8× · ¥329 / 国际 $50 · $0.00505/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0134" data-score="46" data-x="840.685" data-y="353.744" transform="translate(840.685 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Max 日间 · ¥659 / 国际 $100 · $0.0134/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01072" data-score="46" data-x="872.256" data-y="353.744" transform="translate(872.256 353.744)"><title>MiMo V2.6 Pro · MiMo Token Plan Max 夜间0.8× · ¥659 / 国际 $100 · $0.01072/MTok · 46 · mediumMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0134" data-score="25.9869" data-x="840.685" data-y="573.423" transform="translate(840.685 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Max 日间 · ¥659 / 国际 $100 · $0.0134/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01072" data-score="25.9869" data-x="872.256" data-y="573.423" transform="translate(872.256 573.423)"><title>MiMo V2.5 Pro · MiMo Token Plan Max 夜间0.8× · ¥659 / 国际 $100 · $0.01072/MTok · 25.9869 · mediumMiMo-V2.5-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00585" data-score="25.1743" data-x="957.950" data-y="582.343" transform="translate(957.950 582.343)"><title>MiMo V2.5 · MiMo Token Plan Max 日间 · ¥659 / 国际 $100 · $0.00585/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00468" data-score="25.1743" data-x="989.522" data-y="582.343" transform="translate(989.522 582.343)"><title>MiMo V2.5 · MiMo Token Plan Max 夜间0.8× · ¥659 / 国际 $100 · $0.00468/MTok · 25.1743 · mediumMiMo-V2.5 [AA estimate] · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01665" data-score="42.0829" data-x="809.960" data-y="396.741" transform="translate(809.960 396.741)"><title>GPT 5.6 Terra · Plus / GPT 5.6 Terra · Pro 5x · $0.01665/MTok · 42.0829 · mediumGPT-5.6 Terra (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Terra (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -592,6 +676,12 @@
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.5515" data-score="44.3113" data-x="314.724" data-y="372.281" transform="translate(314.724 372.281)"><title>Grok 4.6 · Grok 4.6 API (&lt;200k) · $0.5515/MTok · 44.3113 · highGrok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#B65CFF" stroke-width="1.5" opacity=".68"/>
 </g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.5515" data-score="46.4465506302286" data-x="314.724" data-y="348.843" transform="translate(314.724 348.843)"><title>Grok 4.7 · Grok 4.7 API (&lt;200k) · $0.5515/MTok · 46.4465506302286 · highGrok 4.7 (xhigh) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#B65CFF" stroke-width="1.5" opacity=".68"/>
+</g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.01591" data-score="46" data-x="816.392" data-y="353.744" transform="translate(816.392 353.744)"><title>MiMo V2.6 Pro · MiMo V2.6 Pro API · $0.01591/MTok · 46 · highMiMo-V2.6-Pro · Exact served-model reference; quota-measurement effort is unverified.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#FFA000" stroke-width="1.5" opacity=".68"/>
+</g>
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.6825" data-score="50.7771" data-x="284.570" data-y="301.307" transform="translate(284.570 301.307)"><title>Claude Opus 5 · Opus 5 API · $0.6825/MTok · 50.7771 · highClaude Opus 5 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#F07826" stroke-width="1.5" opacity=".68"/>
 </g>
@@ -628,11 +718,11 @@
 <text x="849.183" y="272.307" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
 <text x="849.183" y="292.307" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01065</text>
 </g>
-<g class="front-label" data-model="glm-5.3">
-<path d="M907.436,352.961Q907.436,314.164 920.613,314.164" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="926.613" y="295.164" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">GLM 5.3 (v2) · max</text>
-<text x="926.613" y="315.164" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >GLM Pro (v2 ¥149) 闲时</text>
-<text x="926.613" y="335.164" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00865</text>
+<g class="front-label" data-model="mimo-v2.6-pro">
+<path d="M908.694,339.935Q908.694,320.744 900.552,320.744" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="894.552" y="301.744" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">MiMo V2.6 Pro</text>
+<text x="894.552" y="321.744" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Command Code GOAT</text>
+<text x="894.552" y="341.744" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00795</text>
 </g>
 <g class="front-label" data-model="step-5-preview">
 <path d="M1021.179,361.889Q1021.179,342.698 1013.037,342.698" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -696,16 +786,18 @@
 <text x="1045.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >DeepSeek</text>
 <rect x="1122" y="826" width="8" height="8" fill="#7CC12A"/>
 <text x="1139.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Google</text>
-<rect x="1205" y="826" width="8" height="8" fill="#00F4E5"/>
-<text x="1222.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >StepFun</text>
-<path d="M1296.11,828.37 L1294.03,829.57 L1291.95,828.37 L1291.95,825.97 L1294.03,824.77 L1296.11,825.97Z M1296.11,834.03 L1294.03,835.23 L1291.95,834.03 L1291.95,831.63 L1294.03,830.43 L1296.11,831.63Z M1300.91,831.20 L1298.83,832.40 L1296.75,831.20 L1296.75,828.80 L1298.83,827.60 L1300.91,828.80Z" fill="#7C3AED" opacity="1.0" stroke="#7C3AED" stroke-width="0.43" stroke-linejoin="round"/><path d="M1295.11,828.73 L1294.13,827.31 M1295.11,831.27 L1294.13,832.69 M1297.27,830.00 L1298.69,830.00" stroke="#7C3AED" stroke-width="2.16" stroke-linecap="round" opacity="1.0" fill="none"/>
-<text x="1309.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Devin</text>
-<path d="M1384 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="1414.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
-<path d="M1504 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="1518.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
+<rect x="1205" y="826" width="8" height="8" fill="#FFA000"/>
+<text x="1222.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Xiaomi</text>
+<rect x="1288" y="826" width="8" height="8" fill="#00F4E5"/>
+<text x="1305.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >StepFun</text>
+<path d="M1379.11,828.37 L1377.03,829.57 L1374.95,828.37 L1374.95,825.97 L1377.03,824.77 L1379.11,825.97Z M1379.11,834.03 L1377.03,835.23 L1374.95,834.03 L1374.95,831.63 L1377.03,830.43 L1379.11,831.63Z M1383.91,831.20 L1381.83,832.40 L1379.75,831.20 L1379.75,828.80 L1381.83,827.60 L1383.91,828.80Z" fill="#7C3AED" opacity="1.0" stroke="#7C3AED" stroke-width="0.43" stroke-linejoin="round"/><path d="M1378.11,828.73 L1377.13,827.31 M1378.11,831.27 L1377.13,832.69 M1380.27,830.00 L1381.69,830.00" stroke="#7C3AED" stroke-width="2.16" stroke-linecap="round" opacity="1.0" fill="none"/>
+<text x="1392.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Devin</text>
+<path d="M1467 830h22" stroke="#303630" stroke-width="1.65"/>
+<text x="1497.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
+<path d="M1587 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
+<text x="1601.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >167 个订阅位置 / 14 个 API 位置 / 10 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >195 个订阅位置 / 16 个 API 位置 / 10 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>
