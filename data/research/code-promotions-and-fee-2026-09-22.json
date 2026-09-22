@@ -1,0 +1,53 @@
+{
+  "collectedAt": "2026-09-22",
+  "sourceType": "official-docs + user screenshot checkout proof",
+  "scope": "OpenCode Go 与 Command Code GOAT 的 DeepSeek V4.1 Flash 限时促销提额，以及 Command Code 实付月费修正",
+  "promotions": [
+    {
+      "provider": "opencode",
+      "planId": "opencode_go_promo",
+      "planName": "OpenCode Go (促销至 09/27)",
+      "model": "deepseek-v4.1-flash",
+      "regularMonthlyLimitUsd": 15,
+      "promoMonthlyLimitUsd": 60,
+      "multiplier": "4x",
+      "startDate": "2026-09-10",
+      "endDate": "2026-09-27",
+      "officialQuote": "DeepSeek V4.1 Flash (Off-Peak) Input $0.15 Output $0.60 Cached Read $0.003 Cached Write - $15 $60 4x · 9 月 27 日结束",
+      "sourceUrl": "https://opencode.ai/docs/zh-cn/go/",
+      "blendedUsdPer1M": 0.00825,
+      "monthlyYi": 72.727,
+      "realUsdPerMtok": 0.00138,
+      "note": "限时促销独立挂点，常规 18.182 亿 ($15) 采用点保持不变"
+    },
+    {
+      "provider": "command_code",
+      "planId": "command_code_goat_promo",
+      "planName": "Command Code GOAT (促销至 09/28)",
+      "model": "deepseek-v4.1-flash",
+      "regularMonthlyCreditsUsd": 40,
+      "promoMonthlyCreditsUsd": 60,
+      "startDate": "2026-09-10",
+      "endDate": "2026-09-28",
+      "officialQuote": "DeepSeek V4.1 Flash Input $0.15 Output $0.60 Cache Read $0.003 Cache Write - Monthly credits $40 $60 through Sep 28th",
+      "sourceUrl": "https://commandcode.ai/docs/plans/goat",
+      "blendedUsdPer1M": 0.00825,
+      "monthlyYi": 72.727,
+      "realUsdPerMtok": 0.00148,
+      "note": "限时促销独立挂点；月费按实际实付 $10.78 计算；常规 48.485 亿 ($40) 采用点保持不变"
+    }
+  ],
+  "commandCodeFeeCorrection": {
+    "planId": "command_code_goat",
+    "previousAssumedPriceUsd": 10.0,
+    "actualBilledPriceUsd": 10.78,
+    "breakdown": {
+      "basePriceUsd": 10.0,
+      "processingFeeUsd": 0.78,
+      "billingCadence": "monthly recurring"
+    },
+    "evidenceScreenshot": "data/research/command-code-goat-fee-2026-09-22.png",
+    "evidenceQuote": "Command Code GOAT $10.00 Billed monthly; processing fee $0.78 Billed monthly; Subtotal $10.78; Tax $0.00; Total due today $10.78",
+    "reason": "平台按月结算时强制加收 $0.78 循环处理手续费，无法免除。用户实际每月固定支出为 $10.78。此前忽略手续费的假设作废，按真实实付价入库。"
+  }
+}

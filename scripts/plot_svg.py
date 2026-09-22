@@ -93,6 +93,8 @@ def plan_name(plan, language):
     if language == "en":
         return (plan.replace(" (9/14+)", " · from Sep 14")
                 .replace(" (促销至 10/31)", " · promo until Oct 31")
+                .replace(" (促销至 09/27)", " · promo until Sep 27")
+                .replace(" (促销至 09/28)", " · promo until Sep 28")
                 .replace(" (老客 ¥149)", " · existing ¥149")
                 .replace(" (老客 ¥49)", " · existing ¥49")
                 .replace(" (老客 ¥469)", " · existing ¥469")
