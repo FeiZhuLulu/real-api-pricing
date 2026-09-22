@@ -21,6 +21,7 @@ SCORE_FILES = (
     "scores-code-arena-round1-2026-09-06.json",
     "scores-aa-coding-agent-round1-2026-09-06.json",
     "scores-aa-round3-2026-09-09.json",
+    "scores-aa-round4-2026-09-22.json",
     "scores-open-design-round1-2026-09-09.json",
     "scores-terminal-bench4-round1-2026-09-10.json",
     "scores-terminal-bench4-round2-selfreport-2026-09-12.json",
