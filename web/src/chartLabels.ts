@@ -8,6 +8,9 @@ export const LOGO_SIZE = 28;
 /** Clearance radius of a frontier logo badge and of a plain scatter dot. */
 export const FRONTIER_RADIUS = LOGO_SIZE / 2;
 export const DOT_RADIUS = 6;
+/** A model/plan lock can cover dozens of points; beyond this, hits keep all
+    their badges but name labels compete for slots instead of being forced. */
+export const LABEL_FORCE_CAP = 6;
 
 /** Where the label box sits relative to the end of its leader line. */
 export type LabelAnchor = "center" | "left" | "right";
@@ -36,6 +39,8 @@ export interface FrontierLogoView {
   y: number;
   logoUrl?: string;
   inPlot: boolean;
+  /** Search-marked badge: ringed in its channel colour instead of frontier black. */
+  hit: boolean;
 }
 
 export interface TextLabelView extends ArenaPlacement {
@@ -53,14 +58,39 @@ export interface AnchorPoint {
   r: number;
 }
 
-/** Bottom cards: all points when labels=all, otherwise frontier (incl. none). */
+/** Bottom cards: all points when labels=all, otherwise frontier plus hits. */
 export function cardGroups(
   gs: Group[],
   front: Group[],
   mode: LabelMode,
+  hits: Group[] = [],
 ): Group[] {
   if (mode === "all") return gs;
-  return front;
+  return badgeGroups(front, hits);
+}
+
+/** Badge order: frontier first, then search hits that are not already on it. */
+export function badgeGroups(front: Group[], hits: Group[]): Group[] {
+  const seen = new Set<string>();
+  const out: Group[] = [];
+  for (const g of [...front, ...hits])
+    if (!seen.has(g.key)) {
+      seen.add(g.key);
+      out.push(g);
+    }
+  return out;
+}
+
+/** Placement priority: search hits get the good slots, then the base label set. */
+export function orderLabelGroups(base: Group[], hits: Group[]): Group[] {
+  const seen = new Set<string>();
+  const out: Group[] = [];
+  for (const g of [...hits, ...base])
+    if (!seen.has(g.key)) {
+      seen.add(g.key);
+      out.push(g);
+    }
+  return out;
 }
 
 /** In-chart text names only — never includes logos. */
@@ -384,18 +414,19 @@ function inPlotBox(
   );
 }
 
-/** Pixel-centered frontier logos; hide when outside the plot box. */
+/** Pixel-centered logo badges; hide when outside the plot box. */
 export function frontierLogoViews(
-  front: Group[],
+  badges: Group[],
   layout: PlotLayout,
   logos: Map<string, string>,
   lang = "en",
+  hits?: Set<string>,
 ): FrontierLogoView[] {
   const box = plotBox(layout);
   if (!box) return [];
   const half = LOGO_SIZE / 2;
   const out: FrontierLogoView[] = [];
-  for (const g of front) {
+  for (const g of badges) {
     const pt = dataToPixel(layout, g.plotPrice, g.score, box);
     if (!pt) continue;
     out.push({
@@ -408,6 +439,7 @@ export function frontierLogoViews(
       y: pt.y,
       logoUrl: logos.get(labelProvider(g)),
       inPlot: inPlotBox(pt.x, pt.y, box, -half),
+      hit: !!hits?.has(g.key),
     });
   }
   return out;
@@ -428,6 +460,7 @@ export function placeTextLabels(
   box: PlotBox,
   mobile: boolean,
   lang = "en",
+  forced?: Set<string>,
 ): ArenaPlacement[] {
   if (!groups.length) return [];
   const placed: { box: Box; lead: Segment | null }[] = [];
@@ -483,7 +516,10 @@ export function placeTextLabels(
         }
       }
     }
-    if (!best || bestPenalty >= BLOCKED) continue;
+    // Forced (search-marked) names take their least-bad slot even when every
+    // slot is blocked — an explicit query must stay visible — and still claim
+    // the space so later labels avoid it.
+    if (!best || (bestPenalty >= BLOCKED && !forced?.has(g.key))) continue;
     placed.push({ box: best.box, lead: best.lead });
     out.push({
       key: g.key,
@@ -545,11 +581,12 @@ function escapeHtml(s: string): string {
  * Paper coords are plot-area normalized (fx, fy); logo size is 28/plotW × 28/plotH.
  */
 export function buildExportDecorationsFromLayout(
-  front: Group[],
+  badges: Group[],
   textPlacements: ArenaPlacement[],
   logos: Map<string, string>,
   layout: PlotLayout,
   mobile: boolean,
+  marks?: { frontier?: Set<string>; hits?: Map<string, string> },
 ): {
   annotations: Partial<Annotations>[];
   images: Array<Partial<Image> & Record<string, unknown>>;
@@ -567,7 +604,7 @@ export function buildExportDecorationsFromLayout(
   const toPaperX = (px: number) => (px - box.left) / box.width;
   const toPaperY = (py: number) => 1 - (py - box.top) / box.height;
 
-  for (const g of front) {
+  for (const g of badges) {
     const src = logos.get(labelProvider(g));
     if (!src) continue;
     const pt = dataToPixel(layout, g.plotPrice, g.score, box);
@@ -576,9 +613,13 @@ export function buildExportDecorationsFromLayout(
     const fx = toPaperX(pt.x);
     const fy = toPaperY(pt.y);
     if (fx < -0.05 || fx > 1.05 || fy < -0.05 || fy > 1.05) continue;
+    // Export marks mirror the overlay: hits get their channel colour as a
+    // 1.6px stroke, everything else the near-black frontier frame (also the
+    // default without marks).
+    const hitColor = marks?.hits?.get(g.key);
     images.push({
       source: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><rect x=".5" y=".5" width="27" height="27" rx="6" fill="white" stroke="#d0d5dc"/><image href="${escapeHtml(src)}" x="4" y="4" width="20" height="20"/></svg>`,
+        `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><rect x=".5" y=".5" width="27" height="27" rx="6" fill="white" stroke="${escapeHtml(hitColor ?? "#20242a")}" stroke-width="${hitColor ? 1.6 : 1}"/><image href="${escapeHtml(src)}" x="4" y="4" width="20" height="20"/></svg>`,
       )}`,
       xref: "paper",
       yref: "paper",
@@ -625,7 +666,9 @@ export function buildExportDecorationsFromLayout(
       text: escapeHtml(p.label),
       showarrow: false,
       bgcolor: "rgba(255,255,255,0.96)",
-      bordercolor: "#e1e4e8",
+      bordercolor:
+        marks?.hits?.get(p.key) ??
+        (marks?.frontier?.has(p.key) ? "#20242a" : "#e1e4e8"),
       borderwidth: 1,
       borderpad: 3,
       font: {

@@ -64,6 +64,14 @@ export const defaultState = (): State => ({
   direction: "asc",
 });
 export const color = (p: Point) => colors[p.channel] || "#00A8A8";
+/** Channel colour at a given alpha, for search-hit rings. */
+export function colorAlpha(p: Point, alpha: number): string {
+  const hex = color(p);
+  const m = /^#([0-9a-f]{6})$/i.exec(hex);
+  if (!m) return hex;
+  const n = parseInt(m[1], 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+}
 const matches = (items: string[], value: string | null) =>
   !items.length || items.includes(value ?? "unknown");
 export function options(data: SiteData): Record<FilterKey, string[]> {
@@ -241,6 +249,13 @@ export function parseLock(raw: string): Lock | null {
 }
 /** Marked hits are capped so a loose query cannot bury the chart in labels. */
 export const SEARCH_MARK_CAP = 8;
+/** Model name without the plan-generation tag: a model lock spans generations. */
+export function modelFamilyLabel(p: Point): string {
+  const tag = p.plan_gen ? ` (${p.plan_gen})` : "";
+  return tag && p.model_display.endsWith(tag)
+    ? p.model_display.slice(0, -tag.length)
+    : p.model_display;
+}
 export function searchTokens(query: string): string[] {
   return query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
 }
@@ -328,7 +343,7 @@ export function searchHits(
       lock.kind === "point"
         ? `${first.point.model_display} · ${displayPlan(first.point.plan, lang)}`
         : lock.kind === "model"
-          ? first.point.model_display
+          ? modelFamilyLabel(first.point)
           : displayPlan(first.point.plan, lang);
     return {
       keys,
@@ -352,7 +367,7 @@ export interface SearchGroupCandidate {
   kind: "model" | "plan";
   /** point.model or point.plan_id. */
   value: string;
-  /** model_display, or displayPlan(plan, lang). */
+  /** modelFamilyLabel for models; displayPlan(plan, lang) for plans. */
   label: string;
   /** Distinct points this lock would mark. */
   points: number;
@@ -360,6 +375,8 @@ export interface SearchGroupCandidate {
   cheapest: number;
   /** Representative row (the cheapest one) for logos and score. */
   row: Row;
+  /** Best score among the points this lock covers. */
+  score: number | null;
 }
 export interface SearchCandidates {
   models: SearchGroupCandidate[];
@@ -389,14 +406,19 @@ export function searchCandidates(
       .join(" ")
       .toLocaleLowerCase();
   const allIn = (hay: string) => tokens.every((t) => hay.includes(t));
+  // The haystack decides only which slugs are listed; every statistic is
+  // computed over all rows a lock would cover, so the subtitle never
+  // promises less than locking delivers.
   const modelRows = new Map<string, Row[]>();
   const planRows = new Map<string, Row[]>();
+  const modelHit = new Set<string>();
+  const planHit = new Set<string>();
   for (const g of gs)
     for (const r of g.rows) {
-      if (tokens.length && allIn(modelHay(r)))
-        modelRows.set(r.point.model, [...(modelRows.get(r.point.model) || []), r]);
-      if (tokens.length && allIn(planHay(r)))
-        planRows.set(r.point.plan_id, [...(planRows.get(r.point.plan_id) || []), r]);
+      modelRows.set(r.point.model, [...(modelRows.get(r.point.model) || []), r]);
+      planRows.set(r.point.plan_id, [...(planRows.get(r.point.plan_id) || []), r]);
+      if (tokens.length && allIn(modelHay(r))) modelHit.add(r.point.model);
+      if (tokens.length && allIn(planHay(r))) planHit.add(r.point.plan_id);
     }
   const cheapestRow = (rows: Row[]) =>
     rows.reduce((a, b) =>
@@ -405,8 +427,6 @@ export function searchCandidates(
   const first = tokens[0] ?? "";
   const prefixed = (label: string) =>
     Number(label.toLocaleLowerCase().startsWith(first));
-  const bestScore = (rows: Row[]) =>
-    Math.max(...rows.map((r) => r.score ?? -Infinity));
   const groupCandidate = (
     kind: "model" | "plan",
     value: string,
@@ -414,6 +434,9 @@ export function searchCandidates(
     rows: Row[],
   ): SearchGroupCandidate => {
     const row = cheapestRow(rows);
+    const scores = rows
+      .map((r) => r.score)
+      .filter((s): s is number => s !== null);
     return {
       kind,
       value,
@@ -421,39 +444,41 @@ export function searchCandidates(
       points: new Set(rows.map((r) => r.point.id)).size,
       cheapest: row.point.real_usd_per_mtok,
       row,
+      score: scores.length ? Math.max(...scores) : null,
     };
   };
-  const models: SearchGroupCandidate[] = [...modelRows.entries()]
-    .sort(([, a], [, b]) => {
-      const la = cheapestRow(a).point.model_display;
-      const lb = cheapestRow(b).point.model_display;
-      return (
-        prefixed(lb) - prefixed(la) ||
-        bestScore(b) - bestScore(a) ||
-        la.localeCompare(lb)
+  const models: SearchGroupCandidate[] = [...modelHit]
+    .map((value) => {
+      const rows = modelRows.get(value)!;
+      return groupCandidate(
+        "model",
+        value,
+        modelFamilyLabel(cheapestRow(rows).point),
+        rows,
       );
     })
-    .map(([value, rows]) =>
-      groupCandidate("model", value, cheapestRow(rows).point.model_display, rows),
+    .sort(
+      (a, b) =>
+        prefixed(b.label) - prefixed(a.label) ||
+        (b.score ?? -Infinity) - (a.score ?? -Infinity) ||
+        a.label.localeCompare(b.label),
     );
-  const plans: SearchGroupCandidate[] = [...planRows.entries()]
-    .sort(([, a], [, b]) => {
-      const la = displayPlan(cheapestRow(a).point.plan, lang);
-      const lb = displayPlan(cheapestRow(b).point.plan, lang);
-      return (
-        prefixed(lb) - prefixed(la) ||
-        (cheapestRow(a).point.price_usd ?? Infinity) -
-          (cheapestRow(b).point.price_usd ?? Infinity) ||
-        la.localeCompare(lb)
-      );
-    })
-    .map(([value, rows]) =>
-      groupCandidate(
+  const plans: SearchGroupCandidate[] = [...planHit]
+    .map((value) => {
+      const rows = planRows.get(value)!;
+      return groupCandidate(
         "plan",
         value,
         displayPlan(cheapestRow(rows).point.plan, lang),
         rows,
-      ),
+      );
+    })
+    .sort(
+      (a, b) =>
+        prefixed(b.label) - prefixed(a.label) ||
+        (a.row.point.price_usd ?? Infinity) -
+          (b.row.point.price_usd ?? Infinity) ||
+        a.label.localeCompare(b.label),
     );
   return { models, plans, points: searchMatches(gs, query, lang) };
 }

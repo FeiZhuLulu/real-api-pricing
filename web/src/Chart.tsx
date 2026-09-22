@@ -15,12 +15,17 @@ import {
   displayPlan,
   accessLine,
   color,
+  colorAlpha,
   price,
   allowance,
   number,
   unmeteredNote,
   selfReportTag,
   variantLabel,
+  type Lock,
+  type SearchCandidates,
+  searchCandidates,
+  searchHits,
   ZERO_SLOT_RATIO,
 } from "./domain";
 import {
@@ -32,17 +37,21 @@ import {
   type TextLabelView,
   DOT_RADIUS,
   FRONTIER_RADIUS,
+  LABEL_FORCE_CAP,
+  badgeGroups,
   buildExportDecorationsFromLayout,
   cardGroups,
   dataToPixel,
   frontierLogoViews,
   labelProvider,
+  orderLabelGroups,
   placeTextLabels,
   plotBox,
   textLabelGroups,
   textLabelViews,
   clearLabelSizeCache,
 } from "./chartLabels";
+import ChartSearch from "./ChartSearch";
 
 export interface ChartHandle {
   download: (format: "png" | "svg") => Promise<void>;
@@ -61,6 +70,7 @@ export default function Chart({
   data,
   theme,
   onSelect,
+  onSearch,
   handle,
 }: {
   rows: Row[];
@@ -68,6 +78,7 @@ export default function Chart({
   data: SiteData;
   theme: "light" | "dark";
   onSelect: (rows: Row[]) => void;
+  onSearch: (find: string, lock: Lock | null) => void;
   handle: React.RefObject<ChartHandle | null>;
 }) {
   const host = useRef<HTMLDivElement>(null);
@@ -92,10 +103,27 @@ export default function Chart({
   const chartGroups = state.view === "pareto" ? groups(rows) : [];
   const frontGroups =
     state.view === "pareto" ? pareto(chartGroups) : [];
+  // Computed every render (no memo): chartGroups is always a fresh array, so
+  // memoizing would only risk serving a stale match set to the overlay.
+  const candidates: SearchCandidates =
+    state.view === "pareto"
+      ? searchCandidates(chartGroups, state.find, state.lang)
+      : { models: [], plans: [], points: [] };
+  const hits = searchHits(chartGroups, state.find, state.lock, state.lang);
+  const hitGroups = chartGroups.filter((g) => hits.keys.has(g.key));
+  const frontKeySet = new Set(frontGroups.map((g) => g.key));
   const cardList =
     state.view === "pareto"
-      ? cardGroups(chartGroups, frontGroups, state.labels)
+      ? cardGroups(chartGroups, frontGroups, state.labels, hitGroups)
       : [];
+  // Assigned during render so the main effect's first syncOverlay() already
+  // sees the current hit set; find/lock never retrigger that effect.
+  const hitsRef = useRef(hits);
+  hitsRef.current = hits;
+  const syncRef = useRef<(() => void) | null>(null);
+  useEffect(() => {
+    syncRef.current?.();
+  }, [state.find, state.lock]);
   const [small, setSmall] = useState(() => window.innerWidth <= 700);
   useEffect(() => {
     const media = window.matchMedia("(max-width:700px)");
@@ -105,6 +133,16 @@ export default function Chart({
   }, []);
   const zh = state.lang === "zh";
   const dark = theme === "dark";
+  // Search hits glow in their own channel colour; the ring alpha lifts in dark mode.
+  const hitStyle = new Map<string, React.CSSProperties>(
+    hitGroups.map((g) => [
+      g.key,
+      {
+        "--hit": color(g.rows[0].point),
+        "--hit-ring": colorAlpha(g.rows[0].point, dark ? 0.45 : 0.3),
+      } as React.CSSProperties,
+    ]),
+  );
   const chartTheme = dark
     ? {
         text: "#aeb5bf",
@@ -173,7 +211,9 @@ export default function Chart({
           plotted = gs;
           frontKeys = new Set(front.map((g) => g.key));
           textGroups = textLabelGroups(gs, front, state.labels);
-          logoMap = await logoUrlMap(front.map((g) => labelProvider(g)));
+          // All plotted providers, not just the frontier: search hits need
+          // their logos without re-running this effect.
+          logoMap = await logoUrlMap(gs.map((g) => labelProvider(g)));
           if (cancelled) return;
           const prices = gs.map((g) => g.plotPrice);
           const hasZero = gs.some((g) => g.price === 0);
@@ -411,8 +451,21 @@ export default function Chart({
           if (!full) return;
           const box = plotBox(full);
           setArea(box);
-          setLogos(frontierLogoViews(front, full, logoMap, state.lang));
-          if (!box || !textGroups.length) {
+          // Search hits wear the same badge as frontier points and are marked
+          // even when the labels dropdown is set to "none".
+          const hitSet = hitsRef.current.keys;
+          const hitList = plotted.filter((g) => hitSet.has(g.key));
+          setLogos(
+            frontierLogoViews(
+              badgeGroups(front, hitList),
+              full,
+              logoMap,
+              state.lang,
+              hitSet,
+            ),
+          );
+          const labelGroups = orderLabelGroups(textGroups, hitList);
+          if (!box || !labelGroups.length) {
             setLabels([]);
             textPlacements = [];
             return;
@@ -427,22 +480,30 @@ export default function Chart({
                 key: g.key,
                 x: pt.x,
                 y: pt.y,
-                r: frontKeys.has(g.key) ? FRONTIER_RADIUS : DOT_RADIUS,
+                // Hits carry a 28px badge too, so other labels must keep the
+                // frontier clearance radius around them.
+                r:
+                  frontKeys.has(g.key) || hitSet.has(g.key)
+                    ? FRONTIER_RADIUS
+                    : DOT_RADIUS,
               };
               markers.push(marker);
               anchors.set(g.key, marker);
             }
             textPlacements = placeTextLabels(
-              textGroups,
+              labelGroups,
               anchors,
               markers,
               box,
               mobile,
               state.lang,
+              // Large hit sets keep all badges but may drop name labels.
+              hitList.length <= LABEL_FORCE_CAP ? hitSet : undefined,
             );
           }
           setLabels(textLabelViews(textPlacements, full));
         };
+        syncRef.current = syncOverlay;
 
         setDragMode("pan");
         controls.current = {
@@ -486,7 +547,15 @@ export default function Chart({
             full && box
               ? dataToPixel(full, Number(point.x), Number(point.y), box)
               : null;
-          if (pt) setHover({ key, x: pt.x, y: pt.y, front: frontKeys.has(key) });
+          if (pt)
+            setHover({
+              key,
+              x: pt.x,
+              y: pt.y,
+              // A marked hit wears a badge, so its hover card needs the badge
+              // radius offset, not the bare dot's.
+              front: frontKeys.has(key) || hitsRef.current.keys.has(key),
+            });
         });
         plot.on("plotly_unhover", () => setHover(null));
         plot.on("plotly_relayout", () => {
@@ -555,9 +624,15 @@ export default function Chart({
             exportHost.style.cssText =
               "position:fixed;left:-20000px;top:0;width:1200px;";
             document.body.appendChild(exportHost);
+            // Read the hit set live: the download can happen long after the
+            // last overlay sync, and search state never rebuilds this plot.
+            const exportHitSet = hitsRef.current.keys;
+            const exportHitList = plotted.filter((g) =>
+              exportHitSet.has(g.key),
+            );
             const exportCards =
               state.view === "pareto"
-                ? cardGroups(groups(rows), pareto(groups(rows)), state.labels)
+                ? cardGroups(plotted, front, state.labels, exportHitList)
                 : [];
             const extraHeight = exportCards.length
               ? 50 + exportCards.length * 22
@@ -605,7 +680,11 @@ export default function Chart({
               );
               const exportFull = fullOf(exportHost);
               let exportText: ArenaPlacement[] = [];
-              if (exportFull && textGroups.length) {
+              const exportLabelGroups = orderLabelGroups(
+                textGroups,
+                exportHitList,
+              );
+              if (exportFull && exportLabelGroups.length) {
                 const box = plotBox(exportFull);
                 if (box) {
                   const anchors = new Map<string, AnchorPoint>();
@@ -617,28 +696,43 @@ export default function Chart({
                       key: g.key,
                       x: pt.x,
                       y: pt.y,
-                      r: frontKeys.has(g.key) ? FRONTIER_RADIUS : DOT_RADIUS,
+                      r:
+                        frontKeys.has(g.key) || exportHitSet.has(g.key)
+                          ? FRONTIER_RADIUS
+                          : DOT_RADIUS,
                     };
                     markers.push(marker);
                     anchors.set(g.key, marker);
                   }
                   exportText = placeTextLabels(
-                    textGroups,
+                    exportLabelGroups,
                     anchors,
                     markers,
                     box,
                     false,
                     state.lang,
+                    exportHitList.length <= LABEL_FORCE_CAP
+                      ? exportHitSet
+                      : undefined,
                   );
                 }
               }
               const baked = exportFull
                 ? buildExportDecorationsFromLayout(
-                    front,
+                    badgeGroups(front, exportHitList),
                     exportText,
                     logoMap,
                     exportFull,
                     false,
+                    {
+                      frontier: frontKeys,
+                      hits: new Map(
+                        exportHitList.map((g) => [
+                          g.key,
+                          color(g.rows[0].point),
+                        ]),
+                      ),
+                    },
                   )
                 : { annotations: [], images: [], shapes: [] };
               await Plotly.relayout(exportHost, {
@@ -692,6 +786,7 @@ export default function Chart({
     return () => {
       cancelled = true;
       cleanup();
+      syncRef.current = null;
       handle.current = null;
       controls.current = null;
       setLogos([]);
@@ -763,6 +858,18 @@ export default function Chart({
               ? "绘图区内滚轮精细缩放 · 框选放大 · 双击或重置视图复位"
               : "Scroll inside the plot for precise zoom · Box zoom · Double-click or Reset view to restore"}
         </span>
+        {state.view === "pareto" && (
+          <div className="chart-search-slot">
+            <ChartSearch
+              query={state.find}
+              lock={state.lock}
+              candidates={candidates}
+              hits={hits}
+              lang={state.lang}
+              onSearch={onSearch}
+            />
+          </div>
+        )}
       </div>
       <div
         className={`chart-shell ${state.view !== "pareto" ? "ranking-chart" : ""}`}
@@ -791,8 +898,13 @@ export default function Chart({
               .map((c) => (
                 <div
                   key={`name-${c.key}`}
-                  className={`arena-name-label${hover?.key === c.key ? " is-hovered" : ""}`}
-                  style={{ left: c.left, top: c.top, maxWidth: c.width }}
+                  className={`arena-name-label${hits.keys.has(c.key) ? " is-hit" : frontKeySet.has(c.key) ? " is-frontier" : ""}${hover?.key === c.key ? " is-hovered" : ""}`}
+                  style={{
+                    left: c.left,
+                    top: c.top,
+                    maxWidth: c.width,
+                    ...hitStyle.get(c.key),
+                  }}
                 >
                   {c.label}
                 </div>
@@ -812,8 +924,8 @@ export default function Chart({
               .map((l) => (
                 <span
                   key={`logo-${l.key}`}
-                  className={`arena-logo-mark${hover?.key === l.key ? " is-hovered" : ""}`}
-                  style={{ left: l.x, top: l.y }}
+                  className={`arena-logo-mark${l.hit ? " is-hit" : ""}${hover?.key === l.key ? " is-hovered" : ""}`}
+                  style={{ left: l.x, top: l.y, ...hitStyle.get(l.key) }}
                 >
                   {l.logoUrl ? (
                     <img src={l.logoUrl} alt="" width={20} height={20} />
@@ -893,7 +1005,12 @@ export default function Chart({
           </p>
           <div>
             {cardList.map((g, i) => (
-              <button key={g.key} onClick={() => selection.current(g.rows)}>
+              <button
+                key={g.key}
+                className={hits.keys.has(g.key) ? "is-hit" : undefined}
+                style={hitStyle.get(g.key)}
+                onClick={() => selection.current(g.rows)}
+              >
                 <b style={{ background: color(g.rows[0].point) }}>{i + 1}</b>
                 <span>
                   <BrandMarks point={g.rows[0].point} />

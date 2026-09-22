@@ -2158,16 +2158,18 @@ small {
   box-shadow: 0 3px 10px rgba(24, 28, 34, 0.18);
   z-index: 1;
 }
-/* Search hits outrank frontier black; the ring is box-shadow so the 1px
+/* Search hits outrank frontier black. The 3px ring, not the hue, is what
+   separates a hit from a frontier badge: near-black channel colours (Zhipu)
+   would otherwise read as the frontier frame. The ring is box-shadow so the 1px
    border geometry stays identical to measureLabel() expectations. */
 .arena-logo-mark.is-hit {
-  border-color: #087f5b;
-  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.22);
+  border-color: var(--hit, #087f5b);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(8, 127, 91, 0.22));
 }
 .arena-logo-mark.is-hit.is-hovered {
-  border-color: #087f5b;
+  border-color: var(--hit, #087f5b);
   box-shadow:
-    0 0 0 2px rgba(8, 127, 91, 0.22),
+    0 0 0 3px var(--hit-ring, rgba(8, 127, 91, 0.22)),
     0 3px 10px rgba(24, 28, 34, 0.18);
 }
 .point-halo {
@@ -2233,22 +2235,22 @@ small {
   border-color: #20242a;
 }
 .arena-name-label.is-hit {
-  border-color: #087f5b;
-  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.22);
+  border-color: var(--hit, #087f5b);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(8, 127, 91, 0.22));
 }
 .arena-name-label.is-frontier.is-hovered {
   border-color: #20242a;
   box-shadow: 0 2px 8px rgba(24, 28, 34, 0.14);
 }
 .arena-name-label.is-hit.is-hovered {
-  border-color: #087f5b;
+  border-color: var(--hit, #087f5b);
   box-shadow:
-    0 0 0 2px rgba(8, 127, 91, 0.22),
+    0 0 0 3px var(--hit-ring, rgba(8, 127, 91, 0.22)),
     0 2px 8px rgba(24, 28, 34, 0.14);
 }
 .point-key button.is-hit {
-  border-color: #8fc7ae;
-  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.14);
+  border-color: var(--hit, #8fc7ae);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(8, 127, 91, 0.14));
 }
 @media (max-width: 700px) {
   .arena-name-label {
@@ -3008,14 +3010,16 @@ body,
   border-color: #2c3239;
   background: #f1f2f3;
 }
+/* The dark base rules above outrank plain .is-hit, so the hit rules must be
+   restated here — colours and alpha still come from --hit/--hit-ring. */
 :root[data-theme="dark"] .arena-logo-mark.is-hit {
-  border-color: #0b7a58;
-  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.3);
+  border-color: var(--hit, #0b7a58);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(104, 197, 162, 0.3));
 }
 :root[data-theme="dark"] .arena-logo-mark.is-hit.is-hovered {
-  border-color: #0b7a58;
+  border-color: var(--hit, #0b7a58);
   box-shadow:
-    0 0 0 2px rgba(104, 197, 162, 0.3),
+    0 0 0 3px var(--hit-ring, rgba(104, 197, 162, 0.3)),
     0 3px 10px rgba(0, 0, 0, 0.5);
 }
 :root[data-theme="dark"] .arena-name-label {
@@ -3034,21 +3038,21 @@ body,
   border-color: #c3cad2;
 }
 :root[data-theme="dark"] .arena-name-label.is-hit {
-  border-color: #68c5a2;
-  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.22);
+  border-color: var(--hit, #68c5a2);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(104, 197, 162, 0.22));
 }
 :root[data-theme="dark"] .arena-name-label.is-frontier.is-hovered {
   border-color: #c3cad2;
 }
 :root[data-theme="dark"] .arena-name-label.is-hit.is-hovered {
-  border-color: #68c5a2;
+  border-color: var(--hit, #68c5a2);
   box-shadow:
-    0 0 0 2px rgba(104, 197, 162, 0.22),
+    0 0 0 3px var(--hit-ring, rgba(104, 197, 162, 0.22)),
     0 3px 10px rgba(0, 0, 0, 0.5);
 }
 :root[data-theme="dark"] .point-key button.is-hit {
-  border-color: #3f7a62;
-  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.18);
+  border-color: var(--hit, #3f7a62);
+  box-shadow: 0 0 0 3px var(--hit-ring, rgba(104, 197, 162, 0.18));
 }
 :root[data-theme="dark"] .chart-search {
   border-color: #373d45;

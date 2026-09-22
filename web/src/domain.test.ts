@@ -32,12 +32,24 @@ import {
   pareto,
   restore,
   rowsFor,
+  type Lock,
+  SEARCH_MARK_CAP,
+  color,
+  colorAlpha,
+  modelFamilyLabel,
+  searchCandidates,
+  searchHits,
+  searchMatches,
   serialize,
   tableRows,
   visiblePoints,
 } from "./domain";
 import {
+  type ArenaPlacement,
+  type PlotLayout,
   FRONTIER_RADIUS,
+  buildExportDecorationsFromLayout,
+  labelProvider,
   placeTextLabels,
   placementRect,
 } from "./chartLabels";
@@ -118,10 +130,10 @@ test("DeepSeek V4.1 Flash uses official USD off-peak and peak API prices", () =>
 test("Step Plan CN uses official Credit pools and CNY list prices", () => {
   const mini35 = data.points.find((p) => p.id === "stepfun_mini_cn::step-3.5-flash")!;
   const max37 = data.points.find((p) => p.id === "stepfun_max_cn::step-3.7-flash")!;
-  assert.equal(mini35.monthly_yi, 25.173);
-  assert.equal(mini35.real_usd_per_mtok, 0.00287);
+  assert.equal(mini35.monthly_yi, 17.475);
+  assert.equal(mini35.real_usd_per_mtok, 0.00414);
   assert.equal(mini35.channel, "StepFun");
-  assert.equal(max37.monthly_yi, 1247.563);
+  assert.equal(max37.monthly_yi, 877.915);
   assert.equal(accessLine(mini35), "StepFun");
 });
 test("Devin Pro SWE-2 is an unmetered $0 promo point that joins and leads the TB4 frontier on a dedicated slot", () => {
@@ -501,6 +513,242 @@ test("Labels yield to ordinary points when every candidate slot is occupied", ()
   assert.deepEqual(placeTextLabels([g], new Map([[g.key, anchor]]), dots,
     { left: 0, top: 0, right: 240, bottom: 200, width: 240, height: 200 }, false), []);
 });
+test("Chart search AND-matches plan, channel and model fields and dedupes points", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  // Multi-token AND is order-independent: the plan tier and vendor must both hit.
+  const forward = searchMatches(gs, "kimi 199", "en");
+  const backward = searchMatches(gs, "199 kimi", "en");
+  assert.deepEqual(
+    forward.map((r) => r.point.id).sort(),
+    ["kimi_allegretto_cn::kimi-k2.7-code", "kimi_allegretto_cn::kimi-k3"],
+  );
+  assert.deepEqual(
+    backward.map((r) => r.point.id).sort(),
+    forward.map((r) => r.point.id).sort(),
+  );
+  // Cross-field hits: localized plan name, channel and model slug.
+  const allegretto = searchMatches(gs, "Allegretto", "en");
+  assert.ok(allegretto.length);
+  assert.ok(allegretto.every((r) => r.point.plan_en === "Kimi Allegretto"));
+  const opencode = searchMatches(gs, "OpenCode", "en");
+  assert.ok(opencode.length);
+  assert.ok(opencode.every((r) => r.point.channel === "OpenCode"));
+  const deepseek = searchMatches(gs, "deepseek", "en");
+  assert.ok(deepseek.length);
+  assert.ok(deepseek.every((r) => r.point.id.includes("deepseek")));
+  // One row per point id even when a point maps to several configurations.
+  const broad = searchMatches(gs, "glm", "en");
+  assert.equal(new Set(broad.map((r) => r.point.id)).size, broad.length);
+});
+test("Chart search lock overrides the live match set and reports a missing lock", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  const lockId = "kimi_allegretto_cn::kimi-k3";
+  // A point id can map to several configurations, hence several groups.
+  const expectedKeys = new Set(
+    gs
+      .filter((g) => g.rows.some((r) => r.point.id === lockId))
+      .map((g) => g.key),
+  );
+  const locked = searchHits(gs, "opencode", { kind: "point", value: lockId }, "en");
+  assert.deepEqual(locked.keys, expectedKeys);
+  assert.equal(locked.total, 1);
+  assert.equal(locked.locked?.kind, "point");
+  assert.equal(locked.locked?.points, 1);
+  assert.equal(locked.lockMissing, false);
+  const missing = searchHits(gs, "", { kind: "point", value: "not-a-point" }, "en");
+  assert.equal(missing.lockMissing, true);
+  assert.equal(missing.keys.size, 0);
+  assert.equal(missing.total, 0);
+  assert.equal(missing.locked, null);
+  // A loose query marks at most SEARCH_MARK_CAP groups but still counts all.
+  const broad = searchHits(gs, "5", null, "en");
+  assert.ok(broad.total > SEARCH_MARK_CAP);
+  assert.ok(broad.keys.size <= SEARCH_MARK_CAP);
+  const idle = searchHits(gs, "", null, "en");
+  assert.equal(idle.keys.size, 0);
+  assert.equal(idle.total, 0);
+});
+test("Chart search model and plan locks cover every matching group uncapped", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  const modelIds = new Set(
+    gs
+      .flatMap((g) => g.rows)
+      .filter((r) => r.point.model === "glm-5.3")
+      .map((r) => r.point.id),
+  );
+  const modelHit = searchHits(gs, "zzz", { kind: "model", value: "glm-5.3" }, "en");
+  assert.deepEqual(
+    modelHit.keys,
+    new Set(
+      gs
+        .filter((g) => g.rows.some((r) => r.point.model === "glm-5.3"))
+        .map((g) => g.key),
+    ),
+  );
+  assert.equal(modelHit.total, modelIds.size);
+  assert.ok(modelHit.total > SEARCH_MARK_CAP);
+  assert.equal(modelHit.locked?.kind, "model");
+  assert.equal(modelHit.locked?.points, modelIds.size);
+  assert.equal(modelHit.locked?.label, "GLM 5.3");
+  assert.equal(modelHit.lockMissing, false);
+  const planIds = new Set(
+    gs
+      .flatMap((g) => g.rows)
+      .filter((r) => r.point.plan_id === "command_code_goat")
+      .map((r) => r.point.id),
+  );
+  const planHit = searchHits(
+    gs,
+    "",
+    { kind: "plan", value: "command_code_goat" },
+    "en",
+  );
+  assert.deepEqual(
+    planHit.keys,
+    new Set(
+      gs
+        .filter((g) => g.rows.some((r) => r.point.plan_id === "command_code_goat"))
+        .map((g) => g.key),
+    ),
+  );
+  assert.equal(planHit.total, planIds.size);
+  assert.ok(planHit.total > SEARCH_MARK_CAP);
+  assert.equal(planHit.locked?.kind, "plan");
+  assert.equal(planHit.locked?.points, planIds.size);
+  assert.equal(planHit.locked?.label, displayPlan("Command Code GOAT", "en"));
+  const gone = searchHits(gs, "", { kind: "model", value: "not-a-model" }, "en");
+  assert.equal(gone.lockMissing, true);
+  assert.equal(gone.locked, null);
+});
+test("Chart search candidates match each kind against its own scope", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  // "cursor" is a channel: it must list Cursor plans but never the Grok model,
+  // whose model-level lock would mark Grok points on other channels too.
+  const cursor = searchCandidates(gs, "cursor", "en");
+  assert.ok(cursor.plans.length);
+  assert.ok(cursor.plans.every((c) => c.row.point.channel === "Cursor"));
+  assert.equal(cursor.models.length, 0);
+  assert.ok(searchCandidates(gs, "claude", "en").models.length);
+  assert.ok(searchCandidates(gs, "anthropic", "en").models.length);
+  const c = searchCandidates(gs, "kimi 199", "en");
+  assert.deepEqual(
+    c.points.map((r) => r.point.id),
+    searchMatches(gs, "kimi 199", "en").map((r) => r.point.id),
+  );
+});
+test("Model family labels strip only the plan-generation tag", () => {
+  const k3 = data.points.find((p) => p.model_display === "Kimi K3 (v1)")!;
+  assert.equal(k3.plan_gen, "v1");
+  assert.equal(modelFamilyLabel(k3), "Kimi K3");
+  const untagged = data.points.find((p) => !p.plan_gen)!;
+  assert.equal(modelFamilyLabel(untagged), untagged.model_display);
+  // A tag that does not match the display suffix is never stripped.
+  assert.equal(
+    modelFamilyLabel({ ...k3, plan_gen: "v9" }),
+    "Kimi K3 (v1)",
+  );
+});
+test("Model lock labels and coverage are generation-independent", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  const candidate = searchCandidates(gs, "glm 5.3", "en").models.find(
+    (c) => c.value === "glm-5.3",
+  )!;
+  const hits = searchHits(gs, "", { kind: "model", value: "glm-5.3" }, "en");
+  assert.ok(!candidate.label.includes("(v"));
+  assert.equal(candidate.label, hits.locked!.label);
+  // A generation-bearing query narrows the matched rows, but the lock still
+  // covers the whole family — the candidate's numbers must promise that.
+  const genQuery = "glm 5.3 v3";
+  const scoped = searchCandidates(gs, genQuery, "en").models.find(
+    (c) => c.value === "glm-5.3",
+  )!;
+  assert.equal(scoped.points, hits.total);
+  const matchedRows = gs
+    .flatMap((g) => g.rows)
+    .filter((r) => r.point.model === "glm-5.3" && r.point.plan_gen === "v3");
+  assert.ok(matchedRows.length);
+  assert.ok(scoped.points > matchedRows.length);
+});
+test("Point-level candidates and locks keep the generation tag", () => {
+  const gs = groups(
+    rowsFor(data, { ...defaultState(), configuration: "all" }),
+  );
+  const pointHits = searchHits(
+    gs,
+    "",
+    { kind: "point", value: "kimi_allegretto_cn::kimi-k3" },
+    "en",
+  );
+  assert.match(pointHits.locked!.label, /\(v\d\)/);
+  const tagged = searchCandidates(gs, "allegretto k3", "en").points.find(
+    (r) => r.point.id === "kimi_allegretto_cn::kimi-k3",
+  )!;
+  assert.match(tagged.point.model_display, /\(v\d\)/);
+});
+test("Share links round-trip the chart search query and lock", () => {
+  const locks: Lock[] = [
+    { kind: "point", value: data.points[0].id },
+    { kind: "model", value: "glm-5.3" },
+    { kind: "plan", value: "command_code_goat" },
+  ];
+  for (const lock of locks) {
+    const s = { ...defaultState(), find: "kimi 199", lock };
+    const restored = restore(serialize(s), data);
+    assert.equal(restored.state.find, "kimi 199");
+    assert.deepEqual(restored.state.lock, lock);
+    assert.equal(restored.warning, false);
+  }
+  for (const hash of [
+    "#find=x&lock=not-a-point",
+    "#lock=bogus:x",
+    "#lock=model:not-a-model",
+  ]) {
+    const bad = restore(hash, data);
+    assert.equal(bad.state.lock, null);
+    assert.equal(bad.warning, true);
+  }
+});
+test("Forced search labels keep their least-bad slot when every slot is blocked", () => {
+  const r = row("blocked", 0.01, 1500);
+  r.point = { ...r.point, model_display: "Claude Opus 5" };
+  const g: Group = {
+    key: r.key,
+    price: 0.01,
+    plotPrice: 0.01,
+    score: 1500,
+    rows: [r],
+  };
+  const anchor = { key: g.key, x: 120, y: 100, r: FRONTIER_RADIUS };
+  const dots = [];
+  for (let x = 6; x < 240; x += 12)
+    for (let y = 6; y < 200; y += 12)
+      dots.push({ key: `dot-${x}-${y}`, x, y, r: 6 });
+  const box = { left: 0, top: 0, right: 240, bottom: 200, width: 240, height: 200 };
+  assert.deepEqual(
+    placeTextLabels([g], new Map([[g.key, anchor]]), dots, box, false),
+    [],
+  );
+  const forced = placeTextLabels(
+    [g],
+    new Map([[g.key, anchor]]),
+    dots,
+    box,
+    false,
+    "en",
+    new Set([g.key]),
+  );
+  assert.equal(forced.length, 1);
+});
 test("CSV escapes formula-like text and embedded quotes without changing numeric source values", () => {
   const r = row("csv", 0.002, 20);
   r.point = { ...r.point, model_display: '=BAD("x")' };
@@ -510,4 +758,96 @@ test("CSV escapes formula-like text and embedded quotes without changing numeric
   >[];
   assert.equal(parsed[0].Model, '\'=BAD("x")');
   assert.equal(parsed[0]["Real price USD/MTok"], "0.002");
+});
+test("colorAlpha renders a channel colour at the requested alpha", () => {
+  const p = { ...data.points[0], channel: "xAI" };
+  assert.equal(color(p), "#B65CFF");
+  assert.equal(colorAlpha(p, 0.3), "rgba(182, 92, 255, 0.3)");
+  assert.equal(colorAlpha(p, 0.45), "rgba(182, 92, 255, 0.45)");
+  // Unknown channels fall back to color()'s default hex without crashing.
+  assert.equal(
+    colorAlpha({ ...data.points[0], channel: "NoSuchChannel" }, 0.3),
+    "rgba(0, 168, 168, 0.3)",
+  );
+});
+test("Exported search marks use the channel colour on badges and labels", () => {
+  const hit = row("hit", 0.01, 50);
+  hit.point = { ...hit.point, channel: "xAI" };
+  const front = row("front", 0.02, 60);
+  const gHit: Group = {
+    key: hit.key,
+    price: 0.01,
+    plotPrice: 0.01,
+    score: 50,
+    rows: [hit],
+  };
+  const gFront: Group = {
+    key: front.key,
+    price: 0.02,
+    plotPrice: 0.02,
+    score: 60,
+    rows: [front],
+  };
+  const layout = {
+    width: 400,
+    height: 300,
+    _size: { l: 0, r: 0, t: 0, b: 0, w: 400, h: 300 },
+    xaxis: {
+      _offset: 0,
+      _length: 400,
+      d2l: Math.log10,
+      l2p: (v: number) => v,
+      range: [1, -3],
+      r2l: Number,
+    },
+    yaxis: {
+      _offset: 0,
+      _length: 300,
+      d2l: (v: number) => v,
+      l2p: (v: number) => v,
+      range: [0, 100],
+      r2l: Number,
+    },
+  } as unknown as PlotLayout;
+  const placement = (g: Group, label: string): ArenaPlacement => ({
+    key: g.key,
+    price: g.plotPrice,
+    score: g.score,
+    label,
+    provider: labelProvider(g),
+    ax: 10,
+    ay: -10,
+    anchor: "center",
+    width: 40,
+    height: 14,
+    radius: 6,
+  });
+  const logos = new Map(
+    [gHit, gFront].map((g, i) => [
+      labelProvider(g),
+      `data:image/svg+xml,logo${i}`,
+    ]),
+  );
+  const { images, annotations } = buildExportDecorationsFromLayout(
+    [gFront, gHit],
+    [placement(gHit, "Hit"), placement(gFront, "Front")],
+    logos,
+    layout,
+    false,
+    {
+      frontier: new Set([gFront.key]),
+      hits: new Map([[gHit.key, "#B65CFF"]]),
+    },
+  );
+  const svg = images.map((i) => decodeURIComponent(String(i.source)));
+  assert.ok(svg.some((s) => s.includes('stroke="#B65CFF"') && s.includes('stroke-width="1.6"')));
+  assert.ok(svg.some((s) => s.includes('stroke="#20242a"') && s.includes('stroke-width="1"')));
+  assert.equal(
+    annotations.find((a) => a.text === "Hit")?.bordercolor,
+    "#B65CFF",
+  );
+  assert.equal(
+    annotations.find((a) => a.text === "Front")?.bordercolor,
+    "#20242a",
+  );
 });
