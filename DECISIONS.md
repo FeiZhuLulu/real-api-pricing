@@ -3,6 +3,10 @@
 `AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-22
+
+- **SuperGrok · Grok 4.7（新增模型点）**：6.72 亿/月 medium；Plus 26.9 亿、Heavy 67.2 亿按面板美元比派生 medium；Lite 不派生。用户本机三会话同框：洗（8,219,321 tok）+ 鹈（5,223,495 tok）+ 删除版（无快照）= 周额度 19%→28%；删除版份额藏整数取整内按约 1% 计 → 周池 1.68 亿，硬边界 5.97~7.68 亿/月。对 4.6 基准（1.273 亿/周）为 1.32×，即 4.7 每 token 占池约 0.76×。CLI Cost 字段两段不自洽（低 cache 段 $/MTok 反低）且等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价，未解；重置后受控打满可升 high。分数由 `scores-grok47-round1-2026-09-22.json` 补充档从 AA round4 未映射载荷提升：int 46.4466 / coding(Grok Build) 56.2676；TB4/Arena/OpenDesign 无 4.7 行不画。两榜均未进前沿（Claude Pro Opus5 $0.0106 支配）。证据：`data/research/supergrok-grok47-round1-2026-09-22.json`。
+
 ## 2026-09-21
 
 - **Google AI Pro · Gemini 3.8 Flash（首个 Google 采用点）**：22.41 亿/月 high。用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88% → 周池 5.60 亿 raw ×4 周。官方按 API worth 合池计权（段内实证：B1:B2 的 %比 0.405 ≈ worth比 0.407，而非 raw比 0.448；周帽合 $120.1 worth），故 raw 额度随负载 mix 变——本样本 cache 82.6%，用户指出 Gemini 实际负载打不到标准口径的 97.5% cache，故采 raw 实测口径（标准负载折算 46.9 亿/月偏高弃用）。Ultra 5x/20x 按官方 worth 倍率派生 112.05/448.2 亿（low）。旁证：round6 的 5h 锚 $20.4 → 周≈5.9 sprint；LLMDevs Pro ~1.0B/周、Ultra ~5.0B/周同量级。证据：`data/research/gemini-weekly-round7-2026-09-21.json`。

@@ -1,0 +1,82 @@
+{
+  "collectedAt": "2026-09-22",
+  "subject": "SuperGrok 周池 — Grok 4.7 本机实测（用户账号，/usage 面板 + 会话统计同框）",
+  "source": {
+    "type": "user_panel_screenshots",
+    "panel": "Weekly limit (SuperGrok), resets September 24 22:37",
+    "sessions": "Grok Build CLI 本地会话统计（Usage limit 页 Session usage 段）"
+  },
+  "rawObservations": {
+    "weeklyQuotaReadings": [
+      {"at": "会话起点", "pct": 19},
+      {"at": "洗衣机会话快照", "pct": 26},
+      {"at": "鹈鹕会话快照（截止读数）", "pct": 28}
+    ],
+    "sessions": [
+      {
+        "id": "洗衣机",
+        "model": "grok-4.7",
+        "totalTokens": 8219321,
+        "inputTokens": 8072086,
+        "cachedInputTokens": 7404032,
+        "outputTokens": 147235,
+        "reasoningTokens": 97863,
+        "modelCalls": 55,
+        "apiTime": "38m10s",
+        "cliCostUsd": 2.4689,
+        "tableMix": {"cacheReadOverInput": 0.917, "outputOverTotal": 0.018, "reasoningOverTotal": 0.012, "usdPer1MTokens": 0.300, "toolsPerCall": 2.25}
+      },
+      {
+        "id": "鹈鹕",
+        "model": "grok-4.7",
+        "totalTokens": 5223495,
+        "inputTokens": 5087763,
+        "cachedInputTokens": 4641792,
+        "outputTokens": 135732,
+        "reasoningTokens": 111223,
+        "modelCalls": 35,
+        "apiTime": "36m53s",
+        "cliCostUsd": 1.3693,
+        "tableMix": {"cacheReadOverInput": 0.912, "outputOverTotal": 0.026, "reasoningOverTotal": 0.021, "usdPer1MTokens": 0.262, "toolsPerCall": 1.69}
+      },
+      {
+        "id": "删除版",
+        "model": "grok-4.7",
+        "note": "会话已删除，仅存统计表行：无 token 总数/成本绝对值。用户确认其为 9% 总消耗的一部分。",
+        "tableMix": {"cacheReadOverInput": 0.638, "outputOverTotal": 0.037, "reasoningOverTotal": 0.023, "usdPer1MTokens": 0.416, "toolsPerCall": 1.14}
+      }
+    ],
+    "userConfirmation": "用户 2026-09-22 确认：19%→28% 的 9% 周额度消耗由这三个会话完整构成（\"这是完整的9%\"）。"
+  },
+  "derivation": {
+    "knownTokens": 13442816,
+    "knownSessionsSharePct": "显示 7% + 2% = 9%，但删除版份额藏在整数取整内",
+    "shareAlgebra": "设洗+鹈真实份额 s，删除版份额 d，总 delta∈[8,10)%。单段真实区间：洗∈(6,8)%，鹈∈(1,3)% → s∈(7,10)，d=δ−s∈[0,3)。周池 W = 13,442,816 / s。",
+    "pointEstimate": {
+      "assumption": "删除版份额约 1%（其不可见区间 0~2% 的中位），即 s=8%",
+      "weeklyTokens": 168035200,
+      "monthlyTokens_x4w": 672140800,
+      "monthlyYi": 6.72
+    },
+    "hardBand": {
+      "delShare0_s9": {"weeklyYi": 1.494, "monthlyYi": 5.97},
+      "delShare2_s7": {"weeklyYi": 1.920, "monthlyYi": 7.68},
+      "note": "若放宽总 delta 取整 8~10% 且删除版≈0，下限可到 5.38 亿/月；采用区间取删除版>0 的 5.97~7.68 亿"
+    },
+    "panelUsdCheck": "周池 1.68 亿 → 面板 $1 ≈ 672 万 token（$0.149/MTok 内含率）；4.6 标定为 $1≈509 万（$0.196/MTok）→ 4.7 每 token 占池约 0.76×",
+    "costFieldWarning": "CLI Cost 字段不可用于池率校准：鹈鹕缓存占比更低、输出占比更高，$/MTok 反而更低（0.262<0.300），单一三段价无解——疑会话内含 >200K 上下文翻倍档或混合子模型调用。洗+鹈 $3.84 外推整周 $42.6，对面板 $25/周呈 1.7× 张力：或 4.7 上线期扩池（4.6 首周双倍有先例），或池内计价≠公开标价。未解，留待重置后复测。"
+  },
+  "crossChecks": [
+    "vs 现采用 4.6 基准 127,272,629 tok/周（V2EX 受控打满，high）：1.32×",
+    "vs linux.do 另测 4.6 为 1.44 亿/周：同量级",
+    "面板周额度面值：Super $25 / Plus $100 / Heavy $250（quota 美元，非公开标价美元）"
+  ],
+  "adoption": {
+    "served_model": "grok-4.7",
+    "supergrok": {"monthlyYi": 6.72, "confidence": "medium"},
+    "supergrok_plus": {"monthlyYi": 26.9, "confidence": "medium", "how": "面板$100/25 派生"},
+    "supergrok_heavy": {"monthlyYi": 67.2, "confidence": "medium", "how": "面板$250/25 派生"},
+    "supergrok_lite": "面板美元未知，不派生；该档保持只有 4.6 点",
+    "confidenceRationale": "本机面板级同框但 n=1 账号 n=1 周窗、删除版份额系推断而非读数；形式上是用户面板截图反推，因推断成分定 medium，重置后受控打满可升 high"
+  }
+}
