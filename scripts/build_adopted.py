@@ -76,7 +76,16 @@ CLAUDE_FABLE51_W = (
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
 # 海外同名档绝对 token 未实测（国际 Code 倍率 1/5/15/30× ≠ 国内 1/4/20/60×），并点仅作价位展示。
 # Andante ¥49 无海外同名档，保持国内口径；Vivace $199 仅海外且无额度证据，不画。
+# MiMo Token Plan：mimo.mi.com 同档同池双币种标价（¥ 国内 / $ 国际），国内外并点口径与 Kimi 相同
 KIMI_INTL = {  # plan_id -> (国际版展示名, 国际版月费 USD)
+    "mimo_token_lite_day": ("MiMo Token Plan Lite (Day)", 6),
+    "mimo_token_lite_night": ("MiMo Token Plan Lite (Night 0.8x)", 6),
+    "mimo_token_standard_day": ("MiMo Token Plan Standard (Day)", 16),
+    "mimo_token_standard_night": ("MiMo Token Plan Standard (Night 0.8x)", 16),
+    "mimo_token_pro_day": ("MiMo Token Plan Pro (Day)", 50),
+    "mimo_token_pro_night": ("MiMo Token Plan Pro (Night 0.8x)", 50),
+    "mimo_token_max_day": ("MiMo Token Plan Max (Day)", 100),
+    "mimo_token_max_night": ("MiMo Token Plan Max (Night 0.8x)", 100),
     "kimi_moderato_cn": ("Kimi Moderato", 19),
     "kimi_allegretto_cn": ("Kimi Allegretto", 39),
     "kimi_allegro_cn": ("Kimi Allegro", 99),
@@ -172,6 +181,7 @@ def claude_fable51_max_monthly_yi() -> float:
 # V4 Flash / Vision 已下线，用户要求从采用集删除；现 27 个模型。
 OPENCODE_GO_MODELS = (
     ("grok-4.6", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants"),
+    ("grok-4.7", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
     ("gpt-5.6-luna", 15, 0.02, 0.2, 1.2, "≤272K 标价；>272K 档保留在 research variants"),
     ("glm-5.3-flash", 15, 0.03, 0.15, 0.5, "官网单档"),
     ("glm-5.3", 15, 0.26, 1.4, 4.4, "官网单档"),
@@ -183,6 +193,8 @@ OPENCODE_GO_MODELS = (
     ("longcat-2.0", 60, 0.006, 0.3, 1.2, "官网单档"),
     ("mimo-v2.5", 60, 0.0028, 0.14, 0.28, "官网单档"),
     ("mimo-v2.5-pro", 15, 0.003625, 0.435, 0.87, "官网单档"),
+    ("mimo-v2.6-flash", 60, 0.0028, 0.14, 0.28, "官网单档；Usage $60"),
+    ("mimo-v2.6-pro", 15, 0.003625, 0.435, 0.87, "官网单档；Usage $15；与 v2.5-pro 同 Usage 档"),
     ("minimax-m3", 60, 0.06, 0.3, 1.2, "官网单档"),
     ("minimax-m2.7", 60, 0.06, 0.3, 1.2, "官网单档"),
     ("minimax-m2.5", 60, 0.06, 0.3, 1.2, "价格/Endpoints 表在列；请求估算表未列"),
@@ -269,6 +281,8 @@ COMMAND_CODE_GOAT_MODELS = (
     ("gpt-5.6-luna", 20, 0.02, 0.2, 1.2, "官网三段价"),
     ("qwen3.8-max", 20, 0.25, 2.0, 6.0, "官网三段价"),
     ("mimo-v2.5-pro", 20, 0.0036, 0.435, 0.87, "官网页成交/折扣三段价"),
+    ("grok-4.7", 20, 0.5, 2.0, 6.0, "官网三段价；Every model 表基准$20（限时提升$35至9/27不采）"),
+    ("mimo-v2.6-flash", 30, 0.0028, 0.14, 0.28, "官网三段价；Every model 表基准$30（限时提升$67至9/24不采）"),
     # —— New models 表（新模型默认 2× credits，Gemini 3.7 Flash 例外 $40）——
     ("qwen3.8-max-0902", 20, 0.25, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("hy4-preview", 20, 0.042, 0.834, 2.501, "官网三段价；New models 默认$20"),
@@ -283,6 +297,8 @@ COMMAND_CODE_GOAT_MODELS = (
     ("kimi-k2.7-code-highspeed", 20, 0.38, 1.9, 8.0, "官网三段价；速度变体独立$20，不继承K2.7 Code的$60"),
     ("grok-4.5", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("grok-4.6", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
+    ("mimo-v2.6-pro", 20, 0.0036, 0.435, 0.87, "官网三段价；New models 默认$20"),
+    ("mimo-v2.6-pro-ultraspeed", 10, 0.036, 4.35, 8.70, "官网三段价；官方明示按Pro价10×故仅配$10 credits"),
     ("gemini-3.7-flash", 40, 0.15, 1.5, 7.5, "官网三段价；New models 表写$40"),
     ("glm-5.2-fast", 20, 0.5, 3.0, 10.25, "官网三段价；速度变体独立$20，不继承GLM-5.2的$70"),
     ("inkling", 20, 0.17, 1.0, 4.05, "官网三段价；New models 默认$20"),
@@ -450,6 +466,50 @@ def glm_rows() -> list[tuple]:
     return rows
 
 
+# 小米 MiMo Token Plan：官方月度 Credits 池 ÷ 分模型分类型 burn 率折 token（mimo.mi.com 订阅文档）。
+# Credits 为虚拟计量单位（cached/input/output 每 token 所扣 credits 各不相同），非固定美元面值。
+# 套餐仅覆盖 v2.5 系列文本模型（v2.5-pro / v2.5；ASR 按时长、TTS 免费均不入图）；V2.6 未列入。
+# 夜间 00:00-08:00（北京）consumption 0.8× → 同 credits 多换 25% token，与 GLM/DeepSeek 闲时同型，
+# 按惯例拆独立情景点（日间基准 / 夜间0.8×）。首购88折、年付88折不采（一次性/换约折扣）。
+# ¥价与$价同档同池：国内外并点、月费按国际版美元标价（Kimi 并点口径），¥价记入决策注。
+# 证据：data/research/mimo-token-plan-round1-2026-09-22.json
+MIMO_TOKEN_TIERS = (
+    # (tier_slug, name, price_cny, price_usd, monthly_credits)
+    ("lite", "Lite", 39, 6, 4_100_000_000),
+    ("standard", "Standard", 99, 16, 11_000_000_000),
+    ("pro", "Pro", 329, 50, 38_000_000_000),
+    ("max", "Max", 659, 100, 82_000_000_000),
+)
+MIMO_CREDIT_RATES = {  # model -> (cached_input, input, output) credits/token
+    "mimo-v2.5-pro": (2.5, 300, 600),
+    "mimo-v2.5": (2, 100, 200),
+}
+MIMO_SOURCE = (
+    "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；"
+    "mimo-token-plan-round1-2026-09-22.json"
+)
+
+
+def mimo_rows() -> list[tuple]:
+    rows = []
+    for slug, name, price_cny, price_usd, credits in MIMO_TOKEN_TIERS:
+        for model, rates in MIMO_CREDIT_RATES.items():
+            burn = blended(*rates)
+            base_yi = credits / burn / YI
+            for band, band_label, factor in (("day", "日间", 1.0), ("night", "夜间0.8×", 1 / 0.8)):
+                monthly_yi = round(base_yi * factor, 2)
+                rows.append((
+                    f"mimo_token_{slug}_{band}", f"MiMo Token Plan {name} {band_label}",
+                    price_cny, "CNY", model, monthly_yi, "medium", MIMO_SOURCE,
+                    f"新增{monthly_yi:g}亿：月池{credits / 1e9:g}B Credits÷统一标准负载混合burn {burn:g} credits/token"
+                    f"（该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
+                    + ("；夜间00:00-08:00（北京）consumption×0.8，同credits多换25% token" if band == "night" else "；日间基准消耗档")
+                    + "；套餐仅覆盖 v2.5 系列文本模型，V2.6 截至 2026-09-22 未列入官方支持清单；"
+                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）",
+                ))
+    return rows
+
+
 # ---- 订阅：(plan_id, plan_name, price, currency, served_model, monthly_yi, confidence, source, decision_note)
 SUBS = [
     # OpenAI —— Sol 为 Terra/5.5 基准；Luna 改用 Plus 用户面板实测，Pro 档按官方 5x/20x 推算
@@ -488,14 +548,14 @@ SUBS = [
     #   分数由 scores-grok47-round1 补充档从 AA round4 未映射载荷提升（int 46.45 / coding 56.27）
     ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测：洗/鹈 13,442,816 tok + 删除版（无快照）= 周额度 19%→28%；supergrok-grok47-round1-2026-09-22.json", f"新增{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：两已知会话 13,442,816 tok 按份额 8% 反推周池 {SUPERGROK47_WEEKLY_TOKENS:,}（9% 总份额中删除版约 1%，其 token 快照缺失、份额藏整数取整内）；硬边界 5.97（删≈0）~7.68亿（删≈2%）；对 4.6 同档 1.273亿/周为 1.32×；CLI Cost 两段不自洽（低 cache 段 $/MTok 反低），不可校池；CLI 等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价——重置后受控打满可升 high"),
     ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.7", supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$100×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，非独立实测"),
-    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，非独立实测；Lite 面板美元未知不派生"),
+    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，按独立档标定非实测；Lite 面板美元未知不派生"),
     # Cursor —— 两张个人Ultra截图均在2026-08-25永久扩池后；社区图可能因首周半价用量集中而使tokens/Usage%反推偏高。
     #   Fast取用户当前平滑账号最大样本863.8M/28.1%=30.74亿；Standard取用户67.78亿与社区86.95亿主行中间值77.37亿。
     #   Pro保留独立面板采用值；Pro+按$800/$3000池比，从round8标准77.37亿反推。
-    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI, "medium", "两张调整后个人Ultra标准主行中间值；cursor-adoption-round8-2026-09-06.json", "旧80亿→77.37亿：(用户当前平滑账号61.0M/0.9%=67.78亿 + 社区8/26图1478.2M/17%=86.95亿)/2。社区图可能有大量首周半价用量，按费用百分比反推略高；中间值不是单行直接实测，token类型分布与面板取整差异保留"),
-    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.6", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
-    ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.6", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
-    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
+    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.7", CURSOR_ULTRA_STANDARD_YI, "medium", "两张调整后个人Ultra标准主行中间值；cursor-adoption-round8-2026-09-06.json", "旧80亿→77.37亿：(用户当前平滑账号61.0M/0.9%=67.78亿 + 社区8/26图1478.2M/17%=86.95亿)/2。社区图可能有大量首周半价用量，按费用百分比反推略高；中间值不是单行直接实测，token类型分布与面板取整差异保留"),
+    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.7", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
+    ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.7", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
+    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.7", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
     # Kimi —— 月池是周池的5倍（不是项目通用4周）；199档本机ccusage反推，其余按官网1x/4x/20x/60x
     #   同名档国内外并点：price_usd 统一按国际版标价（KIMI_INTL），¥价为国内实付；Andante ¥49 无海外同名档
     ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", kimi_199_monthly_yi(), "medium", f"本机ccusage {KIMI_199_USED_TOKENS}/{KIMI_199_USED_FRACTION:.0%}反推周额度×Kimi月池{KIMI_MONTHLY_TO_WEEKLY:g}倍；kimi-adoption-round6-2026-09-08.json", "旧11.61亿→14.51亿：用户确认Kimi月池=周池×5，旧值误套项目通用4周；样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7短时面板的模型/统计窗口不同，未替换基准；ACP14.28为旧模型旁证，不直接采用"),
@@ -530,6 +590,8 @@ SUBS = [
     *ollama_rows("ollama_max", "Ollama Max", 100, OLLAMA_MAX_CREDITS_USD),
     # 阶跃 Step Plan 国内站 —— 官方 Credit 月池 × 人民币三段价；国际站月费不同、不另画。
     *stepfun_rows(),
+    # 小米 MiMo Token Plan —— Credits 月池 × 分模型 burn 率；日/夜两情景点。
+    *mimo_rows(),
 ]
 
 # ---- 不计额度（unmetered）订阅点：月费 ÷ 无界可用量 → $0/MTok。无 token 分母，图上用专用刻度位，不进对数换算。
@@ -568,11 +630,12 @@ DERIVED = [
     # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
     ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / CHATGPT_PRO20X_SOL_MONTHLY_YI, "low", f"{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}→{30.8*CHATGPT_PRO20X_ASTRA_MONTHLY_YI/CHATGPT_PRO20X_SOL_MONTHLY_YI:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}×30.8/{CHATGPT_PRO20X_SOL_MONTHLY_YI:g}（沿用Sol 20x→5x档间比例，基准随Sol 20x加权值联动{CHATGPT_PRO20X_SOL_MONTHLY_YI/30.8:.2f}×）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
     # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点
-    # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5 与 4.6 同价
-    ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
-    ("cursor_ultra", "grok-4.6", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
-    ("cursor_pro", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：官方Cursor三段价混合比；旧12.079亿用舍入倍率2.57，现保留完整精度", True),
-    ("cursor_pro_plus", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "low", f"旧21.33亿基准→20.63亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8的Ultra77.37×800/3000联动，保留跨档假设；见cursor-adoption-round8-2026-09-06.json", False),
+    # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5/4.6/4.7 同价
+    ("cursor_ultra", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
+    ("cursor_ultra", "grok-4.7", "grok-4.6", 1.0, "medium", "Grok 4.6 在 Cursor/SuperGrok 仍可选且同价，继承 4.7 基准；非4.6独立实测", False),
+    ("cursor_ultra", "grok-4.7", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
+    ("cursor_pro", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：官方Cursor三段价混合比；旧12.079亿用舍入倍率2.57，现保留完整精度", True),
+    ("cursor_pro_plus", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "low", f"旧21.33亿基准→20.63亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8的Ultra77.37×800/3000联动，保留跨档假设；见cursor-adoption-round8-2026-09-06.json", False),
     # xAI：订阅面板额度与公开API标价不同；4.5暂按同订阅4.6额度，非API同价断言
     ("supergrok_heavy", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设50.9亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
     ("supergrok", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设5.09亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
@@ -595,6 +658,10 @@ METERED = [
     ("deepseek_v4_pro_peak", "DeepSeek V4 Pro API 忙时", "deepseek-v4-pro", 0.044, 1.32, 3.96, "api-docs.deepseek.com"),
     ("openai_sol_api", "GPT-5.6 Sol API", "gpt-5.6-sol", 0.4, 4.0, 20.0, "developers.openai.com"),
     ("xai_grok46_api", "Grok 4.6 API (<200k)", "grok-4.6", 0.5, 2.0, 6.0, "docs.x.ai"),
+    ("xai_grok47_api", "Grok 4.7 API (<200k)", "grok-4.7", 0.5, 2.0, 6.0, "docs.x.ai；2026-09-21发布与4.6同价；>200K档$1/$4/$12保留在research"),
+    ("mimo_v26_pro_api", "MiMo V2.6 Pro API", "mimo-v2.6-pro", 0.0036, 0.435, 0.87, "OpenRouter/GOAT/OpenCode三渠道一致价；小米官方计价页未列V2.6档；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
+    ("mimo_v26_flash_api", "MiMo V2.6 Flash API", "mimo-v2.6-flash", 0.0028, 0.14, 0.28, "同上；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
+    ("mimo_v26_pro_ultraspeed_api", "MiMo V2.6 Pro UltraSpeed API", "mimo-v2.6-pro-ultraspeed", 0.036, 4.35, 8.70, "速度档按Pro价10×（GOAT文档官方明示）；同上"),
     # 2026-09-06 补齐 Claude 与 GPT-5.6 其余档的官方按量价，让 Claude / ChatGPT 订阅点在同榜有 API 基线可比
     ("anthropic_opus5_api", "Claude Opus 5 API", "claude-opus-5", 0.5, 5.0, 25.0, "platform.claude.com/docs/en/about-claude/pricing"),
     ("anthropic_sonnet5_api", "Claude Sonnet 5 API", "claude-sonnet-5", 0.2, 2.0, 10.0, "platform.claude.com/docs/en/about-claude/pricing"),
@@ -608,7 +675,9 @@ METERED = [
 MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
               "google_ai_pro_us",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
-              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro"}
+              "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro",
+              "mimo_token_lite_day", "mimo_token_standard_day", "mimo_token_pro_day", "mimo_token_max_day",
+              "mimo_token_lite_night", "mimo_token_standard_night", "mimo_token_pro_night", "mimo_token_max_night"}
 MAIN_EXTRA = {
     ("opencode_go", "deepseek-v4.1-flash"),
     ("opencode_go", "glm-5.3-flash"),
@@ -646,7 +715,7 @@ def workload_of(pid: str, billing: str) -> str:
         return "standard"  # API 标价行恒按标准负载加权
     if pid.startswith("stepfun_"):
         return "lowCache"
-    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_")):
+    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_", "mimo_token_")):
         return "standard"
     return "measured"
 
@@ -691,7 +760,7 @@ def main() -> None:
         rows.append(sub_row(pid, b["plan_name"], b["price"], b["currency"], model, b["monthly_yi"] * ratio, conf,
                             f"由同套餐 {bmodel} {b['monthly_yi']} 亿 × {ratio}", how, "main" if main_ and is_main(pid, bmodel) else "full"))
     for pid in ("cursor_ultra", "cursor_pro", "cursor_pro_plus"):
-        b = base[(pid, "grok-4.6")]
+        b = base[(pid, "grok-4.7")]
         rows.append(sub_row(
             pid + "_composer_fast", b["plan_name"] + " (Composer Fast)", b["price"], b["currency"],
             "composer-2.5", b["monthly_yi"] * RATIO_COMPOSER_FAST,

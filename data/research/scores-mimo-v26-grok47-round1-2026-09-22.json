@@ -1,0 +1,63 @@
+{
+  "collectedAt": "2026-09-22",
+  "supplement": true,
+  "supplementNote": "补充档：Grok 4.7（2026-09-21 xAI 发布）与小米 MiMo-V2.6 系列（同日发布）在六大榜单当前可见的全部分数；只追加行，不替换官方快照。版本漂移注意：AA Intelligence 线上已是 v4.3.2（本快照为 v4.3），分数均来自新版本板面，整榜重拉前混用有版本风险。Grok 4.7 的 AA Intelligence xhigh/high 与 AA Coding Agent xhigh 行由 scores-grok47-round1-2026-09-22.json 按 round4 原始精度提供（46.4466/46.3322/56.2676），本档不再重复（原 46/46/56 为页面整显读数）。Code Arena（9/11 快照）、Agent Arena（9/15 快照）、OpenDesign（固定13模型集）暂无两新模型行，不是缺分而是未上榜。MiMo-V2.6-Flash 未上 AA 榜（页面只有 Pro 行）。",
+  "boards": [
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "2026-09-09",
+      "note": "与 scores-aa-round3-2026-09-09.json 同一板面元数据；本档不改快照日期。线上页面已标 v4.3.2（10 evals，新增 GDP.pdf / AutomationBench），新模型分数为新版本读数。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-03",
+      "note": "与 scores-terminal-bench4-round1-2026-09-10.json 同一板面元数据；本档不改快照日期。官方榜 2026-09-21 新增 Grok 4.7 行。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "mimo-v2.6-pro",
+      "variantLabel": "MiMo-V2.6-Pro",
+      "score": 46,
+      "secondary": {
+        "scoreRoundedDisplay": 46,
+        "effort": null,
+        "costPerTaskUsd": 0.13,
+        "medianTokensPerSec": 130,
+        "contextWindow": "1M",
+        "modelCreatorName": "Xiaomi"
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-22",
+      "note": "AA 榜整数读数 46、无 effort 后缀；OpenRouter 模型页的 AA 表显示 46.3（同一榜单不同取整）。v4.3.2 版本读数。Flash 未上榜。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "grok-4.7",
+      "variantLabel": "Grok Build - Grok 4.7 (xhigh)",
+      "score": 37.6,
+      "secondary": {
+        "agentHarness": "Grok Build",
+        "reasoningEffort": "xhigh",
+        "runDate": "2026-09-21",
+        "ciMinus": 3.5,
+        "ciPlus": 3.5,
+        "totalCostUsd": 3700,
+        "totalTokens": 5500000000
+      },
+      "source": "https://www.tbench.ai/leaderboard",
+      "checkedAt": "2026-09-22",
+      "note": "官方 TB4 榜 2026-09-21 新行：37.6% ±3.5%、5.5B tokens、$3.7k、第6名（页面缩写 5.5B/$3.7k，登记为 5.5e9/$3700）。xAI 厂商自报 38.0% 与官方 37.6% 同源口径差0.4pt，采用官方板面读数。"
+    }
+  ],
+  "vendorBenchmarksNotBoards": {
+    "note": "非项目榜单，仅存档。xAI 官方发布自报（x.ai/news/grok-4-7）：CursorBench 4.0 xhigh 46.3% / high 40.4%，DeepSWE v1.1 high 71.0%，Terminal-Bench 4.0 xhigh 38.0%（官方榜行 37.6%），EEBench xhigh 66.0%，GDPval 1695 Elo，AA-Briefcase 1657 Elo。小米 MiMo-V2.6 官方自报：DeepSWE v1.1 Flash 67.9 / Pro 71.9，Terminal-Bench 2.1 Flash 87.6（注意是 TB2.1 非本项目 TB4 榜）；AA 分项自报 Pro：HLE 49.4%、AA-LCR 86.3%、GDPval-AA 58.7%、CritPt 26.6%、SciCode 60.9%、Omniscience 34.8%。"
+  }
+}

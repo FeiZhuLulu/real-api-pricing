@@ -30,6 +30,7 @@ SCORE_FILES = (
     "scores-deepswe-selfreport-2026-09-12.json",
     "scores-stepfun-step5-round1-2026-09-21.json",
     "scores-grok47-round1-2026-09-22.json",
+    "scores-mimo-v26-grok47-round1-2026-09-22.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
@@ -37,6 +38,7 @@ LIST_PRICE_FILES = (
     "list-prices-deepseek-v41-round2-2026-09-10.json",
     "list-prices-stepfun-round1-2026-09-10.json",
     "list-prices-stepfun-round2-2026-09-21.json",
+    "list-prices-mimo-v26-grok47-round1-2026-09-22.json",
 )
 
 
@@ -55,7 +57,8 @@ DISPLAY = {
     "deepseek-v4.1-flash": "DeepSeek V4.1 Flash", "deepseek-v4-flash": "DeepSeek V4 Flash", "deepseek-v4-flash-fast": "DeepSeek V4 Flash Fast", "deepseek-v4-pro": "DeepSeek V4 Pro",
     "deepseek-v4-flash-vision-exp": "DeepSeek V4 Flash Vision Exp",
     "gemini-3.1-pro": "Gemini 3.1 Pro", "gemini-3.7-flash": "Gemini 3.7 Flash", "gemini-3.8-flash": "Gemini 3.8 Flash",
-    "mimo-v2.5": "MiMo V2.5", "mimo-v2.5-pro": "MiMo V2.5 Pro", "longcat-2.0": "LongCat 2.0",
+    "mimo-v2.5": "MiMo V2.5", "mimo-v2.5-pro": "MiMo V2.5 Pro", "mimo-v2.6-pro": "MiMo V2.6 Pro", "mimo-v2.6-flash": "MiMo V2.6 Flash",
+    "mimo-v2.6-pro-ultraspeed": "MiMo V2.6 Pro UltraSpeed", "longcat-2.0": "LongCat 2.0",
     "muse-spark-1.3": "Muse Spark 1.3", "muse-spark-1.3-contributor": "Muse Spark 1.3 Contributor",
     "muse-spark-1.2": "Muse Spark 1.2", "muse-spark-1.2-contributor": "Muse Spark 1.2 Contributor",
     "glm-5.2-fast": "GLM 5.2 Fast", "inkling": "Inkling", "inkling-small": "Inkling Small",

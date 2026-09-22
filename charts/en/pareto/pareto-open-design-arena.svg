@@ -79,18 +79,6 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.06667" data-score="72.4" data-x="623.001" data-y="532.617" transform="translate(623.001 532.617)"><title>Grok 4.6 · SuperGrok Lite · $0.06667/MTok · 72.4 · lowGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="72.4" data-x="798.087" data-y="532.617" transform="translate(798.087 532.617)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 72.4 · mediumGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06506" data-score="72.4" data-x="627.519" data-y="532.617" transform="translate(627.519 532.617)"><title>Grok 4.6 · Cursor Ultra (Fast) · $0.06506/MTok · 72.4 · highGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04255" data-score="72.4" data-x="705.989" data-y="532.617" transform="translate(705.989 532.617)"><title>Grok 4.6 · Cursor Pro · $0.04255/MTok · 72.4 · mediumGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02908" data-score="72.4" data-x="776.329" data-y="532.617" transform="translate(776.329 532.617)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 72.4 · mediumGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
-</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02688" data-score="65.7" data-x="790.866" data-y="670.113" transform="translate(790.866 670.113)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 65.7 · mediumKimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
@@ -230,6 +218,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.10989" data-score="82.7" data-x="530.653" data-y="321.243" transform="translate(530.653 321.243)"><title>GPT-6 Astra · Pro 5x · $0.10989/MTok · 82.7 · lowGPT-6 Astra · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="72.4" data-x="798.087" data-y="532.617" transform="translate(798.087 532.617)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 72.4 · mediumGrok 4.6 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
+</g>
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.00825" data-score="81.2" data-x="1009.144" data-y="352.026" transform="translate(1009.144 352.026)"><title>DeepSeek V4.1 Flash · DeepSeek V4.1 Flash API off-peak · $0.00825/MTok · 81.2 · highDeepSeek V4.1 Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#1F75FE" stroke-width="1.5" opacity=".68"/>
 </g>
@@ -298,7 +289,7 @@
 <path d="M1304 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1318.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >61 subscription positions / 9 API positions / 2 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >58 subscription positions / 9 API positions / 2 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >OpenDesign Harness reference; product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >open-design.ai/zh/llm-arena-for-design/</text>
