@@ -551,14 +551,14 @@ SUBS = [
     #   分数由 scores-grok47-round1 补充档从 AA round4 未映射载荷提升（int 46.45 / coding 56.27）
     ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测：洗/鹈 13,442,816 tok + 删除版（无快照）= 周额度 19%→28%；supergrok-grok47-round1-2026-09-22.json", f"新增{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：两已知会话 13,442,816 tok 按份额 8% 反推周池 {SUPERGROK47_WEEKLY_TOKENS:,}（9% 总份额中删除版约 1%，其 token 快照缺失、份额藏整数取整内）；硬边界 5.97（删≈0）~7.68亿（删≈2%）；对 4.6 同档 1.273亿/周为 1.32×；CLI Cost 两段不自洽（低 cache 段 $/MTok 反低），不可校池；CLI 等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价——重置后受控打满可升 high"),
     ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.7", supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$100×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，非独立实测"),
-    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，按独立档标定非实测；Lite 面板美元未知不派生"),
+    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，非独立实测；Lite 面板美元未知不派生"),
     # Cursor —— 两张个人Ultra截图均在2026-08-25永久扩池后；社区图可能因首周半价用量集中而使tokens/Usage%反推偏高。
     #   Fast取用户当前平滑账号最大样本863.8M/28.1%=30.74亿；Standard取用户67.78亿与社区86.95亿主行中间值77.37亿。
     #   Pro保留独立面板采用值；Pro+按$800/$3000池比，从round8标准77.37亿反推。
-    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.7", CURSOR_ULTRA_STANDARD_YI, "medium", "两张调整后个人Ultra标准主行中间值；cursor-adoption-round8-2026-09-06.json", "旧80亿→77.37亿：(用户当前平滑账号61.0M/0.9%=67.78亿 + 社区8/26图1478.2M/17%=86.95亿)/2。社区图可能有大量首周半价用量，按费用百分比反推略高；中间值不是单行直接实测，token类型分布与面板取整差异保留"),
-    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.7", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
-    ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.7", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
-    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.7", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
+    ("cursor_ultra", "Cursor Ultra", 200, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI, "medium", "两张调整后个人Ultra标准主行中间值；cursor-adoption-round8-2026-09-06.json", "旧80亿→77.37亿：(用户当前平滑账号61.0M/0.9%=67.78亿 + 社区8/26图1478.2M/17%=86.95亿)/2。社区图可能有大量首周半价用量，按费用百分比反推略高；中间值不是单行直接实测，token类型分布与面板取整差异保留"),
+    ("cursor_ultra_fast", "Cursor Ultra (Fast)", 200, "USD", "grok-4.6", CURSOR_ULTRA_FAST_YI, "high", "用户当前平滑账号截图863.8M/28.1%直接反推；cursor-adoption-round8-2026-09-06.json", "旧40亿→30.74亿；取最大样本xhigh-fast行直接反推，百分比取整区间30.69~30.80亿；同图较小high-fast行24.43亿不采。Standard/Fast不强制raw token严格2×，因为面板按费用扣减且token类型构成不同；官方三段费率2×事实不变；与SuperGrok渠道分开"),
+    ("cursor_pro", "Cursor Pro", 20, "USD", "grok-4.6", 4.7, "medium", "Cursor 论坛面板：303.9M = 65% → 4.68 亿；另有用户口述 4~5 亿打满", "保留独立面板采用4.7亿，不随Ultra中间值联动；池按compute cost计非raw token"),
+    ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
     # Kimi —— 月池是周池的5倍（不是项目通用4周）；199档本机ccusage反推，其余按官网1x/4x/20x/60x
     #   同名档国内外并点：price_usd 统一按国际版标价（KIMI_INTL），¥价为国内实付；Andante ¥49 无海外同名档
     ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", kimi_199_monthly_yi(), "medium", f"本机ccusage {KIMI_199_USED_TOKENS}/{KIMI_199_USED_FRACTION:.0%}反推周额度×Kimi月池{KIMI_MONTHLY_TO_WEEKLY:g}倍；kimi-adoption-round6-2026-09-08.json", "旧11.61亿→14.51亿：用户确认Kimi月池=周池×5，旧值误套项目通用4周；样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7短时面板的模型/统计窗口不同，未替换基准；ACP14.28为旧模型旁证，不直接采用"),
@@ -633,12 +633,11 @@ DERIVED = [
     # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
     ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / CHATGPT_PRO20X_SOL_MONTHLY_YI, "low", f"{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}→{30.8*CHATGPT_PRO20X_ASTRA_MONTHLY_YI/CHATGPT_PRO20X_SOL_MONTHLY_YI:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}×30.8/{CHATGPT_PRO20X_SOL_MONTHLY_YI:g}（沿用Sol 20x→5x档间比例，基准随Sol 20x加权值联动{CHATGPT_PRO20X_SOL_MONTHLY_YI/30.8:.2f}×）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
     # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点
-    # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5/4.6/4.7 同价
-    ("cursor_ultra", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
-    ("cursor_ultra", "grok-4.7", "grok-4.6", 1.0, "medium", "Grok 4.6 在 Cursor/SuperGrok 仍可选且同价，继承 4.7 基准；非4.6独立实测", False),
-    ("cursor_ultra", "grok-4.7", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
-    ("cursor_pro", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：官方Cursor三段价混合比；旧12.079亿用舍入倍率2.57，现保留完整精度", True),
-    ("cursor_pro_plus", "grok-4.7", "composer-2.5", RATIO_COMPOSER, "low", f"旧21.33亿基准→20.63亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8的Ultra77.37×800/3000联动，保留跨档假设；见cursor-adoption-round8-2026-09-06.json", False),
+    # Cursor：池按 compute cost 计（官方），Composer 2.5 标价 $0.5/$0.2/$2.5；Grok 4.5 与 4.6 同价
+    ("cursor_ultra", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", f"旧80亿基准→77.37亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8标准中间值联动，非Composer实测；见cursor-adoption-round8-2026-09-06.json", True),
+    ("cursor_ultra", "grok-4.6", "grok-4.5", 1.0, "medium", "旧80亿→77.37亿，继承round8标准基准；Cursor官方models-and-pricing两模型同价，非Grok4.5独立实测；不采用xAI公开API缓存价差；见cursor-adoption-round8-2026-09-06.json", False),
+    ("cursor_pro", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "medium", "Standard：官方Cursor三段价混合比；旧12.079亿用舍入倍率2.57，现保留完整精度", True),
+    ("cursor_pro_plus", "grok-4.6", "composer-2.5", RATIO_COMPOSER, "low", f"旧21.33亿基准→20.63亿×统一标准负载倍率{RATIO_COMPOSER:.6f}；随round8的Ultra77.37×800/3000联动，保留跨档假设；见cursor-adoption-round8-2026-09-06.json", False),
     # xAI：订阅面板额度与公开API标价不同；4.5暂按同订阅4.6额度，非API同价断言
     ("supergrok_heavy", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设50.9亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
     ("supergrok", "grok-4.6", "grok-4.5", 1.0, "medium", "维持同订阅额度假设5.09亿，尚无4.5独立面板实测；xAI API缓存价差不能直接映射订阅周池；与Cursor渠道分开", False),
@@ -763,7 +762,7 @@ def main() -> None:
         rows.append(sub_row(pid, b["plan_name"], b["price"], b["currency"], model, b["monthly_yi"] * ratio, conf,
                             f"由同套餐 {bmodel} {b['monthly_yi']} 亿 × {ratio}", how, "main" if main_ and is_main(pid, bmodel) else "full"))
     for pid in ("cursor_ultra", "cursor_pro", "cursor_pro_plus"):
-        b = base[(pid, "grok-4.7")]
+        b = base[(pid, "grok-4.6")]
         rows.append(sub_row(
             pid + "_composer_fast", b["plan_name"] + " (Composer Fast)", b["price"], b["currency"],
             "composer-2.5", b["monthly_yi"] * RATIO_COMPOSER_FAST,

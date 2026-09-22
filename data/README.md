@@ -10,12 +10,12 @@ These files are the public redacted edition. Original local evidence is backed u
 
 | Board / 榜单 | Scored rows / 有分行 | Unscored rows / 缺分行 |
 |---|---:|---:|
-| Code Arena | 140 / 260 | 120 |
-| Agent Arena | 144 / 260 | 116 |
+| Code Arena | 145 / 260 | 115 |
+| Agent Arena | 149 / 260 | 111 |
 | AA Intelligence | 228 / 260 | 32 |
 | AA Coding Agent | 79 / 260 | 181 |
-| OpenDesign Arena | 72 / 260 | 188 |
-| Terminal-Bench 4.0 | 88 / 260 | 172 |
+| OpenDesign Arena | 77 / 260 | 183 |
+| Terminal-Bench 4.0 | 94 / 260 | 166 |
 
 具体缺分模型以 [`points.csv`](../derived/points.csv) / [`points.json`](../derived/points.json) 的空分数字段为准；不为缺失模型补造分数。
 

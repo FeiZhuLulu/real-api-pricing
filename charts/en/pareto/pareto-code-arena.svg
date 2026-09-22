@@ -84,6 +84,18 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.06667" data-score="1625" data-x="665.141" data-y="351.000" transform="translate(665.141 351.000)"><title>Grok 4.6 · SuperGrok Lite · $0.06667/MTok · 1625 · lowgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="1625" data-x="813.168" data-y="351.000" transform="translate(813.168 351.000)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06506" data-score="1625" data-x="668.960" data-y="351.000" transform="translate(668.960 351.000)"><title>Grok 4.6 · Cursor Ultra (Fast) · $0.06506/MTok · 1625 · highgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.04255" data-score="1625" data-x="735.303" data-y="351.000" transform="translate(735.303 351.000)"><title>Grok 4.6 · Cursor Pro · $0.04255/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02908" data-score="1625" data-x="794.772" data-y="351.000" transform="translate(794.772 351.000)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02688" data-score="1674" data-x="807.063" data-y="290.137" transform="translate(807.063 290.137)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
@@ -398,9 +410,6 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.10828" data-score="1629" data-x="589.370" data-y="346.032" transform="translate(589.370 346.032)"><title>Claude Fable 5 · Max 5x · from Sep 14 · $0.10828/MTok · 1629 · lowclaude-fable-5 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="1625" data-x="813.168" data-y="351.000" transform="translate(813.168 351.000)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
-</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="1556" data-x="813.168" data-y="436.705" transform="translate(813.168 436.705)"><title>Grok 4.5 · Cursor Ultra · $0.02585/MTok · 1556 · mediumgrok-4.5 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFB81C" opacity=".68"/>
 </g>
@@ -499,7 +508,7 @@
 <path d="M1308 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1322.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >118 subscription positions / 11 API positions / 4 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >121 subscription positions / 11 API positions / 4 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >arena.ai/leaderboard/code</text>
