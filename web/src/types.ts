@@ -1,3 +1,5 @@
+import type { Lock } from "./domain";
+
 export type Lang = "en" | "zh";
 export type View = "pareto" | "price" | "allowance" | "method";
 export interface Point {
@@ -26,6 +28,12 @@ export interface Point {
   /** ISO date when a promotional unmetered period ends, if any. */
   promo_until?: string | null;
   list_blended_usd_per_mtok: number | null;
+  /** Quota basis: which workload the capacity assumes — "standard" | "lowCache" | "measured". */
+  workload?: string;
+  /** Plan generation tag for legacy plans, e.g. "v2" on GLM existing-customer tiers. */
+  plan_gen?: string;
+  /** Official metered API list prices per MTok in the vendor's own currency. */
+  list_price?: { cached: number; input: number; output: number; currency: string } | null;
   source: string;
   note: string;
   decision_note: string;
@@ -78,6 +86,7 @@ export interface SiteData {
       labelZh: string;
     };
     standardTokenMix: { cache: number; input: number; output: number };
+    lowCacheTokenMix: { cache: number; input: number; output: number };
   };
 }
 export type FilterKey =
@@ -106,6 +115,11 @@ export interface State {
   configuration: "all" | "summary";
   frontier: boolean;
   labels: "frontier" | "all" | "none";
+  /** Chart search query: live-marks every matching point. */
+  find: string;
+  /** Locked scope from the suggestions: one point, one model across plans, or
+      one plan across models; overrides the live match set. */
+  lock: Lock | null;
   query: string;
   sort: string;
   direction: "asc" | "desc";

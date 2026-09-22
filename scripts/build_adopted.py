@@ -617,7 +617,7 @@ EXCLUDED_SUBSCRIPTIONS = {
 
 FIELDS = ["plan_id", "plan_name", "plan_name_en", "billing", "price", "currency", "price_usd", "served_model",
           "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note",
-          "plan_gen"]
+          "plan_gen", "workload"]
 
 
 def plan_gen_of(pid: str) -> str:
@@ -628,6 +628,18 @@ def plan_gen_of(pid: str) -> str:
     if pid.startswith("kimi_"):
         return "v1"
     return ""
+
+
+def workload_of(pid: str, billing: str) -> str:
+    # 额度口径分类（2026-09-22，详情面板用）：标准负载折算=美元/积分池÷standardTokenMix混合价；
+    # 低缓存负载=÷lowCacheTokenMix；measured=面板/ccusage raw token 直测或同源派生，不经负载折算。
+    if billing == "metered":
+        return "standard"  # API 标价行恒按标准负载加权
+    if pid.startswith("stepfun_"):
+        return "lowCache"
+    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_")):
+        return "standard"
+    return "measured"
 
 
 def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dict:
@@ -652,7 +664,7 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
                 monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until="",
                 confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note,
-                plan_gen=plan_gen_of(pid))
+                plan_gen=plan_gen_of(pid), workload=workload_of(pid, "subscription"))
 
 
 def unmetered_row(pid, name, price, cur, model, conf, src, note) -> dict:

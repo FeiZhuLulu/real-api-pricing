@@ -57,6 +57,8 @@ export const defaultState = (): State => ({
   configuration: "summary",
   frontier: true,
   labels: "frontier",
+  find: "",
+  lock: null,
   query: "",
   sort: "price",
   direction: "asc",
@@ -220,6 +222,241 @@ export function frontierPath(
     ],
   };
 }
+export type LockKind = "point" | "model" | "plan";
+export interface Lock {
+  kind: LockKind;
+  value: string;
+}
+/** URL form "kind:value"; a point id itself contains "::", so split on the first colon only. */
+export function serializeLock(l: Lock): string {
+  return `${l.kind}:${l.value}`;
+}
+export function parseLock(raw: string): Lock | null {
+  const i = raw.indexOf(":");
+  if (i < 0) return null;
+  const kind = raw.slice(0, i);
+  const value = raw.slice(i + 1);
+  if (kind !== "point" && kind !== "model" && kind !== "plan") return null;
+  return value ? { kind, value } : null;
+}
+/** Marked hits are capped so a loose query cannot bury the chart in labels. */
+export const SEARCH_MARK_CAP = 8;
+export function searchTokens(query: string): string[] {
+  return query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+}
+export function rowMatches(r: Row, tokens: string[], lang: string): boolean {
+  if (!tokens.length) return false;
+  const haystack = [
+    r.point.model_display,
+    r.point.model,
+    r.point.label,
+    displayPlan(r.point.plan, lang),
+    r.point.plan,
+    r.point.plan_en ?? "",
+    r.point.channel,
+    manufacturer(r.point.vendor),
+    r.mapping?.variant ?? "",
+  ]
+    .join(" ")
+    .toLocaleLowerCase();
+  // AND semantics: "kimi 199" must hit the plan name and the model together.
+  return tokens.every((t) => haystack.includes(t));
+}
+/** Matching rows across the plotted groups, deduped by point id, in display order. */
+export function searchMatches(
+  gs: Group[],
+  query: string,
+  lang: string,
+): Row[] {
+  const tokens = searchTokens(query);
+  const seen = new Set<string>();
+  const out: Row[] = [];
+  for (const g of gs)
+    for (const r of g.rows)
+      if (!seen.has(r.point.id) && rowMatches(r, tokens, lang)) {
+        seen.add(r.point.id);
+        out.push(r);
+      }
+  const first = tokens[0] ?? "";
+  return out.sort(
+    (a, b) =>
+      Number(b.point.model_display.toLocaleLowerCase().startsWith(first)) -
+        Number(a.point.model_display.toLocaleLowerCase().startsWith(first)) ||
+      a.point.real_usd_per_mtok - b.point.real_usd_per_mtok ||
+      a.point.model_display.localeCompare(b.point.model_display),
+  );
+}
+export interface SearchHits {
+  /** Group keys to annotate. */
+  keys: Set<string>;
+  /** Live mode: matching points before the cap. Locked: points the lock covers. */
+  total: number;
+  /** Resolved lock, for the chip and the status line. */
+  locked: { kind: LockKind; label: string; points: number } | null;
+  /** True when a lock is set but nothing it names is in the current selection. */
+  lockMissing: boolean;
+}
+export function searchHits(
+  gs: Group[],
+  query: string,
+  lock: Lock | null,
+  lang: string,
+  cap = SEARCH_MARK_CAP,
+): SearchHits {
+  // A lock ignores the live query and is uncapped: it marks exactly what the
+  // user chose — one point, a model across plans, or a plan across models.
+  if (lock) {
+    const hit =
+      lock.kind === "point"
+        ? (r: Row) => r.point.id === lock.value
+        : lock.kind === "model"
+          ? (r: Row) => r.point.model === lock.value
+          : (r: Row) => r.point.plan_id === lock.value;
+    const keys = new Set<string>();
+    const ids = new Set<string>();
+    let first: Row | null = null;
+    for (const g of gs)
+      for (const r of g.rows)
+        if (hit(r)) {
+          keys.add(g.key);
+          ids.add(r.point.id);
+          first ??= r;
+        }
+    if (!first)
+      return { keys: new Set(), total: 0, locked: null, lockMissing: true };
+    const label =
+      lock.kind === "point"
+        ? `${first.point.model_display} · ${displayPlan(first.point.plan, lang)}`
+        : lock.kind === "model"
+          ? first.point.model_display
+          : displayPlan(first.point.plan, lang);
+    return {
+      keys,
+      total: ids.size,
+      locked: { kind: lock.kind, label, points: ids.size },
+      lockMissing: false,
+    };
+  }
+  const matches = searchMatches(gs, query, lang);
+  const rowGroup = new Map<Row, Group>();
+  for (const g of gs) for (const r of g.rows) rowGroup.set(r, g);
+  const keys = new Set<string>();
+  for (const r of matches) {
+    if (keys.size >= cap) break;
+    const g = rowGroup.get(r);
+    if (g) keys.add(g.key);
+  }
+  return { keys, total: matches.length, locked: null, lockMissing: false };
+}
+export interface SearchGroupCandidate {
+  kind: "model" | "plan";
+  /** point.model or point.plan_id. */
+  value: string;
+  /** model_display, or displayPlan(plan, lang). */
+  label: string;
+  /** Distinct points this lock would mark. */
+  points: number;
+  /** Lowest real price among them. */
+  cheapest: number;
+  /** Representative row (the cheapest one) for logos and score. */
+  row: Row;
+}
+export interface SearchCandidates {
+  models: SearchGroupCandidate[];
+  plans: SearchGroupCandidate[];
+  points: Row[];
+}
+export function searchCandidates(
+  gs: Group[],
+  query: string,
+  lang: string,
+): SearchCandidates {
+  const tokens = searchTokens(query);
+  // Scoped haystacks per candidate kind: matching "cursor" must list Cursor
+  // plans but not the Grok model — locking that model would mark Grok points
+  // served by other channels too.
+  const modelHay = (r: Row) =>
+    [r.point.model_display, r.point.model, manufacturer(r.point.vendor)]
+      .join(" ")
+      .toLocaleLowerCase();
+  const planHay = (r: Row) =>
+    [
+      r.point.plan,
+      displayPlan(r.point.plan, lang),
+      r.point.plan_en ?? "",
+      r.point.channel,
+    ]
+      .join(" ")
+      .toLocaleLowerCase();
+  const allIn = (hay: string) => tokens.every((t) => hay.includes(t));
+  const modelRows = new Map<string, Row[]>();
+  const planRows = new Map<string, Row[]>();
+  for (const g of gs)
+    for (const r of g.rows) {
+      if (tokens.length && allIn(modelHay(r)))
+        modelRows.set(r.point.model, [...(modelRows.get(r.point.model) || []), r]);
+      if (tokens.length && allIn(planHay(r)))
+        planRows.set(r.point.plan_id, [...(planRows.get(r.point.plan_id) || []), r]);
+    }
+  const cheapestRow = (rows: Row[]) =>
+    rows.reduce((a, b) =>
+      a.point.real_usd_per_mtok <= b.point.real_usd_per_mtok ? a : b,
+    );
+  const first = tokens[0] ?? "";
+  const prefixed = (label: string) =>
+    Number(label.toLocaleLowerCase().startsWith(first));
+  const bestScore = (rows: Row[]) =>
+    Math.max(...rows.map((r) => r.score ?? -Infinity));
+  const groupCandidate = (
+    kind: "model" | "plan",
+    value: string,
+    label: string,
+    rows: Row[],
+  ): SearchGroupCandidate => {
+    const row = cheapestRow(rows);
+    return {
+      kind,
+      value,
+      label,
+      points: new Set(rows.map((r) => r.point.id)).size,
+      cheapest: row.point.real_usd_per_mtok,
+      row,
+    };
+  };
+  const models: SearchGroupCandidate[] = [...modelRows.entries()]
+    .sort(([, a], [, b]) => {
+      const la = cheapestRow(a).point.model_display;
+      const lb = cheapestRow(b).point.model_display;
+      return (
+        prefixed(lb) - prefixed(la) ||
+        bestScore(b) - bestScore(a) ||
+        la.localeCompare(lb)
+      );
+    })
+    .map(([value, rows]) =>
+      groupCandidate("model", value, cheapestRow(rows).point.model_display, rows),
+    );
+  const plans: SearchGroupCandidate[] = [...planRows.entries()]
+    .sort(([, a], [, b]) => {
+      const la = displayPlan(cheapestRow(a).point.plan, lang);
+      const lb = displayPlan(cheapestRow(b).point.plan, lang);
+      return (
+        prefixed(lb) - prefixed(la) ||
+        (cheapestRow(a).point.price_usd ?? Infinity) -
+          (cheapestRow(b).point.price_usd ?? Infinity) ||
+        la.localeCompare(lb)
+      );
+    })
+    .map(([value, rows]) =>
+      groupCandidate(
+        "plan",
+        value,
+        displayPlan(cheapestRow(rows).point.plan, lang),
+        rows,
+      ),
+    );
+  return { models, plans, points: searchMatches(gs, query, lang) };
+}
 export function serialize(s: State): string {
   const d = defaultState();
   const p = new URLSearchParams();
@@ -232,6 +469,8 @@ export function serialize(s: State): string {
   if (s.labels !== d.labels) p.set("labels", s.labels);
   if (s.feeBand !== d.feeBand) p.set("fee", s.feeBand);
   if (s.query) p.set("q", s.query);
+  if (s.find) p.set("find", s.find);
+  if (s.lock) p.set("lock", serializeLock(s.lock));
   if (s.sort !== d.sort) p.set("sort", s.sort);
   if (s.direction !== d.direction) p.set("dir", s.direction);
   if (!s.frontier) p.set("frontier", "0");
@@ -285,6 +524,21 @@ export function restore(
   }
   const query = params.get("q");
   if (query !== null) state.query = query;
+  const find = params.get("find");
+  if (find !== null) state.find = find;
+  const lock = params.get("lock");
+  if (lock !== null) {
+    const parsed = parseLock(lock);
+    const known =
+      parsed &&
+      (parsed.kind === "point"
+        ? data.points.some((p) => p.id === parsed.value)
+        : parsed.kind === "model"
+          ? data.points.some((p) => p.model === parsed.value)
+          : data.points.some((p) => p.plan_id === parsed.value));
+    if (known) state.lock = parsed;
+    else warning = true;
+  }
   if (params.has("sel")) {
     const wanted = params.getAll("sel").filter((id) => id !== "");
     if (!wanted.length) state.selected = [];
@@ -372,6 +626,43 @@ export const allowance = (p: Point, lang: string) =>
     ? "—"
     : number(lang === "zh" ? p.monthly_yi : p.monthly_yi / 10, lang, 3) +
       (lang === "zh" ? " 亿" : " B");
+/** Quota-basis line for the detail panel: which workload the capacity assumes. */
+export function workloadLine(
+  p: Point,
+  conventions: SiteData["conventions"],
+  lang: string,
+): string {
+  const zh = lang === "zh";
+  const pct = (n: number) => `${+(n * 100).toFixed(2)}%`;
+  if (p.workload === "lowCache") {
+    const m = conventions.lowCacheTokenMix;
+    return zh
+      ? `低缓存负载 —— 缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
+      : `Low-cache workload — ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
+  }
+  if (p.workload === "standard") {
+    const m = conventions.standardTokenMix;
+    return zh
+      ? `标准负载 —— 缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
+      : `Standard workload — ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
+  }
+  return zh
+    ? "实测口径 —— 面板/日志 raw token 直测或同源派生，不经负载折算"
+    : "Measured real usage — raw tokens, no workload conversion";
+}
+
+/** Official metered API list prices, shown next to the workload basis. */
+export function listPriceLine(p: Point, lang: string): string {
+  const lp = p.list_price;
+  if (!lp) return "";
+  const sym = lp.currency === "CNY" ? "¥" : "$";
+  const f = (n: number) =>
+    sym + new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(n);
+  const parts = `${f(lp.cached)} / ${f(lp.input)} / ${f(lp.output)}`;
+  return lang === "zh"
+    ? `官方 API 标价：缓存读 / 输入 / 输出 = ${parts}（每 MTok）`
+    : `Official API list (cached / in / out, per MTok): ${parts}`;
+}
 export const safeUrl = (url: string) =>
   /^https?:\/\//i.test(url) || url.startsWith("/data/") ? url : undefined;
 export const manufacturer = (vendor: string) =>

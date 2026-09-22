@@ -90,18 +90,25 @@ def current_score_records(archives):
             if latest.get(record["boardId"]) == name or archive.get("supplement")]
 
 
-def load_list_blended() -> dict[str, float]:
+def load_list_prices() -> dict[str, dict]:
     out = {}
     for name in LIST_PRICE_FILES:
         for m in json.loads((RESEARCH / name).read_text(encoding="utf-8"))["models"]:
             cached = m["cachedInput"] if m["cachedInput"] is not None else m["input"] * 0.1
             rate = CONVENTIONS["usdPerCny"] if m["currency"] == "CNY" else 1
-            out[m["model"]] = (STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * m["input"] + STANDARD_MIX["output"] * m["output"]) / rate
+            out[m["model"]] = dict(
+                cached=cached, input=m["input"], output=m["output"], currency=m["currency"],
+                blended_usd=(STANDARD_MIX["cache"] * cached + STANDARD_MIX["input"] * m["input"] + STANDARD_MIX["output"] * m["output"]) / rate,
+            )
     return out
 
 
+def load_list_blended() -> dict[str, float]:
+    return {m: v["blended_usd"] for m, v in load_list_prices().items()}
+
+
 def main() -> None:
-    scores, list_blended = load_scores(), load_list_blended()
+    scores, list_prices = load_scores(), load_list_prices()
     boards_meta = {b["boardId"]: b for archive in score_archives() if not archive.get("supplement") for b in archive["boards"]}
 
     points, configuration_points = [], []
@@ -109,7 +116,8 @@ def main() -> None:
         for r in csv.DictReader(f):
             model = r["served_model"]
             real = float(r["real_usd_per_mtok"])
-            lb = list_blended.get(model)
+            lp = list_prices.get(model)
+            lb = lp["blended_usd"] if lp else None
             plan_en = r.get("plan_name_en") or None
             gen = r.get("plan_gen") or ""
             gen_tag = f" ({gen})" if gen else ""
@@ -118,6 +126,8 @@ def main() -> None:
                 model_display=DISPLAY.get(model, model) + gen_tag, plan_gen=gen, vendor=vendor_of(model),
                 local_price=f"¥{r['price']}" if plan_en and r["currency"] == "CNY" else None,
                 label=r["plan_name"] if r["billing"] == "metered" else f"{DISPLAY.get(model, model)}{gen_tag} · {r['plan_name']}",
+                workload=r.get("workload") or "",
+                list_price={k: lp[k] for k in ("cached", "input", "output", "currency")} if lp else None,
                 price_usd=float(r["price_usd"]) if r["price_usd"] else None,
                 monthly_yi=float(r["monthly_yi"]) if r["monthly_yi"] else None,
                 real_usd_per_mtok=real, list_blended_usd_per_mtok=round(lb, 4) if lb else None,

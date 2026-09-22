@@ -1171,6 +1171,40 @@ footer a {
   color: #576b60;
   overflow-wrap: anywhere;
 }
+.basis {
+  padding: 15px;
+  background: #f6f8f7;
+  border: 1px solid #e7eeea;
+  border-left: 3px solid #45836c;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #576b60;
+  margin-bottom: 12px;
+}
+.basis small {
+  font-size: 10px;
+  color: #8b939d;
+}
+.basis p {
+  margin: 6px 0 0;
+}
+.evidence-fold {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.evidence-fold > summary {
+  font-size: 12px;
+  font-weight: 550;
+  color: #576b60;
+  cursor: pointer;
+  list-style-position: inside;
+}
+.evidence-fold[open] > summary {
+  margin-bottom: 10px;
+}
 .details-content h4 {
   font-size: 12px;
   font-weight: 550;
@@ -1879,6 +1913,155 @@ small {
   color: #69717c;
   font-size: 11px;
 }
+/* The search lives at the right end of the controls row, above the plot —
+   not floating over it: the modebar owns the plot corner and the reversed
+   axis puts the cheap-and-capable points top-right. */
+.chart-search-slot {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.chart-search-root {
+  position: relative;
+}
+.chart-search-slot .chart-search-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  width: 252px;
+  max-width: 100%;
+  padding: 0 8px;
+  border: 1px solid #d9dde3;
+  border-radius: 6px;
+  background: #fff;
+  color: #969ba4;
+}
+.chart-search:focus-within {
+  border-color: #91b9aa;
+}
+.chart-search input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  font-size: 12px;
+  color: #454c57;
+}
+.chart-search input::placeholder {
+  color: #a4a8b0;
+}
+.chart-search-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  /* Leave ~90px+ for the input beside it; the label ellipsizes beyond this. */
+  max-width: 55%;
+  padding: 2px 3px 2px 8px;
+  border: 1px solid #b7d8cb;
+  border-radius: 5px;
+  background: #eef4f1;
+  color: #20242a;
+  font-size: 11px;
+  line-height: 1.3;
+}
+.chart-search-chip-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.chart-search-slot .chart-search button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 3px;
+  background: transparent;
+  color: #8b919a;
+}
+.chart-search-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  /* Above .arena-label-layer (z-index 2) and the hover card (4). */
+  z-index: 5;
+  width: 330px;
+  max-width: 80vw;
+  max-height: 330px;
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid #e4e7ec;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 12px 30px -10px rgba(24, 28, 34, 0.25);
+}
+.chart-search-slot .chart-search-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  font-size: 12px;
+  color: #20242a;
+}
+.chart-search-slot .chart-search-option:hover,
+.chart-search-slot .chart-search-option.is-active {
+  background: #f2f4f6;
+}
+.chart-search-option .provider-logo {
+  flex-basis: 18px;
+  width: 18px;
+  height: 18px;
+}
+.chart-search-option > span {
+  min-width: 0;
+}
+.chart-search-option small {
+  display: block;
+  margin-top: 2px;
+  color: #8b919a;
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chart-search-more,
+.chart-search-empty {
+  padding: 7px 10px;
+  color: #8b919a;
+  font-size: 11px;
+}
+.chart-search-section {
+  padding: 6px 9px 3px;
+  color: #8b919a;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+.chart-search-status {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  /* Overlays the plot's top margin where the modebar lives — never intercept. */
+  pointer-events: none;
+  margin-top: 3px;
+  color: #8b919a;
+  font-size: 10px;
+  white-space: nowrap;
+}
 .point-key {
   padding: 0 24px 18px;
 }
@@ -1957,7 +2140,7 @@ small {
   height: 28px;
   margin: 0;
   padding: 3px;
-  border: 1px solid #d0d5dc;
+  border: 1px solid #20242a;
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 2px rgba(24, 28, 34, 0.08);
@@ -1974,6 +2157,18 @@ small {
   border-color: #99a1ab;
   box-shadow: 0 3px 10px rgba(24, 28, 34, 0.18);
   z-index: 1;
+}
+/* Search hits outrank frontier black; the ring is box-shadow so the 1px
+   border geometry stays identical to measureLabel() expectations. */
+.arena-logo-mark.is-hit {
+  border-color: #087f5b;
+  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.22);
+}
+.arena-logo-mark.is-hit.is-hovered {
+  border-color: #087f5b;
+  box-shadow:
+    0 0 0 2px rgba(8, 127, 91, 0.22),
+    0 3px 10px rgba(24, 28, 34, 0.18);
 }
 .point-halo {
   position: absolute;
@@ -2033,6 +2228,27 @@ small {
 .arena-name-label.is-hovered {
   border-color: #99a1ab;
   box-shadow: 0 2px 8px rgba(24, 28, 34, 0.14);
+}
+.arena-name-label.is-frontier {
+  border-color: #20242a;
+}
+.arena-name-label.is-hit {
+  border-color: #087f5b;
+  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.22);
+}
+.arena-name-label.is-frontier.is-hovered {
+  border-color: #20242a;
+  box-shadow: 0 2px 8px rgba(24, 28, 34, 0.14);
+}
+.arena-name-label.is-hit.is-hovered {
+  border-color: #087f5b;
+  box-shadow:
+    0 0 0 2px rgba(8, 127, 91, 0.22),
+    0 2px 8px rgba(24, 28, 34, 0.14);
+}
+.point-key button.is-hit {
+  border-color: #8fc7ae;
+  box-shadow: 0 0 0 2px rgba(8, 127, 91, 0.14);
 }
 @media (max-width: 700px) {
   .arena-name-label {
@@ -2381,6 +2597,11 @@ small {
   .plot-controls span {
     flex-basis: 100%;
     line-height: 1.5;
+  }
+  .chart-search-slot,
+  .chart-search-root,
+  .chart-search {
+    width: 100%;
   }
 }
 .fee-bands {
@@ -2783,8 +3004,19 @@ body,
   stroke: #67717d;
 }
 :root[data-theme="dark"] .arena-logo-mark {
-  border-color: #c8cdd3;
+  /* The badge fill stays light in dark mode, so only a dark frame reads. */
+  border-color: #2c3239;
   background: #f1f2f3;
+}
+:root[data-theme="dark"] .arena-logo-mark.is-hit {
+  border-color: #0b7a58;
+  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.3);
+}
+:root[data-theme="dark"] .arena-logo-mark.is-hit.is-hovered {
+  border-color: #0b7a58;
+  box-shadow:
+    0 0 0 2px rgba(104, 197, 162, 0.3),
+    0 3px 10px rgba(0, 0, 0, 0.5);
 }
 :root[data-theme="dark"] .arena-name-label {
   color: #e6e9ec;
@@ -2795,6 +3027,67 @@ body,
 :root[data-theme="dark"] .arena-name-label.is-hovered {
   border-color: #737e8a;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+/* Label fill is dark in dark mode, so a near-black frontier frame would be
+   invisible — frontier goes light grey instead. */
+:root[data-theme="dark"] .arena-name-label.is-frontier {
+  border-color: #c3cad2;
+}
+:root[data-theme="dark"] .arena-name-label.is-hit {
+  border-color: #68c5a2;
+  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.22);
+}
+:root[data-theme="dark"] .arena-name-label.is-frontier.is-hovered {
+  border-color: #c3cad2;
+}
+:root[data-theme="dark"] .arena-name-label.is-hit.is-hovered {
+  border-color: #68c5a2;
+  box-shadow:
+    0 0 0 2px rgba(104, 197, 162, 0.22),
+    0 3px 10px rgba(0, 0, 0, 0.5);
+}
+:root[data-theme="dark"] .point-key button.is-hit {
+  border-color: #3f7a62;
+  box-shadow: 0 0 0 2px rgba(104, 197, 162, 0.18);
+}
+:root[data-theme="dark"] .chart-search {
+  border-color: #373d45;
+  background: #1b1f24;
+  color: #8b919a;
+}
+:root[data-theme="dark"] .chart-search:focus-within {
+  border-color: #4d7a68;
+}
+:root[data-theme="dark"] .chart-search input {
+  color: #e0e3e7;
+}
+:root[data-theme="dark"] .chart-search input::placeholder {
+  color: #858e99;
+}
+:root[data-theme="dark"] .chart-search-slot .chart-search button {
+  border: 0;
+  background: transparent;
+  color: #8b919a;
+}
+:root[data-theme="dark"] .chart-search-chip {
+  border-color: #3f7a62;
+  background: #1d332b;
+  color: #dbe8e2;
+}
+:root[data-theme="dark"] .chart-search-list {
+  border-color: #3a4048;
+  background: #191d21;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+}
+:root[data-theme="dark"] .chart-search-slot .chart-search-option {
+  color: #e3e6ea;
+}
+:root[data-theme="dark"] .chart-search-slot .chart-search-option:hover,
+:root[data-theme="dark"] .chart-search-slot .chart-search-option.is-active {
+  background: #20262a;
+}
+:root[data-theme="dark"] .chart-search-section {
+  color: #7d838c;
 }
 :root[data-theme="dark"] .point-halo {
   border-color: #171a1e;

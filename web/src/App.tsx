@@ -62,6 +62,8 @@ import {
   visiblePoints,
   isUnmetered,
   unmeteredNote,
+  workloadLine,
+  listPriceLine,
 } from "./domain";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
@@ -837,6 +839,7 @@ function Explorer({
                   data={data}
                   theme={theme}
                   onSelect={setDetail}
+                  onSearch={(find, lock) => patch({ find, lock })}
                   handle={chart}
                 />
               )}
@@ -1515,35 +1518,55 @@ function Details({
               </>
             )}
           </div>
-          <h4>
-            {t(
-              "Adoption evidence · original source text",
-              "采用依据 · 原始来源文字",
+          {p.billing === "subscription" && !isUnmetered(p) && (
+            <div className="basis">
+              <small>{t("Quota basis", "额度口径")}</small>
+              {p.workload ? (
+                <p>{workloadLine(p, data.conventions, lang)}</p>
+              ) : null}
+              {p.list_price ? (
+                <p>
+                  {listPriceLine(p, lang)}
+                  {p.list_blended_usd_per_mtok != null &&
+                    t(
+                      ` · standard-load blended ≈ ${price(p.list_blended_usd_per_mtok)}/MTok`,
+                      `；标准负载加权 ≈ ${price(p.list_blended_usd_per_mtok)}/MTok`,
+                    )}
+                </p>
+              ) : null}
+            </div>
+          )}
+          <details className="evidence-fold">
+            <summary>
+              {t(
+                "Adoption evidence · original source text",
+                "采用依据 · 原始来源文字",
+              )}
+            </summary>
+            <p className="original-text">{p.source}</p>
+            {p.decision_note && (
+              <p className="original-text">{p.decision_note}</p>
             )}
-          </h4>
-          <p className="original-text">{p.source}</p>
-          {p.decision_note && (
-            <p className="original-text">{p.decision_note}</p>
-          )}
-          {p.note && p.note !== p.decision_note && (
-            <p className="original-text">{p.note}</p>
-          )}
-          <div className="source-links">
-            {p.evidence.map((e, i) => (
-              <a key={i} href={safeUrl(e.url)} target="_blank" rel="noreferrer">
-                {e.label}
+            {p.note && p.note !== p.decision_note && (
+              <p className="original-text">{p.note}</p>
+            )}
+            <div className="source-links">
+              {p.evidence.map((e, i) => (
+                <a key={i} href={safeUrl(e.url)} target="_blank" rel="noreferrer">
+                  {e.label}
+                  <ArrowUpRight size={13} />
+                </a>
+              ))}
+              <a
+                href={`${REPO}/tree/main/data/research`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("Browse the public evidence archive", "浏览公开证据存档")}
                 <ArrowUpRight size={13} />
               </a>
-            ))}
-            <a
-              href={`${REPO}/tree/main/data/research`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t("Browse the public evidence archive", "浏览公开证据存档")}
-              <ArrowUpRight size={13} />
-            </a>
-          </div>
+            </div>
+          </details>
           <h4>{t("Benchmark references", "评测配置参考")}</h4>
           {rows
             .filter((r) => r.point.id === p.id && r.mapping)
