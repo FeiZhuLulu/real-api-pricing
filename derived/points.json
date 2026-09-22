@@ -32905,7 +32905,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4.1 Flash API 闲时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.006,
     "input": 0.3,
@@ -33068,7 +33068,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4.1 Flash API 忙时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.006,
     "input": 0.3,
@@ -33231,7 +33231,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4 Flash API 闲时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.014,
     "input": 0.44,
@@ -33394,7 +33394,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4 Flash API 忙时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.014,
     "input": 0.44,
@@ -33557,7 +33557,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4 Pro API 闲时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.044,
     "input": 1.32,
@@ -33720,7 +33720,7 @@
    "vendor": "DeepSeek",
    "local_price": null,
    "label": "DeepSeek V4 Pro API 忙时",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.044,
     "input": 1.32,
@@ -33883,7 +33883,7 @@
    "vendor": "OpenAI",
    "local_price": null,
    "label": "GPT-5.6 Sol API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.4,
     "input": 4.0,
@@ -34046,7 +34046,7 @@
    "vendor": "xAI",
    "local_price": null,
    "label": "Grok 4.6 API (<200k)",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.5,
     "input": 2.0,
@@ -34209,7 +34209,7 @@
    "vendor": "Anthropic",
    "local_price": null,
    "label": "Claude Opus 5 API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.5,
     "input": 5.0,
@@ -34372,7 +34372,7 @@
    "vendor": "Anthropic",
    "local_price": null,
    "label": "Claude Sonnet 5 API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.2,
     "input": 2.0,
@@ -34535,7 +34535,7 @@
    "vendor": "Anthropic",
    "local_price": null,
    "label": "Claude Fable 5 API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 1.0,
     "input": 10.0,
@@ -34698,7 +34698,7 @@
    "vendor": "Anthropic",
    "local_price": null,
    "label": "Claude Fable 5.1 API",
-   "workload": "",
+   "workload": "standard",
    "list_price": null,
    "price_usd": null,
    "monthly_yi": null,
@@ -34856,7 +34856,7 @@
    "vendor": "OpenAI",
    "local_price": null,
    "label": "GPT-5.6 Terra API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.2,
     "input": 2.0,
@@ -35019,7 +35019,7 @@
    "vendor": "OpenAI",
    "local_price": null,
    "label": "GPT-5.6 Luna API",
-   "workload": "",
+   "workload": "standard",
    "list_price": {
     "cached": 0.02,
     "input": 0.2,

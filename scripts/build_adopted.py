@@ -708,7 +708,8 @@ def main() -> None:
         rows.append(dict(plan_id=pid, plan_name=name, plan_name_en="", billing="metered", price="", currency="USD", price_usd="",
                          served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=round(blended(cached, inp, out), 5),
                          unmetered="", promo_until="", confidence="high", chart_tier="main", source=src,
-                         decision_note=METERED_NOTES.get(pid, f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}")))
+                         decision_note=METERED_NOTES.get(pid, f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}"),
+                         plan_gen=plan_gen_of(pid), workload=workload_of(pid, "metered")))
 
     with OUT.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)

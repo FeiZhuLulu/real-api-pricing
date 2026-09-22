@@ -112,10 +112,6 @@ def load_list_prices() -> dict[str, dict]:
     return out
 
 
-def load_list_blended() -> dict[str, float]:
-    return {m: v["blended_usd"] for m, v in load_list_prices().items()}
-
-
 def main() -> None:
     scores, list_prices = load_scores(), load_list_prices()
     boards_meta = {b["boardId"]: b for archive in score_archives() if not archive.get("supplement") for b in archive["boards"]}
