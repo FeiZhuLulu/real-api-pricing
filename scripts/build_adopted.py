@@ -468,7 +468,8 @@ def glm_rows() -> list[tuple]:
 
 # 小米 MiMo Token Plan：官方月度 Credits 池 ÷ 分模型分类型 burn 率折 token（mimo.mi.com 订阅文档）。
 # Credits 为虚拟计量单位（cached/input/output 每 token 所扣 credits 各不相同），非固定美元面值。
-# 套餐仅覆盖 v2.5 系列文本模型（v2.5-pro / v2.5；ASR 按时长、TTS 免费均不入图）；V2.6 未列入。
+# 套餐覆盖 8 款：v2.6-pro / v2.6-flash / v2.5-pro / v2.5 / v2.5-asr / tts×3（ASR 按时长、TTS 免费不入图）；
+# V2.6 于 2026-09-22 列入官方支持清单（发布次日文档更新，用户面板截图互证），burn 率与 v2.5 对应档一致。
 # 夜间 00:00-08:00（北京）consumption 0.8× → 同 credits 多换 25% token，与 GLM/DeepSeek 闲时同型，
 # 按惯例拆独立情景点（日间基准 / 夜间0.8×）。首购88折、年付88折不采（一次性/换约折扣）。
 # ¥价与$价同档同池：国内外并点、月费按国际版美元标价（Kimi 并点口径），¥价记入决策注。
@@ -481,6 +482,8 @@ MIMO_TOKEN_TIERS = (
     ("max", "Max", 659, 100, 82_000_000_000),
 )
 MIMO_CREDIT_RATES = {  # model -> (cached_input, input, output) credits/token
+    "mimo-v2.6-pro": (2.5, 300, 600),
+    "mimo-v2.6-flash": (2, 100, 200),
     "mimo-v2.5-pro": (2.5, 300, 600),
     "mimo-v2.5": (2, 100, 200),
 }
@@ -504,7 +507,7 @@ def mimo_rows() -> list[tuple]:
                     f"新增{monthly_yi:g}亿：月池{credits / 1e9:g}B Credits÷统一标准负载混合burn {burn:g} credits/token"
                     f"（该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
                     + ("；夜间00:00-08:00（北京）consumption×0.8，同credits多换25% token" if band == "night" else "；日间基准消耗档")
-                    + "；套餐仅覆盖 v2.5 系列文本模型，V2.6 截至 2026-09-22 未列入官方支持清单；"
+                    + "；套餐覆盖 v2.6-pro/v2.6-flash/v2.5-pro/v2.5 共4款文本模型（2026-09-22文档更新+用户面板互证）；"
                     "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）",
                 ))
     return rows
