@@ -16,7 +16,17 @@ for row in archive["scores"]:
     assert sec["agentHarness"] == "mini-swe-agent"
 configs = json.loads((ROOT / "derived/benchmark-configurations.json").read_text(encoding="utf-8"))
 deep = [c for c in configs if c["board"] == "deepswe_1_1"]
-assert len(deep) == 71
+# Official snapshot rows map 1:1 to configurations. Vendor self-reports arrive as
+# supplements, so pin them by value rather than by a total that every supplement bumps.
+assert len([c for c in deep if not c["score_is_self_reported"]]) == len(archive["scores"])
+assert {(c["model"], c["score"]) for c in deep if c["score_is_self_reported"]} == {
+    ("deepseek-v4.1-flash", 74.2), ("grok-4.7", 71.0),
+    ("mimo-v2.6-pro", 71.9), ("mimo-v2.6-flash", 67.9), ("mimo-v2.5-pro", 19.0)}
+assert len(deep) == len(archive["scores"]) + 5
+assert all(c["score_low"] is None and c["mean_cost_usd_per_task"] is None
+           for c in deep if c["score_is_self_reported"])
+assert {c["agent_harness"] for c in deep
+        if c["score_is_self_reported"] and c["model"] != "deepseek-v4.1-flash"} == {"mini-swe-agent"}
 astra = [c for c in deep if c["model"] == "gpt-6-astra"]
 assert {c["reasoning_effort"] for c in astra} == {"low", "medium", "high", "xhigh", "max"}
 assert max(astra, key=lambda c: c["score"])["reasoning_effort"] == "xhigh"
