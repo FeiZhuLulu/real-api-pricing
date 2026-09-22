@@ -37,7 +37,7 @@ TEMPLATE = r"""<!doctype html>
 </style></head><body>
 <header>
   <h1><mark>帕累托前沿</mark> 真实单价 × 评测配置参考</h1>
-  <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 默认月 = 4 周；Kimi独立月池=周池×5）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro保留Opus4.8历史实测。</div>
+  <div class="sub">真实单价 = 订阅月费 ÷ 用户每月实际可用 token（饱和使用 · 全口径含缓存 · 默认月 = 4 周；Kimi独立月池=周池×5）。每个点 = (订阅套餐, 实际服务模型)；同一模型走不同渠道是不同的点。Claude Max (9/14+) 为2026-09-14起永久额度估算，非当前活动期上限；Pro为Opus 5周池面板反推（shownotover，round8）。</div>
   <div class="bar">
     <label>Y 轴榜单 <select id="board"></select></label>
     <label>评测配置 <select id="configuration"><option value="summary" selected>最高分汇总（默认）</option><option value="all">全部配置（参考映射）</option></select></label>
@@ -80,7 +80,7 @@ function pareto(pts,yk){let best=-Infinity,f=[];for(const p of [...pts].sort((a,
 function fmt(v){return v==null?"—":v;}
 function hover(p,yk,vk){
   const board=yk.replace(/__score$/, ""),field=k=>p[board+"__"+k];
-  const price=p.unmetered?`$${p.price_usd} ÷ 无界（${promoText(p)}）→ ≈$0 促销价，非永久口径`:p.billing==="metered"?"按量 API（标价 × 项目标准负载）":`$${p.price_usd} ÷ ${p.monthly_yi} 亿 token`;
+  const price=p.unmetered?`$${p.price_usd} ÷ 无界（${promoText(p)}）→ ≈$0 促销价，非永久口径`:p.billing==="metered"?"按量 API（标价 × 项目标准负载）":p.local_price?`${p.local_price} / 国际 $${p.price_usd} ÷ ${p.monthly_yi} 亿 token`:`$${p.price_usd} ÷ ${p.monthly_yi} 亿 token`;
   return `<b>${p.label}</b><br>真实单价 <b>${priceLabel(p.real_usd_per_mtok)}/MTok</b><br>${price}`
    +(p.d!=null?`<br>标价混合 $${p.list_blended_usd_per_mtok}/MTok → d = ${(p.d*100).toFixed(1)}%`:"")
    +`<br>Y：${fmt(p[yk])}（${escapeHtml(locVariant(fmt(p[vk])))}）`
@@ -108,7 +108,7 @@ function frontAnnotations(front,pts,yk,xrange,yrange,width,height){
   for(let i=1;i<line.length;i++){const [x,y]=line[i-1],[xx,yy]=line[i];const n=Math.max(2,Math.ceil(Math.hypot(xx-x,yy-y)/10));for(let j=1;j<n;j++)obstacles.push([x+(xx-x)*j/n,y+(yy-y)*j/n]);}
   return [...front].reverse().map(p=>{
     const models=[...new Set(p.members.map(q=>locVariant(q[yk.replace(/__score$/, "__variant")]||q.model_display)))].join(" / ");
-    const plans=[...new Set(p.members.map(q=>q.plan.replace("Claude ","").replace("ChatGPT ","")))];
+    const plans=[...new Set(p.members.map(q=>q.plan.replace("Claude ","").replace("ChatGPT ","")+(q.local_price?`（${q.local_price} / 国际 $${q.price_usd}）`:"")))];
     const rows=[models,...plans,p.unmetered?"≈$0 · "+promoText(p):priceLabel(p.real_usd_per_mtok)+" / MTok"];
     const w=Math.min(width-12,Math.max(...rows.map(s=>[...s].reduce((n,c)=>n+(c.charCodeAt(0)>255?12:6.6),0)))+18),h=rows.length*17+12;
     const x=px(p),y=py(p);let best=null;

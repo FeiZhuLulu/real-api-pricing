@@ -9,11 +9,13 @@ Run from the repository root, in order:
 python scripts/build_adopted.py
 python scripts/compute.py
 python scripts/checks/verify_benchmark_configs.py
+python scripts/checks/verify_deepswe.py
 python scripts/plot_svg.py
 node scripts/render_svg.cjs
 python scripts/build_html.py
 node scripts/checks/verify_configuration_html.cjs
 python scripts/plot_quotas.py
+python scripts/checks/verify_chart_labels.py
 python scripts/publish_charts.py
 python scripts/checks/verify_svg.py
 python scripts/checks/verify_four_boards.py

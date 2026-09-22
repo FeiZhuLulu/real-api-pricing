@@ -73,18 +73,16 @@
       "priceUsd": 100,
       "model": "gpt-6-astra",
       "evidenceType": "derived_official_multiplier",
-      "calculation": "1.59 亿 × 5 = 7.95 亿/月",
       "confidence": "medium",
-      "decision": "曾按 Luna 同法派生 7.95 亿；2026-09-11 用户拍板撤回——Pro 档 Astra 周池三源分歧 2.7×（见 chatgpt-astra-issue8-round9），派生值暂不采用，只保留 Plus 独立点。"
+      "decision": "×5 派生法 2026-09-13 弃用删除：官方 5x/20x 消息倍率不是 raw-token 倍率，且官方 FAQ 明示 Plus 端 Astra 为 limited 子池，派生基础不成立。数值不再记录。"
     },
     {
       "planId": "chatgpt_pro_20x",
       "priceUsd": 200,
       "model": "gpt-6-astra",
       "evidenceType": "derived_official_multiplier",
-      "calculation": "1.59 亿 × 20 = 31.81 亿/月",
       "confidence": "medium",
-      "decision": "曾派生 31.81 亿并入库；2026-09-11 用户拍板撤回——Observatory 09-08 直测 34.63 亿/月（21.8×）与 issue#8 网关 84~93 亿/月（53~58×）分歧未裁决，先只保留 Plus 实测点。chatgpt-pro20x-gateway-measurement 中含大量 Astra 段但为混合负载，仅作量级旁证。"
+      "decision": "×20 派生法 2026-09-13 弃用删除：同上，Plus limited 子池使派生基础不成立；Pro20x 真实池多源（round8~round11）指向远高于 20× 的量级。数值不再记录。chatgpt-pro20x-gateway-measurement 中含大量 Astra 段但为混合负载，仅作量级旁证。"
     }
   ],
   "weeklyWindowCacheHitRates": {
@@ -99,8 +97,8 @@
     "chatgpt_plus_gpt_6_astra_monthlyYi": 1.59
   },
   "withdrawn": {
-    "chatgpt_pro_5x_gpt_6_astra_monthlyYi": 7.95,
-    "chatgpt_pro_20x_gpt_6_astra_monthlyYi": 31.81,
-    "reason": "用户 2026-09-11 拍板：Pro 档三源分歧 2.7× 未裁决（×20 派生 / Observatory 34.6 亿直测 / issue#8 网关 84~93 亿），暂不派生，待更干净周窗证据。【2026-09-12 更新：用户改用 round10 的 10% 截图反推值 48.08 亿/月（low）作为 Pro20x 采用值；×20 派生已被五源证据判定系统性偏低（Plus 端 Astra 为 limited 子池）】"
+    "chatgpt_pro_5x_gpt_6_astra": "derived",
+    "chatgpt_pro_20x_gpt_6_astra": "derived_then_10pct_then_removed",
+    "reason": "×20/×5 派生法 2026-09-13 弃用：官方倍率是消息条数口径，Plus 端 Astra 又是 limited 子池，派生值系统性偏低，按用户要求从记录中删除。Pro20x 曾于 2026-09-12 短暂采用 round10 的 10% 截图反推值，同日用户决定 Pro20x Astra 暂不展示，撤回。Pro 5x 始终无数据。"
   }
 }

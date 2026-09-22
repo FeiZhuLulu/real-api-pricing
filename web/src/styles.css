@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap");
 :root {
   font-family:
+    "DM Sans Variable",
     "DM Sans",
     -apple-system,
     BlinkMacSystemFont,
@@ -593,7 +593,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 9px;
   overflow: auto;
-  max-height: min(560px, 65vh);
+  max-height: min(760px, 78vh);
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
   scroll-padding-top: 50px;
@@ -605,7 +605,7 @@ h1 {
   background: #fafbfc;
 }
 .ranking-scroll {
-  max-height: min(560px, 65vh);
+  max-height: min(760px, 78vh);
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
@@ -619,6 +619,32 @@ h1 {
 .ranking-scroll:focus-visible, .table-scroll:focus-visible {
   outline: 2px solid #86bca8;
   outline-offset: 3px;
+}
+.resize-handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  margin-top: 6px;
+  cursor: ns-resize;
+  touch-action: none;
+  user-select: none;
+  border-radius: 6px;
+}
+.resize-handle span {
+  width: 44px;
+  height: 4px;
+  border-radius: 2px;
+  background: #c9d0d8;
+  transition: background 0.15s, width 0.15s;
+}
+.resize-handle:hover span, .resize-handle:focus-visible span {
+  background: #86bca8;
+  width: 64px;
+}
+.resize-handle:focus-visible {
+  outline: 2px solid #86bca8;
+  outline-offset: 2px;
 }
 .ranking-status {
   margin: 16px 0 0;
@@ -2158,8 +2184,8 @@ small {
 }
 .ranking-row {
   width: 100%;
-  min-height: 98px;
-  padding: 17px 12px;
+  min-height: 60px;
+  padding: 9px 12px;
   text-align: left;
   border: 0;
   border-bottom: 1px solid #edf0f3;
@@ -2187,11 +2213,15 @@ small {
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
-.rank-identity > span {
+.rank-identity .model-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.rank-plan {
   font-size: 12px;
+  font-weight: 400;
   color: #596574;
   line-height: 1.5;
-  overflow-wrap: anywhere;
 }
 .rank-identity small {
   display: flex;
@@ -2229,6 +2259,7 @@ small {
   color: #252d36;
   letter-spacing: -0.4px;
   font-weight: 600;
+  white-space: nowrap;
 }
 .rank-value small {
   font-size: 10px;
@@ -2296,12 +2327,12 @@ small {
     grid-template-columns: 20px minmax(0, 1fr) 106px;
     gap: 10px;
     padding: 18px 4px;
-    min-height: 120px;
+    min-height: 88px;
   }
   .rank-identity strong {
     font-size: 14px;
   }
-  .rank-identity > span {
+  .rank-plan {
     font-size: 11px;
   }
   .rank-value strong {
@@ -2534,7 +2565,15 @@ body,
   border-color: #555d68;
   background: #252a30;
 }
-:root[data-theme="dark"] .language,
+:root[data-theme="dark"] .language {
+  color: #dce0e4;
+  border: 1px solid #373d45;
+  background: #1b1f24;
+}
+:root[data-theme="dark"] .language:hover {
+  border-color: #555d68;
+  background: #252a30;
+}
 :root[data-theme="dark"] .github {
   background: transparent;
 }
@@ -2548,6 +2587,13 @@ body,
 :root[data-theme="dark"] .ranking-columns {
   color: #a1a9b3;
   background: #14171a;
+}
+:root[data-theme="dark"] .resize-handle span {
+  background: #3a424c;
+}
+:root[data-theme="dark"] .resize-handle:hover span,
+:root[data-theme="dark"] .resize-handle:focus-visible span {
+  background: #86bca8;
 }
 :root[data-theme="dark"] .board-tab {
   color: #9aa2ac;
@@ -2772,7 +2818,7 @@ body,
 :root[data-theme="dark"] .point-hover-card .hover-stats i,
 :root[data-theme="dark"] .point-hover-card .hover-foot,
 :root[data-theme="dark"] .ranking-toolbar p,
-:root[data-theme="dark"] .rank-identity > span,
+:root[data-theme="dark"] .rank-identity .rank-plan,
 :root[data-theme="dark"] .rank-identity small,
 :root[data-theme="dark"] .rank-value small {
   color: #9ba4af;

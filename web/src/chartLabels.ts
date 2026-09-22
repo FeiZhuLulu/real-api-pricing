@@ -140,6 +140,14 @@ const sizeCache = new Map<string, { width: number; height: number }>();
 let probe: HTMLElement | null | undefined;
 
 /**
+ * Widths measured before the web font arrives are stale; drop them so labels
+ * are re-measured against the real font.
+ */
+export function clearLabelSizeCache() {
+  sizeCache.clear();
+}
+
+/**
  * Measure a name with a hidden copy of the real label element, so the reserved
  * box matches the rendered font, letter spacing, padding and border exactly —
  * for CJK as well as Latin names.
@@ -624,7 +632,7 @@ export function buildExportDecorationsFromLayout(
         size: fontSize,
         color: "#20242a",
         family:
-          "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+          '"DM Sans Variable", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif',
       },
       align: "center",
       captureevents: false,

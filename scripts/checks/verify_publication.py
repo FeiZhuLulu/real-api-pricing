@@ -20,9 +20,7 @@ for p in ROOT.joinpath('data').rglob('*.json'):
     json.loads(p.read_text(encoding='utf-8-sig'))
 
 exported = list(exports())
-assert len(exported) == 139
-assert not any(d.parent.name == 'frontier' and d.suffix in ('.svg', '.png')
-               and ('deepswe' in d.name or 'DeepSWE' in d.name) for _, d in exported)
+assert len(exported) == 147
 assert len({d for _,d in exported}) == len(exported)
 for source,destination in exported:
     assert destination.is_file(), destination

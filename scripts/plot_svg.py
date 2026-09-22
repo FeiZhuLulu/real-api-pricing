@@ -108,10 +108,20 @@ def plan_name(plan, language):
     return plan.replace(" (9/14+)", " · 9/14+").replace(" (老客 ¥149)", " · 老客 ¥149").replace(" (促销至 10/31)", " · 促销至 10/31")
 
 
+def plan_label(q, language):
+    """会员点套餐名：国内外并点档英文用国际版名、中文用国内档名，并注明两边标价。"""
+    if not q.get("plan_en"):
+        return plan_name(q["plan"], language)
+    usd = f"${q['price_usd']:g}"
+    if language == "en":
+        return q["plan_en"] + (f" · {usd} / CN {q['local_price']}" if q.get("local_price") else "")
+    return plan_name(q["plan"], language) + (f" · {q['local_price']} / 国际 {usd}" if q.get("local_price") else "")
+
+
 def label_lines(p, language, board=None):
     plans = []
     for q in p["members"]:
-        plan = plan_name(q["plan"], language)
+        plan = plan_label(q, language)
         if plan not in plans:
             plans.append(plan)
     if len(plans) == 2 and all(x.startswith("Max ") for x in plans):
@@ -246,7 +256,7 @@ def draw(board, meta, points, tier, language="zh"):
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
         c = COLORS.get(channel(p), "#58655E")
         is_front = p["id"] in ids
-        tooltip_labels = [f'{q["model_display"]} · {plan_name(q["plan"], language)}' for q in p["members"]]
+        tooltip_labels = [f'{q["model_display"]} · {plan_label(q, language)}' for q in p["members"]]
         tooltip = " / ".join(tooltip_labels) + f" · {fmt_price(p['real_usd_per_mtok'])}/MTok · {p[key]} · {p['confidence']}"
         tooltip += " / ".join(str(q.get(board + "__variant")) + " · " + str(q.get(board + "__mapping_note")) for q in p["members"])
         s.append(f'<g class="point" data-billing="{p["billing"]}" data-frontier="{str(is_front).lower()}" data-price="{p["real_usd_per_mtok"]}" data-score="{p[key]}" data-x="{x:.3f}" data-y="{y:.3f}" transform="translate({x:.3f} {y:.3f})"><title>{escape(tooltip)}</title>')
@@ -307,7 +317,7 @@ def draw(board, meta, points, tier, language="zh"):
               if board == "open_design_arena" else
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board in ("aa_coding_agent_index", "terminal_bench_4", "deepswe_1_1") else
-              "Claude Max：9/14 起永久额度估算；Pro：Opus 4.8 历史实测。Y 取同模型存档最高分变体。"
+              "Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。"
           )) + ((" ≈$0 = SWE-2 promo: unmetered on Devin Pro/Max/Teams until 2026-10-31, not permanent; TB4 score self-reported by Cognition."
                  if language == "en" else " ≈$0 为 SWE-2 促销价：Devin Pro/Max/Teams 至 2026-10-31 不计额度，非永久口径；TB4 分数为 Cognition 自报。")
                 if has_zero else ""), 11, "#929A90"),

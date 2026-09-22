@@ -1,0 +1,57 @@
+{
+  "collectedAt": "2026-09-21",
+  "scopeNote": "第十四轮：用户转供的 Pro 20x Astra 周额度新证据——含用户自己账号两日记账（API 价折算列）、两条 X 社区额度自述、一条 sub2 后台口径、一张同类型会话 token+份额截图。统一换算为 Astra 当量 raw token/周。",
+  "items": [
+    {
+      "id": "fig1_user_panel",
+      "claim": "用户本地面板两日（Pro 20x，满周额度打满）：9/20 gpt-6-astra 3517 次/未缓存15.71M/缓存650.03M/输出1.78M（折$896.37）；9/21 至 13:47 astra 851 次/4.76M/149.63M/0.48M（折$220.97）；两日全模型合计 $1099.96+$243.59=$1343.55 list-worth。",
+      "evidenceType": "user_measurement",
+      "source": "用户面板截图（2026-09-21）",
+      "confidence": "high",
+      "observed": {"day1AstraWorthUsd": 896.37, "day2AstraWorthUsd": 220.97, "twoDayAllModelWorthUsd": 1343.55, "twoDayAstraRawM": 822.4, "userAstraMixUsdPerMtok": 1.344},
+      "weeklyPoolEquivYi": 10.0,
+      "note": "按'满周额度'理解：周池≈$1343.55 list-worth ÷ 用户 astra mix $1.344/MTok ≈10.0亿/周。若仅计 astra 份额（$1117）→ 8.3亿/周为下限。"
+    },
+    {
+      "id": "fig2_zrainbo",
+      "claim": "X @zrainbo（用户转述为自述认可）：'Astra 1200-1500 是准确的，也就是 9-9.5e token；5.6 sol 在 2500 刀左右，25-30e token'。",
+      "evidenceType": "community_report",
+      "source": "https://x.com/ABCDEF7sb/status/2101958265571869025/photo/12",
+      "confidence": "medium",
+      "observed": {"astraWeeklyWorthUsd": [1200, 1500], "astraWeeklyTokensYi": [9, 9.5], "solWeeklyWorthUsd": 2500, "solWeeklyTokensYi": [25, 30]},
+      "weeklyPoolEquivYi": 9.25,
+      "note": "raw token 断言 9~9.5 亿/周与采用值正中；Sol 25~30 亿/周与采用值 30.8 亿/周吻合。Astra $1300 vs Sol $2500 说明内部计权非标价等比——Astra 相对 Sol 惩罚 ~1.9×，与 w≈3.2× 反推同向。"
+    },
+    {
+      "id": "fig3_sub2_backend",
+      "claim": "X @fquolodasha：'sub2 后台看到的，几个车队得到的额度，大概 astra 是 1500 刀左右，5.6 的额度在 2200-2500 左右'。",
+      "evidenceType": "community_report",
+      "source": "X 线程（用户转贴）",
+      "confidence": "low-medium",
+      "observed": {"astraWeeklyWorthUsd": 1500, "solWeeklyWorthUsd": [2200, 2500]},
+      "weeklyPoolEquivYi": 10.3,
+      "note": "自称后台多车队数据；$1500 ÷ $1.34~1.6/M ≈ 9.4~11.2 亿 raw；取中 ~10.3 亿。"
+    },
+    {
+      "id": "fig4_2over3",
+      "claim": "用户截图：单日 Astra 未缓存输入19.58M+缓存522.43M+输出3.07M=545.08M raw，折 $871.82；自述当日消耗周额度 2/3 → 整周 ≈$1307.73。",
+      "evidenceType": "community_measurement",
+      "source": "用户转贴截图",
+      "confidence": "medium",
+      "observed": {"dayRawM": 545.08, "dayWorthUsd": 871.82, "mixUsdPerMtok": 1.599, "weeklyShareClaimed": 0.667, "weeklyWorthUsd": 1307.73},
+      "weeklyPoolEquivYi": 8.18,
+      "note": "token 表为真实遥测，'2/3'为自述份额；按其负载 mix 折回 raw 周池 8.18 亿。"
+    }
+  ],
+  "synthesis": {
+    "newBatchWeeklyPoolYi": "8.18~11.2 亿/周，全部落在采用值 9.61 亿/周（38.44 亿/月）所在簇",
+    "worthFraming": "新口径：Pro20x 周池≈$1200~1500 list-worth（Astra 口径）；同池 Sol 可达 $2200~2500——内部计权对 Astra 相对标价惩罚 ~1.9×",
+    "weightedUpdate": "并入加权后周池 9.61→9.53 亿/周、月 38.44→38.12 亿——确认非修正",
+    "highClusterStatus": "lichengzhe 21~23 亿仍无补测，与所有同框/面板证据矛盾，继续不采"
+  },
+  "notFound": [
+    "图4 用户'2/3'读数的面板截图",
+    "图3 sub2 后台的原始表",
+    "官方 Pro20x 周帽绝对值"
+  ]
+}

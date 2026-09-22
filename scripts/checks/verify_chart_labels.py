@@ -5,10 +5,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from plot_quotas import chart_variant
 
-for harness in ("DeepSeek Harness Minimal", "mini-swe-agent"):
+for harness in ("DeepSeek Harness Minimal", "mini-SWE"):
     variant = f"{harness} - DeepSeek V4.1 Flash (max) [vendor self-report]"
     row = {"board_variant": variant, "board_harness": harness}
-    assert chart_variant(row) == f"DeepSeek V4.1 Flash (max)\n{harness} · vendor self-report"
+    expected = (f"DeepSeek V4.1 Flash (max)\n{harness} · vendor self-report"
+                if len(variant) > 60 else variant)
+    assert chart_variant(row) == expected
     assert row["board_variant"] == variant
 
 short = "Codex - GPT-6 Astra (max)"

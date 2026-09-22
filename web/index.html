@@ -8,10 +8,41 @@
       name="description"
       content="Compare the real cost of AI. Explore subscription allowances, model benchmarks and the price–performance frontier, with transparent sources."
     />
+    <meta
+      property="og:title"
+      content="Real API Pricing — The cost behind the capability"
+    />
+    <meta
+      property="og:description"
+      content="Compare the real cost of AI. Explore subscription allowances, model benchmarks and the price–performance frontier, with transparent sources."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://real-api-pricing.vercel.app/" />
+    <meta property="og:site_name" content="Real API Pricing" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      try {
+        var t = localStorage.getItem("pricing-theme");
+        if (t !== "dark" && t !== "light")
+          t = matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
     <title>Real API Pricing — The cost behind the capability</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      This explorer needs JavaScript. Static charts and data:
+      <a href="https://github.com/FeiZhuLulu/real-api-pricing"
+        >github.com/FeiZhuLulu/real-api-pricing</a
+      >
+      / 本页需要 JavaScript，静态图表与数据见
+      <a href="https://github.com/FeiZhuLulu/real-api-pricing">GitHub 仓库</a>。
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

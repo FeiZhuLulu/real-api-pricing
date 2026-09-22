@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("arena_code", "arena_agent_mode", "aa_intelligence_index", "aa_coding_agent_index", "open_design_arena", "terminal_bench_4", "deepswe_1_1")
+BOARDS = ("aa_intelligence_index", "terminal_bench_4", "arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena", "deepswe_1_1")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
@@ -115,9 +115,11 @@ def main() -> None:
             model = r["served_model"]
             real = float(r["real_usd_per_mtok"])
             lb = list_blended.get(model)
+            plan_en = r.get("plan_name_en") or None
             p = dict(
-                id=f"{r['plan_id']}::{model}", plan=r["plan_name"], billing=r["billing"], model=model,
+                id=f"{r['plan_id']}::{model}", plan=r["plan_name"], plan_en=plan_en, billing=r["billing"], model=model,
                 model_display=DISPLAY.get(model, model), vendor=vendor_of(model),
+                local_price=f"¥{r['price']}" if plan_en and r["currency"] == "CNY" else None,
                 label=r["plan_name"] if r["billing"] == "metered" else f"{DISPLAY.get(model, model)} · {r['plan_name']}",
                 price_usd=float(r["price_usd"]) if r["price_usd"] else None,
                 monthly_yi=float(r["monthly_yi"]) if r["monthly_yi"] else None,

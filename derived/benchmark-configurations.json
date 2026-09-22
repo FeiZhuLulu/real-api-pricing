@@ -16517,13 +16517,13 @@
     }
   },
   {
-    "configuration_id": "deepswe_1_1:ccff929c2d658e31",
+    "configuration_id": "deepswe_1_1:3d9b43ea1f40d6be",
     "board": "deepswe_1_1",
     "model": "deepseek-v4.1-flash",
-    "variant": "mini-swe-agent - DeepSeek V4.1 Flash (max) [vendor self-report]",
+    "variant": "mini-SWE - DeepSeek V4.1 Flash (max) [vendor self-report]",
     "score_is_estimated": null,
     "score_is_self_reported": true,
-    "agent_harness": "mini-swe-agent",
+    "agent_harness": "mini-SWE",
     "reasoning_effort": "max",
     "service_mode": null,
     "score": 74.2,
@@ -16537,12 +16537,12 @@
     "raw_record": {
       "boardId": "deepswe_1_1",
       "model": "deepseek-v4.1-flash",
-      "variantLabel": "mini-swe-agent - DeepSeek V4.1 Flash (max)",
+      "variantLabel": "mini-SWE - DeepSeek V4.1 Flash (max)",
       "score": 74.2,
       "secondary": {
         "selfReported": true,
         "reportedBy": "DeepSeek",
-        "agentHarness": "mini-swe-agent",
+        "agentHarness": "mini-SWE",
         "reasoningEffort": "max",
         "contextWindowTokens": 1000000,
         "temperature": 1.0,

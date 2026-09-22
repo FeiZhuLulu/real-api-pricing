@@ -1,0 +1,47 @@
+{
+  "collectedAt": "2026-09-21",
+  "scopeNote": "第七轮：用户本地实测 Google AI Pro（Antigravity 合池）Gemini 3.8 Flash——首个 token×周% 同框，补齐 round6 stillMissing 第一项（周帽）。只追加，不改历史文件。",
+  "priorContext": {
+    "round6": "data/research/gemini-user-estimate-round6-2026-09-06.json — 5h锚≈$20.4 worth（161.69M/81.3%），缺周帽；LLMDevs Pro 300~350M/5h、1.0B/周、Ultra 5.0B/周均 low",
+    "officialMechanism": "antigravity.google/docs/plans：5h 滚动刷新直至周上限；Flash/Pro 按 API 价合池扣减（token worth）；Ultra $100=5×、$200=20× Pro worth；UI 仅显示%"
+  },
+  "items": [
+    {
+      "id": "B_segment",
+      "claim": "用户本地实测（Google AI Pro，模型 gemini-3.8-flash）：B1 前半 +2.85% 对应 cache输入1414.4万/缓存外输入292.5万/输出4.7万=1711.6万 raw；B2 后半 +7.03% 对应 3154.3万/633.3万/35.1万=3822.7万；B 整段 +9.88% 对应 4568.8万/925.8万/39.8万=5534.3万 raw。",
+      "evidenceType": "user_measurement",
+      "source": "用户提供本地遥测表（2026-09-21）",
+      "sourceDate": "2026-09-21",
+      "confidence": "high",
+      "observed": {
+        "plan": "google_ai_pro_us",
+        "model": "gemini-3.8-flash",
+        "b1": {"cachedIn": 14144000, "uncachedIn": 2925000, "out": 47000, "total": 17116000, "deltaPct": 2.85, "worthUsd": 3.43},
+        "b2": {"cachedIn": 31543000, "uncachedIn": 6333000, "out": 351000, "total": 38227000, "deltaPct": 7.03, "worthUsd": 8.43},
+        "bTotal": {"cachedIn": 45688000, "uncachedIn": 9258000, "out": 398000, "total": 55343000, "deltaPct": 9.88, "worthUsd": 11.86},
+        "pricesUsed": {"cache": 0.075, "input": 0.75, "output": 3.75, "note": "Gemini 3.8 Flash 引入价（至 2026-12-31）"}
+      },
+      "worthMeteringProof": "B1:B2 的 % 比 2.85/7.03=0.405 与 worth 比 3.43/8.43=0.407 吻合，与 raw 比 1711.6/3822.7=0.448 不符——实证按 API worth 计权而非 raw token",
+      "windowInterpretation": "按周条解读：周帽 ≈$120.1 worth/周；若为5h条则 $120/5h 与 round6 的 $20.4/5h 锚差 6× 不合理"
+    },
+    {
+      "id": "cross_validation",
+      "claim": "周帽 $120.1 worth/周的外部一致性：round6 5h锚≈$20.4 → 周≈5.9个满载 sprint（'5h刷新直至周帽'机制自洽）；LLMDevs Pro ~1.0B/周 对应其负载 mix 隐含 ≈$0.12/MTok；LLMDevs Ultra ~5.0B/周 恰为 Pro 的 5×（官方 worth 倍率）",
+      "evidenceType": "cross_source_comparison",
+      "confidence": "medium",
+      "note": "用户实测负载 cache 占 82.6%（低于典型 agentic 负载 ~97%），故 raw 口径 560M/周 偏低；标准负载口径 1173M/周 更接近典型缓存型负载实得"
+    }
+  ],
+  "synthesis": {
+    "weeklyWorthPoolUsd": 120.1,
+    "adoptedBasis": "raw 实测口径：55.343M÷9.88%×4周 = 22.4亿/月——worth 池下 raw 额度随负载 mix 变化；用户指出 Gemini 实际负载打不到标准口径的 97.5% cache，本样本（cache 82.6%）即'实际可用'证据",
+    "standardMixEquivalent": "标准负载折算口径：120.1×4 ÷ $0.102375/MTok = 46.9亿/月——因 mix 假设过高弃用，留作参照",
+    "pro5xUltraDerivation": "官方 worth 倍率 5×/20× 同 mix 下等比 → Ultra 5x ≈112.05亿/月、Ultra 20x ≈448.2亿/月（low，未独立实测）",
+    "impliedFiveHour": "若周/5h 比≈5.9 保持，5h 桶≈$20.4 worth≈2.0亿标准负载 token，与 round6 用户锚一致"
+  },
+  "notFound": [
+    "该 9.88% 读数的面板截图（用户口述为周条口径，未见图）",
+    "Google 官方周帽绝对 worth/token 表（仍不公布）",
+    "第二账号复测"
+  ]
+}

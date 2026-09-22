@@ -7,12 +7,12 @@
     {
       "boardId": "deepswe_1_1",
       "model": "deepseek-v4.1-flash",
-      "variantLabel": "mini-swe-agent - DeepSeek V4.1 Flash (max)",
+      "variantLabel": "mini-SWE - DeepSeek V4.1 Flash (max)",
       "score": 74.2,
       "secondary": {
         "selfReported": true,
         "reportedBy": "DeepSeek",
-        "agentHarness": "mini-swe-agent",
+        "agentHarness": "mini-SWE",
         "reasoningEffort": "max",
         "contextWindowTokens": 1000000,
         "temperature": 1.0,

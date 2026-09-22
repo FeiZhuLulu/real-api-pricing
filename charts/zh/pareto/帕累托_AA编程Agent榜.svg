@@ -56,7 +56,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Coding Agent Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,275.263 L923.717,275.263 L925.567,341.225 L990.100,360.110 L1276.748,395.828 L1338.000,395.828" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,275.263 L951.712,275.263 L1087.704,352.097 L1276.748,395.828 L1338.000,395.828" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="65.0524" data-x="777.545" data-y="309.262" transform="translate(777.545 309.262)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 65.0524 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Codex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -70,21 +70,27 @@
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
 <circle r="4" fill="#00A86B"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01259" data-score="62.1405" data-x="925.567" data-y="341.225" transform="translate(925.567 341.225)"><title>Claude Opus 4.8 · Pro · $0.01259/MTok · 62.1405 · mediumClaude Code - Opus 4.8 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00892" data-score="61.1501" data-x="979.408" data-y="352.097" transform="translate(979.408 352.097)"><title>Gemini 3.8 Flash · Google AI Pro / Gemini 3.8 Flash · Google AI Ultra 5x · $0.00892/MTok · 61.1501 · highOpencode - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Opencode - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#7CC12A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00446" data-score="61.1501" data-x="1087.704" data-y="352.097" transform="translate(1087.704 352.097)"><title>Gemini 3.8 Flash · Google AI Ultra 20x · $0.00446/MTok · 61.1501 · lowOpencode - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#7CC12A" stroke-width="1.35"/>
+<circle r="4" fill="#7CC12A"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01065" data-score="68.1498" data-x="951.712" data-y="275.263" transform="translate(951.712 275.263)"><title>Claude Opus 5 · Pro · $0.01065/MTok · 68.1498 · mediumClaude Code - Opus 5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
 <circle r="4" fill="#F07826"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.01274" data-score="68.1498" data-x="923.717" data-y="275.263" transform="translate(923.717 275.263)"><title>Claude Opus 5 · Max 20x · 9/14+ / Claude Opus 5 · Max 5x · 9/14+ · $0.01274/MTok · 68.1498 · mediumClaude Code - Opus 5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Claude Code - Opus 5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#F07826" stroke-width="1.35"/>
-<circle r="4" fill="#F07826"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01274" data-score="68.1498" data-x="923.717" data-y="275.263" transform="translate(923.717 275.263)"><title>Claude Opus 5 · Max 20x · 9/14+ / Claude Opus 5 · Max 5x · 9/14+ · $0.01274/MTok · 68.1498 · mediumClaude Code - Opus 5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Claude Code - Opus 5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02023" data-score="62.6388" data-x="851.469" data-y="335.755" transform="translate(851.469 335.755)"><title>Kimi K3 · Kimi 会员 199 · $0.02023/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02688" data-score="62.6388" data-x="807.063" data-y="335.755" transform="translate(807.063 335.755)"><title>Kimi K3 · Kimi 会员 199 · ¥199 / 国际 $39 · $0.02688/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05036" data-score="62.6388" data-x="708.975" data-y="335.755" transform="translate(708.975 335.755)"><title>Kimi K3 · Kimi 会员 99 · $0.05036/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06552" data-score="62.6388" data-x="667.859" data-y="335.755" transform="translate(667.859 335.755)"><title>Kimi K3 · Kimi 会员 99 · ¥99 / 国际 $19 · $0.06552/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02369" data-score="62.6388" data-x="826.801" data-y="335.755" transform="translate(826.801 335.755)"><title>Kimi K3 · Kimi 会员 699 · $0.02369/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.02274" data-score="62.6388" data-x="833.195" data-y="335.755" transform="translate(833.195 335.755)"><title>Kimi K3 · Kimi 会员 699 · ¥699 / 国际 $99 · $0.02274/MTok · 62.6388 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#2FA8FF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.14901" data-score="38.1218" data-x="539.485" data-y="604.872" transform="translate(539.485 604.872)"><title>Qwen3.7 Plus · 阿里云百炼 Coding Plan Pro · $0.14901/MTok · 38.1218 · mediumClaude Code - Qwen3.7 Plus (thinking) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -183,12 +189,14 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.04163" data-score="61.0333" data-x="738.719" data-y="353.379" transform="translate(738.719 353.379)"><title>GPT 5.5 · Pro 5x · $0.04163/MTok · 61.0333 · mediumCodex - GPT-5.5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00833" data-score="60.4201" data-x="990.100" data-y="360.110" transform="translate(990.100 360.110)"><title>GPT 5.6 Terra · Pro 20x · $0.00833/MTok · 60.4201 · mediumCodex - GPT-5.6 Terra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00A86B" stroke-width="1.35"/>
-<circle r="4" fill="#00A86B"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.00833" data-score="60.4201" data-x="990.100" data-y="360.110" transform="translate(990.100 360.110)"><title>GPT 5.6 Terra · Pro 20x · $0.00833/MTok · 60.4201 · mediumCodex - GPT-5.6 Terra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02081" data-score="61.0333" data-x="847.052" data-y="353.379" transform="translate(847.052 353.379)"><title>GPT 5.5 · Pro 20x · $0.02081/MTok · 61.0333 · mediumCodex - GPT-5.5 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01065" data-score="62.1405" data-x="951.712" data-y="341.225" transform="translate(951.712 341.225)"><title>Claude Opus 4.8 · Pro · $0.01065/MTok · 62.1405 · lowClaude Code - Opus 4.8 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01274" data-score="62.1405" data-x="923.717" data-y="341.225" transform="translate(923.717 341.225)"><title>Claude Opus 4.8 · Max 20x · 9/14+ · $0.01274/MTok · 62.1405 · lowClaude Code - Opus 4.8 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#F07826" opacity=".68"/>
@@ -251,22 +259,16 @@
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#00A86B" stroke-width="1.5" opacity=".68"/>
 </g>
 <g class="front-label" data-model="claude-opus-5">
-<path d="M915.999,262.400Q915.999,245.263 905.717,245.263" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="899.717" y="226.263" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Code · Claude Opus 5 · xhigh</text>
-<text x="899.717" y="246.263" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x / 20x · 9/14+</text>
-<text x="899.717" y="266.263" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01274</text>
+<path d="M943.995,262.400Q943.995,245.263 933.712,245.263" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="927.712" y="226.263" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Code · Claude Opus 5 · xhigh</text>
+<text x="927.712" y="246.263" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
+<text x="927.712" y="266.263" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01065</text>
 </g>
-<g class="front-label" data-model="claude-opus-4.8">
-<path d="M918.549,354.482Q918.549,375.225 907.567,375.225" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="901.567" y="388.225" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Code · Claude Opus 4.8 · max</text>
-<text x="901.567" y="408.225" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
-<text x="901.567" y="428.225" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01259</text>
-</g>
-<g class="front-label" data-model="gpt-5.6-terra">
-<path d="M996.808,346.693Q996.808,324.110 1008.100,324.110" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1014.100" y="305.110" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Codex · GPT 5.6 Terra · max</text>
-<text x="1014.100" y="325.110" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Pro 20x</text>
-<text x="1014.100" y="345.110" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00833</text>
+<g class="front-label" data-model="gemini-3.8-flash">
+<path d="M1081.846,338.288Q1081.846,319.097 1073.704,319.097" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1067.704" y="300.097" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Opencode · Gemini 3.8 Flash · high</text>
+<text x="1067.704" y="320.097" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Google AI Ultra 20x</text>
+<text x="1067.704" y="340.097" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00446</text>
 </g>
 <g class="front-label" data-model="gpt-5.6-luna">
 <path d="M1280.386,410.380Q1280.386,439.828 1287.748,439.828" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -294,12 +296,14 @@
 <text x="792.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Ollama</text>
 <rect x="858" y="826" width="8" height="8" fill="#1F75FE"/>
 <text x="875.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >DeepSeek</text>
-<path d="M961 830h22" stroke="#303630" stroke-width="1.65"/>
-<text x="991.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
-<path d="M1081 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
-<text x="1095.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
+<rect x="952" y="826" width="8" height="8" fill="#7CC12A"/>
+<text x="969.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Google</text>
+<path d="M1044 830h22" stroke="#303630" stroke-width="1.65"/>
+<text x="1074.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >帕累托前沿</text>
+<path d="M1164 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
+<text x="1178.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >54 个订阅位置 / 9 个 API 位置 / 4 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >57 个订阅位置 / 9 个 API 位置 / 3 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/agents/coding-agents</text>

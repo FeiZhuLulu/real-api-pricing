@@ -1,0 +1,256 @@
+{
+  "collectedAt": "2026-09-16",
+  "scopeNote": "第十二轮联网证据：ChatGPT 订阅内 GPT-6 Astra（Codex/Work 共享池）在 Pro 5x（$100 / prolite）与 Pro 20x（$200）的周额度绝对 token。优先 2026-09-12 之后新证据，裁决既有 8.66 亿 vs 12~23 亿分歧。先读过 chatgpt-astra-adoption-round7、chatgpt-astra-quota-round8、chatgpt-astra-issue8-round9、chatgpt-astra-10pct-window-round10、codex-astra-community-x-round11、chatgpt-pro20x-gateway-measurement；本文件只追加，不改已有 research / adopted / scripts。口径：全 token（input+cache_read+cache_write+output）一视同仁；月=4 周；饱和使用。Agent Bridge 本会话 runtime_context=worker、dispatch_enabled=false，故本轮由当前会话直接搜集，未再派子 worker。",
+  "items": [
+    {
+      "claim": "Codex Quota Observatory（单匿名 Pro 20×）Astra 纯模型 headline 已从 2026-09-08 更新到 2026-09-13：7 samples · 35 pts → rawContextPerPoint=8,534,909 → 全周 853,490,923 tokens（约 8.53 亿）；creditsPerPoint=321.1、全周约 32,111 credits。相对 Sol（35.9M/pt）quota/token ≈ 4.21×。日趋势 09-04~09-13 稳定在约 8.4–8.9M tokens/百分点（09-12=8.67M、09-13=8.50M），未见池子跳变。",
+      "evidenceType": "community_measurement",
+      "source": "https://codex-quota.manetli.com/api/public-stats",
+      "sourceDate": "2026-09-15",
+      "quote": "GPT-6 Astra 853.5M context / 100 pts observed · 4.2× quota/token vs Sol ... Astra 8.53M tokens / 1% Sep 13, 2026 UTC · 7 samples · 35 pts",
+      "confidence": "medium",
+      "machineReadable": "https://codex-quota.manetli.com/api/public-stats",
+      "crossLinks": [
+        "https://codex-quota.manetli.com/"
+      ],
+      "observed": {
+        "plan": "chatgpt_pro_20x",
+        "model": "gpt-6-astra",
+        "serviceTier": "standard",
+        "rawContextPerPoint": 8534909,
+        "rawContextPerPointLow": 8168169,
+        "rawContextPerPointHigh": 8953580,
+        "fullWindowRawContext": 853490923,
+        "fullWindowYi": 8.53,
+        "creditsPerPoint": 321.1,
+        "fullWindowCredits": 32111,
+        "headlineSampleCount": 7,
+        "headlineQuotaPoints": 35,
+        "headlineStartDay": "2026-09-13",
+        "headlineEndDay": "2026-09-13",
+        "astraVsSolQuotaPerToken": 4.206626338956865,
+        "history": {
+          "sampleCount": 71,
+          "completeDays": 7,
+          "observedQuotaPoints": 355
+        },
+        "trendRawContextPerPoint": {
+          "2026-09-04": 8419169,
+          "2026-09-05": 8384564,
+          "2026-09-06": 8492421,
+          "2026-09-07": 8940742,
+          "2026-09-08": 8642988,
+          "2026-09-12": 8667989,
+          "2026-09-13": 8500648
+        },
+        "activityLateDays": {
+          "2026-09-07": 1330040559,
+          "2026-09-08": 979794342,
+          "2026-09-09": 6020604,
+          "2026-09-12": 442347795,
+          "2026-09-13": 445480113
+        },
+        "apiGeneratedAtUtc": "2026-09-15T15:50:34Z",
+        "dataThroughUtc": "2026-09-14T23:59:59Z",
+        "disclosure": "single anonymous Pro 20× account; not a universal OpenAI allowance"
+      },
+      "deltaVsRound8": {
+        "oldHeadlineDay": "2026-09-08",
+        "oldFullWindowRawContext": 865766240,
+        "oldFullWindowYi": 8.66,
+        "newFullWindowYi": 8.53,
+        "note": "headline 样本日从 09-08 滚到 09-13；绝对值略降约 1.4%，仍落在 8.5 亿量级。09-09 活动骤降、09-10/11 无日活、09-12/13 恢复，与 09-12 官方再重置时间线吻合。"
+      },
+      "note": "这是目前公开网上仍唯一的『Pro20x + Astra 纯模型 + token 与 used_percent 同框』且持续更新到 09-13 的数据集。Plus/Pro5x 仍标 modeled_ratio（0.05 / 0.25），非独立实测。"
+    },
+    {
+      "claim": "V2EX msg7086（Pro 20X）：自述全部会话为 Astra（lightweight/medium，无 fast、<272K 上下文），以『上一次 Tibo 重置时间戳』为界统计会话 token：非缓存输入 16.8M + 缓存输入 584.9M + 输出（含推理）3.37M = 605,074,493；假设恰好对应已用 75%，线性外推整周约 8.07 亿 tokens / API 等效约 $1,229。补充帖给出下一重置窗合计 876,802,241 tokens（未附 %）。",
+      "evidenceType": "community_measurement",
+      "source": "https://www.v2ex.com/t/1241470",
+      "sourceDate": "2026-09-11",
+      "quote": "我所有的会话都是 Astra ，以 lightweight 和 medium 为主，没有开过 fast 。… 假设这些数据恰好覆盖本周已消耗的 75% … 整周 100% 约 8.07 亿",
+      "confidence": "medium",
+      "observed": {
+        "plan": "chatgpt_pro_20x",
+        "model": "gpt-6-astra",
+        "effort": "lightweight_and_medium",
+        "fast": false,
+        "contextCap": "<272K",
+        "window1": {
+          "uncachedInput": 16835563,
+          "cachedInput": 584864000,
+          "outputIncludingReasoning": 3374930,
+          "totalTokens": 605074493,
+          "claimedUsedPercent": 75,
+          "impliedFullWeekTokens": 806765991,
+          "impliedFullWeekYi": 8.07,
+          "apiDollarEquivalentUsdAt75pct": 921.97,
+          "impliedFullWeekApiUsd": 1229.29
+        },
+        "window2Supplement": {
+          "uncachedInput": 26789763,
+          "cachedInput": 845564800,
+          "outputIncludingReasoning": 4447678,
+          "totalTokens": 876802241,
+          "claimedUsedPercent": null,
+          "note": "补充窗有绝对 token，无同框 %，不能单独外推全周"
+        }
+      },
+      "note": "与 Observatory 8.53~8.66 亿同量级；作者自承 75% 为假设线性。跟帖 maolon/leantli/ntdll 等以 API 美元等效口述（Astra 周约 $1300、Sol 约 $1600–2500），无 raw token+% 同框，仅作旁证。sillydaddy 提醒缺 cache_write；OP 复查记录里 cache_write_input_tokens 全为 0。"
+    },
+    {
+      "claim": "X @sdmat123（2026-09-15）：分析两台 Pro 20x 账号自 Astra 上线以来的 quota 与 tokens，『每次 reset 用量 somewhere north of 800M tokens』， overwhelmingly cached input；并称 OAI 未改 Astra 在 Codex 的用量计量。附图表。",
+      "evidenceType": "community_report_screenshot",
+      "source": "https://x.com/sdmat123/status/2099764901678072033",
+      "sourceDate": "2026-09-15",
+      "quote": "I analyzed quota and tokens across two 20x accounts on my main dev system, and since launch usage is somewhere north of 800M tokens per reset. Overwhelmingly cached input.",
+      "confidence": "medium",
+      "observed": {
+        "plan": "chatgpt_pro_20x",
+        "accounts": 2,
+        "tokensPerResetLowerBound": 800000000,
+        "tokensPerResetYiLowerBound": 8.0
+      },
+      "note": "『>8 亿/次 reset』与 Observatory / V2EX 8.0~8.5 亿簇同向；作者承认混有少量 Luna 与别处轻量用量。非受控打满脚本，但独立于 manetli 单账号。"
+    },
+    {
+      "claim": "首次出现 Pro 5x / Prolite 档 Astra token 与周 used_percent 同框：GitHub openai/codex#45085，ChatGPT Prolite（€100/月，plan_type=prolite），2026-09-12 重置后 0%→86%（约 4h31m），Astra High 主线程 + 3 个子代理 + guardian，合计 198,428,302 total tokens（缓存读占输入 97.38%）。外推 100% ≈ 230.7M tokens/周（约 2.31 亿）。",
+      "evidenceType": "community_measurement",
+      "source": "https://github.com/openai/codex/issues/45085",
+      "sourceDate": "2026-09-12",
+      "quote": "ChatGPT Prolite (€100/month). The rollout telemetry reports plan_type: \"prolite\". … used_percent: 0 … used_percent: 86 … Aggregate usage … Total 198,428,302",
+      "confidence": "medium（同框观测）；low-medium（外推为『纯 Astra 常态周池』）",
+      "observed": {
+        "plan": "chatgpt_pro_5x_prolite",
+        "planTypeTelemetry": "prolite",
+        "priceEur": 100,
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "windowStartUtc": "2026-09-12T10:07:46Z",
+        "windowEndUtc": "2026-09-12T14:38:41Z",
+        "usedPercentFrom": 0,
+        "usedPercentTo": 86,
+        "deltaPercentPoints": 86,
+        "totalTokens": 198428302,
+        "cachedInputTokens": 192381312,
+        "uncachedInputTokens": 5178076,
+        "outputTokens": 868914,
+        "impliedFullWeekTokens": 230730584,
+        "impliedFullWeekYi": 2.31,
+        "mix": {
+          "mainThreadYiShare": 0.342,
+          "threeChildAgentsShare": 0.621,
+          "guardianAutoReviewShare": 0.037
+        }
+      },
+      "crossCheck": {
+        "observatoryPro20xWeeklyYi": 8.53,
+        "modeledPro5xAsQuarterOfPro20xYi": 2.13,
+        "thisIssueImpliedYi": 2.31,
+        "note": "若按官方消息表 20x=4×5x 把 Observatory Pro20x 8.53 亿折成 Pro5x，得约 2.13 亿；本条外推 2.31 亿量级接近。但本条是多代理高缓存放大负载，不能直接当单线程纯 Astra 池；且 Pro5x 是否严格=Pro20x/4 对 Astra 尚未证实。"
+      },
+      "note": "这是本项目首次收集到的 Pro 5x/prolite Astra token+% 同框样本；落在 09-12 官方重置后的干净 0% 起点。作者报告目的是质疑多代理上下文放大，不是为测池大小。"
+    },
+    {
+      "claim": "官方于 2026-09-12 再次发放付费订阅用量重置（继 09-07 全局重置之后）：Tibo 03:20 UTC 宣布『a reset is also landing by midnight today』并附质量修复说明；08:09 UTC 确认『Reset all propagated. Sweet dreams.』。codexresets.com / Codex Reset FM 将此次记为最近一次确认重置。未见官方称改周池绝对值。",
+      "evidenceType": "official_announcement",
+      "source": "https://x.com/thsottiaux/status/2098612714704891959",
+      "sourceDate": "2026-09-12",
+      "quote": "And of course, a reset is also landing by midnight today. … Reset all propagated. Sweet dreams.",
+      "confidence": "high",
+      "crossLinks": [
+        "https://x.com/thsottiaux/status/2098685367058612394",
+        "https://codexresets.com/",
+        "https://codex-reset.pro/"
+      ],
+      "note": "与 09-03/04/05 banked、09-07 global 同属『重置恢复额度』叙事；Observatory 09-09~11 活动空洞后 09-12 恢复，时间线自洽。截至 2026-09-15 codexresets.com 显示此后无新确认重置。"
+    },
+    {
+      "claim": "截至 2026-09-16 搜集时，官方 Help Center『About ChatGPT Pro tiers』仍置顶：自 2026-09-10 起暂时暂停 ChatGPT Pro $200（Pro 20X）新购与升级（含从 Free/Go/Plus/Pro $100 升上来）；现有 $200 续费不受影响；Pro $100 新购与现有均不受影响。多语言镜像同步保留该 Note。未找到解除暂停的公告。",
+      "evidenceType": "official_doc",
+      "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "sourceDate": "2026-09-16",
+      "quote": "As of September 10, 2026, we’re temporarily pausing new sign-ups and upgrades to the ChatGPT Pro $200 plan (Pro 20X). This includes sign-ups and upgrades from Free, Go, Plus, or Pro $100. Existing ChatGPT Pro $200 subscriptions and new or existing ChatGPT Pro $100 subscriptions are not affected by this pause.",
+      "confidence": "high",
+      "crossLinks": [
+        "https://help.openai.com/zh-hans-cn/articles/9793128-about-chatgpt-pro-tiers",
+        "https://x.com/thsottiaux/status/2098113585683808624"
+      ],
+      "note": "页面显示 Updated minutes ago，但暂停文案日期仍为 Sep 10；无 reopen 日期。Tibo 09-10 原帖之后未见宣布恢复销售。"
+    },
+    {
+      "claim": "GitHub issue #8（FeiZhuLulu/real-api-pricing）：lichengzhe 2026-09-07 承诺『等 Astra 跑满一两个完整周窗后再补更干净的数字』；FeiZhuLulu 2026-09-11 追问『你那边有更新的数据吗？』。截至 2026-09-16 该 issue 活动流无 lichengzhe 后续回复或新干净周窗数据——承诺未兑现。",
+      "evidenceType": "community_status_check",
+      "source": "https://github.com/FeiZhuLulu/real-api-pricing/issues/8",
+      "sourceDate": "2026-09-16",
+      "quote": "等 Astra 跑满一两个完整周窗后我可以再补一版更干净的数字。 … 你好，我自己实测大概是32亿tokens一个月。你那边有更新的数据吗？",
+      "confidence": "high（状态事实）；既有 21~23 亿/周测量仍为 medium 且跨 reset 风险未消",
+      "note": "21~23 亿/周（round9）与 Observatory/V2EX/sdmat 的 ~8~8.5 亿簇仍差约 2.5~2.7×；无干净周窗补测前不能用其裁决。"
+    },
+    {
+      "claim": "X @Reism4k（2026-09-15）口述+截图：Pro x20 上 GPT-6 Astra 『roughly ~2 billion worth of tokens』才用尽周额度。落在既有高簇（lichengzhe 21~23 / 社区 12~20），与 Observatory 8.5 亿簇冲突。",
+      "evidenceType": "community_report_screenshot",
+      "source": "https://x.com/Reism4k/status/2099875228193058988",
+      "sourceDate": "2026-09-15",
+      "quote": "Looks like GPT 6 Astra gives you roughly ~2 billion worth of tokens before you're out of weekly. Pro x20 plan.",
+      "confidence": "low",
+      "observed": {
+        "plan": "chatgpt_pro_20x",
+        "claimedWeeklyTokensYi": 20
+      },
+      "note": "无 used_percent 读数、无模型纯度说明、截图未在本轮 OCR 核验；仅作矛盾源登记。"
+    },
+    {
+      "claim": "X @arjunkambj（2026-09-14）口述：5x 档 Sol 约 300M tokens/周、20x 约 1.2B；并称过去（无频繁 reset 时）曾是 1B / 4B。指向 Sol 侧而非 Astra，且无 % 同框。",
+      "evidenceType": "community_report",
+      "source": "https://x.com/arjunkambj/status/2099611484708077920",
+      "sourceDate": "2026-09-14",
+      "quote": "right now on 5x plan 300M tokens per week and on 20x 1.2B and it used be 1b and 4b without resets, and i m taking about sol",
+      "confidence": "low",
+      "note": "Sol 口述量级远低于 Observatory Pro20x Sol headline ~35.9 亿；口径/纯度不明，不用于 Astra 裁决。"
+    },
+    {
+      "claim": "Pro20x Astra 周池多源对照（本轮更新）：Observatory 09-13 → 8.53 亿；V2EX 纯 Astra 75% 外推 → 8.07 亿；sdmat 双账号 → >8 亿/reset；10%截图反推（round10）→ 12~15.6 亿；X 社区口述（round11）→ 10~20 亿；lichengzhe 网关（round9，无干净补测）→ 21~23 亿；@Reism4k → ~20 亿。低端簇（约 8.0~8.5 亿）在 09-07/09-12 重置之后新增两条独立来源，权重上升；高端簇仍无 09-12 后受控打满复核。",
+      "evidenceType": "cross_source_comparison",
+      "source": "round8/9/10/11 与本文件",
+      "sourceDate": "2026-09-16",
+      "table": {
+        "observatory_pro20x_weeklyYi_2026_09_13": 8.53,
+        "v2ex_msg7086_implied_weeklyYi": 8.07,
+        "sdmat_two_accounts_per_resetYi_lowerBound": 8.0,
+        "round10_10pct_screenshot_weeklyYi": "12~15.6",
+        "round11_x_community_oral_weeklyYi": "10~20",
+        "lichengzhe_gateway_weeklyYi_unupdated": "21~23",
+        "reism4k_oral_weeklyYi": 20
+      },
+      "analysis": "候选解释仍成立：(a) lichengzhe/高簇窗口跨多次 reset 或 % 被回打导致高估；(b) 负载/effort/子代理导致 raw token per % 方差大（Observatory 给的是纯模型区间样本）；(c) Observatory 单账号系统性偏低——但 V2EX 与 sdmat 两条独立来源靠拢 8 亿簇，削弱 (c)。用户拍板『暂不挂点』仍合理：缺第二份可复核的受控打满表，且官方绝对 token 表仍未公布。",
+      "confidence": "high（分歧与簇迁移本身）；medium（8.0~8.5 亿为常态池的程度）"
+    }
+  ],
+  "synthesis": {
+    "officialWeeklyAbsoluteTokens": "仍未公布",
+    "pro200PauseStatus": "仍暂停新购/升级（Help Center 2026-09-16 仍置顶 Sep 10 文案）；无解除公告",
+    "newOfficialResetsSinceRound8": [
+      "2026-09-12 global/propagated reset（Tibo 确认）"
+    ],
+    "bestPostResetPro20xAstraEvidence": "Observatory 2026-09-13：Pro20x Astra ≈ 8.53 亿 tokens/周（medium，单账号；较 round8 的 8.66 略降）",
+    "independentCorroborationNear8Yi": [
+      "V2EX msg7086 纯 Astra 75%→8.07 亿",
+      "sdmat 双账号 >8 亿/reset"
+    ],
+    "pro5xFirstSameFrame": "codex#45085 prolite：198.4M tokens / 86% → 外推约 2.31 亿/周（多代理 Astra High；与把 Pro20x 8.53/4 得 2.13 亿量级接近，但不能直接采用）",
+    "lichengzheCleanWeek": "notFound — issue #8 无 09-11 之后补测",
+    "adoptionImplication": "本轮不改 adopted；Pro 两档 Astra 仍建议暂不挂点。若用户要用单一参考中心，09-12 后证据更偏向 ~8.0~8.5 亿/周（月约 32~34 亿），但与 12~23 亿簇未闭环裁决。",
+    "weightCaveat": "Observatory Astra≈4.2× Sol quota/token 相对 round8 的 4.1× 不变；与 lichengzhe 1.5~1.7× 冲突依旧"
+  },
+  "notFound": [
+    "官方公布的 Astra（或任一模型）周窗绝对 token / credits 数值表",
+    "官方公布的订阅内模型权重表",
+    "lichengzhe 承诺的完整干净周窗补测（issue #8 无 2026-09-11 之后新回复）",
+    "第二份独立于 Observatory、可下载原始 Δtoken/Δ% 表的 Pro 20x 纯 Astra 受控打满样本（V2EX/sdmat 为强旁证但非可复核原始表）",
+    "Pro 5x 单线程、可分离纯度的 Astra 打满样本（仅有 #45085 多代理 Prolite 同框）",
+    "$200 Pro 暂停解除或 reopen 日期的官方公告",
+    "官方宣布 09-12 之后另一次 banked/global 重置改变了池大小（只找到重置本身）",
+    "Astra 计量/权重变更的新官方说明（Tibo 09-10 仍称 launch 以来无改动；09-12 重置帖谈质量修复而非改额度）"
+  ]
+}

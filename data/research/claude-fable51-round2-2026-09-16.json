@@ -1,0 +1,216 @@
+{
+  "collectedAt": "2026-09-16",
+  "scopeNote": "第二轮专项搜集（优先 2026-09-13 之后新证据，并补漏 round1）：Anthropic Claude 订阅（Pro $20 / Max 5x $100 / Max 20x $200）内跑 Claude Fable 5.1 的订阅内计量权重、Fable 50% 周帽是否仍适用、9/14 永久周池口径生效后的绝对 token 打满反推，以及 usagebar/#79773/#93894/typed-meter 类计量标定帖。口径：全 token（输入+缓存读+缓存写+输出）一视同仁；月默认=4周；饱和使用。不覆盖旧 research 文件。矛盾全部保留，不自行择一。不许编数。",
+  "priorContext": {
+    "claudeFable51Round1": "data/research/claude-fable51-round1-2026-09-13.json — 官方可用性/API 标价/50%周帽 high；权重标定 notFound；#91623 output/turn≈2× Fable 5 非额度权重；9/1 与 9/4 重置干扰",
+    "claudeAdoptionRound7": "data/research/claude-adoption-round7-2026-09-14.json — 用户拍板：5.1 无实测不挂点已撤；usagebar/#79773/#93894 当时不可追溯",
+    "claudeAdoptionRound6": "data/research/claude-adoption-round6-2026-09-06.json — Max20x=157亿/月、Max5x=78.5亿/月（9/14 永久口径）；周池比20x/5x=2",
+    "claudeQuotasRound5": "data/research/claude-quotas-round5-2026-09.json — Fable 5 历史权重 Reddit 6.50×(20x)/4.25×(5x)；#79773 Max5x Opus 消息/% 基线；usagebar.com Pro≈45 msg/5h"
+  },
+  "items": [
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "claude-fable-5-1 / claude-fable-5",
+      "claim": "2026-09-16 再核对官方 Help Center：Fable 5 与 Fable 5.1 在套餐上规则相同；Max/premium：两者均为标准组成部分，最多可用周额度的 50% 跑 Fable 系列（同池扣减，比其他模型更快）；Pro/standard：不计入套餐周额度，首条起走 usage credits；Claude Code：Fable 5 ≥2.1.170，Fable 5.1 ≥2.1.255；选择器仍可选 Fable 5 或 Fable 5.1",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "50% 仍是同一周池内的 Fable 系列封顶份额，不是额外半池。官方仍未公布相对 Opus 的精确倍数。",
+      "evidenceType": "official_doc",
+      "source": "https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan",
+      "sourceDate": "2026-09-16",
+      "quote": "Fable 5 and Fable 5.1 work the same way on your plan. ... You can use up to 50% of your weekly usage limits on Fable models at no extra cost. They draw from your plan's regular weekly usage limits and use them faster than other Claude models. ... In Claude Code, Fable 5 requires version 2.1.170 or later and Fable 5.1 requires version 2.1.255 or later.",
+      "confidence": "high",
+      "note": "round1 同页再核：9/13 之后未见规则变更；50% 帽对 5.1 仍适用。本轮未找到官方权重倍数更新。"
+    },
+    {
+      "planId": "anthropic_fable5_api",
+      "priceUsd": null,
+      "model": "claude-fable-5",
+      "claim": "官方模型页：Claude Fable 5 仍为 Active (legacy)，建议迁移到 5.1；Retirement not sooner than June 9, 2027；API id 仍为 claude-fable-5；标价 $10/$50，缓存读仍 $1/MTok",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": null,
+      "evidenceType": "official_doc",
+      "source": "https://platform.claude.com/docs/en/models/fable-5/overview",
+      "sourceDate": "2026-09-16",
+      "quote": "Legacy. ... Although Claude Fable 5 is still available, you should consider migrating to Claude Fable 5.1 ... Status: Active (legacy) ... Retirement: Not sooner than June 9, 2027",
+      "confidence": "high",
+      "note": "确认 Fable 5 未下线、未被强制迁移；与 Help Center 选择器并存一致。未发现 Fable 5 订阅权重变更公告。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "all-models / Claude Code weekly permanent +25%",
+      "claim": "官方支持文（2026-09-14 更新）：+50% 临时周额度促销已于 2026-09-13 23:59 PT 结束；自 2026-09-14 起 Claude Code 标准周限额相对促销前基线永久 +25%（相对促销期净降约 17%）；覆盖 Pro/Max/Team/seat-based Enterprise；不改 5h 窗；仍不公布绝对 token 数",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "比例变更已官方落地；绝对值仍需面板/% 同框反推。现行 adopted 157/78.5 亿即按此永久口径（round6）。",
+      "evidenceType": "official_doc",
+      "source": "https://support.claude.com/en/articles/15910845",
+      "sourceDate": "2026-09-14",
+      "quote": "starting September 14, 2026, weekly limits in Claude Code are 25% higher than they were before the promotion for Pro, Max, Team, and seat-based Enterprise plans.",
+      "confidence": "high",
+      "note": "第三方核对（aicatchup 2026-09-14 读 support lastUpdatedDate=2026-09-14T06:59:42Z）：https://aicatchup.com/news/claude-code-weekly-limits-50-percent-promo 。pondero/choosely 等同口径。本轮仍无 9/14 之后新的 total×% 金标准反推。"
+    },
+    {
+      "planId": "claude_max_5x",
+      "priceUsd": 100,
+      "model": "claude-fable-5-1",
+      "claim": "GitHub #93894（round7 曾称不可追溯，本轮定位到标题）：Max 5x（$100/月）上单次 high effort code-review 用 Fable 5.1 可打光整个 session 预算且未完成任务；标签 area:cost",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "5h session 窗定性烧光，无周 %、无 raw total tokens、无相对 Opus 权重倍数。",
+      "evidenceType": "community_report",
+      "source": "https://github.com/anthropics/claude-code/issues/93894",
+      "sourceDate": "2026-09-12",
+      "quote": "Single code-review at high effort using Fable 5.1 blows through entire session budget at $100/month subscription level without completing",
+      "confidence": "medium",
+      "note": "本轮 GitHub 正文页被拦，仅标题+标签可核；方向与 #91623 / paddo / X 口述一致。仍非 1vx0k69 式权重标定。同日邻近 issue：#93886（[1m] 后缀误报 credits）、#93840（Team 交互 CLI 客户端误拦 Fable 5.1）——计量门控 bug，非权重表。"
+    },
+    {
+      "planId": "claude_max_5x",
+      "priceUsd": 100,
+      "model": "claude-fable-5-1",
+      "claim": "X（2026-09-14，永久口径生效当日）：Max 5x 用户称 Fable 5.1 Low effort 单 prompt 消耗 22% usage",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "未说明是 5h 窗还是周窗；无绝对 token；effort=Low。",
+      "evidenceType": "community_report",
+      "source": "https://x.com/BryanKendrick18/status/2099590906080883145",
+      "sourceDate": "2026-09-14",
+      "quote": "On Claude Max 5x ONE prompt on Fable 5.1 (Low) used 22% of usage. Unusable now.",
+      "confidence": "low",
+      "note": "9/14 后新口述；若指 5h 窗则极端烧，但无法校验窗口类型与是否含 subagent。同日另一帖 Opus5 Max5x 约 2h10m 打满 session（@aenuio）。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "claude-fable-5-1",
+      "claim": "X（2026-09-15）：多用户在永久口径生效后称 Fable 5.1 单任务即可烧掉大部分额度并取消 Max；一例称 medium 一 prompt 使 current 从 85%→100%",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "口述烧率；无 %×token 同框。",
+      "evidenceType": "community_report",
+      "source": "https://x.com/yukichu123/status/2099886778744193433",
+      "sourceDate": "2026-09-15",
+      "quote": "After Anthropic removed the 50% usage bonus and effectively cut plan limits by another 25%, the value proposition just stopped making sense. With Fable 5.1, I can barely get through a single task without burning through most of my credits.",
+      "confidence": "low",
+      "note": "同方向：@MaheshikaX（取消 20x）、@LeRouXBT（medium 一 prompt 85%→100% current）、@ShareGrokBots。均为取消动机叙述，非标定。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "claude-fable-5-1 (API output volume, NOT subscription weight)",
+      "claim": "独立复测（Firecrawl，2026-09-07）：57 次 API 跑，Fable 5.1 相对 Fable 5 的 output tokens 比约为 low 1.37× / high 1.12× / max 1.30×；max effort 下 reasoning↑、可见文本略↓。AA 指数侧仍约 1.7× output",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "API 账单侧 output 体积对比；订阅计量是否同权重仍未知。不能直接换成 6.50× 类额度权重。",
+      "evidenceType": "community_measurement",
+      "source": "https://www.firecrawl.dev/blog/is-fable-5-1-cheaper-than-fable-5",
+      "sourceDate": "2026-09-07",
+      "quote": "Across 57 API-billed runs ... Ratios were 1.37x at low, 1.12x at high, and 1.30x at max. ... Artificial Analysis measured cost per task rising 18%, from $3.14 to $3.69. Fable 5.1 spent 140M output tokens ... against Fable 5's 83M.",
+      "confidence": "medium",
+      "note": "补强 round1 的 #91623（JSONL output/turn≈2.04×）与 paddo/AA 方向；仍不是 /usage 百分比同框的订阅权重标定。日期在 round1 截止前一日，round1 未收录此文。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "claude-fable-5-1",
+      "claim": "RockLogic（2026-09-07）：官方确认 Fable『faster than other Claude models』与 50% 周帽，但『Anthropic puts no weighting factor on it anywhere』；网上流传的『~2x Opus』来自第三方/早期 UI 文案，非现行官方页",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "明确否定『官方已公布 2×』的误读。",
+      "evidenceType": "community_report",
+      "source": "https://www.rocklogic.at/blog/claude-usage-limits-fable-5-1-training-data",
+      "sourceDate": "2026-09-07",
+      "quote": "Anthropic puts no weighting factor on it anywhere. The hint circulating online, “Uses your limits ~2x faster than Opus”, concerns Fable 5 from June 2026, comes from third parties and appears on no Anthropic page.",
+      "confidence": "medium",
+      "note": "与 vanja.io『roughly double an Opus session』类 API 标价比推述形成对照：后者是价格卡 2× 直觉，不是面板标定。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "usage meters / Fable weekly bar tools",
+      "claim": "9 月中旬用量展示工具确认仍存在独立 Weekly Fable 桶（读 Anthropic usage endpoint %），但工具本身不发布绝对 token 或相对 Opus 权重：ClaudeUsageBar（Weekly Fable bar，site 更新至 2026-09-13）；Open VSX Claude Usage Meter（Fable %）；cc-usage-monitor statusline 显示 Fable 5.1",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "证明 Fable scoped 周帽在客户端/第三方仍可见；无标定数据产出。",
+      "evidenceType": "tooling_observation",
+      "source": "https://claudeusagebar.com/",
+      "sourceDate": "2026-09-13",
+      "quote": "Weekly Fable (7 day) ... 24% used",
+      "confidence": "medium",
+      "note": "round7 提到的 usagebar：Product Hunt/社区有 Usagebar 产品名；ClaudeUsageBar（Artzainnn）自 1.3.0 起加 Weekly Fable bar。https://open-vsx.org/extension/shivakrishnakokkula/claude-usage-meter ；https://github.com/harveyxiacn/cc-usage-monitor 。均非权重标定帖。"
+    },
+    {
+      "planId": "claude_max_5x",
+      "priceUsd": 100,
+      "model": "claude-opus (historical #79773; NOT new 5.1 weight)",
+      "claim": "补追溯 round7 点名的 #79773：2026-07-21 Max 20x 升级后周池仍按 5x 速率消耗的 bug 报告；正文含 Max 5x 上 ~4–5 条 Opus 消息/1% 周额度的口述基线（已入 round5）。本轮 GitHub 正文页加载失败，标题可核",
+      "weeklyTokens": null,
+      "monthlyTokens": null,
+      "tokenCountingNote": "历史 Opus 消息/% 基线，非 Fable 5.1；无 9 月新回复可核。",
+      "evidenceType": "community_report",
+      "source": "https://github.com/anthropics/claude-code/issues/79773",
+      "sourceDate": "2026-07-21",
+      "quote": "[BUG] Max 20x upgrade not reflected in weekly limits — depleting at Max 5x rate or worse (upgraded July 16, 2026)",
+      "confidence": "medium",
+      "note": "可追溯性：issue 仍存在；内容以 round5 已摘录为准。非 5.1 新标定。"
+    },
+    {
+      "planId": "claude_max_20x",
+      "priceUsd": 200,
+      "model": "claude-fable-5 (historical weight; still NOT remeasured for 5.1)",
+      "claim": "本轮仍未找到针对 Fable 5.1 的 Reddit 1vx0k69 同方法复测（token 用量与 /usage 或 Fable 桶 % 同框 → 相对 Opus 权重）。Fable 5 历史 6.50×(20x)/4.25×(5x) 锚点未被新证据取代",
+      "weeklyTokens": 108600000,
+      "monthlyTokens": 434400000,
+      "tokenCountingNote": "历史 fable-TV 单位（≈Opus-input-equivalent），非 raw ccusage total；仅作 Fable 5 锚点。",
+      "evidenceType": "community_measurement",
+      "source": "https://www.reddit.com/r/ClaudeAI/comments/1vx0k69/lifting_the_curtain_the_max_x5_and_max_x20_usage/",
+      "sourceDate": "2026-08-24",
+      "quote": "Fable weight (× Opus) Max x20 6.50 ... Fable cap (M fable-TV) 108.6",
+      "confidence": "medium",
+      "note": "round1/round5 已归档。本轮 Reddit/GitHub/X/V2EX/Zenn/Qiita 未检出 9/13 后新的同方法标定帖。"
+    }
+  ],
+  "notFound": [
+    {
+      "query": "Fable 5.1 订阅内相对 Opus 5 / Fable 5 的精确权重倍数（面板/% 同框，类似 Reddit 1vx0k69 的 6.50×/4.25×）",
+      "result": "notFound",
+      "note": "官方仍只写 faster than other Claude models；#91623 与 Firecrawl/AA 给的是 output 体积比，不是额度权重。9/14 后仅有口述烧率（22%/prompt 等），无可复算倍数。"
+    },
+    {
+      "query": "2026-09-14 永久口径生效之后 Max 5x/20x 周池绝对 token 打满反推（ccusage/JSONL total 与 /usage % 同框）",
+      "result": "notFound",
+      "note": "搜集窗口距 9/14 仅约 2 天，公开网未见完整一周打满 + total×% 金标准。夏季 skipbit / round6 157/78.5 仍是唯一可用永久口径推导，非新实测。"
+    },
+    {
+      "query": "Fable 5.1 是否已取消 50% 周帽，或 Fable 5 已下线/权重变化公告",
+      "result": "found_negative",
+      "note": "Help Center 2026-09-16 仍写 50% 且 5 与 5.1 同规则；Fable 5 官方 Status=Active (legacy)，退休不早于 2027-06-09。未见权重变更公告。"
+    },
+    {
+      "query": "typed-meter / usagebar / #79773 / #93894 中 9 月中旬新的精确计量标定（倍数或周池绝对 token）",
+      "result": "partial",
+      "note": "#93894 标题可追溯（Max5x session 烧光定性）；#79773 为 7 月历史 bug+Opus 消息基线；usagebar/ClaudeUsageBar 等为 % 展示工具无标定表。未找到名为 typed-meter 的公开标定帖产出绝对倍数。"
+    },
+    {
+      "query": "Claude Code 新版本将 fable 别名/计量公式改为相对 Opus 的新官方倍数",
+      "result": "notFound",
+      "note": "仍要求 ≥2.1.255 用 5.1；#91623 所述 fable 别名默解析到 5.1 无官方否认。未见 changelog 公布订阅权重表。"
+    },
+    {
+      "query": "site:zenn.dev OR site:qiita.com OR site:v2ex.com 2026-09-14 后 Claude Max 周池绝对 token 或 Fable 5.1 权重标定",
+      "result": "notFound",
+      "note": "V2EX 近帖多为 GLM/中转或 9 月初重置讨论；无新面板反推。Qiita 7 月 Fable 池比文已过时。"
+    }
+  ],
+  "summaryForAdoption": {
+    "availabilityAndCap": "50% Fable 周帽对 5+5.1 合计仍适用（Help Center 2026-09-16 再核，high）。Fable 5 仍 Active (legacy)，未下线。Pro 上 Fable 仍=0 计划内额度。",
+    "permanentWeeklyPool": "9/14 永久 +25% 基线（相对夏季 +50% 净 -17%）已官方落地（support 15910845，high）。绝对 token 新打满反推 = notFound；继续沿用 round6 的 157/78.5 亿除非出现新实测。",
+    "subscriptionWeight51": "仍 notFound。不得把 Fable 5 的 6.50×/4.25× 静默改标为 5.1。方向证据（非权重）：output/turn 或 AA output ≈1.1–2.1× Fable 5；订阅侧缓存计量未跟 API $0.25 降价；9/14 后口述烧率更高但不可换算倍数。",
+    "meteringIssuesTraced": "#93894 标题可追溯（Max5x high-effort 单次 review 烧光 session）；#79773 为 7 月历史；usage 展示工具确认 Fable 独立周桶仍在。均不足以挂 5.1 订阅点。",
+    "adoptionImplication": "维持 round7 用户拍板：Fable 5.1 订阅点不挂、等面板级权重或 total×% 实测。本轮无新可采用值；若未来有人复现 1vx0k69 方法，优先采 Max 20x 与 Max 5x 分档实测，勿假设同倍数。"
+  }
+}

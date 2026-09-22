@@ -4,6 +4,34 @@ import type { Lang } from "./types";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
 const REPO_API = "https://api.github.com/repos/FeiZhuLulu/real-api-pricing";
+const STARS_KEY = "pricing-stars";
+const STARS_TTL = 60 * 60 * 1000;
+
+function cachedStars(): { count: number; at: number } | null {
+  try {
+    const raw = localStorage.getItem(STARS_KEY);
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      parsed &&
+      typeof parsed === "object" &&
+      typeof (parsed as { count?: unknown }).count === "number" &&
+      typeof (parsed as { at?: unknown }).at === "number"
+    )
+      return parsed as { count: number; at: number };
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function saveStars(count: number) {
+  try {
+    localStorage.setItem(STARS_KEY, JSON.stringify({ count, at: Date.now() }));
+  } catch {
+    /* Storage is optional. */
+  }
+}
 
 function contributeIssueUrl(): string {
   const title = "补充数据 / Contribute evidence";
@@ -16,6 +44,11 @@ export default function HeaderActions({ lang }: { lang: Lang }) {
   const zh = lang === "zh";
 
   useEffect(() => {
+    const cached = cachedStars();
+    if (cached && Date.now() - cached.at < STARS_TTL) {
+      setStars(cached.count);
+      return;
+    }
     const abort = new AbortController();
     fetch(REPO_API, {
       signal: abort.signal,
@@ -28,11 +61,13 @@ export default function HeaderActions({ lang }: { lang: Lang }) {
       .then((data: { stargazers_count?: unknown }) => {
         if (typeof data.stargazers_count === "number") {
           setStars(data.stargazers_count);
+          saveStars(data.stargazers_count);
         }
       })
       .catch((e: unknown) => {
         if (e instanceof Error && e.name === "AbortError") return;
-        /* Keep the Star link; omit the count on failure. */
+        // On failure fall back to a stale cached count if one exists.
+        if (cached) setStars(cached.count);
       });
     return () => abort.abort();
   }, []);
