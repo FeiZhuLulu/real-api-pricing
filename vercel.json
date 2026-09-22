@@ -1,4 +1,7 @@
 {
+  "github": {
+    "silent": true
+  },
   "buildCommand": "npm --prefix web ci && npm --prefix web run build",
   "installCommand": "echo skipped",
   "outputDirectory": "web/dist",
