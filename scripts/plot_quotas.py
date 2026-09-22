@@ -158,6 +158,9 @@ def plan_name(row: dict, language: str) -> str:
     name = row["plan_name"]
     if name.startswith("GLM "):
         name = name.replace("老客", "v2").replace("新客", "v3")
+    if row.get("plan_gen") and not name.startswith("GLM "):
+        # GLM 老客/新客替换后套餐名已含 v2/v3 代际，不重复标注；Kimi 音乐名档补 (v1)
+        name += f" ({row['plan_gen']})"
     if row["plan_id"].startswith("kimi_"):
         name += " †"
     if language == "en":
@@ -219,6 +222,7 @@ def frontier_rows(rows: list[dict], points: list[dict], board: str) -> list[dict
             raise ValueError("derived/points.json is stale; run scripts/compute.py first")
         candidates.append({**row, "board_score": point[f"{board}__score"],
                            "board_variant": point[f"{board}__variant"],
+                           "plan_gen": point.get("plan_gen") or "",
                            "board_harness": point[f"{board}__agent_harness"],
                            "board_effort": point[f"{board}__reasoning_effort"],
                            "board_mapping": point[f"{board}__mapping_kind"],

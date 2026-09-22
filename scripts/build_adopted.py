@@ -616,7 +616,18 @@ EXCLUDED_SUBSCRIPTIONS = {
 }
 
 FIELDS = ["plan_id", "plan_name", "plan_name_en", "billing", "price", "currency", "price_usd", "served_model",
-          "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note"]
+          "monthly_tokens", "monthly_yi", "real_usd_per_mtok", "unmetered", "promo_until", "confidence", "chart_tier", "source", "decision_note",
+          "plan_gen"]
+
+
+def plan_gen_of(pid: str) -> str:
+    # 套餐代际标注（2026-09-22 用户裁定）：GLM Coding 老客档=v2、新客档=v3（与 plot_quotas plan_name 映射一致）；
+    # Kimi 音乐名会员档=v1（新套餐 Plus/Pro/Max 未入库，届时为当前代不标）。其余套餐为当前代不标。
+    if pid.startswith("glm_coding_"):
+        return "v2" if "_old_" in pid else "v3"
+    if pid.startswith("kimi_"):
+        return "v1"
+    return ""
 
 
 def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dict:
@@ -640,7 +651,8 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
     return dict(plan_id=pid, plan_name=name, plan_name_en=name_en, billing="subscription", price=price, currency=cur,
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
                 monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until="",
-                confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note)
+                confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note,
+                plan_gen=plan_gen_of(pid))
 
 
 def unmetered_row(pid, name, price, cur, model, conf, src, note) -> dict:
