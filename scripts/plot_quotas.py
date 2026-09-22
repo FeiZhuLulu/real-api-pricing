@@ -280,7 +280,7 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
             DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
             r["real_usd_per_mtok"], r["confidence"],
-        ] + ([f"{r['board_score']:g}", r["board_variant"], r["board_harness"] or "—",
+        ] + ([f"{r['board_score']:g}", localise_variant(r["board_variant"], language), r["board_harness"] or "—",
               r["board_effort"] or "—", r["board_mapping"]] if board else [])
         for i, r in enumerate(rows, 1)
     ]
@@ -303,15 +303,27 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
     print(f"wrote {len(rows)} rows -> {path}")
 
 
-def chart_variant(row: dict) -> str:
-    variant = row["board_variant"]
+SELF_REPORT_MARKER = " [vendor self-report]"
+SELF_REPORT_MARKER_ZH = " [厂商自报]"
+
+
+def localise_variant(variant: str, language: str) -> str:
+    # Static charts are published per language, so the provenance marker has to follow
+    # the chart's language; otherwise a Chinese chart carries an English tag. Wording
+    # matches plot_svg.py so the pareto and frontier families agree.
+    return variant.replace(SELF_REPORT_MARKER, SELF_REPORT_MARKER_ZH) if language == "zh" else variant
+
+
+def chart_variant(row: dict, language: str) -> str:
+    variant = localise_variant(row["board_variant"], language)
     if len(variant) <= 60:
         return variant
     harness = row.get("board_harness")
-    marker = " [vendor self-report]"
+    marker = SELF_REPORT_MARKER_ZH if language == "zh" else SELF_REPORT_MARKER
     if harness and variant.startswith(harness + " - "):
         model = variant.removeprefix(harness + " - ")
-        source = " · vendor self-report" if model.endswith(marker) else ""
+        source = ("" if not model.endswith(marker) else
+                  " · 厂商自报" if language == "zh" else " · vendor self-report")
         return model.removesuffix(marker) + "\n" + harness + source
     return textwrap.fill(variant, width=60, break_long_words=False, break_on_hyphens=False)
 
@@ -418,7 +430,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         separator = "\n" if board else " · "
         labels = [
             f"{start + i:02d}. " + (plan_name(r, language) if r["billing"] == "metered"
-                                   else f"{plan_name(r, language)}{separator}{chart_variant(r) if board else DISPLAY.get(r['served_model'], r['served_model'])}")
+                                   else f"{plan_name(r, language)}{separator}{chart_variant(r, language) if board else DISPLAY.get(r['served_model'], r['served_model'])}")
             for i, r in enumerate(chunk, 1)
         ]
         ax.set_yticks(range(len(chunk)), labels, fontsize=12 if board else 10)
