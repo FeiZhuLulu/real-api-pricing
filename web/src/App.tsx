@@ -1582,13 +1582,19 @@ function Details({
                     <dd>
                       {number(m.score_low, lang)} – {number(m.score_high, lang)}
                     </dd>
-                    <dt>Harness / effort / mode</dt>
+                    <dt>{t("Harness / effort / mode", "框架 / 强度 / 模式")}</dt>
                     <dd>
                       {m.agent_harness ?? "—"} / {m.reasoning_effort ?? "—"} /{" "}
                       {m.service_mode ?? "—"}
                     </dd>
                     <dt>{t("Mapping confidence", "映射置信度")}</dt>
-                    <dd>{m.mapping_confidence}</dd>
+                    <dd>
+                      {zh
+                        ? ({ high: "高", medium: "中", low: "低" }[
+                            m.mapping_confidence
+                          ] ?? m.mapping_confidence)
+                        : m.mapping_confidence}
+                    </dd>
                     <dt>
                       {t(
                         "Source task cost (mean / median)",
