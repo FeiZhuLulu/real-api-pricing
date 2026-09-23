@@ -3024,6 +3024,27 @@
     "quota_effort_matched": null
   },
   {
+    "point_id": "devin_max::claude-opus-5.5",
+    "board": "terminal_bench_4",
+    "configuration_id": "terminal_bench_4:f21147cea05f90e9",
+    "variant": "Claude Code - Claude Opus 5.5 (default) - self-reported [vendor self-report]",
+    "score": 66.4,
+    "score_is_estimated": null,
+    "score_is_self_reported": true,
+    "agent_harness": "Claude Code",
+    "reasoning_effort": null,
+    "service_mode": null,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "https://www.anthropic.com/claude-opus-5-5",
+    "mapping_kind": "agent_configuration_reference",
+    "mapping_confidence": "low",
+    "mapping_note": "Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. Vendor self-reported score, not an official leaderboard run.",
+    "quota_effort_matched": null
+  },
+  {
     "point_id": "google_ai_pro_us::gemini-3.8-flash",
     "board": "aa_intelligence_index",
     "configuration_id": "aa_intelligence_index:9f15354e4692f8a6",
