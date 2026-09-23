@@ -20,26 +20,28 @@ GLM Coding Plan 现已改用智谱官方周积分和缓存/输入/输出三段�
 
 ## 数据快照
 
-AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Coding Agent 仍为 **v1.4**。智力榜按新版整榜替换，不能把跨版本分数降低解释为模型能力退步。保留选定快照内的全部配置，并明确标注 AA 估计值；历史证据继续保存在 `data/research/`。
+AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Coding Agent 为 **v1.5**。智力榜按新版整榜替换，不能把跨版本分数降低解释为模型能力退步。保留选定快照内的全部配置，并明确标注 AA 估计值；历史证据继续保存在 `data/research/`。
 
-快照日期：2026-09-09。每行代表一个**套餐 × 实际服务模型**；同一套餐下不同模型的额度是替代关系，不能相加。
+快照日期：<!-- stat:snapshot -->2026-09-23<!-- /stat -->。每行代表一个**套餐 × 实际服务模型**；同一套餐下不同模型的额度是替代关系，不能相加。
 
 | 覆盖范围 | 行数 |
 |---|---:|
-| 全部采用的套餐 × 模型点 | 202 |
-| 有月额度的订阅点 | 188 |
-| 按量 API 基准点 | 13 |
-| OpenCode Go / Command Code GOAT / Ollama / Step Plan | 27 / 37 / 22 / 8 |
-| Code Arena / Agent Arena 有分点 | 136 / 140 |
-| AA 智力榜 / AA 编程 Agent 榜有分点 | 173 / 71 |
-| OpenDesign Arena 有分点 | 70 |
-| Terminal-Bench 4.0 有分点 | 70 |
+| 全部采用的套餐 × 模型点 | <!-- stat:points_total -->264<!-- /stat --> |
+| 有月额度的订阅点 | <!-- stat:points_allowance -->244<!-- /stat --> |
+| 不计额度促销点（≈$0） | <!-- stat:points_unmetered -->1<!-- /stat --> |
+| 按量 API 基准点 | <!-- stat:points_metered -->19<!-- /stat --> |
+| OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->30<!-- /stat --> / <!-- stat:plans_command_code_goat -->41<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
+| Code Arena / Agent Arena 有分点 | <!-- stat:scored_arena_code -->145<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->149<!-- /stat --> |
+| AA 智力榜 / AA 编程 Agent 榜有分点 | <!-- stat:scored_aa_intelligence_index -->228<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->79<!-- /stat --> |
+| OpenDesign Arena 有分点 | <!-- stat:scored_open_design_arena -->77<!-- /stat --> |
+| Terminal-Bench 4.0 有分点 | <!-- stat:scored_terminal_bench_4 -->98<!-- /stat --> |
+| DeepSWE v1.1 有分点 | <!-- stat:scored_deepswe_1_1 -->175<!-- /stat --> |
 
 **下载数据：** [采用值 CSV](data/adopted.csv) · [完整计算结果 CSV](derived/points.csv) · [完整计算结果 JSON](derived/points.json) · [数据说明及缺分清单](data/README.md) · [分日期原始证据](data/research/)
 
 ## 月额度总览
 
-188 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
+<!-- stat:points_allowance -->244<!-- /stat --> 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
 
 ### $0–30
 
@@ -67,7 +69,7 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ## 真实单价总览
 
-把全部 200 个订阅和 API 点放在同一套 $/MTok 口径下比较。
+把全部 <!-- stat:points_priced -->263<!-- /stat --> 个订阅和 API 点放在同一套 $/MTok 口径下比较。
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 
@@ -115,15 +117,15 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ![Terminal-Bench 4.0](charts/zh/pareto/帕累托_TB4终端榜.svg)
 
-OpenDesign 的 13 模型完整效果榜已存档，其中 11 个模型与当前采用点精确映射；GPT-6 Astra、Claude Fable 5.1 因项目暂无精确采用行，只保留榜单记录，不借用邻近型号。DeepSeek V4.1 Flash 采用 9 月 10 日起生效的官方美元标价：闲时缓存输入 $0.003、未缓存输入 $0.15、输出 $0.60，并另列高峰 2 倍价。分数属于 OpenDesign Harness 配置参考，不代表各订阅/API渠道实测。
+OpenDesign 的 <!-- stat:configs_open_design_arena -->13<!-- /stat --> 模型完整效果榜已存档，<!-- stat:configs_mapped_open_design_arena -->13<!-- /stat --> 条全部与采用点的模型精确映射。DeepSeek V4.1 Flash 采用 9 月 10 日起生效的官方美元标价：闲时缓存输入 $0.003、未缓存输入 $0.15、输出 $0.60，并另列高峰 2 倍价。分数属于 OpenDesign Harness 配置参考，不代表各订阅/API渠道实测。
 
 AA 编程 Agent 分数属于已测试的 harness × 模型 × effort 配置。静态图和 `points.*` 明确为**最高存档配置参考汇总**，不代表各订阅/API渠道实测；额度样本的effort、产品harness是否对齐仍未验证。更高effort不自动提高每百万token单价，但可能增加每任务token消耗。
 
-Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，18 行全部存档，包括 GPT-6 Astra 的五个 effort 档。Claude Fable 5.1 暂无采用行，只保留榜单记录并列入缺分，不做近似。另有一行补充档追加在官方快照之后、不替换快照：**SWE-2 · Devin Pro** 27.3%，来自 Cognition 发布博客的自报数字（官方榜无 SWE-2 行）。SWE-2 在促销期内对 Pro/Max/Teams 订阅者不计额度，官推只写 "the next month"，本项目记为截止 2026-10-31，因此真实单价显示为 **≈$0/MTok**、放在专用刻度位，并成为前沿最便宜端点。这是促销价而非永久口径，促销结束后必须复核。
+Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，<!-- stat:configs_terminal_bench_4 -->23<!-- /stat --> 行全部存档，包括 GPT-6 Astra 的五个 effort 档，每行都映射到采用点。另有一行补充档追加在官方快照之后、不替换快照：**SWE-2 · Devin Pro** 27.3%，来自 Cognition 发布博客的自报数字（官方榜无 SWE-2 行）。SWE-2 在促销期内对 Pro/Max/Teams 订阅者不计额度，官推只写 "the next month"，本项目记为截止 2026-10-31，因此真实单价显示为 **≈$0/MTok**、放在专用刻度位，并成为前沿最便宜端点。这是促销价而非永久口径，促销结束后必须复核。
 
 [全配置交互图](charts/zh/pareto/帕累托交互图.html) 默认展示每模型最高分汇总，可切换全部存档配置，并提供思考强度档位选择。下载HTML后本地打开，Plotly需要联网。目前全部采用参考映射，尚不是已验证产品配置的严格前沿。
 
-[评测配置JSON](derived/benchmark-configurations.json) / [CSV](derived/benchmark-configurations.csv) 完整保留235条记录、原始标签、已知harness/effort、来源分数区间和来源任务成本。[套餐配置映射JSON](derived/benchmark-points.json) / [CSV](derived/benchmark-points.csv) 包含1011条明确参考映射，保留低effort配置。Composer Standard/Fast只匹配本模式，缺失时留空；未知harness、effort、区间均不推测。
+[评测配置JSON](derived/benchmark-configurations.json) / [CSV](derived/benchmark-configurations.csv) 完整保留<!-- stat:configs_total -->292<!-- /stat -->条记录、原始标签、已知harness/effort、来源分数区间和来源任务成本。[套餐配置映射JSON](derived/benchmark-points.json) / [CSV](derived/benchmark-points.csv) 包含<!-- stat:refs_total -->1455<!-- /stat -->条明确参考映射，保留低effort配置。Composer Standard/Fast只匹配本模式，缺失时留空；未知harness、effort、区间均不推测。
 
 来源任务成本的均值和中位数分别保留，不作为订阅内任务成本。分数区间可在交互图悬停查看，目前尚不参与前沿筛选。额度数值范围、稳健前沿和负载敏感性分析留待后续；不把定性置信度编成误差百分比。
 
