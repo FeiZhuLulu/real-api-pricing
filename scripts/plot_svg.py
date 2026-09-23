@@ -149,6 +149,9 @@ def label_position(p, board, x, y):
     model = p["model"]
     if model == "claude-opus-5":
         return x - 24, y - 49, "end"
+    if model == "gpt-6-astra":
+        if board == "aa_intelligence_index":
+            return x - 24, y + 30, "end"
     if model == "claude-opus-4.8":
         if board == "aa_intelligence_index":
             return x + 24, y + 43, "start"
@@ -157,6 +160,15 @@ def label_position(p, board, x, y):
         return x - 24, y + 13, "end"
     if model == "claude-sonnet-5":
         return x + 22, y - 54, "start"
+    if model == "mimo-v2.6-pro":
+        if board == "aa_intelligence_index":
+            return x - 30, y + 20, "end"
+    if model == "mimo-v2.5":
+        if board == "aa_intelligence_index":
+            return x - 235, y - 72, "end"
+    if model == "step-5-preview":
+        if board == "aa_intelligence_index":
+            return x + 5, y + 28, "end"
     if model == "glm-5.3":
         if board == "aa_intelligence_index":
             return x + 24, y - 108, "start"
@@ -169,14 +181,19 @@ def label_position(p, board, x, y):
         # TB4 全量里 Luna 分数最低（17.27%），标签整体下移会压过图框下缘。
         if board == "terminal_bench_4":
             return x + 5, y + 25, "end"
+        if board == "aa_intelligence_index":
+            return x - 30, y + 113, "end"
         return x + 5, y + 57, "end"
     if model == "gpt-5.6-terra":
         if board == "aa_intelligence_index":
             return x - 24, y + 65, "end"
         return x + 24, y - 55, "start"
+    if model == "step-3.7-flash":
+        if board == "aa_intelligence_index":
+            return x - 25, y + 12, "end"
     if model == "step-3.5-flash":
         if board == "aa_intelligence_index":
-            return x - 20, y - 12, "end"
+            return x - 390, y - 62, "end"
     if model == "swe-2":
         # 不计额度点贴右边界，标签只能往左上放，且要避开 TB4 里 Luna 的下方标签。
         return x - 30, y + 34, "end"
