@@ -26,22 +26,22 @@ Snapshot: <!-- stat:snapshot -->2026-09-23<!-- /stat -->. Each row is one **plan
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | <!-- stat:points_total -->264<!-- /stat --> |
-| Subscription points with monthly allowance | <!-- stat:points_allowance -->244<!-- /stat --> |
+| All adopted plan × model points | <!-- stat:points_total -->265<!-- /stat --> |
+| Subscription points with monthly allowance | <!-- stat:points_allowance -->245<!-- /stat --> |
 | Unmetered promotional points (≈$0) | <!-- stat:points_unmetered -->1<!-- /stat --> |
 | Metered API baselines | <!-- stat:points_metered -->19<!-- /stat --> |
 | OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->30<!-- /stat --> / <!-- stat:plans_command_code_goat -->41<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
 | Code Arena / Agent Arena scored points | <!-- stat:scored_arena_code -->145<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->149<!-- /stat --> |
 | AA Intelligence / AA Coding Agent scored points | <!-- stat:scored_aa_intelligence_index -->228<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->79<!-- /stat --> |
 | OpenDesign Arena scored points | <!-- stat:scored_open_design_arena -->77<!-- /stat --> |
-| Terminal-Bench 4.0 scored points | <!-- stat:scored_terminal_bench_4 -->98<!-- /stat --> |
+| Terminal-Bench 4.0 scored points | <!-- stat:scored_terminal_bench_4 -->99<!-- /stat --> |
 | DeepSWE v1.1 scored points | <!-- stat:scored_deepswe_1_1 -->175<!-- /stat --> |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
 
 ## Monthly allowance overview
 
-The <!-- stat:points_allowance -->244<!-- /stat --> subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
+The <!-- stat:points_allowance -->245<!-- /stat --> subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
 
 ### $0–30
 
@@ -69,7 +69,7 @@ The <!-- stat:points_allowance -->244<!-- /stat --> subscription plan × model p
 
 ## Real unit price overview
 
-All <!-- stat:points_priced -->263<!-- /stat --> subscription and API points on one comparable $/MTok scale.
+All <!-- stat:points_priced -->264<!-- /stat --> subscription and API points on one comparable $/MTok scale.
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 
@@ -125,7 +125,7 @@ Terminal-Bench 4.0 is the official 66-task leaderboard hosted by Stanford / Harb
 
 [All-configuration interactive view (Chinese)](charts/zh/pareto/帕累托交互图.html) defaults to the highest-score summary per model and offers every archived configuration plus a reasoning-effort selector as options. Download the HTML and open it locally with network access for Plotly. All configurations currently use reference mappings, not a verified product-configuration frontier.
 
-The [configuration archive (JSON)](derived/benchmark-configurations.json) / [CSV](derived/benchmark-configurations.csv) retains all <!-- stat:configs_total -->292<!-- /stat --> records, original labels, known harness/effort, source score intervals, and source task-cost records. The [plan-to-configuration mappings (JSON)](derived/benchmark-points.json) / [CSV](derived/benchmark-points.csv) contains <!-- stat:refs_total -->1455<!-- /stat --> explicit references, including lower-effort variants. Composer Standard/Fast require their own mode; a missing mode stays unscored. Unknown harnesses, efforts and intervals stay null.
+The [configuration archive (JSON)](derived/benchmark-configurations.json) / [CSV](derived/benchmark-configurations.csv) retains all <!-- stat:configs_total -->292<!-- /stat --> records, original labels, known harness/effort, source score intervals, and source task-cost records. The [plan-to-configuration mappings (JSON)](derived/benchmark-points.json) / [CSV](derived/benchmark-points.csv) contains <!-- stat:refs_total -->1456<!-- /stat --> explicit references, including lower-effort variants. Composer Standard/Fast require their own mode; a missing mode stays unscored. Unknown harnesses, efforts and intervals stay null.
 
 Source mean and median task costs are separate fields, not subscription task costs. Score intervals are preserved and available in interactive hover details, but uncertainty does not yet change frontier membership. Numerical quota ranges, robust-frontier analysis and workload sensitivity remain follow-up work; qualitative confidence labels are not numerical error bars.
 
