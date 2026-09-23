@@ -491,6 +491,8 @@ MIMO_SOURCE = (
     "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；"
     "mimo-token-plan-round1-2026-09-22.json"
 )
+MIMO_OPENCODE_TOKENS = (67_848_448, 4_479_135, 1_388_760)  # OpenCode harness 单日 cache读/缓外输入/输出，对照保留
+MIMO_OPENCODE_MIX = tuple(t / sum(MIMO_OPENCODE_TOKENS) for t in MIMO_OPENCODE_TOKENS)
 
 
 def mimo_rows() -> list[tuple]:
@@ -498,9 +500,11 @@ def mimo_rows() -> list[tuple]:
     for slug, name, price_cny, price_usd, credits in MIMO_TOKEN_TIERS:
         for model, rates in MIMO_CREDIT_RATES.items():
             burn = blended(*rates)
+            oc_burn = sum(m * r for m, r in zip(MIMO_OPENCODE_MIX, rates))
             base_yi = credits / burn / YI
             for band, band_label, factor in (("day", "日间", 1.0), ("night", "夜间0.8×", 1 / 0.8)):
                 monthly_yi = round(base_yi * factor, 2)
+                oc_yi = round(credits / oc_burn / YI * factor, 2)
                 rows.append((
                     f"mimo_token_{slug}_{band}", f"MiMo Token Plan {name} {band_label}",
                     price_cny, "CNY", model, monthly_yi, "medium", MIMO_SOURCE,
@@ -508,7 +512,13 @@ def mimo_rows() -> list[tuple]:
                     f"（该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
                     + ("；夜间00:00-08:00（北京）consumption×0.8，同credits多换25% token" if band == "night" else "；日间基准消耗档")
                     + "；套餐覆盖 v2.6-pro/v2.6-flash/v2.5-pro/v2.5 共4款文本模型（2026-09-22文档更新+用户面板互证）；"
-                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）",
+                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）；"
+                    "面板互证：2026-09-22 单日按官方 burn 率应扣 23.47 亿 vs 面板实扣 21.91 亿"
+                    "（−6.6%，夜间0.8×与时区归属解释），burn 率获面板级互证；"
+                    f"对照：OpenCode harness 单日实测 mix（cache读{MIMO_OPENCODE_MIX[0]:.2%}/输入{MIMO_OPENCODE_MIX[1]:.2%}/输出{MIMO_OPENCODE_MIX[2]:.2%}）"
+                    f"下为 {oc_yi:g}亿，不采用——2026-09-23 用户裁定低缓存系 OpenCode harness 所致，"
+                    "另一客户端两题 35.72M tok 实测 cache 95.0%，按标准负载；"
+                    "证据 mimo-token-plan-panel-round2-2026-09-23.json、mimo-client-sample-round3-2026-09-23.json",
                 ))
     return rows
 
