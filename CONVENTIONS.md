@@ -47,6 +47,7 @@
 - **Gemini / Google**：暂无可靠的订阅额度采用值，不补点，不再探测账户额度。
 - **汇率**：取 `conventions.json` 的 `usdPerCny`（历史字段名，实际方向为 CNY/USD），来源日期在 `exchangeRate`。不改历史 research 文件里的旧汇率。
 - **促销**：促销口径必须标截止日，到期后复核。订阅内明确不计额度的模型，真实单价记为 ≈$0，用专用刻度位表示。
+- **数据快照日期**：`data/conventions.json` 的 `updatedAt` 是网页与 README 显示的快照日期（经 compute.py 写入 `derived/points.json` 的 generatedAt）；改采用值或口径时同步改为当天。
 
 ## 5. 出图规则
 

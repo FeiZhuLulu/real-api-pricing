@@ -10,6 +10,7 @@ import csv
 import json
 import math
 import os
+import sys
 import textwrap
 import unicodedata
 
@@ -47,7 +48,15 @@ def fee_band_rows(rows: list[dict], band: dict) -> list[dict]:
 
 if os.path.isfile("C:/Windows/Fonts/msyh.ttc"):
     font_manager.fontManager.addfont("C:/Windows/Fonts/msyh.ttc")
-plt.rcParams["font.family"] = ["Microsoft YaHei", "Noto Sans CJK SC", "DejaVu Sans"]
+available = {f.name for f in font_manager.fontManager.ttflist}
+cjk_candidates = ["Microsoft YaHei", "Noto Sans CJK SC"]
+plt.rcParams["font.family"] = [n for n in cjk_candidates if n in available] + ["DejaVu Sans"]
+if not any(n in available for n in cjk_candidates) and os.environ.get("CHART_FONT_FALLBACK") != "1":
+    sys.exit("找不到中文字体（Microsoft YaHei 或 Noto Sans CJK SC），图表中文会渲染成方块；"
+             "请安装其一。CI 只跑检查不发布图片时可设 CHART_FONT_FALLBACK=1 跳过。"
+             " No CJK font found: Chinese chart text would render as boxes."
+             " Install Microsoft YaHei or Noto Sans CJK SC, or set CHART_FONT_FALLBACK=1"
+             " for CI-only runs whose images are not published.")
 plt.rcParams["axes.unicode_minus"] = False
 plt.rcParams["svg.hashsalt"] = "real-api-pricing"
 
@@ -504,7 +513,6 @@ def main() -> None:
             for language in ("zh", "en"):
                 write_text_table(selected, "quotas", language, fee_band=band)
                 plot(selected, "quotas", language, fee_band=band)
-    import sys
     if "--fee-bands-only" in sys.argv:
         return
     for view in ("quotas", "prices"):
