@@ -3,6 +3,10 @@
 `AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-23
+
+- **MiMo Token Plan 32 行由标准负载折算切换到用户面板实测负载（measuredMix）**：用户 Lite 面板两截图——同窗 2,190,625,116/4,100,000,000 Credits 已用（53.0%，有效期至 2026-10-22）；2026-09-22 单日 token 明细 73,716,343（mimo-v2.6-pro：cache读 67,848,448 / 输入 4,479,135 / 输出 1,388,760）→ 实测 mix 92.04%/6.08%/1.88%。与官方 burn 率互证：当日按 2.5/300/600 应扣 2.35B vs 面板实扣 2.19B，差 6.6% 由夜间 0.8× 时段与时区归属解释 → burn 率获面板级互证。实测混合 burn：v2.6-pro/v2.5-pro 10.9875→**31.833**、v2.6-flash/v2.5 4.8→**11.685** credits/token（非cache部分占比近4倍放大，输出占比 5.4×）。折算结果全部下调 ≈2.9×/2.4×：v2.6-pro Lite 日 3.73→1.29 亿、Standard 10.01→3.46 亿、Pro 34.58→11.94 亿、Max 74.63→25.76 亿（夜间÷0.8 不变）。真实单价（$国际价）：v2.6-pro Lite 日 $0.0466/M、Standard $0.0463、Pro $0.0419、Max $0.0388；flash Lite 日 $0.0171、Max $0.0142。同 mix 下按量 API 等效 $0.0461/M——Lite 日间与按量基本持平，只有 Pro/Max 与夜间档拉开差距。mix 为用户侧负载属性外推至套餐内其余 3 模型与升档池；单用户单日 n=1，置信度维持 medium，旧标准负载值留 decision_note 对照。conventions 新增 `mimoMeasuredTokenMix`（专用口径非统一档），workload 标签新增 `measuredMix`。证据：`mimo-token-plan-panel-round2-2026-09-23.json`。
+
 ## 2026-09-22
 
 - **SuperGrok · Grok 4.7（新增模型点）**：6.72 亿/月 medium；Plus 26.9 亿、Heavy 67.2 亿按面板美元比派生 medium；Lite 不派生。用户本机三会话同框：洗（8,219,321 tok）+ 鹈（5,223,495 tok）+ 删除版（无快照）= 周额度 19%→28%；删除版份额藏整数取整内按约 1% 计 → 周池 1.68 亿，硬边界 5.97~7.68 亿/月。对 4.6 基准（1.273 亿/周）为 1.32×，即 4.7 每 token 占池约 0.76×。CLI Cost 字段两段不自洽（低 cache 段 $/MTok 反低）且等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价，未解；重置后受控打满可升 high。分数由 `scores-grok47-round1-2026-09-22.json` 补充档从 AA round4 未映射载荷提升：int 46.4466 / coding(Grok Build) 56.2676；TB4/Arena/OpenDesign 无 4.7 行不画。两榜均未进前沿（Claude Pro Opus5 $0.0106 支配）。证据：`data/research/supergrok-grok47-round1-2026-09-22.json`。

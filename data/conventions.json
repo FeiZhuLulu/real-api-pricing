@@ -46,6 +46,14 @@
     "labelEn": "Low-cache workload: 85% cache reads / 14.65% fresh input / 0.35% output",
     "note": "2026-09-22 用户裁定的第二档统一负载，用于实测打不到标准 97.5% cache 的渠道（当前：Step 全系；Gemini 实测 82.6% 属同族，但其额度为 raw token 实测口径无需折算）。锚点：step-5-preview 本机实测 mix 79.0%/20.7%/0.34%（210.17M tokens，stepfun-step5-panel-round5-2026-09-21.json）与 Google AI Pro 实测 82.6%，统一取 85% 档；step5 采用值的 decision_note 内保留 79% 实测口径对照数。非cache部分按标准负载的输出占比 0.35% 保留、余量归输入。"
   },
+  "mimoMeasuredTokenMix": {
+    "cache": 0.9203989948334794,
+    "input": 0.060761763507449086,
+    "output": 0.01883924165907145,
+    "labelZh": "MiMo 用户面板实测负载：缓存读取92.04% / 普通输入6.08% / 输出1.88%",
+    "labelEn": "MiMo user-panel measured workload: 92.04% cache reads / 6.08% fresh input / 1.88% output",
+    "note": "2026-09-23 用户 Lite 面板：2026-09-22 单日 73,716,343 tokens（mimo-v2.6-pro）= cache读 67,848,448 + 输入 4,479,135 + 输出 1,388,760；同窗池用量 2,190,625,116/4,100,000,000 credits 与官方 burn 率互证（当日按率应扣 2.35B vs 实扣 2.19B，差额由夜间 0.8× 解释）。仅 MiMo Token Plan 专用口径——单用户单日样本 n=1，不外推为统一档；mix 为用户侧负载属性，套餐内 4 款模型与升档池共用。证据：mimo-token-plan-panel-round2-2026-09-23.json"
+  },
   "sourcePriority": [
     "用户面板截图反推、受控打满实测、官方绝对token或积分表",
     "本地日志/ccusage与同窗额度百分比",

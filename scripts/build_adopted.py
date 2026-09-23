@@ -106,6 +106,15 @@ def blended_low(cached: float, inp: float, out: float) -> float:
     return LOW_CACHE_MIX["cache"] * cached + LOW_CACHE_MIX["input"] * inp + LOW_CACHE_MIX["output"] * out
 
 
+MIMO_MEASURED_MIX = CONVENTIONS["mimoMeasuredTokenMix"]
+
+
+def blended_mimo(cached: float, inp: float, out: float) -> float:
+    # 用户 Lite 面板实测负载（2026-09-22 单日 73.72M tok，v2.6-pro）：cache读92.04%/输入6.08%/输出1.88%；
+    # 同窗 2.19B/4.1B credits 与官方 burn 率互证（当日按率应扣 2.35B vs 实扣 2.19B，差额由夜间 0.8× 解释）
+    return MIMO_MEASURED_MIX["cache"] * cached + MIMO_MEASURED_MIX["input"] * inp + MIMO_MEASURED_MIX["output"] * out
+
+
 def supergrok_monthly_yi(panel_usd: float, digits: int, weekly: float = SUPERGROK_WEEKLY_TOKENS) -> float:
     return round(weekly * MONTH_WEEKS / YI * panel_usd / SUPERGROK_PANEL_USD, digits)
 
@@ -497,18 +506,24 @@ def mimo_rows() -> list[tuple]:
     rows = []
     for slug, name, price_cny, price_usd, credits in MIMO_TOKEN_TIERS:
         for model, rates in MIMO_CREDIT_RATES.items():
-            burn = blended(*rates)
+            burn = blended_mimo(*rates)
+            std_burn = blended(*rates)
             base_yi = credits / burn / YI
             for band, band_label, factor in (("day", "日间", 1.0), ("night", "夜间0.8×", 1 / 0.8)):
                 monthly_yi = round(base_yi * factor, 2)
                 rows.append((
                     f"mimo_token_{slug}_{band}", f"MiMo Token Plan {name} {band_label}",
                     price_cny, "CNY", model, monthly_yi, "medium", MIMO_SOURCE,
-                    f"新增{monthly_yi:g}亿：月池{credits / 1e9:g}B Credits÷统一标准负载混合burn {burn:g} credits/token"
-                    f"（该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
+                    f"旧{round(credits / std_burn / YI * factor, 2):g}亿→{monthly_yi:g}亿：月池{credits / 1e9:g}B Credits"
+                    f"÷用户面板实测负载混合burn {burn:g} credits/token（标准负载口径 {std_burn:g}；"
+                    f"mix cache读92.04%/输入6.08%/输出1.88%，73.72M tok 2026-09-22 v2.6-pro 样本；"
+                    f"该模型 cached/input/output={rates[0]:g}/{rates[1]:g}/{rates[2]:g} credits/token）"
                     + ("；夜间00:00-08:00（北京）consumption×0.8，同credits多换25% token" if band == "night" else "；日间基准消耗档")
                     + "；套餐覆盖 v2.6-pro/v2.6-flash/v2.5-pro/v2.5 共4款文本模型（2026-09-22文档更新+用户面板互证）；"
-                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）",
+                    "耗尽即停不透支；同套餐各模型额度不可相加（共享 Credits 池按单模型打满）；"
+                    "mix 为用户侧负载属性，外推至套餐内其余 3 款模型与升档池；"
+                    "面板已用 2.19B/4.1B credits 与官方 burn 率互证（当日按率应扣 2.35B vs 实扣 2.19B，差额由夜间0.8×解释）；"
+                    "证据 mimo-token-plan-panel-round2-2026-09-23.json",
                 ))
     return rows
 
@@ -717,7 +732,9 @@ def workload_of(pid: str, billing: str) -> str:
         return "standard"  # API 标价行恒按标准负载加权
     if pid.startswith("stepfun_"):
         return "lowCache"
-    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_", "mimo_token_")):
+    if pid.startswith("mimo_token_"):
+        return "measuredMix"  # 用户面板实测 mix × 官方 Credits 池折算（非统一档）
+    if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_")):
         return "standard"
     return "measured"
 
