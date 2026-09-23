@@ -26,6 +26,7 @@ ADOPTED = os.path.join(ROOT, "data", "adopted.csv")
 OUT_DIR = os.path.join(ROOT, "_build")
 with open(os.path.join(ROOT, "data", "conventions.json"), encoding="utf-8") as f:
     CONVENTIONS = json.load(f)
+STD_MIX = CONVENTIONS["standardTokenMix"]
 with open(os.path.join(ROOT, "config", "allowance-fee-bands.json"), encoding="utf-8") as f:
     FEE_BANDS = json.load(f)
 
@@ -125,7 +126,7 @@ TEXT = {
         "quotas_title": "订阅额度总览 · 套餐 × 实际服务模型",
         "prices_title": "真实单价总览 · 订阅与 API 统一对比",
         "quotas_subtitle": "默认月 = 4 周，Kimi独立月池 = 周池×5；饱和使用；全口径 token；按量 API 无月额度",
-        "prices_subtitle": "美元/credits与API三段价统一按97.5%缓存 / 2.15%输入 / 0.35%输出折算；直接total-token实测不重算",
+        "prices_subtitle": f"美元/credits与API三段价统一按{STD_MIX['cache']:.0%}缓存 / {STD_MIX['input']:.1%}输入 / {STD_MIX['output']:.1%}输出折算；直接total-token实测不重算",
         "quotas_axis": "月可用 token（亿，对数轴）",
         "prices_axis": "真实单价（美元 / 百万 token，对数轴）",
         "quotas_order": "额度从高到低",
@@ -140,7 +141,7 @@ TEXT = {
         "quotas_title": "Monthly token allowance | Subscription plan x served model",
         "prices_title": "Effective token price | Subscriptions and APIs compared",
         "quotas_subtitle": "Default month = 4 weeks; Kimi monthly pool = 5× weekly; full utilization, all token types; APIs have no allowance",
-        "prices_subtitle": "Dollar/credit and API rates use 97.5% cache / 2.15% input / 0.35% output; direct total-token measurements are not normalized",
+        "prices_subtitle": f"Dollar/credit and API rates use {STD_MIX['cache']:.0%} cache / {STD_MIX['input']:.1%} input / {STD_MIX['output']:.1%} output; direct total-token measurements are not normalized",
         "quotas_axis": "Monthly tokens (billions, log scale)",
         "prices_axis": "Effective price (USD per million tokens, log scale)",
         "quotas_order": "Highest allowance first",

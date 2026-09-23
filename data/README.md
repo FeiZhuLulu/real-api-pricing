@@ -6,7 +6,7 @@ These files are the public redacted edition. Original local evidence is backed u
 
 当前采用数据共264条“套餐 × 模型”：245条订阅（244条有月额度，另1条不计额度促销点 Devin Pro × SWE-2，≈$0/MTok，促销至2026-10-31）、19条按量API，包括OpenCode Go 30个模型、Command Code GOAT 41个模型、Ollama Pro/Max各11个模型、Step Plan 国内站12个点、MiMo Token Plan 32个点、Devin Max 1个点、ChatGPT Pro 20x Astra 1个点。所有采用数据都参与对应的全量输出；缺榜单分数的模型不进入该榜帕累托图，但仍保留在额度和单价数据中。
 
-美元/credits额度、三段价格与模型间价格比统一按 `conventions.json` 的标准负载换算：缓存读取97.5%、普通输入2.15%、输出0.35%。直接给出total tokens的面板、日志、跑满实测和官方绝对token表不重复归一；只有total tokens和费用百分比但缺token类型拆分时，保留观测并标明限制。GLM已从官方95%缓存示例表改为按官方周积分、三段积分系数和统一标准负载重算，并将忙时、中间值与闲时拆成独立情景点。当前标准不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。完整分类见 [`token-mix-audit-round2-2026-09-07.json`](research/token-mix-audit-round2-2026-09-07.json)。
+美元/credits额度、三段价格与模型间价格比统一按 `conventions.json` 的标准负载换算：缓存读取97%、普通输入2.5%、输出0.5%。直接给出total tokens的面板、日志、跑满实测和官方绝对token表不重复归一；只有total tokens和费用百分比但缺token类型拆分时，保留观测并标明限制。GLM已从官方95%缓存示例表改为按官方周积分、三段积分系数和统一标准负载重算，并将忙时、中间值与闲时拆成独立情景点。当前标准不单列cache write；厂商另收缓存写入费时，换算可能偏高估token。完整分类见 [`token-mix-audit-round2-2026-09-07.json`](research/token-mix-audit-round2-2026-09-07.json)。
 
 | Board / 榜单 | Scored rows / 有分行 | Unscored rows / 缺分行 |
 |---|---:|---:|

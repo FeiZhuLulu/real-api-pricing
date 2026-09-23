@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / '_build'
 CHARTS = ROOT / 'charts'
+STD_MIX = json.loads((ROOT / 'data/conventions.json').read_text(encoding='utf-8'))['standardTokenMix']
 BOARDS = {
     'CodeArena榜': ('code-arena', 'Code Arena'),
     'AgentArena榜': ('agent-arena', 'Agent Arena'),
@@ -64,7 +65,7 @@ def main():
     lines = ['# Charts / 图表目录', '',
              'All Pareto charts use the full dataset. Static charts summarize the highest archived configuration reference. / 帕累托图均使用全量套餐；静态图为最高存档配置参考汇总。', '',
              '[All-configuration interactive view / 全配置交互图（中文）](zh/pareto/帕累托交互图.html) · Download the HTML to open locally; Plotly requires network access. / 下载HTML后本地打开，Plotly需要联网。', '',
-             'Dollar/credit conversions use 97.5% cache reads, 2.15% fresh input and 0.35% output; direct total-token measurements are not normalized again. / 美元或credits额度换算统一采用缓存读取97.5%、普通输入2.15%、输出0.35%；直接total-token实测不重复归一。', '',
+             f"Dollar/credit conversions use {STD_MIX['cache']:.0%} cache reads, {STD_MIX['input']:.1%} fresh input and {STD_MIX['output']:.1%} output; direct total-token measurements are not normalized again. / 美元或credits额度换算统一采用缓存读取{STD_MIX['cache']:.0%}、普通输入{STD_MIX['input']:.1%}、输出{STD_MIX['output']:.1%}；直接total-token实测不重复归一。", '',
              '| Chart / 图表 | English SVG | 中文 SVG | English PNG | 中文 PNG |',
              '|---|---|---|---|---|']
     english = [p for p in exported if p.suffix == '.svg' and p.relative_to(CHARTS).parts[0] == 'en']

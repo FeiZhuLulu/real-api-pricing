@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-09-23",
+  "sourceType": "user_confirmed_project_convention + sample_audit",
+  "userDecision": "2026-09-23 用户裁定：项目统一标准负载改为 缓存读97.0% / 普通输入2.5% / 输出0.5%（用户原话「97.0/2.5/0.5」）；低缓存档输出跟随标准，缓存固定85%，余量归输入 → 85% / 14.5% / 0.5%。",
+  "supersedes": {
+    "standardTokenMix": {"cache": 0.975, "input": 0.0215, "output": 0.0035, "origin": "standard-token-mix-round1-2026-09-07.json；源自本机 Kimi ccusage 2026-06~07（5.92亿 tok，输出0.353%）"},
+    "lowCacheTokenMix": {"cache": 0.85, "input": 0.1465, "output": 0.0035}
+  },
+  "adopted": {
+    "standardTokenMix": {"cache": 0.97, "input": 0.025, "output": 0.005},
+    "lowCacheTokenMix": {"cache": 0.85, "input": 0.145, "output": 0.005}
+  },
+  "whyChange": "旧标准输出0.35%只来自单一本机 Kimi 样本，是现有样本下限；新近 MiMo 客户端1.72%、Grok 4.7 小窗2.17% 触发复核。全库带分项样本汇总后输出中位0.51%、普通输入中位2.79%，旧标准两项均偏低。",
+  "sampleAudit": {
+    "method": "从 data/research 与 data/kimi-local.json 取全部带 cache读/未缓存输入/输出 三项分拆的实测样本；cache write（cache_creation）并入普通输入（本质是未命中输入）；份额按各样本 total 计。",
+    "excluded": [
+      {"sample": "MiMo OpenCode 单日（mimo-token-plan-panel-round2-2026-09-23.json）", "mix": [0.9204, 0.0608, 0.0188], "reason": "用户裁定低缓存系 OpenCode harness 所致"},
+      {"sample": "Step-5 本机（stepfun-step5-panel-round5-2026-09-21.json）", "mix": [0.79, 0.2066, 0.0034], "reason": "低缓存档渠道，不进标准档"},
+      {"sample": "Claude Fable 5.1（claude-fable51-round3-2026-09-20.json）", "reason": "缺 input/cache_write 分项"},
+      {"sample": "ChatGPT Plus Astra（chatgpt-astra-adoption-round7-2026-09-11.json）", "reason": "缺 output 分项"}
+    ],
+    "included": [
+      {"sample": "ChatGPT Pro20x 网关 Sol（社区）", "file": "chatgpt-pro20x-gateway-measurement-2026-09-06.json", "cacheRead": 8256078336, "uncachedInput": 415500011, "output": 44152873, "mix": [0.9473, 0.0477, 0.0051]},
+      {"sample": "Claude Opus 5.5 Max20x（社区，含写入 21.1M）", "file": "claude-opus55-round1-2026-09-23.json", "cacheRead": 1000000000, "uncachedInput": 22500000, "output": 8000000, "mix": [0.9704, 0.0218, 0.0078]},
+      {"sample": "ChatGPT Astra Pro20x 窗2（社区）", "file": "chatgpt-astra-round12-2026-09-16.json", "cacheRead": 845564800, "uncachedInput": 26789763, "output": 4447678, "mix": [0.9644, 0.0306, 0.0051]},
+      {"sample": "ChatGPT Astra Pro20x 窗1（社区）", "file": "chatgpt-astra-round12-2026-09-16.json", "cacheRead": 584864000, "uncachedInput": 16835563, "output": 3374930, "mix": [0.9666, 0.0278, 0.0056]},
+      {"sample": "Kimi ccusage 2026-06~07（本机，旧标准出处）", "file": "data/kimi-local.json", "cacheRead": 577507473, "uncachedInput": 12778057, "output": 2089283, "mix": [0.9749, 0.0216, 0.0035]},
+      {"sample": "Devin Max Astra（本机，含写入 3,708,954）", "file": "devin-usage-round4-2026-09-14.json", "cacheRead": 300944710, "uncachedInput": 3710952, "output": 369918, "mix": [0.9866, 0.0122, 0.0012]},
+      {"sample": "ChatGPT Prolite Astra high（社区）", "file": "chatgpt-astra-round12-2026-09-16.json", "cacheRead": 192381312, "uncachedInput": 5178076, "output": 868914, "mix": [0.9695, 0.0261, 0.0044]},
+      {"sample": "ChatGPT Luna（本机）", "file": "chatgpt-luna-adoption-round6-2026-09-08.json", "cacheRead": 109356416, "uncachedInput": 2941040, "output": 369313, "mix": [0.9706, 0.0261, 0.0033]},
+      {"sample": "Grok 4.7 这次（本机）", "file": "supergrok-grok47-round2-2026-09-22.json", "cacheRead": 51728640, "uncachedInput": 4621905, "output": 278838, "mix": [0.9135, 0.0816, 0.0049]},
+      {"sample": "MiMo 客户端两题（本机）", "file": "mimo-client-sample-round3-2026-09-23.json", "cacheRead": 33940224, "uncachedInput": 1168949, "output": 615195, "mix": [0.9501, 0.0327, 0.0172]},
+      {"sample": "Claude Pro Opus 5（本机，含写入 436,900）", "file": "claude-adoption-round8-2026-09-20.json", "cacheRead": 32200000, "uncachedInput": 437128, "output": 208200, "mix": [0.9804, 0.0133, 0.0063]},
+      {"sample": "Kimi ccusage 2026-08（本机）", "file": "data/kimi-local.json", "cacheRead": 23680791, "uncachedInput": 1473402, "output": 165680, "mix": [0.9353, 0.0582, 0.0065]},
+      {"sample": "Grok 4.7 之前（本机）", "file": "supergrok-grok47-round2-2026-09-22.json", "cacheRead": 12432384, "uncachedInput": 1333041, "output": 305932, "mix": [0.8835, 0.0947, 0.0217]},
+      {"sample": "Claude Max 社区（仅百分比，creation 并入输入）", "file": "claude-quotas-round5-2026-09.json", "mix": [0.9687, 0.028, 0.0033]}
+    ],
+    "summary": {
+      "n": 14,
+      "median": {"cache": 0.9677, "input": 0.0279, "output": 0.0051},
+      "pooledExclGateway": {"cache": 0.9689, "input": 0.0257, "output": 0.0054, "totalTokens": 3.89e9},
+      "pooledAll": {"cache": 0.9539, "input": 0.0409, "output": 0.0052, "totalTokens": 12.6e9},
+      "meanOutput": 0.0069,
+      "outputMedianSamplesOver100M": 0.00475,
+      "observation": "样本越大输出占比越低（≥1亿 tok 的 8 份输出中位 0.48%；超过0.75%的只有 Opus 5.5 0.78% 与两份千万级小样本），与「长会话缓存读随上下文近似平方增长、输出线性增长」的稀释假设方向一致，未证。"
+    }
+  },
+  "scope": "与 round1 相同：美元额度÷三段价、按量API混合单价、同池模型三段价比派生、官方credits三段费率换算；直接给出 total tokens 的面板/日志/打满实测不重算。标准变更须统一重算全部受影响点。",
+  "cacheWriteNote": "标准仍不单列 cache write。显式缓存厂商（如 input $10 / cache write $12.5 = 1.25×）的普通输入段实际多为写入，按写入价计混合价约高 3%，属二阶修正不建模。"
+}

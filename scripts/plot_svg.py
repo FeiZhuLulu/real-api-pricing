@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_build"
+STD_MIX = json.loads((ROOT / "data/conventions.json").read_text(encoding="utf-8"))["standardTokenMix"]
 BOARDS = {
     "arena_code": ("CodeArena榜", "Code Arena"),
     "arena_agent_mode": ("AgentArena榜", "Agent Arena"),
@@ -148,6 +149,9 @@ def label_position(p, board, x, y):
     model = p["model"]
     if model == "claude-opus-5":
         return x - 24, y - 49, "end"
+    if model == "gpt-6-astra":
+        if board == "aa_intelligence_index":
+            return x - 24, y + 30, "end"
     if model == "claude-opus-4.8":
         if board == "aa_intelligence_index":
             return x + 24, y + 43, "start"
@@ -156,9 +160,18 @@ def label_position(p, board, x, y):
         return x - 24, y + 13, "end"
     if model == "claude-sonnet-5":
         return x + 22, y - 54, "start"
+    if model == "mimo-v2.6-pro":
+        if board == "aa_intelligence_index":
+            return x - 30, y + 20, "end"
+    if model == "mimo-v2.5":
+        if board == "aa_intelligence_index":
+            return x - 235, y - 72, "end"
+    if model == "step-5-preview":
+        if board == "aa_intelligence_index":
+            return x + 5, y + 28, "end"
     if model == "glm-5.3":
         if board == "aa_intelligence_index":
-            return x + 24, y - 72, "start"
+            return x + 24, y - 108, "start"
         return x + 24, y - (58 if board == "arena_code" else 31), "start"
     if model == "glm-5.3-flash":
         return x + 23, y - 40, "start"
@@ -168,11 +181,19 @@ def label_position(p, board, x, y):
         # TB4 全量里 Luna 分数最低（17.27%），标签整体下移会压过图框下缘。
         if board == "terminal_bench_4":
             return x + 5, y + 25, "end"
+        if board == "aa_intelligence_index":
+            return x - 30, y + 113, "end"
         return x + 5, y + 57, "end"
     if model == "gpt-5.6-terra":
         if board == "aa_intelligence_index":
             return x - 24, y + 65, "end"
         return x + 24, y - 55, "start"
+    if model == "step-3.7-flash":
+        if board == "aa_intelligence_index":
+            return x - 25, y + 12, "end"
+    if model == "step-3.5-flash":
+        if board == "aa_intelligence_index":
+            return x - 390, y - 62, "end"
     if model == "swe-2":
         # 不计额度点贴右边界，标签只能往左上放，且要避开 TB4 里 Luna 的下方标签。
         return x - 30, y + 34, "end"
@@ -304,7 +325,7 @@ def draw(board, meta, points, tier, language="zh"):
     s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Pareto frontier" if language == "en" else "帕累托前沿", 12, "#687168"),
           f'<path d="M{api_mark_x} 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>',
           text(api_mark_x + 14, 834, "Metered API" if language == "en" else "按量 API", 12, "#687168"),
-          text(56, 874, "Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97.5% cache / 2.15% input / 0.35% output · Direct totals unchanged" if language == "en" else "默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97.5% / 输入2.15% / 输出0.35% · 直接total实测不重算", 12, "#727B72"),
+          text(56, 874, f"Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: {STD_MIX['cache']:.0%} cache / {STD_MIX['input']:.1%} input / {STD_MIX['output']:.1%} output · Direct totals unchanged" if language == "en" else f"默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存{STD_MIX['cache']:.0%} / 输入{STD_MIX['input']:.1%} / 输出{STD_MIX['output']:.1%} · 直接total实测不重算", 12, "#727B72"),
           text(1384, 874, (f"{len(subs)} subscription positions / {len(api)} API positions / {len(frontier)} frontier positions" if language == "en" else f"{len(subs)} 个订阅位置 / {len(api)} 个 API 位置 / {len(frontier)} 个前沿位置"), 12, "#727B72", "end"),
           text(56, 898, ((
               "OpenDesign Harness reference; product/quota alignment unverified, not channel measurements."

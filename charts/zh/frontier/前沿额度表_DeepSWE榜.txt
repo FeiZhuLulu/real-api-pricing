@@ -9,5 +9,5 @@ DeepSWE v1.1 | Pass@1 % | 2026-09-03
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 序号  套餐               价格/月  服务模型             月额度(亿)  $/MTok   置信度  Pass@1 %  得分版本                                         Harness         思考强度  映射
 ----  -----------------  -------  -------------------  ----------  -------  ------  --------  -----------------------------------------------  --------------  --------  -----------------------------
-1     OpenCode Go        USD 10   MiMo V2.6 Flash      89.286      0.00112  medium  67.9      mini-swe-agent - mimo-v2-6-flash [厂商自报]      mini-swe-agent  —         agent_configuration_reference
-2     Command Code GOAT  USD 10   DeepSeek V4.1 Flash  48.485      0.00206  medium  74.2      mini-SWE - DeepSeek V4.1 Flash (max) [厂商自报]  mini-SWE        max       agent_configuration_reference
+1     OpenCode Go        USD 10   MiMo V2.6 Flash      78.782      0.00127  medium  67.9      mini-swe-agent - mimo-v2-6-flash [厂商自报]      mini-swe-agent  —         agent_configuration_reference
+2     Command Code GOAT  USD 10   DeepSeek V4.1 Flash  41.408      0.00241  medium  74.2      mini-SWE - DeepSeek V4.1 Flash (max) [厂商自报]  mini-SWE        max       agent_configuration_reference
