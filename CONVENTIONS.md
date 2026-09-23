@@ -56,6 +56,6 @@
 - 免费档不画（对数轴画不了）；Y 轴没分的模型不画，但要在输出里列出来。
 - 每张榜单一张图，标题写清榜单名和快照日期；不同榜单的分数不混合。
 - 公开 README 和 charts 默认使用全量图；精选图只作内部对照，不作为默认公开视图。
-- **配色**：用明亮、干净的高饱和色，不用深灰或脏色。OpenAI 绿、Claude 橙、xAI 紫、Cursor 黄、Kimi 天蓝、GLM 黑、MiniMax 粉、Alibaba 红、OpenCode 青、DeepSeek 蓝、StepFun 电青 #00F4E5；Gemini 若入库用黄绿。前沿线用近黑色。具体色值只在 [`config/channel-colors.json`](config/channel-colors.json) 维护（网站与全部 Python 图共用）；未指定色相的渠道（Command Code、Ollama、小米、Devin）用浅色调区分。改色后跑 `scripts/checks/verify_palette.py`，数据中出现的渠道两两 CIEDE2000 色差须 ≥ 15。
+- **配色**：用明亮、干净的高饱和色，不用深灰或脏色。OpenAI 绿、Claude 橙（Anthropic 品牌陶土橙 #D97757）、xAI 紫、Cursor 黄、Kimi 天蓝、GLM 黑、MiniMax 粉、Alibaba 红、OpenCode 青、DeepSeek 蓝、小米经典小米橙 #FF6900、StepFun 电青 #00F4E5；Gemini 若入库用黄绿。前沿线用近黑色。具体色值只在 [`config/channel-colors.json`](config/channel-colors.json) 维护（网站与全部 Python 图共用）；未指定色相的渠道（Command Code、Ollama、Devin）用浅色调区分。改色后跑 `scripts/checks/verify_palette.py`：数据中出现的渠道两两 CIEDE2000 色差须 ≥ 15；两家都用本家品牌色的例外对登记在 `brandPairs`（当前 Claude/小米，下限 11.5）。
 - **额度/单价总览**：双栏对数轴，不分量级面板；中文额度用"亿"，英文用 billion；每行数值旁加渠道缩写，图例置顶。
 - **按榜前沿精简版**：从全量付费订阅/API 中按"单价越低、分数越高"筛选，至少一项严格更好才算支配；同价同分的不同套餐都保留。

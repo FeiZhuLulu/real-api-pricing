@@ -10,6 +10,7 @@ _CONFIG = json.loads(
 )
 COLORS: dict[str, str] = _CONFIG["colors"]
 ALIASES: dict[str, str] = _CONFIG["aliases"]
+BRAND_PAIRS: dict[str, float] = {k: v for k, v in _CONFIG.get("brandPairs", {}).items() if not k.startswith("_")}
 FALLBACK: str = _CONFIG["fallback"]
 FRONTIER: str = _CONFIG["frontier"]
 

@@ -2,6 +2,7 @@
 """校验共享渠道配色（config/channel-colors.json）：
 1. 数据里出现的每个渠道都有色值；2. StepFun 保持 CONVENTIONS 指定的 #00F4E5；
 3. 数据中实际出现的渠道两两之间 CIEDE2000 色差 ≥ MIN_DELTA_E（避免肉眼难分的一对）；
+   config 里 brandPairs 列出的品牌色对（两家都用本家品牌色）改用各自登记的下限；
 4. 旧的硬编码色板没有回流到出图脚本。"""
 from __future__ import annotations
 
@@ -14,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
-from palette import ALIASES, COLORS  # noqa: E402
+from palette import ALIASES, BRAND_PAIRS, COLORS  # noqa: E402
 
 MIN_DELTA_E = 15.0
 # 与 web/scripts/build-data.mjs 的渠道前缀一致。
@@ -69,8 +70,9 @@ def main() -> None:
     present = [c for c in channels if c in COLORS]
     pairs = sorted((delta_e(COLORS[a], COLORS[b]), a, b) for a, b in itertools.combinations(present, 2))
     for d, a, b in pairs:
-        if d < MIN_DELTA_E:
-            errors.append(f"{a} {COLORS[a]} vs {b} {COLORS[b]}: ΔE2000 {d:.1f} < {MIN_DELTA_E}")
+        floor = BRAND_PAIRS.get(f"{a}|{b}", BRAND_PAIRS.get(f"{b}|{a}", MIN_DELTA_E))
+        if d < floor:
+            errors.append(f"{a} {COLORS[a]} vs {b} {COLORS[b]}: ΔE2000 {d:.1f} < {floor}")
     legacy = re.compile(r'"(?:#00A86B|#F07826|#B65CFF|#FFB81C|#2FA8FF|#708090|#A0785C|#FFA000)"', re.I)
     for script in ("plot_svg.py", "plot_quotas.py", "build_html.py"):
         if legacy.search((ROOT / "scripts" / script).read_text(encoding="utf-8")):
@@ -78,8 +80,11 @@ def main() -> None:
     if errors:
         print("\n".join(errors))
         sys.exit(1)
-    d, a, b = pairs[0]
-    print(f"Palette OK: {len(present)} channels, closest pair {a}/{b} ΔE2000 {d:.1f} (≥ {MIN_DELTA_E}).")
+    regular = [x for x in pairs if f"{x[1]}|{x[2]}" not in BRAND_PAIRS and f"{x[2]}|{x[1]}" not in BRAND_PAIRS]
+    d, a, b = regular[0]
+    brand = ", ".join(f"{x[1]}/{x[2]} {x[0]:.1f}" for x in pairs if x not in regular)
+    print(f"Palette OK: {len(present)} channels, closest pair {a}/{b} ΔE2000 {d:.1f} (≥ {MIN_DELTA_E})"
+          + (f"; brand pairs {brand}." if brand else "."))
 
 
 if __name__ == "__main__":

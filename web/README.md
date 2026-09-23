@@ -109,6 +109,6 @@ Plotly (1.1 MB of JavaScript) was replaced by a purpose-built SVG scene; the Plo
 - **Interaction.** Hover hit-tests in pixel space (badges win over dots by relative distance) and feeds the React hover card; click opens the evidence dialog; drag pans, Box zoom frames a rectangle, the wheel zooms inside the plot rectangle only, double-click or Reset restores the view, and arrow keys / + / − / 0 work when the plot has focus. Touch: horizontal drag pans, pinch zooms, vertical swipes keep scrolling the page.
 - **Legend.** Channel entries show point counts; hovering one isolates that channel in the chart and rankings, clicking toggles the channel filter.
 
-Channel colours come from `../config/channel-colors.json`, shared with the Python charts; `python scripts/checks/verify_palette.py` enforces a minimum CIEDE2000 distance between channels present in the data. Dark mode swaps near-black provider marks for light ink so they stay visible.
+Channel colours come from `../config/channel-colors.json`, shared with the Python charts; `python scripts/checks/verify_palette.py` enforces a minimum CIEDE2000 distance between channels present in the data (registered brand pairs such as Anthropic terracotta / Xiaomi orange have their own floor). Dark mode swaps near-black provider marks for light ink so they stay visible.
 
 Long tables and rankings render in chunks as they scroll (CSV/PNG exports still include every row), and the dataset request starts from `index.html` in parallel with the JavaScript bundle.
