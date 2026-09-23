@@ -3301,7 +3301,7 @@
    "confidence": "medium",
    "tier": "main",
    "source": "用户本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json",
-   "note": "6.72→4.97亿：周池 168,035,200→124,330,387——round2 大窗实测取代 round1 份额推断；三窗反推 176.1M/124.3M/132.1M，用户裁定「这次」（45.5% 最大消��窗）最可信；对 4.6 同档 1.273亿/周为 0.98× 同量级；两窗反推不重合，池口径或面值有未解变量，n=1 账号维持 medium",
+   "note": "6.72→4.97亿：周池 168,035,200→124,330,387——round2 大窗实测取代 round1 份额推断；三窗反推 176.1M/124.3M/132.1M，用户裁定「这次」（45.5% 最大消耗窗）最可信；「之前」窗已对上 round1 三会话，删除版实得 628,541 tok/0.36%；对 4.6 同档 1.273亿/周为 0.98× 同量级；两窗反推不重合，池口径或面值有未解变量，n=1 账号维持 medium",
    "unmetered": false,
    "promo_until": null,
    "aa_intelligence_index__selection": "highest_archived_reference",

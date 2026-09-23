@@ -23,6 +23,7 @@ SUPERGROK_WEEKLY_TOKENS = 127_272_629
 # Grok 4.7 周池：round2 用户本机实测（Grok Build CLI，xhigh）——「这次」窗 56,629,383 tok = 周额度 +45.5475%
 #   → 124,330,387/周（用户裁定三窗中该窗最可信：消耗份额最大、读数取整误差占比最小；「之前」8% 窗反推 176.1M、汇总 132.1M 不采）。
 #   round1（三会话 13.44M/约8%→168.0M/周）删除版份额系推断，偏高约 35%，已被本轮取代；对 4.6 基准 127,272,629 为 0.98× 同量级。
+#   「之前」窗已确认为 round1 三会话之和：删除版实得 628,541 tok、实占约 0.36% 周池（round1 按约 1% 估）。
 SUPERGROK47_WEEKLY_TOKENS = 124_330_387
 SUPERGROK_PANEL_USD = 25
 CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
@@ -549,7 +550,7 @@ SUBS = [
     ("supergrok_lite", "SuperGrok Lite", 10, "USD", "grok-4.6", 1.5, "low", "aa_grok_build_2026_07", "面板周额度未知，三轮联网均无"),
     # Grok 4.7 —— round2 用户本机实测（2026-09-22，Grok Build CLI xhigh）：「这次」窗 56.6M tok = 周额度 +45.5%；
     #   分数由 scores-grok47-round1 补充档从 AA round4 未映射载荷提升（int 46.45 / coding 56.27）
-    ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json", f"6.72→{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：周池 168,035,200→{SUPERGROK47_WEEKLY_TOKENS:,}——round2 大窗实测取代 round1 份额推断；三窗反推 176.1M/124.3M/132.1M，用户裁定「这次」（45.5% 最大消耗窗）最可信；对 4.6 同档 1.273亿/周为 0.98× 同量级；两窗反推不重合，池口径或面值有未解变量，n=1 账号维持 medium"),
+    ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json", f"6.72→{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：周池 168,035,200→{SUPERGROK47_WEEKLY_TOKENS:,}——round2 大窗实测取代 round1 份额推断；三窗反推 176.1M/124.3M/132.1M，用户裁定「这次」（45.5% 最大消耗窗）最可信；「之前」窗已对上 round1 三会话，删除版实得 628,541 tok/0.36%；对 4.6 同档 1.273亿/周为 0.98× 同量级；两窗反推不重合，池口径或面值有未解变量，n=1 账号维持 medium"),
     ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.7", supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$100×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"26.9→{supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，非独立实测"),
     ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"67.2→{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，非独立实测；Lite 面板美元未知不派生"),
     # Cursor —— 两张个人Ultra截图均在2026-08-25永久扩池后；社区图可能因首周半价用量集中而使tokens/Usage%反推偏高。
