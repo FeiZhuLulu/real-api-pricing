@@ -69,6 +69,7 @@ import {
   workloadLine,
   listPriceLine,
   metricLabel,
+  effortLabel,
 } from "./domain";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
@@ -386,8 +387,10 @@ function Explorer({
     });
     setWarning(false);
   };
-  const filterValue = (v: string) =>
-    v === "unknown"
+  const filterValue = (v: string, key?: FilterKey) =>
+    key === "effort" && v !== "unknown"
+      ? (effortLabel(v, state.lang) ?? v)
+      : v === "unknown"
       ? t("Unknown / unreported", "未知 / 未报告")
       : v === "subscription"
         ? t("Subscription", "订阅")
@@ -804,7 +807,7 @@ function Explorer({
                   )}
                   {activeFilters.map(({ k, v }) => (
                     <button key={k + v} onClick={() => toggleFilter(k, v)}>
-                      {filterLabels[k][zh ? 1 : 0]}: {filterValue(v)}
+                      {filterLabels[k][zh ? 1 : 0]}: {filterValue(v, k)}
                       <X size={12} />
                     </button>
                   ))}
@@ -1056,7 +1059,7 @@ function Explorer({
                   <tbody>
                     {shown.slice(0, tableLimit).map((r, i) => {
                       const config = r.mapping && state.view === "pareto"
-                        ? [r.mapping.agent_harness, r.mapping.reasoning_effort, r.mapping.service_mode]
+                        ? [r.mapping.agent_harness, effortLabel(r.mapping.reasoning_effort, state.lang), r.mapping.service_mode]
                             .filter(Boolean)
                             .join(" · ")
                         : "";
@@ -1347,7 +1350,7 @@ function Explorer({
                             checked={state[k].includes(v)}
                             onChange={() => toggleFilter(k, v)}
                           />
-                          {filterValue(v)}
+                          {filterValue(v, k)}
                         </label>
                       ))}
                     </div>
@@ -1445,6 +1448,7 @@ function Explorer({
               <h3>{t("Complete source data", "完整源数据")}</h3>
               {[
                 "adopted.csv",
+                "points.csv",
                 "points.json",
                 "benchmark-configurations.json",
                 "benchmark-points.json",
@@ -1633,7 +1637,7 @@ function Details({
                     </dd>
                     <dt>{t("Harness / effort / mode", "框架 / 强度 / 模式")}</dt>
                     <dd>
-                      {m.agent_harness ?? "—"} / {m.reasoning_effort ?? "—"} /{" "}
+                      {m.agent_harness ?? "—"} / {effortLabel(m.reasoning_effort, lang) ?? "—"} /{" "}
                       {m.service_mode ?? "—"}
                     </dd>
                     <dt>{t("Mapping confidence", "映射置信度")}</dt>

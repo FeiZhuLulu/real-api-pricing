@@ -680,6 +680,17 @@ const METRIC_ZH: Record<string, string> = {
   "Average task score": "平均任务分",
   "Pass@1 %": "Pass@1 %",
 };
+const EFFORT: Record<string, [string, string]> = {
+  none: ["None", "无推理"],
+  low: ["Low", "低"],
+  medium: ["Medium", "中"],
+  high: ["High", "高"],
+  xhigh: ["xhigh", "超高"],
+  max: ["Max", "最高"],
+};
+/** Reasoning-effort level in the reader's language; unknown levels stay as published. */
+export const effortLabel = (effort: string | null, lang: string) =>
+  effort === null ? null : (EFFORT[effort]?.[lang === "zh" ? 1 : 0] ?? effort);
 /** Leaderboard metric in the reader's language; unknown metrics stay as published. */
 export const metricLabel = (metric: string, lang: string) =>
   lang === "zh" ? (METRIC_ZH[metric] ?? metric) : metric;

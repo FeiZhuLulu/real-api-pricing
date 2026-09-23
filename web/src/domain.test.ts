@@ -25,6 +25,7 @@ import {
   defaultState,
   accessLine,
   displayPlan,
+  effortLabel,
   isThirdParty,
   manufacturer,
   frontierPath,
@@ -455,6 +456,12 @@ test("Language conversion only changes display units and labels", () => {
     displayPlan("GLM (老客 ¥149) 闲时", "en"),
     "GLM (v2 ¥149) Off-peak",
   );
+  // Every archived reasoning-effort level has a Chinese label.
+  for (const e of new Set(data.configurations.map((c) => c.reasoning_effort)))
+    if (e !== null) assert.notEqual(effortLabel(e, "zh"), e, `${e} is translated`);
+  assert.equal(effortLabel("xhigh", "zh"), "超高");
+  assert.equal(effortLabel("max", "en"), "Max");
+  assert.equal(effortLabel(null, "zh"), null);
 });
 test("Chart names never overlap each other and leave the plot rather than collide", () => {
   const box = { left: 60, top: 20, right: 660, bottom: 420, width: 600, height: 400 };

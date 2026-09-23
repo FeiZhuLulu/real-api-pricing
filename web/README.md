@@ -24,12 +24,12 @@ npm run preview
 
 ## Data and behavior
 
-- Three linked views: price–capability scatterplot, real-price ranking, and monthly-allowance ranking. Five leaderboards remain independent.
+- Three linked views: price–capability scatterplot, real-price ranking, and monthly-allowance ranking. Every leaderboard stays independent; scores are never mixed across boards.
 - All adopted points and all archived benchmark configurations are selected initially. Model selection expands to channels and individual plan/model points. Empty selection is distinct from selecting everything.
 - Filters within one category are ORed; categories are ANDed. Harness, effort, and mode filters restrict benchmark references. Plans without matching scores stay in the table and in price/allowance views. Those ranking views use one row per plan/model, with any table score labeled as the highest matching reference.
 - The frontier is recomputed for the filtered set with strict dominance. Equal coordinates are grouped only for rendering; every plan/configuration member remains inspectable. Lowest price is on the right. Endpoint extensions cannot imply the highest score at the cheapest price.
 - Detail dialogs distinguish quota confidence from mapping confidence, show original adoption evidence, and link to public archives. Original-language evidence is retained; English display labels translate Chinese plan qualifiers without changing IDs or values.
-- The table search and sorting affect the table and its CSV, while the global model/filter state affects both chart and table. Pagination displays 50 rows at a time; CSV exports all matching rows, not just the current page.
+- The table search and sorting affect the table and its CSV, while the global model/filter state affects both chart and table. Tables and rankings scroll inside bounded panels and render progressively as you scroll; CSV and image exports include every matching row.
 - Share links serialize state in the URL hash. Removed IDs and invalid settings are ignored with an explicit notice. CSV text is quoted and formula-like text escaped.
 - PNG/SVG exports use the current chart. Mobile dialogs fill the screen; long ranking charts and wide tables scroll within their containers.
 
