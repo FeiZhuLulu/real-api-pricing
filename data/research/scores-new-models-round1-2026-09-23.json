@@ -1,0 +1,903 @@
+{
+  "collectedAt": "2026-09-23",
+  "supplement": true,
+  "supplementNote": "9/21–22 新发模型（Claude Opus 5.5、GPT-6 Sol/Luna、Grok 4.7、MiMo V2.6、Step 5 Preview）官方/第三方榜单补档。scores[] 只收录榜单方实测行，追加到各榜当前快照（无 baseSnapshot → append 到各板现行快照）。AA Intelligence 线上已是 v4.3.2（10 评测），round4 快照标 v4.3——沿 scores-mimo 档先例，本档分数为 v4.3.2 读数，整榜重拉前混用有版本风险。AA 独立实测 TB4（页面注明 Independently benchmarked by Artificial Analysis）按用户口径计入 terminal_bench_4，agentHarness=Artificial Analysis，与 tbench.ai 官方 harness 行分开。GPT-6 Sol/Luna（9/22 新发）尚无 adopted 套餐行，官方分数移入 unmappedOfficialRows 不灌 scores[]（沿 round4 notableUnmappedNonAdopted 先例）。厂商自报数只进 vendorBenchmarksNotBoards；官方但非项目榜单进 officialBoardsNotInProject。",
+  "boards": [
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "2026-09-22",
+      "note": "沿用 round4 元数据；线上版本已是 v4.3.2，本档读数为 v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "name": "Artificial Analysis Coding Agent Index v1.5",
+      "url": "https://artificialanalysis.ai/agents/coding-agents",
+      "metric": "Coding Agent Index",
+      "snapshotDate": "2026-09-22",
+      "note": "沿用 round4 元数据；v1.5 板面 2026-09-23 为 19 配置。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-03",
+      "note": "官方榜 2026-09-23 复核：27 行无新模型行（榜首 Astra Codex max 58.18）。本档新增行均为 AA 独立实测（agentHarness=Artificial Analysis），与官方 harness 行分开不互灌。"
+    },
+    {
+      "boardId": "arena_code",
+      "name": "Code Arena | WebDev 🏆 Overall",
+      "url": "https://arena.ai/leaderboard/code",
+      "metric": "Arena Score",
+      "snapshotDate": "2026-09-23",
+      "note": "按 2026-09-23 线上板面追加（rating 保留整数位，CI 由 rankUpper/rankLower 与 rating 端点折算）。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (max with fallback)",
+      "score": 57.6223698102963,
+      "secondary": {
+        "scoreRoundedDisplay": 58,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "claude-opus-5-5",
+        "shortName": "Claude Opus 5.5 (max with fallback)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Anthropic",
+        "effort": "max",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 5.982012019521066,
+        "terminalbenchV40": 0.595959595959596,
+        "scicode": 0.668981481481482,
+        "hle": 0.613531047265987,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "v4.3.2 原始精度（页面整数位 58）。9/22 发布，同日全部五档上榜并登顶（次高 Fable 5.1 max 53.35）。slug 无 -max 后缀即 max 档。AA 页面注明 releaseDate 2026-09-22，其余四档标 9-17（分档实测日期）。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (xhigh with fallback)",
+      "score": 55.9873505840139,
+      "secondary": {
+        "scoreRoundedDisplay": 56,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "claude-opus-5-5-xhigh",
+        "shortName": "Claude Opus 5.5 (xhigh with fallback)",
+        "releaseDate": "2026-09-17",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Anthropic",
+        "effort": "xhigh",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 3.459110175822289,
+        "terminalbenchV40": 0.595959595959596,
+        "scicode": 0.650462962962963,
+        "hle": 0.575069508804449,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "同上（整数位 56）。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (high with fallback)",
+      "score": 53.5831959822067,
+      "secondary": {
+        "scoreRoundedDisplay": 54,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "claude-opus-5-5-high",
+        "shortName": "Claude Opus 5.5 (high with fallback)",
+        "releaseDate": "2026-09-17",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Anthropic",
+        "effort": "high",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 1.822504718771704,
+        "terminalbenchV40": 0.565656565656566,
+        "scicode": 0.604166666666667,
+        "hle": 0.555607043558851,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "同上（整数位 54）。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (medium with fallback)",
+      "score": 51.2434931792768,
+      "secondary": {
+        "scoreRoundedDisplay": 51,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "claude-opus-5-5-medium",
+        "shortName": "Claude Opus 5.5 (medium with fallback)",
+        "releaseDate": "2026-09-17",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Anthropic",
+        "effort": "medium",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 1.3360093438976588,
+        "terminalbenchV40": 0.525252525252525,
+        "scicode": 0.592592592592593,
+        "hle": 0.547265987025023,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "同上（整数位 51）。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (low with fallback)",
+      "score": 42.3077781466168,
+      "secondary": {
+        "scoreRoundedDisplay": 42,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "claude-opus-5-5-low",
+        "shortName": "Claude Opus 5.5 (low with fallback)",
+        "releaseDate": "2026-09-17",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Anthropic",
+        "effort": "low",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.551180473909146,
+        "terminalbenchV40": 0.313131313131313,
+        "scicode": 0.585648148148148,
+        "hle": 0.483317886932345,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "同上（整数位 42）。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "mimo-v2.6-pro",
+      "variantLabel": "MiMo-V2.6-Pro",
+      "score": 46.3242065310383,
+      "secondary": {
+        "scoreRoundedDisplay": 46,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "mimo-v2-6-pro",
+        "shortName": "MiMo-V2.6-Pro",
+        "releaseDate": "2026-09-21",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "Xiaomi",
+        "effort": null,
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.13322318937213493,
+        "terminalbenchV40": 0.348484848484849,
+        "scicode": 0.608796296296296,
+        "hle": 0.493512511584801,
+        "price1mInputTokens": 0.435,
+        "price1mOutputTokens": 0.87
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "v4.3.2 原始精度，升级 scores-mimo-v26-grok47-round1 的整数读数 46（同榜同模型，46.3242）。无 effort 后缀；Flash 仍未上榜。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Artificial Analysis - Claude Opus 5.5 (max)",
+      "score": 59.6,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "max"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测（非 tbench.ai 官方榜运行，harness 不同，两边不互灌）。tbench.ai 官方榜 2026-09-23 复核仍无 Opus 5.5 行；Anthropic 自报 66.4%(xhigh,±2.6) 与 AA 实测 59.6% 口径不同——AA 值为 adoptable 的第三方读数。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Artificial Analysis - Claude Opus 5.5 (xhigh)",
+      "score": 59.6,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "xhigh"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "同上。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Artificial Analysis - Claude Opus 5.5 (high)",
+      "score": 56.57,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "同上。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Artificial Analysis - Claude Opus 5.5 (medium)",
+      "score": 52.53,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "medium"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "同上。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Artificial Analysis - Claude Opus 5.5 (low)",
+      "score": 31.31,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "low"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "同上。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "mimo-v2.6-pro",
+      "variantLabel": "Artificial Analysis - MiMo-V2.6-Pro",
+      "score": 34.85,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": null
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测；小米自跑自报 34.9% 未获采用（对比机型对不齐，harness 未署名）。此为该模型首个第三方 TB4 读数。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "grok-4.7",
+      "variantLabel": "Artificial Analysis - Grok 4.7 (xhigh)",
+      "score": 25.76,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "xhigh"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 25.76%，显著低于 tbench.ai 官方行 Grok Build 37.58%——不同 harness 不同运行，两侧均留档；per-model max 仍取官方 37.6。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "grok-4.7",
+      "variantLabel": "Artificial Analysis - Grok 4.7 (high)",
+      "score": 24.75,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "同上（24.75%）。"
+    },
+    {
+      "boardId": "arena_code",
+      "model": "grok-4.7",
+      "variantLabel": "grok-4.7-xhigh",
+      "score": 1626,
+      "secondary": {
+        "rank": 13,
+        "rankSpread": [
+          10,
+          19
+        ],
+        "ciPlus": 16.0,
+        "ciMinus": 16.0,
+        "votes": 1658,
+        "modelKey": "grok-4.7-xhigh-public",
+        "pricePerM": "$2 / $6",
+        "context": "500K"
+      },
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-23",
+      "note": "Code Arena 线上板面 2026-09-23 读数（rating 1625.64，round 为整数位 1626；rank 13、95% 名次区间 10–19）。9/21 发布后新上榜。"
+    },
+    {
+      "boardId": "arena_code",
+      "model": "mimo-v2.6-pro",
+      "variantLabel": "mimo-v2.6-pro",
+      "score": 1628,
+      "secondary": {
+        "rank": 0,
+        "rankSpread": [
+          10,
+          20
+        ],
+        "ciPlus": 17.7,
+        "ciMinus": 17.7,
+        "votes": 790,
+        "modelKey": "mimo-v2-6-pro-mw0j",
+        "isDay1": true,
+        "day1Lambda": 0.21,
+        "pricePerM": "$0.435 / $0.87",
+        "context": "1M"
+      },
+      "source": "https://arena.ai/leaderboard/code",
+      "checkedAt": "2026-09-23",
+      "note": "rating 1628.15（整数位 1628）。rank=0 为 Day-1 未正式排位（isDay1，λ=0.21），95% 名次区间 10–20、790 票。"
+    }
+  ],
+  "unmappedOfficialRows": [
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (max)",
+      "score": 47.5276426437724,
+      "secondary": {
+        "scoreRoundedDisplay": 48,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol",
+        "shortName": "GPT-6 Sol (max)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "max",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 1.0564240894076389,
+        "terminalbenchV40": 0.439393939393939,
+        "scicode": 0.576388888888889,
+        "hle": 0.479147358665431,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (max)",
+      "score": 43.94,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "max"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (xhigh)",
+      "score": 44.1009705516407,
+      "secondary": {
+        "scoreRoundedDisplay": 44,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-xhigh",
+        "shortName": "GPT-6 Sol (xhigh)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "xhigh",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.5318962692390143,
+        "terminalbenchV40": 0.303030303030303,
+        "scicode": 0.550925925925926,
+        "hle": 0.462928637627433,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (xhigh)",
+      "score": 30.3,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "xhigh"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (high)",
+      "score": 42.8215513642985,
+      "secondary": {
+        "scoreRoundedDisplay": 43,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-high",
+        "shortName": "GPT-6 Sol (high)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "high",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.3746326907148203,
+        "terminalbenchV40": 0.262626262626263,
+        "scicode": 0.548611111111111,
+        "hle": 0.44114921223355,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (high)",
+      "score": 26.26,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (medium)",
+      "score": 39.7820971749522,
+      "secondary": {
+        "scoreRoundedDisplay": 40,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-medium",
+        "shortName": "GPT-6 Sol (medium)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "medium",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.24820209578663968,
+        "terminalbenchV40": 0.186868686868687,
+        "scicode": 0.538194444444444,
+        "hle": 0.409638554216867,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (medium)",
+      "score": 18.69,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "medium"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (low)",
+      "score": 33.9008505585733,
+      "secondary": {
+        "scoreRoundedDisplay": 34,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-low",
+        "shortName": "GPT-6 Sol (low)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "low",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.13224085088798104,
+        "terminalbenchV40": 0.0909090909090909,
+        "scicode": 0.502314814814815,
+        "hle": 0.349397590361446,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (low)",
+      "score": 9.09,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "low"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT-6 Luna (max)",
+      "score": 37.2559686869738,
+      "secondary": {
+        "scoreRoundedDisplay": 37,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-luna",
+        "shortName": "GPT-6 Luna (max)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "max",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.06809498628701058,
+        "terminalbenchV40": 0.126262626262626,
+        "scicode": 0.546296296296296,
+        "hle": 0.385078776645042,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-luna",
+      "variantLabel": "Artificial Analysis - GPT-6 Luna (max)",
+      "score": 12.63,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "max"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT-6 Luna (xhigh)",
+      "score": 33.8845820217785,
+      "secondary": {
+        "scoreRoundedDisplay": 34,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-luna-xhigh",
+        "shortName": "GPT-6 Luna (xhigh)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "xhigh",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.041708771594451556,
+        "terminalbenchV40": 0.0808080808080808,
+        "scicode": 0.517361111111111,
+        "hle": 0.343373493975904,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-luna",
+      "variantLabel": "Artificial Analysis - GPT-6 Luna (xhigh)",
+      "score": 8.08,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "xhigh"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT-6 Luna (high)",
+      "score": 32.1482304150837,
+      "secondary": {
+        "scoreRoundedDisplay": 32,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-luna-high",
+        "shortName": "GPT-6 Luna (high)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "high",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.02861964876935845,
+        "terminalbenchV40": 0.0454545454545455,
+        "scicode": 0.503472222222222,
+        "hle": 0.329471733086191,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-luna",
+      "variantLabel": "Artificial Analysis - GPT-6 Luna (high)",
+      "score": 4.55,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT-6 Luna (medium)",
+      "score": 29.4619523515762,
+      "secondary": {
+        "scoreRoundedDisplay": 29,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-luna-medium",
+        "shortName": "GPT-6 Luna (medium)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "medium",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.01725359419426588,
+        "terminalbenchV40": 0.0252525252525253,
+        "scicode": 0.509259259259259,
+        "hle": 0.282669138090825,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-luna",
+      "variantLabel": "Artificial Analysis - GPT-6 Luna (medium)",
+      "score": 2.53,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "medium"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT-6 Luna (low)",
+      "score": 20.9225480080866,
+      "secondary": {
+        "scoreRoundedDisplay": 21,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-luna-low",
+        "shortName": "GPT-6 Luna (low)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "low",
+        "contextWindowTokens": 1000000,
+        "costPerTaskUsd": 0.004483809259539013,
+        "terminalbenchV40": 0,
+        "scicode": 0.46875,
+        "hle": 0.202502316960148,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-luna",
+      "variantLabel": "Artificial Analysis - GPT-6 Luna (low)",
+      "score": 0,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "low"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "Codex - GPT-6 Sol (max)",
+      "score": 56.6626,
+      "secondary": {
+        "configurationRank": 6,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-6-sol",
+        "displayModel": "GPT-6 Sol (max)",
+        "isUnavailable": false,
+        "variantOf": null,
+        "deepSWE": 69.0265486725664,
+        "terminalBenchV2_1": null,
+        "terminalBenchV4": 43.4343434343434,
+        "sweAtlasQnA": 57.5268817204301,
+        "meanCostUsdPerTask": 2.989729004180416,
+        "agentWallTimeSec": 1338.0527051705185,
+        "meanSteps": 86.55005500550054,
+        "meanTotalTokens": 9840777.763476355,
+        "cacheHitRate": 0.9640119921972632,
+        "hostConfigId": "7a0dfd2a7a9d93056f860d4675586d66",
+        "versions": {
+          "deep-swe-v1.1": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "swe-atlas-qna": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "terminal-bench-v4": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          }
+        }
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-23",
+      "note": "AA Coding Agent Index v1.5（19 配置板面）原始精度 indexScore×100。无 adopted 套餐行，存档待采纳；TB4 子项为 Codex harness 运行，与 tbench.ai 独立榜不互灌。"
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-6-luna",
+      "variantLabel": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+      "score": 41.0744,
+      "secondary": {
+        "configurationRank": 18,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-6-luna",
+        "displayModel": "GPT-6 Luna (max)",
+        "isUnavailable": false,
+        "variantOf": null,
+        "deepSWE": 63.716814159292,
+        "terminalBenchV2_1": null,
+        "terminalBenchV4": 15.151515151515198,
+        "sweAtlasQnA": 44.3548387096774,
+        "meanCostUsdPerTask": 0.17591172304455457,
+        "agentWallTimeSec": 1285.9268514851478,
+        "meanSteps": 88.64301430143014,
+        "meanTotalTokens": 10218069.248074815,
+        "cacheHitRate": 0.9606438143896164,
+        "hostConfigId": "ac8276cd5d15ac2daacb9956ad44c132",
+        "versions": {
+          "deep-swe-v1.1": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "swe-atlas-qna": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "terminal-bench-v4": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          }
+        }
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-23",
+      "note": "AA Coding Agent Index v1.5（19 配置板面）原始精度 indexScore×100。无 adopted 套餐行，存档待采纳；TB4 子项为 Codex harness 运行，与 tbench.ai 独立榜不互灌。"
+    }
+  ],
+  "officialBoardsNotInProject": [
+    {
+      "boardId": "frontiercode_1_1_main",
+      "name": "FrontierCode 1.1 Leaderboard (Main)",
+      "url": "https://cognition.com/frontiercode",
+      "metric": "Merge rate %",
+      "snapshotDate": "2026-09-23",
+      "note": "Cognition 官方公开榜（页面 JSON-LD ItemList，10 行，降序）：1) Claude Opus 5.5 54.6% 2) Claude Fable 5 53.5 3) Claude Opus 5 53.4 4) GPT-6 Astra 53.3 5) Claude Fable 5.1 50.9 6) SWE-2 50.0 7) GPT-6 Sol 49.3 8) Grok 4.6 48.0 9) Grok 4.7 47.6 10) GPT-5.6 Sol 47.5。Opus 5.5 的 54.6 对应其默认档（medium）——Anthropic 发布页脚注 'At default effort (medium), Opus 5.5 scores 54.6%'，与其 max 档自测 54.4 分开。真第三方榜、更新最快，建议纳入 BOARDS。"
+    },
+    {
+      "boardId": "cursorbench_4_0",
+      "name": "CursorBench 4.0",
+      "url": "https://cursor.com/cursorbench",
+      "metric": "Score %",
+      "snapshotDate": "2026-09-23",
+      "note": "Cursor 官方公开榜（43 配置）：9/23 复核无任何新发模型行，榜首 Fable 5.1 Max 51.8，Composer 2.5 27.7。Opus 5.5 的 57.8/52.5、Grok 4.7 的 46.3 目前均为厂商自报，官方未收录——等榜收录后可纳入。"
+    }
+  ],
+  "vendorBenchmarksNotBoards": {
+    "note": "非项目榜单或厂商自报，仅存档。Anthropic Opus 5.5 发布页（anthropic.com/claude-opus-5-5，2026-09-22）评测表：TB4 66.4%（脚注¹注明 at xhigh effort、SE ±2.6——修正 scores-opus55-selfreport 档 effortNote『未指明档位』，官方脚注实为 xhigh；表内对照 Fable 5.1 55.8 / Opus 5 52.3 / Astra 57.9 / Sol 37.3）、FrontierCode v1.1 Main 54.4%（max 档自测；官方榜 54.6 为 medium 默认档，两边同源不同档）、CursorBench 4.0 57.8%（max；全档曲线 low 43.7 / med 52.5 / high 56 / xhigh 56 / max 57.8）、GDPval-AA v2.1 1846、AutomationBench 40.0%（Zapier 实测方，脚注²注明无 fallback 致偏低）、HLE 67.7% w/tools、TB-Science 0.1 58.7%（±3.5–5）、OSWorld 2.0 81.8% partial、Chartography 89.0% w/tools、SWE-bench Pro 89.9%（系统卡）。OpenAI GPT-6 系列（openai.com 发布页，2026-09-22）：AutomationBench Sol xhigh 33.2%、ALE Sol max 56.4%、DeepSWE Sol 68.8 / Luna 66.6、OSWorld Sol xhigh 60.5%；API 标价 Sol $2/$10、Luna $0.10/$0.50。xAI Grok 4.7（x.ai/news/grok-4-7）：CursorBench 46.3、DeepSWE 71.0（high effort）、EEBench 64.0、AA Briefcase 1657、TB4 38.0（官方 37.6 已采）。小米 MiMo-V2.6（模型卡）：DeepSWE 71.9/67.9 已采为自报行；TB4 自跑 34.9/28.8 未采（现由 AA 独立实测 34.85 替代参照）；TB2.1 89.9/87.6；GDPval 1673。阶跃 Step-5（发布图，harness 多处署名 AA）：DeepSWE 67.7、StepCodeBench 49.0、ProgramBench 80.5、TB2.1 85.0、ALE-CLI 29.5、FrontierFinance 66.4、DRACO 83.3、GPQA 93.5、HLE 46.5、BrowseComp 88.7。"
+  },
+  "boardsCheckedNoNewRows": [
+    "tbench.ai 官方 TB4（2026-09-23，27 行）：无 Opus 5.5 / Sol / Luna / MiMo / Step-5 行",
+    "deepswe.datacurve.ai 官方 DeepSWE v1.1（28 模型）：无新发行行",
+    "arena.ai/leaderboard/agent（9/15 快照）：无新发行行",
+    "open-design.ai OpenDesign（固定 13 模型）：无变化",
+    "cursor.com/cursorbench（43 配置）：无新发行行"
+  ]
+}

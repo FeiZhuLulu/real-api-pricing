@@ -33,6 +33,7 @@ SCORE_FILES = (
     "scores-mimo-v26-grok47-round1-2026-09-22.json",
     "scores-deepswe-mimo-v26-grok47-selfreport-2026-09-22.json",
     "scores-opus55-selfreport-2026-09-23.json",
+    "scores-new-models-round1-2026-09-23.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",

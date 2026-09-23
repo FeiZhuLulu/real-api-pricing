@@ -54,7 +54,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Arena Score</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,272.747 L955.350,272.747 L983.306,370.874 L1155.086,375.842 L1277.325,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,272.747 L955.350,272.747 L975.333,347.274 L983.306,370.874 L1155.086,375.842 L1277.325,482.663 L1338.000,482.663" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03247" data-score="1617" data-x="782.822" data-y="360.937" transform="translate(782.822 360.937)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 1617 · mediumgpt-5.6-sol-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / gpt-5.6-sol-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00A86B" opacity=".68"/>
 </g>
@@ -82,6 +82,12 @@
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.06667" data-score="1625" data-x="671.477" data-y="351.000" transform="translate(671.477 351.000)"><title>Grok 4.6 · SuperGrok Lite · $0.06667/MTok · 1625 · lowgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.06036" data-score="1626" data-x="686.865" data-y="349.758" transform="translate(686.865 349.758)"><title>Grok 4.7 · SuperGrok / Grok 4.7 · SuperGrok Heavy · $0.06036/MTok · 1626 · mediumgrok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / grok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.05025" data-score="1626" data-x="715.236" data-y="349.758" transform="translate(715.236 349.758)"><title>Grok 4.7 · SuperGrok Plus · $0.05025/MTok · 1626 · mediumgrok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#B65CFF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02585" data-score="1625" data-x="818.110" data-y="351.000" transform="translate(818.110 351.000)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -248,6 +254,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.37736" data-score="1625" data-x="403.196" data-y="351.000" transform="translate(403.196 351.000)"><title>Grok 4.6 · OpenCode Go · $0.37736/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.37736" data-score="1626" data-x="403.196" data-y="349.758" transform="translate(403.196 349.758)"><title>Grok 4.7 · OpenCode Go · $0.37736/MTok · 1626 · mediumgrok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.02027" data-score="1519" data-x="855.745" data-y="482.663" transform="translate(855.745 482.663)"><title>GPT 5.6 Luna · OpenCode Go · $0.02027/MTok · 1519 · mediumgpt-5.6-luna-xhigh (codex-harness) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
@@ -264,6 +273,9 @@
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01249" data-score="1475" data-x="930.685" data-y="537.316" transform="translate(930.685 537.316)"><title>MiMo V2.5 Pro · OpenCode Go · $0.01249/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01249" data-score="1628" data-x="930.685" data-y="347.274" transform="translate(930.685 347.274)"><title>MiMo V2.6 Pro · OpenCode Go · $0.01249/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00C0A8" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01195" data-score="1487" data-x="937.525" data-y="522.411" transform="translate(937.525 522.411)"><title>MiniMax M3 · OpenCode Go · $0.01195/MTok · 1487 · mediumminimax-m3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -302,6 +314,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.00936" data-score="1475" data-x="975.333" data-y="537.316" transform="translate(975.333 537.316)"><title>MiMo V2.5 Pro · Command Code GOAT · $0.00936/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.28249" data-score="1626" data-x="448.010" data-y="349.758" transform="translate(448.010 349.758)"><title>Grok 4.7 · Command Code GOAT · $0.28249/MTok · 1626 · mediumgrok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.03705" data-score="1621" data-x="762.400" data-y="355.968" transform="translate(762.400 355.968)"><title>Hy4 Preview · Command Code GOAT · $0.03705/MTok · 1621 · mediumhy4-preview · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
 </g>
@@ -316,6 +331,10 @@
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.28249" data-score="1625" data-x="448.010" data-y="351.000" transform="translate(448.010 351.000)"><title>Grok 4.6 · Command Code GOAT · $0.28249/MTok · 1625 · mediumgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00936" data-score="1628" data-x="975.333" data-y="347.274" transform="translate(975.333 347.274)"><title>MiMo V2.6 Pro · Command Code GOAT · $0.00936/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#708090" stroke-width="1.35"/>
+<circle r="4" fill="#708090"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.05513" data-score="1587" data-x="700.892" data-y="398.200" transform="translate(700.892 398.200)"><title>Gemini 3.7 Flash · Command Code GOAT · $0.05513/MTok · 1587 · mediumgemini-3.7-flash-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#708090" opacity=".68"/>
@@ -350,10 +369,22 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.14699" data-score="1674" data-x="549.116" data-y="290.137" transform="translate(549.116 290.137)"><title>Kimi K3 · Ollama Max · $0.14699/MTok · 1674 · mediumkimi-k3-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#A0785C" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01893" data-score="1628" data-x="866.330" data-y="347.274" transform="translate(866.330 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Lite (Day) · $6 / CN ¥39 · $0.01893/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01511" data-score="1628" data-x="901.213" data-y="347.274" transform="translate(901.213 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Lite (Night 0.8x) · $6 / CN ¥39 · $0.01511/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01893" data-score="1475" data-x="866.330" data-y="537.316" transform="translate(866.330 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Lite (Day) · $6 / CN ¥39 · $0.01893/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01511" data-score="1475" data-x="901.213" data-y="537.316" transform="translate(901.213 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Lite (Night 0.8x) · $6 / CN ¥39 · $0.01511/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0188" data-score="1628" data-x="867.396" data-y="347.274" transform="translate(867.396 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Standard (Day) · $16 / CN ¥99 · $0.0188/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01504" data-score="1628" data-x="901.932" data-y="347.274" transform="translate(901.932 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Standard (Night 0.8x) · $16 / CN ¥99 · $0.01504/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0188" data-score="1475" data-x="867.396" data-y="537.316" transform="translate(867.396 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Standard (Day) · $16 / CN ¥99 · $0.0188/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -362,10 +393,22 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01504" data-score="1475" data-x="901.932" data-y="537.316" transform="translate(901.932 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Standard (Night 0.8x) · $16 / CN ¥99 · $0.01504/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01701" data-score="1628" data-x="882.882" data-y="347.274" transform="translate(882.882 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Pro (Day) · $50 / CN ¥329 · $0.01701/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01361" data-score="1628" data-x="917.394" data-y="347.274" transform="translate(917.394 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Pro (Night 0.8x) · $50 / CN ¥329 · $0.01361/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01701" data-score="1475" data-x="882.882" data-y="537.316" transform="translate(882.882 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Pro (Day) · $50 / CN ¥329 · $0.01701/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01361" data-score="1475" data-x="917.394" data-y="537.316" transform="translate(917.394 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Pro (Night 0.8x) · $50 / CN ¥329 · $0.01361/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01576" data-score="1628" data-x="894.694" data-y="347.274" transform="translate(894.694 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Max (Day) · $100 / CN ¥659 · $0.01576/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01261" data-score="1628" data-x="929.205" data-y="347.274" transform="translate(929.205 347.274)"><title>MiMo V2.6 Pro · MiMo Token Plan Max (Night 0.8x) · $100 / CN ¥659 · $0.01261/MTok · 1628 · mediummimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FFA000" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.01576" data-score="1475" data-x="894.694" data-y="537.316" transform="translate(894.694 537.316)"><title>MiMo V2.5 Pro · MiMo Token Plan Max (Day) · $100 / CN ¥659 · $0.01576/MTok · 1475 · mediummimo-v2.5-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -437,6 +480,12 @@
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="1625" data-x="340.728" data-y="351.000" transform="translate(340.728 351.000)"><title>Grok 4.6 · Grok 4.6 API (&lt;200k) · $0.565/MTok · 1625 · highgrok-4.6-high · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#B65CFF" stroke-width="1.5" opacity=".68"/>
 </g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="1626" data-x="340.728" data-y="349.758" transform="translate(340.728 349.758)"><title>Grok 4.7 · Grok 4.7 API (&lt;200k) · $0.565/MTok · 1626 · highgrok-4.7-xhigh · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#B65CFF" stroke-width="1.5" opacity=".68"/>
+</g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.01872" data-score="1628" data-x="868.056" data-y="347.274" transform="translate(868.056 347.274)"><title>MiMo V2.6 Pro · MiMo V2.6 Pro API · $0.01872/MTok · 1628 · highmimo-v2.6-pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#FFA000" stroke-width="1.5" opacity=".68"/>
+</g>
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.735" data-score="1688" data-x="300.018" data-y="272.747" transform="translate(300.018 272.747)"><title>Claude Opus 5 · Opus 5 API · $0.735/MTok · 1688 · highclaude-opus-5-max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#F07826" stroke-width="1.5" opacity=".68"/>
 </g>
@@ -457,6 +506,12 @@
 <text x="931.350" y="223.747" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5 · max</text>
 <text x="931.350" y="243.747" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro</text>
 <text x="931.350" y="263.747" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01065</text>
+</g>
+<g class="front-label" data-model="mimo-v2.6-pro">
+<path d="M969.474,333.465Q969.474,314.274 961.333,314.274" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="955.333" y="295.274" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">MiMo V2.6 Pro</text>
+<text x="955.333" y="315.274" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Command Code GOAT</text>
+<text x="955.333" y="335.274" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00936</text>
 </g>
 <g class="front-label" data-model="glm-5.3">
 <path d="M989.592,357.254Q989.592,331.874 1001.306,331.874" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -505,7 +560,7 @@
 <path d="M1308 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1322.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97% cache / 2.5% input / 0.5% output · Direct totals unchanged</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >120 subscription positions / 11 API positions / 4 frontier positions</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >134 subscription positions / 13 API positions / 5 frontier positions</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model.</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >arena.ai/leaderboard/code</text>
