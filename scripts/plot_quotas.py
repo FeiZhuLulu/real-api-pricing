@@ -10,6 +10,7 @@ import csv
 import json
 import math
 import os
+import re
 import textwrap
 import unicodedata
 
@@ -172,6 +173,7 @@ def plan_name(row: dict, language: str) -> str:
             name = name.replace(original, translated)
         if row["plan_id"].startswith("kimi_"):
             name = name.replace("Kimi CN ", "Kimi CN CNY ")
+        name = re.sub(r"\(促销至 (\d+/\d+)\)", r"(promo until \1)", name)
     return name
 
 
@@ -199,9 +201,11 @@ def monthly_value(row: dict, language: str) -> float:
 
 def sorted_rows(rows: list[dict], view: str) -> list[dict]:
     if view == "quotas":
+        # 不计额度（≈$0 促销）点没有月额度数值，排在最前（促销期额度无上限），其余按额度降序。
         return sorted(
-            (r for r in rows if r["billing"] == "subscription" and r["monthly_tokens"]),
-            key=lambda r: -float(r["monthly_yi"]),
+            (r for r in rows
+             if r["billing"] == "subscription" and (r["monthly_tokens"] or r.get("unmetered") == "true")),
+            key=lambda r: (r.get("unmetered") != "true", -float(r["monthly_yi"] or 0)),
         )
     return sorted(rows, key=lambda r: float(r["real_usd_per_mtok"]))
 
@@ -211,7 +215,7 @@ def frontier_rows(rows: list[dict], points: list[dict], board: str) -> list[dict
     candidates = []
     for row in rows:
         point = index.get(f"{row['plan_id']}::{row['served_model']}")
-        if point is None or point.get(f"{board}__score") is None or float(row["real_usd_per_mtok"]) <= 0:
+        if point is None or point.get(f"{board}__score") is None:
             continue
         if float(row["real_usd_per_mtok"]) != point["real_usd_per_mtok"]:
             raise ValueError("derived/points.json is stale; run scripts/compute.py first")
@@ -238,8 +242,8 @@ def frontier_caption(board: dict) -> str:
 
 def frontier_rule(language: str) -> str:
     if language == "zh":
-        return "前沿按全量订阅/API的单价与得分筛选，非额度排名；同价同分套餐均保留；缺分模型不参与，估算不确定性未纳入筛选。"
-    return "Selected by price and score across all subscriptions/APIs, not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled."
+        return "前沿按全量订阅/API（含不计额度的 ≈$0 促销点，与帕累托图一致）的单价与得分筛选，非额度排名；同价同分套餐均保留；缺分模型不参与，估算不确定性未纳入筛选。"
+    return "Selected by price and score across all subscriptions/APIs (including unmetered ≈$0 promo points, as in the Pareto charts), not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled."
 
 
 def evidence_note(language: str) -> str:
@@ -266,8 +270,10 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
             str(i), plan_name(r, language),
             fee_text(r, language),
             DISPLAY.get(r["served_model"], r["served_model"]),
-            f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
-            price_text(float(r["real_usd_per_mtok"])), r["confidence"],
+            (("不计额度" if language == "zh" else "unmetered") if r.get("unmetered") == "true"
+             else f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-"),
+            (unmetered_label(r, language, with_dollar=False) if r.get("unmetered") == "true"
+             else price_text(float(r["real_usd_per_mtok"]))), r["confidence"],
         ] + ([f"{r['board_score']:g}", localise_variant(r["board_variant"], language), r["board_harness"] or "—",
               r["board_effort"] or "—", r["board_mapping"]] if board else [])
         for i, r in enumerate(rows, 1)
@@ -321,9 +327,34 @@ def price_text(value: float) -> str:
     return f"{round(value, 5):g}"
 
 
+def promo_until_text(row: dict) -> str | None:
+    """促销截止 "YYYY-MM-DD" → "M/D"（不补零），与 plot_svg.promo_text 同一格式。"""
+    until = row.get("promo_until")
+    return f"{until[5:7].lstrip('0')}/{until[8:10].lstrip('0')}" if until else None
+
+
+def unmetered_label(row: dict, language: str, with_dollar: bool) -> str:
+    """不计额度点的价格文案，措辞同 plot_svg.promo_text；with_dollar=False 供无 $ 列使用。"""
+    price = "≈$0" if with_dollar else "≈0"
+    md = promo_until_text(row)
+    if md:
+        return (f"{price} · promo until {md}, unmetered" if language == "en"
+                else f"{price} · 促销至{md}，不计额度")
+    return f"{price} · unmetered" if language == "en" else f"{price} · 不计额度"
+
+
 def annotation_of(row: dict, value: float, view: str, language: str,
                   board: dict | None) -> str:
-    value_label = f"{value:g}" if view == "quotas" else f"${price_text(value)}"
+    if row.get("unmetered") == "true":
+        md = promo_until_text(row)
+        if view == "prices":
+            value_label = unmetered_label(row, language, with_dollar=True)
+        elif language == "zh":
+            value_label = f"不计额度 · 促销至{md}" if md else "不计额度"
+        else:
+            value_label = f"unmetered · promo until {md}" if md else "unmetered"
+    else:
+        value_label = f"{value:g}" if view == "quotas" else f"${price_text(value)}"
     confidence = row["confidence"][0].upper()
     channel = VENDOR_CODES[vendor_of(row["plan_id"])]
     annotation = f"{value_label}  {channel} [{confidence}]"
@@ -384,7 +415,9 @@ def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
 def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
          mixed_scale: bool = False, fee_band: dict | None = None) -> None:
     text = TEXT[language]
-    values = [monthly_value(r, language) if view == "quotas"
+    # 不计额度点没有可画的数值：占位 0，不进入 baseline/xhi，也不画条形。
+    values = [0.0 if r.get("unmetered") == "true"
+              else monthly_value(r, language) if view == "quotas"
               else float(r["real_usd_per_mtok"]) for r in rows]
     ncols = 1 if board else 2
     half = (len(rows) + ncols - 1) // ncols
@@ -404,17 +437,20 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         fig.subplots_adjust(left=0.205, right=0.99, top=0.90, bottom=0.09, wspace=1.04)
     if fee_band:
         fig.subplots_adjust(top=1 - 1.65 / figsize[1], bottom=2.0 / figsize[1])
-    baseline = min(values) * 0.60
+    positive = [v for v in values if v > 0]
+    baseline = min(positive) * 0.60
     # 前沿额度图的最大条目仍需给右侧数值/置信度留出完整文本宽度。
-    xhi = max(values) * (2.20 if view == "quotas" and board else
-                         1.40 if view == "quotas" else (8 if board else 12))
+    xhi = max(positive) * (2.20 if view == "quotas" and board else
+                           1.40 if view == "quotas" else (8 if board else 12))
 
     for col, ax in enumerate(axes):
         start = col * half
         chunk = rows[start:start + half]
         chunk_values = values[start:start + half]
         colors = [VENDOR_COLORS[vendor_of(r["plan_id"])] for r in chunk]
-        bars = ax.barh(range(len(chunk)), [v - baseline for v in chunk_values],
+        bars = ax.barh(range(len(chunk)),
+                       [0 if r.get("unmetered") == "true" else v - baseline
+                        for v, r in zip(chunk_values, chunk)],
                        left=baseline, color=colors, height=0.67)
         if mixed_scale and col == 0:
             for j in (0, 1):
@@ -443,7 +479,8 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         for j, (bar, value, row) in enumerate(zip(bars, chunk_values, chunk)):
             if mixed_scale and col == 0 and j < 2:
                 continue
-            ax.text(value * 1.03, bar.get_y() + bar.get_height() / 2,
+            ax.text((baseline if row.get("unmetered") == "true" else value) * 1.03,
+                    bar.get_y() + bar.get_height() / 2,
                     annotation_of(row, value, view, language, board),
                     va="center", fontsize=11 if board else 9.5, color="#20252B",
                     zorder=15 if mixed_scale else 3,
@@ -495,8 +532,10 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
 
 def main() -> None:
     with open(ADOPTED, encoding="utf-8-sig") as f:
-        # 不计额度（$0）点无 token 分母且无法上对数条形图，总览与前沿精简版不画；只在帕累托图上以专用刻度位呈现。
-        rows = [r for r in csv.DictReader(f) if r["real_usd_per_mtok"] and float(r["real_usd_per_mtok"]) > 0]
+        all_rows = list(csv.DictReader(f))
+    # 总览与月费分档仍排除 ≈$0 不计额度点（无 token 分母且无法上对数条形图）；
+    # 逐榜前沿输出与帕累托图口径一致，用 all_rows 把不计额度点计入支配筛选。
+    rows = [r for r in all_rows if r["real_usd_per_mtok"] and float(r["real_usd_per_mtok"]) > 0]
     os.makedirs(OUT_DIR, exist_ok=True)
     for band in FEE_BANDS:
         selected = sorted_rows(fee_band_rows(rows, band), "quotas")
@@ -519,11 +558,13 @@ def main() -> None:
     selections = {}
     for board_id, meta in data["boards"].items():
         board = {**meta, "id": board_id}
-        selected = frontier_rows(rows, data["points"], board_id)
+        selected = frontier_rows(all_rows, data["points"], board_id)
         selections[board_id] = {
             **meta,
             "frontier": [{"id": f"{r['plan_id']}::{r['served_model']}", "model": r["served_model"],
                           "price_usd_per_mtok": float(r["real_usd_per_mtok"]),
+                          "unmetered": r.get("unmetered") == "true",
+                          "promo_until": r.get("promo_until") or None,
                           "score": r["board_score"], "variant": r["board_variant"],
                           "agent_harness": r["board_harness"], "reasoning_effort": r["board_effort"],
                           "mapping_kind": r["board_mapping"],
