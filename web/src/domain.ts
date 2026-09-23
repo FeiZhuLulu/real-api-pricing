@@ -622,13 +622,28 @@ export const number = (n: number | null, lang = "en", digits = 3) =>
     : new Intl.NumberFormat(lang === "zh" ? "zh-CN" : "en-US", {
         maximumFractionDigits: digits,
       }).format(n);
+/**
+ * Short price for charts, rankings, tables and cards: at most 5 decimals and
+ * 4 significant digits ("$0.0006", "$0.1157"). The data keeps 6 significant
+ * digits, so ordering and the frontier always use the exact value.
+ */
 export const price = (n: number | null) =>
   n === null
     ? "—"
     : n === 0
       ? "≈$0"
       : "$" +
-      new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(n);
+        new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(
+          Math.round(n * 1e5) / 1e5 || n,
+        );
+/** Full-precision price for the detail dialog ("$0.000595538"). */
+export const priceExact = (n: number | null) =>
+  n === null
+    ? "—"
+    : n === 0
+      ? "≈$0"
+      : "$" +
+        new Intl.NumberFormat("en-US", { maximumSignificantDigits: 6 }).format(n);
 export const allowance = (p: Point, lang: string) =>
   p.monthly_yi === null
     ? "—"

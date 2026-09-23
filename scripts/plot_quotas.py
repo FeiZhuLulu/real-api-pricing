@@ -267,7 +267,7 @@ def write_text_table(rows: list[dict], view: str, language: str, board: dict | N
             fee_text(r, language),
             DISPLAY.get(r["served_model"], r["served_model"]),
             f"{monthly_value(r, language):g}" if r["monthly_tokens"] else "-",
-            r["real_usd_per_mtok"], r["confidence"],
+            price_text(float(r["real_usd_per_mtok"])), r["confidence"],
         ] + ([f"{r['board_score']:g}", localise_variant(r["board_variant"], language), r["board_harness"] or "—",
               r["board_effort"] or "—", r["board_mapping"]] if board else [])
         for i, r in enumerate(rows, 1)
@@ -316,9 +316,14 @@ def chart_variant(row: dict, language: str) -> str:
     return textwrap.fill(variant, width=60, break_long_words=False, break_on_hyphens=False)
 
 
+def price_text(value: float) -> str:
+    """图表与文字表的短格式单价（5 位小数）；数据本身保留 6 位有效数字，排序用原值。"""
+    return f"{round(value, 5):g}"
+
+
 def annotation_of(row: dict, value: float, view: str, language: str,
                   board: dict | None) -> str:
-    value_label = f"{value:g}" if view == "quotas" else f"${value:g}"
+    value_label = f"{value:g}" if view == "quotas" else f"${price_text(value)}"
     confidence = row["confidence"][0].upper()
     channel = VENDOR_CODES[vendor_of(row["plan_id"])]
     annotation = f"{value_label}  {channel} [{confidence}]"

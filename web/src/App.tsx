@@ -57,6 +57,7 @@ import {
   options,
   pareto,
   price,
+  priceExact,
   restore,
   rowsFor,
   safeUrl,
@@ -1529,7 +1530,7 @@ function Details({
           <div className="detail-metrics">
             <div>
               <small>{t("Real price / MTok", "真实单价 / MTok")}</small>
-              <strong>{price(p.real_usd_per_mtok)}</strong>
+              <strong>{priceExact(p.real_usd_per_mtok)}</strong>
             </div>
             <div>
               <small>{t("Monthly tokens", "月 token")}</small>
@@ -1565,7 +1566,7 @@ function Details({
                 {price(p.price_usd)} {t("/ month", "/ 月")}
                 {p.currency === "CNY" ? ` (¥${p.original_price})` : ""} ÷{" "}
                 {number(p.monthly_tokens, lang, 0)} tokens × 1,000,000 ≈{" "}
-                {price(p.real_usd_per_mtok)} / MTok
+                {priceExact(p.real_usd_per_mtok)} / MTok
               </>
             )}
           </div>

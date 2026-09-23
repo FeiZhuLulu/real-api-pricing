@@ -31,6 +31,8 @@ import {
   frontierPath,
   groups,
   pareto,
+  price,
+  priceExact,
   restore,
   rowsFor,
   type Lock,
@@ -144,7 +146,9 @@ test("Step Plan CN uses official Credit pools and CNY list prices", () => {
   const max37 = data.points.find((p) => p.id === "stepfun_max_cn::step-3.7-flash")!;
   // Low-cache mix 85/14.5/0.5 × ¥0.14/¥0.70/¥2.10 = ¥0.231/MTok against the ¥400 credit pool.
   assert.equal(mini35.monthly_yi, 17.316);
-  assert.equal(mini35.real_usd_per_mtok, 0.00417);
+  // ¥49 ÷ 6.7787 = $7.2285 over 1,731.6 MTok, stored at full precision, shown short.
+  assert.equal(mini35.real_usd_per_mtok, 0.0041744772);
+  assert.equal(price(mini35.real_usd_per_mtok), "$0.00417");
   assert.equal(mini35.channel, "StepFun");
   assert.equal(max37.monthly_yi, 858.83);
   assert.equal(accessLine(mini35), "StepFun");
@@ -188,7 +192,8 @@ test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
   const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
   // $40 allowance ÷ off-peak (97/2.5/0.5 × $0.003/$0.15/$0.60 = $0.00966/MTok).
   assert.equal(p.monthly_yi, 41.408);
-  assert.equal(p.real_usd_per_mtok, 0.00241);
+  assert.equal(p.real_usd_per_mtok, 0.0024149923);
+  assert.equal(price(p.real_usd_per_mtok), "$0.00241");
 });
 test("Default selection includes every adopted point, including unscored models", () => {
   const rows = rowsFor(data, defaultState());
@@ -875,4 +880,26 @@ test("Channel palette is shared with the Python charts and keeps pale colours le
     // No dot disappears into the dark surface.
     assert.ok(luminance(dotColors(hex, true).fill) > 0.02);
   }
+});
+test("Real prices keep full precision for ordering; summaries stay short, details show the exact value", () => {
+  // Every stored price reproduces fee ÷ tokens to 8 significant digits.
+  for (const p of data.points)
+    if (p.billing === "subscription" && p.monthly_tokens && p.price_usd && p.real_usd_per_mtok > 0) {
+      const exact = (p.price_usd / p.monthly_tokens) * 1e6;
+      assert.ok(Math.abs(exact - p.real_usd_per_mtok) / exact < 0.003, `${p.id} reproduces fee ÷ tokens`);
+    }
+  // Short display: at most 5 decimals / 4 significant digits; exact: 6 significant digits.
+  assert.equal(price(0.000595501), "$0.0006");
+  assert.equal(price(0.11574074), "$0.1157");
+  assert.equal(price(103.117), "$103.1");
+  assert.equal(priceExact(0.000595501), "$0.000595501");
+  assert.equal(priceExact(0), "≈$0");
+  // Two prices that look identical when shortened still sort by their true values.
+  const s = { ...defaultState(), view: "price" as const, sort: "price", direction: "asc" as const };
+  const ordered = tableRows(rowsFor(data, s), s).map((r) => r.point.real_usd_per_mtok);
+  ordered.forEach((v, i) => i && assert.ok(v >= ordered[i - 1], "ascending by exact price"));
+  const plus = data.points.find((p) => p.id === "chatgpt_plus::gpt-5.6-luna")!;
+  const pro5 = data.points.find((p) => p.id === "chatgpt_pro_5x::gpt-5.6-luna")!;
+  assert.equal(price(plus.real_usd_per_mtok), price(pro5.real_usd_per_mtok));
+  assert.notEqual(plus.real_usd_per_mtok, pro5.real_usd_per_mtok);
 });
