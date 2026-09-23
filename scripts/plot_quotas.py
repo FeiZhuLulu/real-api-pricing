@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
 from compute import DISPLAY
+from palette import palette
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ADOPTED = os.path.join(ROOT, "data", "adopted.csv")
@@ -72,24 +73,10 @@ VENDOR_OF = {
     "devin": "Devin",
     "google_ai": "Gemini",
 }
-VENDOR_COLORS = {
-    "OpenAI": "#00A86B",
-    "Anthropic": "#F07826",
-    "xAI": "#B65CFF",
-    "Cursor": "#FFB81C",
-    "Kimi": "#2FA8FF",
-    "GLM": "#1E1E1E",
-    "MiniMax": "#D23A7D",
-    "Alibaba": "#FF6F61",
-    "OpenCode": "#00C0A8",
-    "Command Code": "#708090",
-    "Ollama": "#A0785C",
-    "DeepSeek": "#1F75FE",
-    "Gemini": "#7CC12A",
-    "StepFun": "#00F4E5",
-    "Xiaomi": "#FF6900",
-    "Devin": "#7C3AED",
-}
+# 色值统一来自 config/channel-colors.json；此处只定图例顺序。
+VENDOR_COLORS = palette(["OpenAI", "Anthropic", "xAI", "Cursor", "Kimi", "GLM", "MiniMax", "Alibaba",
+                         "OpenCode", "Command Code", "Ollama", "DeepSeek", "Gemini", "StepFun",
+                         "Xiaomi", "Devin"])
 VIEW_CN = {"quotas": "额度", "prices": "单价"}
 BOARD_CN = {
     "arena_code": "CodeArena榜",
