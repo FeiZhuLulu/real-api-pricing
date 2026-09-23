@@ -125,9 +125,9 @@ function ChartScene(p: SceneProps) {
     p.highlight !== null
       ? g.rows[0].point.channel === p.highlight
         ? 1
-        : 0.16
+        : 0.3
       : p.hits.size > 0 && !p.hits.has(g.key)
-        ? 0.4
+        ? 0.5
         : 1;
   const badgeKeys = new Set(p.badges.map((g) => g.key));
   const fence = p.zeroX !== null ? zeroFence(p.zeroX) : null;
@@ -256,17 +256,20 @@ function ChartScene(p: SceneProps) {
             const { x, y } = toPixel(view, box, g.plotPrice, g.score);
             const col = dotColors(color(g.rows[0].point), p.dark);
             const f = fade(g);
+            // Non-frontier dots are context: soft fill, a same-hue outline so
+            // pale channels stay legible. An isolated channel returns to full strength.
+            const isolated = p.highlight !== null && f === 1;
             return (
               <circle
                 key={g.key}
                 cx={x.toFixed(1)}
                 cy={y.toFixed(1)}
-                r={4.4}
+                r={isolated ? 4.4 : 3.8}
                 fill={col.fill}
-                fillOpacity={0.84 * f}
+                fillOpacity={isolated ? 0.9 : (p.dark ? 0.55 : 0.48) * f}
                 stroke={col.stroke}
-                strokeOpacity={f < 1 ? f : 0.95}
-                strokeWidth={1}
+                strokeOpacity={isolated ? 1 : (p.dark ? 0.6 : 0.55) * f}
+                strokeWidth={0.9}
               />
             );
           })}

@@ -299,7 +299,7 @@ def draw(board, meta, points, tier, language="zh"):
         else:
             # 浅色渠道（淡紫/粉/薄荷等）加同色相深边，白底上保持可辨。
             edge = f' stroke="{shade(c, .32)}" stroke-width=".9"' if luminance(c) > .45 else ""
-            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".78"{edge}/>')
+            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".68"{edge}/>')
         s.append('</g>')
     for p in reversed(frontier):
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
