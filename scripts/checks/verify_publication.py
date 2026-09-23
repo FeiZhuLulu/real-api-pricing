@@ -46,6 +46,10 @@ for doc,lang in [('README.md','en'),('README.zh.md','zh')]:
     assert len(pictures)==10 and all(p.startswith(f'charts/{lang}/') for p in pictures)
     assert s.count('[English SVG]')==10 and s.count('[中文 SVG]')==10
     assert s.count('[English PNG]')==10 and s.count('[中文 PNG]')==10
+for f in ROOT.joinpath('charts/en').rglob('*'):
+    if f.suffix in ('.txt', '.svg', '.html'):
+        leaks = sorted(set(re.findall(r'[\u4e00-\u9fff]', f.read_text(encoding='utf-8'))))
+        assert not leaks, f'{f}: CJK characters in English output: {"".join(leaks)}'
 print(f'PASS: {len(adopted)} adopted rows, {len(exported)} exported files match build hashes, all JSON and bilingual links valid')
 for board in data['boards']:
     missing=sorted({p['model'] for p in data['points'] if p[board+'__score'] is None})

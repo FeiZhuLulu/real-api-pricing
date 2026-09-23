@@ -66,6 +66,20 @@ for board_id, (display, metric, tag) in BOARDS.items():
             assert not re.search(r"[\u4e00-\u9fff]", (OUT / f"{stem}.svg").read_text(encoding="utf-8"))
         rows.append((display, tier, language, len(selected), len(point_groups), len(expected_front), len(missing)))
 
+# 前沿精简版必须与帕累托图同一支配口径：逐榜核对 _build/前沿筛选结果.json 的 id 集合
+# 等于 derived/points.json 中该榜全部有分点（含 real_usd_per_mtok == 0 的不计额度点）的非支配集。
+frontier_result = json.loads((OUT / "前沿筛选结果.json").read_text(encoding="utf-8"))
+for board_id in BOARDS:
+    key = f"{board_id}__score"
+    scored = [p for p in data["points"] if p[key] is not None]
+    expected_ids = {p["id"] for p in scored if not any(
+        q["real_usd_per_mtok"] <= p["real_usd_per_mtok"] and q[key] >= p[key]
+        and (q["real_usd_per_mtok"] < p["real_usd_per_mtok"] or q[key] > p[key])
+        for q in scored
+    )}
+    actual_ids = {e["id"] for e in frontier_result["boards"][board_id]["frontier"]}
+    assert actual_ids == expected_ids, f"{board_id}: frontier ids {sorted(actual_ids ^ expected_ids)} differ"
+
 research = json.loads((ROOT / "data/research/scores-aa-coding-agent-round1-2026-09-06.json").read_text(encoding="utf-8"))
 assert research["boards"][0]["boardId"] == "aa_coding_agent_index"
 assert all(item["source"].startswith("https://artificialanalysis.ai/") for item in research["scores"])
@@ -95,4 +109,4 @@ report += [
 
 for row in rows:
     print(f"{row[0]} {row[1]} {row[2]}: {row[3]} rows, {row[4]} positions, {row[5]} frontier")
-print(f"PASS: {len(BOARDS)} boards, {len(manifest)} SVG/PNG pairs, English text, HTML syntax and official benchmark provenance verified")
+print(f"PASS: {len(BOARDS)} boards, {len(manifest)} SVG/PNG pairs, English text, HTML syntax, frontier selections and official benchmark provenance verified")
