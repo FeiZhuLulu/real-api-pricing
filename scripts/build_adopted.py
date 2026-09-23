@@ -776,9 +776,15 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
     tokens = round(monthly_yi * YI)
     return dict(plan_id=pid, plan_name=name, plan_name_en=name_en, billing="subscription", price=price, currency=cur,
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
-                monthly_yi=monthly_yi, real_usd_per_mtok=round(price_usd / tokens * 1e6, 5), unmetered="", promo_until="",
+                monthly_yi=monthly_yi, real_usd_per_mtok=sig(price_usd / tokens * 1e6), unmetered="", promo_until="",
                 confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note,
                 plan_gen=plan_gen_of(pid), workload=workload_of(pid, "subscription"))
+
+
+def sig(value: float, digits: int = 8) -> float:
+    """真实单价存 8 位有效数字（原先固定 5 位小数，极低单价只剩 1~2 位有效数字，排序会并列或颠倒）。
+    展示时各视图自行取短格式，详情显示完整值。"""
+    return float(f"{value:.{digits}g}")
 
 
 def unmetered_row(pid, name, price, cur, model, conf, src, note) -> dict:
@@ -811,7 +817,7 @@ def main() -> None:
     rows += [unmetered_row(*u) for u in UNMETERED]
     for pid, name, model, cached, inp, out, src in METERED:
         rows.append(dict(plan_id=pid, plan_name=name, plan_name_en="", billing="metered", price="", currency="USD", price_usd="",
-                         served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=round(blended(cached, inp, out), 5),
+                         served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=sig(blended(cached, inp, out)),
                          unmetered="", promo_until="", confidence="high", chart_tier="main", source=src,
                          decision_note=METERED_NOTES.get(pid, f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}"),
                          plan_gen=plan_gen_of(pid), workload=workload_of(pid, "metered")))

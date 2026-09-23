@@ -3,24 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f5f3ed" />
     <meta
       name="description"
-      content="Compare the real cost of AI. Explore subscription allowances, model benchmarks and the price–performance frontier, with transparent sources."
+      content="Compare the real cost of AI: subscription allowances, real per-token prices and the price–performance frontier across independent leaderboards, with every source traceable."
     />
-    <meta
-      property="og:title"
-      content="Real API Pricing — The cost behind the capability"
-    />
+    <meta property="og:title" content="Real API Pricing · The cost behind the capability" />
     <meta
       property="og:description"
-      content="Compare the real cost of AI. Explore subscription allowances, model benchmarks and the price–performance frontier, with transparent sources."
+      content="Monthly fee ÷ tokens you can actually use, plotted against independent leaderboards. Open data, open methodology."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://real-api-pricing.vercel.app/" />
     <meta property="og:site_name" content="Real API Pricing" />
-    <meta name="twitter:card" content="summary" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/FeiZhuLulu/real-api-pricing/main/charts/en/pareto/pareto-aa-intelligence.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="canonical" href="https://real-api-pricing.vercel.app/" />
     <script>
       try {
         var t = localStorage.getItem("pricing-theme");
@@ -29,9 +39,19 @@
             ? "dark"
             : "light";
         document.documentElement.dataset.theme = t;
+        if (t === "dark")
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", "#0f1113");
       } catch (e) {}
+      // Start the dataset download in parallel with the JavaScript bundle.
+      window.__siteData = fetch("/data/site.json").then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      });
+      window.__siteData.catch(function () {});
     </script>
-    <title>Real API Pricing — The cost behind the capability</title>
+    <title>Real API Pricing · The cost behind the capability</title>
   </head>
   <body>
     <div id="root"></div>

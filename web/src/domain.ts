@@ -1,5 +1,6 @@
 import type { State, SiteData, Row, Point, Group, FilterKey } from "./types";
 import feeBandDefinitions from "../../config/allowance-fee-bands.json";
+import { channelColors, FALLBACK_COLOR } from "./palette";
 export const feeBands = feeBandDefinitions;
 export function matchesFeeBand(fee: number | null, id: string): boolean {
   if (id === "all") return true;
@@ -21,25 +22,7 @@ export const filterKeys: FilterKey[] = [
   "effort",
   "modes",
 ];
-export const colors: Record<string, string> = {
-  OpenAI: "#00A86B",
-  Anthropic: "#F07826",
-  xAI: "#B65CFF",
-  Cursor: "#FFB81C",
-  Kimi: "#2FA8FF",
-  Zhipu: "#1E1E1E",
-  MiniMax: "#D23A7D",
-  Alibaba: "#FF4545",
-  OpenCode: "#00B9A4",
-  DeepSeek: "#1F75FE",
-  Google: "#82BE2C",
-  "Command Code": "#64748B",
-  Ollama: "#A0785C",
-  Xiaomi: "#FFA000",
-  Tencent: "#26C6DA",
-  StepFun: "#00F4E5",
-  Devin: "#7C3AED",
-};
+export const colors = channelColors;
 export const defaultState = (): State => ({
   feeBand: "all",
   lang: "en",
@@ -63,7 +46,7 @@ export const defaultState = (): State => ({
   sort: "price",
   direction: "asc",
 });
-export const color = (p: Point) => colors[p.channel] || "#00A8A8";
+export const color = (p: Point) => colors[p.channel] || FALLBACK_COLOR;
 /** Channel colour at a given alpha, for search-hit rings. */
 export function colorAlpha(p: Point, alpha: number): string {
   const hex = color(p);
@@ -639,13 +622,28 @@ export const number = (n: number | null, lang = "en", digits = 3) =>
     : new Intl.NumberFormat(lang === "zh" ? "zh-CN" : "en-US", {
         maximumFractionDigits: digits,
       }).format(n);
+/**
+ * Short price for charts, rankings, tables and cards: at most 5 decimals and
+ * 4 significant digits ("$0.0006", "$0.1157"). The data keeps 6 significant
+ * digits, so ordering and the frontier always use the exact value.
+ */
 export const price = (n: number | null) =>
   n === null
     ? "—"
     : n === 0
       ? "≈$0"
       : "$" +
-      new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(n);
+        new Intl.NumberFormat("en-US", { maximumSignificantDigits: 4 }).format(
+          Math.round(n * 1e5) / 1e5 || n,
+        );
+/** Full-precision price for the detail dialog ("$0.000595538"). */
+export const priceExact = (n: number | null) =>
+  n === null
+    ? "—"
+    : n === 0
+      ? "≈$0"
+      : "$" +
+        new Intl.NumberFormat("en-US", { maximumSignificantDigits: 6 }).format(n);
 export const allowance = (p: Point, lang: string) =>
   p.monthly_yi === null
     ? "—"
@@ -662,18 +660,18 @@ export function workloadLine(
   if (p.workload === "lowCache") {
     const m = conventions.lowCacheTokenMix;
     return zh
-      ? `低缓存负载 —— 缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
-      : `Low-cache workload — ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
+      ? `低缓存负载：缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
+      : `Low-cache workload: ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
   }
   if (p.workload === "standard") {
     const m = conventions.standardTokenMix;
     return zh
-      ? `标准负载 —— 缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
-      : `Standard workload — ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
+      ? `标准负载：缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
+      : `Standard workload: ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
   }
   return zh
-    ? "实测口径 —— 面板/日志 raw token 直测或同源派生，不经负载折算"
-    : "Measured real usage — raw tokens, no workload conversion";
+    ? "实测口径：面板/日志 raw token 直测或同源派生，不经负载折算"
+    : "Measured real usage: raw tokens, no workload conversion";
 }
 
 /** Official metered API list prices, shown next to the workload basis. */
@@ -688,6 +686,29 @@ export function listPriceLine(p: Point, lang: string): string {
     ? `官方 API 标价：缓存读 / 输入 / 输出 = ${parts}（每 MTok）`
     : `Official API list (cached / in / out, per MTok): ${parts}`;
 }
+const METRIC_ZH: Record<string, string> = {
+  "Intelligence Index": "智力指数",
+  "Resolution Rate %": "解决率 %",
+  "Arena Score": "Arena 分数",
+  "Net Improvement %": "净提升 %",
+  "Coding Agent Index": "编程 Agent 指数",
+  "Average task score": "平均任务分",
+  "Pass@1 %": "Pass@1 %",
+};
+const EFFORT: Record<string, [string, string]> = {
+  none: ["None", "无推理"],
+  low: ["Low", "低"],
+  medium: ["Medium", "中"],
+  high: ["High", "高"],
+  xhigh: ["xhigh", "超高"],
+  max: ["Max", "最高"],
+};
+/** Reasoning-effort level in the reader's language; unknown levels stay as published. */
+export const effortLabel = (effort: string | null, lang: string) =>
+  effort === null ? null : (EFFORT[effort]?.[lang === "zh" ? 1 : 0] ?? effort);
+/** Leaderboard metric in the reader's language; unknown metrics stay as published. */
+export const metricLabel = (metric: string, lang: string) =>
+  lang === "zh" ? (METRIC_ZH[metric] ?? metric) : metric;
 export const safeUrl = (url: string) =>
   /^https?:\/\//i.test(url) || url.startsWith("/data/") ? url : undefined;
 export const manufacturer = (vendor: string) =>

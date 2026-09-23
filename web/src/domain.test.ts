@@ -25,11 +25,14 @@ import {
   defaultState,
   accessLine,
   displayPlan,
+  effortLabel,
   isThirdParty,
   manufacturer,
   frontierPath,
   groups,
   pareto,
+  price,
+  priceExact,
   restore,
   rowsFor,
   type Lock,
@@ -45,14 +48,24 @@ import {
   visiblePoints,
 } from "./domain";
 import {
-  type ArenaPlacement,
-  type PlotLayout,
   FRONTIER_RADIUS,
-  buildExportDecorationsFromLayout,
-  labelProvider,
   placeTextLabels,
   placementRect,
 } from "./chartLabels";
+import {
+  boxToView,
+  formatTickPrice,
+  hitTest,
+  homeView,
+  makeBox,
+  panBy,
+  priceTicks,
+  scoreTicks,
+  toPixel,
+  zoomAt,
+} from "./chartScene";
+import { channelColors, dotColors, luminance } from "./palette";
+import { readFileSync as readConfig } from "node:fs";
 import type { Group, Point, Row, SiteData } from "./types";
 const data: SiteData = unpackData(JSON.parse(
   readFileSync(new URL("../public/data/site.json", import.meta.url), "utf8"),
@@ -124,16 +137,20 @@ test("All source point values and stable IDs survive the adapter, including null
 test("DeepSeek V4.1 Flash uses official USD off-peak and peak API prices", () => {
   const offPeak = data.points.find((p) => p.id === "deepseek_v41_flash_offpeak::deepseek-v4.1-flash")!;
   const peak = data.points.find((p) => p.id === "deepseek_v41_flash_peak::deepseek-v4.1-flash")!;
-  assert.equal(offPeak.real_usd_per_mtok, 0.00825);
-  assert.equal(peak.real_usd_per_mtok, 0.0165);
+  // Standard mix 97/2.5/0.5 × list $0.006/$0.30/$1.20 = $0.01932 peak; off-peak is half.
+  assert.equal(offPeak.real_usd_per_mtok, 0.00966);
+  assert.equal(peak.real_usd_per_mtok, 0.01932);
 });
 test("Step Plan CN uses official Credit pools and CNY list prices", () => {
   const mini35 = data.points.find((p) => p.id === "stepfun_mini_cn::step-3.5-flash")!;
   const max37 = data.points.find((p) => p.id === "stepfun_max_cn::step-3.7-flash")!;
-  assert.equal(mini35.monthly_yi, 17.475);
-  assert.equal(mini35.real_usd_per_mtok, 0.00414);
+  // Low-cache mix 85/14.5/0.5 × ¥0.14/¥0.70/¥2.10 = ¥0.231/MTok against the ¥400 credit pool.
+  assert.equal(mini35.monthly_yi, 17.316);
+  // ¥49 ÷ 6.7787 = $7.2285 over 1,731.6 MTok, stored at full precision, shown short.
+  assert.equal(mini35.real_usd_per_mtok, 0.0041744772);
+  assert.equal(price(mini35.real_usd_per_mtok), "$0.00417");
   assert.equal(mini35.channel, "StepFun");
-  assert.equal(max37.monthly_yi, 877.915);
+  assert.equal(max37.monthly_yi, 858.83);
   assert.equal(accessLine(mini35), "StepFun");
 });
 test("Devin Pro SWE-2 is an unmetered $0 promo point that joins and leads the TB4 frontier on a dedicated slot", () => {
@@ -173,8 +190,10 @@ test("DeepSWE keeps effort levels and vendor provenance through the adapter", ()
 });
 test("Command Code GOAT DeepSeek V4.1 Flash uses $40 monthly credits", () => {
   const p = data.points.find((p) => p.id === "command_code_goat::deepseek-v4.1-flash")!;
-  assert.equal(p.monthly_yi, 48.485);
-  assert.equal(p.real_usd_per_mtok, 0.00206);
+  // $40 allowance ÷ off-peak (97/2.5/0.5 × $0.003/$0.15/$0.60 = $0.00966/MTok).
+  assert.equal(p.monthly_yi, 41.408);
+  assert.equal(p.real_usd_per_mtok, 0.0024149923);
+  assert.equal(price(p.real_usd_per_mtok), "$0.00241");
 });
 test("Default selection includes every adopted point, including unscored models", () => {
   const rows = rowsFor(data, defaultState());
@@ -442,6 +461,12 @@ test("Language conversion only changes display units and labels", () => {
     displayPlan("GLM (老客 ¥149) 闲时", "en"),
     "GLM (v2 ¥149) Off-peak",
   );
+  // Every archived reasoning-effort level has a Chinese label.
+  for (const e of new Set(data.configurations.map((c) => c.reasoning_effort)))
+    if (e !== null) assert.notEqual(effortLabel(e, "zh"), e, `${e} is translated`);
+  assert.equal(effortLabel("xhigh", "zh"), "超高");
+  assert.equal(effortLabel("max", "en"), "Max");
+  assert.equal(effortLabel(null, "zh"), null);
 });
 test("Chart names never overlap each other and leave the plot rather than collide", () => {
   const box = { left: 60, top: 20, right: 660, bottom: 420, width: 600, height: 400 };
@@ -774,93 +799,107 @@ test("CSV escapes formula-like text and embedded quotes without changing numeric
 });
 test("colorAlpha renders a channel colour at the requested alpha", () => {
   const p = { ...data.points[0], channel: "xAI" };
-  assert.equal(color(p), "#B65CFF");
-  assert.equal(colorAlpha(p, 0.3), "rgba(182, 92, 255, 0.3)");
-  assert.equal(colorAlpha(p, 0.45), "rgba(182, 92, 255, 0.45)");
+  assert.equal(color(p), "#9333EA");
+  assert.equal(colorAlpha(p, 0.3), "rgba(147, 51, 234, 0.3)");
+  assert.equal(colorAlpha(p, 0.45), "rgba(147, 51, 234, 0.45)");
   // Unknown channels fall back to color()'s default hex without crashing.
   assert.equal(
     colorAlpha({ ...data.points[0], channel: "NoSuchChannel" }, 0.3),
-    "rgba(0, 168, 168, 0.3)",
+    "rgba(138, 148, 166, 0.3)",
   );
 });
-test("Exported search marks use the channel colour on badges and labels", () => {
-  const hit = row("hit", 0.01, 50);
-  hit.point = { ...hit.point, channel: "xAI" };
-  const front = row("front", 0.02, 60);
-  const gHit: Group = {
-    key: hit.key,
-    price: 0.01,
-    plotPrice: 0.01,
-    score: 50,
-    rows: [hit],
-  };
-  const gFront: Group = {
-    key: front.key,
-    price: 0.02,
-    plotPrice: 0.02,
-    score: 60,
-    rows: [front],
-  };
-  const layout = {
-    width: 400,
-    height: 300,
-    _size: { l: 0, r: 0, t: 0, b: 0, w: 400, h: 300 },
-    xaxis: {
-      _offset: 0,
-      _length: 400,
-      d2l: Math.log10,
-      l2p: (v: number) => v,
-      range: [1, -3],
-      r2l: Number,
-    },
-    yaxis: {
-      _offset: 0,
-      _length: 300,
-      d2l: (v: number) => v,
-      l2p: (v: number) => v,
-      range: [0, 100],
-      r2l: Number,
-    },
-  } as unknown as PlotLayout;
-  const placement = (g: Group, label: string): ArenaPlacement => ({
-    key: g.key,
-    price: g.plotPrice,
-    score: g.score,
-    label,
-    provider: labelProvider(g),
-    ax: 10,
-    ay: -10,
-    anchor: "center",
-    width: 40,
-    height: 14,
-    radius: 6,
+test("Chart scale maps the reversed log price axis and round-trips pan, zoom and box zoom", () => {
+  const box = makeBox(900, 500, { l: 60, r: 20, t: 20, b: 60 });
+  const gs = groups([row("cheap", 0.001, 20), row("dear", 1, 60)]);
+  const v = homeView(gs);
+  const cheap = toPixel(v, box, 0.001, 20);
+  const dear = toPixel(v, box, 1, 60);
+  assert.ok(cheap.x > dear.x, "cheaper sits further right");
+  assert.ok(dear.y < cheap.y, "higher scores sit higher");
+  for (const p of [cheap, dear]) {
+    assert.ok(p.x > box.left && p.x < box.right && p.y > box.top && p.y < box.bottom);
+  }
+  // Zoom keeps the data under the cursor fixed and is reversible.
+  const z = zoomAt(v, box, cheap.x, cheap.y, 0.5);
+  const still = toPixel(z, box, 0.001, 20);
+  assert.ok(Math.abs(still.x - cheap.x) < 1e-6 && Math.abs(still.y - cheap.y) < 1e-6);
+  const back = zoomAt(z, box, cheap.x, cheap.y, 2);
+  for (const k of ["xl", "xr", "yb", "yt"] as const) assert.ok(Math.abs(back[k] - v[k]) < 1e-9);
+  // Panning moves the data with the pointer.
+  const moved = toPixel(panBy(v, box, 40, -25), box, 1, 60);
+  assert.ok(Math.abs(moved.x - dear.x - 40) < 1e-6 && Math.abs(moved.y - dear.y + 25) < 1e-6);
+  // Box zoom frames exactly the dragged rectangle.
+  const framed = boxToView(v, box, dear.x, dear.y, cheap.x, cheap.y);
+  const a = toPixel(framed, box, 1, 60);
+  const b = toPixel(framed, box, 0.001, 20);
+  assert.ok(Math.abs(a.x - box.left) < 1e-6 && Math.abs(a.y - box.top) < 1e-6);
+  assert.ok(Math.abs(b.x - box.right) < 1e-6 && Math.abs(b.y - box.bottom) < 1e-6);
+});
+test("Price ticks use plain decimals, stay in view, keep their spacing and skip the $0 slot", () => {
+  assert.equal(formatTickPrice(0.0005), "$0.0005");
+  assert.equal(formatTickPrice(0.02), "$0.02");
+  assert.equal(formatTickPrice(2), "$2");
+  assert.equal(formatTickPrice(1000), "$1,000");
+  const box = makeBox(1000, 500, { l: 60, r: 20, t: 20, b: 60 });
+  const v = { xl: 0.5, xr: -3.5, yb: 0, yt: 100 };
+  const ticks = priceTicks(v, box, 60);
+  assert.ok(ticks.length >= 4);
+  ticks.forEach((t, i) => {
+    assert.ok(t.pos >= box.left - 1e-6 && t.pos <= box.right + 1e-6);
+    if (i) assert.ok(t.pos - ticks[i - 1].pos >= 60 - 1e-6, "ticks keep their minimum gap");
   });
-  const logos = new Map(
-    [gHit, gFront].map((g, i) => [
-      labelProvider(g),
-      `data:image/svg+xml,logo${i}`,
-    ]),
-  );
-  const { images, annotations } = buildExportDecorationsFromLayout(
-    [gFront, gHit],
-    [placement(gHit, "Hit"), placement(gFront, "Front")],
-    logos,
-    layout,
-    false,
-    {
-      frontier: new Set([gFront.key]),
-      hits: new Map([[gHit.key, "#B65CFF"]]),
-    },
-  );
-  const svg = images.map((i) => decodeURIComponent(String(i.source)));
-  assert.ok(svg.some((s) => s.includes('stroke="#B65CFF"') && s.includes('stroke-width="1.6"')));
-  assert.ok(svg.some((s) => s.includes('stroke="#20242a"') && s.includes('stroke-width="1"')));
-  assert.equal(
-    annotations.find((a) => a.text === "Hit")?.bordercolor,
-    "#B65CFF",
-  );
-  assert.equal(
-    annotations.find((a) => a.text === "Front")?.bordercolor,
-    "#20242a",
-  );
+  assert.ok(!ticks.some((t) => t.label.includes("e")), "no exponent notation");
+  // Nothing cheaper than the fence of the unmetered slot gets a tick.
+  const fenced = priceTicks(v, box, 60, Math.log10(0.001));
+  assert.ok(fenced.every((t) => Number(t.label.replace(/[$,]/g, "")) >= 0.001));
+  // A narrow mobile plot thins whole decades rather than overlapping labels.
+  const narrow = priceTicks({ xl: 1, xr: -5, yb: 0, yt: 1 }, makeBox(320, 300, { l: 40, r: 10, t: 10, b: 40 }), 54);
+  narrow.forEach((t, i) => i && assert.ok(t.pos - narrow[i - 1].pos >= 54 - 1e-6));
+  const y = scoreTicks({ xl: 1, xr: 0, yb: 1403, yt: 1517 }, box, "en");
+  assert.ok(y.length >= 3 && y.every((t) => /^1,[45]\d\d$/.test(t.label)));
+});
+test("Hit testing prefers the nearest target relative to its size", () => {
+  const items = [
+    { key: "badge", x: 100, y: 100, r: 17 },
+    { key: "dot", x: 108, y: 100, r: 9 },
+  ];
+  assert.equal(hitTest(items, 104, 100)?.key, "badge");
+  assert.equal(hitTest(items, 110, 100)?.key, "dot");
+  assert.equal(hitTest(items, 200, 200), null);
+});
+test("Channel palette is shared with the Python charts and keeps pale colours legible", () => {
+  const config = JSON.parse(readConfig(new URL("../../config/channel-colors.json", import.meta.url), "utf8"));
+  assert.deepEqual(channelColors, config.colors);
+  assert.equal(channelColors.StepFun, "#00F4E5", "CONVENTIONS pins StepFun");
+  for (const channel of new Set(data.points.map((p) => p.channel)))
+    assert.ok(channelColors[channel], `${channel} has a colour`);
+  for (const hex of Object.values(channelColors)) {
+    const light = dotColors(hex, false);
+    // Every dot outline is darker than its fill on white.
+    assert.ok(luminance(light.stroke) < luminance(light.fill) || luminance(hex) < 0.05);
+    // No dot disappears into the dark surface.
+    assert.ok(luminance(dotColors(hex, true).fill) > 0.02);
+  }
+});
+test("Real prices keep full precision for ordering; summaries stay short, details show the exact value", () => {
+  // Every stored price reproduces fee ÷ tokens to 8 significant digits.
+  for (const p of data.points)
+    if (p.billing === "subscription" && p.monthly_tokens && p.price_usd && p.real_usd_per_mtok > 0) {
+      const exact = (p.price_usd / p.monthly_tokens) * 1e6;
+      assert.ok(Math.abs(exact - p.real_usd_per_mtok) / exact < 0.003, `${p.id} reproduces fee ÷ tokens`);
+    }
+  // Short display: at most 5 decimals / 4 significant digits; exact: 6 significant digits.
+  assert.equal(price(0.000595501), "$0.0006");
+  assert.equal(price(0.11574074), "$0.1157");
+  assert.equal(price(103.117), "$103.1");
+  assert.equal(priceExact(0.000595501), "$0.000595501");
+  assert.equal(priceExact(0), "≈$0");
+  // Two prices that look identical when shortened still sort by their true values.
+  const s = { ...defaultState(), view: "price" as const, sort: "price", direction: "asc" as const };
+  const ordered = tableRows(rowsFor(data, s), s).map((r) => r.point.real_usd_per_mtok);
+  ordered.forEach((v, i) => i && assert.ok(v >= ordered[i - 1], "ascending by exact price"));
+  const plus = data.points.find((p) => p.id === "chatgpt_plus::gpt-5.6-luna")!;
+  const pro5 = data.points.find((p) => p.id === "chatgpt_pro_5x::gpt-5.6-luna")!;
+  assert.equal(price(plus.real_usd_per_mtok), price(pro5.real_usd_per_mtok));
+  assert.notEqual(plus.real_usd_per_mtok, pro5.real_usd_per_mtok);
 });

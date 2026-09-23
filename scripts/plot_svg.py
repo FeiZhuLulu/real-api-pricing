@@ -7,6 +7,8 @@ import math
 from html import escape
 from pathlib import Path
 
+from palette import FALLBACK, luminance, palette, shade
+
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_build"
 STD_MIX = json.loads((ROOT / "data/conventions.json").read_text(encoding="utf-8"))["standardTokenMix"]
@@ -19,12 +21,10 @@ BOARDS = {
     "terminal_bench_4": ("TB4终端榜", "Terminal-Bench 4.0"),
     "deepswe_1_1": ("DeepSWE榜", "DeepSWE v1.1"),
 }
-COLORS = {"OpenAI": "#00A86B", "Claude": "#F07826", "xAI": "#B65CFF",
-          "Cursor": "#FFB81C", "Kimi": "#2FA8FF", "GLM": "#1E1E1E",
-          "MiniMax": "#D23A7D", "Alibaba": "#FF6F61", "OpenCode": "#00C0A8",
-          "Command Code": "#708090", "Ollama": "#A0785C", "DeepSeek": "#1F75FE",
-          "Google": "#7CC12A", "Xiaomi": "#FFA000", "Tencent": "#26C6DA",
-          "StepFun": "#00F4E5", "Devin": "#7C3AED"}
+# 色值统一来自 config/channel-colors.json；此处只定图例顺序。
+COLORS = palette(["OpenAI", "Claude", "xAI", "Cursor", "Kimi", "GLM", "MiniMax", "Alibaba",
+                  "OpenCode", "Command Code", "Ollama", "DeepSeek", "Google", "Xiaomi",
+                  "Tencent", "StepFun", "Devin"])
 PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
             ("anthropic", "Claude"), ("devin", "Devin"),
             ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
@@ -275,7 +275,7 @@ def draw(board, meta, points, tier, language="zh"):
         s.append(f'<path id="frontier" d="{path}" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>')
     for p in subs + api:
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])
-        c = COLORS.get(channel(p), "#58655E")
+        c = COLORS.get(channel(p), FALLBACK)
         is_front = p["id"] in ids
         tooltip_labels = [f'{q["model_display"]} · {plan_label(q, language)}' for q in p["members"]]
         tooltip = " / ".join(tooltip_labels) + f" · {fmt_price(p['real_usd_per_mtok'])}/MTok · {p[key]} · {p['confidence']}"
@@ -297,7 +297,9 @@ def draw(board, meta, points, tier, language="zh"):
         elif p["billing"] == "metered":
             s.append(f'<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="{c}" stroke-width="1.5" opacity=".68"/>')
         else:
-            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".68"/>')
+            # 浅色渠道（淡紫/粉/薄荷等）加同色相深边，白底上保持可辨。
+            edge = f' stroke="{shade(c, .32)}" stroke-width=".9"' if luminance(c) > .45 else ""
+            s.append(f'<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="{c}" opacity=".68"{edge}/>')
         s.append('</g>')
     for p in reversed(frontier):
         x, y = sx(p["real_usd_per_mtok"]), sy(p[key])

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import { X } from "@phosphor-icons/react";
 export default function Modal({
   title,
@@ -14,6 +14,7 @@ export default function Modal({
   closeLabel?: string;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const headingId = useId();
   const close = useRef(onClose);
   close.current = onClose;
   useEffect(() => {
@@ -48,16 +49,16 @@ export default function Modal({
             close.current();
         }
       }}
-      aria-labelledby="modal-heading"
+      aria-labelledby={headingId}
     >
       <div className="modal-head">
-        <h2 id="modal-heading">{title}</h2>
+        <h2 id={headingId}>{title}</h2>
         <button
           className="icon-button"
           onClick={onClose}
           aria-label={closeLabel}
         >
-          <X size={20} />
+          <X size={18} />
         </button>
       </div>
       <div className="modal-body">{children}</div>
