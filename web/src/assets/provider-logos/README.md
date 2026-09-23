@@ -1,6 +1,6 @@
 # Provider SVG assets
 
-`ProviderLogo` discovers `*.svg` and `*.png` here at build time. Artwork is shown at 28×28 CSS pixels next to the model name. Third-party access shows the channel followed by the model developer. PNG assets are inlined so the static deployment preserves their binary content.
+`ProviderLogo` discovers `*.svg` and `*.webp` here at build time and inlines them as data URLs, so the page, the SVG chart and exported files all carry the artwork without extra requests. Artwork is shown at 20–28 CSS pixels next to the model name. Third-party access shows the channel followed by the model developer. In dark mode, marks drawn in near-black ink (OpenAI, Anthropic, xAI, Cursor, Ollama, Kimi, Devin, Meituan) are recoloured to light ink; tile logos keep their own background.
 
 ## Files
 
@@ -14,4 +14,4 @@ Most marks are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) 
 
 Brand marks remain trademarks of their owners. Rebuild recipe: `_assemble.py` (expects a `_fetch/` cache of upstream SVGs).
 
-Prefer SVG assets without embedded rasters or scripts. Command Code intentionally uses its complete PNG avatar. Keep gradient IDs unique within each SVG.
+Prefer SVG assets without embedded rasters or scripts. Command Code intentionally uses its complete avatar, stored as a 96×96 WebP (2 KB; the 400×400 JPEG original was 25 KB). Keep gradient IDs unique within each SVG.

@@ -1,4 +1,3 @@
-import type { Annotations, Image } from "plotly.js";
 import type { Group } from "./types";
 import { manufacturer } from "./domain";
 
@@ -27,27 +26,6 @@ export interface ArenaPlacement {
   width: number;
   height: number;
   radius: number;
-}
-
-export interface FrontierLogoView {
-  key: string;
-  price: number;
-  score: number;
-  provider: string;
-  label: string;
-  x: number;
-  y: number;
-  logoUrl?: string;
-  inPlot: boolean;
-  /** Search-marked badge: ringed in its channel colour instead of frontier black. */
-  hit: boolean;
-}
-
-export interface TextLabelView extends ArenaPlacement {
-  left: number;
-  top: number;
-  lead: { x1: number; y1: number; x2: number; y2: number } | null;
-  inPlot: boolean;
 }
 
 /** A marker a label must not cover: pixel centre plus its clearance radius. */
@@ -167,7 +145,9 @@ const DIRECTIONS: { dx: number; dy: number; anchor: LabelAnchor }[] = [
 const RING_GAPS = [8, 22, 40];
 
 const sizeCache = new Map<string, { width: number; height: number }>();
-let probe: HTMLElement | null | undefined;
+let measureCtx: CanvasRenderingContext2D | null | undefined;
+export const LABEL_FONT =
+  '"DM Sans Variable", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
 
 /**
  * Widths measured before the web font arrives are stale; drop them so labels
@@ -178,51 +158,59 @@ export function clearLabelSizeCache() {
 }
 
 /**
- * Measure a name with a hidden copy of the real label element, so the reserved
- * box matches the rendered font, letter spacing, padding and border exactly —
- * for CJK as well as Latin names.
+ * Size of a name box: the text advance measured with the same font the SVG
+ * renders (canvas measureText, no layout), plus 7px/3px padding and a 1px
+ * border (6px/2px on mobile). Works for CJK as well as Latin names.
  */
 export function measureLabel(label: string, mobile: boolean) {
   const cap = mobile ? 168 : 224;
-  if (probe === undefined) {
-    if (typeof document === "undefined") probe = null;
-    else {
-      probe = document.createElement("div");
-      probe.className = "arena-name-label";
-      probe.setAttribute("aria-hidden", "true");
-      probe.style.cssText =
-        "left:-10000px;top:0;visibility:hidden;max-width:none;transition:none";
-      document.body.appendChild(probe);
-    }
-  }
-  // The label font follows a media query, so the current size is part of the key.
-  const cacheKey = `${cap}|${probe ? getComputedStyle(probe).fontSize : mobile}|${label}`;
+  const font = mobile ? 10 : 11;
+  const padX = mobile ? 6 : 7;
+  const padY = mobile ? 2 : 3;
+  const cacheKey = `${mobile ? 1 : 0}|${label}`;
   const hit = sizeCache.get(cacheKey);
   if (hit) return hit;
-  let size: { width: number; height: number };
-  if (probe) {
-    probe.style.fontSize = mobile ? "10px" : "11px";
-    probe.style.padding = mobile ? "2px 6px" : "3px 7px";
-    probe.textContent = label;
-    const rect = probe.getBoundingClientRect();
-    // One extra pixel: sub-pixel text widths would otherwise trigger ellipsis.
-    size = {
-      width: Math.min(cap, Math.ceil(rect.width + 1)),
-      height: Math.ceil(rect.height),
-    };
+  if (measureCtx === undefined)
+    measureCtx =
+      typeof document !== "undefined"
+        ? document.createElement("canvas").getContext("2d")
+        : null;
+  let text: number;
+  if (measureCtx) {
+    measureCtx.font = `${font}px ${LABEL_FONT}`;
+    text = measureCtx.measureText(label).width;
   } else {
-    const font = mobile ? 10 : 11;
-    const text = [...label].reduce(
+    text = [...label].reduce(
       (n, c) => n + (c.charCodeAt(0) > 255 ? font : font * 0.58),
       0,
     );
-    size = {
-      width: Math.min(cap, Math.ceil(text) + (mobile ? 12 : 14) + 2),
-      height: Math.round(font * 1.25) + (mobile ? 4 : 6) + 2,
-    };
   }
+  // One extra pixel: sub-pixel advances would otherwise clip the last glyph.
+  const size = {
+    width: Math.min(cap, Math.ceil(text + padX * 2 + 2 + 1)),
+    height: Math.ceil(font * 1.25) + padY * 2 + 2,
+  };
   sizeCache.set(cacheKey, size);
   return size;
+}
+
+/**
+ * The label text that fits in `width` (the measured box, capped), ending in
+ * an ellipsis when the full name would overflow.
+ */
+export function fitLabel(label: string, mobile: boolean): string {
+  const cap = mobile ? 168 : 224;
+  // measureLabel clamps at the cap, so reaching it means the name overflows.
+  const fits = (text: string) => measureLabel(text, mobile).width < cap;
+  if (fits(label)) return label;
+  let lo = 1;
+  let hi = label.length;
+  while (lo < hi) {
+    const mid = (lo + hi + 1) >> 1;
+    if (fits(label.slice(0, mid).trimEnd() + "…")) lo = mid;
+    else hi = mid - 1;
+  }
+  return label.slice(0, lo).trimEnd() + "…";
 }
 
 export type LabelRect = {
@@ -261,10 +249,10 @@ export const placementRect = (
   y: number,
 ): LabelRect => labelBox(x, y, placement, placement);
 
-type Segment = { x1: number; y1: number; x2: number; y2: number };
+export type Segment = { x1: number; y1: number; x2: number; y2: number };
 
 /** Leader from the marker edge to the nearest point of the label border. */
-function leaderSegment(
+export function leaderSegment(
   x: number,
   y: number,
   box: Box,
@@ -315,135 +303,6 @@ export type PlotBox = {
   width: number;
   height: number;
 };
-
-type PlotAxis = {
-  _offset: number;
-  _length?: number;
-  d2l: (v: number) => number;
-  l2p: (v: number) => number;
-  r2l?: (v: number) => number;
-  range?: number[];
-};
-
-export type PlotLayout = {
-  width: number;
-  height: number;
-  _size?: { l: number; r: number; t: number; b: number; w: number; h: number };
-  xaxis?: PlotAxis;
-  yaxis?: PlotAxis;
-};
-
-export function plotBox(layout: PlotLayout): PlotBox | null {
-  const size = layout._size;
-  if (size && size.w > 0 && size.h > 0) {
-    return {
-      left: size.l,
-      right: size.l + size.w,
-      top: size.t,
-      bottom: size.t + size.h,
-      width: size.w,
-      height: size.h,
-    };
-  }
-  const xa = layout.xaxis;
-  const ya = layout.yaxis;
-  if (!xa || !ya || xa._length == null || ya._length == null) return null;
-  return {
-    left: xa._offset,
-    right: xa._offset + xa._length,
-    top: ya._offset,
-    bottom: ya._offset + ya._length,
-    width: xa._length,
-    height: ya._length,
-  };
-}
-
-function rangeLinear(ax: PlotAxis): [number, number] | null {
-  const range = ax.range;
-  if (!range || range.length < 2) return null;
-  const toLinear = ax.r2l ?? Number;
-  const lo = toLinear(range[0]);
-  const hi = toLinear(range[1]);
-  if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo === hi) return null;
-  return [lo, hi];
-}
-
-/**
- * Pixel position derived from the live axis ranges instead of l2p.
- * While Plotly pans it updates ax.range on every frame but only recomputes the
- * l2p scale when the drag ends, so l2p would leave the overlay behind.
- */
-export function dataToPixel(
-  layout: PlotLayout,
-  price: number,
-  score: number,
-  box?: PlotBox | null,
-): { x: number; y: number } | null {
-  const xa = layout.xaxis;
-  const ya = layout.yaxis;
-  if (!xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) return null;
-  const xLin = xa.d2l(price);
-  const yLin = ya.d2l(score);
-  if (!Number.isFinite(xLin) || !Number.isFinite(yLin)) return null;
-  const area = box ?? plotBox(layout);
-  const xr = area && rangeLinear(xa);
-  const yr = area && rangeLinear(ya);
-  if (area && xr && yr) {
-    return {
-      x: area.left + ((xLin - xr[0]) / (xr[1] - xr[0])) * area.width,
-      y: area.bottom - ((yLin - yr[0]) / (yr[1] - yr[0])) * area.height,
-    };
-  }
-  return {
-    x: xa._offset + xa.l2p(xLin),
-    y: ya._offset + ya.l2p(yLin),
-  };
-}
-
-function inPlotBox(
-  x: number,
-  y: number,
-  box: PlotBox,
-  pad: number,
-): boolean {
-  return (
-    x >= box.left - pad &&
-    x <= box.right + pad &&
-    y >= box.top - pad &&
-    y <= box.bottom + pad
-  );
-}
-
-/** Pixel-centered logo badges; hide when outside the plot box. */
-export function frontierLogoViews(
-  badges: Group[],
-  layout: PlotLayout,
-  logos: Map<string, string>,
-  lang = "en",
-  hits?: Set<string>,
-): FrontierLogoView[] {
-  const box = plotBox(layout);
-  if (!box) return [];
-  const half = LOGO_SIZE / 2;
-  const out: FrontierLogoView[] = [];
-  for (const g of badges) {
-    const pt = dataToPixel(layout, g.plotPrice, g.score, box);
-    if (!pt) continue;
-    out.push({
-      key: g.key,
-      price: g.plotPrice,
-      score: g.score,
-      provider: labelProvider(g),
-      label: modelLabel(g, lang),
-      x: pt.x,
-      y: pt.y,
-      logoUrl: logos.get(labelProvider(g)),
-      inPlot: inPlotBox(pt.x, pt.y, box, -half),
-      hit: !!hits?.has(g.key),
-    });
-  }
-  return out;
-}
 
 const BLOCKED = 1000;
 
@@ -536,151 +395,4 @@ export function placeTextLabels(
     });
   }
   return out;
-}
-
-export function textLabelViews(
-  placements: ArenaPlacement[],
-  layout: PlotLayout,
-): TextLabelView[] {
-  const box = plotBox(layout);
-  if (!box) return [];
-  const out: TextLabelView[] = [];
-  for (const p of placements) {
-    const pt = dataToPixel(layout, p.price, p.score, box);
-    if (!pt) continue;
-    const rect = labelBox(pt.x, pt.y, p, p);
-    const visible =
-      inPlotBox(pt.x, pt.y, box, -p.radius) &&
-      rect.left < box.right &&
-      rect.right > box.left &&
-      rect.top < box.bottom &&
-      rect.bottom > box.top;
-    out.push({
-      ...p,
-      left: rect.left,
-      top: rect.top,
-      lead: leaderSegment(pt.x, pt.y, rect, p.radius),
-      inPlot: visible,
-    });
-  }
-  return out;
-}
-
-function escapeHtml(s: string): string {
-  return s.replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ]!,
-  );
-}
-
-/**
- * Build export images/annotations from a finished export plot's fullLayout.
- * Paper coords are plot-area normalized (fx, fy); logo size is 28/plotW × 28/plotH.
- */
-export function buildExportDecorationsFromLayout(
-  badges: Group[],
-  textPlacements: ArenaPlacement[],
-  logos: Map<string, string>,
-  layout: PlotLayout,
-  mobile: boolean,
-  marks?: { frontier?: Set<string>; hits?: Map<string, string> },
-): {
-  annotations: Partial<Annotations>[];
-  images: Array<Partial<Image> & Record<string, unknown>>;
-  shapes: Array<Record<string, unknown>>;
-} {
-  const box = plotBox(layout);
-  const xa = layout.xaxis;
-  const ya = layout.yaxis;
-  const annotations: Partial<Annotations>[] = [];
-  const images: Array<Partial<Image> & Record<string, unknown>> = [];
-  const shapes: Array<Record<string, unknown>> = [];
-  if (!box || !xa?.l2p || !ya?.l2p || !xa.d2l || !ya.d2l) {
-    return { annotations, images, shapes };
-  }
-  const toPaperX = (px: number) => (px - box.left) / box.width;
-  const toPaperY = (py: number) => 1 - (py - box.top) / box.height;
-
-  for (const g of badges) {
-    const src = logos.get(labelProvider(g));
-    if (!src) continue;
-    const pt = dataToPixel(layout, g.plotPrice, g.score, box);
-    if (!pt) continue;
-    // Plot-area normalized coords (Plotly paper for images/annotations/shapes).
-    const fx = toPaperX(pt.x);
-    const fy = toPaperY(pt.y);
-    if (fx < -0.05 || fx > 1.05 || fy < -0.05 || fy > 1.05) continue;
-    // Export marks mirror the overlay: hits get their channel colour as a
-    // 1.6px stroke, everything else the near-black frontier frame (also the
-    // default without marks).
-    const hitColor = marks?.hits?.get(g.key);
-    images.push({
-      source: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><rect x=".5" y=".5" width="27" height="27" rx="6" fill="white" stroke="${escapeHtml(hitColor ?? "#20242a")}" stroke-width="${hitColor ? 1.6 : 1}"/><image href="${escapeHtml(src)}" x="4" y="4" width="20" height="20"/></svg>`,
-      )}`,
-      xref: "paper",
-      yref: "paper",
-      x: fx,
-      y: fy,
-      sizex: LOGO_SIZE / box.width,
-      sizey: LOGO_SIZE / box.height,
-      xanchor: "center",
-      yanchor: "middle",
-      layer: "above",
-      sizing: "contain",
-      opacity: 1,
-    });
-  }
-
-  const fontSize = mobile ? 10 : 11;
-  for (const p of textPlacements) {
-    const pt = dataToPixel(layout, p.price, p.score, box);
-    if (!pt) continue;
-    const rect = labelBox(pt.x, pt.y, p, p);
-    const lead = leaderSegment(pt.x, pt.y, rect, p.radius);
-    if (lead) {
-      // Annotation arrows cannot be dashed, so leaders are dotted shapes.
-      shapes.push({
-        type: "line",
-        xref: "paper",
-        yref: "paper",
-        x0: toPaperX(lead.x1),
-        y0: toPaperY(lead.y1),
-        x1: toPaperX(lead.x2),
-        y1: toPaperY(lead.y2),
-        line: { color: "#aab1ba", width: 1, dash: "dot" },
-        layer: "above",
-      });
-    }
-    annotations.push({
-      x: toPaperX(pt.x + p.ax),
-      y: toPaperY(pt.y + p.ay),
-      xref: "paper",
-      yref: "paper",
-      xanchor:
-        p.anchor === "center" ? "center" : p.anchor === "left" ? "left" : "right",
-      yanchor: "middle",
-      text: escapeHtml(p.label),
-      showarrow: false,
-      bgcolor: "rgba(255,255,255,0.96)",
-      bordercolor:
-        marks?.hits?.get(p.key) ??
-        (marks?.frontier?.has(p.key) ? "#20242a" : "#e1e4e8"),
-      borderwidth: 1,
-      borderpad: 3,
-      font: {
-        size: fontSize,
-        color: "#20242a",
-        family:
-          '"DM Sans Variable", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif',
-      },
-      align: "center",
-      captureevents: false,
-    });
-  }
-
-  return { annotations, images, shapes };
 }

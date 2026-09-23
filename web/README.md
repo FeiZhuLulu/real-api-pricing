@@ -1,6 +1,6 @@
 # Real API Pricing website
 
-React + TypeScript + Vite, with a locally bundled Plotly renderer. The website reads the repository's adopted data; it does not fetch live prices or recompute quota adoption.
+React + TypeScript + Vite, with a hand-written SVG chart (no charting library). The website reads the repository's adopted data; it does not fetch live prices or recompute quota adoption.
 
 ## Local development
 
@@ -99,12 +99,16 @@ Earlier verified preview: https://real-api-pricing-r3pgysog6-feizhululus-project
 
 Rankings and the detail table use separate bounded scroll panels rather than pagination. Ranking PNG/SVG and table CSV exports include all filtered rows. The contribution link opens `.github/ISSUE_TEMPLATE/contribute-data.md` on GitHub.
 
-### Scatter overlay: names, hover and panning (2026-09-09)
+### Scatter chart engine (2026-09-23)
 
-The logo markers and model names are HTML drawn over the Plotly canvas (`chartLabels.ts` + `Chart.tsx`), so three rules keep them part of the chart instead of a second layer floating above it:
+Plotly (1.1 MB of JavaScript) was replaced by a purpose-built SVG scene; the Plotly-era overlay notes above no longer apply.
 
-- **Positions come from the live axis ranges, not `l2p`.** While Plotly pans it rewrites `axis.range` every frame but only rebuilds the pixel scale when the gesture ends, so `l2p` lags a drag. `dataToPixel` maps through `range` instead, and `plotly_relayouting` reprojects the overlay on every animation frame. Slots are only re-solved on `plotly_relayout`/`plotly_afterplot`/resize, so names travel with their points during a drag rather than reshuffling.
-- **Names take the nearest free slot.** `placeTextLabels` tries above, below, right, left, then the diagonals, at three distances from the marker edge, and scores each candidate on label collisions, covered markers, crossing leaders, leader length and plot-edge overflow. A name with no clear slot is dropped instead of stacked; the point, its hover card and the table still carry it. Widths come from a hidden copy of the real label element, so CJK and Latin names reserve exactly what they render.
-- **Hover and click belong to Plotly.** The overlay is `pointer-events: none`, which is why hovering a logo used to show nothing while hovering just beside it worked. Traces use `hoverinfo: "none"` and `plotly_hover` feeds a styled React card, plus a scaled logo or a grown dot for the hovered point. Frontier hit targets are the first trace and share the dot radius: Plotly keeps the earliest trace on a distance tie and its distance floor (`1 - 3/radius`) favours small markers, so a fat invisible marker would lose its own point to a neighbouring dot.
+- **One scene, two renderers.** `Chart.tsx` renders a single `<ChartScene>` SVG with explicit colours: the page mounts it live, and PNG/SVG export renders the same component off-screen at 1200 px (with a title, the numbered key and the embedded DM Sans font), so downloads match the screen. The export uses the current zoom and theme.
+- **Geometry lives in `chartScene.ts`** (pure, unit-tested): the reversed log price axis, 1-2-5 log ticks that thin whole decades on narrow plots and skip the unmetered `$0` slot, nice score ticks, and zoom-about-pointer / pan / box-zoom maths. Logos, names and leaders share the chart's coordinate system, so they can never lag a drag.
+- **Names take the nearest free slot.** `placeTextLabels` tries above, below, right, left, then the diagonals, at three distances from the marker edge, and scores each candidate on label collisions, covered markers, crossing leaders, leader length and plot-edge overflow. A name with no clear slot is dropped instead of stacked. Widths come from canvas `measureText` with the rendered font (re-measured once the web font loads). During a gesture names ride with their points; the solver re-runs when the gesture settles.
+- **Interaction.** Hover hit-tests in pixel space (badges win over dots by relative distance) and feeds the React hover card; click opens the evidence dialog; drag pans, Box zoom frames a rectangle, the wheel zooms inside the plot rectangle only, double-click or Reset restores the view, and arrow keys / + / − / 0 work when the plot has focus. Touch: horizontal drag pans, pinch zooms, vertical swipes keep scrolling the page.
+- **Legend.** Channel entries show point counts; hovering one isolates that channel in the chart and rankings, clicking toggles the channel filter.
 
-Exports rebake the same geometry into Plotly paper coordinates: logos as images, names as arrow-less annotations, leaders as dotted shapes, since annotation arrows cannot be dashed.
+Channel colours come from `../config/channel-colors.json`, shared with the Python charts; `python scripts/checks/verify_palette.py` enforces a minimum CIEDE2000 distance between channels present in the data. Dark mode swaps near-black provider marks for light ink so they stay visible.
+
+Long tables and rankings render in chunks as they scroll (CSV/PNG exports still include every row), and the dataset request starts from `index.html` in parallel with the JavaScript bundle.
