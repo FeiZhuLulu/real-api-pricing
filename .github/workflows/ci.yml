@@ -1,0 +1,110 @@
+name: CI
+
+# Every PR and every push to main re-runs the data pipeline and fails when the
+# committed outputs no longer match it. Raster charts and matplotlib SVGs depend
+# on the fonts of the machine that renders them (Microsoft YaHei on Windows), so
+# they are rebuilt here only to feed the checks, never compared byte for byte.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  data:
+    name: Data pipeline & committed outputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONIOENCODING: utf-8
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          npm ci
+
+      - name: Rebuild adopted data and derived points
+        run: |
+          python scripts/build_adopted.py > /dev/null
+          python scripts/compute.py > /dev/null
+
+      - name: Data checks
+        run: |
+          python scripts/checks/verify_benchmark_configs.py
+          python scripts/checks/verify_aa_snapshot.py
+          python scripts/checks/verify_deepswe.py
+          python scripts/checks/verify_palette.py
+
+      - name: Rebuild charts, tables and interactive HTML
+        run: |
+          mkdir -p _build
+          python scripts/plot_svg.py > /dev/null
+          node scripts/render_svg.cjs > /dev/null
+          python scripts/build_html.py > /dev/null
+          python scripts/plot_quotas.py > _build/plot_quotas.ci.log 2>&1 || { tail -n 60 _build/plot_quotas.ci.log; exit 1; }
+          python scripts/publish_charts.py
+
+      - name: Chart checks
+        run: |
+          node scripts/checks/verify_configuration_html.cjs
+          python scripts/checks/verify_fee_bands.py
+          python scripts/checks/verify_chart_labels.py
+          python scripts/checks/verify_svg.py
+          python scripts/checks/verify_four_boards.py > /dev/null
+          python scripts/checks/verify_publication.py
+
+      - name: Committed outputs match the pipeline
+        run: |
+          # The repository stores LF; normalise the working tree the same way before comparing.
+          paths=(data derived charts
+                 ':(exclude,glob)**/*.png'
+                 ':(exclude,glob)charts/*/overview/*.svg'
+                 ':(exclude,glob)charts/*/frontier/*.svg')
+          if ! git -c core.autocrlf=input diff --quiet -- "${paths[@]}"; then
+            git -c core.autocrlf=input diff --stat -- "${paths[@]}"
+            git -c core.autocrlf=input diff -- "${paths[@]}" | head -n 120
+            echo "::error::Committed data/derived/charts differ from a fresh pipeline run. Re-run BUILD.md locally and commit the results (adopted.csv must never be edited by hand)."
+            exit 1
+          fi
+          untracked=$(git status --porcelain --untracked-files=all -- data derived charts | grep '^??' || true)
+          if [ -n "$untracked" ]; then
+            echo "$untracked"
+            echo "::error::The pipeline produced files that are not committed."
+            exit 1
+          fi
+
+  web:
+    name: Website tests & build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
