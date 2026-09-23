@@ -20,6 +20,7 @@ python scripts/publish_charts.py
 python scripts/checks/verify_svg.py
 python scripts/checks/verify_four_boards.py
 python scripts/checks/verify_publication.py
+python scripts/checks/verify_palette.py
 ```
 
 On Windows, set `PYTHONIOENCODING=utf-8` if the console cannot print Chinese filenames. `plot_static.py` is a compatibility entry point for `plot_svg.py`.
@@ -29,6 +30,7 @@ On Windows, set `PYTHONIOENCODING=utf-8` if the console cannot print Chinese fil
 - `data/research/`: append-only evidence and dated leaderboard snapshots. Historical claims may disagree with current adoption decisions.
 - `data/raw/`: aggregate usage evidence, retained for traceability.
 - `data/conventions.json`: shared calculation conventions and exchange rate.
+- `config/channel-colors.json`: the single channel palette for the website and every Python chart.
 - `scripts/build_adopted.py`: adopted values, confidence and rationale; generates `data/adopted.csv`.
 - `derived/`: price/score summary pairs, lossless benchmark configurations and explicit plan/configuration reference mappings. Run `compute.py` to regenerate all five benchmark JSON/CSV files.
 - `charts/`: public bilingual charts and tables; start with `charts/README.md`. English and Chinese filenames live in `en/` and `zh/`, grouped into `pareto/`, `overview/` and `frontier/`.

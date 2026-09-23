@@ -1,0 +1,29 @@
+{
+  "_comment": "Single source of channel colours for the website and every Python chart. Hue families follow CONVENTIONS.md §5; exact values were chosen for perceptual separation (scripts/checks/verify_palette.py enforces the minimum CIEDE2000 distance). Keys are access channels; aliases map legacy script keys.",
+  "colors": {
+    "OpenAI": "#16A34A",
+    "Anthropic": "#F97316",
+    "xAI": "#9333EA",
+    "Cursor": "#FACC15",
+    "Kimi": "#0EA5E9",
+    "Zhipu": "#1E1E1E",
+    "MiniMax": "#E2167E",
+    "Alibaba": "#DC2626",
+    "OpenCode": "#0F766E",
+    "Command Code": "#DBA6FA",
+    "Ollama": "#EC8779",
+    "DeepSeek": "#4D6BFE",
+    "Google": "#84CC16",
+    "Xiaomi": "#FE90B6",
+    "Tencent": "#7DD3FC",
+    "StepFun": "#00F4E5",
+    "Devin": "#36EE91"
+  },
+  "aliases": {
+    "Claude": "Anthropic",
+    "GLM": "Zhipu",
+    "Gemini": "Google"
+  },
+  "fallback": "#8A94A6",
+  "frontier": "#1F2328"
+}
