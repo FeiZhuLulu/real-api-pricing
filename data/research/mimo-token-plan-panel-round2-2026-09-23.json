@@ -1,0 +1,63 @@
+{
+ "collectedAt": "2026-09-23",
+ "subject": "小米 MiMo Token Plan 用户面板实测：Lite 档 Credits 消耗 + token 类型明细",
+ "scope": "用户本人 Lite 连续包月账号两张面板截图（用量曲线悬停明细 + 套餐用量条），mimo-v2.6-pro 负载",
+ "panel": {
+  "plan": "Lite 月度套餐（连续包月）",
+  "validUntil": "2026-10-22 23:59:59 (UTC)",
+  "monthlyCredits": 4100000000,
+  "usedCredits": 2190625116,
+  "usedPctShown": "53.0%",
+  "computedPct": 53.43,
+  "dayDetail": {
+   "date": "2026-09-22",
+   "totalTokens": 73716343,
+   "cachedInputTokens": 67848448,
+   "inputTokens": 4479135,
+   "outputTokens": 1388760
+  }
+ },
+ "measuredMix": {
+  "cache": 0.9203989948334794,
+  "input": 0.060761763507449086,
+  "output": 0.01883924165907145,
+  "labelZh": "用户面板实测负载：缓存读 92.04% / 普通输入 6.08% / 输出 1.88%",
+  "note": "73,716,343 token 单日样本（2026-09-22，mimo-v2.6-pro）。与项目统一标准负载 97.5/2.15/0.35 差距大：该渠道真实负载打不到 97.5% cache，且输出占比 5.4×——与 Gemini 实测 82.6%、Step 实测 79% 同类，是 agentic coding 的真实形态"
+ },
+ "burnRateCrossValidation": {
+  "officialRates": "mimo-v2.6-pro cached/input/output = 2.5/300/600 credits/token（round1 官方文档）",
+  "dayBurnAtOfficialRates": 2346617620,
+  "panelUsedCredits": 2190625116,
+  "delta": "-6.6%",
+  "interpretation": "当日按官方 burn 率应扣 23.47 亿，面板实扣 21.91 亿，差 6.6%——由夜间 00:00-08:00（北京）consumption×0.8 时段用量与时区归属解释；官方 burn 率获面板级互证",
+  "ifAllNight": 1877294096
+ },
+ "measuredBlendedBurn": {
+  "mimo-v2.6-pro": {"blendedCreditsPerToken": 31.8331, "formula": "0.9204×2.5 + 0.0608×300 + 0.0188×600", "vsStandard": "10.9875 → 31.8331（2.90×）"},
+  "mimo-v2.6-flash": {"blendedCreditsPerToken": 11.6848, "formula": "0.9204×2 + 0.0608×100 + 0.0188×200", "vsStandard": "4.8 → 11.6848（2.43×）"},
+  "mimo-v2.5-pro": "与 v2.6-pro 同 burn 率表 2.5/300/600 → 同 31.8331",
+  "mimo-v2.5": "与 v2.6-flash 同 burn 率表 2/100/200 → 同 11.6848"
+ },
+ "measuredMixConversion": {
+  "note": "月池 Credits ÷ 实测负载混合 burn = 该用户负载下实际可用月 token；夜间档 = 日间 ÷ 0.8（同 credits 多换 25% token）",
+  "mimo-v2.6-pro": {
+   "Lite": {"day": 128800000, "night": 161000000},
+   "Standard": {"day": 345600000, "night": 431900000},
+   "Pro": {"day": 1193700000, "night": 1492200000},
+   "Max": {"day": 2575900000, "night": 3219900000}
+  },
+  "mimo-v2.6-flash": {
+   "Lite": {"day": 350900000, "night": 438600000},
+   "Standard": {"day": 941400000, "night": 1176700000},
+   "Pro": {"day": 3252100000, "night": 4065100000},
+   "Max": {"day": 7017700000, "night": 8772100000}
+  }
+ },
+ "meteredEquivalentAtMeasuredMix": {
+  "note": "同一实测负载下按官方按量标价应付的美元（与订阅真实单价同口径对照）：v2.6-pro 按 OpenRouter/GOAT/OpenCode 一致价 $0.0036/0.435/0.87 per MTok",
+  "mimo-v2.6-pro": {"blendedUsdPerMtok": 0.0461, "formula": "0.9204×0.0036 + 0.0608×0.435 + 0.0188×0.87"}
+ },
+ "adoptionDecision": "MiMo Token Plan 全部 32 行由统一标准负载折算（10.9875/4.8 credits·token⁻¹）切换到用户面板实测负载折算（31.8331/11.6848），workload 标记 measuredMix；旧标准负载对照值保留在 decision_note。样本为单用户单日重度负载（n=1），置信度维持 medium；mix 为用户侧负载属性，外推至套餐内其余 3 款模型与升档池",
+ "source": "用户提供的两张订阅面板截图（2026-09-22/23 会话附件）",
+ "supersedes": "mimo-token-plan-round1-2026-09-22.json 的 standardWorkloadConversion（仅折算口径，官方档位/burn 率/折扣规则不变）"
+}

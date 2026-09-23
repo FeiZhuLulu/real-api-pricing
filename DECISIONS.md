@@ -3,6 +3,10 @@
 `AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-23
+
+- **MiMo Token Plan 32 行维持统一标准负载折算（measuredMix 切换当日撤回）**：同日早些时候的 measuredMix 提交把 32 行从标准负载（混合 burn 10.9875/4.8 credits/token）切到 OpenCode harness 单日实测 mix（92.04%/6.08%/1.88% → 31.833/11.685）。用户 2026-09-23 裁定：该单日样本的低缓存系 OpenCode harness 所致，非 MiMo 服务属性——另一客户端（"mimo/kimi desktop"，版本未确认）两题 35.72M tok 实测 cache 95.0%（input 3.27%/output 1.72%）→ 恢复标准负载口径，采用值回到 v2.6-pro Lite 日 3.73 亿、Max 日 74.63 亿、flash Lite 日 8.54 亿等 32 行原值，置信度维持 medium。round2 保留的部分：面板 burn 率互证——2026-09-22 单日按官方率应扣 23.47 亿 vs 面板实扣 21.91 亿（−6.6%，夜间 0.8× 时段与时区归属解释），官方 burn 率获面板级互证；同窗池用量 2,190,625,116/4,100,000,000 Credits（53.0%，有效期至 2026-10-22）。两套实测 mix（OpenCode 92.04%、kimi desktop 95.01%）折算值只留 decision_note 对照不采用；输出占比两侧实测 1.72%/1.88% 均高于标准 0.35%，是否调整标准输出占比待用户裁定。conventions 不加专用 mix 档，workload 标签维持 standard。证据：`mimo-token-plan-panel-round2-2026-09-23.json`、`mimo-client-sample-round3-2026-09-23.json`。
+
 ## 2026-09-22
 
 - **SuperGrok · Grok 4.7（round2 修订）**：6.72→4.97 亿/月 medium；Plus 26.9→19.9 亿、Heavy 67.2→49.7 亿按面板美元比派生 medium；Lite 不派生。round2 本机实测（Grok Build CLI，xhigh）：「这次」窗 56,629,383 tok = 周额度 +45.5475% → 周池 124,330,387（三窗反推 176.1M/124.3M/132.1M，用户裁定中间窗最可信——份额大、取整误差占比小）。对 4.6 基准（1.273 亿/周）为 0.98× 同量级——round1 的 1.32× 系删除版份额推断偏高，已取代。「之前」窗已对上 round1 三会话（洗+鹈+删除版）：删除版实得 628,541 tok、实占周池约 0.36%（round1 按约 1% 估），其 mix 与 round1 记录行逐项吻合。两窗反推不重合（176 vs 124），池口径或面值有未解变量；n=1 账号维持 medium。分数由 `scores-grok47-round1-2026-09-22.json` 补充档从 AA round4 未映射载荷提升：int 46.4466 / coding(Grok Build) 56.2676；TB4/Arena/OpenDesign 无 4.7 行不画。两榜均未进前沿（Claude Pro Opus5 $0.0106 支配）。证据：`data/research/supergrok-grok47-round2-2026-09-22.json`（round1 档保留作历史对照）。

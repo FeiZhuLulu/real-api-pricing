@@ -10,13 +10,16 @@ for harness in ("DeepSeek Harness Minimal", "mini-SWE"):
     row = {"board_variant": variant, "board_harness": harness}
     expected = (f"DeepSeek V4.1 Flash (max)\n{harness} · vendor self-report"
                 if len(variant) > 60 else variant)
-    assert chart_variant(row) == expected
+    assert chart_variant(row, "en") == expected
+    zh = chart_variant(row, "zh")
+    assert "vendor self-report" not in zh and "厂商自报" in zh
     assert row["board_variant"] == variant
 
 short = "Codex - GPT-6 Astra (max)"
-assert chart_variant({"board_variant": short}) == short
+assert chart_variant({"board_variant": short}, "en") == short
+assert chart_variant({"board_variant": short}, "zh") == short
 long = "A long benchmark configuration with enough words to exceed the chart label width"
-wrapped = chart_variant({"board_variant": long})
+wrapped = chart_variant({"board_variant": long}, "en")
 assert "\n" in wrapped and wrapped.replace("\n", " ") == long
 assert all(len(line) <= 60 for line in wrapped.splitlines())
 print("PASS: short labels unchanged; long labels wrapped; source records preserved")
