@@ -1,0 +1,71 @@
+{
+  "collectedAt": "2026-09-22",
+  "subject": "SuperGrok 周池 — Grok 4.7 本机实测 round2（Grok Build CLI，xhigh，用户账号）",
+  "source": {
+    "type": "user_panel_screenshots",
+    "panel": "Weekly limit (SuperGrok) 周额度 + Grok Build CLI 本地会话统计同框",
+    "effort": "xhigh",
+    "note": "round1（supergrok-grok47-round1-2026-09-22.json）同批扩展：本轮带小数位的周额度增量读数（非整数取整），窗口累计 token 远超上轮"
+  },
+  "rawObservations": {
+    "windows": [
+      {
+        "id": "之前",
+        "inputTokens": 13765425,
+        "outputTokens": 305932,
+        "cachedInputTokens": 12432384,
+        "reasoningTokens": 223760,
+        "totalTokens": 14071357,
+        "cacheHitOverInput": 0.9032,
+        "weeklyQuotaDeltaPct": 7.98875,
+        "impliedWeeklyTokens": 176139659
+      },
+      {
+        "id": "这次",
+        "inputTokens": 56350545,
+        "outputTokens": 278838,
+        "cachedInputTokens": 51728640,
+        "reasoningTokens": 180927,
+        "totalTokens": 56629383,
+        "cacheHitOverInput": 0.918,
+        "weeklyQuotaDeltaPct": 45.5475,
+        "impliedWeeklyTokens": 124330387
+      },
+      {
+        "id": "汇总",
+        "inputTokens": 70115970,
+        "outputTokens": 584770,
+        "cachedInputTokens": 64161024,
+        "reasoningTokens": 404687,
+        "totalTokens": 70700740,
+        "cacheHitOverInput": 0.9151,
+        "weeklyQuotaDeltaPct": 53.53625,
+        "impliedWeeklyTokens": 132061435
+      }
+    ],
+    "consistencyCheck": "total = input + output；input 含 cache_read；reasoning ⊂ output；hit = cache_read/input；反推周额度 = total ÷ 周额度增量%（各窗独立自洽，表值与计算差 ≤±10 为显示取整）",
+    "userConfirmation": "用户 2026-09-22：『中间那个数据可信度最高』→ 采用「这次」窗口（45.5475% 最大消耗窗）"
+  },
+  "derivation": {
+    "adoptedWindow": "这次",
+    "weeklyTokens": 124330387,
+    "monthlyTokens_x4w": 497321548,
+    "monthlyYi": 4.97,
+    "whyMiddleWindow": "45.5% 周额度消耗对应 56.6M token，分母份额大、面板读数取整误差占比最小；「之前」窗仅 8% 增量反推 176.1M 偏高；汇总 132.1M 被小窗拉高"
+  },
+  "crossChecks": [
+    "「之前」窗已对上 round1 三会话（洗+鹈+删除版）：14,071,357 = 8,219,321 + 5,223,495 + 628,541（删除版实得 token，round1 中快照缺失）；其反推 mix——cache/input 0.638、output/total 0.037、reasoning/total 0.023——与 round1 记录行逐项吻合。删除版实占周池约 0.36%（round1 按约 1% 估），洗+鹈约 7.63%（round1 按 8% 估）",
+    "vs 4.6 同档采用基准 127,272,629 tok/周（V2EX 受控打满，high）：0.977× —— 基本一致，4.7 池与 4.6 同量级",
+    "vs round1 推断 168,035,200 tok/周：round1 删除版份额系推断（约 1%），本轮大窗实测显示该推断偏高约 35%，round2 取代之",
+    "窗口间反推差异（之前 176.1M vs 这次 124.3M）：或池面值随时间变动，或周额度按非纯 raw token 计权（负载 mix 影响占池速率）；按 4.7 标价 $0.5/2/6 成本计权反推：之前 $10.72/7.98875%→周池$134，这次 $36.78/45.5475%→$81，差 1.66× 比 raw 1.42× 更大；且这次 cache 更高、输出更少，每 token 占池反而更多（0.80%/M vs 0.57%/M），与按标价成本计权方向相反，排除标价计权。候选解释（未证）：>200K 长上下文档价格翻倍——这次窗口输入 5635 万、长上下文同时推高 cache 命中，方向吻合，需单请求上下文长度验证",
+    "面板周额度面值：Super $25 / Plus $100 / Heavy $250（quota 美元，非公开标价美元）"
+  ],
+  "adoption": {
+    "served_model": "grok-4.7",
+    "supergrok": {"monthlyYi": 4.97, "confidence": "medium", "how": "124,330,387×4周"},
+    "supergrok_plus": {"monthlyYi": 19.9, "confidence": "medium", "how": "面板$100/25 派生"},
+    "supergrok_heavy": {"monthlyYi": 49.7, "confidence": "medium", "how": "面板$250/25 派生"},
+    "supergrok_lite": "面板美元未知，不派生；该档保持只有 4.6 点",
+    "confidenceRationale": "本机面板+CLI 同框、单窗 45.5% 大份额，比 round1 更实；但两窗反推不重合（176 vs 124）说明池口径或面值有未解变量，且 n=1 账号，维持 medium"
+  }
+}

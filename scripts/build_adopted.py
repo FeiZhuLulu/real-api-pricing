@@ -20,10 +20,11 @@ CURSOR_ULTRA_FAST_YI = 30.74
 CLAUDE_MAX_20X_YI = round(47.2 * MONTH_WEEKS / 1.5 * 1.25)
 CLAUDE_WEEKLY_20X_TO_5X = 2
 SUPERGROK_WEEKLY_TOKENS = 127_272_629
-# Grok 4.7 周池：用户本机三会话同框（洗 8,219,321 + 鹈 5,223,495 + 删除版无快照），周额度 19%→28%；
-#   删除版份额藏在整数取整内，按约 1% 计即两已知会话占 8% → 13,442,816/0.08 = 168,035,200/周。
-#   硬边界 5.97（删≈0）~7.68 亿/月（删≈2%）；CLI Cost 字段两段不自洽不可校池，$42.6/周等价对面板$25有1.7×张力。
-SUPERGROK47_WEEKLY_TOKENS = 168_035_200
+# Grok 4.7 周池：round2 用户本机实测（Grok Build CLI，xhigh）——「这次」窗 56,629,383 tok = 周额度 +45.5475%
+#   → 124,330,387/周（用户裁定三窗中该窗最可信：消耗份额最大、读数取整误差占比最小；「之前」8% 窗反推 176.1M、汇总 132.1M 不采）。
+#   round1（三会话 13.44M/约8%→168.0M/周）删除版份额系推断，偏高约 35%，已被本轮取代；对 4.6 基准 127,272,629 为 0.98× 同量级。
+#   「之前」窗已确认为 round1 三会话之和：删除版实得 628,541 tok、实占约 0.36% 周池（round1 按约 1% 估）。
+SUPERGROK47_WEEKLY_TOKENS = 124_330_387
 SUPERGROK_PANEL_USD = 25
 CHATGPT_PLUS_LUNA_USED_TOKENS = 112_666_769
 CHATGPT_PLUS_LUNA_USED_FRACTION = 0.06
@@ -557,11 +558,11 @@ SUBS = [
     ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.6", supergrok_monthly_yi(100, 1), "medium", f"面板周额度$100×Super精确标定×{MONTH_WEEKS:g}周", f"采用{supergrok_monthly_yi(100, 1):g}亿：{SUPERGROK_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，按一位小数取值；linux.do用户口述每用一刀涨1%与周$100吻合"),
     ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.6", supergrok_monthly_yi(250, 1), "medium", f"面板周额度$250×Super精确标定×{MONTH_WEEKS:g}周", f"采用{supergrok_monthly_yi(250, 1):g}亿：{SUPERGROK_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，按一位小数取值；标价换算18亿作废（面板美元≠标价美元）；Zhang 208亿未采"),
     ("supergrok_lite", "SuperGrok Lite", 10, "USD", "grok-4.6", 1.5, "low", "aa_grok_build_2026_07", "面板周额度未知，三轮联网均无"),
-    # Grok 4.7 —— 用户本机三会话同框实测（2026-09-22）：9% 周额度由 洗/鹈/删除版 完整构成；
+    # Grok 4.7 —— round2 用户本机实测（2026-09-22，Grok Build CLI xhigh）：「这次」窗 56.6M tok = 周额度 +45.5%；
     #   分数由 scores-grok47-round1 补充档从 AA round4 未映射载荷提升（int 46.45 / coding 56.27）
-    ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测：洗/鹈 13,442,816 tok + 删除版（无快照）= 周额度 19%→28%；supergrok-grok47-round1-2026-09-22.json", f"新增{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：两已知会话 13,442,816 tok 按份额 8% 反推周池 {SUPERGROK47_WEEKLY_TOKENS:,}（9% 总份额中删除版约 1%，其 token 快照缺失、份额藏整数取整内）；硬边界 5.97（删≈0）~7.68亿（删≈2%）；对 4.6 同档 1.273亿/周为 1.32×；CLI Cost 两段不自洽（低 cache 段 $/MTok 反低），不可校池；CLI 等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价——重置后受控打满可升 high"),
-    ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.7", supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$100×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，非独立实测"),
-    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"新增{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，非独立实测；Lite 面板美元未知不派生"),
+    ("supergrok", "SuperGrok", 30, "USD", "grok-4.7", supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS), "medium", "用户本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json", f"6.72→{supergrok_monthly_yi(25, 2, SUPERGROK47_WEEKLY_TOKENS):g}亿：周池 168,035,200→{SUPERGROK47_WEEKLY_TOKENS:,}——round2 大窗实测取代 round1 份额推断；三窗反推 176.1M/124.3M/132.1M，用户裁定「这次」（45.5% 最大消耗窗）最可信；「之前」窗已对上 round1 三会话，删除版实得 628,541 tok/0.36%；对 4.6 同档 1.273亿/周为 0.98× 同量级；两窗反推不重合，池口径或面值有未解变量，n=1 账号维持 medium"),
+    ("supergrok_plus", "SuperGrok Plus", 100, "USD", "grok-4.7", supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$100×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"26.9→{supergrok_monthly_yi(100, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×100/25，非独立实测"),
+    ("supergrok_heavy", "SuperGrok Heavy", 300, "USD", "grok-4.7", supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS), "medium", f"面板周额度$250×Super 4.7实测标定×{MONTH_WEEKS:g}周", f"67.2→{supergrok_monthly_yi(250, 1, SUPERGROK47_WEEKLY_TOKENS):g}亿：{SUPERGROK47_WEEKLY_TOKENS:,}×{MONTH_WEEKS:g}周×250/25，非独立实测；Lite 面板美元未知不派生"),
     # Cursor —— 两张个人Ultra截图均在2026-08-25永久扩池后；社区图可能因首周半价用量集中而使tokens/Usage%反推偏高。
     #   Fast取用户当前平滑账号最大样本863.8M/28.1%=30.74亿；Standard取用户67.78亿与社区86.95亿主行中间值77.37亿。
     #   Pro保留独立面板采用值；Pro+按$800/$3000池比，从round8标准77.37亿反推。
