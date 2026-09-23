@@ -1,6 +1,6 @@
 # DECISIONS.md · 采用值决策记录
 
-`AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
+`AGENTS.md` 只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
 ## 2026-09-23
