@@ -10,6 +10,7 @@ import csv
 import json
 import math
 import os
+import re
 import textwrap
 import unicodedata
 
@@ -172,6 +173,7 @@ def plan_name(row: dict, language: str) -> str:
             name = name.replace(original, translated)
         if row["plan_id"].startswith("kimi_"):
             name = name.replace("Kimi CN ", "Kimi CN CNY ")
+        name = re.sub(r"\(促销至 (\d+/\d+)\)", r"(promo until \1)", name)
     return name
 
 
