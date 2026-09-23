@@ -1528,7 +1528,7 @@
    "confidence": "high",
    "tier": "main",
    "source": "用户Devin Max面板cc usage双检查点：云端周额度剩余75%→27%（差48pt）段内 claude-opus-5-5-xhigh +1,142 calls/+512,221,810 tok、claude-opus-5-5-high +118/+13,111,946，合计 +1,260 calls/+525,333,756 tokens；devin-opus55-round1-2026-09-23.json；https://devin.ai/pricing Max $200/月",
-   "note": "新增43.78亿：525,333,756÷48%×4周＝周池1,094,445,325 raw；用户裁定48pp全归Opus 5.5增量（swe-2等免费不占额度）；全口径total直接采用不归一；取整区间约42.88~44.71亿；命中率按含cache_create口径92.31%（xhigh 92.38%占97.5%tokens为主力、high 89.32%）；与Astra周池350.6M有3.12×张力——共享池按模型加权（或池面值调整），机制未公布并列记录，本模型raw月额读数不受影响；effort仅影响速率；Pro $20档无数据不派生",
+   "note": "新增43.78亿：525,333,756÷48%×4周＝周池1,094,445,325 raw；用户裁定48pp全归Opus 5.5增量（swe-2等免费不占额度）；全口径total直接采用不归一；取整区间约42.88~44.71亿；命中率按含cache_create口径92.31%（xhigh 92.38%占97.5%tokens为主力、high 89.32%）；与Astra周池350.6M有3.12×张力——worth对账：Opus5.5段$336.4~457.2→池$700.8~952.5 vs Astra段$356.6~365.8→池$409.8~420.5，恒定池须Opus5.5按~0.6×标价计（写费~$1.5~1.7/MTok）否则池两周涨~1.7~2.3×；判别=本周重测astra；本模型raw月额读数不受影响；effort仅影响速率；Pro $20档无数据不派生",
    "unmetered": false,
    "promo_until": null,
    "aa_intelligence_index__selection": null,

@@ -48,6 +48,9 @@ DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
 #   合计 +1,260 calls/+525,333,756 tokens；用户裁定 48pp 全归 Opus 5.5 增量（swe-2 等免费不占额度）。
 #   与 Astra round4 周池 350.6M raw 有 3.12× 张力 → 共享周池按模型加权（或池面值调整），
 #   两读数各自段内自洽，权重机制未公布并列记录；本模型 raw 月额读数不受影响。
+#   用户假说"共享 API 额度池按标价计费"对账：Opus5.5 段 worth $336.4(5m写)~$457.2(1h写)→池$700.8~952.5；
+#   Astra 段 worth $356.6~365.8→池$409.8~420.5。恒定池要成立须 Opus5.5 按 ~0.59~0.60× 标价计
+#   （或写费 ~$1.5~1.7/MTok），否则池两周涨 ~1.7~2.3×；判别法=本周重测 astra（350→恒定池，600→涨池）。
 DEVIN_MAX_OPUS55_USED_TOKENS = 525_333_756
 DEVIN_MAX_OPUS55_USED_FRACTION = 0.48
 # Google AI Pro 周帽 —— round7 用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88%
@@ -570,7 +573,7 @@ SUBS = [
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
     ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
     # Opus 5.5 —— 同账号同面板双检查点增量法：云端剩余75%→27%段内 Opus5.5 净增525.3M raw
-    ("devin_max", "Devin Max", 200, "USD", "claude-opus-5.5", devin_max_opus55_monthly_yi(), "high", "用户Devin Max面板cc usage双检查点：云端周额度剩余75%→27%（差48pt）段内 claude-opus-5-5-xhigh +1,142 calls/+512,221,810 tok、claude-opus-5-5-high +118/+13,111,946，合计 +1,260 calls/+525,333,756 tokens；devin-opus55-round1-2026-09-23.json；https://devin.ai/pricing Max $200/月", f"新增{devin_max_opus55_monthly_yi():g}亿：525,333,756÷48%×4周＝周池1,094,445,325 raw；用户裁定48pp全归Opus 5.5增量（swe-2等免费不占额度）；全口径total直接采用不归一；取整区间约42.88~44.71亿；命中率按含cache_create口径92.31%（xhigh 92.38%占97.5%tokens为主力、high 89.32%）；与Astra周池350.6M有3.12×张力——共享池按模型加权（或池面值调整），机制未公布并列记录，本模型raw月额读数不受影响；effort仅影响速率；Pro $20档无数据不派生"),
+    ("devin_max", "Devin Max", 200, "USD", "claude-opus-5.5", devin_max_opus55_monthly_yi(), "high", "用户Devin Max面板cc usage双检查点：云端周额度剩余75%→27%（差48pt）段内 claude-opus-5-5-xhigh +1,142 calls/+512,221,810 tok、claude-opus-5-5-high +118/+13,111,946，合计 +1,260 calls/+525,333,756 tokens；devin-opus55-round1-2026-09-23.json；https://devin.ai/pricing Max $200/月", f"新增{devin_max_opus55_monthly_yi():g}亿：525,333,756÷48%×4周＝周池1,094,445,325 raw；用户裁定48pp全归Opus 5.5增量（swe-2等免费不占额度）；全口径total直接采用不归一；取整区间约42.88~44.71亿；命中率按含cache_create口径92.31%（xhigh 92.38%占97.5%tokens为主力、high 89.32%）；与Astra周池350.6M有3.12×张力——worth对账：Opus5.5段$336.4~457.2→池$700.8~952.5 vs Astra段$356.6~365.8→池$409.8~420.5，恒定池须Opus5.5按~0.6×标价计（写费~$1.5~1.7/MTok）否则池两周涨~1.7~2.3×；判别=本周重测astra；本模型raw月额读数不受影响；effort仅影响速率；Pro $20档无数据不派生"),
     # Google —— Antigravity 合池按 API worth 计权（官方机制）；round7 用户本地实测补上首个周帽同框
     ("google_ai_pro_us", "Google AI Pro", 19.99, "USD", "gemini-3.8-flash", google_ai_pro_monthly_yi(), "high", "用户本地实测：B整段55.343M raw(cache45.69M/in9.26M/out0.40M)=周条+9.88%；gemini-weekly-round7-2026-09-21.json", f"新增{google_ai_pro_monthly_yi():g}亿：55.343M÷9.88%×{MONTH_WEEKS:g}周=周池5.60亿raw；worth计权经B1/B2段内验（%比0.405≈worth比0.407，非raw比0.448），周帽合$120.1 worth；worth池raw额度随负载mix变——本样本cache 82.6%，用户指出Gemini实际负载打不到标准口径的97.5% cache，故采raw实测而非标准负载折算（折算口径46.9亿/月偏高弃用）；LLMDevs Pro~1.0B/周与Ultra~5.0B/周(恰5×)量级吻合；round6的5h锚$20.4→周≈5.9 sprint自洽"),
     ("google_ai_ultra_5x_us", "Google AI Ultra 5x", 99.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 5, 2), "low", "官方：Ultra $100 = 5× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*5:g}亿：Pro采用值×官方worth倍率5；LLMDevs Ultra~5.0B/周同量级旁证；非独立实测"),
