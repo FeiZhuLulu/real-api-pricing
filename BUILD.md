@@ -25,6 +25,8 @@ python scripts/checks/verify_publication.py
 python scripts/checks/verify_palette.py
 ```
 
+CI (`.github/workflows/ci.yml`) runs this pipeline on Ubuntu for every PR and every push to `main`, then fails if the committed `data/`, `derived/` or text-comparable `charts/` outputs (tables, interactive HTML, hand-written Pareto SVGs) differ from a fresh run. PNGs and matplotlib SVGs depend on the rendering machine's fonts, so CI rebuilds them only to feed the checks; render and commit them locally. A second job runs the website's `npm test` and `npm run build`.
+
 On Windows, set `PYTHONIOENCODING=utf-8` if the console cannot print Chinese filenames. `plot_static.py` is a compatibility entry point for `plot_svg.py`.
 
 ## Layout
