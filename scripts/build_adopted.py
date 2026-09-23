@@ -47,7 +47,7 @@ DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
 #   → raw 周池 5.60 亿。官方按 API worth 合池计权（实证：B1/B2 的 %比 0.405≈worth比 0.407，非 raw比 0.448），
 #   故 raw 额度随负载 mix 变：本样本 cache 82.6%（用户指出 Gemini 实际负载打不到 97% cache）——
 #   采用 raw 实测口径而非标准负载折算（标准负载口径 $120.1 worth/周≈46.9 亿/月，偏高不采）；
-#   与 Step 的 conventions.lowCacheTokenMix 同属"打不到97.5% cache 采实测"口径族（2026-09-22 用户裁定统一）
+#   与 Step 的 conventions.lowCacheTokenMix 同属"打不到标准97% cache 采实测"口径族（2026-09-22 用户裁定统一）
 GOOGLE_PRO_B_TOTAL_TOKENS = 55_343_000
 GOOGLE_PRO_B_WEEKLY_FRACTION = 0.0988
 KIMI_199_USED_TOKENS = 243_739_068
@@ -118,7 +118,7 @@ LOW_CACHE_MIX = CONVENTIONS["lowCacheTokenMix"]
 
 
 def blended_low(cached: float, inp: float, out: float) -> float:
-    # 低缓存负载（step-5-preview 本机实测 mix）：用于实测打不到 97.5% cache 的渠道
+    # 低缓存负载（step-5-preview 本机实测 mix）：用于实测打不到标准 97% cache 的渠道
     return LOW_CACHE_MIX["cache"] * cached + LOW_CACHE_MIX["input"] * inp + LOW_CACHE_MIX["output"] * out
 
 
@@ -404,8 +404,8 @@ GLM_CREDIT_RATES = {"glm-5.3": (1.7, 6.9, 24), "glm-5.3-flash": (0.56, 2.3, 8)}
 # 证据：platform.stepfun.com/docs/zh/step-plan/overview；pricing/details；
 #       data/research/stepfun-step-plan-round1-2026-09-10.json、round3-2026-09-10.json。
 # step-5-preview（round5）：用户 Plus 面板 + 本机 210M token 实测互验成立；实测负载 cache 79.0%
-# 打不到标准口径 97.5%。2026-09-22 用户裁定：Step 全系统一套 conventions.lowCacheTokenMix
-# 「低缓存负载」85%/14.65%/0.35%（step5 实测 79% 留作 decision_note 对照），Gemini raw 实测属同族。
+# 打不到标准口径 97%。2026-09-22 用户裁定：Step 全系统一套 conventions.lowCacheTokenMix
+# 「低缓存负载」85%/14.5%/0.5%（step5 实测 79% 留作 decision_note 对照），Gemini raw 实测属同族。
 STEPFUN_STEP5_TOKENS = (166_038_390, 43_410_633, 720_954)  # 本机实测 cache读/缓外输入/输出（79.0% mix，作对照保留）
 STEPFUN_STEP5_MEASURED_CNY = sum(t * p for t, p in zip(STEPFUN_STEP5_TOKENS, (0.35, 7.0, 20.0))) / sum(STEPFUN_STEP5_TOKENS)
 STEPFUN_TIERS = (
@@ -437,7 +437,7 @@ def stepfun_rows() -> list[tuple]:
                 conf = "high" if pid == "stepfun_plus_cn" else "medium"
                 note = (
                     f"新增{yi:g}亿：国内站月度{credit_m:g}M Credit÷低缓存统一负载混合价¥{blended_cny:.3f}/M"
-                    "（conventions.lowCacheTokenMix 85%/14.65%/0.35%，2026-09-22用户裁定Step全系统一口径）。"
+                    f"（conventions.lowCacheTokenMix {LOW_CACHE_MIX['cache']:.0%}/{LOW_CACHE_MIX['input']:.1%}/{LOW_CACHE_MIX['output']:.1%}，2026-09-22用户裁定Step全系统一口径）。"
                     f"对照：本机实测79.0% mix混合价¥{STEPFUN_STEP5_MEASURED_CNY:.3f}/M，对应{credit_m / STEPFUN_STEP5_MEASURED_CNY / 100:.3f}亿"
                     "（210.17M tokens大样本，OpenCode+DSH同窗）。"
                     + ("Plus面板双向验证：控制台Credit消耗378.15M 与本机token×官方三段价期望376.41M 差+0.46%；"
@@ -452,8 +452,8 @@ def stepfun_rows() -> list[tuple]:
                 conf = "medium"
                 note = (
                     f"{round(credit_m / blended(cached, inp, out) / 100, 3):g}→{yi:g}亿："
-                    "Step实测负载打不到97.5% cache（2026-09-22用户裁定），改套低缓存统一负载"
-                    f"（conventions.lowCacheTokenMix 85%/14.65%/0.35%）混合价¥{blended_cny:.3f}/M；"
+                    "Step实测负载打不到标准97% cache（2026-09-22用户裁定），改套低缓存统一负载"
+                    f"（conventions.lowCacheTokenMix {LOW_CACHE_MIX['cache']:.0%}/{LOW_CACHE_MIX['input']:.1%}/{LOW_CACHE_MIX['output']:.1%}）混合价¥{blended_cny:.3f}/M；"
                     f"国内站月度{credit_m:g}M Credit÷该价，1M Credit=¥1，cached/input/output=¥{cached:g}/{inp:g}/{out:g}。"
                     "英文 $1≈7M 与人民币口径对 3.5 差 0%、对 3.7 因美元价四舍五入少 3.2%，采用中文精确口径。"
                     "未采用旧 Coding Plan Prompt/5h 表；未加 Studio 40% 创作额度；"

@@ -9,5 +9,5 @@ FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY month
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 No.  Plan               Monthly fee  Served model         Monthly tokens (B)  USD/MTok  Confidence  Pass@1 %  Score variant                                              Harness         Reasoning effort  Mapping
 ---  -----------------  -----------  -------------------  ------------------  --------  ----------  --------  ---------------------------------------------------------  --------------  ----------------  -----------------------------
-1    OpenCode Go        USD 10       MiMo V2.6 Flash      8.9286              0.00112   medium      67.9      mini-swe-agent - mimo-v2-6-flash [vendor self-report]      mini-swe-agent  —                 agent_configuration_reference
-2    Command Code GOAT  USD 10       DeepSeek V4.1 Flash  4.8485              0.00206   medium      74.2      mini-SWE - DeepSeek V4.1 Flash (max) [vendor self-report]  mini-SWE        max               agent_configuration_reference
+1    OpenCode Go        USD 10       MiMo V2.6 Flash      7.8782              0.00127   medium      67.9      mini-swe-agent - mimo-v2-6-flash [vendor self-report]      mini-swe-agent  —                 agent_configuration_reference
+2    Command Code GOAT  USD 10       DeepSeek V4.1 Flash  4.1408              0.00241   medium      74.2      mini-SWE - DeepSeek V4.1 Flash (max) [vendor self-report]  mini-SWE        max               agent_configuration_reference

@@ -91,8 +91,8 @@ assert len(open_design) == 13 and all(c["agent_harness"] == "OpenDesign" for c i
 assert {c["model"] for c in open_design} >= {"gpt-5.6-sol", "deepseek-v4-flash", "claude-fable-5.1"}
 assert not candidates(dict(served_model="claude-fable-5", plan_id="claude_max"), open_design, "open_design_arena")
 assert all(c["mean_cost_usd_per_task"] is not None for c in open_design)
-assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.00825
-assert indexed["deepseek_v41_flash_peak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.0165
+assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.00966
+assert indexed["deepseek_v41_flash_peak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.01932
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["open_design_arena__score"] == 81.2
 # AA round4 (2026-09-22) superseded round3, so the round3-pinned intelligence
 # supplement retired and these two scores now come from round4 itself.
