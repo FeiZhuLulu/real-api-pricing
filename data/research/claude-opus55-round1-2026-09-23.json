@@ -1,0 +1,83 @@
+{
+  "recordedAt": "2026-09-23",
+  "sourceType": "community_tweet_screenshot + official_launch",
+  "trigger": "用户提供 X @MiaAI_lab 推文截图：OPUS 5.5 experiment 用量统计；用户裁定档位挂 Max 20x",
+  "communitySample": {
+    "source": "X @MiaAI_lab 推文（用户提供截图，发布时间约为 2026-09-23）",
+    "model": "claude-opus-5.5",
+    "planInference": "claude_max_20x $200（用户裁定；档位推文未标——隐含加权5h池 ≈7.07亿，与 Max20x 簇 4.74~11.34亿 自洽，Pro 0.57亿 / 5x ~3.6亿 均不符，仅 20x 成立）",
+    "effort": "xHigh",
+    "wallClock": "1h 2m",
+    "tokens": {
+      "input": 1400000,
+      "output": 8000000,
+      "cacheRead": 1000000000,
+      "cacheWrite": 21100000,
+      "totalRaw": 1030500000
+    },
+    "costUsd": 482.63,
+    "usageBar": "~75% of my 5h limit"
+  },
+  "officialContext": {
+    "launch": "2026-09-22 Anthropic 发布 Claude Opus 5.5（5.5 家族首个，Sonnet 5.5 / Haiku 5.5 随后数周）",
+    "pricing": {
+      "cacheRead": 0.2,
+      "input": 4.0,
+      "output": 20.0,
+      "cacheWrite5m": 5.0,
+      "cacheWrite1h": 8.0,
+      "fast": { "input": 8.0, "output": 40.0 },
+      "batch": { "input": 2.0, "output": 10.0 },
+      "note": "cache 读价为 base input 的 0.05×（其他模型 0.1×）；输出比 Opus 5 快 >30%"
+    },
+    "launchClaims": [
+      "较 Opus 5 典型负载便宜 ~40%（in/out -20%、cache 读 -60%）",
+      "Pro/Max/Team 5h 使用上限上调（原文：increasing five-hour usage limits on Pro, Max, and Team plans）",
+      "订阅用户发放 rate limit reset，可留存随时使用",
+      "性能对标 Fable 5.1（多数工作），厂商自报 TB4 66.4% / FrontierCode 54.4% / CursorBench 52.5% / GDPval-AA 1846"
+    ],
+    "sources": [
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "https://platform.claude.com/docs/en/about-claude/pricing"
+    ]
+  },
+  "derivations": {
+    "pool5hRawYi": 13.74,
+    "formula5h": "10.305亿 ÷ ~75% = 13.74亿 raw 5h池（发布上调后口径）",
+    "monthlyPrimary": {
+      "yi": 301.7,
+      "formula": "采用周池(加权)39.25亿 ÷ 隐含权重0.5204 = raw周池 75.42亿 ×4周 = 301.7亿（等价：13.74亿窗池 × Max周满窗~5.49[39.25亿÷chudi反推7.15亿] ×4周）",
+      "caveat": "官方同步上调 5h 上限并发放 reset——窗容量系发布期口径；公告仅提 5h 调整，周池沿用采用值"
+    },
+    "weightCrossCheck": {
+      "impliedWeight": 0.5204,
+      "formula": "39.25亿 ÷ 75.42亿 = 0.5204（社区样本隐含的 Opus5.5/Opus5 订阅内权重）",
+      "priceRatio": 0.5143,
+      "formula2": "官方标价混合价比 blended(0.2,4,20)/blended(0.5,5,25) = 0.3510/0.6825 = 0.5143 → 备选月额 157÷0.5143 = 305.28亿（差 +1.2%）",
+      "verdict": "样本隐含权重与标价混合比仅差 1.2%——Opus5.5 订阅权重≈标价比获双向互证"
+    },
+    "weightedWindowCheck": "13.74亿 × 0.5143 = 7.07亿 加权 ≈ chudi 检查点反推 Opus5 5h池 7.15亿（-1.1%）：标价权重下新窗容量与旧窗容量自洽，说明官方上调部分基本被权重吸收",
+    "costClosure": "样本按 Opus5.5 标价计 $471.10（in$4/out$20/读$0.2/写5m$5）≈ 推文 $482.63（+2.4%，token 均为 M 取整可闭合）；1h写档$8 计 $534.4 不闭合；Opus5 旧价计 $838.9 远不闭合——模型身份与价表互证"
+  },
+  "adoptionSummary": {
+    "claude_max_20x::claude-opus-5.5": "新增 301.7亿/月 medium：社区样本窗池推隐含权重0.5204→raw周池75.42亿×4周；标价混合比法305.28亿（+1.2%）留作备选；n=1 推文、档位用户裁定",
+    "claude_pro::claude-opus-5.5": "36.09亿 low：18.78 × 1.9217 借 20x 隐含权重派生，非独立实测",
+    "claude_max_5x::claude-opus-5.5": "150.85亿 low：78.5 × 1.9217 同上",
+    "anthropic_opus55_api": "官方标价 cached/input/output = $0.2/$4/$20，标准负载混合价 $0.351/MTok"
+  },
+  "scores": "厂商自报 TB4 66.4%（default effort）进 supplement 档 scores-opus55-selfreport-2026-09-23.json；AA/arena/OpenDesign 无 Opus5.5 第三方快照分不补造；FrontierCode/CursorBench/GDPval-AA 非本仓库榜单仅留证据",
+  "caveats": [
+    "单一样本、推文口径非面板截图；~75% 为取整自述（70~80% → 窗池 12.9~14.7亿 → 月额区间约 283~322亿）",
+    "发布次日样本：官方上调 5h 上限 + 发放 rate-limit reset——窗池系发布期口径，周池面板直测或 reset 后受控打满可复核",
+    "effort xHigh 只影响消耗速率不影响池大小（沿用 round8 effort 口径）",
+    "Opus 5.5 订阅内权重未官方公布：样本隐含 ~0.52 与标价混合比 0.514 收敛属最强互证；若官方权重偏离价格比（Fable 6.5× 前车之鉴）采用值需重推",
+    "模型刚发布，暂无第三方榜单分数；厂商自报分按惯例 flag 保留",
+    "Sonnet 5.5 / Haiku 5.5 未发布不派生"
+  ],
+  "relatedFiles": [
+    "claude-adoption-round9-2026-09-21.json",
+    "claude-fable51-round3-2026-09-20.json",
+    "claude-quotas-round5-2026-09.json"
+  ]
+}

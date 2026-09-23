@@ -3,6 +3,13 @@
 `AGENTS.md` 只放工作规则；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-23
+
+- **Claude Opus 5.5（9/22 发布，新增模型点）**：Max 20x = 301.7 亿/月 medium；Pro = 36.09 亿、Max 5x = 150.85 亿按隐含权重派生 low。用户提供 X @MiaAI_lab 推文截图（社区样本，档位用户裁定挂 20x——推文未标档，隐含加权窗池量级仅 20x 自洽）：xHigh 1h2m 烧 10.305 亿 raw（in 1.4M / out 8.0M / cache读 1.0B / cache写 21.1M）= ~75% of 5h limit → raw 5h池 13.74 亿；隐含权重 = chudi 反推加权窗池 7.15 ÷ 13.74 = 0.5204 → 月额 = 采用月池 157 ÷ 0.5204。官方标价混合比法独立互证：blended(0.2,4,20)/blended(0.5,5,25) = 0.5143 → 305.28 亿仅差 +1.2%，留作备选不采；窗容量加权反推 7.07 亿 ≈ chudi 7.15 亿（-1.1%）；样本按新价计 $471.1 ≈ 推文 $482.63（+2.4%，token 取整内闭合，Opus5 旧价 $838.9 远不闭合即模型身份互证）。注意口径：官方发布同日上调 Pro/Max/Team 5h 上限并发放 rate-limit reset，本样本窗池系发布期口径；~75% 为取整自述（月额区间约 283~322 亿）；effort 只影响速率；n=1 推文无面板。Sonnet 5.5 / Haiku 5.5 未发布不派生。证据：`data/research/claude-opus55-round1-2026-09-23.json`。
+- **Claude Opus 5.5 按量 API + 官方价目补录**：anthropic_opus55_api 行（cached/input/output = $0.2/$4/$20 → 标准负载混合价 $0.351/MTok；cache read 为 base input 的 0.05×，其他模型 0.1×；写 $5/5m $8/1h、Fast $8/$40、Batch $2/$10）。价目档案 `list-prices-2026-09.json` 同步补 claude-opus-5.5 条。
+- **Opus 5.5 厂商自报分补录**：supplement 文件 `data/research/scores-opus55-selfreport-2026-09-23.json`——TB4 66.4%（发布页标 at default effort，未指明档位）。AA Intelligence / Arena / OpenDesign / AA Coding / DeepSWE 暂无第三方快照分不补造；发布页其余自报分（FrontierCode 54.4、CursorBench 52.5、GDPval-AA 1846）非本仓库榜单仅留证据。TB4 全量榜 4 个 Opus5.5 行全部有分（98 行）。
+- **审计**：采用 260→264 行（订阅 245：244 有额度 + 1 不计额度；按量 19）。
+
 ## 2026-09-22
 
 - **SuperGrok · Grok 4.7（新增模型点）**：6.72 亿/月 medium；Plus 26.9 亿、Heavy 67.2 亿按面板美元比派生 medium；Lite 不派生。用户本机三会话同框：洗（8,219,321 tok）+ 鹈（5,223,495 tok）+ 删除版（无快照）= 周额度 19%→28%；删除版份额藏整数取整内按约 1% 计 → 周池 1.68 亿，硬边界 5.97~7.68 亿/月。对 4.6 基准（1.273 亿/周）为 1.32×，即 4.7 每 token 占池约 0.76×。CLI Cost 字段两段不自洽（低 cache 段 $/MTok 反低）且等价 $42.6/周对面板 $25 呈 1.7× 张力，疑上线期扩池或池内计价≠标价，未解；重置后受控打满可升 high。分数由 `scores-grok47-round1-2026-09-22.json` 补充档从 AA round4 未映射载荷提升：int 46.4466 / coding(Grok Build) 56.2676；TB4/Arena/OpenDesign 无 4.7 行不画。两榜均未进前沿（Claude Pro Opus5 $0.0106 支配）。证据：`data/research/supergrok-grok47-round1-2026-09-22.json`。
