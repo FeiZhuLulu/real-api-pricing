@@ -13999,5 +13999,40 @@
       "checkedAt": "2026-09-22",
       "note": "xAI 发布页（2026-09-21）基准表 DeepSWE v1.1 行 71.0%*，星注 high effort。同表 Grok 4.6 High 65.2 与官方榜 mini-swe-agent - grok-4-6 (high) 65.188 差 0.012，据此判定同 harness 同口径。官方榜无 grok-4.7 行，该模型此前在 DeepSWE 榜缺位。同表 Terminal-Bench 4.0 自报 38.0% 不采用——该榜已有官方行 Grok Build - Grok 4.7 (xhigh) 37.6%，官方读数优先于厂商自报；同表 Grok 4.6 TB4 20.3 与官方榜 Grok Build - Grok 4.6 (high) 20.3 完全一致，进一步佐证两表同源。"
     }
+  },
+  {
+    "configuration_id": "terminal_bench_4:f21147cea05f90e9",
+    "board": "terminal_bench_4",
+    "model": "claude-opus-5.5",
+    "variant": "Claude Code - Claude Opus 5.5 (default) - self-reported [vendor self-report]",
+    "score_is_estimated": null,
+    "score_is_self_reported": true,
+    "agent_harness": "Claude Code",
+    "reasoning_effort": null,
+    "service_mode": null,
+    "score": 66.4,
+    "score_low": null,
+    "score_high": null,
+    "mean_cost_usd_per_task": null,
+    "median_cost_usd_per_task": null,
+    "source": "https://www.anthropic.com/claude-opus-5-5",
+    "checked_at": "2026-09-23",
+    "archive": "scores-opus55-selfreport-2026-09-23.json",
+    "raw_record": {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Code - Claude Opus 5.5 (default) - self-reported",
+      "score": 66.4,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "Anthropic",
+        "agentHarness": "Claude Code",
+        "reasoningEffort": null,
+        "effortNote": "发布页评测表标 at default effort，未指明是 low/medium/high/xhigh 中哪一档"
+      },
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "checkedAt": "2026-09-23",
+      "note": "厂商自报，非 tbench.ai 官方榜运行。Anthropic 2026-09-22 Opus 5.5 发布页评测表 Terminal-Bench 4 行 66.4%（default effort）；同表 FrontierCode 54.4%、CursorBench 52.5%、GDPval-AA 1846 非本仓库榜单仅留证据；AA/arena/OpenDesign 暂无第三方快照分不补造。见 claude-opus55-round1-2026-09-23.json。"
+    }
   }
 ]
