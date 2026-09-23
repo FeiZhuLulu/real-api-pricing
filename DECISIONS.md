@@ -9,6 +9,7 @@
 - **Claude Opus 5.5 按量 API + 官方价目补录**：anthropic_opus55_api 行（cached/input/output = $0.2/$4/$20 → 标准负载混合价 $0.351/MTok；cache read 为 base input 的 0.05×，其他模型 0.1×；写 $5/5m $8/1h、Fast $8/$40、Batch $2/$10）。价目档案 `list-prices-2026-09.json` 同步补 claude-opus-5.5 条。
 - **Opus 5.5 厂商自报分补录**：supplement 文件 `data/research/scores-opus55-selfreport-2026-09-23.json`——TB4 66.4%（发布页标 at default effort，未指明档位）。AA Intelligence / Arena / OpenDesign / AA Coding / DeepSWE 暂无第三方快照分不补造；发布页其余自报分（FrontierCode 54.4、CursorBench 52.5、GDPval-AA 1846）非本仓库榜单仅留证据。TB4 全量榜 4 个 Opus5.5 行全部有分（98 行）。
 - **审计**：采用 260→264 行（订阅 245：244 有额度 + 1 不计额度；按量 19）。
+- **MiMo Token Plan 32 行维持统一标准负载折算（measuredMix 切换当日撤回）**：同日早些时候的 measuredMix 提交把 32 行从标准负载（混合 burn 10.9875/4.8 credits/token）切到 OpenCode harness 单日实测 mix（92.04%/6.08%/1.88% → 31.833/11.685）。用户 2026-09-23 裁定：该单日样本的低缓存系 OpenCode harness 所致，非 MiMo 服务属性——另一客户端（"mimo/kimi desktop"，版本未确认）两题 35.72M tok 实测 cache 95.0%（input 3.27%/output 1.72%）→ 恢复标准负载口径，采用值回到 v2.6-pro Lite 日 3.73 亿、Max 日 74.63 亿、flash Lite 日 8.54 亿等 32 行原值，置信度维持 medium。round2 保留的部分：面板 burn 率互证——2026-09-22 单日按官方率应扣 23.47 亿 vs 面板实扣 21.91 亿（−6.6%，夜间 0.8× 时段与时区归属解释），官方 burn 率获面板级互证；同窗池用量 2,190,625,116/4,100,000,000 Credits（53.0%，有效期至 2026-10-22）。两套实测 mix（OpenCode 92.04%、kimi desktop 95.01%）折算值只留 decision_note 对照不采用；输出占比两侧实测 1.72%/1.88% 均高于标准 0.35%，是否调整标准输出占比待用户裁定。conventions 不加专用 mix 档，workload 标签维持 standard。证据：`mimo-token-plan-panel-round2-2026-09-23.json`、`mimo-client-sample-round3-2026-09-23.json`。
 
 ## 2026-09-22
 
