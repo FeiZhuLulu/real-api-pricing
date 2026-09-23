@@ -171,7 +171,7 @@ def main() -> None:
         w.writeheader()
         w.writerows(points)
     (OUT / "points.json").write_text(json.dumps(dict(
-        generatedAt="2026-09-22", mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
+        generatedAt=CONVENTIONS["updatedAt"], mix={k: round(v, 4) for k, v in STANDARD_MIX.items() if isinstance(v, (int, float))},
         boards={b: dict(name=boards_meta[b]["name"].replace("🏆 ", ""), metric=boards_meta[b]["metric"], url=boards_meta[b]["url"], snapshot=boards_meta[b]["snapshotDate"]) for b in BOARDS},
         points=points,
     ), ensure_ascii=False, indent=1), encoding="utf-8")
