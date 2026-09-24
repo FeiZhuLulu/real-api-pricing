@@ -277,12 +277,14 @@ def claude_fable51_max_monthly_yi() -> float:
 # 元组：(model, per-model Usage USD, cached read, input, output, 采用价档说明)
 # 证据全量快照：data/research/opencode-go-round5-2026-09-06.json（当时 28 个模型）。
 # DeepSeek 2026-09-10 增量：opencode-go-deepseek-round6-2026-09-10.json。
-# V4 Flash / Vision 已下线，用户要求从采用集删除；现 27 个模型。
+# 曾按用户确认删除 V4 Flash / Vision，2026-09-24 官网复核两点恢复在列后重新入库；现 33 个模型（Omen Alpha 官网未列待确认）。
+# 限额变动：glm-5.3-flash $15→$60（2026-09-24 复核）。新增：gpt-6-luna、deepseek-v4-flash、deepseek-v4-flash-vision-exp。
 OPENCODE_GO_MODELS = (
     ("grok-4.6", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants"),
     ("grok-4.7", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants；mimo-v26-grok47-catalogs-round1-2026-09-22.json"),
     ("gpt-5.6-luna", 15, 0.02, 0.2, 1.2, "≤272K 标价；>272K 档保留在 research variants"),
-    ("glm-5.3-flash", 15, 0.03, 0.15, 0.5, "官网单档"),
+    ("gpt-6-luna", 15, 0.01, 0.1, 0.5, "官网新行；≤272K 标价；>272K 档保留在 research variants；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("glm-5.3-flash", 60, 0.03, 0.15, 0.5, "官网限额 2026-09-24 复核 $15→$60；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("glm-5.3", 15, 0.26, 1.4, 4.4, "官网单档"),
     ("glm-5.2", 60, 0.26, 1.4, 4.4, "官网单档"),
     ("glm-5.1", 60, 0.26, 1.4, 4.4, "官网单档"),
@@ -306,9 +308,11 @@ OPENCODE_GO_MODELS = (
     ("qwen3.6-plus", 60, 0.05, 0.5, 3.0, "≤256K 标价；>256K 档保留在 research variants"),
     ("deepseek-v4.1-flash", 15, 0.003, 0.15, 0.60, "官网新行；Off-Peak；Peak=2×保留在 research variants"),
     ("deepseek-v4-pro", 15, 0.022, 0.66, 1.98, "Off-Peak；Peak 额度为其一半，保留在 research variants；OpenCode 价表未改"),
+    ("deepseek-v4-flash", 30, 0.003, 0.15, 0.60, "官网恢复在列（旧行按用户确认下线删除，2026-09-24 复核回归 $30）；Off-Peak；Peak=2×保留在 research variants；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("deepseek-v4-flash-vision-exp", 15, 0.003, 0.15, 0.60, "官网恢复在列（旧行按用户确认下线删除，2026-09-24 复核回归 $15）；Vision Exp；Off-Peak；Peak=2×保留在 research variants；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("hy4-preview", 30, 0.042, 0.834, 2.501, "官网单档"),
     ("hy3", 60, 0.035, 0.14, 0.58, "官网单档"),
-    ("omen-alpha", 100, 0.04, 0.2, 0.66, "模型 Usage $100，但共享月池 $60 先绑定"),
+    ("omen-alpha", 100, 0.04, 0.2, 0.66, "模型 Usage $100，但共享月池 $60 先绑定；2026-09-24 官网限额表与模型 ID 表均未列本模型，待确认是否下线（goat-opencode-catalogs-round1-2026-09-24.json）"),
 )
 
 OPENCODE_GO_OLD_YI = {
@@ -330,7 +334,8 @@ OPENCODE_GO_NOTES = {
         "新增18.182亿：min(共享月池$60, 模型Usage $15) ÷ 统一标准负载加权价；"
         "官网闲时 cached/input/output=$0.003/$0.15/$0.60，高峰2×。官网 Model ID=deepseek-flash，"
         "项目 served_model=deepseek-v4.1-flash 以对接榜单。"
-        "用户确认 V4 Flash / Vision 已下线，OpenCode 这两点删除（旧Flash 21.637亿、Vision 10.819亿）。"
+        "用户曾确认 V4 Flash / Vision 已下线并删除（旧Flash 21.637亿、Vision 10.819亿）；"
+        "2026-09-24 官网复核两点已恢复在列（Flash $30 / Vision Exp $15，另立行）。"
         "官方请求数仅作交叉检查，不再作为额度主值；同套餐各模型额度不可相加"
     ),
 }
@@ -382,10 +387,17 @@ COMMAND_CODE_GOAT_MODELS = (
     ("mimo-v2.5-pro", 20, 0.0036, 0.435, 0.87, "官网页成交/折扣三段价"),
     ("grok-4.7", 20, 0.5, 2.0, 6.0, "官网三段价；Every model 表基准$20（限时提升$35至9/27不采）"),
     ("mimo-v2.6-flash", 30, 0.0028, 0.14, 0.28, "官网三段价；Every model 表基准$30（限时提升$67至9/24不采）"),
+    ("deepseek-v4-flash", 60, 0.003, 0.15, 0.60, "官网新行「V4 Flash (latest)」$60；Off-Peak；Peak=2×保留在 research variants；"
+     "该表三段价$0.15/$0.60/$0.003 与页顶 Models included 表$0.14/$0.28/$0.0028 不一致（后者与 MiMo V2.5 相同疑笔误），采同表行内口径；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("longcat-2.0", 50, 0.006, 0.3, 1.2, "官网三段价；Every model 表 $50；goat-opencode-catalogs-round1-2026-09-24.json"),
     # —— New models 表（新模型默认 2× credits，Gemini 3.7 Flash 例外 $40）——
+    ("gpt-6-luna", 20, 0.01, 0.1, 0.5, "官网三段价；New models 表 $20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("qwen3.8-omni-flash", 20, 0.016, 0.15, 0.47, "官网三段价；New models 表 $20；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("qwen3.8-max-0902", 20, 0.25, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("hy4-preview", 20, 0.042, 0.834, 2.501, "官网三段价；New models 默认$20"),
     ("qwen3.8-flash", 20, 0.016, 0.16, 0.47, "官网三段价（本渠道 input=$0.16）；New models 默认$20"),
+    ("glm-5.3-flashx", 20, 0.075, 0.37, 1.25, "官网三段价；New models 表 $20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("deepseek-v4-flash-vision-exp", 20, 0.003, 0.15, 0.60, "官网三段价；曾按用户确认下线删除、现恢复在列 $20；Off-Peak；Peak=2×保留在 research variants；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("deepseek-v4-flash-fast", 20, 0.07, 0.28, 0.56, "官网三段价；New models 默认$20；与Flash额度分开"),
     ("glm-5.3", 20, 0.26, 1.4, 4.4, "官网三段价；New models 默认$20"),
     ("muse-spark-1.3", 20, 0.15, 1.25, 4.25, "官网标准档三段价；New models 默认$20"),
@@ -398,6 +410,7 @@ COMMAND_CODE_GOAT_MODELS = (
     ("grok-4.6", 20, 0.5, 2.0, 6.0, "官网三段价；New models 默认$20"),
     ("mimo-v2.6-pro", 20, 0.0036, 0.435, 0.87, "官网三段价；New models 默认$20"),
     ("mimo-v2.6-pro-ultraspeed", 10, 0.036, 4.35, 8.70, "官网三段价；官方明示按Pro价10×故仅配$10 credits"),
+    ("step-5-preview", 20, 0.05, 1.0, 2.7, "官网三段价；New models 表 $20（2026-09-24 复核在列）；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("gemini-3.7-flash", 40, 0.15, 1.5, 7.5, "官网三段价；New models 表写$40"),
     ("glm-5.2-fast", 20, 0.5, 3.0, 10.25, "官网三段价；速度变体独立$20，不继承GLM-5.2的$70"),
     ("inkling", 20, 0.17, 1.0, 4.05, "官网三段价；New models 默认$20"),
@@ -405,6 +418,15 @@ COMMAND_CODE_GOAT_MODELS = (
     ("step-3.7-flash", 20, 0.04, 0.2, 1.15, "官网三段价；New models 默认$20"),
     ("step-3.5-flash", 20, 0.02, 0.1, 0.3, "官网三段价；New models 默认$20"),
     ("nemotron-3-ultra", 20, 0.12, 0.6, 2.4, "官网三段价；New models 默认$20"),
+    # —— Older models 段（2026-09-24 官网说明：旧模型一律标准 $20 credits）——
+    ("kimi-k2.6", 20, 0.16, 0.95, 4.0, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("kimi-k2.5", 20, 0.1, 0.6, 3.0, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("glm-5.1", 20, 0.26, 1.4, 4.4, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("glm-5", 20, 0.2, 1.0, 3.2, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("qwen3.7-flash", 20, 0.006, 0.03, 0.13, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("qwen3.6-max-preview", 20, 0.26, 1.3, 7.8, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("minimax-m2.7", 20, 0.06, 0.3, 1.2, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
+    ("minimax-m2.5", 20, 0.03, 0.3, 1.2, "官网三段价；Older models 一律$20；goat-opencode-catalogs-round1-2026-09-24.json"),
 )
 
 
@@ -420,7 +442,8 @@ COMMAND_CODE_GOAT_NOTES = {
     "deepseek-v4.1-flash": (
         "新增48.485亿：min(共享月池$70, 模型allowance $40) ÷ 统一标准负载加权价；"
         "官网闲时 cached/input/output=$0.003/$0.15/$0.60，高峰2×。"
-        "用户确认 V4 Flash / Vision 已下线，Command Code 这两点删除（旧Flash 43.274亿、Vision 14.425亿）。"
+        "用户曾确认 V4 Flash / Vision 已下线并删除（旧Flash 43.274亿、Vision 14.425亿）；"
+        "2026-09-24 官网复核已恢复在列（V4 Flash latest $60、Vision Exp $20，另立行）。"
         "官方请求数仅作交叉检查，不再作为额度主值；忽略 processing fee；同套餐各模型额度不可相加"
     ),
 }
