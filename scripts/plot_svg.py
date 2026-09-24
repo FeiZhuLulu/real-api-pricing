@@ -7,7 +7,7 @@ import math
 from html import escape
 from pathlib import Path
 
-from palette import FALLBACK, luminance, palette, shade
+from palette import FALLBACK, channel_of, luminance, palette, shade
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "_build"
@@ -21,22 +21,18 @@ BOARDS = {
     "terminal_bench_4": ("TB4终端榜", "Terminal-Bench 4.0"),
     "deepswe_1_1": ("DeepSWE榜", "DeepSWE v1.1"),
 }
-# 色值统一来自 config/channel-colors.json；此处只定图例顺序。
-COLORS = palette(["OpenAI", "Claude", "xAI", "Cursor", "Kimi", "GLM", "MiniMax", "Alibaba",
+# 色值与 id 前缀统一来自 config/channel-colors.json；此处只定图例顺序。
+COLORS = palette(["OpenAI", "Anthropic", "xAI", "Cursor", "Kimi", "Zhipu", "MiniMax", "Alibaba",
                   "OpenCode", "Command Code", "Ollama", "DeepSeek", "Google", "Xiaomi",
                   "Tencent", "StepFun", "Devin"])
-PREFIXES = [("chatgpt", "OpenAI"), ("openai", "OpenAI"), ("claude", "Claude"),
-            ("anthropic", "Claude"), ("devin", "Devin"),
-            ("supergrok", "xAI"), ("xai", "xAI"), ("cursor", "Cursor"), ("kimi", "Kimi"),
-            ("glm", "GLM"), ("minimax", "MiniMax"), ("aliyun", "Alibaba"),
-            ("opencode", "OpenCode"), ("command_code", "Command Code"), ("ollama", "Ollama"),
-            ("deepseek", "DeepSeek"), ("stepfun", "StepFun")]
+# 图例沿用旧显示名（Claude/GLM），内部键均为 canonical 渠道名。
+LABEL = {"Anthropic": "Claude", "Zhipu": "GLM"}
 WIDTH, HEIGHT = 1440, 940
 LEFT, RIGHT, TOP, BOTTOM = 120, 1338, 233, 705
 
 
 def channel(p):
-    return next((name for prefix, name in PREFIXES if p["id"].startswith(prefix)), p["vendor"])
+    return channel_of(p["id"], p["vendor"])
 
 
 def pareto(points, key):
@@ -320,9 +316,10 @@ def draw(board, meta, points, tier, language="zh"):
     present = [(name, c) for name, c in COLORS.items() if any(channel(p) == name for p in valid)]
     xx = 57
     for name, c in present:
+        display = LABEL.get(name, name)
         s += [devin_logo(2.4, c, cx=xx + 4, cy=830) if name == "Devin" else f'<rect x="{xx}" y="826" width="8" height="8" fill="{c}"/>',
-              text(xx + 17, 834, name, 12, "#687168")]
-        xx += max(83, len(name) * 7 + 38)
+              text(xx + 17, 834, display, 12, "#687168")]
+        xx += max(83, len(display) * 7 + 38)
     api_mark_x = xx + (190 if language == "en" else 129)
     s += [f'<path d="M{xx + 9} 830h22" stroke="#303630" stroke-width="1.65"/>', text(xx + 39, 834, "Pareto frontier" if language == "en" else "帕累托前沿", 12, "#687168"),
           f'<path d="M{api_mark_x} 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>',

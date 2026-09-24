@@ -89,19 +89,6 @@ export function providerLogoUrl(
   return url;
 }
 
-/** Logo sources for a set of providers (kept async for callers that export). */
-export async function logoUrlMap(
-  providers: string[],
-  tone: LogoTone = "light",
-): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  for (const provider of new Set(providers)) {
-    const url = providerLogoUrl(provider, tone);
-    if (url) map.set(provider, url);
-  }
-  return map;
-}
-
 export default function ProviderLogo({
   provider,
   size = 28,

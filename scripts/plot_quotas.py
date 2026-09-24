@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
 from compute import DISPLAY
-from palette import palette
+from palette import channel_of, palette
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ADOPTED = os.path.join(ROOT, "data", "adopted.csv")
@@ -61,32 +61,12 @@ if not any(n in available for n in cjk_candidates) and os.environ.get("CHART_FON
 plt.rcParams["axes.unicode_minus"] = False
 plt.rcParams["svg.hashsalt"] = "real-api-pricing"
 
-VENDOR_OF = {
-    "chatgpt": "OpenAI",
-    "openai": "OpenAI",
-    "claude": "Anthropic",
-    "anthropic": "Anthropic",
-    "supergrok": "xAI",
-    "xai": "xAI",
-    "cursor": "Cursor",
-    "kimi": "Kimi",
-    "glm": "GLM",
-    "minimax": "MiniMax",
-    "aliyun": "Alibaba",
-    "opencode": "OpenCode",
-    "command_code": "Command Code",
-    "ollama": "Ollama",
-    "deepseek": "DeepSeek",
-    "stepfun": "StepFun",
-    "mimo_token": "Xiaomi",
-    "mimo_v26": "Xiaomi",
-    "devin": "Devin",
-    "google_ai": "Gemini",
-}
-# 色值统一来自 config/channel-colors.json；此处只定图例顺序。
-VENDOR_COLORS = palette(["OpenAI", "Anthropic", "xAI", "Cursor", "Kimi", "GLM", "MiniMax", "Alibaba",
-                         "OpenCode", "Command Code", "Ollama", "DeepSeek", "Gemini", "StepFun",
+# 色值与 id 前缀统一来自 config/channel-colors.json；此处只定图例顺序。
+VENDOR_COLORS = palette(["OpenAI", "Anthropic", "xAI", "Cursor", "Kimi", "Zhipu", "MiniMax", "Alibaba",
+                         "OpenCode", "Command Code", "Ollama", "DeepSeek", "Google", "StepFun",
                          "Xiaomi", "Devin"])
+# 图例沿用旧显示名（GLM/Gemini），内部键均为 canonical 渠道名。
+LABEL = {"Zhipu": "GLM", "Google": "Gemini"}
 VIEW_CN = {"quotas": "额度", "prices": "单价"}
 BOARD_CN = {
     "arena_code": "CodeArena榜",
@@ -113,9 +93,9 @@ def output_stem(view: str, board: dict | None, language: str, table: bool = Fals
 
 VENDOR_CODES = {
     "OpenAI": "OA", "Anthropic": "AN", "xAI": "XA", "Cursor": "CU",
-    "Kimi": "KI", "GLM": "GL", "MiniMax": "MM", "Alibaba": "AL",
+    "Kimi": "KI", "Zhipu": "GL", "MiniMax": "MM", "Alibaba": "AL",
     "OpenCode": "OC", "Command Code": "CC", "Ollama": "OL",
-    "DeepSeek": "DS", "Gemini": "GE", "StepFun": "SF", "Devin": "DV",
+    "DeepSeek": "DS", "Google": "GE", "StepFun": "SF", "Devin": "DV",
     "Xiaomi": "MI",
 }
 TEXT = {
@@ -150,10 +130,6 @@ TEXT = {
         "metered": "Pay-as-you-go",
     },
 }
-
-
-def vendor_of(plan_id: str) -> str:
-    return next(name for prefix, name in VENDOR_OF.items() if plan_id.startswith(prefix))
 
 
 def plan_name(row: dict, language: str) -> str:
@@ -365,7 +341,7 @@ def annotation_of(row: dict, value: float, view: str, language: str,
     else:
         value_label = f"{value:g}" if view == "quotas" else f"${price_text(value)}"
     confidence = row["confidence"][0].upper()
-    channel = VENDOR_CODES[vendor_of(row["plan_id"])]
+    channel = VENDOR_CODES[channel_of(row["plan_id"])]
     annotation = f"{value_label}  {channel} [{confidence}]"
     if board:
         score = f"{row['board_score']:+g}%" if "%" in board["metric"] else f"{row['board_score']:g}"
@@ -402,7 +378,7 @@ def draw_mixed_vs_third(fig, axes, mixed, baseline, view, language) -> None:
             facecolor=color, alpha=alpha, lw=0, clip_on=False, zorder=z))
 
     for j in (0, 1):
-        color = VENDOR_COLORS[vendor_of(rows[j]["plan_id"])]
+        color = VENDOR_COLORS[channel_of(rows[j]["plan_id"])]
         ratio = values[j] / ref
         y_fig, h_fig = _fig_box(bars[j].get_y(), bars[j].get_height(), tax, fig)
         target = ref_len * ratio
@@ -456,7 +432,7 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
         start = col * half
         chunk = rows[start:start + half]
         chunk_values = values[start:start + half]
-        colors = [VENDOR_COLORS[vendor_of(r["plan_id"])] for r in chunk]
+        colors = [VENDOR_COLORS[channel_of(r["plan_id"])] for r in chunk]
         bars = ax.barh(range(len(chunk)),
                        [0 if r.get("unmetered") == "true" else v - baseline
                         for v, r in zip(chunk_values, chunk)],
@@ -506,10 +482,10 @@ def plot(rows: list[dict], view: str, language: str, board: dict | None = None,
     fig.text(0.5, 1 - 0.65 / figsize[1] if fee_band else 0.925 if board else 0.952,
              frontier_caption(board) if board else text[f"{view}_subtitle"],
              ha="center", fontsize=10 if board else 11, color="#505A64")
-    providers = {vendor_of(r["plan_id"]) for r in rows}
+    providers = {channel_of(r["plan_id"]) for r in rows}
     legend = [(name, color) for name, color in VENDOR_COLORS.items() if name in providers]
     handles = [plt.Rectangle((0, 0), 1, 1, color=color) for _, color in legend]
-    fig.legend(handles, [f"{VENDOR_CODES[name]}  {name}" for name, _ in legend], loc="lower center",
+    fig.legend(handles, [f"{VENDOR_CODES[name]}  {LABEL.get(name, name)}" for name, _ in legend], loc="lower center",
                bbox_to_anchor=(0.5, 1 - 1.2 / figsize[1] if fee_band else 0.86 if board else 0.916), ncol=len(legend),
                fontsize=11, frameon=False, handlelength=1.6, columnspacing=1.8)
     if board:

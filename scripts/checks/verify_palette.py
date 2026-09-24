@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """校验共享渠道配色（config/channel-colors.json）：
+0. 数据里每个 point id 都命中 channels 里的一个前缀；
 1. 数据里出现的每个渠道都有色值；2. StepFun 保持 CONVENTIONS 指定的 #00F4E5；
 3. 数据中实际出现的渠道两两之间 CIEDE2000 色差 ≥ MIN_DELTA_E（避免肉眼难分的一对）；
    config 里 brandPairs 列出的品牌色对（两家都用本家品牌色）改用各自登记的下限；
@@ -15,16 +16,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
-from palette import ALIASES, BRAND_PAIRS, COLORS  # noqa: E402
+from palette import ALIASES, BRAND_PAIRS, COLORS, channel_of  # noqa: E402
 
 MIN_DELTA_E = 15.0
-# 与 web/scripts/build-data.mjs 的渠道前缀一致。
-PREFIXES = {
-    "chatgpt": "OpenAI", "openai": "OpenAI", "claude": "Anthropic", "anthropic": "Anthropic",
-    "supergrok": "xAI", "xai": "xAI", "cursor": "Cursor", "kimi": "Kimi", "glm": "Zhipu",
-    "minimax": "MiniMax", "aliyun": "Alibaba", "opencode": "OpenCode", "command_code": "Command Code",
-    "ollama": "Ollama", "deepseek": "DeepSeek", "stepfun": "StepFun", "devin": "Devin",
-}
 
 
 def lab(hex_color: str) -> tuple[float, float, float]:
@@ -60,8 +54,15 @@ def delta_e(c1: str, c2: str) -> float:
 
 def main() -> None:
     points = json.loads((ROOT / "derived" / "points.json").read_text(encoding="utf-8"))["points"]
-    channels = sorted({next((c for pre, c in PREFIXES.items() if p["id"].startswith(pre)), p["vendor"]) for p in points})
-    errors = [f"channel {c!r} has no colour in config/channel-colors.json" for c in channels if c not in COLORS]
+    errors = []
+    channels = set()
+    for p in points:
+        try:
+            channels.add(channel_of(p["id"]))
+        except ValueError:
+            errors.append(f"point {p['id']!r} matches no id prefix in config/channel-colors.json channels")
+    channels = sorted(channels)
+    errors += [f"channel {c!r} has no colour in config/channel-colors.json" for c in channels if c not in COLORS]
     if COLORS.get("StepFun") != "#00F4E5":
         errors.append("StepFun must stay #00F4E5 (CONVENTIONS.md §5)")
     for alias, target in ALIASES.items():

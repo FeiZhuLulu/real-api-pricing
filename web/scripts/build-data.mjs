@@ -21,6 +21,7 @@ const [
   conventions,
   adoptedText,
   evidenceFiles,
+  channelColors,
 ] = await Promise.all([
   read("derived/points.json"),
   read("derived/benchmark-configurations.json"),
@@ -28,6 +29,7 @@ const [
   read("data/conventions.json"),
   readFile(path.join(repo, "data/adopted.csv"), "utf8"),
   readdir(path.join(repo, "data/research")),
+  read("config/channel-colors.json"),
 ]);
 const adopted = new Map(
   parse(adoptedText, { columns: true, skip_empty_lines: true, bom: true }).map(
@@ -45,28 +47,10 @@ for (const m of mappings)
   if (!pointIds.has(m.point_id) || !configById.has(m.configuration_id))
     throw new Error("Orphan benchmark mapping");
 const evidenceToCopy = new Set();
-const channels = {
-  chatgpt: "OpenAI",
-  openai: "OpenAI",
-  claude: "Anthropic",
-  anthropic: "Anthropic",
-  supergrok: "xAI",
-  xai: "xAI",
-  cursor: "Cursor",
-  kimi: "Kimi",
-  glm: "Zhipu",
-  minimax: "MiniMax",
-  aliyun: "Alibaba",
-  opencode: "OpenCode",
-  command_code: "Command Code",
-  ollama: "Ollama",
-  deepseek: "DeepSeek",
-  stepfun: "StepFun",
-  devin: "Devin",
-};
+// id 前缀 → 渠道与 Python 侧共用 config/channel-colors.json 的 channels 数组。
+const channelPrefixes = channelColors.channels;
 const channel = (p) =>
-  Object.entries(channels).find(([prefix]) => p.id.startsWith(prefix))?.[1] ||
-  p.vendor;
+  channelPrefixes.find(([prefix]) => p.id.startsWith(prefix))?.[1] || p.vendor;
 const data = {
   version: 1,
   generatedAt: points.generatedAt,
