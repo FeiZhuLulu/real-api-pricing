@@ -26,11 +26,11 @@ Snapshot: <!-- stat:snapshot -->2026-09-24<!-- /stat -->. Each row is one **plan
 
 | Coverage | Rows |
 |---|---:|
-| All adopted plan × model points | <!-- stat:points_total -->284<!-- /stat --> |
-| Subscription points with monthly allowance | <!-- stat:points_allowance -->264<!-- /stat --> |
+| All adopted plan × model points | <!-- stat:points_total -->283<!-- /stat --> |
+| Subscription points with monthly allowance | <!-- stat:points_allowance -->263<!-- /stat --> |
 | Unmetered promotional points (≈$0) | <!-- stat:points_unmetered -->1<!-- /stat --> |
 | Metered API baselines | <!-- stat:points_metered -->19<!-- /stat --> |
-| OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->33<!-- /stat --> / <!-- stat:plans_command_code_goat -->56<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
+| OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->32<!-- /stat --> / <!-- stat:plans_command_code_goat -->56<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
 | Code Arena / Agent Arena scored points | <!-- stat:scored_arena_code -->165<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->152<!-- /stat --> |
 | AA Intelligence / AA Coding Agent scored points | <!-- stat:scored_aa_intelligence_index -->244<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->82<!-- /stat --> |
 | OpenDesign Arena scored points | <!-- stat:scored_open_design_arena -->79<!-- /stat --> |
@@ -42,7 +42,7 @@ Snapshot: <!-- stat:snapshot -->2026-09-24<!-- /stat -->. Each row is one **plan
 
 ## Monthly allowance overview
 
-The <!-- stat:points_allowance -->264<!-- /stat --> subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
+The <!-- stat:points_allowance -->263<!-- /stat --> subscription plan × model points are split by adopted USD monthly fee so GitHub can show them without packing every bar into one chart: **$0–30 inclusive**, **>$30 and ≤$100**, **>$100–$300**. Each band ranks monthly usable tokens independently. The undivided chart and hybrid-scale view stay in the [chart index](charts/README.md).
 
 ### $0–30
 
@@ -70,7 +70,7 @@ The <!-- stat:points_allowance -->264<!-- /stat --> subscription plan × model p
 
 ## Real unit price overview
 
-All <!-- stat:points_priced -->283<!-- /stat --> subscription and API points on one comparable $/MTok scale.
+All <!-- stat:points_priced -->282<!-- /stat --> subscription and API points on one comparable $/MTok scale.
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 

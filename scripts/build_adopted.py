@@ -277,7 +277,7 @@ def claude_fable51_max_monthly_yi() -> float:
 # 元组：(model, per-model Usage USD, cached read, input, output, 采用价档说明)
 # 证据全量快照：data/research/opencode-go-round5-2026-09-06.json（当时 28 个模型）。
 # DeepSeek 2026-09-10 增量：opencode-go-deepseek-round6-2026-09-10.json。
-# 曾按用户确认删除 V4 Flash / Vision，2026-09-24 官网复核两点恢复在列后重新入库；现 33 个模型（Omen Alpha 官网未列待确认）。
+# 曾按用户确认删除 V4 Flash / Vision，2026-09-24 官网复核两点恢复在列后重新入库；现 32 个模型（Omen Alpha 官网未列，2026-09-24 用户确认下线删除）。
 # 限额变动：glm-5.3-flash $15→$60（2026-09-24 复核）。新增：gpt-6-luna、deepseek-v4-flash、deepseek-v4-flash-vision-exp。
 OPENCODE_GO_MODELS = (
     ("grok-4.6", 15, 0.5, 2.0, 6.0, "≤200K 标价；>200K 价翻倍，保留在 research variants"),
@@ -312,7 +312,6 @@ OPENCODE_GO_MODELS = (
     ("deepseek-v4-flash-vision-exp", 15, 0.003, 0.15, 0.60, "官网恢复在列（旧行按用户确认下线删除，2026-09-24 复核回归 $15）；Vision Exp；Off-Peak；Peak=2×保留在 research variants；goat-opencode-catalogs-round1-2026-09-24.json"),
     ("hy4-preview", 30, 0.042, 0.834, 2.501, "官网单档"),
     ("hy3", 60, 0.035, 0.14, 0.58, "官网单档"),
-    ("omen-alpha", 100, 0.04, 0.2, 0.66, "模型 Usage $100，但共享月池 $60 先绑定；2026-09-24 官网限额表与模型 ID 表均未列本模型，待确认是否下线（goat-opencode-catalogs-round1-2026-09-24.json）"),
 )
 
 OPENCODE_GO_OLD_YI = {

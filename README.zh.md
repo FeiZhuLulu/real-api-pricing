@@ -26,11 +26,11 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 | 覆盖范围 | 行数 |
 |---|---:|
-| 全部采用的套餐 × 模型点 | <!-- stat:points_total -->284<!-- /stat --> |
-| 有月额度的订阅点 | <!-- stat:points_allowance -->264<!-- /stat --> |
+| 全部采用的套餐 × 模型点 | <!-- stat:points_total -->283<!-- /stat --> |
+| 有月额度的订阅点 | <!-- stat:points_allowance -->263<!-- /stat --> |
 | 不计额度促销点（≈$0） | <!-- stat:points_unmetered -->1<!-- /stat --> |
 | 按量 API 基准点 | <!-- stat:points_metered -->19<!-- /stat --> |
-| OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->33<!-- /stat --> / <!-- stat:plans_command_code_goat -->56<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
+| OpenCode Go / Command Code GOAT / Ollama / Step Plan | <!-- stat:plans_opencode_go -->32<!-- /stat --> / <!-- stat:plans_command_code_goat -->56<!-- /stat --> / <!-- stat:plans_ollama -->22<!-- /stat --> / <!-- stat:plans_step_plan -->12<!-- /stat --> |
 | Code Arena / Agent Arena 有分点 | <!-- stat:scored_arena_code -->165<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->152<!-- /stat --> |
 | AA 智力榜 / AA 编程 Agent 榜有分点 | <!-- stat:scored_aa_intelligence_index -->244<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->82<!-- /stat --> |
 | OpenDesign Arena 有分点 | <!-- stat:scored_open_design_arena -->79<!-- /stat --> |
@@ -42,7 +42,7 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ## 月额度总览
 
-<!-- stat:points_allowance -->264<!-- /stat --> 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
+<!-- stat:points_allowance -->263<!-- /stat --> 个订阅套餐 × 模型点按采用数据里的美元月费拆成三档，避免 GitHub 首页一张图挤满：**$0–30（含 $30）**、**>$30 且 ≤$100**、**>$100–$300**。各档内部按月可用 token 排序。未拆档的全量图和混合比例图仍在 [图表目录](charts/README.md)。
 
 ### $0–30
 
@@ -70,7 +70,7 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ## 真实单价总览
 
-把全部 <!-- stat:points_priced -->283<!-- /stat --> 个订阅和 API 点放在同一套 $/MTok 口径下比较。
+把全部 <!-- stat:points_priced -->282<!-- /stat --> 个订阅和 API 点放在同一套 $/MTok 口径下比较。
 
 [English SVG](charts/en/overview/real-price-overview.svg) · [中文 SVG](charts/zh/overview/单价总览.svg) · [English PNG](charts/en/overview/real-price-overview.png) · [中文 PNG](charts/zh/overview/单价总览.png)
 
