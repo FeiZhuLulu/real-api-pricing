@@ -1,6 +1,6 @@
 # Data / 数据
 
-Current snapshot: 2026-09-23. The adopted dataset contains 265 plan × model rows: 246 subscription rows (245 with a monthly allowance plus one unmetered promotional row, Devin Pro × SWE-2 at ≈$0/MTok until 2026-10-31) and 19 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
+Current snapshot: 2026-09-24. The adopted dataset contains 265 plan × model rows: 246 subscription rows (245 with a monthly allowance plus one unmetered promotional row, Devin Pro × SWE-2 at ≈$0/MTok until 2026-10-31) and 19 metered API rows. This covers the project's adopted sample, not every plan or model on the market.
 
 These files are the public redacted edition. Original local evidence is backed up outside Git; see [PUBLICATION.md](../PUBLICATION.md). 本目录为公开脱敏版，保留数值、来源与取舍记录，原件仅存于 Git 忽略的本地备份。
 
