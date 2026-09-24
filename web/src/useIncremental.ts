@@ -13,8 +13,12 @@ export function useIncremental(
   step = 80,
 ) {
   const [limit, setLimit] = useState(step);
+  const [seenKey, setSeenKey] = useState(resetKey);
+  if (seenKey !== resetKey) {
+    setSeenKey(resetKey);
+    setLimit(step);
+  }
   const sentinel = useRef<HTMLElement | null>(null);
-  useEffect(() => setLimit(step), [resetKey, step]);
   useEffect(() => {
     const el = sentinel.current;
     if (!el || limit >= total) return;

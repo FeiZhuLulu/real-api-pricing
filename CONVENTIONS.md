@@ -47,7 +47,7 @@
 - **Gemini / Google**：暂无可靠的订阅额度采用值，不补点，不再探测账户额度。
 - **汇率**：取 `conventions.json` 的 `usdPerCny`（历史字段名，实际方向为 CNY/USD），来源日期在 `exchangeRate`。不改历史 research 文件里的旧汇率。
 - **促销**：促销口径必须标截止日，到期后复核。订阅内明确不计额度的模型，真实单价记为 ≈$0，用专用刻度位表示。
-- **数据快照日期**：`data/conventions.json` 的 `updatedAt` 是网页与 README 显示的快照日期（经 compute.py 写入 `derived/points.json` 的 generatedAt）；改采用值或口径时同步改为当天。
+- **数据快照日期**：`data/conventions.json` 的 `updatedAt` 是网页与 README 显示的快照日期（经 compute.py 写入 `derived/points.json` 的 generatedAt）；改采用值或口径时同步改为当天；CI 会在 adopted.csv 变化而 updatedAt 未推进时报错（`scripts/checks/verify_snapshot_date.py`）。
 
 ## 5. 出图规则
 
@@ -57,7 +57,7 @@
 - 免费档不画（对数轴画不了）；Y 轴没分的模型不画，但要在输出里列出来。
 - 每张榜单一张图，标题写清榜单名和快照日期；不同榜单的分数不混合。
 - 公开 README 和 charts 默认使用全量图；精选图只作内部对照，不作为默认公开视图。
-- **配色**：用明亮、干净的高饱和色，不用深灰或脏色。OpenAI 绿、Claude 橙（深陶土橙）、xAI 紫、Cursor 黄、Kimi 天蓝、GLM 黑、MiniMax 粉、Alibaba 红、OpenCode 青、DeepSeek 蓝、小米橙（亮橙，与 Claude 深陶土靠明度区分）、StepFun 电青 #00F4E5；Gemini 若入库用黄绿。前沿线用近黑色。具体色值只在 [`config/channel-colors.json`](config/channel-colors.json) 维护（网站与全部 Python 图共用）；未指定色相的渠道中 Command Code、Ollama 用浅色调区分，Devin 用中性灰 #A1A1AA（用户指定；中灰，不是深灰）。改色后跑 `scripts/checks/verify_palette.py`：数据中出现的渠道两两 CIEDE2000 色差须 ≥ 15，不为品牌色开例外（确需例外时登记在 `brandPairs`）。
+- **配色**：用明亮、干净的高饱和色，不用深灰或脏色。OpenAI 绿、Claude 橙（深陶土橙）、xAI 紫、Cursor 黄、Kimi 天蓝、GLM 黑、MiniMax 粉、Alibaba 红、OpenCode 青、DeepSeek 蓝、小米橙（亮橙，与 Claude 深陶土靠明度区分）、StepFun 电青 #00F4E5；Gemini 若入库用黄绿。前沿线用近黑色。具体色值只在 [`config/channel-colors.json`](config/channel-colors.json) 维护（网站与全部 Python 图共用），同文件 `channels` 数组也是唯一的 id 前缀 → 渠道映射；未指定色相的渠道中 Command Code、Ollama 用浅色调区分，Devin 用中性灰 #A1A1AA（用户指定；中灰，不是深灰）。改色后跑 `scripts/checks/verify_palette.py`：数据中出现的渠道两两 CIEDE2000 色差须 ≥ 15，不为品牌色开例外（确需例外时登记在 `brandPairs`）。
 - **单价精度**：`real_usd_per_mtok` 存 8 位有效数字，排序与前沿判定都用原值；图表、排名、表格按至多 5 位小数的短格式显示，网页详情弹窗显示完整值。不要为了显示好看在数据里截短单价。
 - **额度/单价总览**：双栏对数轴，不分量级面板；中文额度用"亿"，英文用 billion；每行数值旁加渠道缩写，图例置顶。
 - **按榜前沿精简版**：从全量订阅/API（含不计额度的 ≈$0 促销点，与帕累托图一致）中按"单价越低、分数越高"筛选，至少一项严格更好才算支配；同价同分的不同套餐都保留。

@@ -1,5 +1,5 @@
 {
-  "_comment": "Single source of channel colours for the website and every Python chart. Hue families follow CONVENTIONS.md §5; exact values were chosen for perceptual separation (scripts/checks/verify_palette.py enforces the minimum CIEDE2000 distance). Keys are access channels; aliases map legacy script keys.",
+  "_comment": "Single source of channel colours for the website and every Python chart. Hue families follow CONVENTIONS.md §5; exact values were chosen for perceptual separation (scripts/checks/verify_palette.py enforces the minimum CIEDE2000 distance). Keys are access channels; aliases map legacy script keys. The channels array is also the single ordered point/plan id-prefix → channel map shared by every script.",
   "colors": {
     "OpenAI": "#16A34A",
     "Anthropic": "#CC5A2E",
@@ -24,6 +24,27 @@
     "GLM": "Zhipu",
     "Gemini": "Google"
   },
+  "channels": [
+    ["chatgpt", "OpenAI"],
+    ["openai", "OpenAI"],
+    ["claude", "Anthropic"],
+    ["anthropic", "Anthropic"],
+    ["supergrok", "xAI"],
+    ["xai", "xAI"],
+    ["cursor", "Cursor"],
+    ["kimi", "Kimi"],
+    ["glm", "Zhipu"],
+    ["minimax", "MiniMax"],
+    ["aliyun", "Alibaba"],
+    ["opencode", "OpenCode"],
+    ["command_code", "Command Code"],
+    ["ollama", "Ollama"],
+    ["deepseek", "DeepSeek"],
+    ["stepfun", "StepFun"],
+    ["mimo_", "Xiaomi"],
+    ["devin", "Devin"],
+    ["google_ai", "Google"]
+  ],
   "fallback": "#8A94A6",
   "frontier": "#1F2328"
 }
