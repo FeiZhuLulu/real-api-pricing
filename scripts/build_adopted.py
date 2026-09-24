@@ -41,8 +41,24 @@ CHATGPT_PRO20X_ASTRA_MONTHLY_YI = round(CHATGPT_PRO20X_ASTRA_WEEK_YI * MONTH_WEE
 #   Observatory 遥测 143.6×3 + 《财经》打满 109×3 + 网关 139.5×2（含两段Astra，混合负载降权不剔除）
 #   + 社区健康周 131.2×2 + imon139 口述 120×1 = 1419.2/11
 CHATGPT_PRO20X_SOL_MONTHLY_YI = round(1419.2 / 11, 2)
+# Devin Max —— 同账号 cc usage 两段实测：Astra 段为 round4 87pt 近满周（305,025,580 tok/667 calls，
+#   剩余100%→13%）；Opus 5.5 段为双检查点增量（2026-09-23，云端剩余75%→27% 差48pt，
+#   xhigh +1,142 calls/+512,221,810 tok hit 92.38%、high +118/+13,111,946 hit 89.32%，合计525,333,756）；
+#   用户裁定各段 pp 全归对应模型增量（swe-2 等免费不占额度）。
+#   2026-09-24 用户裁定：两段实测负载均偏离标准档，入库按标价折 list-worth 再按统一负载档换算
+#   （Opus 5.5 用 Anthropic 档、Astra 用标准档——OpenAI 无缓存写费，cache_create 按普通输入计）；
+#   raw total 口径留作对照见各行注。worth 对账（恒定池假说）：Opus5.5 段 $336.4(5m写)~$457.2(1h写)
+#   →池$700.8~952.5；Astra 段 $356.6~365.8→池$409.8~420.5——恒定池成立须 Opus5.5 按 ~0.6× 标价计，
+#   折算只依赖标价比例，不依赖绝对值。
+DEVIN_MAX_ASTRA_SEGMENT = {"cache_read": 300_944_710, "cache_create": 3_708_954, "input": 1_998, "output": 369_918}
 DEVIN_MAX_ASTRA_USED_TOKENS = 305_025_580
 DEVIN_MAX_ASTRA_USED_FRACTION = 0.87
+DEVIN_MAX_OPUS55_SEGMENT = {"cache_read": 483_137_835, "cache_create": 40_275_697, "input": 2_672, "output": 1_917_552}
+DEVIN_MAX_OPUS55_USED_TOKENS = 525_333_756
+DEVIN_MAX_OPUS55_USED_FRACTION = 0.48
+OPUS55_LIST = (0.2, 4.0, 20.0)  # cached/input/output 官方标价；5 分钟缓存写价见 ANTHROPIC_CACHE_WRITE_5M
+assert sum(DEVIN_MAX_ASTRA_SEGMENT.values()) == DEVIN_MAX_ASTRA_USED_TOKENS
+assert sum(DEVIN_MAX_OPUS55_SEGMENT.values()) == DEVIN_MAX_OPUS55_USED_TOKENS
 # Google AI Pro 周帽 —— round7 用户本地实测：B 整段 55.343M raw（cache 45.688M/输入 9.258M/输出 0.398M）= 周条 +9.88%
 #   → raw 周池 5.60 亿。官方按 API worth 合池计权（实证：B1/B2 的 %比 0.405≈worth比 0.407，非 raw比 0.448），
 #   故 raw 额度随负载 mix 变：本样本 cache 82.6%（用户指出 Gemini 实际负载打不到 97% cache）——
@@ -122,6 +138,20 @@ def blended_low(cached: float, inp: float, out: float) -> float:
     return LOW_CACHE_MIX["cache"] * cached + LOW_CACHE_MIX["input"] * inp + LOW_CACHE_MIX["output"] * out
 
 
+ANTHROPIC_MIX = CONVENTIONS["anthropicTokenMix"]
+# 份额与标准档联动防漂移：Anthropic 档 = 标准档的普通输入份额改按缓存写价
+assert (ANTHROPIC_MIX["cache"], ANTHROPIC_MIX["cacheWrite"], ANTHROPIC_MIX["output"]) == (
+    STANDARD_MIX["cache"], STANDARD_MIX["input"], STANDARD_MIX["output"])
+# Anthropic 5 分钟缓存写入价（platform.claude.com pricing；Fable 5.1 见 claude-fable51-round1-2026-09-13.json）
+ANTHROPIC_CACHE_WRITE_5M = {"claude-opus-5": 6.25, "claude-sonnet-5": 2.5, "claude-fable-5": 12.5,
+                          "claude-fable-5.1": 12.5, "claude-opus-5.5": 5.0}
+
+
+def blended_anthropic(cached: float, write: float, out: float) -> float:
+    # Anthropic 档混合价：缓存读 + 缓存写(5m) + 输出（CONVENTIONS §2.4，2026-09-24 用户裁定）
+    return ANTHROPIC_MIX["cache"] * cached + ANTHROPIC_MIX["cacheWrite"] * write + ANTHROPIC_MIX["output"] * out
+
+
 def supergrok_monthly_yi(panel_usd: float, digits: int, weekly: float = SUPERGROK_WEEKLY_TOKENS) -> float:
     return round(weekly * MONTH_WEEKS / YI * panel_usd / SUPERGROK_PANEL_USD, digits)
 
@@ -142,10 +172,50 @@ def chatgpt_astra_monthly_yi() -> float:
     )
 
 
-def devin_max_astra_monthly_yi() -> float:
+def devin_max_astra_raw_monthly_yi() -> float:
+    # 原始 total 口径（raw token ÷ 段占比 ×4周），入库后留作对照
     return round(
         DEVIN_MAX_ASTRA_USED_TOKENS / DEVIN_MAX_ASTRA_USED_FRACTION
         * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def devin_max_astra_segment_worth_usd() -> float:
+    # 段 list-worth：OpenAI 无缓存写费，cache_create 按普通输入 $10 计
+    s = DEVIN_MAX_ASTRA_SEGMENT
+    return (s["cache_read"] * 1.0 + (s["cache_create"] + s["input"]) * 10.0 + s["output"] * 50.0) / 1e6
+
+
+def devin_max_astra_monthly_yi() -> float:
+    # 段 worth ÷87% ×4周 ÷ 标准负载混合价 $1.47/MTok（2026-09-24 用户裁定）
+    return round(
+        devin_max_astra_segment_worth_usd() / DEVIN_MAX_ASTRA_USED_FRACTION
+        * MONTH_WEEKS / blended(1.0, 10.0, 50.0) / 100,
+        2,
+    )
+
+
+def devin_max_opus55_raw_monthly_yi() -> float:
+    return round(
+        DEVIN_MAX_OPUS55_USED_TOKENS / DEVIN_MAX_OPUS55_USED_FRACTION
+        * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def devin_max_opus55_segment_worth_usd() -> float:
+    # 段 list-worth：cache_create 按 Opus 5.5 的 5 分钟缓存写价 $5/MTok
+    s = DEVIN_MAX_OPUS55_SEGMENT
+    return (s["cache_read"] * OPUS55_LIST[0] + s["cache_create"] * ANTHROPIC_CACHE_WRITE_5M["claude-opus-5.5"]
+            + s["input"] * OPUS55_LIST[1] + s["output"] * OPUS55_LIST[2]) / 1e6
+
+
+def devin_max_opus55_monthly_yi() -> float:
+    # 段 worth ÷48% ×4周 ÷ Anthropic 档混合价 $0.419/MTok（2026-09-24 用户裁定）
+    return round(
+        devin_max_opus55_segment_worth_usd() / DEVIN_MAX_OPUS55_USED_FRACTION
+        * MONTH_WEEKS / blended_anthropic(OPUS55_LIST[0], ANTHROPIC_CACHE_WRITE_5M["claude-opus-5.5"], OPUS55_LIST[2]) / 100,
         2,
     )
 
@@ -553,7 +623,9 @@ SUBS = [
     # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{CHATGPT_PRO20X_SOL_MONTHLY_YI/4/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限
-    ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "high", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；https://devin.ai/pricing Max $200/月", "16.24→14.02亿：305,025,580÷87%×4周；全口径total直接采用不归一；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，周池406M→350.6M（-13.7%，旧段取整偏差或周池下调，round2/3留作历史证据不覆盖）；取整区间约13.94~14.11亿；命中率按含cache_create口径98.78%（与round2段97.84%同量级，均为极端缓存型负载）；swe-2-max等免费不占额度；Pro $20档无数据不派生"),
+    ("devin_max", "Devin Max", 200, "USD", "gpt-6-astra", devin_max_astra_monthly_yi(), "medium", "用户Devin Max面板cc usage：本周gpt-6-astra-high total 305,025,580 tokens（calls 667，in 1,998/out 369,918/cache_read 300,944,710/cache_create 3,708,954）= 周额度87pt（剩余100%→13%）；devin-usage-round4-2026-09-14.json；anthropic-token-mix-round1-2026-09-24.json；https://devin.ai/pricing Max $200/月", f"{devin_max_astra_raw_monthly_yi():g}→{devin_max_astra_monthly_yi():g}亿（2026-09-24用户裁定按统一负载折算）：段 worth ${devin_max_astra_segment_worth_usd():.2f}（cache读300.945M×$1＋写/输入3.711M×$10＋输出0.370M×$50；OpenAI无缓存写费，cache_create按普通输入计）÷87%×4周＝月${devin_max_astra_segment_worth_usd()/0.87*4:.2f} list-worth ÷ 标准负载混合价${blended(1,10,50):.2f}/MTok；面板%取整区间约11.03~11.28亿；原始total口径305,025,580÷87%×4周＝14.02亿留作对照；87pt近满周样本（round2 20pt段的3.76倍）取代旧反推，raw周池406M→350.6M（-13.7%，round2/3留作历史证据）；命中率按含cache_create口径98.78%（与round2段97.84%同量级，极端缓存型负载）；swe-2-max等免费不占额度；折算假设Devin按标价比例扣额度；Pro $20档无数据不派生"),
+    # Opus 5.5 —— 同账号同面板双检查点增量法：云端剩余75%→27%段内 Opus5.5 净增525.3M raw
+    ("devin_max", "Devin Max", 200, "USD", "claude-opus-5.5", devin_max_opus55_monthly_yi(), "medium", "用户Devin Max面板cc usage双检查点：云端周额度剩余75%→27%（差48pt）段内 claude-opus-5-5-xhigh +1,142 calls/+512,221,810 tok、claude-opus-5-5-high +118/+13,111,946，合计 +1,260 calls/+525,333,756 tokens；devin-opus55-round1-2026-09-23.json；anthropic-token-mix-round1-2026-09-24.json；https://devin.ai/pricing Max $200/月", f"{devin_max_opus55_raw_monthly_yi():g}→{devin_max_opus55_monthly_yi():g}亿（2026-09-24用户裁定按统一负载折算）：本段实测负载 cache读91.97%/cache写7.67%/输入0.001%/输出0.365% 偏离标准档；按Opus 5.5标价 cached$0.2/写5m $5/in$4/out$20 折段 worth ${devin_max_opus55_segment_worth_usd():.2f} ÷48%×4周＝月${devin_max_opus55_segment_worth_usd()/0.48*4:.2f} list-worth ÷ Anthropic档混合价${blended_anthropic(0.2,5.0,20.0):.3f}/MTok；面板%取整区间约65.53~68.32亿；cache写按1h $8敏感性77.12亿不采；原始total口径525,333,756÷48%×4周＝43.78亿（取整42.88~44.71）留作对照；用户裁定48pp全归Opus 5.5（若段内有其他计费模型消耗，Opus实际所占pp更少、周池更大，本值偏保守）；swe-2等免费不占额度；worth对账：恒定池口径Opus5.5按约0.6×标价计（与Astra周池3.12×张力指向共享池模型加权）；仅本行与同面板Astra行折算；effort仅影响速率；Pro $20档无数据不派生"),
     # Google —— Antigravity 合池按 API worth 计权（官方机制）；round7 用户本地实测补上首个周帽同框
     ("google_ai_pro_us", "Google AI Pro", 19.99, "USD", "gemini-3.8-flash", google_ai_pro_monthly_yi(), "high", "用户本地实测：B整段55.343M raw(cache45.69M/in9.26M/out0.40M)=周条+9.88%；gemini-weekly-round7-2026-09-21.json", f"新增{google_ai_pro_monthly_yi():g}亿：55.343M÷9.88%×{MONTH_WEEKS:g}周=周池5.60亿raw；worth计权经B1/B2段内验（%比0.405≈worth比0.407，非raw比0.448），周帽合$120.1 worth；worth池raw额度随负载mix变——本样本cache 82.6%，用户指出Gemini实际负载打不到标准口径的97.5% cache，故采raw实测而非标准负载折算（折算口径46.9亿/月偏高弃用）；LLMDevs Pro~1.0B/周与Ultra~5.0B/周(恰5×)量级吻合；round6的5h锚$20.4→周≈5.9 sprint自洽"),
     ("google_ai_ultra_5x_us", "Google AI Ultra 5x", 99.99, "USD", "gemini-3.8-flash", round(google_ai_pro_monthly_yi() * 5, 2), "low", "官方：Ultra $100 = 5× Pro token worth（antigravity.google/blog 2026-05-19）", f"新增{google_ai_pro_monthly_yi()*5:g}亿：Pro采用值×官方worth倍率5；LLMDevs Ultra~5.0B/周同量级旁证；非独立实测"),
@@ -744,11 +816,17 @@ def plan_gen_of(pid: str) -> str:
     return ""
 
 
-def workload_of(pid: str, billing: str) -> str:
-    # 额度口径分类（2026-09-22，详情面板用）：标准负载折算=美元/积分池÷standardTokenMix混合价；
-    # 低缓存负载=÷lowCacheTokenMix；measured=面板/ccusage raw token 直测或同源派生，不经负载折算。
+def workload_of(pid: str, billing: str, model: str = "") -> str:
+    # 额度口径分类（详情面板用）：standard=美元/积分池÷standardTokenMix 混合价；
+    # anthropic=÷anthropicTokenMix（Anthropic 按量 API，及经 2026-09-24 用户裁定按 Anthropic 档折算的
+    # devin_max::claude-opus-5.5）；lowCache=÷lowCacheTokenMix；measured=面板/ccusage raw token 直测
+    # 或同源派生，不经负载折算（devin_max::gpt-6-astra 经裁定按标准档折算为例外）。
     if billing == "metered":
-        return "standard"  # API 标价行恒按标准负载加权
+        return "anthropic" if model in ANTHROPIC_CACHE_WRITE_5M else "standard"
+    if (pid, model) == ("devin_max", "claude-opus-5.5"):
+        return "anthropic"
+    if (pid, model) == ("devin_max", "gpt-6-astra"):
+        return "standard"
     if pid.startswith("stepfun_"):
         return "lowCache"
     if pid.startswith(("opencode_", "command_code_", "ollama_", "glm_coding_", "mimo_token_")):
@@ -778,7 +856,7 @@ def sub_row(pid, name, price, cur, model, yi, conf, src, note, tier=None) -> dic
                 price_usd=round(price_usd, 2), served_model=model, monthly_tokens=int(tokens),
                 monthly_yi=monthly_yi, real_usd_per_mtok=sig(price_usd / tokens * 1e6), unmetered="", promo_until="",
                 confidence=conf, chart_tier=tier or ("main" if is_main(pid, model) else "full"), source=src, decision_note=note,
-                plan_gen=plan_gen_of(pid), workload=workload_of(pid, "subscription"))
+                plan_gen=plan_gen_of(pid), workload=workload_of(pid, "subscription", model))
 
 
 def sig(value: float, digits: int = 8) -> float:
@@ -816,11 +894,20 @@ def main() -> None:
         ))
     rows += [unmetered_row(*u) for u in UNMETERED]
     for pid, name, model, cached, inp, out, src in METERED:
+        write5m = ANTHROPIC_CACHE_WRITE_5M.get(model)
+        if write5m is not None:
+            mix_price = blended_anthropic(cached, write5m, out)
+            default_note = (f"标价 cached {cached}/in {inp}/out {out}、缓存写(5m) ${write5m:g} × Anthropic 统一负载 "
+                            f"{ANTHROPIC_MIX['cache']:.1%}/{ANTHROPIC_MIX['cacheWrite']:.2%}/{ANTHROPIC_MIX['output']:.2%}"
+                            "（普通输入份额按5分钟缓存写入价计）")
+        else:
+            mix_price = blended(cached, inp, out)
+            default_note = f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}"
         rows.append(dict(plan_id=pid, plan_name=name, plan_name_en="", billing="metered", price="", currency="USD", price_usd="",
-                         served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=sig(blended(cached, inp, out)),
+                         served_model=model, monthly_tokens="", monthly_yi="", real_usd_per_mtok=sig(mix_price),
                          unmetered="", promo_until="", confidence="high", chart_tier="main", source=src,
-                         decision_note=METERED_NOTES.get(pid, f"标价 cached {cached}/in {inp}/out {out} × 项目统一标准负载 {STANDARD_MIX['cache']:.1%}/{STANDARD_MIX['input']:.2%}/{STANDARD_MIX['output']:.2%}"),
-                         plan_gen=plan_gen_of(pid), workload=workload_of(pid, "metered")))
+                         decision_note=METERED_NOTES.get(pid, default_note),
+                         plan_gen=plan_gen_of(pid), workload=workload_of(pid, "metered", model)))
 
     with OUT.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)

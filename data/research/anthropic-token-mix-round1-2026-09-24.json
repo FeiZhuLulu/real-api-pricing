@@ -1,0 +1,80 @@
+{
+  "collectedAt": "2026-09-24",
+  "subject": "Anthropic 统一负载档 + Devin Max 两行面板实测的负载折算（用户裁定）",
+  "rule": {
+    "decidedAt": "2026-09-24",
+    "decision": "Anthropic 单独收缓存写入费，未命中缓存的输入几乎全部走缓存写，故标准档的普通输入份额对 Anthropic 按 5 分钟缓存写入价计 → anthropicTokenMix = {cache 0.97, cacheWrite 0.025, output 0.005}（份额与 standardTokenMix 联动，cacheWrite = standard.input）。用于 Anthropic 按量 API 行与经用户裁定折算的 Anthropic 面板实测行。",
+    "conventionsKey": "data/conventions.json: anthropicTokenMix",
+    "evidence": [
+      {
+        "sample": "Devin Max 面板（devin-opus55-round1，Opus 5.5 段）",
+        "mix": { "input": 0.00001, "cacheCreate": 0.0767, "cacheRead": 0.9197, "output": 0.00365 },
+        "note": "普通输入 0.001%、缓存写 7.67%——未命中输入几乎全部走缓存写"
+      },
+      {
+        "sample": "MiaAI Claude Code 样本（claude-opus55-round1-2026-09-23.json）",
+        "mix": { "input": 0.0014, "cacheCreate": 0.0205, "cacheRead": 0.9704, "output": 0.0078 },
+        "tokens": { "input": 1400000, "output": 8000000, "cacheRead": 1000000000, "cacheCreate": 21100000 },
+        "note": "input 0.14% / write 2.05%——与标准档 2.5% 输入份额同量级，方向一致"
+      }
+    ],
+    "cacheWrite5mPricesUsdPerMtok": {
+      "claude-opus-5": 6.25,
+      "claude-sonnet-5": 2.5,
+      "claude-fable-5": 12.5,
+      "claude-fable-5.1": 12.5,
+      "claude-opus-5.5": 5.0
+    },
+    "priceSources": "platform.claude.com/docs/en/about-claude/pricing；Fable 5.1 见 data/research/claude-fable51-round1-2026-09-13.json；其余 variants.cacheWrite5m 见 data/research/list-prices-2026-09.json"
+  },
+  "devinMaxOpus55": {
+    "segment": { "cacheRead": 483137835, "cacheCreate": 40275697, "input": 2672, "output": 1917552, "total": 525333756 },
+    "weeklyQuotaDeltaPctPoints": 48,
+    "listPricesUsdPerMtok": { "cached": 0.2, "cacheWrite5m": 5, "input": 4, "output": 20 },
+    "segmentWorthUsd": 336.37,
+    "monthlyWorthUsd": 2803.06,
+    "anthropicBlendedUsdPerMtok": 0.419,
+    "monthlyYi": 66.9,
+    "realUsdPerMtok": 0.029895366,
+    "roundedPercentRangeYi": [65.53, 68.32],
+    "sensitivityNotAdoptedYi": { "cacheWrite1h8": 77.12 },
+    "rawTotalMonthlyYi": 43.78,
+    "rawTotalRangeYi": [42.88, 44.71],
+    "workload": "anthropic",
+    "confidence": "medium",
+    "formula": "段 worth $336.37 ÷ 48% × 4 周 = $2,803.06/月 ÷ $0.419/MTok = 66.90 亿/月"
+  },
+  "devinMaxAstra": {
+    "segment": { "cacheRead": 300944710, "cacheCreate": 3708954, "input": 1998, "output": 369918, "total": 305025580 },
+    "weeklyQuotaDeltaPctPoints": 87,
+    "listPricesUsdPerMtok": { "cached": 1, "input": 10, "output": 50 },
+    "priceSource": "developers.openai.com gpt-6-astra（chatgpt-astra-quota-round8）；OpenAI 无缓存写费，cache_create 按普通输入 $10 计",
+    "segmentWorthUsd": 356.55,
+    "monthlyWorthUsd": 1639.31,
+    "standardBlendedUsdPerMtok": 1.47,
+    "monthlyYi": 11.15,
+    "realUsdPerMtok": 0.1793722,
+    "roundedPercentRangeYi": [11.03, 11.28],
+    "rawTotalMonthlyYi": 14.02,
+    "workload": "standard",
+    "confidence": "medium",
+    "formula": "段 worth $356.55 ÷ 87% × 4 周 = $1,639.31/月 ÷ 标准档 $1.47/MTok = 11.15 亿/月"
+  },
+  "affectedRows": [
+    { "id": "anthropic_opus5_api::claude-opus-5", "oldUsdPerMtok": 0.735, "newUsdPerMtok": 0.76625 },
+    { "id": "anthropic_sonnet5_api::claude-sonnet-5", "oldUsdPerMtok": 0.294, "newUsdPerMtok": 0.3065 },
+    { "id": "anthropic_fable5_api::claude-fable-5", "oldUsdPerMtok": 1.47, "newUsdPerMtok": 1.5325 },
+    { "id": "anthropic_fable51_api::claude-fable-5.1", "oldUsdPerMtok": 0.7425, "newUsdPerMtok": 0.805 },
+    { "id": "anthropic_opus55_api::claude-opus-5.5", "oldUsdPerMtok": 0.394, "newUsdPerMtok": 0.419 },
+    { "id": "devin_max::claude-opus-5.5", "oldMonthlyYi": 43.78, "newMonthlyYi": 66.9, "oldUsdPerMtok": 0.04568296, "newUsdPerMtok": 0.029895366 },
+    { "id": "devin_max::gpt-6-astra", "oldMonthlyYi": 14.02, "newMonthlyYi": 11.15, "oldUsdPerMtok": 0.14265335, "newUsdPerMtok": 0.1793722 }
+  ],
+  "relatedFiles": [
+    "devin-opus55-round1-2026-09-23.json",
+    "devin-usage-round4-2026-09-14.json",
+    "claude-opus55-round1-2026-09-23.json",
+    "claude-fable51-round1-2026-09-13.json",
+    "list-prices-2026-09.json",
+    "standard-token-mix-round2-2026-09-23.json"
+  ]
+}

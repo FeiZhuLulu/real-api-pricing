@@ -738,8 +738,8 @@ function Explorer({
                   ) : state.view === "price" ? (
                     <span>
                       {t(
-                        "Monthly subscription fee ÷ usable tokens. Metered APIs use the standard workload.",
-                        "订阅月费 ÷ 可用 token；按量 API 采用项目标准负载。",
+                        "Monthly subscription fee ÷ usable tokens. Metered APIs use the project workload (Anthropic models price the input share as cache writes).",
+                        "订阅月费 ÷ 可用 token；按量 API 采用项目统一负载（Anthropic 档以缓存写替代普通输入份额）。",
                       )}
                     </span>
                   ) : (
@@ -1547,9 +1547,16 @@ function Details({
           </div>
           <div className="formula">
             {p.billing === "metered" ? (
-              t(
-                "Metered API · public token prices weighted by the project standard workload.",
-                "按量 API · 三段公开标价按项目标准负载加权。",
+              p.workload === "anthropic" ? (
+                t(
+                  "Metered API · public token prices weighted by the Anthropic workload (input share at the 5-minute cache-write rate).",
+                  "按量 API · 三段公开标价按 Anthropic 统一负载加权（普通输入份额按 5 分钟缓存写价计）。",
+                )
+              ) : (
+                t(
+                  "Metered API · public token prices weighted by the project standard workload.",
+                  "按量 API · 三段公开标价按项目标准负载加权。",
+                )
               )
             ) : isUnmetered(p) ? (
               <>
@@ -1746,8 +1753,8 @@ function Method({
           </h2>
           <p>
             {t(
-              "Dollar/credit pools priced at public rates and metered APIs are converted using the same three-part workload. Direct total-token measurements are not normalized again. Vendor dashboard dollars are calibrated from measured usage, not treated as public-price dollars.",
-              "按公开标价记账的美元/credits 池与按量 API，使用统一三段负载折算。直接 total-token 实测不重复归一。厂商面板额度美元使用实测标定，不当成公开标价美元。",
+              "Dollar/credit pools priced at public rates and metered APIs are converted using the same three-part workload; for Anthropic models the input share is priced at the 5-minute cache-write rate. Direct total-token measurements are not normalized again, except ruled panel segments converted via list-worth (Devin Max Opus 5.5 / GPT-6 Astra). Vendor dashboard dollars are calibrated from measured usage, not treated as public-price dollars.",
+              "按公开标价记账的美元/credits 池与按量 API，使用统一三段负载折算（Anthropic 档的普通输入份额按 5 分钟缓存写价计）。直接 total-token 实测不重复归一，经裁定折算的面板段除外（Devin Max Opus 5.5 / GPT-6 Astra 按 list-worth 换算）。厂商面板额度美元使用实测标定，不当成公开标价美元。",
             )}
           </p>
           <div className="mix-values">
@@ -1766,8 +1773,8 @@ function Method({
           </div>
           <p>
             {t(
-              "This is a comparison convention, not a measured workload. Cache-write charges are not modeled separately, so converted allowances may be overstated where they apply.",
-              "这是比较基准，不代表实测负载。折算未单列缓存写入费用，另收写入费的渠道可能高估可用额度。",
+              "This is a comparison convention, not a measured workload. Cache-write charges are modeled only in the Anthropic workload (input share at the 5-minute cache-write rate); other channels with write fees may still see overstated allowances.",
+              "这是比较基准，不代表实测负载。仅 Anthropic 档单列缓存写入（普通输入份额按 5 分钟缓存写价计），其余另收写入费的渠道仍可能高估可用额度。",
             )}
           </p>
         </article>

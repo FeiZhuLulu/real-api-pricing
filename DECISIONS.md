@@ -3,6 +3,13 @@
 `AGENTS.md` 只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-24
+
+- **Anthropic 统一负载档 `anthropicTokenMix`（新增第三档）**：缓存读 97% / 缓存写 2.5% / 输出 0.5%——Anthropic 单独收缓存写入费，未命中缓存的输入几乎全部走缓存写（Devin 面板 input 0.001%/write 7.67%；MiaAI Claude Code 样本 input 0.14%/write 2.05%），故标准档的普通输入份额对 Anthropic 按 5 分钟缓存写入价计（份额与标准档联动）。5 行 Anthropic 按量 API 改档：Opus 5 $0.735→$0.76625、Sonnet 5 $0.294→$0.3065、Fable 5 $1.47→$1.5325、Fable 5.1 $0.7425→$0.805、Opus 5.5 $0.394→$0.419/MTok（workload=anthropic）。Claude 订阅派生行不变（Opus/Sonnet 标价比在两档下同为 2.5）。用户 2026-09-24 裁定。证据：`anthropic-token-mix-round1-2026-09-24.json`。
+- **Devin Max × Claude Opus 5.5 本机实测（新增第 265 行）**：66.90 亿/月 medium（PR 初稿 raw total 43.78 → 用户裁定按统一负载折算后 66.90）。用户面板 cc usage 双检查点增量：云端周额度剩余 75%→27%（差 48pt）段内 claude-opus-5-5-xhigh +1,142 calls/+512,221,810 tok（hit 92.38%）、claude-opus-5-5-high +118/+13,111,946（hit 89.32%），合计 +1,260 calls/+525,333,756 raw；用户裁定 48pp 全归 Opus 5.5 增量——若段内有其他计费模型消耗，Opus 实际所占 pp 更少、周池更大，本值偏保守；swe-2 等免费不占额度。折算：本段实测负载 cache读91.97%/cache写7.67%/输入0.001%/输出0.365% 偏离标准档，按 Opus 5.5 标价（cached$0.2/写5m $5/in$4/out$20）折段 worth $336.37 ÷48%×4周＝月 $2,803.06 list-worth ÷ Anthropic 档混合价 $0.419/MTok；面板%取整区间约 65.53~68.32 亿；cache写按 1h $8 敏感性 77.12 亿不采；原始 total 口径 43.78 亿（取整 42.88~44.71）留作对照。worth 对账：恒定池口径 Opus5.5 按约 0.6× 标价计（与 Astra 周池 3.12× 张力指向共享池模型加权）；折算只依赖标价比例。TB4 榜凭厂商自报 66.4 有分。证据：`devin-opus55-round1-2026-09-23.json`、`anthropic-token-mix-round1-2026-09-24.json`。
+- **Devin Max × GPT-6 Astra 按统一负载折算**：14.02→11.15 亿/月 medium（workload=standard）。OpenAI 无缓存写费，cache_create 按普通输入 $10 计：段 worth $356.55（cached$1/in$10/out$50）÷87%×4周＝月 $1,639.31 list-worth ÷ 标准档混合价 $1.47/MTok；面板%取整区间约 11.03~11.28 亿；raw total 14.02 亿留作对照。round4 87pt 近满周段（305,025,580 tok/667 calls，剩余100%→13%）等实测事实不变。证据：`devin-usage-round4-2026-09-14.json`、`anthropic-token-mix-round1-2026-09-24.json`。
+- **审计**：采用 264→265 行（订阅 246：245 有额度 + 1 不计额度；按量 19）。
+
 ## 2026-09-23
 
 - **按榜前沿精简版纳入不计额度点（与帕累托图一致）**：`plot_quotas.py` 原先把 ≈$0 不计额度点排除在前沿筛选之外，而帕累托图与网页已把它计入支配，TB4 前沿表因此多出一个在图上已被支配的点。用户 2026-09-23 裁定纳入：TB4 前沿 +`devin_pro::swe-2`（自报 27.3%，≈$0，促销至 10/31）、−`chatgpt_pro_20x::gpt-5.6-luna`（$0.00133，17.27%，被 SWE-2 支配）；其余 6 个榜单不变。前沿额度版把不计额度点排在最前、不画条形；单价/额度总览仍不画 ≈$0 点。`verify_four_boards.py` 新增前沿筛选结果与帕累托支配集合逐榜一致的断言。
