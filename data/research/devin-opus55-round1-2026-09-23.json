@@ -55,7 +55,8 @@
     "weeklyTokens": 1094445325,
     "remaining27pctTokens": 295500238,
     "monthlyTokensExact": 4377781300,
-    "adoptedMonthlyYi": 43.78,
+    "rawTotalMonthlyYi": 43.78,
+    "note": "原始 total 口径，入库值见 standardMixNormalization",
     "formula": "525,333,756 ÷ 48 × 100 = 周池 1,094,445,325 raw；×4 周 = 43.78 亿/月",
     "roundedPercentMonthlyLow": 4288438824,
     "roundedPercentMonthlyHigh": 4470925583,
@@ -79,17 +80,32 @@
     "finding": "按完整官方标价两周反推不一致（1.71~2.32×）：要么 Opus 5.5 按 ~0.585~0.600× 列表价计费（等价于 cache_write 按 ~$1.53~1.66/MTok 而非 $5/8），要么池子两周间涨了 ~1.7~2.3×。恒定 worth 池 $410~420/周 + Opus5.5 ~0.6× 计费是更省的解释——Astra 周读数在该口径下恰好自洽（409.8/1.1689≈350.7M raw）",
     "blendedRates": { "opus55ListMixUsdPerMtok": 0.6403, "astraSegMixUsdPerMtok": 1.1689 },
     "discriminator": "本周重测一小段 astra：若周池仍 ~350~360M raw → 恒定 worth 池 + Opus5.5 折价计费成立；若 ~600M raw → 池子确涨至 ~$700。待数据",
-    "adoptionImpact": "不改变采用值：raw token 标定与 worth 标定在本行数学上等价（43.78亿/月不变）；worth 口径只影响跨模型池语义的表述与其他模型的派生预测"
+    "adoptionImpact": "2026-09-24 用户裁定后采用 worth 折算口径入库（见 standardMixNormalization）；raw total 43.78亿 留作对照"
+  },
+  "standardMixNormalization": {
+    "decidedAt": "2026-09-24",
+    "decision": "用户裁定：本段负载非统一负载，入库按项目统一负载折算；Opus 5.5 用 Anthropic 档（普通输入份额按 5 分钟缓存写 $5 计），同面板 Astra 行用标准档",
+    "measuredMix": { "cacheRead": 0.9197, "cacheCreate": 0.0767, "input": 0.00001, "output": 0.00365 },
+    "anthropicMix": { "cache": 0.97, "cacheWrite": 0.025, "output": 0.005 },
+    "listPricesUsdPerMtok": { "cached": 0.2, "cacheWrite5m": 5, "input": 4, "output": 20 },
+    "segmentWorthUsd": 336.37,
+    "monthlyWorthUsd": 2803.06,
+    "anthropicBlendedUsdPerMtok": 0.419,
+    "monthlyYi": 66.9,
+    "roundedPercentRangeYi": [65.53, 68.32],
+    "alternativesNotAdoptedYi": { "cacheWrite1h": 77.12, "rawTotal": 43.78 },
+    "assumption": "Devin 按各类 token 标价比例扣额度；worth 对账显示绝对值约为标价 0.6×，折算只依赖比例",
+    "evidence": "anthropic-token-mix-round1-2026-09-24.json"
   },
   "adoption": {
     "planId": "devin_max",
     "planName": "Devin Max",
     "priceUsd": 200,
     "served_model": "claude-opus-5.5",
-    "monthlyYi": 43.78,
-    "confidence": "high",
-    "confidenceRationale": "用户面板直读、双检查点 48pt 大段、分项与合计自洽、增量与累计闭环；取整区间 ±4%。相对 Astra round4（87pt）段更短且含用户裁定的归属假设，但与周池 cross-check 权重张力不改变本模型 raw 月额读数本身",
-    "how": "525,333,756 ÷ 48% × 4 周"
+    "monthlyYi": 66.9,
+    "confidence": "medium",
+    "confidenceRationale": "面板直读 high 级实测 × 标价比例折算假设（CONVENTIONS 证据等级：官方比例 × high 基准 = medium）",
+    "how": "段 worth (483,137,835×$0.2 + 40,275,697×$5 + 2,672×$4 + 1,917,552×$20)/1e6 = $336.37 ÷ 48% × 4 周 = $2,803.06 ÷ Anthropic 档混合价 $0.419/MTok"
   },
   "caveats": [
     "n=1 账号、单周窗；云端%为取整读数（真实增量 47~49pp → 月额 42.88~44.71 亿）",
@@ -101,6 +117,7 @@
     "devin-usage-round4-2026-09-14.json",
     "devin-usage-round3-2026-09-12.json",
     "claude-opus55-round1-2026-09-23.json",
-    "devin-swe2-round1-2026-09-12.json"
+    "devin-swe2-round1-2026-09-12.json",
+    "anthropic-token-mix-round1-2026-09-24.json"
   ]
 }

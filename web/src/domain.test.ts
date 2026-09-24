@@ -46,6 +46,7 @@ import {
   serialize,
   tableRows,
   visiblePoints,
+  workloadLine,
 } from "./domain";
 import {
   FRONTIER_RADIUS,
@@ -74,6 +75,22 @@ const data: SiteData = unpackData(JSON.parse(
 test("Packed website mappings restore every original field without data loss", () => {
   const raw = JSON.parse(readFileSync(new URL("../../derived/benchmark-points.json", import.meta.url), "utf8"));
   assert.deepEqual(data.mappings, raw);
+});
+test("Anthropic workload line prices the input share as cache writes", () => {
+  const p = { workload: "anthropic" } as Point;
+  const m = data.conventions.anthropicTokenMix;
+  assert.equal(m.cache + m.cacheWrite + m.output, 1);
+  assert.equal(
+    workloadLine(p, data.conventions, "zh"),
+    "Anthropic 统一负载：缓存读 97% / 缓存写 2.5% / 输出 0.5%",
+  );
+  assert.equal(
+    workloadLine(p, data.conventions, "en"),
+    "Anthropic workload: 97% cache reads / 2.5% cache writes / 0.5% output",
+  );
+  const api = data.points.find((q) => q.id === "anthropic_opus55_api::claude-opus-5.5");
+  assert.equal(api?.workload, "anthropic");
+  assert.ok(workloadLine(api!, data.conventions, "zh").includes("缓存写"));
 });
 test("Monthly fee bands have exact non-overlapping boundaries and preserve all eligible allowances", () => {
   for (const [fee, expected] of [

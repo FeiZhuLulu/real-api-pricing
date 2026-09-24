@@ -16,10 +16,12 @@
 4. **负载折算**：凡是美元额度、credits 额度、三段价、模型间价格比换算成 token 的，统一按 `conventions.json` 的负载档折算，这是比较基准，不代表任何平台的实测负载。
    - **标准档** `standardTokenMix`：默认。
    - **低缓存档** `lowCacheTokenMix`：只用于经用户裁定、实测确实打不到标准缓存的渠道（当前 Step 全系）。缓存固定，输出占比跟随标准档，余量归输入。
+   - **Anthropic 档** `anthropicTokenMix`：Anthropic 单独收缓存写入费、未命中输入几乎全部走缓存写，故标准档的普通输入份额按 5 分钟缓存写入价计；用于 Anthropic 按量 API 行，以及经用户裁定折算的 Anthropic 面板实测。
    - 不为单个渠道或单个用户样本另设专用负载档。某家实测缓存偏低时，先区分是渠道本身的属性还是客户端 harness 的问题。
    - 直接给出 total token 的面板反推、本地日志、受控打满和官方绝对 token 表，**不再重复套负载**。
+     - 例外（用户 2026-09-24 裁定）：Devin Max 面板两行按标价折 list-worth 后换算——Opus 5.5 用 Anthropic 档，GPT-6 Astra 用标准档。
    - 负载比例的修订依据全库带分项的样本审计（见 `standard-token-mix-round*.json`）。修订后要统一重算所有受影响的点，不单独调整某一家。
-5. **缓存写入**不单列：标准档里它算作普通输入。对单独收写入费的厂商，按标准档算出的额度可能略偏高，只在脚注说明。
+5. **缓存写入**不单列：标准档里它算作普通输入；Anthropic 档里普通输入份额即按缓存写入价计。
 6. **官方倍率各家含义不同，不能直接相乘**：Claude 是 5h 窗口倍率，Max 20x 的周池只有 5x 的约 2 倍；Google 是 token worth；Cursor 是 Agent limits。
 7. **同套餐推其他模型**：按官方 credits 比（OpenAI）或标价混合价比（Cursor、Anthropic Sonnet/Opus）推算，置信度标 medium/low。Anthropic Fable 例外：订阅内权重是 Opus 的 4–6.5 倍，而且受周额度 50% 上限约束。
 8. **分词器差异、利用率 < 100% 这类二阶修正不做**，脚注一句即可。
