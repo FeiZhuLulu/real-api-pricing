@@ -10,6 +10,7 @@ Dollar/credit conversions use 97% cache reads, 2.5% fresh input and 0.5% output;
 |---|---|---|---|---|
 | Pareto Aa Coding Agent / 帕累托_AA编程Agent榜 | [SVG](en/pareto/pareto-aa-coding-agent.svg) | [SVG](zh/pareto/帕累托_AA编程Agent榜.svg) | [PNG](en/pareto/pareto-aa-coding-agent.png) | [PNG](zh/pareto/帕累托_AA编程Agent榜.png) |
 | Pareto Aa Intelligence / 帕累托_AA智力榜 | [SVG](en/pareto/pareto-aa-intelligence.svg) | [SVG](zh/pareto/帕累托_AA智力榜.svg) | [PNG](en/pareto/pareto-aa-intelligence.png) | [PNG](zh/pareto/帕累托_AA智力榜.png) |
+| Pareto Aa Terminal Bench 4 / 帕累托_TB4·AA榜 | [SVG](en/pareto/pareto-aa-terminal-bench-4.svg) | [SVG](zh/pareto/帕累托_TB4·AA榜.svg) | [PNG](en/pareto/pareto-aa-terminal-bench-4.png) | [PNG](zh/pareto/帕累托_TB4·AA榜.png) |
 | Pareto Agent Arena / 帕累托_AgentArena榜 | [SVG](en/pareto/pareto-agent-arena.svg) | [SVG](zh/pareto/帕累托_AgentArena榜.svg) | [PNG](en/pareto/pareto-agent-arena.png) | [PNG](zh/pareto/帕累托_AgentArena榜.png) |
 | Pareto Code Arena / 帕累托_CodeArena榜 | [SVG](en/pareto/pareto-code-arena.svg) | [SVG](zh/pareto/帕累托_CodeArena榜.svg) | [PNG](en/pareto/pareto-code-arena.png) | [PNG](zh/pareto/帕累托_CodeArena榜.png) |
 | Pareto Deepswe 1 1 / 帕累托_DeepSWE榜 | [SVG](en/pareto/pareto-deepswe-1-1.svg) | [SVG](zh/pareto/帕累托_DeepSWE榜.svg) | [PNG](en/pareto/pareto-deepswe-1-1.png) | [PNG](zh/pareto/帕累托_DeepSWE榜.png) |
@@ -23,6 +24,7 @@ Dollar/credit conversions use 97% cache reads, 2.5% fresh input and 0.5% output;
 | Real Price Overview / 单价总览 | [SVG](en/overview/real-price-overview.svg) | [SVG](zh/overview/单价总览.svg) | [PNG](en/overview/real-price-overview.png) | [PNG](zh/overview/单价总览.png) |
 | Frontier Allowance Aa Coding Agent / 前沿额度_AA编程Agent榜 | [SVG](en/frontier/frontier-allowance-aa-coding-agent.svg) | [SVG](zh/frontier/前沿额度_AA编程Agent榜.svg) | [PNG](en/frontier/frontier-allowance-aa-coding-agent.png) | [PNG](zh/frontier/前沿额度_AA编程Agent榜.png) |
 | Frontier Allowance Aa Intelligence / 前沿额度_AA智力榜 | [SVG](en/frontier/frontier-allowance-aa-intelligence.svg) | [SVG](zh/frontier/前沿额度_AA智力榜.svg) | [PNG](en/frontier/frontier-allowance-aa-intelligence.png) | [PNG](zh/frontier/前沿额度_AA智力榜.png) |
+| Frontier Allowance Aa Terminal Bench 4 / 前沿额度_TB4·AA榜 | [SVG](en/frontier/frontier-allowance-aa-terminal-bench-4.svg) | [SVG](zh/frontier/前沿额度_TB4·AA榜.svg) | [PNG](en/frontier/frontier-allowance-aa-terminal-bench-4.png) | [PNG](zh/frontier/前沿额度_TB4·AA榜.png) |
 | Frontier Allowance Agent Arena / 前沿额度_AgentArena榜 | [SVG](en/frontier/frontier-allowance-agent-arena.svg) | [SVG](zh/frontier/前沿额度_AgentArena榜.svg) | [PNG](en/frontier/frontier-allowance-agent-arena.png) | [PNG](zh/frontier/前沿额度_AgentArena榜.png) |
 | Frontier Allowance Code Arena / 前沿额度_CodeArena榜 | [SVG](en/frontier/frontier-allowance-code-arena.svg) | [SVG](zh/frontier/前沿额度_CodeArena榜.svg) | [PNG](en/frontier/frontier-allowance-code-arena.png) | [PNG](zh/frontier/前沿额度_CodeArena榜.png) |
 | Frontier Allowance Deepswe 1 1 / 前沿额度_DeepSWE榜 | [SVG](en/frontier/frontier-allowance-deepswe-1-1.svg) | [SVG](zh/frontier/前沿额度_DeepSWE榜.svg) | [PNG](en/frontier/frontier-allowance-deepswe-1-1.png) | [PNG](zh/frontier/前沿额度_DeepSWE榜.png) |
@@ -30,6 +32,7 @@ Dollar/credit conversions use 97% cache reads, 2.5% fresh input and 0.5% output;
 | Frontier Allowance Terminal Bench 4 / 前沿额度_TB4终端榜 | [SVG](en/frontier/frontier-allowance-terminal-bench-4.svg) | [SVG](zh/frontier/前沿额度_TB4终端榜.svg) | [PNG](en/frontier/frontier-allowance-terminal-bench-4.png) | [PNG](zh/frontier/前沿额度_TB4终端榜.png) |
 | Frontier Price Aa Coding Agent / 前沿单价_AA编程Agent榜 | [SVG](en/frontier/frontier-price-aa-coding-agent.svg) | [SVG](zh/frontier/前沿单价_AA编程Agent榜.svg) | [PNG](en/frontier/frontier-price-aa-coding-agent.png) | [PNG](zh/frontier/前沿单价_AA编程Agent榜.png) |
 | Frontier Price Aa Intelligence / 前沿单价_AA智力榜 | [SVG](en/frontier/frontier-price-aa-intelligence.svg) | [SVG](zh/frontier/前沿单价_AA智力榜.svg) | [PNG](en/frontier/frontier-price-aa-intelligence.png) | [PNG](zh/frontier/前沿单价_AA智力榜.png) |
+| Frontier Price Aa Terminal Bench 4 / 前沿单价_TB4·AA榜 | [SVG](en/frontier/frontier-price-aa-terminal-bench-4.svg) | [SVG](zh/frontier/前沿单价_TB4·AA榜.svg) | [PNG](en/frontier/frontier-price-aa-terminal-bench-4.png) | [PNG](zh/frontier/前沿单价_TB4·AA榜.png) |
 | Frontier Price Agent Arena / 前沿单价_AgentArena榜 | [SVG](en/frontier/frontier-price-agent-arena.svg) | [SVG](zh/frontier/前沿单价_AgentArena榜.svg) | [PNG](en/frontier/frontier-price-agent-arena.png) | [PNG](zh/frontier/前沿单价_AgentArena榜.png) |
 | Frontier Price Code Arena / 前沿单价_CodeArena榜 | [SVG](en/frontier/frontier-price-code-arena.svg) | [SVG](zh/frontier/前沿单价_CodeArena榜.svg) | [PNG](en/frontier/frontier-price-code-arena.png) | [PNG](zh/frontier/前沿单价_CodeArena榜.png) |
 | Frontier Price Deepswe 1 1 / 前沿单价_DeepSWE榜 | [SVG](en/frontier/frontier-price-deepswe-1-1.svg) | [SVG](zh/frontier/前沿单价_DeepSWE榜.svg) | [PNG](en/frontier/frontier-price-deepswe-1-1.png) | [PNG](zh/frontier/前沿单价_DeepSWE榜.png) |
@@ -50,6 +53,8 @@ Dollar/credit conversions use 97% cache reads, 2.5% fresh input and 0.5% output;
 - [en/frontier/frontier-price-deepswe-1-1-table.txt](en/frontier/frontier-price-deepswe-1-1-table.txt)
 - [zh/frontier/前沿单价表_OpenDesign设计榜.txt](zh/frontier/前沿单价表_OpenDesign设计榜.txt)
 - [en/frontier/frontier-price-open-design-arena-table.txt](en/frontier/frontier-price-open-design-arena-table.txt)
+- [zh/frontier/前沿单价表_TB4·AA榜.txt](zh/frontier/前沿单价表_TB4·AA榜.txt)
+- [en/frontier/frontier-price-aa-terminal-bench-4-table.txt](en/frontier/frontier-price-aa-terminal-bench-4-table.txt)
 - [zh/frontier/前沿单价表_TB4终端榜.txt](zh/frontier/前沿单价表_TB4终端榜.txt)
 - [en/frontier/frontier-price-terminal-bench-4-table.txt](en/frontier/frontier-price-terminal-bench-4-table.txt)
 - [zh/frontier/前沿额度表_AA智力榜.txt](zh/frontier/前沿额度表_AA智力榜.txt)
@@ -64,6 +69,8 @@ Dollar/credit conversions use 97% cache reads, 2.5% fresh input and 0.5% output;
 - [en/frontier/frontier-allowance-deepswe-1-1-table.txt](en/frontier/frontier-allowance-deepswe-1-1-table.txt)
 - [zh/frontier/前沿额度表_OpenDesign设计榜.txt](zh/frontier/前沿额度表_OpenDesign设计榜.txt)
 - [en/frontier/frontier-allowance-open-design-arena-table.txt](en/frontier/frontier-allowance-open-design-arena-table.txt)
+- [zh/frontier/前沿额度表_TB4·AA榜.txt](zh/frontier/前沿额度表_TB4·AA榜.txt)
+- [en/frontier/frontier-allowance-aa-terminal-bench-4-table.txt](en/frontier/frontier-allowance-aa-terminal-bench-4-table.txt)
 - [zh/frontier/前沿额度表_TB4终端榜.txt](zh/frontier/前沿额度表_TB4终端榜.txt)
 - [en/frontier/frontier-allowance-terminal-bench-4-table.txt](en/frontier/frontier-allowance-terminal-bench-4-table.txt)
 - [zh/overview/单价总览表.txt](zh/overview/单价总览表.txt)

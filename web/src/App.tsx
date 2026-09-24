@@ -81,6 +81,7 @@ const boardLabels: Record<string, string> = {
   aa_coding_agent_index: "AA Coding Agent",
   open_design_arena: "OpenDesign Arena",
   terminal_bench_4: "Terminal-Bench 4.0",
+  aa_terminal_bench_4: "Terminal-Bench 4.0 (AA)",
   deepswe_1_1: "DeepSWE v1.1",
 };
 const boardZh: Record<string, string> = {
@@ -90,6 +91,7 @@ const boardZh: Record<string, string> = {
   aa_coding_agent_index: "AA 编程 Agent",
   open_design_arena: "OpenDesign 设计榜",
   terminal_bench_4: "Terminal-Bench 4.0 终端榜",
+  aa_terminal_bench_4: "TB4（AA 实测）",
   deepswe_1_1: "DeepSWE v1.1",
 };
 const filterLabels: Record<FilterKey, [string, string]> = {

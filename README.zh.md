@@ -34,7 +34,8 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 | Code Arena / Agent Arena 有分点 | <!-- stat:scored_arena_code -->162<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->149<!-- /stat --> |
 | AA 智力榜 / AA 编程 Agent 榜有分点 | <!-- stat:scored_aa_intelligence_index -->233<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->79<!-- /stat --> |
 | OpenDesign Arena 有分点 | <!-- stat:scored_open_design_arena -->77<!-- /stat --> |
-| Terminal-Bench 4.0 有分点 | <!-- stat:scored_terminal_bench_4 -->110<!-- /stat --> |
+| Terminal-Bench 4.0 有分点 | <!-- stat:scored_terminal_bench_4 -->95<!-- /stat --> |
+| Terminal-Bench 4.0（AA）有分点 | <!-- stat:scored_aa_terminal_bench_4 -->26<!-- /stat --> |
 | DeepSWE v1.1 有分点 | <!-- stat:scored_deepswe_1_1 -->175<!-- /stat --> |
 
 **下载数据：** [采用值 CSV](data/adopted.csv) · [完整计算结果 CSV](derived/points.csv) · [完整计算结果 JSON](derived/points.json) · [数据说明及缺分清单](data/README.md) · [分日期原始证据](data/research/)
@@ -117,11 +118,19 @@ AA 智力榜改用 **Intelligence Index v4.3**（2026-09-07 发布），AA Codin
 
 ![Terminal-Bench 4.0](charts/zh/pareto/帕累托_TB4终端榜.svg)
 
+### Terminal-Bench 4.0（AA）
+
+[English SVG](charts/en/pareto/pareto-aa-terminal-bench-4.svg) · [中文 SVG](charts/zh/pareto/帕累托_TB4·AA榜.svg) · [English PNG](charts/en/pareto/pareto-aa-terminal-bench-4.png) · [中文 PNG](charts/zh/pareto/帕累托_TB4·AA榜.png)
+
+![Terminal-Bench 4.0（AA）](charts/zh/pareto/帕累托_TB4·AA榜.svg)
+
 OpenDesign 的 <!-- stat:configs_open_design_arena -->13<!-- /stat --> 模型完整效果榜已存档，<!-- stat:configs_mapped_open_design_arena -->13<!-- /stat --> 条全部与采用点的模型精确映射。DeepSeek V4.1 Flash 采用 9 月 10 日起生效的官方美元标价：闲时缓存输入 $0.003、未缓存输入 $0.15、输出 $0.60，并另列高峰 2 倍价。分数属于 OpenDesign Harness 配置参考，不代表各订阅/API渠道实测。
 
 AA 编程 Agent 分数属于已测试的 harness × 模型 × effort 配置。静态图和 `points.*` 明确为**最高存档配置参考汇总**，不代表各订阅/API渠道实测；额度样本的effort、产品harness是否对齐仍未验证。更高effort不自动提高每百万token单价，但可能增加每任务token消耗。
 
-Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，<!-- stat:configs_terminal_bench_4 -->31<!-- /stat --> 行全部存档，包括 GPT-6 Astra 的五个 effort 档，每行都映射到采用点。另有一行补充档追加在官方快照之后、不替换快照：**SWE-2 · Devin Pro** 27.3%，来自 Cognition 发布博客的自报数字（官方榜无 SWE-2 行）。SWE-2 在促销期内对 Pro/Max/Teams 订阅者不计额度，官推只写 "the next month"，本项目记为截止 2026-10-31，因此真实单价显示为 **≈$0/MTok**、放在专用刻度位，并成为前沿最便宜端点。这是促销价而非永久口径，促销结束后必须复核。
+Terminal-Bench 4.0 是 Stanford / Harbor / Laude Institute 托管的 66 任务官方榜（快照 2026-09-03）。每行是一个 harness × 模型 × effort 配置，<!-- stat:configs_terminal_bench_4 -->22<!-- /stat --> 行全部存档，包括 GPT-6 Astra 的五个 effort 档，每行都映射到采用点。另有一行补充档追加在官方快照之后、不替换快照：**SWE-2 · Devin Pro** 27.3%，来自 Cognition 发布博客的自报数字（官方榜无 SWE-2 行）。本榜只收官方榜已公布 harness 的运行和标注过的厂商自报行：Artificial Analysis 用自家 `Artificial Analysis` harness 独立实测的 TB4 拆分为 **Terminal-Bench 4.0（AA）**——同为 66 题但 agent 配置不同，两榜不可互换（同配置对拍中位差 ~2.6 分；Grok 4.7 xhigh 官方 Grok Build 37.58 vs AA 25.76）。SWE-2 在促销期内对 Pro/Max/Teams 订阅者不计额度，官推只写 "the next month"，本项目记为截止 2026-10-31，因此真实单价显示为 **≈$0/MTok**、放在专用刻度位，并成为前沿最便宜端点。这是促销价而非永久口径，促销结束后必须复核。
+
+Terminal-Bench 4.0（AA）是 Artificial Analysis 用自家 harness 跑的同一套题（快照 2026-09-23），因 agent scaffolding 不同独立成榜。它覆盖了官方榜尚未收录的模型——Claude Opus 5.5（max 59.6，五档全存档）、MiMo V2.6 Pro（34.85，目前唯一第三方 TB4 分）和 Step 5（33.3）。
 
 [全配置交互图](charts/zh/pareto/帕累托交互图.html) 默认展示每模型最高分汇总，可切换全部存档配置，并提供思考强度档位选择。下载HTML后本地打开，Plotly需要联网。目前全部采用参考映射，尚不是已验证产品配置的严格前沿。
 

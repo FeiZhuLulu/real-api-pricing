@@ -15,6 +15,7 @@ BOARDS = {
     'AA编程Agent榜': ('aa-coding-agent', 'AA Coding Agent'),
     'OpenDesign设计榜': ('open-design-arena', 'OpenDesign Arena'),
     'TB4终端榜': ('terminal-bench-4', 'Terminal-Bench 4.0'),
+    'TB4·AA榜': ('aa-terminal-bench-4', 'Terminal-Bench 4.0 (AA)'),
     'DeepSWE榜': ('deepswe-1-1', 'DeepSWE v1.1'),
 }
 

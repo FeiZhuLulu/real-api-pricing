@@ -34,7 +34,8 @@ Snapshot: <!-- stat:snapshot -->2026-09-24<!-- /stat -->. Each row is one **plan
 | Code Arena / Agent Arena scored points | <!-- stat:scored_arena_code -->162<!-- /stat --> / <!-- stat:scored_arena_agent_mode -->149<!-- /stat --> |
 | AA Intelligence / AA Coding Agent scored points | <!-- stat:scored_aa_intelligence_index -->233<!-- /stat --> / <!-- stat:scored_aa_coding_agent_index -->79<!-- /stat --> |
 | OpenDesign Arena scored points | <!-- stat:scored_open_design_arena -->77<!-- /stat --> |
-| Terminal-Bench 4.0 scored points | <!-- stat:scored_terminal_bench_4 -->110<!-- /stat --> |
+| Terminal-Bench 4.0 scored points | <!-- stat:scored_terminal_bench_4 -->95<!-- /stat --> |
+| Terminal-Bench 4.0 (AA) scored points | <!-- stat:scored_aa_terminal_bench_4 -->26<!-- /stat --> |
 | DeepSWE v1.1 scored points | <!-- stat:scored_deepswe_1_1 -->175<!-- /stat --> |
 
 **Download the data:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) · [computed points (JSON)](derived/points.json) · [data notes and score coverage](data/README.md) · [dated evidence](data/research/)
@@ -117,11 +118,19 @@ Using Real API Pricing as a new baseline, we plot each leaderboard's scores on t
 
 ![Terminal-Bench 4.0](charts/en/pareto/pareto-terminal-bench-4.svg)
 
+### Terminal-Bench 4.0 (AA)
+
+[English SVG](charts/en/pareto/pareto-aa-terminal-bench-4.svg) · [中文 SVG](charts/zh/pareto/帕累托_TB4·AA榜.svg) · [English PNG](charts/en/pareto/pareto-aa-terminal-bench-4.png) · [中文 PNG](charts/zh/pareto/帕累托_TB4·AA榜.png)
+
+![Terminal-Bench 4.0 (AA)](charts/en/pareto/pareto-aa-terminal-bench-4.svg)
+
 OpenDesign's full <!-- stat:configs_open_design_arena -->13<!-- /stat -->-model quality ranking is archived, and all <!-- stat:configs_mapped_open_design_arena -->13<!-- /stat --> entries map to exact adopted model identities. DeepSeek V4.1 Flash uses the official USD list price effective September 10: $0.003 cached input / $0.15 uncached input / $0.60 output off-peak, with a separate 2× peak point. The scores are OpenDesign Harness references, not measurements of each subscription/API channel.
 
 AA Coding Agent scores describe tested harness × model × effort configurations. Static charts and `points.*` are explicitly **highest archived configuration reference summaries**. They are not measurements of each subscription/API channel; quota-measurement effort and product harness alignment remain unverified. Higher effort does not automatically change $/MTok; it can change tokens consumed per task.
 
-Terminal-Bench 4.0 is the official 66-task leaderboard hosted by Stanford / Harbor / the Laude Institute (snapshot 2026-09-03). Each published row is a harness × model × effort configuration, and all <!-- stat:configs_terminal_bench_4 -->31<!-- /stat --> rows are archived including GPT-6 Astra's five effort levels; every row maps to an adopted point. One supplemental row is appended to the official snapshot without replacing it: **SWE-2 · Devin Pro** at 27.3%, Cognition's self-reported figure from its launch post (the official board has no SWE-2 row). SWE-2 is unmetered for Pro/Max/Teams subscribers during a promotion that Cognition announced as "the next month" and that we record as ending 2026-10-31, so its real price is shown as **≈$0/MTok** on a dedicated axis slot and it becomes the cheapest frontier point. This is a promotional price, not a permanent allowance; the point must be re-evaluated when the promotion ends.
+Terminal-Bench 4.0 is the official 66-task leaderboard hosted by Stanford / Harbor / the Laude Institute (snapshot 2026-09-03). Each published row is a harness × model × effort configuration, and all <!-- stat:configs_terminal_bench_4 -->22<!-- /stat --> rows are archived including GPT-6 Astra's five effort levels; every row maps to an adopted point. One supplemental row is appended to the official snapshot without replacing it: **SWE-2 · Devin Pro** at 27.3%, Cognition's self-reported figure from its launch post (the official board has no SWE-2 row). Only rows run on the official published harnesses or flagged vendor self-reports stay on this board: Artificial Analysis independently benchmarks TB4 on its own `Artificial Analysis` harness, and those runs are scored separately as **Terminal-Bench 4.0 (AA)** — same 66 tasks, different agent configuration, so the two boards are not interchangeable (on matched configurations the median absolute gap is ~2.6 points; Grok 4.7 xhigh scores 37.58 on the official Grok Build harness vs 25.76 under AA). SWE-2 is unmetered for Pro/Max/Teams subscribers during a promotion that Cognition announced as "the next month" and that we record as ending 2026-10-31, so its real price is shown as **≈$0/MTok** on a dedicated axis slot and it becomes the cheapest frontier point. This is a promotional price, not a permanent allowance; the point must be re-evaluated when the promotion ends.
+
+Terminal-Bench 4.0 (AA) is the same task suite run on Artificial Analysis' own harness (snapshot 2026-09-23), tracked as a separate leaderboard because agent scaffolding differs. It covers models the official board does not yet list — Claude Opus 5.5 (59.6 at max, five effort levels archived), MiMo V2.6 Pro (34.85, its only third-party TB4 score) and Step 5 (33.3).
 
 [All-configuration interactive view (Chinese)](charts/zh/pareto/帕累托交互图.html) defaults to the highest-score summary per model and offers every archived configuration plus a reasoning-effort selector as options. Download the HTML and open it locally with network access for Plotly. All configurations currently use reference mappings, not a verified product-configuration frontier.
 

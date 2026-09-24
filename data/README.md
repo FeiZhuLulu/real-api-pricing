@@ -15,7 +15,8 @@ These files are the public redacted edition. Original local evidence is backed u
 | AA Intelligence | 228 / 265 | 37 |
 | AA Coding Agent | 79 / 265 | 186 |
 | OpenDesign Arena | 77 / 265 | 188 |
-| Terminal-Bench 4.0 | 99 / 265 | 166 |
+| Terminal-Bench 4.0 | 95 / 265 | 170 |
+| Terminal-Bench 4.0 (AA) | 26 / 265 | 239 |
 
 具体缺分模型以 [`points.csv`](../derived/points.csv) / [`points.json`](../derived/points.json) 的空分数字段为准；不为缺失模型补造分数。
 
