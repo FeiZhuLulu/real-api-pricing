@@ -1,0 +1,78 @@
+{
+ "collectedAt": "2026-09-24",
+ "subject": "OpenCode Go 与 Command Code GOAT 全量目录复核（官网页面原表，curl 抓取对照 zh/en 双版本）",
+ "collectionMethod": "curl 抓取 opencode.ai/docs/go/ 与 /docs/zh-cn/go/（双语一致）、commandcode.ai/docs/plans/goat/ 与 /docs/resources/pricing-limits 当前 HTML；此前一次抓取曾命中过期缓存（缺 Grok 4.7、MiMo V2.6、GPT-6 Luna 等新行、GOAT 限额表为旧版），已由双语原表更正——凡与前版抓取冲突处以本轮为准。",
+ "opencodeGo": {
+  "url": "https://opencode.ai/docs/go/",
+  "sharedPoolUsd": 60,
+  "changedCaps": [
+   {"model": "glm-5.3-flash", "usageUsdOld": 15, "usageUsdNew": 60,
+    "note": "双语限额表一致：$15→$60。其余已采用行逐项核对无变动。"}
+  ],
+  "newModels": [
+   {"model": "gpt-6-luna", "usageUsd": 15, "input": 0.10, "output": 0.50, "cachedRead": 0.01, "cachedWrite": 0.125, "tier": "≤272K",
+    "longContext": {"input": 0.20, "output": 0.75, "cachedRead": 0.02, "cachedWrite": 0.25, "tier": ">272K"},
+    "apiModelId": "gpt-6-luna", "endpoint": "https://opencode.ai/zen/go/v1/responses"},
+   {"model": "deepseek-v4-flash", "usageUsd": 30, "input": 0.15, "output": 0.60, "cachedRead": 0.003, "tier": "Off-Peak",
+    "peakTier": {"input": 0.30, "output": 1.20, "cachedRead": 0.006, "tier": "Peak"},
+    "apiModelId": "deepseek-v4-flash",
+    "note": "恢复在列。旧行曾按用户确认下线删除（旧值 21.637亿）；官网 Peak=Off-Peak 2×。"},
+   {"model": "deepseek-v4-flash-vision-exp", "usageUsd": 15, "input": 0.15, "output": 0.60, "cachedRead": 0.003, "tier": "Off-Peak",
+    "peakTier": {"input": 0.30, "output": 1.20, "cachedRead": 0.006, "tier": "Peak"},
+    "apiModelId": "deepseek-v4-flash-vision-exp",
+    "note": "恢复在列（旧行曾删除，旧值 10.819亿）。图片按尺寸折 token 与文本同按输入计。"}
+  ],
+  "promoStatus": [
+   {"model": "deepseek-v4.1-flash", "officialQuote": "$15 $60 4x · Ends Sep 27（zh：9月27日结束）",
+    "note": "限额提额促销进行中至 2026-09-27，按项目促销不采惯例只记不采；上游 PR #19 据 09-22 证据主张建档该促销点——证据本身准确（本档复核同口径），但促销属短期口径不入常态档。前一版过期抓取曾显示『9月20日结束』，系缓存误导，以本轮双语原表为准。"}
+  ],
+  "notListed": [
+   {"model": "omen-alpha", "note": "现采用行 Usage $100（共享池 $60 先绑定）；2026-09-24 官网限额表、模型清单与 Model ID 表均未列本模型，待确认是否下线——按惯例未见下线确认前保留行并标注。"}
+  ],
+  "freeModels": [
+   {"model": "space-bunny-free", "officialQuote": "Free / 无限制 限时（unlimited limited time）", "note": "免费限时模型不入采用集（同类先例：GOAT 各 Free 行不建档）。"}
+  ]
+ },
+ "commandCodeGoat": {
+  "url": "https://commandcode.ai/docs/plans/goat/",
+  "sharedPoolUsd": 70,
+  "changedCaps": [],
+  "capsVerifiedUnchanged": "Every model + New models 两表共 48 行与仓库既有 41 行逐一核对：全部 allowance 与三段价一致，无变动（包含 deepseek-v4.1-flash $40、gpt-5.6-luna $20、qwen3.8-max $20、qwen3.7-max/plus/3.6-plus $33、mimo-v2.6-flash $30、mimo-v2.6-pro-ultraspeed $10 等）。",
+  "newModels": [
+   {"model": "deepseek-v4-flash", "allowanceUsd": 60, "input": 0.15, "output": 0.60, "cachedRead": 0.003, "displayName": "DeepSeek V4 Flash (latest)", "tier": "Off-Peak",
+    "note": "恢复在列（旧行曾按用户确认下线删除，旧值 43.274亿）。注意：该 allowance 表三段价为 $0.15/$0.60/$0.003（与 V4.1 同），而页顶 Models included 表标 $0.14/$0.28/$0.0028（与 MiMo V2.5 相同，疑笔误）——采用同表行内口径（allowance 与三段价同行的值）。项目按量 API 行另有 deepseek_v4_flash_offpeak $0.007/$0.22/$0.66，渠道价不同不混用。"},
+   {"model": "longcat-2.0", "allowanceUsd": 50, "input": 0.30, "output": 1.20, "cachedRead": 0.006},
+   {"model": "deepseek-v4-flash-vision-exp", "allowanceUsd": 20, "input": 0.15, "output": 0.60, "cachedRead": 0.003, "displayName": "DeepSeek V4 Flash Vision (exp)",
+    "note": "恢复在列（旧行曾删除，旧值 14.425亿）；New models 表。"},
+   {"model": "gpt-6-luna", "allowanceUsd": 20, "input": 0.10, "output": 0.50, "cachedRead": 0.01, "cachedWrite": 0.125, "note": "New models 表；GPT-6 Luna 首个采用行（此前各渠道无 allowance 公布）。"},
+   {"model": "qwen3.8-omni-flash", "allowanceUsd": 20, "input": 0.15, "output": 0.47, "cachedRead": 0.016, "note": "New models 表；与 qwen3.8-flash（本渠道 input $0.16）不同模型不同价。"},
+   {"model": "glm-5.3-flashx", "allowanceUsd": 20, "input": 0.37, "output": 1.25, "cachedRead": 0.075, "note": "New models 表；GLM-5.3 Flash 的速度变体。"},
+   {"model": "step-5-preview", "allowanceUsd": 20, "input": 1.00, "output": 2.70, "cachedRead": 0.05, "note": "New models 表；Step-5 Preview 首个订阅渠道行（此前仅 Step Plan 按量档）。"}
+  ],
+  "olderModelsUniform20": {
+   "officialQuote": "Older models also available - Kimi K2.6, Kimi K2.5, GLM-5.1, GLM-5, Qwen 3.7 Flash, Qwen 3.6 Max Preview, MiniMax M2.7, MiniMax M2.5 - all at the standard $20 credits for $10 GOAT plan",
+   "models": [
+    {"model": "kimi-k2.6", "input": 0.95, "output": 4.00, "cachedRead": 0.16},
+    {"model": "kimi-k2.5", "input": 0.60, "output": 3.00, "cachedRead": 0.10},
+    {"model": "glm-5.1", "input": 1.40, "output": 4.40, "cachedRead": 0.26},
+    {"model": "glm-5", "input": 1.00, "output": 3.20, "cachedRead": 0.20},
+    {"model": "qwen3.7-flash", "input": 0.03, "output": 0.13, "cachedRead": 0.006, "cachedWrite": 0.038},
+    {"model": "qwen3.6-max-preview", "input": 1.30, "output": 7.80, "cachedRead": 0.26, "cachedWrite": 1.63},
+    {"model": "minimax-m2.7", "input": 0.30, "output": 1.20, "cachedRead": 0.06},
+    {"model": "minimax-m2.5", "input": 0.30, "output": 1.20, "cachedRead": 0.03}
+   ]
+  },
+  "promoStatus": [
+   {"model": "deepseek-v4.1-flash", "officialQuote": "$40 $60 through Sep 28th", "note": "促销至 2026-09-28 不采（惯例）；基准 $40 与采用值一致。上游 PR #19 欲建该促销行。"},
+   {"model": "grok-4.7", "officialQuote": "$20 $35 through Sep 27th", "note": "沿用 09-22 裁定：限时提额不采。"},
+   {"model": "mimo-v2.6-flash", "officialQuote": "$30 $67 through Sep 24th", "note": "沿用 09-22 裁定：限时提额不采；促销今日到期。"}
+  ],
+  "dealsBanner": [
+   {"model": "minimax-m3", "note": "DEAL 横幅『2× usage，Every credit goes 2× further』——采用价已按成交价 $0.30/$1.20/$0.06（allowance $47），横幅系同义表述不叠加。"},
+   {"model": "mimo-v2.5 / mimo-v2.5-pro", "note": "DEAL 横幅『up to 99% off』——采用价已按成交价 $0.14/$0.28/$0.0028 与 $0.435/$0.87/$0.0036，不叠加。"},
+   {"model": "deepseek-v4.1-flash (Pro plan)", "note": "pricing-limits 页另有 Pro 档 $50→$70 促销至 9/17 已过期不采；Go/Pro 档额度表非本批范围。"},
+   {"model": "laguna-s-2.1-free / longcat-2.0:free / ling-3.0-flash-sante:free", "note": "免费模型不入采用集。"}
+  ]
+ },
+ "notAdopted": "两渠道促销点一律不采（惯例）；免费模型不建档；GOAT 的 Pro/Max 套餐（$20/$100/$200）与本仓库 GOAT 档分开，未入本批。"
+}
