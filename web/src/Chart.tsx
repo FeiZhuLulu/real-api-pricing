@@ -676,6 +676,12 @@ export default function Chart({
     setView(home);
     setSettled(home);
   };
+  // Double-click resets only on empty plot space: over a point or badge the
+  // click is a selection gesture, not a view reset.
+  const onDoubleClick = (e: React.MouseEvent) => {
+    const pt = local(e);
+    if (!hitTest(markable, pt.x, pt.y)) reset();
+  };
   const zoomBy = (factor: number) =>
     setViewSafe(zoomAt(view, box, box.left + box.width / 2, box.top + box.height / 2, factor));
 
@@ -1019,7 +1025,7 @@ export default function Chart({
           onPointerUp={(e) => endGesture(e)}
           onPointerCancel={(e) => endGesture(e, true)}
           onPointerLeave={() => !gesture.current && setHoverKey(null)}
-          onDoubleClick={reset}
+          onDoubleClick={onDoubleClick}
           onKeyDown={onKeyDown}
         >
           {width > 0 && (

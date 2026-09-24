@@ -10,9 +10,20 @@ _CONFIG = json.loads(
 )
 COLORS: dict[str, str] = _CONFIG["colors"]
 ALIASES: dict[str, str] = _CONFIG["aliases"]
+CHANNEL_PREFIXES: list[tuple[str, str]] = [tuple(pair) for pair in _CONFIG["channels"]]
 BRAND_PAIRS: dict[str, float] = {k: v for k, v in _CONFIG.get("brandPairs", {}).items() if not k.startswith("_")}
 FALLBACK: str = _CONFIG["fallback"]
 FRONTIER: str = _CONFIG["frontier"]
+
+
+def channel_of(point_id: str, vendor: str | None = None) -> str:
+    """point/plan id 前缀 → 渠道名（首个匹配前缀）；无匹配回退 vendor，都没有则要求登记前缀。"""
+    for prefix, channel in CHANNEL_PREFIXES:
+        if point_id.startswith(prefix):
+            return channel
+    if vendor is not None:
+        return vendor
+    raise ValueError(f"no channel prefix for {point_id!r}; add it to config/channel-colors.json channels")
 
 
 def color(name: str) -> str:

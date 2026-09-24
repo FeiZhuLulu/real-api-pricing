@@ -47,6 +47,12 @@ jobs:
           python scripts/build_adopted.py > /dev/null
           python scripts/compute.py > /dev/null
 
+      - name: Snapshot date advanced with adopted data
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          python scripts/checks/verify_snapshot_date.py --base FETCH_HEAD
+
       - name: README statistics are current
         run: python scripts/readme_stats.py --check
 

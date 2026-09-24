@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from palette import FALLBACK, palette
+from palette import FALLBACK, channel_of, palette
 
 ROOT = Path(__file__).resolve().parent.parent
 POINTS = ROOT / "derived" / "points.json"
@@ -59,7 +59,7 @@ TEMPLATE = r"""<!doctype html>
 const DATA = __DATA__;
 const VENDOR_COLOR = __COLORS__;
 const FRONTIER_COLOR="#111111";
-const channel=p=>p.id.startsWith("cursor_")?"Cursor":p.id.startsWith("opencode_")?"OpenCode":p.id.startsWith("command_code_")?"Command Code":p.id.startsWith("ollama_")?"Ollama":p.id.startsWith("stepfun_")?"StepFun":p.id.startsWith("devin_")?"Devin":p.vendor;
+const channel=p=>p.channel;
 const color=p=>VENDOR_COLOR[channel(p)]||VENDOR_COLOR.other;
 // Devin 渠道用六边形近似官方标志（Plotly 无自定义路径标记）；静态 SVG 用完整标志。
 const symbolOf=(p,base)=>channel(p)==="Devin"?"hexagon":base;
@@ -202,6 +202,7 @@ draw();
 def main() -> None:
     data = json.loads(POINTS.read_text(encoding="utf-8"))
     for point in data["points"]:
+        point["channel"] = channel_of(point["id"], point["vendor"])
         if point.get("plan", "").startswith("GLM "):
             for field in ("plan", "label"):
                 point[field] = point[field].replace("老客", "v2").replace("新客", "v3")
