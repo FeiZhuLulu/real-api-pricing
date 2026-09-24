@@ -19,6 +19,7 @@ BOARDS = {
     "aa_coding_agent_index": ("AA编程Agent榜", "AA Coding Agent"),
     "open_design_arena": ("OpenDesign设计榜", "OpenDesign Arena"),
     "terminal_bench_4": ("TB4终端榜", "Terminal-Bench 4.0"),
+    "aa_terminal_bench_4": ("TB4·AA榜", "TB4 (AA)"),
     "deepswe_1_1": ("DeepSWE榜", "DeepSWE v1.1"),
 }
 # 色值与 id 前缀统一来自 config/channel-colors.json；此处只定图例顺序。
@@ -174,8 +175,8 @@ def label_position(p, board, x, y):
     if model in {"deepseek-v4-flash", "deepseek-v4.1-flash"}:
         return x - 24, y + 49, "end"
     if model == "gpt-5.6-luna":
-        # TB4 全量里 Luna 分数最低（17.27%），标签整体下移会压过图框下缘。
-        if board == "terminal_bench_4":
+        # TB4 全量里 Luna 分数最低（官方 17.27% / AA 0%），标签整体下移会压过图框下缘。
+        if board in ("terminal_bench_4", "aa_terminal_bench_4"):
             return x + 5, y + 25, "end"
         if board == "aa_intelligence_index":
             return x - 30, y + 113, "end"
@@ -330,13 +331,13 @@ def draw(board, meta, points, tier, language="zh"):
               "OpenDesign Harness reference; product/quota alignment unverified, not channel measurements."
               if board == "open_design_arena" else
               "Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements."
-              if board in ("aa_coding_agent_index", "terminal_bench_4", "deepswe_1_1") else
+              if board in ("aa_coding_agent_index", "terminal_bench_4", "aa_terminal_bench_4", "deepswe_1_1") else
               "Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model."
           ) if language == "en" else (
               "OpenDesign Harness 配置参考；产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
               if board == "open_design_arena" else
               "最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。"
-              if board in ("aa_coding_agent_index", "terminal_bench_4", "deepswe_1_1") else
+              if board in ("aa_coding_agent_index", "terminal_bench_4", "aa_terminal_bench_4", "deepswe_1_1") else
               "Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。"
           )) + ((" ≈$0 = SWE-2 promo: unmetered on Devin Pro/Max/Teams until 2026-10-31, not permanent; TB4 score self-reported by Cognition."
                  if language == "en" else " ≈$0 为 SWE-2 促销价：Devin Pro/Max/Teams 至 2026-10-31 不计额度，非永久口径；TB4 分数为 Cognition 自报。")

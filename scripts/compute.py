@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
 CONVENTIONS = json.loads((DATA / "conventions.json").read_text(encoding="utf-8"))
 STANDARD_MIX = CONVENTIONS["standardTokenMix"]
-BOARDS = ("aa_intelligence_index", "terminal_bench_4", "arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena", "deepswe_1_1")
+# terminal_bench_4 只收 tbench.ai 官方 harness 行（含厂商自报附录行）；
+# AA 自家 harness 的 TB4 运行拆到 aa_terminal_bench_4（benchmark_configs.configuration 路由）。
+BOARDS = ("aa_intelligence_index", "terminal_bench_4", "aa_terminal_bench_4", "arena_code", "arena_agent_mode", "aa_coding_agent_index", "open_design_arena", "deepswe_1_1")
 SCORE_FILES = (
     "scores-2026-09.json",
     "scores-code-arena-round1-2026-09-06.json",
@@ -33,6 +35,7 @@ SCORE_FILES = (
     "scores-mimo-v26-grok47-round1-2026-09-22.json",
     "scores-deepswe-mimo-v26-grok47-selfreport-2026-09-22.json",
     "scores-opus55-selfreport-2026-09-23.json",
+    "scores-new-models-round1-2026-09-23.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
@@ -120,6 +123,11 @@ def load_list_prices() -> dict[str, dict]:
 def main() -> None:
     scores, list_prices = load_scores(), load_list_prices()
     boards_meta = {b["boardId"]: b for archive in score_archives() if not archive.get("supplement") for b in archive["boards"]}
+    # supplement 档案可以声明新榜（如 aa_terminal_bench_4）的元数据；已存在榜仍以快照档为准。
+    for archive in score_archives():
+        if archive.get("supplement"):
+            for b in archive["boards"]:
+                boards_meta.setdefault(b["boardId"], b)
 
     points, configuration_points = [], []
     with (DATA / "adopted.csv").open(encoding="utf-8-sig") as f:

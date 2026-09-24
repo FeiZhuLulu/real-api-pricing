@@ -14,6 +14,7 @@ BOARDS = {
     "aa_coding_agent_index": ("Artificial Analysis Coding Agent Index", "Coding Agent Index", "AA编程Agent榜"),
     "open_design_arena": ("OpenDesign Arena · Quality ranking", "Average task score", "OpenDesign设计榜"),
     "terminal_bench_4": ("Terminal-Bench 4.0", "Resolution Rate %", "TB4终端榜"),
+    "aa_terminal_bench_4": ("Terminal-Bench 4.0 (AA)", "Resolution Rate %", "TB4·AA榜"),
     "deepswe_1_1": ("DeepSWE v1.1", "Pass@1 %", "DeepSWE榜"),
 }
 
@@ -92,7 +93,7 @@ assert all("agentHarness" in item["secondary"] and "reasoningEffort" in item["se
 report = [
     "# 六榜帕累托数据核对",
     "",
-    "核对日期：2026-09-10。结果：**通过**。六榜独立计分，主图与全量图均与 `derived/points.json` 一致。",
+    f"核对日期：2026-09-10。结果：**通过**。{len(BOARDS)}榜独立计分，主图与全量图均与 `derived/points.json` 一致。",
     "",
     "| 榜单 | 范围 | 语言 | 有分数据行 | 合并后坐标 | 前沿坐标 | 未覆盖模型数 |",
     "|---|---:|---:|---:|---:|---:|---:|",
@@ -101,7 +102,7 @@ for display, tier, language, scored, positions, frontier, missing in rows:
     report.append(f"| {display} | {'精选' if tier == 'main' else '全量'} | {language} | {scored} | {positions} | {frontier} | {missing} |")
 report += [
     "",
-    "核验项：严格支配判定、X 轴对数坐标、前沿端点方向、SVG 无嵌入位图、PNG 同步渲染、交互图 JavaScript 语法、六个榜单选择项、AA Coding Agent、OpenDesign 与 Terminal-Bench 4.0 官方来源及 harness/effort 字段。",
+    f"核验项：严格支配判定、X 轴对数坐标、前沿端点方向、SVG 无嵌入位图、PNG 同步渲染、交互图 JavaScript 语法、{len(BOARDS)}个榜单选择项、AA Coding Agent、OpenDesign 与 Terminal-Bench 4.0 官方来源及 harness/effort 字段。",
     "",
     "AA Coding Agent 与 Terminal-Bench 4.0 只映射精确模型；同模型多个官网配置取存档最高分，配置名称保留在 `variant`。未覆盖型号不插值、不借用邻近型号。",
 ]

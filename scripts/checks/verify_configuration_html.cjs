@@ -57,4 +57,4 @@ vm.runInContext('draw()', context);
   assert(!hover.includes('Claude Code - Opus 5 (max)'), 'high effort drops max-only models');
 }
 element('effort').value = '';
-console.log('PASS: all six boards render every configuration and summary; mapping/cost details, effort filter and API toggle verified');
+console.log(`PASS: all ${Object.keys(summary.boards).length} boards render every configuration and summary; mapping/cost details, effort filter and API toggle verified`);
