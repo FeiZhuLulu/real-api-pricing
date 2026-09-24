@@ -1,0 +1,54 @@
+{
+  "collectedAt": "2026-09-24",
+  "scopeNote": "GPT-6 Sol（9/22 新发）ChatGPT Plus 订阅额度首个本机实测。仅记录证据，不入 adopted：用户 2026-09-24 裁定等 PR #38（GPT-6 Sol 榜分存档）合并后再新增采用行，且只加 Plus、不派生 Pro 5x/20x。历史 research 文件不改。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-6-sol",
+      "client": "Codex CLI",
+      "evidenceType": "user_local_log_x_panel_percent",
+      "source": "用户本机 Codex 实测截图（2026-09-24 会话内提供）",
+      "sourceDate": "2026-09-24",
+      "userConfirmation": "用户原话：『图1是codex 6sol，plus，用了约6%周额度，本机实测』",
+      "observed": {
+        "segment": "今天 10:30 检查点（当日 0）→ 截图时刻的当日增量，全部为 gpt-6-sol",
+        "weeklyUsedFractionStated": 0.06,
+        "weeklyUsedFractionNote": "用户口述『约6%』",
+        "totalTokens": 15716975,
+        "inputTokens": 693878,
+        "outputTokens": 46713,
+        "reasoningTokensSubsetOfOutput": 14925,
+        "cacheReadTokens": 14976384,
+        "inputShareOfTotal": 0.0441483173,
+        "outputShareOfTotal": 0.0029721368,
+        "cacheReadShareOfTotal": 0.9528795458,
+        "reasoningShareOfOutput": 0.3195042066,
+        "cacheHitRate": 0.9557200767,
+        "toolEstimatedApiValueUsd": 4.85,
+        "cumulativeIncludingYesterday": 93499973,
+        "yesterdayUnchanged": 77782998,
+        "yesterdayNote": "93,499,973 − 15,716,975 = 77,782,998，截图称昨天约 77.8M 未变动；昨日段无周%检查点，不参与反推"
+      },
+      "verification": "693,878 + 46,713 + 14,976,384 = 15,716,975 与 Total 一致 → input 不含 cache_read，reasoning 为 output 子集不重复相加；hit = cache_read/(input+cache_read) = 95.57% 与截图一致；结构 4.4%/0.30%/95.3%、reasoning 约占 output 32% 均可复算。估价 $4.85 = 693,878×$2 + 14,976,384×$0.2 + 46,713×$10（=$4.8502）；$2/$10 与 PR #38 存档 AA 页 GPT-6 Sol 标价一致，cached $0.2 为 0.1× 推定、未见官方页确认。",
+      "calculation": {
+        "weeklyTokensCentral": 261949583.33,
+        "monthlyTokensCentralExact": 1047798333.33,
+        "monthlyYiCentral": 10.48,
+        "formula": "15,716,975 / 6% * 4 weeks",
+        "roundedPercentMonthlyLow": 967198461.54,
+        "roundedPercentMonthlyHigh": 1143052727.27,
+        "roundedPercentNote": "6% 若为取整读数（5.5%~6.5%），对应 9.67~11.43 亿/月；中心值按 6%。",
+        "realUsdPerMTokCentral": 0.0190876425
+      },
+      "tokenCountingNote": "本地日志直接给 total，沿 Luna round6 先例直接采用 total，不按项目标准负载再次归一。",
+      "confidenceProposed": "high",
+      "pendingAdoption": "PR #38 合并后：scores-new-models-round1 中 gpt-6-sol 的 unmappedOfficialRows 移入 scores[]，build_adopted.py 新增 chatgpt_plus × gpt-6-sol 10.48 亿；不派生 Pro 5x/20x（用户裁定）。"
+    }
+  ],
+  "relatedFiles": [
+    "chatgpt-luna-adoption-round6-2026-09-08.json",
+    "chatgpt-astra-adoption-round7-2026-09-11.json",
+    "scores-new-models-round1-2026-09-23.json（PR #38 分支）"
+  ]
+}

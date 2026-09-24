@@ -1,0 +1,294 @@
+{
+  "collectedAt": "2026-09-24",
+  "supplement": true,
+  "supplementNote": "GPT-6 Sol 榜分启用：chatgpt_plus × gpt-6-sol 采用行新增（本机 Codex 实测，chatgpt-gpt6sol-plus-round1-2026-09-24.json），按 round1 先例『无 adopted 行时存档、入库后移入 scores[]』，把 scores-new-models-round1-2026-09-23.json 中 gpt-6-sol 的 11 条 unmappedOfficialRows 原样移入 scores[]；原文件只追加不改，未复制 Luna 行（无 adopted 行）。无 baseSnapshot → 追加到各板现行快照。AA 独立实测 TB4 行保留 boardId=terminal_bench_4 + agentHarness=Artificial Analysis，由 benchmark_configs 路由到 aa_terminal_bench_4。",
+  "sourceArchive": "scores-new-models-round1-2026-09-23.json",
+  "boards": [
+    {
+      "boardId": "aa_intelligence_index",
+      "name": "Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "metric": "Intelligence Index",
+      "snapshotDate": "2026-09-22",
+      "note": "沿用 round4 元数据；线上版本已是 v4.3.2，本档读数为 v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "name": "Artificial Analysis Coding Agent Index v1.5",
+      "url": "https://artificialanalysis.ai/agents/coding-agents",
+      "metric": "Coding Agent Index",
+      "snapshotDate": "2026-09-22",
+      "note": "沿用 round4 元数据；v1.5 板面 2026-09-23 为 19 配置。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-03",
+      "note": "官方榜 2026-09-23 复核：27 行无新模型行（榜首 Astra Codex max 58.18）。本榜现只收官方/厂商自报行；AA 独立实测行已路由至 aa_terminal_bench_4。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (max)",
+      "score": 47.5276426437724,
+      "secondary": {
+        "scoreRoundedDisplay": 48,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol",
+        "shortName": "GPT-6 Sol (max)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "max",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 1.0564240894076389,
+        "terminalbenchV40": 0.439393939393939,
+        "scicode": 0.576388888888889,
+        "hle": 0.479147358665431,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (max)",
+      "score": 43.94,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "max"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (xhigh)",
+      "score": 44.1009705516407,
+      "secondary": {
+        "scoreRoundedDisplay": 44,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-xhigh",
+        "shortName": "GPT-6 Sol (xhigh)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "xhigh",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.5318962692390143,
+        "terminalbenchV40": 0.303030303030303,
+        "scicode": 0.550925925925926,
+        "hle": 0.462928637627433,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (xhigh)",
+      "score": 30.3,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "xhigh"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (high)",
+      "score": 42.8215513642985,
+      "secondary": {
+        "scoreRoundedDisplay": 43,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-high",
+        "shortName": "GPT-6 Sol (high)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "high",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.3746326907148203,
+        "terminalbenchV40": 0.262626262626263,
+        "scicode": 0.548611111111111,
+        "hle": 0.44114921223355,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (high)",
+      "score": 26.26,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "high"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (medium)",
+      "score": 39.7820971749522,
+      "secondary": {
+        "scoreRoundedDisplay": 40,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-medium",
+        "shortName": "GPT-6 Sol (medium)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "medium",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.24820209578663968,
+        "terminalbenchV40": 0.186868686868687,
+        "scicode": 0.538194444444444,
+        "hle": 0.409638554216867,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (medium)",
+      "score": 18.69,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "medium"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_intelligence_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT-6 Sol (low)",
+      "score": 33.9008505585733,
+      "secondary": {
+        "scoreRoundedDisplay": 34,
+        "intelligenceIndexIsEstimated": false,
+        "slug": "gpt-6-sol-low",
+        "shortName": "GPT-6 Sol (low)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "deprecated": false,
+        "modelCreatorName": "OpenAI",
+        "effort": "low",
+        "contextWindowTokens": 872000,
+        "costPerTaskUsd": 0.13224085088798104,
+        "terminalbenchV40": 0.0909090909090909,
+        "scicode": 0.502314814814815,
+        "hle": 0.349397590361446,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10
+      },
+      "source": "https://artificialanalysis.ai/leaderboards/models",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "gpt-6-sol",
+      "variantLabel": "Artificial Analysis - GPT-6 Sol (low)",
+      "score": 9.09,
+      "secondary": {
+        "agentHarness": "Artificial Analysis",
+        "reasoningEffort": "low"
+      },
+      "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+    },
+    {
+      "boardId": "aa_coding_agent_index",
+      "model": "gpt-6-sol",
+      "variantLabel": "Codex - GPT-6 Sol (max)",
+      "score": 56.6626,
+      "secondary": {
+        "configurationRank": 6,
+        "agentHarness": "Codex",
+        "provider": "openai",
+        "hostModelSlug": "openai_gpt-6-sol",
+        "displayModel": "GPT-6 Sol (max)",
+        "isUnavailable": false,
+        "variantOf": null,
+        "deepSWE": 69.0265486725664,
+        "terminalBenchV2_1": null,
+        "terminalBenchV4": 43.4343434343434,
+        "sweAtlasQnA": 57.5268817204301,
+        "meanCostUsdPerTask": 2.989729004180416,
+        "agentWallTimeSec": 1338.0527051705185,
+        "meanSteps": 86.55005500550054,
+        "meanTotalTokens": 9840777.763476355,
+        "cacheHitRate": 0.9640119921972632,
+        "hostConfigId": "7a0dfd2a7a9d93056f860d4675586d66",
+        "versions": {
+          "deep-swe-v1.1": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "swe-atlas-qna": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          },
+          "terminal-bench-v4": {
+            "min": {
+              "version": "0.154.0",
+              "dateReleased": null
+            },
+            "max": {
+              "version": "0.154.0",
+              "dateReleased": null
+            }
+          }
+        }
+      },
+      "source": "https://artificialanalysis.ai/agents/coding-agents",
+      "checkedAt": "2026-09-23",
+      "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-sol 入库后启用。原注：AA Coding Agent Index v1.5（19 配置板面）原始精度 indexScore×100。无 adopted 套餐行，存档待采纳；TB4 子项为 Codex harness 运行，与 tbench.ai 独立榜不互灌。"
+    }
+  ]
+}
