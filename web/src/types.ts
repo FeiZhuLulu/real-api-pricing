@@ -28,7 +28,7 @@ export interface Point {
   /** ISO date when a promotional unmetered period ends, if any. */
   promo_until?: string | null;
   list_blended_usd_per_mtok: number | null;
-  /** Quota basis: which workload the capacity assumes — "standard" | "lowCache" | "measured". */
+  /** Quota basis: which workload the capacity assumes — "standard" | "anthropic" | "lowCache" | "measured". */
   workload?: string;
   /** Plan generation tag for legacy plans, e.g. "v2" on GLM existing-customer tiers. */
   plan_gen?: string;
@@ -87,6 +87,7 @@ export interface SiteData {
     };
     standardTokenMix: { cache: number; input: number; output: number };
     lowCacheTokenMix: { cache: number; input: number; output: number };
+    anthropicTokenMix: { cache: number; cacheWrite: number; output: number };
   };
 }
 export type FilterKey =

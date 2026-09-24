@@ -663,6 +663,12 @@ export function workloadLine(
       ? `低缓存负载：缓存读 ${pct(m.cache)} / 输入 ${pct(m.input)} / 输出 ${pct(m.output)}`
       : `Low-cache workload: ${pct(m.cache)} cache reads / ${pct(m.input)} input / ${pct(m.output)} output`;
   }
+  if (p.workload === "anthropic") {
+    const m = conventions.anthropicTokenMix;
+    return zh
+      ? `Anthropic 统一负载：缓存读 ${pct(m.cache)} / 缓存写 ${pct(m.cacheWrite)} / 输出 ${pct(m.output)}`
+      : `Anthropic workload: ${pct(m.cache)} cache reads / ${pct(m.cacheWrite)} cache writes / ${pct(m.output)} output`;
+  }
   if (p.workload === "standard") {
     const m = conventions.standardTokenMix;
     return zh

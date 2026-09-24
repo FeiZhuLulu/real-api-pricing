@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23",
+  "updatedAt": "2026-09-24",
   "project": "真实API定价",
   "role": "定义当前采用、计算、绘图和公开发布共用的项目口径",
   "formula": "订阅价 ÷ 用户实际能用到的月 token = 真实混合单价",
@@ -45,6 +45,14 @@
     "labelZh": "低缓存负载：缓存读取85% / 普通输入14.5% / 输出0.5%",
     "labelEn": "Low-cache workload: 85% cache reads / 14.5% fresh input / 0.5% output",
     "note": "2026-09-22 用户裁定的第二档统一负载，用于实测打不到标准 97% cache 的渠道（当前：Step 全系；Gemini 实测 82.6% 属同族，但其额度为 raw token 实测口径无需折算）。锚点：step-5-preview 本机实测 mix 79.0%/20.7%/0.34%（210.17M tokens，stepfun-step5-panel-round5-2026-09-21.json）与 Google AI Pro 实测 82.6%，统一取 85% 档；step5 采用值的 decision_note 内保留 79% 实测口径对照数。非cache部分输出占比 0.5% 跟随标准负载、余量归输入。2026-09-23 随标准档由 85%/14.65%/0.35% 修订（standard-token-mix-round2-2026-09-23.json）。"
+  },
+  "anthropicTokenMix": {
+    "cache": 0.97,
+    "cacheWrite": 0.025,
+    "output": 0.005,
+    "labelZh": "Anthropic 统一负载：缓存读97% / 缓存写2.5% / 输出0.5%",
+    "labelEn": "Anthropic workload: 97% cache reads / 2.5% cache writes / 0.5% output",
+    "note": "Anthropic 单独收缓存写入费，未命中缓存的输入几乎全部走缓存写（Devin 面板 input 0.001%/write 7.67%；MiaAI Claude Code 样本 input 0.14%/write 2.05%），故标准档的普通输入份额对 Anthropic 按 5 分钟缓存写入价计；份额与 standardTokenMix 联动（cacheWrite = standard.input）。2026-09-24 用户裁定。"
   },
   "sourcePriority": [
     "用户面板截图反推、受控打满实测、官方绝对token或积分表",
