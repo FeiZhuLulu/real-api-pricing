@@ -1,0 +1,61 @@
+{
+  "collectedAt": "2026-09-25",
+  "scopeNote": "GPT-6 Luna（9/22 新发）ChatGPT Plus 订阅额度首个本机实测。用户 2026-09-25 提供双检查点段截图：周窗 Remaining 48%→44%（差 4pt）段内 6luna 计数 93,463,060→134,264,472（+40,801,412），同面板 6sol 未动为干净窗，4pt 全归 gpt-6-luna。用户特别提醒：Luna 单价低、GPT 周额度只显示整数百分比，取整读数误差占比大。入库沿用『只挂 Plus、Pro 5x/20x 不派生』的 9/24 Sol 同裁定（Luna 单价低 × 官方倍率放大会叠加取整误差，待用户确认）。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-6-luna",
+      "client": "Codex CLI（本机，本地对得上）",
+      "evidenceType": "user_local_log_x_panel_percent",
+      "source": "用户本机实测截图（2026-09-25 会话内提供）：19:43 起点 Remaining 48% / 6luna 累计 93,463,060 → 现在 Remaining 44% / 累计 134,264,472",
+      "sourceDate": "2026-09-25",
+      "userConfirmation": "用户原话：『本地对得上，而且这段是干净的 6luna 窗口：6sol 没动』『全是今天的 gpt-6-luna』『luna 太便宜了，GPT 周额度不显示小数点，所以差一点可能影响都会很大』",
+      "observed": {
+        "segment": "周窗 Remaining 48% → 44%（差 4pt），段内 6luna 计数 +40,801,412、6sol 计数未动",
+        "weeklyRemainingStart": 0.48,
+        "weeklyRemainingEnd": 0.44,
+        "weeklyUsedFractionStated": 0.04,
+        "weeklyUsedFractionNote": "面板 Remaining 整数百分点：48%→44% 差 4pt，两端均为取整读数",
+        "totalTokens": 40801412,
+        "inputTokens": 1139718,
+        "outputTokens": 322174,
+        "reasoningTokensSubsetOfOutput": 208472,
+        "cacheReadTokens": 39339520,
+        "inputShareOfTotal": 0.0279334,
+        "outputShareOfTotal": 0.0078961,
+        "cacheReadShareOfTotal": 0.9641704,
+        "reasoningShareOfOutput": 0.6470797,
+        "cacheHitRatePanel": 0.9719,
+        "cacheHitRateComputed": 0.9718454,
+        "toolEstimatedApiValueUsd": 0.6685,
+        "cumulativeStart": 93463060,
+        "cumulativeEnd": 134264472,
+        "cumulativeDelta": 40801412,
+        "segmentAllToday": "『全是今天的 gpt-6-luna』：+40,801,412 即今日 6luna 总量，全部落在双检查点段内；起点前 93,463,060 为更早日期存量，无更早周%检查点不参与"
+      },
+      "verification": "1,139,718 + 322,174 + 39,339,520 = 40,801,412 与段增量一致 → input 不含 cache_read，reasoning 为 output 子集不重复相加；134,264,472 − 93,463,060 = 40,801,412 两端校验；hit = cache_read/(input+cache_read) = 97.18%（面板显示 97.19%，四舍五入差在万分之一量级）；结构 2.79%/0.79%/96.42%、reasoning 约占 output 65% 均可复算。估价 $0.67 = 1,139,718×$0.1 + 322,174×$0.5 + 39,339,520×$0.01（$0.668454）；$0.1/$0.5 与 PR #38 存档 AA 页 GPT-6 Luna 标价一致，cached $0.01 为 0.1× 推定、未见官方页确认。",
+      "calculation": {
+        "weeklyTokensCentral": 1020035300,
+        "monthlyTokensCentralExact": 4080141200,
+        "monthlyYiCentral": 40.8,
+        "formula": "40,801,412 / 4% * 4 weeks",
+        "roundedPercentMonthlyLow": 3264112960,
+        "roundedPercentMonthlyHigh": 5440188266.67,
+        "roundedPercentNote": "两端 Remaining 均为整数读数：无论四舍五入还是截断显示，真实 Δ 落在 3~5pt，对应月额 32.64~54.40 亿（±20%~+33%）——Luna 便宜使 1pt 约 10.2M tokens，取整一格的影响比 Sol/5.6-Luna 的 6% 读数（±8%）大得多",
+        "realUsdPerMTokCentral": 0.0049018
+      },
+      "tokenCountingNote": "本地计数直接给 total，沿 Luna round6/Sol round1 先例直接采用 total，不按项目标准负载再次归一。",
+      "poolTensionNote": "隐含周池 1.02B raw：与同面板 9/24 Sol 实测周池 262M（月 10.48 亿）差 ~3.9×、与 9/8 5.6-Luna 实测周池 1.88B（月 75.11 亿）差 ~0.54×——同一 Plus 周额度按模型给出不同 raw 池，方向与模型单价一致（Luna $0.1/$0.5 比 Sol $2/$10 便宜 20×，同池 worth 口径下可烧更多 token）；段 worth $0.67 折池仅 ~$16.7/周，与 Sol 段 $4.85 折池 ~$81/周 同向但仍有 4.8× 差，表明计费非纯标价 worth——记为张力不消解。",
+      "confidenceProposed": "medium",
+      "confidenceRationale": "双检查点干净窗、token 构成两端校验，证据形式强于 Sol 的口述『约6%』；但 4pt 段在整数百分比面板上的取整区间（3~5pt）把月额放宽到 ±20%~+33%，宽于 Sol/5.6-Luna 的 ±8%，故定 medium 而非 high——用户提醒的影响显著性已写入取整区间。",
+      "adopted": "chatgpt_plus × gpt-6-luna = 40.80 亿/月 medium（workload=measured）；Pro 5x/20x 不派生（沿 9/24 Sol 用户裁定先例，Luna 低单价 × 官方倍率会叠加放大取整误差）；榜分自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 移入 scores-gpt6luna-round1-2026-09-25.json。"
+    }
+  ],
+  "relatedFiles": [
+    "chatgpt-gpt6sol-plus-round1-2026-09-24.json",
+    "chatgpt-luna-adoption-round6-2026-09-08.json",
+    "scores-new-models-round1-2026-09-23.json",
+    "scores-gpt6luna-round1-2026-09-25.json"
+  ]
+}

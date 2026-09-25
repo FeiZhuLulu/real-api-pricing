@@ -35,6 +35,12 @@ CHATGPT_PLUS_SOL6_SEGMENT = {"input": 693_878, "output": 46_713, "cache_read": 1
 CHATGPT_PLUS_SOL6_USED_TOKENS = 15_716_975
 CHATGPT_PLUS_SOL6_USED_FRACTION = 0.06
 assert sum(CHATGPT_PLUS_SOL6_SEGMENT.values()) == CHATGPT_PLUS_SOL6_USED_TOKENS
+# GPT-6 Luna（9/22 新发）Plus —— 2026-09-25 用户本机实测：周窗 Remaining 48%→44%（差 4pt）段内
+#   gpt-6-luna 净增 40,801,412 tok（6sol 计数未动为干净窗）；面板只显整数%，真实 Δ 落 3~5pt
+CHATGPT_PLUS_LUNA6_SEGMENT = {"input": 1_139_718, "output": 322_174, "cache_read": 39_339_520}
+CHATGPT_PLUS_LUNA6_USED_TOKENS = 40_801_412
+CHATGPT_PLUS_LUNA6_USED_FRACTION = 0.04
+assert sum(CHATGPT_PLUS_LUNA6_SEGMENT.values()) == CHATGPT_PLUS_LUNA6_USED_TOKENS
 # Astra Pro20x 周池 —— round14 后按实测源加权（round10 的 10% 与 Pro20x 档位经用户确认真实）：
 #   Observatory 8.53×3 + round10 13.8×3 + g5a 7.52×3 + msg7086 8.07×2 + 图1用户面板 10.0×3
 #   + 图4(2/3周) 8.18×2 + 图2 X自述 9.25×1 + 图3 sub2后台 10.3×1 = 171.6/18 = 9.53 亿/周；
@@ -180,6 +186,14 @@ def chatgpt_astra_monthly_yi() -> float:
 def chatgpt_sol6_monthly_yi() -> float:
     return round(
         CHATGPT_PLUS_SOL6_USED_TOKENS / CHATGPT_PLUS_SOL6_USED_FRACTION
+        * MONTH_WEEKS / YI,
+        2,
+    )
+
+
+def chatgpt_luna6_monthly_yi() -> float:
+    return round(
+        CHATGPT_PLUS_LUNA6_USED_TOKENS / CHATGPT_PLUS_LUNA6_USED_FRACTION
         * MONTH_WEEKS / YI,
         2,
     )
@@ -635,6 +649,9 @@ SUBS = [
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；round13新增Plus同框32~75M/周散布于1.28~3.0亿/月，与1.59亿同量级不改值；Pro20x已按round13挂点"),
     # GPT-6 Sol（9/22 新发）—— 用户Plus账号2026-09-24本机Codex当日增量直测；只挂Plus，Pro 5x/20x不派生（用户裁定）
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-sol", chatgpt_sol6_monthly_yi(), "high", "用户本机Codex实测：当日增量gpt-6-sol total 15,716,975 tokens（input 693,878/output 46,713含reasoning 14,925/cache_read 14,976,384，hit 95.57%）= 周额度约6%；chatgpt-gpt6sol-plus-round1-2026-09-24.json", f"新增{chatgpt_sol6_monthly_yi():g}亿：15,716,975÷6%×4周；直接采用total不套标准负载（沿Luna round6先例）；6%为口述取整，5.5~6.5%对应9.67~11.43亿；工具估价$4.85＝in$2/cached$0.2/out$10（$2/$10与AA页标价一致，cached 0.1×未见官方页）；昨日77.8M无周%检查点不参与；Pro 5x/20x不派生（用户裁定只挂Plus）；榜分见scores-gpt6sol-round1-2026-09-24.json"),
+    # GPT-6 Luna（9/22 新发）—— 用户Plus账号2026-09-25双检查点段实测：Remaining 48%→44%（差4pt）段内
+    #   gpt-6-luna +40,801,412 tok，6sol未动为干净窗；沿Sol裁定只挂Plus，Pro 5x/20x不派生
+    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-luna", chatgpt_luna6_monthly_yi(), "medium", "用户本机实测：周窗Remaining 48%→44%（差4pt）段内 gpt-6-luna +40,801,412 tokens（input 1,139,718/output 322,174含reasoning 208,472/cache_read 39,339,520，hit 97.19%），段内6sol未动；chatgpt-gpt6luna-plus-round1-2026-09-25.json", f"新增{chatgpt_luna6_monthly_yi():g}亿：40,801,412÷4%×4周；直接采用total不套标准负载（沿Luna round6/Sol round1先例）；面板Remaining为整数取整，真实Δ落3~5pt对应32.64~54.40亿——Luna便宜使1pt约10.2M tokens，取整误差占比远大于Sol的±8%（用户提醒：差一点可能影响都会很大，故定medium）；段估价$0.67＝in$0.1/cached$0.01/out$0.5（$0.1/$0.5与AA页一致，cached 0.1×推定）；隐含周池1.02B与同面板Sol实测262M（月10.48亿）差~3.9×、与5.6-Luna实测1.88B（月75.11亿）差~0.54×——同Plus周额度按模型不同raw池，方向与模型单价一致（Luna比Sol便宜20×），记为张力不消解；段内今日6luna全量40.8M落在检查点段内，起点前93.5M存量无%检查点不参与；Pro 5x/20x不派生（沿9/24 Sol用户裁定先例）；榜分见scores-gpt6luna-round1-2026-09-25.json"),
     # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{CHATGPT_PRO20X_SOL_MONTHLY_YI/4/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限

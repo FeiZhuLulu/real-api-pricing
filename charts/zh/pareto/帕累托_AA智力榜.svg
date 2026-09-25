@@ -81,6 +81,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.019083969" data-score="47.5276426437724" data-x="798.639" data-y="375.312" transform="translate(798.639 375.312)"><title>GPT-6 Sol · Plus · $0.01908/MTok · 47.5276426437724 · highGPT-6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0049019608" data-score="37.2559686869738" data-x="988.600" data-y="476.316" transform="translate(988.600 476.316)"><title>GPT-6 Luna · Plus · $0.0049/MTok · 37.2559686869738 · mediumGPT-6 Luna (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.052465897" data-score="52.6737" data-x="657.300" data-y="324.709" transform="translate(657.300 324.709)"><title>GPT-6 Astra · Pro 20x · $0.05247/MTok · 52.6737 · mediumGPT-6 Astra (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
@@ -827,7 +830,7 @@
 <path d="M1587 825l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="1601.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="874.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5 · 美元/credits换算：缓存97% / 输入2.5% / 输出0.5% · 直接total实测不重算</text>
-<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >208 个订阅位置 / 17 个 API 位置 / 8 个前沿位置</text>
+<text x="1384.000" y="874.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >209 个订阅位置 / 17 个 API 位置 / 8 个前沿位置</text>
 <text x="56.000" y="898.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max：9/14 起永久额度估算；Pro：Opus 5 周池面板反推。Y 取同模型存档最高分变体。</text>
 <text x="56.000" y="919.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="919.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>

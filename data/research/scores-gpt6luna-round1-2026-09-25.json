@@ -1,0 +1,294 @@
+{
+ "collectedAt": "2026-09-25",
+ "supplement": true,
+ "supplementNote": "GPT-6 Luna 榜分启用：chatgpt_plus × gpt-6-luna 采用行新增（本机双检查点段实测，chatgpt-gpt6luna-plus-round1-2026-09-25.json），按 round1 先例『无 adopted 行时存档、入库后移入 scores[]』，把 scores-new-models-round1-2026-09-23.json 中 gpt-6-luna 的 11 条 unmappedOfficialRows 原样移入 scores[]；原文件只追加不改。无 baseSnapshot → 追加到各板现行快照。AA 独立实测 TB4 行保留 boardId=terminal_bench_4 + agentHarness=Artificial Analysis，由 benchmark_configs 路由到 aa_terminal_bench_4。",
+ "sourceArchive": "scores-new-models-round1-2026-09-23.json",
+ "boards": [
+  {
+   "boardId": "aa_intelligence_index",
+   "name": "Artificial Analysis Intelligence Index v4.3",
+   "url": "https://artificialanalysis.ai/leaderboards/models",
+   "metric": "Intelligence Index",
+   "snapshotDate": "2026-09-22",
+   "note": "沿用 round4 元数据；线上版本已是 v4.3.2，本档读数为 v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "aa_coding_agent_index",
+   "name": "Artificial Analysis Coding Agent Index v1.5",
+   "url": "https://artificialanalysis.ai/agents/coding-agents",
+   "metric": "Coding Agent Index",
+   "snapshotDate": "2026-09-22",
+   "note": "沿用 round4 元数据；v1.5 板面 2026-09-23 为 19 配置。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "name": "Terminal-Bench 4.0",
+   "url": "https://www.tbench.ai/leaderboard",
+   "metric": "Resolution Rate %",
+   "snapshotDate": "2026-09-03",
+   "note": "官方榜 2026-09-23 复核：27 行无新模型行（榜首 Astra Codex max 58.18）。本榜现只收官方/厂商自报行；AA 独立实测行已路由至 aa_terminal_bench_4。"
+  }
+ ],
+ "scores": [
+  {
+   "boardId": "aa_intelligence_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "GPT-6 Luna (max)",
+   "score": 37.2559686869738,
+   "secondary": {
+    "scoreRoundedDisplay": 37,
+    "intelligenceIndexIsEstimated": false,
+    "slug": "gpt-6-luna",
+    "shortName": "GPT-6 Luna (max)",
+    "releaseDate": "2026-09-22",
+    "isReasoning": true,
+    "deprecated": false,
+    "modelCreatorName": "OpenAI",
+    "effort": "max",
+    "contextWindowTokens": 1000000,
+    "costPerTaskUsd": 0.06809498628701058,
+    "terminalbenchV40": 0.126262626262626,
+    "scicode": 0.546296296296296,
+    "hle": 0.385078776645042,
+    "price1mInputTokens": 0.1,
+    "price1mOutputTokens": 0.5
+   },
+   "source": "https://artificialanalysis.ai/leaderboards/models",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "model": "gpt-6-luna",
+   "variantLabel": "Artificial Analysis - GPT-6 Luna (max)",
+   "score": 12.63,
+   "secondary": {
+    "agentHarness": "Artificial Analysis",
+    "reasoningEffort": "max"
+   },
+   "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+  },
+  {
+   "boardId": "aa_intelligence_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "GPT-6 Luna (xhigh)",
+   "score": 33.8845820217785,
+   "secondary": {
+    "scoreRoundedDisplay": 34,
+    "intelligenceIndexIsEstimated": false,
+    "slug": "gpt-6-luna-xhigh",
+    "shortName": "GPT-6 Luna (xhigh)",
+    "releaseDate": "2026-09-22",
+    "isReasoning": true,
+    "deprecated": false,
+    "modelCreatorName": "OpenAI",
+    "effort": "xhigh",
+    "contextWindowTokens": 1000000,
+    "costPerTaskUsd": 0.041708771594451556,
+    "terminalbenchV40": 0.0808080808080808,
+    "scicode": 0.517361111111111,
+    "hle": 0.343373493975904,
+    "price1mInputTokens": 0.1,
+    "price1mOutputTokens": 0.5
+   },
+   "source": "https://artificialanalysis.ai/leaderboards/models",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "model": "gpt-6-luna",
+   "variantLabel": "Artificial Analysis - GPT-6 Luna (xhigh)",
+   "score": 8.08,
+   "secondary": {
+    "agentHarness": "Artificial Analysis",
+    "reasoningEffort": "xhigh"
+   },
+   "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+  },
+  {
+   "boardId": "aa_intelligence_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "GPT-6 Luna (high)",
+   "score": 32.1482304150837,
+   "secondary": {
+    "scoreRoundedDisplay": 32,
+    "intelligenceIndexIsEstimated": false,
+    "slug": "gpt-6-luna-high",
+    "shortName": "GPT-6 Luna (high)",
+    "releaseDate": "2026-09-22",
+    "isReasoning": true,
+    "deprecated": false,
+    "modelCreatorName": "OpenAI",
+    "effort": "high",
+    "contextWindowTokens": 1000000,
+    "costPerTaskUsd": 0.02861964876935845,
+    "terminalbenchV40": 0.0454545454545455,
+    "scicode": 0.503472222222222,
+    "hle": 0.329471733086191,
+    "price1mInputTokens": 0.1,
+    "price1mOutputTokens": 0.5
+   },
+   "source": "https://artificialanalysis.ai/leaderboards/models",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "model": "gpt-6-luna",
+   "variantLabel": "Artificial Analysis - GPT-6 Luna (high)",
+   "score": 4.55,
+   "secondary": {
+    "agentHarness": "Artificial Analysis",
+    "reasoningEffort": "high"
+   },
+   "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+  },
+  {
+   "boardId": "aa_intelligence_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "GPT-6 Luna (medium)",
+   "score": 29.4619523515762,
+   "secondary": {
+    "scoreRoundedDisplay": 29,
+    "intelligenceIndexIsEstimated": false,
+    "slug": "gpt-6-luna-medium",
+    "shortName": "GPT-6 Luna (medium)",
+    "releaseDate": "2026-09-22",
+    "isReasoning": true,
+    "deprecated": false,
+    "modelCreatorName": "OpenAI",
+    "effort": "medium",
+    "contextWindowTokens": 1000000,
+    "costPerTaskUsd": 0.01725359419426588,
+    "terminalbenchV40": 0.0252525252525253,
+    "scicode": 0.509259259259259,
+    "hle": 0.282669138090825,
+    "price1mInputTokens": 0.1,
+    "price1mOutputTokens": 0.5
+   },
+   "source": "https://artificialanalysis.ai/leaderboards/models",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "model": "gpt-6-luna",
+   "variantLabel": "Artificial Analysis - GPT-6 Luna (medium)",
+   "score": 2.53,
+   "secondary": {
+    "agentHarness": "Artificial Analysis",
+    "reasoningEffort": "medium"
+   },
+   "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+  },
+  {
+   "boardId": "aa_intelligence_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "GPT-6 Luna (low)",
+   "score": 20.9225480080866,
+   "secondary": {
+    "scoreRoundedDisplay": 21,
+    "intelligenceIndexIsEstimated": false,
+    "slug": "gpt-6-luna-low",
+    "shortName": "GPT-6 Luna (low)",
+    "releaseDate": "2026-09-22",
+    "isReasoning": true,
+    "deprecated": false,
+    "modelCreatorName": "OpenAI",
+    "effort": "low",
+    "contextWindowTokens": 1000000,
+    "costPerTaskUsd": 0.004483809259539013,
+    "terminalbenchV40": 0,
+    "scicode": 0.46875,
+    "hle": 0.202502316960148,
+    "price1mInputTokens": 0.1,
+    "price1mOutputTokens": 0.5
+   },
+   "source": "https://artificialanalysis.ai/leaderboards/models",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：9/22 新发，无 adopted 套餐行——存档待采纳；AA v4.3.2 原始精度。"
+  },
+  {
+   "boardId": "terminal_bench_4",
+   "model": "gpt-6-luna",
+   "variantLabel": "Artificial Analysis - GPT-6 Luna (low)",
+   "score": 0,
+   "secondary": {
+    "agentHarness": "Artificial Analysis",
+    "reasoningEffort": "low"
+   },
+   "source": "https://artificialanalysis.ai/models/claude-opus-5-5（AA 模型页 evals 载荷，页面注明 Independently benchmarked by Artificial Analysis）",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA 独立实测 TB4；无 adopted 套餐行，存档待采纳。"
+  },
+  {
+   "boardId": "aa_coding_agent_index",
+   "model": "gpt-6-luna",
+   "variantLabel": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+   "score": 41.0744,
+   "secondary": {
+    "configurationRank": 18,
+    "agentHarness": "Codex",
+    "provider": "openai",
+    "hostModelSlug": "openai_gpt-6-luna",
+    "displayModel": "GPT-6 Luna (max)",
+    "isUnavailable": false,
+    "variantOf": null,
+    "deepSWE": 63.716814159292,
+    "terminalBenchV2_1": null,
+    "terminalBenchV4": 15.151515151515198,
+    "sweAtlasQnA": 44.3548387096774,
+    "meanCostUsdPerTask": 0.17591172304455457,
+    "agentWallTimeSec": 1285.9268514851478,
+    "meanSteps": 88.64301430143014,
+    "meanTotalTokens": 10218069.248074815,
+    "cacheHitRate": 0.9606438143896164,
+    "hostConfigId": "ac8276cd5d15ac2daacb9956ad44c132",
+    "versions": {
+     "deep-swe-v1.1": {
+      "min": {
+       "version": "0.154.0",
+       "dateReleased": null
+      },
+      "max": {
+       "version": "0.154.0",
+       "dateReleased": null
+      }
+     },
+     "swe-atlas-qna": {
+      "min": {
+       "version": "0.154.0",
+       "dateReleased": null
+      },
+      "max": {
+       "version": "0.154.0",
+       "dateReleased": null
+      }
+     },
+     "terminal-bench-v4": {
+      "min": {
+       "version": "0.154.0",
+       "dateReleased": null
+      },
+      "max": {
+       "version": "0.154.0",
+       "dateReleased": null
+      }
+     }
+    }
+   },
+   "source": "https://artificialanalysis.ai/agents/coding-agents",
+   "checkedAt": "2026-09-23",
+   "note": "自 scores-new-models-round1-2026-09-23.json unmappedOfficialRows 原样移入（分数/secondary/source/checkedAt 不改）；chatgpt_plus × gpt-6-luna 入库后启用。原注：AA Coding Agent Index v1.5（19 配置板面）原始精度 indexScore×100。无 adopted 套餐行，存档待采纳；TB4 子项为 Codex harness 运行，与 tbench.ai 独立榜不互灌。"
+  }
+ ]
+}

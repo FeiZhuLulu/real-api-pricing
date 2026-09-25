@@ -3,6 +3,11 @@
 `AGENTS.md` 只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-25
+
+- **ChatGPT Plus × GPT-6 Luna 本机实测（新增模型点）**：40.80 亿/月 medium（workload=measured）。用户本机双检查点段实测：周窗 Remaining 48%→44%（差 4pt）段内 gpt-6-luna 净增 +40,801,412 tok（input 1,139,718 / output 322,174 含 reasoning 208,472 / cache_read 39,339,520，hit 97.19%），同面板 6sol 计数未动为干净窗、4pt 全归 Luna；今日 6luna 全量 40.8M 落在段内，起点前 93.5M 存量无%检查点不参与。40,801,412÷4%×4 周＝月 40.80 亿，直接用 total 不套负载（沿 Luna round6/Sol round1 先例）。面板 Remaining 只显整数%：真实 Δ 落 3~5pt 对应 32.64~54.40 亿（−20%/+33%）——Luna 便宜使 1pt 约 10.2M tokens，取整误差占比远大于 Sol 的 ±8%，用户提醒『差一点可能影响都会很大』，故定 medium 而非 high。段估价 $0.67＝in $0.1/cached $0.01/out $0.5（$0.1/$0.5 与 AA 页一致，cached 0.1× 推定）。隐含周池 1.02B 与同面板 Sol 实测 262M（月 10.48 亿）差 ~3.9×、与 5.6-Luna 实测 1.88B（月 75.11 亿）差 ~0.54×——同 Plus 周额度按模型不同 raw 池，方向与单价一致（Luna 比 Sol 便宜 20×），记为张力不消解。Pro 5x/20x 不派生（沿 9/24 Sol 用户裁定先例；Luna 低单价×官方倍率会叠加放大取整误差）。榜分：`scores-new-models-round1` 中 gpt-6-luna 的 11 条 unmappedOfficialRows 原样移入新 supplement `scores-gpt6luna-round1-2026-09-25.json`（AA int max 37.2560、AA Coding Codex 41.0744、AA TB4 max 12.63）。证据：`chatgpt-gpt6luna-plus-round1-2026-09-25.json`。
+- **审计**：采用 266→267 行（订阅 248：247 有额度 + 1 不计额度；按量 19）。
+
 ## 2026-09-24
 
 - **ChatGPT Plus × GPT-6 Sol 本机实测（新增模型点）**：10.48 亿/月 high（workload=measured）。用户本机 Codex 当日增量全为 gpt-6-sol：input 693,878 / output 46,713（含 reasoning 14,925）/ cache_read 14,976,384 = total 15,716,975（hit 95.57%）= 周额度约 6% → 15,716,975÷6%×4 周；直接用 total 不套负载（沿 Luna round6 先例）；6% 为口述取整，5.5~6.5% 对应 9.67~11.43 亿。工具估价 $4.85 = in $2 / cached $0.2 / out $10（$2/$10 与 AA 页一致，cached 0.1× 未见官方页，未建按量 API 行）。昨日 77.8M 无周% 检查点不参与。只挂 Plus，Pro 5x/20x 不派生（用户裁定）。榜分：`scores-new-models-round1` 中 gpt-6-sol 的 11 条 unmappedOfficialRows 原样移入新 supplement `scores-gpt6sol-round1-2026-09-24.json`（AA int max 47.5276、AA Coding Codex 56.6626、AA TB4 max 43.94）。证据：`chatgpt-gpt6sol-plus-round1-2026-09-24.json`。
