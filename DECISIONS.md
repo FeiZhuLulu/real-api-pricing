@@ -3,6 +3,10 @@
 `AGENTS.md` 只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-26
+
+- **ChatGPT Plus × GPT-6 Luna 本机实测（新增模型点）**：44.05 亿/月 high（workload=measured）。用户本机 Codex 周额度窗 48%→35% 全程增量均为 gpt-6-luna：分两段——48→44 标准档 40,801,412 tok/4pp，44→35 用户开启 Fast 102,356,505 tok/9pp；合计 143,157,917 tok（input 3,185,120/output 954,045 含 reasoning 562,883/cache_read 139,018,752，hit 97.76%）÷13pp×4 周。**Fast 判定未生效**：官方口径『Fast mode 可增加额度消耗』（chatgpt-astra-quota-round8），若生效每 1% 应买到更少 token；实测 raw tok/pp 反升 11.5%，且按 Luna 标价比例（cache 0.1×、output 5~6× input）折算后两段每 pp 加权额度成本比 0.99~1.00——计量无差异，raw 上升全部由命中率 97.19%→97.99% 结构变化解释；API 侧 Fast 2× 加价在整数%取整最差边界（≈1.48×）之外可排除，小幅差异不可排除。故两段同质合并 13pp 窗采用；面板整数读数 Δpp∈[12,14] 对应 40.90~47.72 亿，std-only 敏感性 40.80 亿。只挂 Plus，Pro 5x/20x 不派生（沿 Sol 裁定）。榜分：`scores-new-models-round1` 中 gpt-6-luna 的 11 条 unmappedOfficialRows 原样移入新 supplement `scores-gpt6luna-round1-2026-09-26.json`（AA int max 37.2560、AA Coding Codex 41.0744、AA TB4 max 12.63）。证据：`chatgpt-gpt6luna-plus-round1-2026-09-26.json`。
+
 ## 2026-09-24
 
 - **ChatGPT Plus × GPT-6 Sol 本机实测（新增模型点）**：10.48 亿/月 high（workload=measured）。用户本机 Codex 当日增量全为 gpt-6-sol：input 693,878 / output 46,713（含 reasoning 14,925）/ cache_read 14,976,384 = total 15,716,975（hit 95.57%）= 周额度约 6% → 15,716,975÷6%×4 周；直接用 total 不套负载（沿 Luna round6 先例）；6% 为口述取整，5.5~6.5% 对应 9.67~11.43 亿。工具估价 $4.85 = in $2 / cached $0.2 / out $10（$2/$10 与 AA 页一致，cached 0.1× 未见官方页，未建按量 API 行）。昨日 77.8M 无周% 检查点不参与。只挂 Plus，Pro 5x/20x 不派生（用户裁定）。榜分：`scores-new-models-round1` 中 gpt-6-sol 的 11 条 unmappedOfficialRows 原样移入新 supplement `scores-gpt6sol-round1-2026-09-24.json`（AA int max 47.5276、AA Coding Codex 56.6626、AA TB4 max 43.94）。证据：`chatgpt-gpt6sol-plus-round1-2026-09-24.json`。

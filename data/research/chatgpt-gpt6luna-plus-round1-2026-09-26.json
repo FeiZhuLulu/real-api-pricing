@@ -1,0 +1,102 @@
+{
+  "collectedAt": "2026-09-26",
+  "scopeNote": "GPT-6 Luna（9/22 新发）ChatGPT Plus 订阅额度首个本机实测，也是 Codex Fast mode 的首次计量对照。用户本机 Codex 日志 × 面板周额度百分比，当日 09-26 两段窗口：48%→44% 为标准档，44%→35% 用户开启了 Fast。按 Sol round1 先例新增 adopted 行；只挂 Plus、不派生 Pro 5x/20x（沿用用户 2026-09-24 对 GPT-6 Sol 的裁定）。历史 research 文件不改。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-6-luna",
+      "client": "Codex CLI",
+      "evidenceType": "user_local_log_x_panel_percent",
+      "source": "用户本机 Codex 实测截图（2026-09-26 会话内提供）",
+      "sourceDate": "2026-09-26",
+      "userConfirmation": "用户原话：『GPT Plus，6 luna数据，第一段是正常6luna，第二段我开了fast，但不知道有没有生效，可能是没有生效』",
+      "observed": {
+        "window": "周额度 48% → 35%，全部增量为 gpt-6-luna，整段为 2026-09-26 当天",
+        "segments": [
+          {
+            "label": "Standard 48%→44%",
+            "serviceTierUserIntent": "standard",
+            "deltaPp": 4,
+            "inputTokens": 1139718,
+            "outputTokens": 322174,
+            "reasoningTokensSubsetOfOutput": 208472,
+            "cacheReadTokens": 39339520,
+            "totalTokens": 40801412,
+            "cacheHitRate": 0.9719,
+            "tokensPerPoint": 10200353,
+            "weeklyTokensImplied": 1020035300
+          },
+          {
+            "label": "Fast 44%→35%（用户开启 Fast，是否生效未知）",
+            "serviceTierUserIntent": "fast",
+            "deltaPp": 9,
+            "inputTokens": 2045402,
+            "outputTokens": 631871,
+            "reasoningTokensSubsetOfOutput": 354411,
+            "cacheReadTokens": 99679232,
+            "totalTokens": 102356505,
+            "cacheHitRate": 0.9799,
+            "tokensPerPoint": 11372945,
+            "weeklyTokensImplied": 1137294500,
+            "subWindow": {
+              "label": "37%→35%（Fast 段尾段 2pp 对照）",
+              "totalTokens": 24279331,
+              "deltaPp": 2,
+              "tokensPerPoint": 12139665.5,
+              "weeklyTokensImplied": 1213966550,
+              "note": "仅 2pp，取整误差占比大，仅作对照不入权"
+            }
+          }
+        ],
+        "total": {
+          "deltaPp": 13,
+          "inputTokens": 3185120,
+          "outputTokens": 954045,
+          "reasoningTokensSubsetOfOutput": 562883,
+          "cacheReadTokens": 139018752,
+          "totalTokens": 143157917,
+          "cacheHitRate": 0.9776,
+          "tokensPerPoint": 11012147,
+          "weeklyTokensImplied": 1101214746
+        }
+      },
+      "verification": "分段加总与合计逐项一致：input 1,139,718+2,045,402=3,185,120；output 322,174+631,871=954,045；reasoning 208,472+354,411=562,883；cache_read 39,339,520+99,679,232=139,018,752；total 40,801,412+102,356,505=143,157,917。每段 input+output+cache_read=total（reasoning 为 output 子集不重复相加）；hit=cache_read/(input+cache_read) 复算 97.19%/97.99%/97.76% 与截图一致；÷Δpp×100 复算周额度 1,020,035,300/1,137,294,500/1,101,214,746 与截图一致。",
+      "fastModeAnalysis": {
+        "question": "第二段用户开了 Codex Fast mode，额度计量上是否生效？",
+        "naiveReading": "raw tokens/pp 不降反升（10,200,353→11,372,945，+11.5%）——方向与官方口径相反：help.openai.com 写明『Fast mode ... can also increase usage』，若生效每 1% 应买到更少 token。",
+        "mixAdjusted": "两段负载结构不同（hit 97.19%→97.99%），须按标价权重折算再比。以 Luna 价格比例（cache≈0.1×input，output≈5~6×input）计每 pp 的加权 token 成本：5.6-Luna 三段价 0.2/0.02/1.2 比例下 quota 成本比 fast/std = 0.9975；6-Luna AA 页标价 0.1/0.01/0.5 比例下 = 0.9913。",
+        "bounds": "面板为整数 % 读数：Δpp4∈[3,5]、Δpp9∈[8,10] 的极端独立取整下，加权成本比区间约 [0.71, 1.48]——小幅 Fast 加价无法完全排除，但 API 侧 Fast 标价 2×（official-api-prices.json openai_gpt56_sol_api.longContext）在 worst case 边界之外，明确可排除；且段尾子窗 37→35 的 12.14M tok/pp 继续走高而非走低。",
+        "conclusion": "额度计量上两段无差异（每加权 token 成本差 <1%，若取符号方向还略便宜）——判定本次 Fast 未在额度侧生效，与用户自疑一致；剩余解释只可能是『对 Luna/Plus 的 Fast 不加权』，留待后续带小数读数或更长窗复核。",
+        "adoptionImplication": "两段计量同质 → 合并 48→35 共 13pp 作采用样本；若坚持只信 Standard 段，40.80 亿作敏感性对照。"
+      },
+      "calculation": {
+        "adoptedWindow": "total 48%→35%（13pp，最大同质样本）",
+        "weeklyTokensCentral": 1101214746.15,
+        "monthlyTokensCentralExact": 4404858984.62,
+        "monthlyYiCentral": 44.05,
+        "formula": "143,157,917 / 13% * 4 weeks",
+        "roundedPercentMonthlyLow": 4090226200.0,
+        "roundedPercentMonthlyHigh": 4771797226.67,
+        "roundedPercentNote": "端点 48/35 若为四舍五入整数，则真实 Δpp∈[12,14]，对应 40.90~47.72 亿/月；中心值按 13pp。",
+        "segmentSensitivity": "仅 Standard 段（4pp）：40.80 亿/月；仅 Fast 段（9pp）：45.49 亿/月——两段同为同源面板±取整误差内的同口径读数，差异不具统计意义。",
+        "realUsdPerMTokCentral": 0.0045404405
+      },
+      "tokenCountingNote": "本地日志直接给 total，沿 Luna round6 / Sol round1 先例直接采用 total，不按项目标准负载再次归一。",
+      "crossCheck": {
+        "vsGpt6SolPlusSameAccount": "9/24 同窗型 Sol 样本 $4.8502/约6pp ≈ $0.808/pp list-worth；本样本 Luna $0.1671~0.1686/pp（AA 标价 0.1/0.01/0.5）——Sol 的额度『购买力』按自身标价约为 Luna 的 4.8 倍，raw token 比 11.01M vs 2.62M/pp ≈ 4.2×。",
+        "vsGpt56LunaRound6": "5.6-Luna（9/8 同账号 Plus）：$0.5364/pp（5.6-Luna 标价）；6-Luna $0.1671/pp（6-Luna 标价）——按各自 list-worth 计，6-Luna 每美元价值的额度消耗约为 5.6-Luna 的 3.2×；raw tok/pp 比 18.78M→11.01M。模型换代额度权重不同，不互相校准。",
+        "luna6ListWorth": "周池 ≈ $16.7~16.9 Luna-6 list-worth（AA 页 in$0.1/out$0.5，cached 0.1× 推定）"
+      },
+      "confidence": "high",
+      "pendingAdoption": "chatgpt_plus × gpt-6-luna 44.05 亿/月（high, measured）；不派生 Pro 5x/20x（沿 Sol 裁定）；入库后 scores-new-models-round1-2026-09-23.json 中 gpt-6-luna 的 11 条 unmappedOfficialRows 经新 supplement scores-gpt6luna-round1-2026-09-26.json 移入 scores[]。"
+    }
+  ],
+  "relatedFiles": [
+    "chatgpt-luna-adoption-round6-2026-09-08.json",
+    "chatgpt-gpt6sol-plus-round1-2026-09-24.json",
+    "scores-new-models-round1-2026-09-23.json",
+    "scores-gpt6luna-round1-2026-09-26.json",
+    "chatgpt-astra-quota-round8-2026-09-11.json（官方『Fast mode ... can also increase usage』出处）"
+  ]
+}
