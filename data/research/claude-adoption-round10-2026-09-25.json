@@ -1,0 +1,122 @@
+{
+  "recordedAt": "2026-09-25",
+  "sourceType": "grok_compiled_report_pdf (用户提供 grok_report.pdf，13页，汇编 Reddit/X/官方博客/Endor Labs 共17条)",
+  "scope": "Claude Code 订阅用量数据源汇总——主线为 Opus 5.5 时代 5h窗+周额度实测。报告自承：无一条同时具备『套餐+四项token分拆+5h%+周%』四件套，全部为残片。逐条对照本仓库 round1~round9 采用状态。",
+  "items": [
+    {
+      "id": "reddit-pro-opus55-full5h-151m",
+      "source": "Reddit r/ClaudeCode 帖（报告条目#1，约2026-09-24），Pro $20，Opus 5.5 专用，帖标题自述『打满5h窗＝周额度13.333%（即75%的5h＝周10.0%）』",
+      "tokens": {
+        "input": 458,
+        "output": 242249,
+        "cacheRead": 149816660,
+        "cacheWrite": 1134356,
+        "totalRaw": 151193723,
+        "note": "分项为评论区按 API 牌价估值，非 transcript；两项相加=151,193,723 恰与帖主总数闭合"
+      },
+      "usageBar": "满5h窗 = 周额度 13.333%（两窗连打同比率复现；即周池=7.5窗）",
+      "derivation": {
+        "directRaw": "151,193,723 ÷ 13.333% = 周池 11.34亿 raw → ×4周 = 45.36亿/月【2026-09-25 用户裁定采用口径：直接按 token÷百分比】",
+        "worthPath5m": "段 worth：读149.817M×$0.2 + 写1.134M×$5 + 入0.458k×$4 + 出0.242M×$20 ≈ $40.48/窗 → ÷13.333% = 周$303.6 → ÷Anthropic档混合价$0.419 → 29.0亿/月（留作对照不采）",
+        "worthPath1h": "cache写若按1h $8 计 → 周$333.9 → 31.4亿/月（对照）",
+        "weeklyPool": "周池 11.34亿 raw；若 Pro 加权周池沿用 Opus5 的 4.70亿 当量，则隐含 Opus5.5 周池权重 ≈4.70/11.34 = 0.414（低于 MiaAI 样本的 5h口径隐含 0.5204——窗权重与周池权重口径本就不同，且本样本 % 为标题读数）",
+        "rounding": "13.333% 系帖主读数，若真实值在 13.0~13.5% → 月额 44.8~46.5亿；token 取整幅度未知"
+      },
+      "adopted": "adopted_direct_45.36yi",
+      "adoptedNote": "替换旧派生值 36.09亿（18.78×1.9217 借20x隐含权重）；首个 Pro+Opus5.5 满窗直测样本，且首次给出 Pro+5.5 的 5h 窗池容量 1.51亿 raw（≈Opus5 Pro 5h池 56.7M 的 2.67×）。弱点：无 /usage 面板截图、token为评论区估值 → 置信度 low"
+    },
+    {
+      "id": "renaux-max100-30d-8.5b",
+      "source": "Julien Renaux（报告条目#11，X/Blog），Claude Max $100（5x），30天账单：8.5B tokens，API等价 $6,165",
+      "derivation": "采用值 78.5亿/月 按实测 mix（读~99%）预测 worth：8.5B×(0.99×$0.5+...)/月 推算周池 $1,504；实测 $6,165/30d → 闭合差 +2.5%；周池折合 8.5B÷4.286周=19.83亿 raw/周 vs 采用隐含 78.5÷4=19.63亿（+1%）",
+      "adopted": "corroboration_only",
+      "note": "claude_max_5x::claude-opus-5 行（78.5亿）目前最强的外部闭合校验；Renaux 原文另有 Sonnet 混用份额，8.5B 为全模型合计——混池读数进 Opus5 闭合属近似"
+    },
+    {
+      "id": "same-account-multiweek-max20x-max5x",
+      "source": "报告条目#15，同账号多周 /usage 截图序（Max20x 与 Max5x 两档各若干周）",
+      "windowCounts": "Max20x ≈5.5 满窗/周；Max5x ≈9~11.1 满窗/周",
+      "derivation": "Max20x ~5.5窗/周 与 round9『Max周满窗数~5.5』精确吻合（chudi反推5h池~7.1亿：39.25亿÷7.1亿≈5.5）→ corroboration_structural；Max5x 9~11.1窗系仓库未有之结构性读数（隐含5x窗池约39.25÷2÷9~11.1≈1.77~2.18亿加权当量）",
+      "conflict": "其美元当量周读数（5x 九月周 $421~469）与采用值隐含 ~$1,504/周（78.5亿×标准混合价÷4）差 ~3.5×——若读数非打满周则仅为下限；方向性张力留档不入权",
+      "adopted": "structural_corroboration + tension_not_adopted(dollar_path)"
+    },
+    {
+      "id": "endor-labs-200task-medians",
+      "source": "Endor Labs 实验报告（报告条目#3），200 个标准化任务受控对比",
+      "content": "Opus5.5 中位任务：0.37M cache读 + 6.4k 输出 + $0.33/任务（133s）；vs Opus5：输出量 ~1/4、cache读 ~1/9",
+      "value": "负载形状证据：5.5 省的是读次数与输出，不是订阅周桶变大——支撑 round1 以来『换模型改权重不改池』口径；同时佐证 anthropic 档负载 mix 形状",
+      "adopted": "context_loadshape"
+    },
+    {
+      "id": "subagent-cache-ttl-5min",
+      "source": "报告条目#16，Claude Code 子代理机制分析",
+      "content": "子代理默认 cache TTL 5min（主会话 1h）；5 个子代理并发 26 次全量重写 = 12.2M cache写，单写爆量可打爆两个 5h 窗",
+      "value": "机制级 caveat：解释部分社区样本 cache写占比异常（如条目#13 写占14%）；评估 cache写敏感型样本时需考虑子代理放大",
+      "adopted": "context_mechanism"
+    },
+    {
+      "id": "opus-vs-astra-sametask-6.46x",
+      "source": "报告条目#2，同一 Rust 任务：Claude Code Opus 134.99M tok vs Devin Astra 20.89M tok",
+      "value": "跨 harness token 膨胀 6.46×（几乎全为 cache读）——与仓库 Devin Astra/Opus 折算线相关的直接证据；非订阅额度证据",
+      "adopted": "context_cross_harness"
+    },
+    {
+      "id": "swarm-135agents-11m-51m",
+      "source": "报告条目#10，135 agents 并行 audit，51分钟烧 11M tok",
+      "adopted": "context_loadshape"
+    },
+    {
+      "id": "luongnv89-5h69-w10",
+      "source": "报告条目#5，X @luongnv89：5h窗 69% ≈ 周额度 10%（~7窗/周读法）",
+      "value": "定性旁证：若5h窗满≈周14.3%，与 #1 的 13.333% 同量级（Pro 口径）；无 token 分拆",
+      "adopted": "corroboration_qualitative"
+    },
+    {
+      "id": "waynesun-dual-buckets",
+      "source": "报告条目#8，@waynesun All-models / Fable 双周桶截图",
+      "value": "与仓库 Fable 限周50%子帽模型结构互证（round9 已有同型证据）",
+      "adopted": "context_corroboration"
+    },
+    {
+      "id": "reddit-audit-two-accounts-dup",
+      "source": "报告条目#14 —— 即 round9 已转正的 reddit-audit-two-accounts（$1,222=周52%→整周$2,350）",
+      "adopted": "already_adopted_round9"
+    },
+    {
+      "id": "official-blog-token-guide",
+      "source": "报告条目#4 —— Anthropic 官方 blog『一个任务多少token』，round1 已引用的官方价表佐证",
+      "adopted": "already_referenced_round1"
+    },
+    {
+      "id": "misc-qualitative",
+      "source": "报告条目 #6/#7/#9/#12/#17 —— 仅 % 无 token 分拆、或纯感想、或无用量条",
+      "adopted": "unusable_no_tokens 或 context_only"
+    },
+    {
+      "id": "write-share-anomaly-14pct",
+      "source": "报告条目#13，某样本 cache写占比 14%",
+      "value": "异常写占比样本——结合 #16 子代理 TTL 机制解读，属负载形态而非池容量证据",
+      "adopted": "context_mechanism"
+    }
+  ],
+  "adoptionSummary": {
+    "claude_pro::claude-opus-5.5": "36.09→45.36亿/月（low），2026-09-25 用户裁定直接口径：满5h窗 151,193,723 tok ÷ 周13.333% ×4周（Reddit #1）。worth路径 29.0亿(5m写)/31.4亿(1h写) 与旧派生 36.09亿 留作对照——直接 raw 口径按用户裁定优先；隐含周池权重 0.414 与 MiaAI 5h口径 0.5204 不同口径不互斥。置信度 low：无 /usage 截图、token 为评论区按牌价估值、n=1",
+    "claude_max_5x::claude-opus-5.5": "维持 150.85亿 low（78.5×1.9217 借20x权重派生）——本轮无 5x 新证据",
+    "claude_max_20x::claude-opus-5.5": "维持 301.7亿 medium——本轮无新 20x 直测；#15 的 5.5窗/周结构互证采用值周池",
+    "claude_max_5x::claude-opus-5": "维持 78.5亿 medium——#11 Renaux 30d $6,165 账单闭合差 +2.5% 强互证",
+    "claude_max_20x::claude-opus-5": "维持 157亿 medium——#15 Max20x~5.5满窗/周与 round9 chudi 反推吻合"
+  },
+  "caveats": [
+    "#1 样本无 Usage 面板截图：13.333% 为帖主标题读数、token 分拆为评论区按牌价估值——按 sourcePriority 只能记 low，若能拿到 /usage 同框或 ccusage 日志可升级",
+    "#1 的 45.36亿 与 20x 档 301.7亿 隐含的比例关系（×6.65）与 Opus5 的 Pro:Max20x（18.78:157=×8.36）不同——跨档权重关系随 5.5 改变属预期，但若后续直测显示 Pro 5.5 周池权重并非 0.414，需重推",
+    "#15 美元当量读数与采用值差 ~3.5×：若该账号实际未打满周则仅为下限读法；按本仓库惯例美元口径不进 X 轴换算，列张力不入权",
+    "报告本身是二手汇编（Grok 生成），条目级原文未逐条回链核验；关键数字（151,193,723、13.333%、$6,165、8.5B）以报告转述为准",
+    "#2 的 6.46× 跨 harness 比较为单任务样本，不作 Astra/Opus 折算系数修正依据"
+  ],
+  "relatedFiles": [
+    "claude-opus55-round1-2026-09-23.json",
+    "claude-adoption-round9-2026-09-21.json",
+    "claude-adoption-round8-2026-09-20.json",
+    "claude-quotas-round5-2026-09.json"
+  ]
+}
