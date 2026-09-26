@@ -80,7 +80,7 @@
         "roundedPercentMonthlyHigh": 4771797226.67,
         "roundedPercentNote": "端点 48/35 若为四舍五入整数，则真实 Δpp∈[12,14]，对应 40.90~47.72 亿/月；中心值按 13pp。",
         "segmentSensitivity": "仅 Standard 段（4pp）：40.80 亿/月；仅 Fast 段（9pp）：45.49 亿/月——两段同为同源面板±取整误差内的同口径读数，差异不具统计意义。",
-        "realUsdPerMTokCentral": 0.0045395975
+        "realUsdPerMTokCentral": 0.0045404405
       },
       "tokenCountingNote": "本地日志直接给 total，沿 Luna round6 / Sol round1 先例直接采用 total，不按项目标准负载再次归一。",
       "crossCheck": {
