@@ -35,12 +35,11 @@ CHATGPT_PLUS_SOL6_SEGMENT = {"input": 693_878, "output": 46_713, "cache_read": 1
 CHATGPT_PLUS_SOL6_USED_TOKENS = 15_716_975
 CHATGPT_PLUS_SOL6_USED_FRACTION = 0.06
 assert sum(CHATGPT_PLUS_SOL6_SEGMENT.values()) == CHATGPT_PLUS_SOL6_USED_TOKENS
-# GPT-6 Luna（9/22 新发）Plus —— 2026-09-28 用户本机 Codex 实测（Luna Max effort 档）：
-#   周额度重置后新一周窗 97%→91%（09-27 22:09 → 09-28 20:44，Δ6pp），段内增量 137,648,446 tok 全为 gpt-6-luna
-#   （gpt-5.6-luna 累计 205,934,189 与 6sol/astra 均未动）。用户 2026-09-28 裁定改采本周样本、认定周池已上调：
-#   与 round1（48%→35% 13pp、143,157,917 tok → 11.01M/pp）反推周池差 2.08×——worth/pp 同向 2.01×、
-#   负载 mix 几乎不变（hit 97.71% vs 97.76%）、取整最坏组合仍 ≥1.65×，指向分母变化而非计量口径；
-#   round1 保留为历史证据不采（chatgpt-gpt6luna-plus-round1-2026-09-26.json）。
+# GPT-6 Luna（9/22 新发）Plus —— round2：2026-09-28 用户本机 Codex 实测（effort=max）：
+#   新一周窗 09-27 22:09 97% → 09-28 20:44 91%（6pp），段内 +137,648,446 tok 全为 gpt-6-luna
+#   （gpt-5.6-luna 累计 205,934,189 未动、6sol/astra 计数未动）。本周 22.94M tok/pp ≈ round1 合并样本
+#   11.01M 的 2.08×（standard 段 10.20M 的 2.25×），两侧取整区间不重叠，判周池放大或 effort 计权变化而非噪声；
+#   用户裁定新一周分开记，采用本周样本，round1（48%→35%，143,157,917 tok/13pp→44.05亿）留作对照不合并不平均
 CHATGPT_PLUS_LUNA6_SEGMENT = {"input": 3_129_683, "output": 757_355, "cache_read": 133_761_408}
 CHATGPT_PLUS_LUNA6_USED_TOKENS = 137_648_446
 CHATGPT_PLUS_LUNA6_USED_FRACTION = 0.06
@@ -686,8 +685,8 @@ SUBS = [
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-astra", chatgpt_astra_monthly_yi(), "high", "用户Plus面板：10,336,745 tokens(input+cache_read) = 周窗剩余26pt；chatgpt-astra-adoption-round7-2026-09-11.json", "新增1.59亿：10,336,745÷26%×4周；本次抽取未含output（Luna同法占0.33%，影响<1%）；26pt为取整读数差，范围约1.53~1.65亿；Plus定价页写明Astra为limited档（可加credits），直测的是实际消耗速率不受影响；round8发现Observatory现测Astra≈4.1×Sol，round7旧权重2×互证口径存疑，本值不依赖权重模型；round13新增Plus同框32~75M/周散布于1.28~3.0亿/月，与1.59亿同量级不改值；Pro20x已按round13挂点"),
     # GPT-6 Sol（9/22 新发）—— 用户Plus账号2026-09-24本机Codex当日增量直测；只挂Plus，Pro 5x/20x不派生（用户裁定）
     ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-sol", chatgpt_sol6_monthly_yi(), "high", "用户本机Codex实测：当日增量gpt-6-sol total 15,716,975 tokens（input 693,878/output 46,713含reasoning 14,925/cache_read 14,976,384，hit 95.57%）= 周额度约6%；chatgpt-gpt6sol-plus-round1-2026-09-24.json", f"新增{chatgpt_sol6_monthly_yi():g}亿：15,716,975÷6%×4周；直接采用total不套标准负载（沿Luna round6先例）；6%为口述取整，5.5~6.5%对应9.67~11.43亿；工具估价$4.85＝in$2/cached$0.2/out$10（$2/$10与AA页标价一致，cached 0.1×未见官方页）；昨日77.8M无周%检查点不参与；Pro 5x/20x不派生（用户裁定只挂Plus）；榜分见scores-gpt6sol-round1-2026-09-24.json"),
-    # GPT-6 Luna（9/22 新发）—— 用户Plus账号2026-09-28本机Codex新一周窗97%→91%直测（Luna Max档）；只挂Plus，Pro 5x/20x不派生（沿Sol裁定）
-    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-luna", chatgpt_luna6_monthly_yi(), "high", "用户本机Codex实测（Luna Max档）：周额度重置后97%→91%段内增量全为gpt-6-luna total 137,648,446 tokens（input 3,129,683/output 757,355含reasoning 471,268/cache_read 133,761,408，hit 97.71%）；chatgpt-gpt6luna-plus-round2-2026-09-28.json", f"44.05→{chatgpt_luna6_monthly_yi():g}亿（2026-09-28用户裁定新一周样本取代、认定周池上调）：137,648,446÷6%×4周；直接采用total不套标准负载（沿Luna round6先例）；与round1差2.08×系周池分母变化（worth/pp $0.338 vs $0.168、负载mix不变、取整最坏组合仍≥1.65×）非计量口径；面板整数%读数Δpp5~7对应78.66~110.12亿；Luna Max=Codex Max effort档，同模型不另立口径；Pro 5x/20x不派生（沿Sol裁定）；榜分见scores-gpt6luna-round1-2026-09-26.json"),
+    # GPT-6 Luna（9/22 新发）—— 用户Plus账号本机Codex新一周周窗直测；round2（97%→91%，effort=max）取代 round1；只挂Plus，Pro 5x/20x不派生（沿Sol裁定）
+    ("chatgpt_plus", "ChatGPT Plus", 20, "USD", "gpt-6-luna", chatgpt_luna6_monthly_yi(), "high", "用户本机Codex实测（effort=max）：新一周窗09-27 22:09 97%→09-28 20:44 91%增量全为gpt-6-luna total 137,648,446 tokens（input 3,129,683/output 757,355含reasoning 471,268/cache_read 133,761,408，hit 97.71%）；chatgpt-gpt6luna-plus-round2-2026-09-28.json", f"44.05→{chatgpt_luna6_monthly_yi():g}亿：137,648,446÷6%×4周；直接采用total不套标准负载（沿Luna round6先例）；面板整数%读数Δpp5~7对应78.66~110.12亿；本周22.94M tok/pp≈round1合并样本11.01M的2.08×（standard段10.20M的2.25×），两侧取整区间不重叠，判为周池放大或effort计权变化（本周max、round1未记effort，两因果链不可区分）而非噪声；用户裁定新一周分开记，round1 44.05亿留作对照不合并不平均；段内gpt-5.6-luna累计205,934,189、6sol/astra均未动，6pp全归6-luna；Pro 5x/20x不派生（沿Sol裁定）；榜分沿用scores-gpt6luna-round1-2026-09-26.json"),
     # Pro20x Astra —— round12 因三源分歧2.7×暂不挂点；round13 用户转供同框批次（g5a/g8）+ sdmat 使 8 亿簇达 5 条独立来源，裁决收敛
     ("chatgpt_pro_20x", "ChatGPT Pro 20x", 200, "USD", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI, "medium", "8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14用户面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14", f"新增{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}亿：周池{CHATGPT_PRO20X_ASTRA_WEEK_YI:g}亿×{MONTH_WEEKS:g}周——实测源按验证等级加权（面板同框/用户面板/连续序列×3、自述份额×2、社区口述×1），round10的10%与档位经用户确认由不采改为入权；round14新口径：周池≈$1200~1500 list-worth（Astra），同池Sol $2200~2500，内部计权对Astra惩罚~1.9×；用户自测≈32亿/月与lichengzhe网关21~23亿按用户指示不入权，纯口述与仅下限源不进均值；隐含权重≈{CHATGPT_PRO20X_SOL_MONTHLY_YI/4/CHATGPT_PRO20X_ASTRA_WEEK_YI:.2f}×Sol；同源真实测量仍散布6.8~15.6亿/周，账号间池子可能本就不同，此值为加权中心而非普适常数"),
     # Devin —— 用户Max账号本周87pt近满周段astra单列反推（305M tokens/667 calls）；swe-2-max等免费不占额度，Max官方为周池无日上限

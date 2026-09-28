@@ -5,7 +5,7 @@
 
 ## 2026-09-28
 
-- **ChatGPT Plus × GPT-6 Luna 改采新一周 Luna Max 档样本（44.05 → 91.77 亿/月，high 不变）**：真实单价 $0.0045402951 → $0.0021793614/MTok。用户 2026-09-28 裁定改用本周新值、认定周池已上调、上周 round1 样本作废（round1 档保留为历史证据不采）。样本：周额度重置后新一周首个窗口 97%→91%（09-27 22:09 → 09-28 20:44，Δ6pp），段内增量全为 gpt-6-luna：+137,648,446 tok（input 3,129,683 / output 757,355 含 reasoning 471,268 / cache_read 133,761,408，hit 97.71%）；gpt-5.6-luna 累计 205,934,189 与 6sol/astra 均未动，归属零杂讯。反推 22.94M tok/pp → 周池 2.294B、剩余 91%≈2.09B、月额中心 91.77 亿（整数%取整 Δpp∈[5,7] 对应 78.66~110.12 亿）。与上周采用样本（11.01M/pp → 44.05 亿/月）差 2.08×：取整最坏组合仍 ≥1.65× 不可由误差解释；按 6-Luna AA 标价折 worth/pp（$0.338 vs $0.168）同向 ≈2.0×，且两周负载结构几乎相同（hit 97.71% vs 97.76%）——差异在周池分母而非计量口径或负载 mix。候选解释：新一周常态周池上调（9/22 发布口径 "Higher usage limits"，发布周另有 banked reset 扰动）、Luna Max 档池权重差异、或上周窗偏差。「luna max」按社区同型叫法（`gpt-5.6-luna max`、openai/codex#34246、#41969）理解为 Codex Luna 的 Max reasoning effort 档，同模型不另立计量口径。用户裁定『新一周分开记』，本样本独立归档于 `chatgpt-gpt6luna-plus-round2-2026-09-28.json`。Pro 5x/20x 不派生（沿 Sol 裁定）；榜分不变（scores-gpt6luna-round1-2026-09-26.json）。
+- **ChatGPT Plus × GPT-6 Luna 新一周实测取代上周样本（effort=max）**：44.05 → 91.77 亿/月 high（workload=measured）。用户本机 Codex 新一周窗 09-27 22:09 97% → 09-28 20:44 91%（6pp），段内 +137,648,446 tok（input 3,129,683/output 757,355 含 reasoning 471,268/cache_read 133,761,408，hit 97.71%）全为 gpt-6-luna——gpt-5.6-luna 累计 205,934,189、6sol/astra 计数均未动。本周 22.94M tok/pp ≈ round1 合并样本 11.01M 的 2.08×（standard 段 10.20M 的 2.25×），两侧取整区间（78.66~110.12 vs 40.90~47.72 亿）不重叠，判为周池放大或 effort 计权变化而非噪声；本周全程 max effort（reasoning 占 output 62.2%，round1 未记 effort），两条因果链现有证据不可区分。用户裁定新一周分开记：采用本周样本，round1 44.05 亿留作历史对照，不合并不平均。只挂 Plus，Pro 5x/20x 不派生（沿 Sol 裁定）。证据：`chatgpt-gpt6luna-plus-round2-2026-09-28.json`。
 
 ## 2026-09-27
 
