@@ -1,0 +1,108 @@
+{
+  "collectedAt": "2026-09-28",
+  "scopeNote": "GPT-6 Luna × ChatGPT Plus 新一周（周额度重置后）第二个本机实测样本，用户以 Luna Max effort 档使用（『luna max』= Codex Luna 的 Max reasoning effort 档，模型仍为 gpt-6-luna；社区同样写法见 openai/codex#34246、#41969 及 community.openai.com/t/1388730『Luna Max』）。窗 09-27 22:09 周额度剩余 97% → 09-28 20:44 剩余 91%（Δ6pp），段内增量全为 gpt-6-luna。用户裁定『新一周分开记』——本档只记证据，采用值是否改挂待用户裁定（round1 采用值 44.05 亿维持不动）。历史 research 文件不改。",
+  "items": [
+    {
+      "planId": "chatgpt_plus",
+      "priceUsd": 20,
+      "model": "gpt-6-luna",
+      "client": "Codex CLI",
+      "serviceTier": "max（Luna Max effort 档；与 round1 的 standard/fast 同字段，仅描述使用档位，不另立计量口径）",
+      "evidenceType": "user_local_log_x_panel_percent",
+      "source": "用户本机 Codex 实测截图（2026-09-28 会话内提供）",
+      "sourceDate": "2026-09-28",
+      "userConfirmation": "用户原话：『新的6luna数据，本机实测，gpt plus，luna max』；截图自注『91% 已记下。这段不是 5.6：gpt-5.6-luna 仍是 205,934,189，全是 gpt-6-luna』『大约是上周 6luna standard 样本的 2.2 倍，新一周分开记』",
+      "observed": {
+        "window": "周额度剩余 97% → 91%（北京时间 09-27 22:09 → 09-28 20:44），Δ6pp；上一采用样本所在周已结束（round1 窗止于 35%），本窗为新一周重置后首个窗口",
+        "checkpoints": [
+          {
+            "at": "2026-09-27 22:09",
+            "remainingPct": 97,
+            "gpt6LunaCumulativeTokens": 236620977,
+            "gpt56LunaCumulativeTokens": 205934189,
+            "note": "上一检查点"
+          },
+          {
+            "at": "2026-09-28 20:44",
+            "remainingPct": 91,
+            "gpt6LunaCumulativeTokens": 374269423,
+            "gpt56LunaCumulativeTokens": 205934189,
+            "note": "6luna 累计 Δ=+137,648,446；gpt-5.6-luna 累计未动，gpt-6-sol / gpt-6-astra 亦未动 → 段内消耗全归 gpt-6-luna"
+          }
+        ],
+        "segments": [
+          {
+            "label": "09-27 后半（按自然日拆账，非独立额度检查点）",
+            "inputTokens": 894958,
+            "outputTokens": 219581,
+            "reasoningTokensSubsetOfOutput": 137350,
+            "cacheReadTokens": 35160320,
+            "totalTokens": 36274859,
+            "cacheHitRate": 0.9752
+          },
+          {
+            "label": "09-28（按自然日拆账，非独立额度检查点）",
+            "inputTokens": 2234725,
+            "outputTokens": 537774,
+            "reasoningTokensSubsetOfOutput": 333918,
+            "cacheReadTokens": 98601088,
+            "totalTokens": 101373587,
+            "cacheHitRate": 0.9778
+          }
+        ],
+        "total": {
+          "deltaPp": 6,
+          "inputTokens": 3129683,
+          "outputTokens": 757355,
+          "reasoningTokensSubsetOfOutput": 471268,
+          "cacheReadTokens": 133761408,
+          "totalTokens": 137648446,
+          "cacheHitRate": 0.9771,
+          "tokensPerPoint": 22941407.67,
+          "weeklyTokensImplied": 2294140767,
+          "remaining91PctImpliedTokens": 2087668098
+        }
+      },
+      "verification": "分段加总与累计差双向一致：09-27 后半 + 09-28 两段逐项相加 = input 894,958+2,234,725=3,129,683、output 219,581+537,774=757,355、reasoning 137,350+333,918=471,268、cache_read 35,160,320+98,601,088=133,761,408、total 36,274,859+101,373,587=137,648,446；且等于面板累计差 374,269,423−236,620,977=137,648,446。每段 input+output+cache_read=total（reasoning 为 output 子集不重复相加）；hit=cache_read/(input+cache_read) 复算 97.52%/97.78%/97.71% 与截图一致。÷6pp×100 复算周池 2,294,140,767、剩余 91%≈2,087,668,098（≈2.09B）与用户自算一致。",
+      "discrepancyVsRound1": {
+        "rawRatio": "本周 22.94M tok/pp vs round1 合并 11.01M/pp = 2.08×、vs round1 standard 段 10.20M/pp = 2.25×（用户自注≈2.2×对应后者）。整数 % 取整最坏组合（本周 Δpp=7 且上周 Δpp=12）仍 ~1.65×，非读数误差可解释。",
+        "worthRatio": "按 6-Luna AA 标价（cached $0.01 / in $0.1 / out $0.5）折段 worth：本周 $2.03/6pp = $0.338/pp，round1 $2.19/13pp = $0.168/pp —— worth 口径同样 ≈2.0×，说明差异在周池分母而非 raw/worth 计量口径。",
+        "hypotheses": [
+          "周池上调：9/22 发布口径『Higher usage limits and lower cost』，round1 实测于发布周（当周全账号还发放了 banked reset），本周或为首个常态周池；",
+          "Luna Max effort 档额度权重不同：方向上反直觉（社区抱怨 Luna Max 烧额度快），且实测每 pp 买到更多 raw token——若 Max 加权更重应更少；不支持但不排除档位池差异；",
+          "round1 窗偏差：上周窗处于发布周且跨 Fast 自开段，池面值当时可能为过渡口径。",
+          "结论：同源同账号同模型两周窗反推周池差 2.08×，属真实分歧；按口径『矛盾摆出来让用户拍板』，采用值暂不动。"
+        ]
+      },
+      "calculation": {
+        "windowFormula": "137,648,446 / 6% * 4 weeks",
+        "weeklyTokensCentral": 2294140766.67,
+        "monthlyTokensCentralExact": 9176563066.67,
+        "monthlyYiCentral": 91.77,
+        "roundedPercentMonthlyLow": 7865625485.71,
+        "roundedPercentMonthlyHigh": 11011875680.0,
+        "roundedPercentNote": "面板整数 % 读数：真实 Δpp∈[5,7]，对应 78.66~110.12 亿/月；中心值按 6pp。分母 6pp 小于 round1 的 13pp，取整敏感度更高（±17%）。",
+        "realUsdPerMTokCentral": 0.0021794652
+      },
+      "tokenCountingNote": "本地日志直接给 total，沿 Luna round6 / Sol round1 / Luna-6 round1 先例直接采用 total，不按项目标准负载再次归一。",
+      "crossCheck": {
+        "vsRound1SameAccount": "见 discrepancyVsRound1：raw 2.08~2.25×、worth 2.01×；两周窗均为 6-luna 独占增量，负载结构 hit 97.71% vs 97.76% 几乎相同——mix 不变而每 pp token 翻倍，指向分母池变化。",
+        "vsGpt6SolPlusSameAccount": "9/24 Sol 样本 $0.808/pp list-worth；本周 Luna $0.338/pp（6-Luna 标价）——Sol 每 pp 购买力约为 Luna 的 2.4×（round1 时为 4.8×），比值变化同样反映 Luna 周池分母变化。"
+      },
+      "confidence": "high（面板剩余%×本机日志双检查点、模型归属零杂讯；分母仅 6pp 取整敏感度 ±17% 已在区间内注明）",
+      "pendingAdoption": "待用户裁定：chatgpt_plus × gpt-6-luna 维持 44.05 亿或改挂本周口径（中心 91.77 亿、区间 78.66~110.12 亿）或两周合并。用户已裁定『新一周分开记』——本档独立留存，不并入 round1 样本。"
+    }
+  ],
+  "relatedFiles": [
+    "chatgpt-gpt6luna-plus-round1-2026-09-26.json（上周采用样本 44.05 亿/月）",
+    "chatgpt-gpt6sol-plus-round1-2026-09-24.json",
+    "chatgpt-luna-adoption-round6-2026-09-08.json",
+    "chatgpt-astra-quota-round8-2026-09-11.json（Fast mode 官方口径出处）"
+  ],
+  "externalReferences": [
+    "https://community.openai.com/t/why-is-luna-max-draining-weekly-usage-so-quickly/1388730（社区『Luna Max』叫法=Max effort 档）",
+    "https://github.com/openai/codex/issues/34246（『gpt-5.6-luna max』= 模型+effort 展示格式）",
+    "https://github.com/openai/codex/issues/41969（Pro Lite『gpt-5.6-luna with Max reasoning』及 Luna Reserve/banked reset 概念）",
+    "https://community.openai.com/t/announcing-gpt-6-sol-and-gpt-6-luna-in-the-api-codex-and-chatgpt/1399925（9/22 发布：『Higher usage limits and lower cost』+ banked reset 发放）"
+  ]
+}
