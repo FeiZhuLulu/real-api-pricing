@@ -33,6 +33,7 @@ const escape = (s: string) =>
 export default function Ranking({
   rows,
   state,
+  domain,
   highlight,
   onSelect,
   handle,
@@ -40,6 +41,7 @@ export default function Ranking({
 }: {
   rows: Row[];
   state: State;
+  domain: { low: number; high: number };
   highlight: string | null;
   onSelect: (rows: Row[]) => void;
   handle: React.RefObject<ChartHandle | null>;
@@ -65,17 +67,21 @@ export default function Ranking({
   const value = (r: Row) =>
     isPrice ? r.point.real_usd_per_mtok : r.point.monthly_yi!;
   // Unmetered $0 rows have no log position: they get the shortest bar.
-  const values = sorted.map(value).filter((v) => v > 0),
-    low = values.length ? Math.min(...values) : 0,
-    high = values.length ? Math.max(...values) : 0;
+  const { low, high } = domain;
   const bar = (r: Row) =>
-    value(r) <= 0
-      ? 2
-      : high === low
-        ? 100
-        : 6 +
-          (94 * (Math.log10(value(r)) - Math.log10(low))) /
-            (Math.log10(high) - Math.log10(low));
+    Math.min(
+      100,
+      Math.max(
+        2,
+        value(r) <= 0
+          ? 2
+          : high === low
+            ? 100
+            : 6 +
+              (94 * (Math.log10(value(r)) - Math.log10(low))) /
+                (Math.log10(high) - Math.log10(low)),
+      ),
+    );
   const formatted = (r: Row) =>
     isPrice
       ? price(value(r)) +

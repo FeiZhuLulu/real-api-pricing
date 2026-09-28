@@ -87,6 +87,28 @@ export function visiblePoints(data: SiteData, s: State): Point[] {
           matchesFeeBand(p.price_usd, s.feeBand))),
   );
 }
+/**
+ * Log-scale domain for the ranking bars over every point, so filtering or
+ * locking rows cannot change how long the surviving bars are. The allowance
+ * view keeps the visiblePoints eligibility (minus the fee band) so the domain
+ * matches what the unfiltered ranking would span.
+ */
+export function barDomain(
+  data: SiteData,
+  view: State["view"],
+): { low: number; high: number } {
+  const values = data.points
+    .filter(
+      (p) =>
+        view !== "allowance" ||
+        (p.billing !== "metered" && p.monthly_yi !== null),
+    )
+    .map((p) => (view === "price" ? p.real_usd_per_mtok : p.monthly_yi))
+    .filter((v): v is number => v !== null && Number.isFinite(v) && v > 0);
+  return values.length
+    ? { low: Math.min(...values), high: Math.max(...values) }
+    : { low: 0, high: 0 };
+}
 export function rowsFor(data: SiteData, s: State): Row[] {
   const byPoint = new Map<string, typeof data.mappings>();
   for (const m of data.mappings)

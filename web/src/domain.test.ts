@@ -21,6 +21,7 @@ import {
   matchesFeeBand,
   feeBands,
   allowance,
+  barDomain,
   csv,
   defaultState,
   accessLine,
@@ -279,6 +280,70 @@ test("Monthly allowance excludes APIs, preserves unscored subscriptions and does
   );
   assert.ok(rows.every((r) => r.point.billing !== "metered"));
   assert.equal(new Set(rows.map((r) => r.point.id)).size, rows.length);
+});
+test("Ranking bar domain spans every point so filters, fee bands and locks cannot rescale bars", () => {
+  const eligible = data.points.filter(
+    (p) =>
+      p.billing !== "metered" && p.monthly_yi !== null && p.monthly_yi > 0,
+  );
+  const expected = {
+    low: Math.min(...eligible.map((p) => p.monthly_yi!)),
+    high: Math.max(...eligible.map((p) => p.monthly_yi!)),
+  };
+  assert.deepEqual(barDomain(data, "allowance"), expected);
+  // barDomain takes no state: a narrow fee band, channel lock, selection or
+  // search term shrinks the rows but leaves every surviving bar's length.
+  const s = {
+    ...defaultState(),
+    view: "allowance" as const,
+    feeBand: "0-30",
+    channels: ["OpenAI"],
+    query: "luna",
+    selected: [data.points[0].id],
+  };
+  assert.ok(visiblePoints(data, s).length < eligible.length);
+  assert.deepEqual(barDomain(data, s.view), expected);
+});
+test("Allowance bar domain excludes metered and quota-less points; price domain keeps every positive price", () => {
+  const site: SiteData = {
+    ...data,
+    points: [
+      {
+        ...data.points[0],
+        id: "metered",
+        billing: "metered",
+        monthly_yi: 9999,
+        real_usd_per_mtok: 0.5,
+      },
+      {
+        ...data.points[0],
+        id: "no-quota",
+        billing: "subscription",
+        monthly_yi: null,
+        real_usd_per_mtok: 4,
+      },
+      {
+        ...data.points[0],
+        id: "small",
+        billing: "subscription",
+        monthly_yi: 2,
+        real_usd_per_mtok: 0,
+      },
+      {
+        ...data.points[0],
+        id: "large",
+        billing: "subscription",
+        monthly_yi: 50,
+        real_usd_per_mtok: 8,
+      },
+    ],
+  };
+  assert.deepEqual(barDomain(site, "allowance"), { low: 2, high: 50 });
+  assert.deepEqual(barDomain(site, "price"), { low: 0.5, high: 8 });
+  assert.deepEqual(barDomain({ ...site, points: [] }, "price"), {
+    low: 0,
+    high: 0,
+  });
 });
 test("Harness/effort/mode filters constrain scores without silently losing unscored plans", () => {
   const rows = rowsFor(data, {
