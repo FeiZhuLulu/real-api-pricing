@@ -144,7 +144,7 @@ def label_position(p, board, x, y):
     model = p["model"]
     if model == "claude-opus-5":
         if board == "aa_coding_agent_index":
-            return x - 10, y - 62, "end"
+            return x + 20, y - 62, "start"
         return x - 24, y - 49, "end"
     if model == "gpt-6-astra":
         if board == "aa_intelligence_index":
@@ -177,7 +177,7 @@ def label_position(p, board, x, y):
             return x - 1, y + 41, "end"
     if model == "gemini-3.8-flash":
         if board == "aa_coding_agent_index":
-            return x + 131, y + 33, "end"
+            return x - 19, y + 66, "end"
     if model == "glm-5.3":
         if board == "aa_intelligence_index":
             return x + 24, y - 108, "start"
@@ -203,6 +203,12 @@ def label_position(p, board, x, y):
         if board == "aa_intelligence_index":
             return x + 174, y - 6, "end"
         return x + 5, y + 57, "end"
+    if model == "gpt-6-luna":
+        # 最右端前沿点：AA编程榜标签放前沿尾线下方、让开 gemini 引线柱，TB4·AA 榜对角线过陡改放左下。
+        if board == "aa_coding_agent_index":
+            return x + 84, y + 22, "end"
+        if board == "aa_terminal_bench_4":
+            return x - 104, y - 17, "end"
     if model == "gpt-5.6-terra":
         if board == "aa_intelligence_index":
             return x - 24, y + 65, "end"

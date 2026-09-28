@@ -1,6 +1,6 @@
 {
   "collectedAt": "2026-09-28",
-  "scopeNote": "GPT-6 Luna × ChatGPT Plus 新一周（周额度重置后）第二个本机实测样本，用户以 Luna Max effort 档使用（『luna max』= Codex Luna 的 Max reasoning effort 档，模型仍为 gpt-6-luna；社区同样写法见 openai/codex#34246、#41969 及 community.openai.com/t/1388730『Luna Max』）。窗 09-27 22:09 周额度剩余 97% → 09-28 20:44 剩余 91%（Δ6pp），段内增量全为 gpt-6-luna。用户裁定『新一周分开记』——本档只记证据，采用值是否改挂待用户裁定（round1 采用值 44.05 亿维持不动）。历史 research 文件不改。",
+  "scopeNote": "GPT-6 Luna × ChatGPT Plus 新一周（周额度重置后）第二个本机实测样本，用户以 Luna Max effort 档使用（『luna max』= Codex Luna 的 Max reasoning effort 档，模型仍为 gpt-6-luna；社区同样写法见 openai/codex#34246、#41969 及 community.openai.com/t/1388730『Luna Max』）。窗 09-27 22:09 周额度剩余 97% → 09-28 20:44 剩余 91%（Δ6pp），段内增量全为 gpt-6-luna。用户裁定『新一周分开记』；2026-09-28 用户再裁定改采本周新值（认定周池上调、上周样本作废）→ chatgpt_plus × gpt-6-luna 44.05→91.77 亿/月，round1 档保留为历史证据。历史 research 文件不改。",
   "items": [
     {
       "planId": "chatgpt_plus",
@@ -90,7 +90,7 @@
         "vsGpt6SolPlusSameAccount": "9/24 Sol 样本 $0.808/pp list-worth；本周 Luna $0.338/pp（6-Luna 标价）——Sol 每 pp 购买力约为 Luna 的 2.4×（round1 时为 4.8×），比值变化同样反映 Luna 周池分母变化。"
       },
       "confidence": "high（面板剩余%×本机日志双检查点、模型归属零杂讯；分母仅 6pp 取整敏感度 ±17% 已在区间内注明）",
-      "pendingAdoption": "待用户裁定：chatgpt_plus × gpt-6-luna 维持 44.05 亿或改挂本周口径（中心 91.77 亿、区间 78.66~110.12 亿）或两周合并。用户已裁定『新一周分开记』——本档独立留存，不并入 round1 样本。"
+      "adoption": "2026-09-28 用户裁定：改采本周新值——认定周池已上调、上周 round1 样本作废。chatgpt_plus × gpt-6-luna 44.05 → 91.77 亿/月（137,648,446÷6%×4 周，high, workload=measured，真实单价 $0.0021793614/MTok）；整数%取整区间 78.66~110.12 亿。round1 档（44.05 亿）保留为历史证据不采。Pro 5x/20x 不派生（沿 Sol 裁定）；榜分仍由 scores-gpt6luna-round1-2026-09-26.json 提供。"
     }
   ],
   "relatedFiles": [
