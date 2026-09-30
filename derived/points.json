@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-29",
+ "generatedAt": "2026-09-30",
  "mix": {
   "cache": 0.97,
   "input": 0.025,
@@ -4034,14 +4034,14 @@
     "currency": "USD"
    },
    "price_usd": 20.0,
-   "monthly_yi": 28.99,
-   "real_usd_per_mtok": 0.0068989307,
+   "monthly_yi": 24.52,
+   "real_usd_per_mtok": 0.0081566069,
    "list_blended_usd_per_mtok": 0.394,
-   "d": 0.0175,
-   "confidence": "low",
+   "d": 0.0207,
+   "confidence": "medium",
    "tier": "main",
-   "source": "Reddit r/ClaudeCode 帖（grok_report 条目#1，约9/24）：Pro 满 5h 窗 151,193,723 raw tok（读149.82M/写1.13M/入458/出242k）＝周额度 13.333%，两窗连打复现；claude-adoption-round10-2026-09-25.json",
-   "note": "36.09→28.99亿，2026-09-25 用户裁定按标价折 worth 再按 Anthropic 档负载换算（同 devin_max×opus-5.5 口径）：段 worth $40.48（读149.82M×$0.2＋写1.13M×$5(5m)＋入458×$4＋出0.24M×$20）÷周13.333%×4周＝月$1214.49 list-worth ÷ Anthropic档混合价$0.419/MTok；cache写按1h $8 敏感性31.4亿不采；raw total 口径45.36亿留作对照；首个 Pro+5.5 窗池读数1.51亿 raw（≈Opus5 Pro 5h池56.7M 的2.67×）；隐含周池权重≈0.414（与 MiaAI 5h口径0.5204 属窗/周不同口径不互斥）；弱点：无 /usage 截图、token 系评论区按牌价估值、n=1 → low；13.333%为帖主读数，13.0~13.5% 对应约28.6~29.7亿；若获 /usage 同框或 ccusage 日志可升级",
+   "source": "X @kanzakichiya ccusage 周表（2026-09-30 用户转供截图）：两周全 opus-5-5 合计 478,154,186 raw（读466.19M/写10.34M/入4,118/出1.61M）＝周额度 22%+47%＝69%（帖主口述，Opus 5.5 Medium）；claude-adoption-round11-2026-09-30.json",
+   "note": "28.99→24.52亿，round11 ccusage 样本替换 round10 Reddit 单窗为主值（同口径按标价折 worth 再按 Anthropic 档换算）：段 worth $177.22（读466.19M×$0.2＋写10.34M×$5(5m)＋入4,118×$4＋出1.61M×$20）÷周69%×4周＝月$1027.36 list-worth ÷ Anthropic档混合价$0.419/MTok；ccusage 自报 $208.25（两周 $92.14/$116.11）按写 1h $8 逐分闭合，1h 敏感性28.81亿不采；raw total 口径27.72亿（周池6.93亿 raw）留作对照；22%/47% 为整数读数，68~70% 对应24.17~24.88亿；ccusage 自然周与额度重置周未必对齐，分周比（$78.48/22% vs $98.73/47%）不闭合，只用合计；旧 Reddit 满窗 28.99亿（round10，low）降为互证，高 18%；两样本 worth 合池（÷82.33%）约25.24亿不采；ccusage＋口述百分比 → medium",
    "unmetered": false,
    "promo_until": null,
    "aa_intelligence_index__selection": "highest_archived_reference",

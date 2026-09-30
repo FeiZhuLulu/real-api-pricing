@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-09-30",
+  "sourceType": "user_provided_community_screenshot",
+  "trigger": "用户转供 X @kanzakichiya（chiyarlathotep）回复用户 @Fei2411 的推文与 ccusage 周表截图：Claude Pro 基本只用 Opus 5.5 Medium，两周合计用掉周额度 22%+47%；用户追问『总共是69%的周额度？』，帖主回复『对的』",
+  "reading": {
+    "source": "X @kanzakichiya 推文正文 + ccusage weekly 表截图（2 张，用户提供）",
+    "plan": "claude_pro $20",
+    "model": "opus-5-5（ccusage 表仅此一个模型；帖主自述『基本上是用的 Opus 5.5 Medium』）",
+    "weeklyPctUsed": "22% + 47% = 69%（帖主口述，经用户追问确认）",
+    "ccusageWeeks": [
+      {"week": "2026-09-20", "input": 1814, "output": 821467, "cacheCreate": 4552079, "cacheRead": 196439531, "totalTokens": 201814891, "costUsd": 92.14},
+      {"week": "2026-09-27", "input": 2304, "output": 790686, "cacheCreate": 5792192, "cacheRead": 269754113, "totalTokens": 276339295, "costUsd": 116.11}
+    ],
+    "total": {"input": 4118, "output": 1612153, "cacheCreate": 10344271, "cacheRead": 466193644, "totalTokens": 478154186, "costUsd": 208.25}
+  },
+  "derived": {
+    "mix": "cache读97.50% / cache写2.16% / 输入0.001% / 输出0.34%",
+    "worth5mUsd": 177.22,
+    "worth1hUsd": 208.25,
+    "priceClosure": "按 Opus 5.5 标价（读$0.2/入$4/出$20）+ cache 写 1h $8 重算：两周 $92.14 / $116.11、合计 $208.25，与 ccusage 自报逐分吻合 → ccusage 按 1h TTL 计写价（Claude Code 主会话 1h 缓存）；项目口径仍按 5m $5 折 worth",
+    "weeklyPoolRawYi": 6.93,
+    "weeklyPoolWorth5mUsd": 256.84,
+    "monthlyWorth5mUsd": 1027.36,
+    "monthlyYi": 24.52,
+    "formula": "段 worth(5m) $177.22 ÷ 69% × 4周 = 月 $1,027.36 list-worth ÷ Anthropic 档混合价 $0.419/MTok = 24.52亿/月",
+    "sensitivity": {
+      "cacheWrite1h": 28.81,
+      "rawTotal": 27.72,
+      "pct68to70": [24.17, 24.88]
+    },
+    "perWeekCheck": "分周 worth(5m) $78.48/22% = 周$356.7 vs $98.73/47% = 周$210.1 不闭合 → ccusage 自然周与额度重置周未必对齐，只用两周合计 ÷69%"
+  },
+  "comparison": {
+    "round10RedditFull5h": "28.99亿/月（low，单窗 151.19M raw = 周13.333%，token 为评论区估值）；本样本低 15.5%，同量级",
+    "pooledWorth": "两样本 worth 合池 ($177.22+$40.48)÷(69%+13.333%)×4÷$0.419 ≈ 25.24亿，不采"
+  },
+  "adopted": "claude_pro::claude-opus-5.5 = 24.52亿/月 medium（替换 round10 28.99亿 low，round10 降为互证）",
+  "confidenceRationale": "ccusage 日志四项分拆 + 帖主口述周%（CONVENTIONS §3 medium）；样本 4.78亿 raw、跨两周，远大于 round10 单窗；弱点：周%为口述整数、无 /usage 截图、ccusage 周与重置周对齐不可考、『基本上』Opus 5.5 暗示可能有少量其他模型占额度（若有则本值偏保守）",
+  "relatedFiles": ["claude-adoption-round10-2026-09-25.json", "anthropic-token-mix-round1-2026-09-24.json"]
+}

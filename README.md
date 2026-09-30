@@ -17,7 +17,7 @@ AI coding subscriptions sell a monthly fee, not a per-token price. This project 
 - The black line is the Pareto frontier: for every point on it, no other point is both cheaper and higher-scoring.
 - Subscription prices assume you use the whole allowance. Use half of it and your real price doubles.
 
-Snapshot: <!-- stat:snapshot -->2026-09-29<!-- /stat --> · <!-- stat:points_total -->295<!-- /stat --> plan × model points · [all charts, SVG / PNG, both languages](charts/README.md)
+Snapshot: <!-- stat:snapshot -->2026-09-30<!-- /stat --> · <!-- stat:points_total -->295<!-- /stat --> plan × model points · [all charts, SVG / PNG, both languages](charts/README.md)
 
 ## How the numbers are made
 

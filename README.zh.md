@@ -17,7 +17,7 @@ AI 编程订阅只标月费，不标每 token 多少钱。本项目把每个套�
 - 黑线是帕累托前沿：线上的每个点，都找不到另一个点比它更便宜、分数又更高。
 - 订阅单价按用满额度计算。只用掉一半，实际单价就翻倍。
 
-快照日期 <!-- stat:snapshot -->2026-09-29<!-- /stat --> · 共 <!-- stat:points_total -->295<!-- /stat --> 个「套餐 × 模型」点 · [全部图表（中英文、SVG / PNG）](charts/README.md)
+快照日期 <!-- stat:snapshot -->2026-09-30<!-- /stat --> · 共 <!-- stat:points_total -->295<!-- /stat --> 个「套餐 × 模型」点 · [全部图表（中英文、SVG / PNG）](charts/README.md)
 
 ## 数字怎么来的
 

@@ -3,6 +3,10 @@
 本地 `AGENTS.md`（不入库）只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-09-30
+
+- **Claude Pro × Claude Opus 5.5 换 ccusage 两周样本（替换 Reddit 单窗，low → medium）**：28.99 → 24.52 亿/月（workload=anthropic，同口径）。X @kanzakichiya（2026-09-30 用户转供截图）：Pro 基本只用 Opus 5.5 Medium，ccusage 两周（09-20/09-27）全为 opus-5-5，合计 478,154,186 raw（读 466,193,644 / 写 10,344,271 / 入 4,118 / 出 1,612,153，cache 读 97.50%）＝周额度 22%+47%＝69%（帖主口述，经用户追问确认）。按 Opus 5.5 标价（读 $0.2 / 写 5m $5 / 入 $4 / 出 $20）折段 worth $177.22 ÷69%×4 周＝月 $1,027.36 ÷ Anthropic 档 $0.419/MTok＝24.52 亿。价格闭合：ccusage 自报 $92.14/$116.11/$208.25 按写 1h $8 逐分吻合；1h 敏感性 28.81 亿不采；raw total 口径 27.72 亿（周池 6.93 亿 raw）留作对照；68~70% 对应 24.17~24.88 亿。ccusage 自然周与额度重置周未必对齐（分周比不闭合），只用合计。旧 Reddit 满窗 28.99 亿（round10）降为互证，本值低 15.5%；两样本 worth 合池约 25.24 亿不采。证据：`claude-adoption-round11-2026-09-30.json`。
+
 ## 2026-09-29
 
 - **Droid Pro × Claude Opus 5.5 社区口述点（新增，low）**：3.82 亿/月（workload=anthropic，同 droid_max×opus-5.5 口径）。X @SnowyWar36965（2026-09-28，用户转供截图）：Pro $20 跑 Opus 5.5 小动画用掉 5h 窗约 70%，帖主按等价 API 消耗估 5h≈$15.4 / 周≈$45 / 月≈$160（Max 10x≈$154/$450/$1,600）。取帖主月值 $160 ÷ Anthropic 档 $0.419/MTok＝3.82 亿；周 $45×4＝$180（4.30 亿）不采——帖主月值低于 4× 周，按 30 天窗为绑定约束。帖主 token 列（18 亿/$1,600≈$0.89/MTok）为其自身负载，不采。对照：本机实测 Max 月 worth $2,116.91 ÷10＝Pro 约 $211.7（5.05 亿），帖主值约其 0.76×。弱点：口述、无面板截图与 token 分拆、n=1 → low。仅挂 Opus 5.5，不按倍率派生同池其他模型。证据：`droid-pro-opus55-community-round1-2026-09-29.json`。
