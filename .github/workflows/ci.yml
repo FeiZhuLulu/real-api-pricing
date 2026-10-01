@@ -56,6 +56,9 @@ jobs:
       - name: README statistics are current
         run: python scripts/readme_stats.py --check
 
+      - name: Agent speed test unit tests
+        run: python -m unittest discover -s tools/agent_speedtest
+
       - name: Data checks
         run: |
           python scripts/checks/verify_benchmark_configs.py

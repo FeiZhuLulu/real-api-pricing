@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "run_id": "20261001-051232-4bfec4",
+  "started_utc": "2026-10-01T05:12:32+00:00",
+  "finished_utc": "2026-10-01T05:14:16+00:00",
+  "agent": "devin",
+  "model": "Devin (Cognition AI)",
+  "model_source": "self-report",
+  "effort": null,
+  "note": "Devin Cloud session; underlying LLM is not exposed to the VM",
+  "detected": {
+    "agent": "devin",
+    "agent_evidence": [
+      "env:DEVIN_DIR"
+    ],
+    "model_detected": null,
+    "model_detected_source": null,
+    "host": {
+      "os": "Linux",
+      "os_release": "6.8.0-1061-aws",
+      "machine": "x86_64",
+      "python": "3.10.12"
+    }
+  },
+  "token_counter": "heuristic, within ~3% of o200k_base on English prose; each model's own tokenizer may differ by 10-20%",
+  "summary": {
+    "valid_trials": 8,
+    "invalid_trials": 0,
+    "minimal_turn_median_s": 2.37,
+    "output_tok_per_s": 49.5,
+    "output_words_per_s": 43.4,
+    "fixed_overhead_s": 3.18,
+    "r2": 0.989,
+    "naive_long_trial_tok_per_s": 39.8
+  },
+  "trials": [
+    {
+      "target_words": 0,
+      "warmup": true,
+      "topic": null,
+      "words": 1,
+      "est_tokens": 1,
+      "chars": 2,
+      "interval_s": 4.318,
+      "valid": true,
+      "reason": "",
+      "sha1": "7a85f4764bbd"
+    },
+    {
+      "target_words": 500,
+      "warmup": false,
+      "topic": "how a violin maker chooses and shapes the wood",
+      "words": 484,
+      "est_tokens": 549,
+      "chars": 2796,
+      "interval_s": 15.312,
+      "valid": true,
+      "reason": "",
+      "sha1": "a7c5118836f6"
+    },
+    {
+      "target_words": 500,
+      "warmup": false,
+      "topic": "the ecology of a small freshwater pond",
+      "words": 476,
+      "est_tokens": 545,
+      "chars": 2717,
+      "interval_s": 15.802,
+      "valid": true,
+      "reason": "",
+      "sha1": "34e1311ac8fb"
+    },
+    {
+      "target_words": 1000,
+      "warmup": false,
+      "topic": "what a beekeeper does across one full year",
+      "words": 970,
+      "est_tokens": 1100,
+      "chars": 5580,
+      "interval_s": 24.083,
+      "valid": true,
+      "reason": "",
+      "sha1": "da36a0a12449"
+    },
+    {
+      "target_words": 0,
+      "warmup": false,
+      "topic": null,
+      "words": 1,
+      "est_tokens": 1,
+      "chars": 2,
+      "interval_s": 2.187,
+      "valid": true,
+      "reason": "",
+      "sha1": "7a85f4764bbd"
+    },
+    {
+      "target_words": 0,
+      "warmup": false,
+      "topic": null,
+      "words": 1,
+      "est_tokens": 1,
+      "chars": 2,
+      "interval_s": 2.562,
+      "valid": true,
+      "reason": "",
+      "sha1": "7a85f4764bbd"
+    },
+    {
+      "target_words": 150,
+      "warmup": false,
+      "topic": "how early sailors navigated without satellites",
+      "words": 136,
+      "est_tokens": 156,
+      "chars": 842,
+      "interval_s": 6.548,
+      "valid": true,
+      "reason": "",
+      "sha1": "2a5cd4babd7e"
+    },
+    {
+      "target_words": 1000,
+      "warmup": false,
+      "topic": "the journey of a coffee bean from farm to cup",
+      "words": 1031,
+      "est_tokens": 1181,
+      "chars": 5984,
+      "interval_s": 26.987,
+      "valid": true,
+      "reason": "",
+      "sha1": "d85b985583e7"
+    },
+    {
+      "target_words": 150,
+      "warmup": false,
+      "topic": "the quiet craft of repairing old mechanical watches",
+      "words": 134,
+      "est_tokens": 154,
+      "chars": 762,
+      "interval_s": 6.424,
+      "valid": true,
+      "reason": "",
+      "sha1": "6ce777e3d411"
+    }
+  ]
+}
