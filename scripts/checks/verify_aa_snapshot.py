@@ -14,9 +14,14 @@ count = 0
 for name, row in current_score_records(archives):
     if name not in raw_archives:
         continue
-    raw = raw_archives[name]["rawRecords"][row["boardId"]]
     secondary = row["secondary"]
-    if row["boardId"] == "aa_intelligence_index":
+    raw = raw_archives[name]["rawRecords"]["aa_intelligence_index" if row["boardId"] == "aa_terminal_bench_4" else row["boardId"]]
+    if row["boardId"] == "aa_terminal_bench_4":
+        source = next(r for r in raw if r["slug"] == secondary["slug"])
+        expected = source["terminalBench40"] * 100
+        assert secondary["agentHarness"] == "Artificial Analysis"
+        assert row["variantLabel"] == "Artificial Analysis - " + (source.get("shortName") or source["name"])
+    elif row["boardId"] == "aa_intelligence_index":
         source = next(r for r in raw if r["slug"] == secondary["slug"])
         expected = source["intelligenceIndex"]
         assert secondary["intelligenceIndexIsEstimated"] == source["intelligenceIndexIsEstimated"]

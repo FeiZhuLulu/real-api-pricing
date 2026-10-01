@@ -9,7 +9,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
-from benchmark_configs import configuration, candidates, score_fields
+from benchmark_configs import configuration, candidates, routed_board, score_fields
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA, RESEARCH, OUT = ROOT / "data", ROOT / "data" / "research", ROOT / "derived"
@@ -38,6 +38,12 @@ SCORE_FILES = (
     "scores-new-models-round1-2026-09-23.json",
     "scores-gpt6sol-round1-2026-09-24.json",
     "scores-gpt6luna-round1-2026-09-26.json",
+    "scores-aa-round5-2026-10-01.json",
+    "scores-terminal-bench4-round3-2026-10-01.json",
+    "scores-terminal-bench4-selfreport-carry-2026-10-01.json",
+    "scores-code-arena-round2-2026-10-01.json",
+    "scores-agent-arena-round2-2026-10-01.json",
+    "scores-open-design-round2-2026-10-01.json",
 )
 LIST_PRICE_FILES = (
     "list-prices-2026-09.json",
@@ -99,16 +105,25 @@ def current_score_records(archives):
     # Files are explicitly ordered oldest to newest. A complete new board snapshot
     # replaces that board as a whole, including models removed from its coverage.
     # Archives flagged "supplement" only append rows (e.g. vendor self-reports) to the
-    # current snapshot and never replace it.
-    latest = {b["boardId"]: name for name, archive in archives for b in archive["boards"]
-              if b["boardId"] in BOARDS and not archive.get("supplement")}
-    return [(name, record) for name, archive in archives for record in archive["scores"]
-            if latest.get(record["boardId"]) == name or (
-                archive.get("supplement") and (
-                    "baseSnapshot" not in archive
-                    or archive["baseSnapshot"] == latest.get(record["boardId"])
-                )
-            )]
+    # current snapshot and never replace it. A supplement with baseSnapshot applies only
+    # while that snapshot is current; one without applies to whichever snapshot was current
+    # at its position, so a later full snapshot of the (routed) board supersedes it.
+    latest, position = {}, {}
+    for index, (name, archive) in enumerate(archives):
+        if not archive.get("supplement"):
+            for b in archive["boards"]:
+                if b["boardId"] in BOARDS:
+                    latest[b["boardId"]], position[b["boardId"]] = name, index
+
+    def current(index, name, archive, record):
+        if not archive.get("supplement"):
+            return latest.get(record["boardId"]) == name
+        if "baseSnapshot" in archive:
+            return archive["baseSnapshot"] == latest.get(record["boardId"])
+        return position.get(routed_board(record), -1) < index
+
+    return [(name, record) for index, (name, archive) in enumerate(archives)
+            for record in archive["scores"] if current(index, name, archive, record)]
 
 
 def load_list_prices() -> dict[str, dict]:

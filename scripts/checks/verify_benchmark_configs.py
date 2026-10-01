@@ -36,6 +36,17 @@ assert current_score_records([("old", old), ("extra", supplement), ("new", new)]
     ("old", old), ("new", new)])
 assert current_score_records([("old", old), ("extra", supplement),
                               ("empty", {"boards": new["boards"], "scores": []})]) == [("old", old["scores"][1])]
+# A supplement without baseSnapshot belongs to the snapshot current at its position:
+# a later full snapshot of the same (routed) board supersedes it, an earlier one does not.
+loose = {"boards": new["boards"], "supplement": True,
+         "scores": [{"boardId": "aa_intelligence_index", "model": "loose", "score": 70}]}
+assert ("loose", loose["scores"][0]) in current_score_records([("old", old), ("loose", loose)])
+assert current_score_records([("old", old), ("loose", loose), ("new", new)]) == current_score_records([("old", old), ("new", new)])
+aa_row = {"boardId": "terminal_bench_4", "model": "m", "score": 1, "secondary": {"agentHarness": "Artificial Analysis"}}
+tb_row = {"boardId": "terminal_bench_4", "model": "m", "score": 2, "secondary": {"agentHarness": "Codex"}}
+routed = {"boards": [], "supplement": True, "scores": [aa_row, tb_row]}
+assert current_score_records([("sup", routed), ("tb", {"boards": [{"boardId": "terminal_bench_4"}], "scores": []})]) == [("sup", aa_row)]
+assert current_score_records([("sup", routed), ("aa", {"boards": [{"boardId": "aa_terminal_bench_4"}], "scores": []})]) == [("sup", tb_row)]
 assert len({c["configuration_id"] for c in configs}) == len(configs)
 for c, (file, record) in zip(configs, expected):
     assert c["archive"] == file and c["raw_record"] == record
@@ -87,8 +98,8 @@ assert unknown_mode["service_mode"] is None
 assert not candidates(dict(served_model="composer-2.5", plan_id="cursor_ultra"), [unknown_mode], "aa_coding_agent_index")
 assert configuration(dict(boardId="arena_code", model="a", variantLabel="a-xHigh (codex-harness)", score=1), "test")["reasoning_effort"] == "xhigh"
 open_design = [c for c in configs if c["board"] == "open_design_arena"]
-assert len(open_design) == 13 and all(c["agent_harness"] == "OpenDesign" for c in open_design)
-assert {c["model"] for c in open_design} >= {"gpt-5.6-sol", "deepseek-v4-flash", "claude-fable-5.1"}
+assert len(open_design) == 16 and all(c["agent_harness"] == "OpenDesign" for c in open_design)
+assert {c["model"] for c in open_design} >= {"gpt-5.6-sol", "deepseek-v4.1-flash", "claude-fable-5.1"}
 assert not candidates(dict(served_model="claude-fable-5", plan_id="claude_max"), open_design, "open_design_arena")
 assert all(c["mean_cost_usd_per_task"] is not None for c in open_design)
 assert indexed["deepseek_v41_flash_offpeak::deepseek-v4.1-flash"]["real_usd_per_mtok"] == 0.00966

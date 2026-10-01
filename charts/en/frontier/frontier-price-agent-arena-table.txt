@@ -1,4 +1,4 @@
-Agent Arena · Overall (Ranking / Pareto) | Net Improvement % | 2026-09-01
+Agent Arena · Overall (Ranking / Pareto) | Net Improvement % | 2026-09-30
 Selected by price and score across all subscriptions/APIs (including unmetered ≈$0 promo points, as in the Pareto charts), not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled.
 Effective token price | Subscriptions and APIs compared
 Dollar/credit and API rates use 97% cache / 2.5% input / 0.5% output; direct total-token measurements are not normalized
@@ -7,9 +7,12 @@ Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers i
 † Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. Same-name CN/global tiers are merged; fee and unit price use the international USD list ($19/$39/$99), ¥ is the domestic list price. OpenCode Go uses official dollar pools and rates under the standard workload.
 FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate (merged same-name Kimi tiers use the international USD list instead).
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-No.  Plan             Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence  Net Improvement %  Score variant           Harness  Reasoning effort  Mapping
----  ---------------  -----------  ---------------  ------------------  --------  ----------  -----------------  ----------------------  -------  ----------------  -----------------------------
-1    ChatGPT Pro 20x  USD 200      GPT 5.6 Luna     141.163             0.00142   medium      2.15               GPT 5.6 Luna (xHigh)    —        xhigh             agent_configuration_reference
-2    Droid Max        USD 200      GLM 5.3 Flash    134.72              0.00148   medium      4.03               GLM 5.3 Flash           —        —                 agent_configuration_reference
-3    Claude Pro       USD 20       Claude Sonnet 5  6.4725              0.00309   medium      7.51               Claude Sonnet 5 (High)  —        high              agent_configuration_reference
-4    Claude Pro       USD 20       Claude Opus 5    2.589               0.00772   high        13.74              Claude Opus 5 (High)    —        high              agent_configuration_reference
+No.  Plan                    Monthly fee  Served model         Monthly tokens (B)  USD/MTok  Confidence  Net Improvement %  Score variant              Harness  Reasoning effort  Mapping
+---  ----------------------  -----------  -------------------  ------------------  --------  ----------  -----------------  -------------------------  -------  ----------------  -----------------------------
+1    Droid Max               USD 200      GPT-6 Luna           202.08              0.00099   medium      1.68               GPT 6 Luna (Max)           —        max               agent_configuration_reference
+2    OpenCode Go             USD 10       DeepSeek V4.1 Flash  6.2112              0.00161   medium      4.01               Deepseek V4.1 Flash (Max)  —        max               agent_configuration_reference
+3    Command Code GOAT       USD 10       DeepSeek V4.1 Flash  6.2112              0.00161   medium      4.01               Deepseek V4.1 Flash (Max)  —        max               agent_configuration_reference
+4    Claude Pro              USD 20       Claude Sonnet 5      6.4725              0.00309   medium      4.81               Claude Sonnet 5 (High)     —        high              agent_configuration_reference
+5    Claude Max 20x (9/14+)  USD 200      Claude Opus 5.5      31.538              0.00634   medium      13.78              Claude Opus 5.5 (High)     —        high              agent_configuration_reference
+6    Claude Max 5x (9/14+)   USD 100      Claude Opus 5.5      15.769              0.00634   low         13.78              Claude Opus 5.5 (High)     —        high              agent_configuration_reference
+7    Droid Max               USD 200      Claude Fable 5.1     2.0208              0.09897   medium      14.55              Claude Fable 5.1 (Max)     —        max               agent_configuration_reference

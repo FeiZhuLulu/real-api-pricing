@@ -10,13 +10,13 @@ These files are the public redacted edition. Original local evidence is backed u
 
 | Board / 榜单 | Scored rows / 有分行 | Unscored rows / 缺分行 |
 |---|---:|---:|
-| AA Intelligence | <!-- stat:scored_aa_intelligence_index -->268<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_intelligence_index -->50<!-- /stat --> |
-| AA Coding Agent | <!-- stat:scored_aa_coding_agent_index -->97<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_coding_agent_index -->221<!-- /stat --> |
-| Code Arena | <!-- stat:scored_arena_code -->178<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_arena_code -->140<!-- /stat --> |
-| Agent Arena | <!-- stat:scored_arena_agent_mode -->164<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_arena_agent_mode -->154<!-- /stat --> |
-| OpenDesign Arena | <!-- stat:scored_open_design_arena -->88<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_open_design_arena -->230<!-- /stat --> |
+| AA Intelligence | <!-- stat:scored_aa_intelligence_index -->287<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_intelligence_index -->31<!-- /stat --> |
+| AA Coding Agent | <!-- stat:scored_aa_coding_agent_index -->114<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_coding_agent_index -->204<!-- /stat --> |
+| Code Arena | <!-- stat:scored_arena_code -->258<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_arena_code -->60<!-- /stat --> |
+| Agent Arena | <!-- stat:scored_arena_agent_mode -->202<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_arena_agent_mode -->116<!-- /stat --> |
+| OpenDesign Arena | <!-- stat:scored_open_design_arena -->69<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_open_design_arena -->249<!-- /stat --> |
 | Terminal-Bench 4.0 | <!-- stat:scored_terminal_bench_4 -->111<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_terminal_bench_4 -->207<!-- /stat --> |
-| Terminal-Bench 4.0 (AA) | <!-- stat:scored_aa_terminal_bench_4 -->36<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_terminal_bench_4 -->282<!-- /stat --> |
+| Terminal-Bench 4.0 (AA) | <!-- stat:scored_aa_terminal_bench_4 -->272<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_aa_terminal_bench_4 -->46<!-- /stat --> |
 | DeepSWE v1.1 | <!-- stat:scored_deepswe_1_1 -->195<!-- /stat --> / <!-- stat:points_total -->318<!-- /stat --> | <!-- stat:unscored_deepswe_1_1 -->123<!-- /stat --> |
 
 具体缺分模型以 [`points.csv`](../derived/points.csv) / [`points.json`](../derived/points.json) 的空分数字段为准；不为缺失模型补造分数。

@@ -70,7 +70,7 @@ Coding Agent Index v1.5。每个分数对应一组测过的 harness × 模型 ×
 
 ![OpenDesign 设计榜](charts/zh/pareto/帕累托_OpenDesign设计榜.svg)
 
-取 0–100 的任务平均分（需求完成度 30 + 设计质量 70），不用它混入成本和速度的推荐分。存档的 <!-- stat:configs_mapped_open_design_arena -->13<!-- /stat --> 个模型全部对上了采用点。
+取 0–100 的任务平均分（需求完成度 30 + 设计质量 70），不用它混入成本和速度的推荐分。存档的 <!-- stat:configs_mapped_open_design_arena -->16<!-- /stat --> 个模型全部对上了采用点。
 
 ### Terminal-Bench 4.0
 
@@ -78,7 +78,7 @@ Coding Agent Index v1.5。每个分数对应一组测过的 harness × 模型 ×
 
 ![Terminal-Bench 4.0](charts/zh/pareto/帕累托_TB4终端榜.svg)
 
-Stanford、Harbor 和 Laude Institute 维护的 66 题官方榜（快照 2026-09-03），<!-- stat:configs_terminal_bench_4 -->22<!-- /stat --> 个公开配置全部收录。官方榜还没收的模型，补上厂商自报分并标 [self-reported]，例如 Cognition 发布博客里 SWE-2 · Devin Pro 的 27.3%。
+Stanford、Harbor 和 Laude Institute 维护的 66 题官方榜（快照 2026-09-03），<!-- stat:configs_terminal_bench_4 -->30<!-- /stat --> 个公开配置全部收录。官方榜还没收的模型，补上厂商自报分并标 [self-reported]，例如 Cognition 发布博客里 SWE-2 · Devin Pro 的 27.3%。
 
 ### Terminal-Bench 4.0（AA）
 
@@ -135,20 +135,20 @@ Stanford、Harbor 和 Laude Institute 维护的 66 题官方榜（快照 2026-09
 
 | 榜单 | 有分点 |
 |---|---:|
-| AA 智力榜 | <!-- stat:scored_aa_intelligence_index -->268<!-- /stat --> |
-| AA 编程 Agent 榜 | <!-- stat:scored_aa_coding_agent_index -->97<!-- /stat --> |
-| Code Arena | <!-- stat:scored_arena_code -->178<!-- /stat --> |
-| Agent Arena | <!-- stat:scored_arena_agent_mode -->164<!-- /stat --> |
-| OpenDesign 设计榜 | <!-- stat:scored_open_design_arena -->88<!-- /stat --> |
+| AA 智力榜 | <!-- stat:scored_aa_intelligence_index -->287<!-- /stat --> |
+| AA 编程 Agent 榜 | <!-- stat:scored_aa_coding_agent_index -->114<!-- /stat --> |
+| Code Arena | <!-- stat:scored_arena_code -->258<!-- /stat --> |
+| Agent Arena | <!-- stat:scored_arena_agent_mode -->202<!-- /stat --> |
+| OpenDesign 设计榜 | <!-- stat:scored_open_design_arena -->69<!-- /stat --> |
 | Terminal-Bench 4.0 | <!-- stat:scored_terminal_bench_4 -->111<!-- /stat --> |
-| Terminal-Bench 4.0（AA） | <!-- stat:scored_aa_terminal_bench_4 -->36<!-- /stat --> |
+| Terminal-Bench 4.0（AA） | <!-- stat:scored_aa_terminal_bench_4 -->272<!-- /stat --> |
 | DeepSWE v1.1 | <!-- stat:scored_deepswe_1_1 -->195<!-- /stat --> |
 
 点数最多的几个套餐家族：Command Code GOAT <!-- stat:plans_command_code_goat -->58<!-- /stat --> 个、MiMo Token Plan <!-- stat:plans_mimo_token -->32<!-- /stat --> 个、OpenCode Go <!-- stat:plans_opencode_go -->28<!-- /stat --> 个、Droid Max <!-- stat:plans_droid_max -->27<!-- /stat --> 个、Ollama <!-- stat:plans_ollama -->22<!-- /stat --> 个、Step Plan <!-- stat:plans_step_plan -->12<!-- /stat --> 个。
 
 **下载：** [采用值 CSV](data/adopted.csv) · [计算结果 CSV](derived/points.csv) / [JSON](derived/points.json) · [数据说明](data/README.md) · [分日期原始证据](data/research/)
 
-**全部评测配置**（不只每个模型的最高分）：[评测配置存档](derived/benchmark-configurations.json)（[CSV](derived/benchmark-configurations.csv)）完整保留 <!-- stat:configs_total -->330<!-- /stat --> 条记录，含原始标签、harness、effort、分数区间和任务成本。[套餐与配置的映射](derived/benchmark-points.json)（[CSV](derived/benchmark-points.csv)）有 <!-- stat:refs_total -->1854<!-- /stat --> 条明确对应。不知道的 harness、effort 和区间一律留空，不猜。[全配置交互图](charts/zh/pareto/帕累托交互图.html)可以切换配置和思考强度；需下载后本地打开，Plotly 要联网。
+**全部评测配置**（不只每个模型的最高分）：[评测配置存档](derived/benchmark-configurations.json)（[CSV](derived/benchmark-configurations.csv)）完整保留 <!-- stat:configs_total -->525<!-- /stat --> 条记录，含原始标签、harness、effort、分数区间和任务成本。[套餐与配置的映射](derived/benchmark-points.json)（[CSV](derived/benchmark-points.csv)）有 <!-- stat:refs_total -->2608<!-- /stat --> 条明确对应。不知道的 harness、effort 和区间一律留空，不猜。[全配置交互图](charts/zh/pareto/帕累托交互图.html)可以切换配置和思考强度；需下载后本地打开，Plotly 要联网。
 
 ## 已知局限
 

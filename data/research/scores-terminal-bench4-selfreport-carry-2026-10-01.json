@@ -1,0 +1,70 @@
+{
+  "collectedAt": "2026-10-01",
+  "supplement": true,
+  "baseSnapshot": "scores-terminal-bench4-round3-2026-10-01.json",
+  "supplementNote": "补充档：把绑在 round1 官方快照上的厂商自报行原样（分数、来源、checkedAt 不变）转挂到新官方快照 scores-terminal-bench4-round3-2026-10-01.json。三个模型（DeepSeek V4.1 Flash、SWE-2、Claude Opus 5.5）在 2026-10-01 官方榜仍无行。Opus 5.5 66.4 的档位更正（xhigh）见 scores-new-models-round1-2026-09-23.json。",
+  "boards": [
+    {
+      "boardId": "terminal_bench_4",
+      "name": "Terminal-Bench 4.0",
+      "url": "https://www.tbench.ai/leaderboard",
+      "metric": "Resolution Rate %",
+      "snapshotDate": "2026-09-21",
+      "note": "同新官方快照元数据。"
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "terminal_bench_4",
+      "model": "deepseek-v4.1-flash",
+      "variantLabel": "DeepSeek Harness Minimal - DeepSeek V4.1 Flash (max)",
+      "score": 31.2,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "DeepSeek",
+        "agentHarness": "DeepSeek Harness Minimal",
+        "reasoningEffort": "max",
+        "contextWindowTokens": 1000000,
+        "temperature": 1.0,
+        "topP": 0.95
+      },
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "checkedAt": "2026-09-12",
+      "carriedFrom": "scores-terminal-bench4-round2-selfreport-2026-09-12.json"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "swe-2",
+      "variantLabel": "Devin CLI - SWE-2 (best effort)",
+      "score": 27.3,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "Cognition",
+        "agentHarness": "Devin CLI",
+        "reasoningEffort": null,
+        "effortNote": "博客附录 A：报各 reasoning-effort 中最高分，未指明是 medium/high/max 中哪一档"
+      },
+      "source": "https://cognition.com/blog/swe-2",
+      "checkedAt": "2026-09-12",
+      "note": "厂商自报，非 tbench.ai 官方榜运行。Cognition 博客 Coding benchmark results 表 Terminal-Bench 4 列 27.3%。同表 Astra/Sol/Grok 4.6 与官方榜一致，Fable 5.1 55.8 与官方榜 57.88 不一致。无 CI、无成本/token 数据。见 devin-swe2-round1-2026-09-12.json。",
+      "carriedFrom": "scores-terminal-bench4-round2-selfreport-2026-09-12.json"
+    },
+    {
+      "boardId": "terminal_bench_4",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Code - Claude Opus 5.5 (default) - self-reported",
+      "score": 66.4,
+      "secondary": {
+        "selfReported": true,
+        "reportedBy": "Anthropic",
+        "agentHarness": "Claude Code",
+        "reasoningEffort": null,
+        "effortNote": "发布页评测表标 at default effort，未指明是 low/medium/high/xhigh 中哪一档"
+      },
+      "source": "https://www.anthropic.com/claude-opus-5-5",
+      "checkedAt": "2026-09-23",
+      "note": "厂商自报，非 tbench.ai 官方榜运行。Anthropic 2026-09-22 Opus 5.5 发布页评测表 Terminal-Bench 4 行 66.4%（default effort）；同表 FrontierCode 54.4%、CursorBench 52.5%、GDPval-AA 1846 非本仓库榜单仅留证据；AA/arena/OpenDesign 暂无第三方快照分不补造。见 claude-opus55-round1-2026-09-23.json。",
+      "carriedFrom": "scores-opus55-selfreport-2026-09-23.json"
+    }
+  ]
+}

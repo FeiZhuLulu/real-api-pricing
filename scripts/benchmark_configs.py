@@ -43,11 +43,15 @@ def normalise_label(label: str) -> tuple[str, dict]:
     return (label[:match.start()], params) if isinstance(params, dict) else (label, {})
 
 
+def routed_board(record):
+    return (AA_TB4_BOARD if record["boardId"] == "terminal_bench_4"
+            and record.get("secondary", {}).get("agentHarness") == "Artificial Analysis" else record["boardId"])
+
+
 def configuration(record, archive):
     secondary = record.get("secondary", {})
     label, params = normalise_label(record["variantLabel"])
-    board = (AA_TB4_BOARD if record["boardId"] == "terminal_bench_4"
-             and secondary.get("agentHarness") == "Artificial Analysis" else record["boardId"])
+    board = routed_board(record)
     estimated = secondary.get("intelligenceIndexIsEstimated", record.get("scoreIsEstimated"))
     self_reported = bool(secondary.get("selfReported"))
     model = record.get("model") or (OPEN_DESIGN_MODELS.get(label) if board.startswith("open_design_arena") else None)

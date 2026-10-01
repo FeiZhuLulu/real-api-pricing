@@ -767,6 +767,7 @@ const EFFORT: Record<string, [string, string]> = {
   high: ["High", "高"],
   xhigh: ["xhigh", "超高"],
   max: ["Max", "最高"],
+  thinking: ["Thinking", "思考"],
 };
 /** Reasoning-effort level in the reader's language; unknown levels stay as published. */
 export const effortLabel = (effort: string | null, lang: string) =>

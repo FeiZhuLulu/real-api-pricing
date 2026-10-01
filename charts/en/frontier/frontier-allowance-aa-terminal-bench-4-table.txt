@@ -1,4 +1,4 @@
-Terminal-Bench 4.0 (AA) | Resolution Rate % | 2026-09-23
+Terminal-Bench 4.0 (AA) | Resolution Rate % | 2026-10-01
 Selected by price and score across all subscriptions/APIs (including unmetered ≈$0 promo points, as in the Pareto charts), not by allowance. Equivalent plans retained; unscored models excluded; uncertainty not modeled.
 Monthly token allowance | Subscription plan x served model
 Default month = 4 weeks; Kimi monthly pool = 5× weekly; full utilization, all token types; APIs have no allowance
@@ -7,9 +7,12 @@ Color = plan/API provider; confidence [H] high / [M] medium / [L] low; numbers i
 † Kimi: CNY199 K3 uses a K3-256K-dominant / ~84% weekly sample ×5 = 1.451B; pure K2.7 uses 11.9M / 0.76% = 1.568B. Other tiers are scaled by official ratios. Same-name CN/global tiers are merged; fee and unit price use the international USD list ($19/$39/$99), ¥ is the domestic list price. OpenCode Go uses official dollar pools and rates under the standard workload.
 FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY monthly fees divided by this rate (merged same-name Kimi tiers use the international USD list instead).
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
-No.  Plan                    Monthly fee  Served model     Monthly tokens (B)  USD/MTok  Confidence  Resolution Rate %  Score variant                                Harness              Reasoning effort  Mapping
----  ----------------------  -----------  ---------------  ------------------  --------  ----------  -----------------  -------------------------------------------  -------------------  ----------------  -----------------------------
-1    Droid Max               USD 200      GPT-6 Luna       202.08              0.00099   medium      12.63              Artificial Analysis - GPT-6 Luna (max)       Artificial Analysis  max               agent_configuration_reference
-2    Claude Max 20x (9/14+)  USD 200      Claude Opus 5.5  31.538              0.00634   medium      59.6               Artificial Analysis - Claude Opus 5.5 (max)  Artificial Analysis  max               agent_configuration_reference
-3    Step Plan Max (¥699)    CNY 699      Step 5 Preview   28.3186             0.00364   medium      33.3               Step 5 Preview (High)                        Artificial Analysis  high              agent_configuration_reference
-4    Claude Max 5x (9/14+)   USD 100      Claude Opus 5.5  15.769              0.00634   low         59.6               Artificial Analysis - Claude Opus 5.5 (max)  Artificial Analysis  max               agent_configuration_reference
+No.  Plan                    Monthly fee  Served model       Monthly tokens (B)  USD/MTok  Confidence  Resolution Rate %  Score variant                                                Harness              Reasoning effort  Mapping
+---  ----------------------  -----------  -----------------  ------------------  --------  ----------  -----------------  -----------------------------------------------------------  -------------------  ----------------  -----------------------------
+1    Droid Max               USD 200      GPT-6 Luna         202.08              0.00099   medium      12.6263            Artificial Analysis - GPT-6 Luna (max)                       Artificial Analysis  max               agent_configuration_reference
+2    Droid Max               USD 200      GLM 5.3 Flash      134.72              0.00148   medium      32.8283            Artificial Analysis - GLM-5.3-Flash                          Artificial Analysis  —                 agent_configuration_reference
+3    Claude Max 20x (9/14+)  USD 200      Claude Opus 5.5    31.538              0.00634   medium      59.596             Artificial Analysis - Claude Opus 5.5 (max with fallback)    Artificial Analysis  max               agent_configuration_reference
+4    Step Plan Max (¥699)    CNY 699      Step 5 Preview     28.3186             0.00364   medium      33.3333            Artificial Analysis - Step 5 Preview                         Artificial Analysis  —                 agent_configuration_reference
+5    Claude Max 5x (9/14+)   USD 100      Claude Opus 5.5    15.769              0.00634   low         59.596             Artificial Analysis - Claude Opus 5.5 (max with fallback)    Artificial Analysis  max               agent_configuration_reference
+6    Droid Max               USD 200      Claude Sonnet 5.5  10.104              0.01979   medium      63.6364            Artificial Analysis - Claude Sonnet 5.5 (max with fallback)  Artificial Analysis  max               agent_configuration_reference
+7    OpenCode Go             USD 10       MiMo V2.6 Flash    7.8782              0.00127   medium      22.7273            Artificial Analysis - MiMo-V2.6-Flash                        Artificial Analysis  —                 agent_configuration_reference

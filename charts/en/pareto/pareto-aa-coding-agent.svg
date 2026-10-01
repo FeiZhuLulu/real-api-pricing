@@ -9,7 +9,7 @@
 <text x="56.000" y="146.000" font-size="44" fill="#35483E" text-anchor="start" font-weight="400" class="serif" font-style="italic">Pareto frontier</text>
 <text x="384.000" y="143.000" font-size="16" fill="#858B81" text-anchor="start" font-weight="300" >Pareto frontier · Full</text>
 <text x="1388.000" y="76.000" font-size="31" fill="#343A33" text-anchor="end" font-weight="400" class="serif">AA Coding Agent</text>
-<text x="1388.000" y="107.000" font-size="12" fill="#737771" text-anchor="end" font-weight="400" >Leaderboard snapshot  2026-09-22</text>
+<text x="1388.000" y="107.000" font-size="12" fill="#737771" text-anchor="end" font-weight="400" >Leaderboard snapshot  2026-10-01</text>
 <text x="1388.000" y="136.000" font-size="12" fill="#737771" text-anchor="end" font-weight="400" >Coding Agent Index v1.5</text>
 <rect x="40" y="184" width="1360" height="612" rx="20" fill="#FFFFFF"/>
 <path d="M1273.198 233V705" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
@@ -32,335 +32,378 @@
 <text x="272.384" y="735.000" font-size="12" fill="#747B74" text-anchor="middle" font-weight="400" class="number">$0.5</text>
 <path d="M160.758 233V705" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
 <text x="160.758" y="735.000" font-size="12" fill="#747B74" text-anchor="middle" font-weight="400" class="number">$1</text>
-<path d="M120 690.697H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="694.697" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">35</text>
-<path d="M120 619.182H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="623.182" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">40</text>
-<path d="M120 547.667H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="551.667" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">45</text>
-<path d="M120 476.152H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="480.152" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">50</text>
-<path d="M120 404.636H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="408.636" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">55</text>
-<path d="M120 333.121H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="337.121" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">60</text>
-<path d="M120 261.606H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
-<text x="100.000" y="265.606" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">65</text>
+<path d="M120 692.579H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="696.579" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">35</text>
+<path d="M120 630.474H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="634.474" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">40</text>
+<path d="M120 568.368H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="572.368" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">45</text>
+<path d="M120 506.263H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="510.263" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">50</text>
+<path d="M120 444.158H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="448.158" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">55</text>
+<path d="M120 382.053H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="386.053" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">60</text>
+<path d="M120 319.947H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="323.947" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">65</text>
+<path d="M120 257.842H1338" stroke="#E8EBE7" stroke-dasharray="2 7" opacity=".8"/>
+<text x="100.000" y="261.842" font-size="12" fill="#747B74" text-anchor="end" font-weight="400" class="number">70</text>
 <path d="M120 233V705H1338" fill="none" stroke="#E3E7E2"/>
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Coding Agent Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,301.333 L533.238,301.333 L635.445,309.593 L943.954,337.035 L1055.090,592.532 L1274.865,603.815 L1338.000,603.815" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.032467532" data-score="54.5591" data-x="712.733" data-y="410.943" transform="translate(712.733 410.943)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Codex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path id="frontier" d="M120.000,278.240 L792.425,278.240 L975.734,307.668 L1217.091,590.420 L1274.865,617.129 L1338.000,617.129" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.032467532" data-score="54.5591" data-x="712.733" data-y="449.634" transform="translate(712.733 449.634)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Codex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015501473" data-score="54.5591" data-x="831.792" data-y="410.943" transform="translate(831.792 410.943)"><title>GPT 5.6 Sol · Pro 20x · $0.0155/MTok · 54.5591 · highCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015501473" data-score="54.5591" data-x="831.792" data-y="449.634" transform="translate(831.792 449.634)"><title>GPT 5.6 Sol · Pro 20x · $0.0155/MTok · 54.5591 · highCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.12578616" data-score="61.645" data-x="494.626" data-y="309.593" transform="translate(494.626 309.593)"><title>GPT-6 Astra · Plus · $0.12579/MTok · 61.645 · highCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0028336639" data-score="43.2247" data-x="1105.462" data-y="590.420" transform="translate(1105.462 590.420)"><title>GPT 5.6 Luna · Plus · $0.00283/MTok · 43.2247 · highCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.018181818" data-score="56.6626" data-x="806.108" data-y="380.856" transform="translate(806.108 380.856)"><title>GPT-6 Sol · Plus · $0.01818/MTok · 56.6626 · highCodex - GPT-6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0028335836" data-score="43.2247" data-x="1105.466" data-y="590.420" transform="translate(1105.466 590.420)"><title>GPT 5.6 Luna · Pro 5x · $0.00283/MTok · 43.2247 · mediumCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0021732044" data-score="41.0744" data-x="1148.197" data-y="603.815" transform="translate(1148.197 603.815)"><title>GPT-6 Luna · Plus · $0.00217/MTok · 41.0744 · highCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.052465897" data-score="61.645" data-x="635.445" data-y="309.593" transform="translate(635.445 309.593)"><title>GPT-6 Astra · Pro 20x · $0.05247/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0014168019" data-score="43.2247" data-x="1217.091" data-y="590.420" transform="translate(1217.091 590.420)"><title>GPT 5.6 Luna · Pro 20x · $0.00142/MTok · 43.2247 · mediumCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#16A34A" stroke-width="1.35"/>
 <circle r="4" fill="#16A34A"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1793722" data-score="61.645" data-x="437.476" data-y="309.593" transform="translate(437.476 309.593)"><title>GPT-6 Astra · Devin Max · $0.17937/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.12578616" data-score="61.645" data-x="494.626" data-y="361.620" transform="translate(494.626 361.620)"><title>GPT-6 Astra · Plus · $0.12579/MTok · 61.645 · highCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.018181818" data-score="56.6626" data-x="806.108" data-y="423.507" transform="translate(806.108 423.507)"><title>GPT-6 Sol · Plus · $0.01818/MTok · 56.6626 · highCodex - GPT-6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0021732044" data-score="41.0744" data-x="1148.197" data-y="617.129" transform="translate(1148.197 617.129)"><title>GPT-6 Luna · Plus · $0.00217/MTok · 41.0744 · highCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.022988506" data-score="62.9078" data-x="768.332" data-y="345.935" transform="translate(768.332 345.935)"><title>GPT-6.1 Sol · Plus · $0.02299/MTok · 62.9078 · highCodex - GPT-6.1 Sol (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.052465897" data-score="61.645" data-x="635.445" data-y="361.620" transform="translate(635.445 361.620)"><title>GPT-6 Astra · Pro 20x · $0.05247/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.1793722" data-score="61.645" data-x="437.476" data-y="361.620" transform="translate(437.476 361.620)"><title>GPT-6 Astra · Devin Max · $0.17937/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path transform="translate(-4.46 -5.23) scale(0.0910)" d="M0 38.6518V14.8349C7.06768e-06 13.7882 0.545676 12.821 1.43146 12.2977L21.5811 0.392519C22.4669 -0.13084 23.5583 -0.13084 24.444 0.392519L44.5937 12.2977C45.4795 12.821 46.0252 13.7882 46.0252 14.835V26.9983C46.1136 31.0401 48.201 34.9385 51.8723 37.1076C55.5435 39.2767 59.8863 39.1775 63.3509 37.2349L73.6442 31.1533C74.53 30.6299 75.6213 30.6299 76.5071 31.1533L96.6568 43.0584C97.5426 43.5818 98.0882 44.549 98.0882 45.5957V69.406C98.0882 70.4527 97.5426 71.4199 96.6568 71.9433L76.5071 83.8485C75.6213 84.3718 74.53 84.3718 73.6442 83.8485L63.4342 77.816C59.9562 75.8284 55.5738 75.7095 51.8732 77.8959C48.202 80.065 46.1146 83.9633 46.0262 88.005V100.165C46.0262 101.212 45.4805 102.179 44.5947 102.702L24.445 114.607C23.5592 115.131 22.4679 115.131 21.5821 114.607L1.43243 102.702C0.546645 102.179 0.000975341 101.212 0.000975341 100.165V76.3547C0.000982408 75.308 0.546652 74.3408 1.43244 73.8175L21.5821 61.9123C22.4679 61.3889 23.5592 61.3889 24.445 61.9123L34.7616 68.0077C38.2221 69.9367 42.5526 70.0305 46.215 67.8666C49.9155 65.6802 52.0061 61.7367 52.063 57.6605C51.9747 53.6187 49.8872 49.3025 46.216 47.1334C42.5447 44.9643 38.202 45.0635 34.7374 47.0061L24.3967 53.1502C23.5071 53.6788 22.4087 53.6783 21.5196 53.1489L1.42323 41.1841C0.542079 40.6595 -7.06754e-06 39.695 0 38.6518Z" fill="#A1A1AA" opacity="0.68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077450601" data-score="41.8632" data-x="943.536" data-y="592.532" transform="translate(943.536 592.532)"><title>Gemini 3.8 Flash · Google AI Pro · $0.00775/MTok · 41.8632 · highAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.029895366" data-score="65.9886" data-x="726.025" data-y="307.668" transform="translate(726.025 307.668)"><title>Claude Opus 5.5 · Devin Max · $0.0299/MTok · 65.9886 · mediumClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path transform="translate(-4.46 -5.23) scale(0.0910)" d="M0 38.6518V14.8349C7.06768e-06 13.7882 0.545676 12.821 1.43146 12.2977L21.5811 0.392519C22.4669 -0.13084 23.5583 -0.13084 24.444 0.392519L44.5937 12.2977C45.4795 12.821 46.0252 13.7882 46.0252 14.835V26.9983C46.1136 31.0401 48.201 34.9385 51.8723 37.1076C55.5435 39.2767 59.8863 39.1775 63.3509 37.2349L73.6442 31.1533C74.53 30.6299 75.6213 30.6299 76.5071 31.1533L96.6568 43.0584C97.5426 43.5818 98.0882 44.549 98.0882 45.5957V69.406C98.0882 70.4527 97.5426 71.4199 96.6568 71.9433L76.5071 83.8485C75.6213 84.3718 74.53 84.3718 73.6442 83.8485L63.4342 77.816C59.9562 75.8284 55.5738 75.7095 51.8732 77.8959C48.202 80.065 46.1146 83.9633 46.0262 88.005V100.165C46.0262 101.212 45.4805 102.179 44.5947 102.702L24.445 114.607C23.5592 115.131 22.4679 115.131 21.5821 114.607L1.43243 102.702C0.546645 102.179 0.000975341 101.212 0.000975341 100.165V76.3547C0.000982408 75.308 0.546652 74.3408 1.43244 73.8175L21.5821 61.9123C22.4679 61.3889 23.5592 61.3889 24.445 61.9123L34.7616 68.0077C38.2221 69.9367 42.5526 70.0305 46.215 67.8666C49.9155 65.6802 52.0061 61.7367 52.063 57.6605C51.9747 53.6187 49.8872 49.3025 46.216 47.1334C42.5447 44.9643 38.202 45.0635 34.7374 47.0061L24.3967 53.1502C23.5071 53.6788 22.4087 53.6783 21.5196 53.1489L1.42323 41.1841C0.542079 40.6595 -7.06754e-06 39.695 0 38.6518Z" fill="#A1A1AA" opacity="0.68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.039588282" data-score="65.9886" data-x="680.799" data-y="307.668" transform="translate(680.799 307.668)"><title>Claude Opus 5.5 · Droid Max · $0.03959/MTok · 65.9886 · mediumClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.052356021" data-score="65.9886" data-x="635.783" data-y="307.668" transform="translate(635.783 307.668)"><title>Claude Opus 5.5 · Droid Pro · $0.05236/MTok · 65.9886 · lowClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077450601" data-score="41.8632" data-x="943.536" data-y="607.331" transform="translate(943.536 607.331)"><title>Gemini 3.8 Flash · Google AI Pro · $0.00775/MTok · 41.8632 · highAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#84CC16" opacity=".68" stroke="#5A8B0F" stroke-width=".9"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077481596" data-score="41.8632" data-x="943.472" data-y="592.532" transform="translate(943.472 592.532)"><title>Gemini 3.8 Flash · Google AI Ultra 5x · $0.00775/MTok · 41.8632 · lowAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077481596" data-score="41.8632" data-x="943.472" data-y="607.331" transform="translate(943.472 607.331)"><title>Gemini 3.8 Flash · Google AI Ultra 5x · $0.00775/MTok · 41.8632 · lowAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#84CC16" opacity=".68" stroke="#5A8B0F" stroke-width=".9"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0038742735" data-score="41.8632" data-x="1055.090" data-y="592.532" transform="translate(1055.090 592.532)"><title>Gemini 3.8 Flash · Google AI Ultra 20x · $0.00387/MTok · 41.8632 · lowAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#84CC16" stroke-width="1.35"/>
-<circle r="4" fill="#84CC16"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0038742735" data-score="41.8632" data-x="1055.090" data-y="607.331" transform="translate(1055.090 607.331)"><title>Gemini 3.8 Flash · Google AI Ultra 20x · $0.00387/MTok · 41.8632 · lowAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#84CC16" opacity=".68" stroke="#5A8B0F" stroke-width=".9"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0077249903" data-score="59.7264" data-x="943.954" data-y="337.035" transform="translate(943.954 337.035)"><title>Claude Opus 5 · Pro · $0.00772/MTok · 59.7264 · highClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0077249903" data-score="59.7264" data-x="943.954" data-y="385.451" transform="translate(943.954 385.451)"><title>Claude Opus 5 · Pro · $0.00772/MTok · 59.7264 · highClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.012738854" data-score="59.7264" data-x="863.401" data-y="385.451" transform="translate(863.401 385.451)"><title>Claude Opus 5 · Max 20x · from Sep 14 / Claude Opus 5 · Max 5x · from Sep 14 · $0.01274/MTok · 59.7264 · mediumClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Claude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.11574074" data-score="62.2225" data-x="508.030" data-y="354.447" transform="translate(508.030 354.447)"><title>Claude Fable 5.1 · Max 20x · from Sep 14 · $0.11574/MTok · 62.2225 · mediumClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0063415562" data-score="65.9886" data-x="975.734" data-y="307.668" transform="translate(975.734 307.668)"><title>Claude Opus 5.5 · Max 20x · from Sep 14 / Claude Opus 5.5 · Max 5x · from Sep 14 · $0.00634/MTok · 65.9886 · mediumClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Claude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#CC5A2E" stroke-width="1.35"/>
 <circle r="4" fill="#CC5A2E"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.012738854" data-score="59.7264" data-x="863.401" data-y="337.035" transform="translate(863.401 337.035)"><title>Claude Opus 5 · Max 20x · from Sep 14 / Claude Opus 5 · Max 5x · from Sep 14 · $0.01274/MTok · 59.7264 · mediumClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Claude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0065487885" data-score="65.9886" data-x="970.555" data-y="307.668" transform="translate(970.555 307.668)"><title>Claude Opus 5.5 · Pro · $0.00655/MTok · 65.9886 · highClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.11574074" data-score="62.2225" data-x="508.030" data-y="301.333" transform="translate(508.030 301.333)"><title>Claude Fable 5.1 · Max 20x · from Sep 14 · $0.11574/MTok · 62.2225 · mediumClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.058139535" data-score="46.969" data-x="618.909" data-y="543.911" transform="translate(618.909 543.911)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05814/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Grok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.048543689" data-score="46.969" data-x="647.958" data-y="543.911" transform="translate(647.958 543.911)"><title>Grok 4.6 · SuperGrok Plus · $0.04854/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.066666667" data-score="46.969" data-x="596.869" data-y="543.911" transform="translate(596.869 543.911)"><title>Grok 4.6 · SuperGrok Lite · $0.06667/MTok · 46.969 · lowGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.052447552" data-score="56.2676" data-x="635.501" data-y="428.413" transform="translate(635.501 428.413)"><title>Grok 4.7 · SuperGrok / Grok 4.7 · SuperGrok Heavy · $0.05245/MTok · 56.2676 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Grok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.043668122" data-score="56.2676" data-x="665.003" data-y="428.413" transform="translate(665.003 428.413)"><title>Grok 4.7 · SuperGrok Plus · $0.04367/MTok · 56.2676 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.025849813" data-score="46.969" data-x="749.440" data-y="543.911" transform="translate(749.440 543.911)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.065061809" data-score="46.969" data-x="600.793" data-y="543.911" transform="translate(600.793 543.911)"><title>Grok 4.6 · Cursor Ultra (Fast) · $0.06506/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042553191" data-score="46.969" data-x="669.169" data-y="543.911" transform="translate(669.169 543.911)"><title>Grok 4.6 · Cursor Pro · $0.04255/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.029081039" data-score="46.969" data-x="730.472" data-y="543.911" transform="translate(730.472 543.911)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="51.9259" data-x="743.159" data-y="482.341" transform="translate(743.159 482.341)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.065517241" data-score="51.9259" data-x="599.669" data-y="482.341" transform="translate(599.669 482.341)"><title>Kimi K3 (v1) · Kimi Moderato · $19 / CN ¥99 · $0.06552/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.022742936" data-score="51.9259" data-x="770.062" data-y="482.341" transform="translate(770.062 482.341)"><title>Kimi K3 (v1) · Kimi Allegro · $99 / CN ¥699 · $0.02274/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.084502269" data-score="53.5548" data-x="558.690" data-y="462.109" transform="translate(558.690 462.109)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) peak · $0.0845/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.056334846" data-score="53.5548" data-x="623.987" data-y="462.109" transform="translate(623.987 462.109)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) midpoint · $0.05633/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042251135" data-score="53.5548" data-x="670.316" data-y="462.109" transform="translate(670.316 462.109)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) off-peak · $0.04225/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.035089925" data-score="53.5548" data-x="700.224" data-y="462.109" transform="translate(700.224 462.109)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) peak · $0.03509/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023393284" data-score="53.5548" data-x="765.521" data-y="462.109" transform="translate(765.521 462.109)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) midpoint · $0.02339/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.017544963" data-score="53.5548" data-x="811.850" data-y="462.109" transform="translate(811.850 462.109)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) off-peak · $0.01754/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.064212177" data-score="53.5548" data-x="602.910" data-y="462.109" transform="translate(602.910 462.109)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) peak · $0.06421/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042808118" data-score="53.5548" data-x="668.207" data-y="462.109" transform="translate(668.207 462.109)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) midpoint · $0.04281/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.032106088" data-score="53.5548" data-x="714.536" data-y="462.109" transform="translate(714.536 462.109)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) off-peak · $0.03211/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01778367" data-score="53.5548" data-x="809.674" data-y="462.109" transform="translate(809.674 462.109)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) peak · $0.01778/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01185578" data-score="53.5548" data-x="874.971" data-y="462.109" transform="translate(874.971 462.109)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) midpoint · $0.01186/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0088918349" data-score="53.5548" data-x="921.300" data-y="462.109" transform="translate(921.300 462.109)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) off-peak · $0.00889/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.055141311" data-score="53.5548" data-x="627.435" data-y="462.109" transform="translate(627.435 462.109)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) peak · $0.05514/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.036752379" data-score="53.5548" data-x="692.770" data-y="462.109" transform="translate(692.770 462.109)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) midpoint · $0.03675/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.027565877" data-score="53.5548" data-x="739.089" data-y="462.109" transform="translate(739.089 462.109)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) off-peak · $0.02757/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023990051" data-score="53.5548" data-x="761.464" data-y="462.109" transform="translate(761.464 462.109)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) peak · $0.02399/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015989671" data-score="53.5548" data-x="826.799" data-y="462.109" transform="translate(826.799 462.109)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) midpoint · $0.01599/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.011992946" data-score="53.5548" data-x="873.118" data-y="462.109" transform="translate(873.118 462.109)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) off-peak · $0.01199/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.37735849" data-score="46.969" data-x="317.704" data-y="543.911" transform="translate(317.704 543.911)"><title>Grok 4.6 · OpenCode Go · $0.37736/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.37735849" data-score="56.2676" data-x="317.704" data-y="428.413" transform="translate(317.704 428.413)"><title>Grok 4.7 · OpenCode Go · $0.37736/MTok · 56.2676 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.020267531" data-score="43.2247" data-x="788.619" data-y="590.420" transform="translate(788.619 590.420)"><title>GPT 5.6 Luna · OpenCode Go · $0.02027/MTok · 43.2247 · mediumCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0098000784" data-score="41.0744" data-x="905.637" data-y="617.129" transform="translate(905.637 617.129)"><title>GPT-6 Luna · OpenCode Go · $0.0098/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.20618557" data-score="53.5548" data-x="415.041" data-y="462.109" transform="translate(415.041 462.109)"><title>GLM 5.3 · OpenCode Go · $0.20619/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.29411765" data-score="51.9259" data-x="357.838" data-y="482.341" transform="translate(357.838 482.341)"><title>Kimi K3 · OpenCode Go · $0.29412/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.21505376" data-score="43.2653" data-x="408.259" data-y="589.915" transform="translate(408.259 589.915)"><title>Qwen3.8 Max · OpenCode Go · $0.21505/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.031826862" data-score="43.052" data-x="715.942" data-y="592.565" transform="translate(715.942 592.565)"><title>DeepSeek V4 Pro · OpenCode Go · $0.03183/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0032199897" data-score="38.7425" data-x="1084.879" data-y="646.093" transform="translate(1084.879 646.093)"><title>DeepSeek V4 Flash · OpenCode Go · $0.00322/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10857763" data-score="54.5591" data-x="518.319" data-y="449.634" transform="translate(518.319 449.634)"><title>GPT 5.6 Sol · Command Code GOAT · $0.10858/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0016099948" data-score="38.7425" data-x="1196.505" data-y="646.093" transform="translate(1196.505 646.093)"><title>DeepSeek V4 Flash · Command Code GOAT · $0.00161/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.055126792" data-score="41.8632" data-x="627.478" data-y="607.331" transform="translate(627.478 607.331)"><title>Gemini 3.8 Flash · Command Code GOAT · $0.05513/MTok · 41.8632 · mediumAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023872046" data-score="43.052" data-x="762.259" data-y="592.565" transform="translate(762.259 592.565)"><title>DeepSeek V4 Pro · Command Code GOAT · $0.02387/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015199878" data-score="43.2247" data-x="834.956" data-y="590.420" transform="translate(834.956 590.420)"><title>GPT 5.6 Luna · Command Code GOAT · $0.0152/MTok · 43.2247 · mediumCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.16129032" data-score="43.2653" data-x="454.588" data-y="589.915" transform="translate(454.588 589.915)"><title>Qwen3.8 Max · Command Code GOAT · $0.16129/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.28248588" data-score="56.2676" data-x="364.336" data-y="428.413" transform="translate(364.336 428.413)"><title>Grok 4.7 · Command Code GOAT · $0.28249/MTok · 56.2676 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0073502389" data-score="41.0744" data-x="951.962" data-y="617.129" transform="translate(951.962 617.129)"><title>GPT-6 Luna · Command Code GOAT · $0.00735/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.15455951" data-score="53.5548" data-x="461.452" data-y="462.109" transform="translate(461.452 462.109)"><title>GLM 5.3 · Command Code GOAT · $0.15456/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.099009901" data-score="54.3027" data-x="533.174" data-y="452.819" transform="translate(533.174 452.819)"><title>Muse Spark 1.3 · Command Code GOAT · $0.09901/MTok · 54.3027 · mediumMuse Code - Muse Spark 1.3 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.22026432" data-score="51.9259" data-x="404.403" data-y="482.341" transform="translate(404.403 482.341)"><title>Kimi K3 · Command Code GOAT · $0.22026/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.28248588" data-score="46.969" data-x="364.336" data-y="543.911" transform="translate(364.336 543.911)"><title>Grok 4.6 · Command Code GOAT · $0.28249/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.29411765" data-score="68.3578" data-x="357.838" data-y="278.240" transform="translate(357.838 278.240)"><title>Claude Sonnet 5.5 · Command Code GOAT · $0.29412/MTok · 68.3578 · mediumClaude Code - Sonnet 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051966949" data-score="38.7425" data-x="1007.797" data-y="646.093" transform="translate(1007.797 646.093)"><title>DeepSeek V4 Flash · Ollama Pro · $0.0052/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015913431" data-score="43.052" data-x="827.568" data-y="592.565" transform="translate(827.568 592.565)"><title>DeepSeek V4 Pro · Ollama Pro / DeepSeek V4 Pro · Ollama Max · $0.01591/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Codex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10309278" data-score="53.5548" data-x="526.666" data-y="462.109" transform="translate(526.666 462.109)"><title>GLM 5.3 · Ollama Pro · $0.10309/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14695077" data-score="51.9259" data-x="469.582" data-y="482.341" transform="translate(469.582 482.341)"><title>Kimi K3 · Ollama Pro · $0.14695/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051966679" data-score="38.7425" data-x="1007.798" data-y="646.093" transform="translate(1007.798 646.093)"><title>DeepSeek V4 Flash · Ollama Max · $0.0052/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10307153" data-score="53.5548" data-x="526.700" data-y="462.109" transform="translate(526.700 462.109)"><title>GLM 5.3 · Ollama Max · $0.10307/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14699397" data-score="51.9259" data-x="469.535" data-y="482.341" transform="translate(469.535 482.341)"><title>Kimi K3 · Ollama Max · $0.14699/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.11575414" data-score="62.2225" data-x="508.011" data-y="354.447" transform="translate(508.011 354.447)"><title>Claude Fable 5.1 · Max 5x · from Sep 14 · $0.11575/MTok · 62.2225 · lowClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.058139535" data-score="46.969" data-x="618.909" data-y="519.504" transform="translate(618.909 519.504)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05814/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Grok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.048543689" data-score="46.969" data-x="647.958" data-y="519.504" transform="translate(647.958 519.504)"><title>Grok 4.6 · SuperGrok Plus · $0.04854/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.066666667" data-score="46.969" data-x="596.869" data-y="519.504" transform="translate(596.869 519.504)"><title>Grok 4.6 · SuperGrok Lite · $0.06667/MTok · 46.969 · lowGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.052447552" data-score="56.26764360706693" data-x="635.501" data-y="386.505" transform="translate(635.501 386.505)"><title>Grok 4.7 · SuperGrok / Grok 4.7 · SuperGrok Heavy · $0.05245/MTok · 56.26764360706693 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Grok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.043668122" data-score="56.26764360706693" data-x="665.003" data-y="386.505" transform="translate(665.003 386.505)"><title>Grok 4.7 · SuperGrok Plus · $0.04367/MTok · 56.26764360706693 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#9333EA" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.025849813" data-score="46.969" data-x="749.440" data-y="519.504" transform="translate(749.440 519.504)"><title>Grok 4.6 · Cursor Ultra · $0.02585/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.065061809" data-score="46.969" data-x="600.793" data-y="519.504" transform="translate(600.793 519.504)"><title>Grok 4.6 · Cursor Ultra (Fast) · $0.06506/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042553191" data-score="46.969" data-x="669.169" data-y="519.504" transform="translate(669.169 519.504)"><title>Grok 4.6 · Cursor Pro · $0.04255/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.029081039" data-score="46.969" data-x="730.472" data-y="519.504" transform="translate(730.472 519.504)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="51.9259" data-x="743.159" data-y="448.605" transform="translate(743.159 448.605)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.065517241" data-score="51.9259" data-x="599.669" data-y="448.605" transform="translate(599.669 448.605)"><title>Kimi K3 (v1) · Kimi Moderato · $19 / CN ¥99 · $0.06552/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.022742936" data-score="51.9259" data-x="770.062" data-y="448.605" transform="translate(770.062 448.605)"><title>Kimi K3 (v1) · Kimi Allegro · $99 / CN ¥699 · $0.02274/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.084502269" data-score="53.5548" data-x="558.690" data-y="425.307" transform="translate(558.690 425.307)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) peak · $0.0845/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.056334846" data-score="53.5548" data-x="623.987" data-y="425.307" transform="translate(623.987 425.307)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) midpoint · $0.05633/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042251135" data-score="53.5548" data-x="670.316" data-y="425.307" transform="translate(670.316 425.307)"><title>GLM 5.3 (v3) · GLM Lite (v3 ¥118) off-peak · $0.04225/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.035089925" data-score="53.5548" data-x="700.224" data-y="425.307" transform="translate(700.224 425.307)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) peak · $0.03509/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023393284" data-score="53.5548" data-x="765.521" data-y="425.307" transform="translate(765.521 425.307)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) midpoint · $0.02339/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.017544963" data-score="53.5548" data-x="811.850" data-y="425.307" transform="translate(811.850 425.307)"><title>GLM 5.3 (v2) · GLM Lite (v2 ¥49) off-peak · $0.01754/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.064212177" data-score="53.5548" data-x="602.910" data-y="425.307" transform="translate(602.910 425.307)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) peak · $0.06421/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.042808118" data-score="53.5548" data-x="668.207" data-y="425.307" transform="translate(668.207 425.307)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) midpoint · $0.04281/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.032106088" data-score="53.5548" data-x="714.536" data-y="425.307" transform="translate(714.536 425.307)"><title>GLM 5.3 (v3) · GLM Pro (v3 ¥538) off-peak · $0.03211/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01778367" data-score="53.5548" data-x="809.674" data-y="425.307" transform="translate(809.674 425.307)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) peak · $0.01778/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.01185578" data-score="53.5548" data-x="874.971" data-y="425.307" transform="translate(874.971 425.307)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) midpoint · $0.01186/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0088918349" data-score="53.5548" data-x="921.300" data-y="425.307" transform="translate(921.300 425.307)"><title>GLM 5.3 (v2) · GLM Pro (v2 ¥149) off-peak · $0.00889/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.055141311" data-score="53.5548" data-x="627.435" data-y="425.307" transform="translate(627.435 425.307)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) peak · $0.05514/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.036752379" data-score="53.5548" data-x="692.770" data-y="425.307" transform="translate(692.770 425.307)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) midpoint · $0.03675/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.027565877" data-score="53.5548" data-x="739.089" data-y="425.307" transform="translate(739.089 425.307)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) off-peak · $0.02757/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023990051" data-score="53.5548" data-x="761.464" data-y="425.307" transform="translate(761.464 425.307)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) peak · $0.02399/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015989671" data-score="53.5548" data-x="826.799" data-y="425.307" transform="translate(826.799 425.307)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) midpoint · $0.01599/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.011992946" data-score="53.5548" data-x="873.118" data-y="425.307" transform="translate(873.118 425.307)"><title>GLM 5.3 (v2) · GLM Max (v2 ¥469) off-peak · $0.01199/MTok · 53.5548 · highOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.37735849" data-score="46.969" data-x="317.704" data-y="519.504" transform="translate(317.704 519.504)"><title>Grok 4.6 · OpenCode Go · $0.37736/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.37735849" data-score="56.26764360706693" data-x="317.704" data-y="386.505" transform="translate(317.704 386.505)"><title>Grok 4.7 · OpenCode Go · $0.37736/MTok · 56.26764360706693 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0098000784" data-score="41.0744" data-x="905.637" data-y="603.815" transform="translate(905.637 603.815)"><title>GPT-6 Luna · OpenCode Go · $0.0098/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.20618557" data-score="53.5548" data-x="415.041" data-y="425.307" transform="translate(415.041 425.307)"><title>GLM 5.3 · OpenCode Go · $0.20619/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.29411765" data-score="51.9259" data-x="357.838" data-y="448.605" transform="translate(357.838 448.605)"><title>Kimi K3 · OpenCode Go · $0.29412/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.21505376" data-score="43.2653" data-x="408.259" data-y="572.478" transform="translate(408.259 572.478)"><title>Qwen3.8 Max · OpenCode Go · $0.21505/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.031826862" data-score="43.052" data-x="715.942" data-y="575.529" transform="translate(715.942 575.529)"><title>DeepSeek V4 Pro · OpenCode Go · $0.03183/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0032199897" data-score="38.7425" data-x="1084.879" data-y="637.168" transform="translate(1084.879 637.168)"><title>DeepSeek V4 Flash · OpenCode Go · $0.00322/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0F766E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10857763" data-score="54.5591" data-x="518.319" data-y="410.943" transform="translate(518.319 410.943)"><title>GPT 5.6 Sol · Command Code GOAT · $0.10858/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0016099948" data-score="38.7425" data-x="1196.505" data-y="637.168" transform="translate(1196.505 637.168)"><title>DeepSeek V4 Flash · Command Code GOAT · $0.00161/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.055126792" data-score="41.8632" data-x="627.478" data-y="592.532" transform="translate(627.478 592.532)"><title>Gemini 3.8 Flash · Command Code GOAT · $0.05513/MTok · 41.8632 · mediumAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.023872046" data-score="43.052" data-x="762.259" data-y="575.529" transform="translate(762.259 575.529)"><title>DeepSeek V4 Pro · Command Code GOAT · $0.02387/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.16129032" data-score="43.2653" data-x="454.588" data-y="572.478" transform="translate(454.588 572.478)"><title>Qwen3.8 Max · Command Code GOAT · $0.16129/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.28248588" data-score="56.26764360706693" data-x="364.336" data-y="386.505" transform="translate(364.336 386.505)"><title>Grok 4.7 · Command Code GOAT · $0.28249/MTok · 56.26764360706693 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0073502389" data-score="41.0744" data-x="951.962" data-y="603.815" transform="translate(951.962 603.815)"><title>GPT-6 Luna · Command Code GOAT · $0.00735/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.15455951" data-score="53.5548" data-x="461.452" data-y="425.307" transform="translate(461.452 425.307)"><title>GLM 5.3 · Command Code GOAT · $0.15456/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.099009901" data-score="54.3027" data-x="533.174" data-y="414.610" transform="translate(533.174 414.610)"><title>Muse Spark 1.3 · Command Code GOAT · $0.09901/MTok · 54.3027 · mediumMuse Code - Muse Spark 1.3 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.22026432" data-score="51.9259" data-x="404.403" data-y="448.605" transform="translate(404.403 448.605)"><title>Kimi K3 · Command Code GOAT · $0.22026/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.28248588" data-score="46.969" data-x="364.336" data-y="519.504" transform="translate(364.336 519.504)"><title>Grok 4.6 · Command Code GOAT · $0.28249/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#DBA6FA" opacity=".68" stroke="#9571AA" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051966949" data-score="38.7425" data-x="1007.797" data-y="637.168" transform="translate(1007.797 637.168)"><title>DeepSeek V4 Flash · Ollama Pro · $0.0052/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.015913431" data-score="43.052" data-x="827.568" data-y="575.529" transform="translate(827.568 575.529)"><title>DeepSeek V4 Pro · Ollama Pro / DeepSeek V4 Pro · Ollama Max · $0.01591/MTok · 43.052 · mediumCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Codex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10309278" data-score="53.5548" data-x="526.666" data-y="425.307" transform="translate(526.666 425.307)"><title>GLM 5.3 · Ollama Pro · $0.10309/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14695077" data-score="51.9259" data-x="469.582" data-y="448.605" transform="translate(469.582 448.605)"><title>Kimi K3 · Ollama Pro · $0.14695/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051966679" data-score="38.7425" data-x="1007.798" data-y="637.168" transform="translate(1007.798 637.168)"><title>DeepSeek V4 Flash · Ollama Max · $0.0052/MTok · 38.7425 · mediumCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10307153" data-score="53.5548" data-x="526.700" data-y="425.307" transform="translate(526.700 425.307)"><title>GLM 5.3 · Ollama Max · $0.10307/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.14699397" data-score="51.9259" data-x="469.535" data-y="448.605" transform="translate(469.535 448.605)"><title>Kimi K3 · Ollama Max · $0.14699/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FC8EA7" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.11575414" data-score="62.2225" data-x="508.011" data-y="301.333" transform="translate(508.011 301.333)"><title>Claude Fable 5.1 · Max 5x · from Sep 14 · $0.11575/MTok · 62.2225 · lowClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10989011" data-score="61.645" data-x="516.384" data-y="309.593" transform="translate(516.384 309.593)"><title>GPT-6 Astra · Pro 5x · $0.10989/MTok · 61.645 · lowCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.10989011" data-score="61.645" data-x="516.384" data-y="361.620" transform="translate(516.384 361.620)"><title>GPT-6 Astra · Pro 5x · $0.10989/MTok · 61.645 · lowCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.098970705" data-score="62.2225" data-x="533.238" data-y="301.333" transform="translate(533.238 301.333)"><title>Claude Fable 5.1 · Droid Max · $0.09897/MTok · 62.2225 · mediumClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.098970705" data-score="62.2225" data-x="533.238" data-y="354.447" transform="translate(533.238 354.447)"><title>Claude Fable 5.1 · Droid Max · $0.09897/MTok · 62.2225 · mediumClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.049485352" data-score="59.7264" data-x="644.864" data-y="385.451" transform="translate(644.864 385.451)"><title>Claude Opus 5 · Droid Max · $0.04949/MTok · 59.7264 · mediumClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.019794141" data-score="68.3578" data-x="792.425" data-y="278.240" transform="translate(792.425 278.240)"><title>Claude Sonnet 5.5 · Droid Max · $0.01979/MTok · 68.3578 · mediumClaude Code - Sonnet 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#0A0ABF" stroke-width="1.35"/>
 <circle r="4" fill="#0A0ABF"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.049485352" data-score="59.7264" data-x="644.864" data-y="337.035" transform="translate(644.864 337.035)"><title>Claude Opus 5 · Droid Max · $0.04949/MTok · 59.7264 · mediumClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.098970705" data-score="61.645" data-x="533.238" data-y="361.620" transform="translate(533.238 361.620)"><title>GPT-6 Astra · Droid Max · $0.09897/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.098970705" data-score="61.645" data-x="533.238" data-y="309.593" transform="translate(533.238 309.593)"><title>GPT-6 Astra · Droid Max · $0.09897/MTok · 61.645 · mediumCodex - GPT-6 Astra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="56.6626" data-x="792.425" data-y="423.507" transform="translate(792.425 423.507)"><title>GPT-6 Sol · Droid Max · $0.01979/MTok · 56.6626 · mediumCodex - GPT-6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="56.6626" data-x="792.425" data-y="380.856" transform="translate(792.425 380.856)"><title>GPT-6 Sol · Droid Max · $0.01979/MTok · 56.6626 · mediumCodex - GPT-6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00098970705" data-score="41.0744" data-x="1274.865" data-y="603.815" transform="translate(1274.865 603.815)"><title>GPT-6 Luna · Droid Max · $0.00099/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.00098970705" data-score="41.0744" data-x="1274.865" data-y="617.129" transform="translate(1274.865 617.129)"><title>GPT-6 Luna · Droid Max · $0.00099/MTok · 41.0744 · mediumCodex - GPT-6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#0A0ABF" stroke-width="1.35"/>
 <circle r="4" fill="#0A0ABF"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.039588282" data-score="54.5591" data-x="680.799" data-y="410.943" transform="translate(680.799 410.943)"><title>GPT 5.6 Sol · Droid Max · $0.03959/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.039588282" data-score="54.5591" data-x="680.799" data-y="449.634" transform="translate(680.799 449.634)"><title>GPT 5.6 Sol · Droid Max · $0.03959/MTok · 54.5591 · mediumCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0074228029" data-score="41.8632" data-x="950.380" data-y="592.532" transform="translate(950.380 592.532)"><title>Gemini 3.8 Flash · Droid Max · $0.00742/MTok · 41.8632 · mediumAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0019794141" data-score="43.2247" data-x="1163.239" data-y="590.420" transform="translate(1163.239 590.420)"><title>GPT 5.6 Luna · Droid Max · $0.00198/MTok · 43.2247 · mediumCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="56.26764360706693" data-x="792.425" data-y="386.505" transform="translate(792.425 386.505)"><title>Grok 4.7 · Droid Max · $0.01979/MTok · 56.26764360706693 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0074228029" data-score="41.8632" data-x="950.380" data-y="607.331" transform="translate(950.380 607.331)"><title>Gemini 3.8 Flash · Droid Max · $0.00742/MTok · 41.8632 · mediumAntigravity SDK - Gemini 3.8 Flash (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="46.969" data-x="792.425" data-y="519.504" transform="translate(792.425 519.504)"><title>Grok 4.6 · Droid Max · $0.01979/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="56.2676" data-x="792.425" data-y="428.413" transform="translate(792.425 428.413)"><title>Grok 4.7 · Droid Max · $0.01979/MTok · 56.2676 · mediumGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.013855885" data-score="53.5548" data-x="849.865" data-y="425.307" transform="translate(849.865 425.307)"><title>GLM 5.3 · Droid Max · $0.01386/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="46.969" data-x="792.425" data-y="543.911" transform="translate(792.425 543.911)"><title>Grok 4.6 · Droid Max · $0.01979/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.029691211" data-score="51.9259" data-x="727.128" data-y="448.605" transform="translate(727.128 448.605)"><title>Kimi K3 · Droid Max · $0.02969/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.013855885" data-score="53.5548" data-x="849.865" data-y="462.109" transform="translate(849.865 462.109)"><title>GLM 5.3 · Droid Max · $0.01386/MTok · 53.5548 · mediumOpencode - GLM-5.3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="43.2653" data-x="792.425" data-y="572.478" transform="translate(792.425 572.478)"><title>Qwen3.8 Max · Droid Max · $0.01979/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.029691211" data-score="51.9259" data-x="727.128" data-y="482.341" transform="translate(727.128 482.341)"><title>Kimi K3 · Droid Max · $0.02969/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.01559" data-score="38.7425" data-x="830.875" data-y="637.168" transform="translate(830.875 637.168)"><title>DeepSeek V4 Flash · DeepSeek V4 Flash API off-peak · $0.01559/MTok · 38.7425 · highCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.019794141" data-score="43.2653" data-x="792.425" data-y="589.915" transform="translate(792.425 589.915)"><title>Qwen3.8 Max · Droid Max · $0.01979/MTok · 43.2653 · mediumClaude Code - Qwen3.8 Max · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
+</g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.01559" data-score="38.7425" data-x="830.875" data-y="646.093" transform="translate(830.875 646.093)"><title>DeepSeek V4 Flash · DeepSeek V4 Flash API off-peak · $0.01559/MTok · 38.7425 · highCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#4D6BFE" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.03118" data-score="38.7425" data-x="719.249" data-y="637.168" transform="translate(719.249 637.168)"><title>DeepSeek V4 Flash · DeepSeek V4 Flash API peak · $0.03118/MTok · 38.7425 · highCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.03118" data-score="38.7425" data-x="719.249" data-y="646.093" transform="translate(719.249 646.093)"><title>DeepSeek V4 Flash · DeepSeek V4 Flash API peak · $0.03118/MTok · 38.7425 · highCodex - DeepSeek V4 Flash 0731 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#4D6BFE" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.04774" data-score="43.052" data-x="650.646" data-y="575.529" transform="translate(650.646 575.529)"><title>DeepSeek V4 Pro · DeepSeek V4 Pro API off-peak · $0.04774/MTok · 43.052 · highCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.04774" data-score="43.052" data-x="650.646" data-y="592.565" transform="translate(650.646 592.565)"><title>DeepSeek V4 Pro · DeepSeek V4 Pro API off-peak · $0.04774/MTok · 43.052 · highCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#4D6BFE" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.09548" data-score="43.052" data-x="539.020" data-y="575.529" transform="translate(539.020 575.529)"><title>DeepSeek V4 Pro · DeepSeek V4 Pro API peak · $0.09548/MTok · 43.052 · highCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.09548" data-score="43.052" data-x="539.020" data-y="592.565" transform="translate(539.020 592.565)"><title>DeepSeek V4 Pro · DeepSeek V4 Pro API peak · $0.09548/MTok · 43.052 · highCodex - DeepSeek V4 Pro 0813 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#4D6BFE" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.588" data-score="54.5591" data-x="246.276" data-y="410.943" transform="translate(246.276 410.943)"><title>GPT 5.6 Sol · GPT-5.6 Sol API · $0.588/MTok · 54.5591 · highCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.588" data-score="54.5591" data-x="246.276" data-y="449.634" transform="translate(246.276 449.634)"><title>GPT 5.6 Sol · GPT-5.6 Sol API · $0.588/MTok · 54.5591 · highCodex - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#16A34A" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="46.969" data-x="252.702" data-y="519.504" transform="translate(252.702 519.504)"><title>Grok 4.6 · Grok 4.6 API (&lt;200k) · $0.565/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="46.969" data-x="252.702" data-y="543.911" transform="translate(252.702 543.911)"><title>Grok 4.6 · Grok 4.6 API (&lt;200k) · $0.565/MTok · 46.969 · highGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#9333EA" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="56.26764360706693" data-x="252.702" data-y="386.505" transform="translate(252.702 386.505)"><title>Grok 4.7 · Grok 4.7 API (&lt;200k) · $0.565/MTok · 56.26764360706693 · highGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.565" data-score="56.2676" data-x="252.702" data-y="428.413" transform="translate(252.702 428.413)"><title>Grok 4.7 · Grok 4.7 API (&lt;200k) · $0.565/MTok · 56.2676 · highGrok Build - Grok 4.7 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#9333EA" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.76625" data-score="59.7264" data-x="203.635" data-y="337.035" transform="translate(203.635 337.035)"><title>Claude Opus 5 · Opus 5 API · $0.76625/MTok · 59.7264 · highClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.76625" data-score="59.7264" data-x="203.635" data-y="385.451" transform="translate(203.635 385.451)"><title>Claude Opus 5 · Opus 5 API · $0.76625/MTok · 59.7264 · highClaude Code - Opus 5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#CC5A2E" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="point" data-billing="metered" data-frontier="false" data-price="0.805" data-score="62.2225" data-x="195.690" data-y="301.333" transform="translate(195.690 301.333)"><title>Claude Fable 5.1 · Fable 5.1 API · $0.805/MTok · 62.2225 · highClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.805" data-score="62.2225" data-x="195.690" data-y="354.447" transform="translate(195.690 354.447)"><title>Claude Fable 5.1 · Fable 5.1 API · $0.805/MTok · 62.2225 · highClaude Code - Fable 5.1 (max) (with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#CC5A2E" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="front-label" data-model="claude-fable-5.1">
-<path d="M527.380,287.524Q527.380,268.333 519.238,268.333" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="513.238" y="249.333" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Code · Claude Fable 5.1 · max</text>
-<text x="513.238" y="269.333" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Droid Max</text>
-<text x="513.238" y="289.333" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.09897</text>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.419" data-score="65.9886" data-x="300.846" data-y="307.668" transform="translate(300.846 307.668)"><title>Claude Opus 5.5 · Opus 5.5 API · $0.419/MTok · 65.9886 · highClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#CC5A2E" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="front-label" data-model="gpt-6-astra">
-<path d="M638.419,294.890Q638.419,220.593 653.445,220.593" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="659.445" y="201.593" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Codex · GPT-6 Astra · max</text>
-<text x="659.445" y="221.593" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Pro 20x</text>
-<text x="659.445" y="241.593" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.05247</text>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.0304" data-score="43.2247" data-x="723.329" data-y="590.420" transform="translate(723.329 590.420)"><title>GPT 5.6 Luna · GPT-5.6 Luna API · $0.0304/MTok · 43.2247 · highCodex - GPT-5.6 Luna (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#16A34A" stroke-width="1.5" opacity=".68"/>
 </g>
-<g class="front-label" data-model="claude-opus-5">
-<path d="M948.778,322.831Q948.778,284.035 961.954,284.035" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="967.954" y="265.035" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Claude Code · Claude Opus 5 · max</text>
-<text x="967.954" y="285.035" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Pro</text>
-<text x="967.954" y="305.035" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00772</text>
+<g class="front-label" data-model="claude-sonnet-5.5">
+<path d="M795.679,292.883Q795.679,287.240 794.425,287.240" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="788.425" y="300.240" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Code · Claude Sonnet 5.5 · max</text>
+<text x="788.425" y="320.240" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Droid Max</text>
+<text x="788.425" y="340.240" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.01979</text>
 </g>
-<g class="front-label" data-model="gemini-3.8-flash">
-<path d="M1051.119,606.997Q1051.119,643.532 1041.090,643.532" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1035.090" y="656.532" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Antigravity SDK v0.1.12 · Gemini 3.8 Flash · high</text>
-<text x="1035.090" y="676.532" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Google AI Ultra 20x</text>
-<text x="1035.090" y="696.532" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00387</text>
+<g class="front-label" data-model="claude-opus-5.5">
+<path d="M981.304,293.741Q981.304,292.668 981.734,292.668" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="987.734" y="273.668" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Claude Code · Claude Opus 5.5 · max</text>
+<text x="987.734" y="293.668" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Max 5x / 20x · from Sep 14</text>
+<text x="987.734" y="313.668" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00634</text>
+</g>
+<g class="front-label" data-model="gpt-5.6-luna">
+<path d="M1202.265,588.139Q1202.265,586.420 1191.091,586.420" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1185.091" y="567.420" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Codex · GPT 5.6 Luna · max</text>
+<text x="1185.091" y="587.420" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Pro 20x</text>
+<text x="1185.091" y="607.420" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00142</text>
 </g>
 <g class="front-label" data-model="gpt-6-luna">
-<path d="M1278.791,589.338Q1278.791,544.815 1290.865,544.815" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1284.865" y="525.815" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Codex · GPT-6 Luna · max</text>
-<text x="1284.865" y="545.815" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Droid Max</text>
-<text x="1284.865" y="565.815" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00099</text>
+<path d="M1273.878,602.161Q1273.878,526.129 1268.865,526.129" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1274.865" y="507.129" font-size="16" fill="#343C34" text-anchor="middle" font-weight="400" class="label-name">Codex · GPT-6 Luna · max</text>
+<text x="1274.865" y="527.129" font-size="11.5" fill="#8B9487" text-anchor="middle" font-weight="400" >Droid Max</text>
+<text x="1274.865" y="547.129" font-size="14" fill="#566150" text-anchor="middle" font-weight="400" class="number">$0.00099</text>
 </g>
 <rect x="57" y="826" width="8" height="8" fill="#16A34A"/>
 <text x="74.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >OpenAI</text>
@@ -393,7 +436,7 @@
 <path d="M62 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="76.000" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5× weekly · Dollar/credit: 97% cache / 2.5% input / 0.5% output · Direct totals unchanged</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >83 subscription positions / 9 API positions / 5 frontier positions</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >97 subscription positions / 11 API positions / 4 frontier positions</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/agents/coding-agents</text>

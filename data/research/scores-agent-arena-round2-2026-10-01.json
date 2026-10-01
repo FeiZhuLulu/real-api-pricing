@@ -1,0 +1,3730 @@
+{
+  "collectedAt": "2026-10-01",
+  "revises": "data/research/scores-2026-09.json (arena_agent_mode board only)",
+  "extraction": {
+    "method": "curl download of https://arena.ai/leaderboard/agent on 2026-10-01; ranking entries (avgScore) and costStats parsed from the RSC payload.",
+    "tempDir": "_build/boards-round5/",
+    "pageDate": "Sep 30, 2026",
+    "totalSessions": 2001328,
+    "modelCount": 46,
+    "scoreRule": "Net Improvement % = avgScore.value × 100, 2 dp as displayed (page row: Claude Fable 5.1 (Max) 14.55% ±1.92%); median cost/task = costStats P50, 14-day window.",
+    "mappingNotes": [
+      "Qwen3.8 Max (contenders/paisley-n9x0) → qwen3.8-max by exact display name; the page does not say whether it is the 0803 or 0902 build.",
+      "Not mapped: Qwen3.8 Flash Next, Muse Spark 1.1, GPT 5.4 (High), Gemini 4 Argon, Solar Pro 4."
+    ]
+  },
+  "boards": [
+    {
+      "boardId": "arena_agent_mode",
+      "name": "Agent Arena · Overall (Ranking / Pareto)",
+      "url": "https://arena.ai/leaderboard/agent",
+      "paretoUrl": "https://arena.ai/leaderboard/agent/pareto",
+      "metric": "Net Improvement %",
+      "secondaryMetric": "Median cost per task USD (P50, last 14 days)",
+      "snapshotDate": "2026-09-30",
+      "note": "Page header: Sep 30, 2026 · 2,001,328 sessions · 46 models. Column Net Improvement; cost window 14 days."
+    }
+  ],
+  "scores": [
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-fable-5.1",
+      "variantLabel": "Claude Fable 5.1 (Max)",
+      "score": 14.55,
+      "secondary": {
+        "rank": 1,
+        "rankSpread": [
+          1,
+          4
+        ],
+        "ciPlus": 1.92,
+        "ciMinus": 1.92,
+        "netImprovementRaw": 0.1455297025193051,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 4.44,
+        "medianCostPerTaskUsdRaw": 4.436707999999999,
+        "sessions": 14636,
+        "contenderName": "contenders/claude-fable-5.1-max-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-5.5",
+      "variantLabel": "Claude Opus 5.5 (High)",
+      "score": 13.78,
+      "secondary": {
+        "rank": 2,
+        "rankSpread": [
+          1,
+          4
+        ],
+        "ciPlus": 2.24,
+        "ciMinus": 2.24,
+        "netImprovementRaw": 0.13784181616281832,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 1.57,
+        "medianCostPerTaskUsdRaw": 1.5690757,
+        "sessions": 5013,
+        "contenderName": "contenders/claude-opus-5.5-high-vertex-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-6-astra",
+      "variantLabel": "GPT 6 Astra (Max)",
+      "score": 12.18,
+      "secondary": {
+        "rank": 3,
+        "rankSpread": [
+          1,
+          7
+        ],
+        "ciPlus": 2.28,
+        "ciMinus": 2.28,
+        "netImprovementRaw": 0.12175489332353712,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 2.9,
+        "medianCostPerTaskUsdRaw": 2.9008555,
+        "sessions": 11077,
+        "contenderName": "contenders/gpt-6-astra-max-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-6-sol",
+      "variantLabel": "GPT 6 Sol (Max)",
+      "score": 10.65,
+      "secondary": {
+        "rank": 4,
+        "rankSpread": [
+          1,
+          10
+        ],
+        "ciPlus": 2.57,
+        "ciMinus": 2.57,
+        "netImprovementRaw": 0.10645668688061616,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.91,
+        "medianCostPerTaskUsdRaw": 0.9061006000000003,
+        "sessions": 5031,
+        "contenderName": "contenders/gpt-6-sol-max-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (High)",
+      "score": 8.76,
+      "secondary": {
+        "rank": 5,
+        "rankSpread": [
+          3,
+          10
+        ],
+        "ciPlus": 1.5,
+        "ciMinus": 1.5,
+        "netImprovementRaw": 0.08760655303538206,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 2.5,
+        "medianCostPerTaskUsdRaw": 2.497321875,
+        "sessions": 26501,
+        "contenderName": "contenders/claude-opus-5-high-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-5",
+      "variantLabel": "Claude Opus 5 (Max)",
+      "score": 8.55,
+      "secondary": {
+        "rank": 6,
+        "rankSpread": [
+          3,
+          10
+        ],
+        "ciPlus": 1.57,
+        "ciMinus": 1.57,
+        "netImprovementRaw": 0.085451073507389,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 3.59,
+        "medianCostPerTaskUsdRaw": 3.5855317500000004,
+        "sessions": 21714,
+        "contenderName": "contenders/claude-opus-5-max-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-fable-5",
+      "variantLabel": "Claude Fable 5 (High)",
+      "score": 8.37,
+      "secondary": {
+        "rank": 7,
+        "rankSpread": [
+          4,
+          10
+        ],
+        "ciPlus": 1.3,
+        "ciMinus": 1.3,
+        "netImprovementRaw": 0.08366053240098753,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 2.02,
+        "medianCostPerTaskUsdRaw": 2.0244934999999997,
+        "sessions": 39998,
+        "contenderName": "contenders/claude-fable-5-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-sol",
+      "variantLabel": "GPT 5.6 Sol (xHigh)",
+      "score": 7.05,
+      "secondary": {
+        "rank": 9,
+        "rankSpread": [
+          4,
+          11
+        ],
+        "ciPlus": 1.38,
+        "ciMinus": 1.38,
+        "netImprovementRaw": 0.07054582147602956,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 1.05,
+        "medianCostPerTaskUsdRaw": 1.05124595,
+        "sessions": 33916,
+        "contenderName": "contenders/gpt-5.6-sol-xhigh-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-opus-4.8",
+      "variantLabel": "Claude Opus 4.8 (High)",
+      "score": 6.92,
+      "secondary": {
+        "rank": 10,
+        "rankSpread": [
+          4,
+          11
+        ],
+        "ciPlus": 1.38,
+        "ciMinus": 1.38,
+        "netImprovementRaw": 0.06923697104299241,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 1.36,
+        "medianCostPerTaskUsdRaw": 1.3621281666666665,
+        "sessions": 40210,
+        "contenderName": "contenders/claude-opus-4-8-thinking-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-sonnet-5",
+      "variantLabel": "Claude Sonnet 5 (High)",
+      "score": 4.81,
+      "secondary": {
+        "rank": 11,
+        "rankSpread": [
+          8,
+          22
+        ],
+        "ciPlus": 1.72,
+        "ciMinus": 1.72,
+        "netImprovementRaw": 0.048060893931133726,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.9,
+        "medianCostPerTaskUsdRaw": 0.897684725,
+        "sessions": 31480,
+        "contenderName": "contenders/claude-sonnet-5-agent",
+        "modelOrganization": "Anthropic"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "hy4-preview",
+      "variantLabel": "Hy4 preview",
+      "score": 4.24,
+      "secondary": {
+        "rank": 12,
+        "rankSpread": [
+          10,
+          20
+        ],
+        "ciPlus": 0.85,
+        "ciMinus": 0.85,
+        "netImprovementRaw": 0.04244555997749705,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.29,
+        "medianCostPerTaskUsdRaw": 0.29312866133333326,
+        "sessions": 53732,
+        "contenderName": "contenders/phoenix-qcs2-agent",
+        "modelOrganization": "Tencent"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "muse-spark-1.3",
+      "variantLabel": "Muse Spark 1.3 (Max)",
+      "score": 4.19,
+      "secondary": {
+        "rank": 13,
+        "rankSpread": [
+          10,
+          19
+        ],
+        "ciPlus": 0.59,
+        "ciMinus": 0.59,
+        "netImprovementRaw": 0.041918390470629244,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.41,
+        "medianCostPerTaskUsdRaw": 0.40948609999999996,
+        "sessions": 61422,
+        "contenderName": "contenders/muse-spark-1-3-max-agent",
+        "modelOrganization": "Meta"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.5",
+      "variantLabel": "GPT 5.5 (xHigh)",
+      "score": 4.12,
+      "secondary": {
+        "rank": 14,
+        "rankSpread": [
+          10,
+          22
+        ],
+        "ciPlus": 1.05,
+        "ciMinus": 1.05,
+        "netImprovementRaw": 0.041160605697829145,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 1.22,
+        "medianCostPerTaskUsdRaw": 1.221792,
+        "sessions": 53913,
+        "contenderName": "contenders/gpt-5.5-xhigh-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4.1-flash",
+      "variantLabel": "Deepseek V4.1 Flash (Max)",
+      "score": 4.01,
+      "secondary": {
+        "rank": 15,
+        "rankSpread": [
+          11,
+          19
+        ],
+        "ciPlus": 0.5,
+        "ciMinus": 0.5,
+        "netImprovementRaw": 0.04005070128566882,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.09,
+        "medianCostPerTaskUsdRaw": 0.093749272,
+        "sessions": 95889,
+        "contenderName": "contenders/deepseek-v4.1-flash-max-20260910-agent",
+        "modelOrganization": "DeepSeek"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k3",
+      "variantLabel": "Kimi K3 (Max)",
+      "score": 3.98,
+      "secondary": {
+        "rank": 16,
+        "rankSpread": [
+          11,
+          20
+        ],
+        "ciPlus": 0.53,
+        "ciMinus": 0.53,
+        "netImprovementRaw": 0.03983378687688044,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.75,
+        "medianCostPerTaskUsdRaw": 0.7508934,
+        "sessions": 129908,
+        "contenderName": "contenders/kivine-wxzc-agent",
+        "modelOrganization": "Moonshot"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "grok-4.7",
+      "variantLabel": "Grok 4.7 (xHigh)",
+      "score": 3.64,
+      "secondary": {
+        "rank": 17,
+        "rankSpread": [
+          10,
+          27
+        ],
+        "ciPlus": 1.57,
+        "ciMinus": 1.57,
+        "netImprovementRaw": 0.03641197380079611,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 1.47,
+        "medianCostPerTaskUsdRaw": 1.4728959999999998,
+        "sessions": 10109,
+        "contenderName": "contenders/grok-4.7-xhigh-public-agent",
+        "modelOrganization": "SpaceXAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.2",
+      "variantLabel": "GLM 5.2 (Max)",
+      "score": 3.64,
+      "secondary": {
+        "rank": 18,
+        "rankSpread": [
+          11,
+          23
+        ],
+        "ciPlus": 0.74,
+        "ciMinus": 0.74,
+        "netImprovementRaw": 0.0363506120697182,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.76,
+        "medianCostPerTaskUsdRaw": 0.75712883,
+        "sessions": 83747,
+        "contenderName": "contenders/glm-5.2-agent",
+        "modelOrganization": "Z.ai"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.8-flash",
+      "variantLabel": "Gemini 3.8 Flash (High)",
+      "score": 2.96,
+      "secondary": {
+        "rank": 19,
+        "rankSpread": [
+          11,
+          24
+        ],
+        "ciPlus": 0.82,
+        "ciMinus": 0.82,
+        "netImprovementRaw": 0.029563106907863203,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.58,
+        "medianCostPerTaskUsdRaw": 0.5811470812499999,
+        "sessions": 32890,
+        "contenderName": "contenders/skimaki-kwc6-agent",
+        "modelOrganization": "Google"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.8-max",
+      "variantLabel": "Qwen3.8 Max",
+      "score": 2.8,
+      "secondary": {
+        "rank": 20,
+        "rankSpread": [
+          13,
+          24
+        ],
+        "ciPlus": 0.65,
+        "ciMinus": 0.65,
+        "netImprovementRaw": 0.02804376354442393,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.44,
+        "medianCostPerTaskUsdRaw": 0.43885050000000003,
+        "sessions": 49157,
+        "contenderName": "contenders/paisley-n9x0",
+        "modelOrganization": "Alibaba"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.3",
+      "variantLabel": "GLM 5.3 (Max)",
+      "score": 2.57,
+      "secondary": {
+        "rank": 21,
+        "rankSpread": [
+          15,
+          27
+        ],
+        "ciPlus": 0.72,
+        "ciMinus": 0.72,
+        "netImprovementRaw": 0.02574044983167535,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.64,
+        "medianCostPerTaskUsdRaw": 0.64470332,
+        "sessions": 80704,
+        "contenderName": "contenders/glm-5.3-agent",
+        "modelOrganization": "Z.ai"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-6-luna",
+      "variantLabel": "GPT 6 Luna (Max)",
+      "score": 1.68,
+      "secondary": {
+        "rank": 22,
+        "rankSpread": [
+          15,
+          28
+        ],
+        "ciPlus": 1.41,
+        "ciMinus": 1.41,
+        "netImprovementRaw": 0.01680924574841998,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.06,
+        "medianCostPerTaskUsdRaw": 0.06303544,
+        "sessions": 12076,
+        "contenderName": "contenders/gpt-6-luna-max-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-pro",
+      "variantLabel": "DeepSeek V4 Pro (High) (0813)",
+      "score": 1.29,
+      "secondary": {
+        "rank": 23,
+        "rankSpread": [
+          17,
+          31
+        ],
+        "ciPlus": 1.7,
+        "ciMinus": 1.7,
+        "netImprovementRaw": 0.012890258994477245,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.38,
+        "medianCostPerTaskUsdRaw": 0.3779027875,
+        "sessions": 6743,
+        "contenderName": "contenders/deepseek-v4-pro-high-fireworks",
+        "modelOrganization": "DeepSeek"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "grok-4.6",
+      "variantLabel": "Grok 4.6 (xHigh)",
+      "score": 1.16,
+      "secondary": {
+        "rank": 24,
+        "rankSpread": [
+          18,
+          29
+        ],
+        "ciPlus": 1.02,
+        "ciMinus": 1.02,
+        "netImprovementRaw": 0.01156080975145234,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.99,
+        "medianCostPerTaskUsdRaw": 0.988828,
+        "sessions": 25563,
+        "contenderName": "contenders/grok-4.6-xhigh-public-agent",
+        "modelOrganization": "SpaceXAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.5",
+      "variantLabel": "GPT 5.5",
+      "score": 1.13,
+      "secondary": {
+        "rank": 25,
+        "rankSpread": [
+          20,
+          29
+        ],
+        "ciPlus": 0.97,
+        "ciMinus": 0.97,
+        "netImprovementRaw": 0.011277335271279987,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.61,
+        "medianCostPerTaskUsdRaw": 0.610801,
+        "sessions": 82103,
+        "contenderName": "contenders/gpt-5.5-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "grok-4.5",
+      "variantLabel": "Grok 4.5",
+      "score": 1.11,
+      "secondary": {
+        "rank": 26,
+        "rankSpread": [
+          20,
+          29
+        ],
+        "ciPlus": 0.99,
+        "ciMinus": 0.99,
+        "netImprovementRaw": 0.011084195756121486,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.44,
+        "medianCostPerTaskUsdRaw": 0.43587000000000004,
+        "sessions": 41479,
+        "contenderName": "contenders/grok-4.5-agent",
+        "modelOrganization": "SpaceXAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-terra",
+      "variantLabel": "GPT 5.6 Terra (xHigh)",
+      "score": 0.83,
+      "secondary": {
+        "rank": 28,
+        "rankSpread": [
+          20,
+          31
+        ],
+        "ciPlus": 1.25,
+        "ciMinus": 1.25,
+        "netImprovementRaw": 0.008294417032596956,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.43,
+        "medianCostPerTaskUsdRaw": 0.42624249999999997,
+        "sessions": 22046,
+        "contenderName": "contenders/gpt-5.6-terra-xhigh-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.3-flash",
+      "variantLabel": "GLM 5.3 Flash",
+      "score": -0.28,
+      "secondary": {
+        "rank": 29,
+        "rankSpread": [
+          23,
+          31
+        ],
+        "ciPlus": 0.48,
+        "ciMinus": 0.48,
+        "netImprovementRaw": -0.0028286401774680115,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.1,
+        "medianCostPerTaskUsdRaw": 0.100495625,
+        "sessions": 76297,
+        "contenderName": "contenders/glm-5.3-flash-agent",
+        "modelOrganization": "Z.ai"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-5.6-luna",
+      "variantLabel": "GPT 5.6 Luna (xHigh)",
+      "score": -1.09,
+      "secondary": {
+        "rank": 31,
+        "rankSpread": [
+          27,
+          33
+        ],
+        "ciPlus": 0.7,
+        "ciMinus": 0.7,
+        "netImprovementRaw": -0.010900954420771746,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.07,
+        "medianCostPerTaskUsdRaw": 0.07296761,
+        "sessions": 39830,
+        "contenderName": "contenders/gpt-5.6-luna-xhigh-agent",
+        "modelOrganization": "OpenAI"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.8-27b",
+      "variantLabel": "Qwen 3.8 27B",
+      "score": -1.61,
+      "secondary": {
+        "rank": 32,
+        "rankSpread": [
+          30,
+          33
+        ],
+        "ciPlus": 0.6,
+        "ciMinus": 0.6,
+        "netImprovementRaw": -0.016128490732088732,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.31,
+        "medianCostPerTaskUsdRaw": 0.3128092,
+        "sessions": 53985,
+        "contenderName": "contenders/qwen3.8-27b-code-agent",
+        "modelOrganization": "Alibaba"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.7-flash",
+      "variantLabel": "Gemini 3.7 Flash (High)",
+      "score": -1.64,
+      "secondary": {
+        "rank": 33,
+        "rankSpread": [
+          30,
+          34
+        ],
+        "ciPlus": 0.76,
+        "ciMinus": 0.76,
+        "netImprovementRaw": -0.016418883599838806,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.38,
+        "medianCostPerTaskUsdRaw": 0.3759328125,
+        "sessions": 51614,
+        "contenderName": "contenders/andwise-evfd-agent",
+        "modelOrganization": "Google"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "muse-spark-1.2",
+      "variantLabel": "Muse Spark 1.2 (xHigh)",
+      "score": -2.96,
+      "secondary": {
+        "rank": 34,
+        "rankSpread": [
+          33,
+          34
+        ],
+        "ciPlus": 0.69,
+        "ciMinus": 0.69,
+        "netImprovementRaw": -0.029574610776391144,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.4,
+        "medianCostPerTaskUsdRaw": 0.39728209999999997,
+        "sessions": 46284,
+        "contenderName": "contenders/muse-spark-1.2-xhigh-agent",
+        "modelOrganization": "Meta"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.7-max",
+      "variantLabel": "Qwen3.7 Max",
+      "score": -5.2,
+      "secondary": {
+        "rank": 36,
+        "rankSpread": [
+          35,
+          39
+        ],
+        "ciPlus": 0.94,
+        "ciMinus": 0.94,
+        "netImprovementRaw": -0.05202787044973144,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.19,
+        "medianCostPerTaskUsdRaw": 0.1949871825,
+        "sessions": 39957,
+        "contenderName": "contenders/qwen3.7-max-agent",
+        "modelOrganization": "Alibaba"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "hy3",
+      "variantLabel": "Hy3",
+      "score": -5.7,
+      "secondary": {
+        "rank": 37,
+        "rankSpread": [
+          35,
+          42
+        ],
+        "ciPlus": 1.23,
+        "ciMinus": 1.23,
+        "netImprovementRaw": -0.057044187117040346,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.04,
+        "medianCostPerTaskUsdRaw": 0.044244222,
+        "sessions": 29011,
+        "contenderName": "contenders/hy3-tencent-cloud-agent",
+        "modelOrganization": "Tencent"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m3",
+      "variantLabel": "Minimax M3",
+      "score": -6.71,
+      "secondary": {
+        "rank": 38,
+        "rankSpread": [
+          36,
+          42
+        ],
+        "ciPlus": 0.89,
+        "ciMinus": 0.89,
+        "netImprovementRaw": -0.06710541285201452,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.08,
+        "medianCostPerTaskUsdRaw": 0.08431896,
+        "sessions": 40771,
+        "contenderName": "contenders/minimax-m3-first-party",
+        "modelOrganization": "MiniMax"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.5-pro",
+      "variantLabel": "Mimo V2.5 Pro",
+      "score": -7.23,
+      "secondary": {
+        "rank": 39,
+        "rankSpread": [
+          37,
+          42
+        ],
+        "ciPlus": 0.91,
+        "ciMinus": 0.91,
+        "netImprovementRaw": -0.07228507779222011,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.04,
+        "medianCostPerTaskUsdRaw": 0.038483031,
+        "sessions": 44405,
+        "contenderName": "contenders/mimo-v2.5-pro-agent",
+        "modelOrganization": "Xiaomi"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.7-plus",
+      "variantLabel": "Qwen3.7 Plus",
+      "score": -7.28,
+      "secondary": {
+        "rank": 40,
+        "rankSpread": [
+          36,
+          43
+        ],
+        "ciPlus": 1.47,
+        "ciMinus": 1.47,
+        "netImprovementRaw": -0.07278309668346637,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.09,
+        "medianCostPerTaskUsdRaw": 0.092556064,
+        "sessions": 21406,
+        "contenderName": "contenders/qwen3.7-plus-agent",
+        "modelOrganization": "Alibaba"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.1-pro",
+      "variantLabel": "Gemini 3.1 Pro Preview",
+      "score": -7.35,
+      "secondary": {
+        "rank": 41,
+        "rankSpread": [
+          37,
+          42
+        ],
+        "ciPlus": 0.98,
+        "ciMinus": 0.98,
+        "netImprovementRaw": -0.07349666328844258,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.29,
+        "medianCostPerTaskUsdRaw": 0.2931636,
+        "sessions": 86482,
+        "contenderName": "contenders/gemini-3.1-pro-preview-agent",
+        "modelOrganization": "Google"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gemini-3.6-flash",
+      "variantLabel": "Gemini 3.6 Flash (High)",
+      "score": -7.67,
+      "secondary": {
+        "rank": 42,
+        "rankSpread": [
+          37,
+          43
+        ],
+        "ciPlus": 1.08,
+        "ciMinus": 1.08,
+        "netImprovementRaw": -0.07674899660899959,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.3,
+        "medianCostPerTaskUsdRaw": 0.295381275,
+        "sessions": 22568,
+        "contenderName": "contenders/gemini-3.6-flash-agent",
+        "modelOrganization": "Google"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "inkling-small",
+      "variantLabel": "Inkling Small",
+      "score": -9.8,
+      "secondary": {
+        "rank": 43,
+        "rankSpread": [
+          41,
+          45
+        ],
+        "ciPlus": 1.42,
+        "ciMinus": 1.42,
+        "netImprovementRaw": -0.09797549493301351,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.1,
+        "medianCostPerTaskUsdRaw": 0.0992085,
+        "sessions": 13028,
+        "contenderName": "contenders/inkling-small",
+        "modelOrganization": "Thinky"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "inkling",
+      "variantLabel": "Inkling",
+      "score": -10.9,
+      "secondary": {
+        "rank": 44,
+        "rankSpread": [
+          43,
+          45
+        ],
+        "ciPlus": 1.06,
+        "ciMinus": 1.06,
+        "netImprovementRaw": -0.10904642553845262,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.25,
+        "medianCostPerTaskUsdRaw": 0.24988325,
+        "sessions": 42596,
+        "contenderName": "contenders/inkling-agent",
+        "modelOrganization": "Thinky"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mistral-medium-3.5",
+      "variantLabel": "Mistral Medium 3.5",
+      "score": -11.74,
+      "secondary": {
+        "rank": 45,
+        "rankSpread": [
+          43,
+          45
+        ],
+        "ciPlus": 1.5,
+        "ciMinus": 1.5,
+        "netImprovementRaw": -0.11737227392552999,
+        "pipelines": 5,
+        "medianCostPerTaskUsd": 0.67,
+        "medianCostPerTaskUsdRaw": 0.670423,
+        "sessions": 10797,
+        "contenderName": "contenders/mistral-medium-3.5-v2-agent",
+        "modelOrganization": "Mistral"
+      },
+      "source": "https://arena.ai/leaderboard/agent",
+      "checkedAt": "2026-10-01"
+    }
+  ],
+  "rawLeaderboardPayload": [
+    {
+      "rank": 1,
+      "contenderName": "contenders/claude-fable-5.1-max-agent",
+      "model": "Claude Fable 5.1 (Max)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "inputPricePerMillion": 10,
+      "outputPricePerMillion": 50,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 1,
+        "max": 4
+      },
+      "avgScore": {
+        "value": 0.1455297025193051,
+        "ci": 0.019171769275374534,
+        "pipelines": 5
+      },
+      "sessions": 14636,
+      "observations": 1644478,
+      "signalScores": {
+        "task_outcome_explicit": 0.17455470109600546,
+        "praise_complaint": 0.3373233701517887,
+        "steering_burden": 0.08950998221420603,
+        "bash_recovery_steps": 0.12306241958199582,
+        "tool_hallucination": 0.003198039552529508
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.02898044839586883,
+        "praise_complaint": 0.07892211809080296,
+        "steering_burden": 0.02827968269377759,
+        "bash_recovery_steps": 0.009631964422545991,
+        "tool_hallucination": 0.0002766096952793867
+      }
+    },
+    {
+      "rank": 2,
+      "contenderName": "contenders/claude-opus-5.5-high-vertex-agent",
+      "model": "Claude Opus 5.5 (High)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/claude-opus-5-5",
+      "inputPricePerMillion": 4,
+      "outputPricePerMillion": 20,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 1,
+        "max": 4
+      },
+      "avgScore": {
+        "value": 0.13784181616281832,
+        "ci": 0.022436696182619703,
+        "pipelines": 5
+      },
+      "sessions": 5013,
+      "observations": 664759,
+      "signalScores": {
+        "task_outcome_explicit": 0.13954901603904335,
+        "praise_complaint": 0.30234839419407566,
+        "steering_burden": 0.11732735467356753,
+        "bash_recovery_steps": 0.12693736347588702,
+        "tool_hallucination": 0.0030469524315179797
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.04248254949583416,
+        "praise_complaint": 0.090128040572176,
+        "steering_burden": 0.024017922722190332,
+        "bash_recovery_steps": 0.008781052185119653,
+        "tool_hallucination": 0.00044968921913320775
+      }
+    },
+    {
+      "rank": 3,
+      "contenderName": "contenders/gpt-6-astra-max-agent",
+      "model": "GPT 6 Astra (Max)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/gpt-6-astra/",
+      "inputPricePerMillion": 10,
+      "outputPricePerMillion": 50,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 1,
+        "max": 7
+      },
+      "avgScore": {
+        "value": 0.12175489332353712,
+        "ci": 0.022811493176203207,
+        "pipelines": 5
+      },
+      "sessions": 11077,
+      "observations": 850978,
+      "signalScores": {
+        "task_outcome_explicit": 0.12025670627304752,
+        "praise_complaint": 0.3469828459471206,
+        "steering_burden": 0.08238590826276976,
+        "bash_recovery_steps": 0.05590236953389849,
+        "tool_hallucination": 0.0032466366008492287
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.04025338249355351,
+        "praise_complaint": 0.09479354529787876,
+        "steering_burden": 0.027324006397249027,
+        "bash_recovery_steps": 0.016296867312329155,
+        "tool_hallucination": 0.00026013813932346166
+      }
+    },
+    {
+      "rank": 4,
+      "contenderName": "contenders/gpt-6-sol-max-agent",
+      "model": "GPT 6 Sol (Max)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 10,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 1,
+        "max": 10
+      },
+      "avgScore": {
+        "value": 0.10645668688061616,
+        "ci": 0.025656524400460297,
+        "pipelines": 5
+      },
+      "sessions": 5031,
+      "observations": 838445,
+      "signalScores": {
+        "task_outcome_explicit": 0.09869409077588365,
+        "praise_complaint": 0.24324711785751618,
+        "steering_burden": 0.118714339674929,
+        "bash_recovery_steps": 0.06838124949362556,
+        "tool_hallucination": 0.0032466366011263403
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.04553010826602388,
+        "praise_complaint": 0.10530995288192341,
+        "steering_burden": 0.02213014264513042,
+        "bash_recovery_steps": 0.019898868103551626,
+        "tool_hallucination": 0.0002601381393235367
+      }
+    },
+    {
+      "rank": 5,
+      "contenderName": "contenders/claude-opus-5-high-agent",
+      "model": "Claude Opus 5 (High)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/news/claude-opus-5",
+      "inputPricePerMillion": 5,
+      "outputPricePerMillion": 25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 3,
+        "max": 10
+      },
+      "avgScore": {
+        "value": 0.08760655303538206,
+        "ci": 0.015009705589617478,
+        "pipelines": 5
+      },
+      "sessions": 26501,
+      "observations": 3421474,
+      "signalScores": {
+        "task_outcome_explicit": 0.06844588573033228,
+        "praise_complaint": 0.17812695433080605,
+        "steering_burden": 0.06960051359955466,
+        "bash_recovery_steps": 0.1187448395599997,
+        "tool_hallucination": 0.00311457195621756
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.03182567228684344,
+        "praise_complaint": 0.05505660794603746,
+        "steering_burden": 0.01928574402120131,
+        "bash_recovery_steps": 0.008241091764147446,
+        "tool_hallucination": 0.0002703303266966238
+      }
+    },
+    {
+      "rank": 6,
+      "contenderName": "contenders/claude-opus-5-max-agent",
+      "model": "Claude Opus 5 (Max)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/news/claude-opus-5",
+      "inputPricePerMillion": 5,
+      "outputPricePerMillion": 25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 3,
+        "max": 10
+      },
+      "avgScore": {
+        "value": 0.085451073507389,
+        "ci": 0.015689560000578653,
+        "pipelines": 5
+      },
+      "sessions": 21714,
+      "observations": 2899530,
+      "signalScores": {
+        "task_outcome_explicit": 0.100898514431916,
+        "praise_complaint": 0.1451093236331612,
+        "steering_burden": 0.04760064955796628,
+        "bash_recovery_steps": 0.1304688650044783,
+        "tool_hallucination": 0.0031780149094231547
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.03240688456357868,
+        "praise_complaint": 0.0584019843915864,
+        "steering_burden": 0.020636793381379578,
+        "bash_recovery_steps": 0.007886651327014833,
+        "tool_hallucination": 0.00027214400777832116
+      }
+    },
+    {
+      "rank": 7,
+      "contenderName": "contenders/claude-fable-5-agent",
+      "model": "Claude Fable 5 (High)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "inputPricePerMillion": 10,
+      "outputPricePerMillion": 50,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 4,
+        "max": 10
+      },
+      "avgScore": {
+        "value": 0.08366053240098753,
+        "ci": 0.013026983761714489,
+        "pipelines": 5
+      },
+      "sessions": 39998,
+      "observations": 2446423,
+      "signalScores": {
+        "task_outcome_explicit": 0.054987252141505016,
+        "praise_complaint": 0.1841400133617569,
+        "steering_burden": 0.08978455975033212,
+        "bash_recovery_steps": 0.0861531810223557,
+        "tool_hallucination": 0.0032376557289879315
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.027621679617315795,
+        "praise_complaint": 0.04853914009741683,
+        "steering_burden": 0.013952791381146676,
+        "bash_recovery_steps": 0.013277922763088854,
+        "tool_hallucination": 0.0002607154087238329
+      }
+    },
+    {
+      "rank": 8,
+      "contenderName": "contenders/barium-bb-v2-4xts-agent",
+      "model": "Gemini 4 Argon (High)",
+      "modelOrganization": "Google",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 10,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 3,
+        "max": 15
+      },
+      "avgScore": {
+        "value": 0.07919464739027324,
+        "ci": 0.03240424470726072,
+        "pipelines": 5
+      },
+      "sessions": 3417,
+      "observations": 192481,
+      "signalScores": {
+        "task_outcome_explicit": 0.14148027061046642,
+        "praise_complaint": 0.27739300057041305,
+        "steering_burden": 0.15879504003538686,
+        "bash_recovery_steps": -0.1807026973900523,
+        "tool_hallucination": -0.0009923768748478778
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.05072359982898844,
+        "praise_complaint": 0.12810722943263447,
+        "steering_burden": 0.02675007585585959,
+        "bash_recovery_steps": 0.05593022801293035,
+        "tool_hallucination": 0.004845119003141023
+      }
+    },
+    {
+      "rank": 9,
+      "contenderName": "contenders/gpt-5.6-sol-xhigh-agent",
+      "model": "GPT 5.6 Sol (xHigh)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/gpt-5-6/",
+      "inputPricePerMillion": 4,
+      "outputPricePerMillion": 20,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 4,
+        "max": 11
+      },
+      "avgScore": {
+        "value": 0.07054582147602956,
+        "ci": 0.01375617244321066,
+        "pipelines": 5
+      },
+      "sessions": 33916,
+      "observations": 4057019,
+      "signalScores": {
+        "task_outcome_explicit": 0.0563588642193702,
+        "praise_complaint": 0.21441671755228953,
+        "steering_burden": 0.061966418566325565,
+        "bash_recovery_steps": 0.016740470441021893,
+        "tool_hallucination": 0.003246636601140551
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.027845649533405296,
+        "praise_complaint": 0.05142567620336541,
+        "steering_burden": 0.01770211320845025,
+        "bash_recovery_steps": 0.013608917485750362,
+        "tool_hallucination": 0.0002601381393235302
+      }
+    },
+    {
+      "rank": 10,
+      "contenderName": "contenders/claude-opus-4-8-thinking-agent",
+      "model": "Claude Opus 4.8 (High)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/news/claude-opus-4-8",
+      "inputPricePerMillion": 5,
+      "outputPricePerMillion": 25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 4,
+        "max": 11
+      },
+      "avgScore": {
+        "value": 0.06923697104299241,
+        "ci": 0.01382835219533618,
+        "pipelines": 5
+      },
+      "sessions": 40210,
+      "observations": 2363486,
+      "signalScores": {
+        "task_outcome_explicit": 0.04878112389716316,
+        "praise_complaint": 0.15185625239920075,
+        "steering_burden": 0.07460462521360556,
+        "bash_recovery_steps": 0.07091525913769292,
+        "tool_hallucination": 2.7594567299615846e-05
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.027685398009670296,
+        "praise_complaint": 0.05132000237509177,
+        "steering_burden": 0.016264043631778927,
+        "bash_recovery_steps": 0.018570493658651183,
+        "tool_hallucination": 0.002021178945864358
+      }
+    },
+    {
+      "rank": 11,
+      "contenderName": "contenders/claude-sonnet-5-agent",
+      "model": "Claude Sonnet 5 (High)",
+      "modelOrganization": "Anthropic",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.anthropic.com/news/claude-sonnet-5",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 10,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 8,
+        "max": 22
+      },
+      "avgScore": {
+        "value": 0.048060893931133726,
+        "ci": 0.017237003405211136,
+        "pipelines": 5
+      },
+      "sessions": 31480,
+      "observations": 3476931,
+      "signalScores": {
+        "task_outcome_explicit": 0.012987499641160083,
+        "praise_complaint": 0.10354165645906888,
+        "steering_burden": 0.05378868120668573,
+        "bash_recovery_steps": 0.06794249697565657,
+        "tool_hallucination": 0.0020441353730973333
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.037650231000008916,
+        "praise_complaint": 0.06262154531919467,
+        "steering_burden": 0.024441084479215478,
+        "bash_recovery_steps": 0.010816708042513456,
+        "tool_hallucination": 0.0007676236525424171
+      }
+    },
+    {
+      "rank": 12,
+      "contenderName": "contenders/phoenix-qcs2-agent",
+      "model": "Hy4 preview",
+      "modelOrganization": "Tencent",
+      "license": "Apache 2.0",
+      "provider": null,
+      "modelUrl": "https://hy.tencent.ai/research/hy4-preview",
+      "inputPricePerMillion": 0.834,
+      "outputPricePerMillion": 2.501,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 10,
+        "max": 20
+      },
+      "avgScore": {
+        "value": 0.04244555997749705,
+        "ci": 0.008528110616662601,
+        "pipelines": 5
+      },
+      "sessions": 53732,
+      "observations": 4632328,
+      "signalScores": {
+        "task_outcome_explicit": 0.06370855134463516,
+        "praise_complaint": 0.07672224469294109,
+        "steering_burden": 0.009198111159037625,
+        "bash_recovery_steps": 0.062644797347573,
+        "tool_hallucination": -4.5904656701623026e-05
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.017426411806499453,
+        "praise_complaint": 0.032008395428589104,
+        "steering_burden": 0.01074657453536898,
+        "bash_recovery_steps": 0.0055234249636483546,
+        "tool_hallucination": 0.002991846246028883
+      }
+    },
+    {
+      "rank": 13,
+      "contenderName": "contenders/muse-spark-1-3-max-agent",
+      "model": "Muse Spark 1.3 (Max)",
+      "modelOrganization": "Meta",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://developer.meta.com/ai/models/muse-spark/",
+      "inputPricePerMillion": 1.25,
+      "outputPricePerMillion": 4.25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 10,
+        "max": 19
+      },
+      "avgScore": {
+        "value": 0.041918390470629244,
+        "ci": 0.005859178457852762,
+        "pipelines": 5
+      },
+      "sessions": 61422,
+      "observations": 5782135,
+      "signalScores": {
+        "task_outcome_explicit": 0.062495206814205284,
+        "praise_complaint": 0.03269177540623869,
+        "steering_burden": 0.055019486442067334,
+        "bash_recovery_steps": 0.056170379750804855,
+        "tool_hallucination": 0.003215103939830044
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.012907453831420598,
+        "praise_complaint": 0.02093920883941705,
+        "steering_burden": 0.007471503987105901,
+        "bash_recovery_steps": 0.005874118594558983,
+        "tool_hallucination": 0.00026589550636559
+      }
+    },
+    {
+      "rank": 14,
+      "contenderName": "contenders/gpt-5.5-xhigh-agent",
+      "model": "GPT 5.5 (xHigh)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "inputPricePerMillion": 5,
+      "outputPricePerMillion": 30,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 10,
+        "max": 22
+      },
+      "avgScore": {
+        "value": 0.041160605697829145,
+        "ci": 0.010473317579615504,
+        "pipelines": 5
+      },
+      "sessions": 53913,
+      "observations": 2949979,
+      "signalScores": {
+        "task_outcome_explicit": -0.004351422250258641,
+        "praise_complaint": 0.07558914053964205,
+        "steering_burden": 0.03876922964459267,
+        "bash_recovery_steps": 0.09257002929947511,
+        "tool_hallucination": 0.0032260512556945287
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.02242215272619922,
+        "praise_complaint": 0.03721615482041868,
+        "steering_burden": 0.014137008383418755,
+        "bash_recovery_steps": 0.011580472047164184,
+        "tool_hallucination": 0.00026315455895595035
+      }
+    },
+    {
+      "rank": 15,
+      "contenderName": "contenders/deepseek-v4.1-flash-max-20260910-agent",
+      "model": "Deepseek V4.1 Flash (Max)",
+      "modelOrganization": "DeepSeek",
+      "license": "MIT",
+      "provider": null,
+      "modelUrl": "https://www.deepseek.com/en/news/deepseek-v4-1-flash/",
+      "inputPricePerMillion": 0.3,
+      "outputPricePerMillion": 1.2,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 11,
+        "max": 19
+      },
+      "avgScore": {
+        "value": 0.04005070128566882,
+        "ci": 0.0050058262915124024,
+        "pipelines": 5
+      },
+      "sessions": 95889,
+      "observations": 14509968,
+      "signalScores": {
+        "task_outcome_explicit": 0.08654853570633703,
+        "praise_complaint": 0.02212123244228792,
+        "steering_burden": 0.01190340298651843,
+        "bash_recovery_steps": 0.07769017599847294,
+        "tool_hallucination": 0.001990159294727789
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.011004593680683253,
+        "praise_complaint": 0.018316817009030067,
+        "steering_burden": 0.006871603171345386,
+        "bash_recovery_steps": 0.0032667311918963965,
+        "tool_hallucination": 0.0003860860757115953
+      }
+    },
+    {
+      "rank": 16,
+      "contenderName": "contenders/kivine-wxzc-agent",
+      "model": "Kimi K3 (Max)",
+      "modelOrganization": "Moonshot",
+      "license": "Kimi K3 license",
+      "provider": null,
+      "modelUrl": "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+      "inputPricePerMillion": 3,
+      "outputPricePerMillion": 15,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 11,
+        "max": 20
+      },
+      "avgScore": {
+        "value": 0.03983378687688044,
+        "ci": 0.005329515516311091,
+        "pipelines": 5
+      },
+      "sessions": 129908,
+      "observations": 11907312,
+      "signalScores": {
+        "task_outcome_explicit": 0.07324153249693777,
+        "praise_complaint": 0.06607005708738845,
+        "steering_burden": 0.014160122938507658,
+        "bash_recovery_steps": 0.042450585261486484,
+        "tool_hallucination": 0.0032466366000818425
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.011838462267021399,
+        "praise_complaint": 0.018881750478622547,
+        "steering_burden": 0.007320600397902038,
+        "bash_recovery_steps": 0.004955083942102964,
+        "tool_hallucination": 0.0002601381393234014
+      }
+    },
+    {
+      "rank": 17,
+      "contenderName": "contenders/grok-4.7-xhigh-public-agent",
+      "model": "Grok 4.7 (xHigh)",
+      "modelOrganization": "SpaceXAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://docs.x.ai/developers/models/grok-4.7",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 6,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 10,
+        "max": 27
+      },
+      "avgScore": {
+        "value": 0.03641197380079611,
+        "ci": 0.015681015281952954,
+        "pipelines": 5
+      },
+      "sessions": 10109,
+      "observations": 1423674,
+      "signalScores": {
+        "task_outcome_explicit": 0.062252176397638914,
+        "praise_complaint": 0.050598986404781554,
+        "steering_burden": 0.0036925858592600225,
+        "bash_recovery_steps": 0.06226948374115948,
+        "tool_hallucination": 0.003246636601140551
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.034241942662133984,
+        "praise_complaint": 0.057273880550887835,
+        "steering_burden": 0.022500840653038916,
+        "bash_recovery_steps": 0.010940087002903776,
+        "tool_hallucination": 0.000260138139323505
+      }
+    },
+    {
+      "rank": 18,
+      "contenderName": "contenders/glm-5.2-agent",
+      "model": "GLM 5.2 (Max)",
+      "modelOrganization": "Z.ai",
+      "license": "MIT",
+      "provider": "SiliconFlow",
+      "modelUrl": "https://huggingface.co/zai-org/GLM-5.2",
+      "inputPricePerMillion": 1.4,
+      "outputPricePerMillion": 4.4,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 11,
+        "max": 23
+      },
+      "avgScore": {
+        "value": 0.0363506120697182,
+        "ci": 0.0073895526692421085,
+        "pipelines": 5
+      },
+      "sessions": 83747,
+      "observations": 6349755,
+      "signalScores": {
+        "task_outcome_explicit": 0.0522799314443807,
+        "praise_complaint": 0.10171101585180475,
+        "steering_burden": 0.01774900249750916,
+        "bash_recovery_steps": 0.006839082152270803,
+        "tool_hallucination": 0.003174028402625595
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.01543622200149965,
+        "praise_complaint": 0.02673267354752437,
+        "steering_burden": 0.009548975230708228,
+        "bash_recovery_steps": 0.008340694614939213,
+        "tool_hallucination": 0.0002930589051797247
+      }
+    },
+    {
+      "rank": 19,
+      "contenderName": "contenders/skimaki-kwc6-agent",
+      "model": "Gemini 3.8 Flash (High)",
+      "modelOrganization": "Google",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "inputPricePerMillion": 0.75,
+      "outputPricePerMillion": 3.75,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 11,
+        "max": 24
+      },
+      "avgScore": {
+        "value": 0.029563106907863203,
+        "ci": 0.008246416776269184,
+        "pipelines": 5
+      },
+      "sessions": 32890,
+      "observations": 4028580,
+      "signalScores": {
+        "task_outcome_explicit": 0.07406438336964549,
+        "praise_complaint": 0.04502929824251212,
+        "steering_burden": 0.03320319444954628,
+        "bash_recovery_steps": -0.006080901994098387,
+        "tool_hallucination": 0.0015995604717105039
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.018211239661269057,
+        "praise_complaint": 0.029508468025275375,
+        "steering_burden": 0.011713026745467647,
+        "bash_recovery_steps": 0.0067252385701194115,
+        "tool_hallucination": 0.0008610768595025963
+      }
+    },
+    {
+      "rank": 20,
+      "contenderName": "contenders/paisley-n9x0",
+      "model": "Qwen3.8 Max",
+      "modelOrganization": "Alibaba",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://qwen.ai/blog?id=qwen3.8",
+      "inputPricePerMillion": 1.69,
+      "outputPricePerMillion": 5.07,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 13,
+        "max": 24
+      },
+      "avgScore": {
+        "value": 0.02804376354442393,
+        "ci": 0.006532365054054003,
+        "pipelines": 5
+      },
+      "sessions": 49157,
+      "observations": 4238238,
+      "signalScores": {
+        "task_outcome_explicit": 0.052351024183720396,
+        "praise_complaint": 0.04211703307002268,
+        "steering_burden": 0.030532795916256572,
+        "bash_recovery_steps": 0.026498635876065046,
+        "tool_hallucination": -0.011280671323945057
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.014558018254422114,
+        "praise_complaint": 0.023482684102998946,
+        "steering_burden": 0.008641144586367113,
+        "bash_recovery_steps": 0.007145467995720689,
+        "tool_hallucination": 0.002083926460093968
+      }
+    },
+    {
+      "rank": 21,
+      "contenderName": "contenders/glm-5.3-agent",
+      "model": "GLM 5.3 (Max)",
+      "modelOrganization": "Z.ai",
+      "license": "MIT",
+      "provider": null,
+      "modelUrl": "https://z.ai/blog/glm-5.3",
+      "inputPricePerMillion": 1.4,
+      "outputPricePerMillion": 4.4,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 15,
+        "max": 27
+      },
+      "avgScore": {
+        "value": 0.02574044983167535,
+        "ci": 0.007167969750868402,
+        "pipelines": 5
+      },
+      "sessions": 80704,
+      "observations": 8506558,
+      "signalScores": {
+        "task_outcome_explicit": 0.055534511629026895,
+        "praise_complaint": 0.06400455283764428,
+        "steering_burden": 0.008953219663241196,
+        "bash_recovery_steps": -0.0030366715727330185,
+        "tool_hallucination": 0.0032466366011973946
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.015977784702239876,
+        "praise_complaint": 0.025215193483301673,
+        "steering_burden": 0.010391886915148016,
+        "bash_recovery_steps": 0.006573812697232189,
+        "tool_hallucination": 0.0002601381393235289
+      }
+    },
+    {
+      "rank": 22,
+      "contenderName": "contenders/gpt-6-luna-max-agent",
+      "model": "GPT 6 Luna (Max)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+      "inputPricePerMillion": 0.1,
+      "outputPricePerMillion": 0.5,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 15,
+        "max": 28
+      },
+      "avgScore": {
+        "value": 0.01680924574841998,
+        "ci": 0.01413339030401832,
+        "pipelines": 5
+      },
+      "sessions": 12076,
+      "observations": 1488722,
+      "signalScores": {
+        "task_outcome_explicit": 0.003798587819658805,
+        "praise_complaint": -0.010426949631422433,
+        "steering_burden": 0.04349390807110187,
+        "bash_recovery_steps": 0.04393404588181293,
+        "tool_hallucination": 0.0032466366009487047
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.030975583430340584,
+        "praise_complaint": 0.04969306932677036,
+        "steering_burden": 0.01846541402471831,
+        "bash_recovery_steps": 0.019402403032303644,
+        "tool_hallucination": 0.0002601381393234764
+      }
+    },
+    {
+      "rank": 23,
+      "contenderName": "contenders/deepseek-v4-pro-high-fireworks",
+      "model": "DeepSeek V4 Pro (High) (0813)",
+      "modelOrganization": "DeepSeek",
+      "license": "MIT",
+      "provider": null,
+      "modelUrl": "https://api-docs.deepseek.com/updates/#date-2026-08-13",
+      "inputPricePerMillion": null,
+      "outputPricePerMillion": null,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 17,
+        "max": 31
+      },
+      "avgScore": {
+        "value": 0.012890258994477245,
+        "ci": 0.017027818157361575,
+        "pipelines": 5
+      },
+      "sessions": 6743,
+      "observations": 767675,
+      "signalScores": {
+        "task_outcome_explicit": -0.012330159838401245,
+        "praise_complaint": 0.025080022158410875,
+        "steering_burden": 0.003332232230997434,
+        "bash_recovery_steps": 0.045122563820238604,
+        "tool_hallucination": 0.003246636601140551
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.04075768930716603,
+        "praise_complaint": 0.06109645017442608,
+        "steering_burden": 0.023355600862557065,
+        "bash_recovery_steps": 0.012491063994805339,
+        "tool_hallucination": 0.0002601381393235341
+      }
+    },
+    {
+      "rank": 24,
+      "contenderName": "contenders/grok-4.6-xhigh-public-agent",
+      "model": "Grok 4.6 (xHigh)",
+      "modelOrganization": "SpaceXAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://docs.x.ai/developers/models/grok-4.6",
+      "inputPricePerMillion": null,
+      "outputPricePerMillion": null,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 18,
+        "max": 29
+      },
+      "avgScore": {
+        "value": 0.01156080975145234,
+        "ci": 0.010187580025834166,
+        "pipelines": 5
+      },
+      "sessions": 25563,
+      "observations": 2897004,
+      "signalScores": {
+        "task_outcome_explicit": -0.007347929256557584,
+        "praise_complaint": -0.004857562207393418,
+        "steering_burden": 0.009957390612973127,
+        "bash_recovery_steps": 0.056805513007660347,
+        "tool_hallucination": 0.0032466366005792224
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.024205029093635144,
+        "praise_complaint": 0.03405462479837749,
+        "steering_burden": 0.013779970483332855,
+        "bash_recovery_steps": 0.01005117515595165,
+        "tool_hallucination": 0.00026013813932339357
+      }
+    },
+    {
+      "rank": 25,
+      "contenderName": "contenders/gpt-5.5-agent",
+      "model": "GPT 5.5",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "inputPricePerMillion": 5,
+      "outputPricePerMillion": 30,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 20,
+        "max": 29
+      },
+      "avgScore": {
+        "value": 0.011277335271279987,
+        "ci": 0.00973848831875753,
+        "pipelines": 5
+      },
+      "sessions": 82103,
+      "observations": 2624911,
+      "signalScores": {
+        "task_outcome_explicit": -0.04592239431895728,
+        "praise_complaint": 0.04140540691741912,
+        "steering_burden": 0.011950036776992912,
+        "bash_recovery_steps": 0.045706990379762,
+        "tool_hallucination": 0.0032466366011831838
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.021267120031528253,
+        "praise_complaint": 0.03163142123956886,
+        "steering_burden": 0.012305925903161718,
+        "bash_recovery_steps": 0.018943836765588182,
+        "tool_hallucination": 0.00026013813932351543
+      }
+    },
+    {
+      "rank": 26,
+      "contenderName": "contenders/grok-4.5-agent",
+      "model": "Grok 4.5",
+      "modelOrganization": "SpaceXAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://docs.x.ai/developers/models/grok-4.5",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 6,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 20,
+        "max": 29
+      },
+      "avgScore": {
+        "value": 0.011084195756121486,
+        "ci": 0.009873821037142863,
+        "pipelines": 5
+      },
+      "sessions": 41479,
+      "observations": 2369856,
+      "signalScores": {
+        "task_outcome_explicit": 0.014706777846321795,
+        "praise_complaint": -0.039654201069502126,
+        "steering_burden": 0.020625198034531278,
+        "bash_recovery_steps": 0.05649656736858488,
+        "tool_hallucination": 0.003246636600671593
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.023494344160015654,
+        "praise_complaint": 0.03289210435414494,
+        "steering_burden": 0.01453033830215275,
+        "bash_recovery_steps": 0.010940949403886763,
+        "tool_hallucination": 0.0002601381393234235
+      }
+    },
+    {
+      "rank": 27,
+      "contenderName": "contenders/gpt-5.4-high-code-arena-harness-agent",
+      "model": "GPT 5.4 (High)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://platform.openai.com/docs/models/gpt-5.4",
+      "inputPricePerMillion": 2.5,
+      "outputPricePerMillion": 15,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 22,
+        "max": 29
+      },
+      "avgScore": {
+        "value": 0.009149151250985334,
+        "ci": 0.009185357793290088,
+        "pipelines": 5
+      },
+      "sessions": 81278,
+      "observations": 4277931,
+      "signalScores": {
+        "task_outcome_explicit": -0.026463908923974766,
+        "praise_complaint": -0.006604199969624913,
+        "steering_burden": 0.05391123154421268,
+        "bash_recovery_steps": 0.021655997003279692,
+        "tool_hallucination": 0.0032466366010339698
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.021072042043359412,
+        "praise_complaint": 0.032258592335809536,
+        "steering_burden": 0.011553592327457493,
+        "bash_recovery_steps": 0.012879707402401129,
+        "tool_hallucination": 0.0002601381393234942
+      }
+    },
+    {
+      "rank": 28,
+      "contenderName": "contenders/gpt-5.6-terra-xhigh-agent",
+      "model": "GPT 5.6 Terra (xHigh)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/gpt-5-6/",
+      "inputPricePerMillion": 2,
+      "outputPricePerMillion": 12,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 20,
+        "max": 31
+      },
+      "avgScore": {
+        "value": 0.008294417032596956,
+        "ci": 0.012476692476469714,
+        "pipelines": 5
+      },
+      "sessions": 22046,
+      "observations": 1543054,
+      "signalScores": {
+        "task_outcome_explicit": -0.04227018039644015,
+        "praise_complaint": 0.04501722398199304,
+        "steering_burden": 0.024853390929294117,
+        "bash_recovery_steps": 0.010625014046826697,
+        "tool_hallucination": 0.0032466366013110814
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.026988276303900407,
+        "praise_complaint": 0.04205444674057393,
+        "steering_burden": 0.01667058526986305,
+        "bash_recovery_steps": 0.01924705776992009,
+        "tool_hallucination": 0.00026013813932355837
+      }
+    },
+    {
+      "rank": 29,
+      "contenderName": "contenders/glm-5.3-flash-agent",
+      "model": "GLM 5.3 Flash",
+      "modelOrganization": "Z.ai",
+      "license": "MIT",
+      "provider": null,
+      "modelUrl": "https://z.ai/blog/glm-5.3",
+      "inputPricePerMillion": 0.06,
+      "outputPricePerMillion": 0.2,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 23,
+        "max": 31
+      },
+      "avgScore": {
+        "value": -0.0028286401774680115,
+        "ci": 0.004782733853759658,
+        "pipelines": 5
+      },
+      "sessions": 76297,
+      "observations": 8835696,
+      "signalScores": {
+        "task_outcome_explicit": 0.04635371834287094,
+        "praise_complaint": -0.008014935686999958,
+        "steering_burden": -0.0021821184209526723,
+        "bash_recovery_steps": -0.0535465017231147,
+        "tool_hallucination": 0.003246636600856334
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.011290662881275587,
+        "praise_complaint": 0.015993488910650753,
+        "steering_burden": 0.006793044627326116,
+        "bash_recovery_steps": 0.005419303074536717,
+        "tool_hallucination": 0.00026013813932346773
+      }
+    },
+    {
+      "rank": 30,
+      "contenderName": "contenders/farris-ees5-agent",
+      "model": "Qwen3.8 Flash Next",
+      "modelOrganization": "Alibaba",
+      "license": "qwen-community-1.0",
+      "provider": null,
+      "modelUrl": "https://qwen.ai/blog?id=qwen3.8-flash-next",
+      "inputPricePerMillion": 0.16,
+      "outputPricePerMillion": 0.47,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 27,
+        "max": 33
+      },
+      "avgScore": {
+        "value": -0.00788917862305656,
+        "ci": 0.006356916697653451,
+        "pipelines": 5
+      },
+      "sessions": 78117,
+      "observations": 10534330,
+      "signalScores": {
+        "task_outcome_explicit": 0.03557544951562963,
+        "praise_complaint": -0.033458222883285815,
+        "steering_burden": -0.008437669390859548,
+        "bash_recovery_steps": -0.024798138912249357,
+        "tool_hallucination": -0.008327311444517704
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.015131745814451383,
+        "praise_complaint": 0.02268530506698646,
+        "steering_burden": 0.009104793835131242,
+        "bash_recovery_steps": 0.00499065464406535,
+        "tool_hallucination": 0.0009762047828488357
+      }
+    },
+    {
+      "rank": 31,
+      "contenderName": "contenders/gpt-5.6-luna-xhigh-agent",
+      "model": "GPT 5.6 Luna (xHigh)",
+      "modelOrganization": "OpenAI",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://openai.com/index/gpt-5-6/",
+      "inputPricePerMillion": 0.2,
+      "outputPricePerMillion": 1.2,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 27,
+        "max": 33
+      },
+      "avgScore": {
+        "value": -0.010900954420771746,
+        "ci": 0.006995767006432707,
+        "pipelines": 5
+      },
+      "sessions": 39830,
+      "observations": 3701847,
+      "signalScores": {
+        "task_outcome_explicit": -0.028830835797916565,
+        "praise_complaint": -0.04170064180858413,
+        "steering_burden": 0.0010432731013332308,
+        "bash_recovery_steps": 0.011736795800836086,
+        "tool_hallucination": 0.003246636600472641
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.016481730331527916,
+        "praise_complaint": 0.02286607597820867,
+        "steering_burden": 0.009808205625866968,
+        "bash_recovery_steps": 0.011144015524704582,
+        "tool_hallucination": 0.0002601381393233901
+      }
+    },
+    {
+      "rank": 32,
+      "contenderName": "contenders/qwen3.8-27b-code-agent",
+      "model": "Qwen 3.8 27B",
+      "modelOrganization": "Alibaba",
+      "license": "Apache 2.0",
+      "provider": null,
+      "modelUrl": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "inputPricePerMillion": 0.4,
+      "outputPricePerMillion": 3,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 30,
+        "max": 33
+      },
+      "avgScore": {
+        "value": -0.016128490732088732,
+        "ci": 0.005991342097016444,
+        "pipelines": 5
+      },
+      "sessions": 53985,
+      "observations": 6558139,
+      "signalScores": {
+        "task_outcome_explicit": 0.015061566426099238,
+        "praise_complaint": -0.031566395964638505,
+        "steering_burden": -0.0036110608418745693,
+        "bash_recovery_steps": -0.05754090722985139,
+        "tool_hallucination": -0.00298565605017842
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.014540739272715864,
+        "praise_complaint": 0.02045790780589475,
+        "steering_burden": 0.008502863063147351,
+        "bash_recovery_steps": 0.0060416317572745265,
+        "tool_hallucination": 0.0012094640623875905
+      }
+    },
+    {
+      "rank": 33,
+      "contenderName": "contenders/andwise-evfd-agent",
+      "model": "Gemini 3.7 Flash (High)",
+      "modelOrganization": "Google",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+      "inputPricePerMillion": 0.75,
+      "outputPricePerMillion": 3.75,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 30,
+        "max": 34
+      },
+      "avgScore": {
+        "value": -0.016418883599838806,
+        "ci": 0.007551595301246449,
+        "pipelines": 5
+      },
+      "sessions": 51614,
+      "observations": 4735071,
+      "signalScores": {
+        "task_outcome_explicit": 0.010788787880457229,
+        "praise_complaint": -0.04013822005509893,
+        "steering_burden": -0.01033037583076779,
+        "bash_recovery_steps": -0.04241998946446324,
+        "tool_hallucination": 5.379470678690268e-06
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.018231179495114352,
+        "praise_complaint": 0.02494231627978087,
+        "steering_burden": 0.010507266721657499,
+        "bash_recovery_steps": 0.00826988400508858,
+        "tool_hallucination": 0.0017287430531462906
+      }
+    },
+    {
+      "rank": 34,
+      "contenderName": "contenders/muse-spark-1.2-xhigh-agent",
+      "model": "Muse Spark 1.2 (xHigh)",
+      "modelOrganization": "Meta",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://developer.meta.com/ai/models/muse-spark/",
+      "inputPricePerMillion": 1.25,
+      "outputPricePerMillion": 4.25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 33,
+        "max": 34
+      },
+      "avgScore": {
+        "value": -0.029574610776391144,
+        "ci": 0.006931103459479195,
+        "pipelines": 5
+      },
+      "sessions": 46284,
+      "observations": 2719630,
+      "signalScores": {
+        "task_outcome_explicit": -0.04777483427239948,
+        "praise_complaint": -0.11640661874652825,
+        "steering_burden": -0.04864780028994009,
+        "bash_recovery_steps": 0.06171603067356135,
+        "tool_hallucination": 0.0032401687533507584
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.01822859953224093,
+        "praise_complaint": 0.020868608617656104,
+        "steering_burden": 0.011038775126670265,
+        "bash_recovery_steps": 0.008362298601788665,
+        "tool_hallucination": 0.0002604302317912059
+      }
+    },
+    {
+      "rank": 35,
+      "contenderName": "contenders/super-nova-ext-3tam-agent",
+      "model": "Muse Spark 1.1",
+      "modelOrganization": "Meta",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+      "inputPricePerMillion": 1.25,
+      "outputPricePerMillion": 4.25,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 35,
+        "max": 37
+      },
+      "avgScore": {
+        "value": -0.04596486043059292,
+        "ci": 0.004486995777154508,
+        "pipelines": 5
+      },
+      "sessions": 139186,
+      "observations": 7281249,
+      "signalScores": {
+        "task_outcome_explicit": -0.039055046966982476,
+        "praise_complaint": -0.11431277151817953,
+        "steering_burden": -0.06232593098696482,
+        "bash_recovery_steps": -0.017141468265611692,
+        "tool_hallucination": 0.0030109155847739544
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.011176144228768685,
+        "praise_complaint": 0.012771601493341944,
+        "steering_burden": 0.0070628977308242885,
+        "bash_recovery_steps": 0.008152794337897416,
+        "tool_hallucination": 0.00030833976877382447
+      }
+    },
+    {
+      "rank": 36,
+      "contenderName": "contenders/qwen3.7-max-agent",
+      "model": "Qwen3.7 Max",
+      "modelOrganization": "Alibaba",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": null,
+      "inputPricePerMillion": null,
+      "outputPricePerMillion": null,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 35,
+        "max": 39
+      },
+      "avgScore": {
+        "value": -0.05202787044973144,
+        "ci": 0.009441370242026036,
+        "pipelines": 5
+      },
+      "sessions": 39957,
+      "observations": 2159337,
+      "signalScores": {
+        "task_outcome_explicit": -0.09068645691015653,
+        "praise_complaint": -0.09098006397346525,
+        "steering_burden": -0.06448824570654971,
+        "bash_recovery_steps": -0.012601561956225416,
+        "tool_hallucination": -0.0013830237022602887
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.024350371069597185,
+        "praise_complaint": 0.027724621536898697,
+        "steering_burden": 0.013751131360794592,
+        "bash_recovery_steps": 0.014151931081605215,
+        "tool_hallucination": 0.0016550244344827672
+      }
+    },
+    {
+      "rank": 37,
+      "contenderName": "contenders/hy3-tencent-cloud-agent",
+      "model": "Hy3",
+      "modelOrganization": "Tencent",
+      "license": "Apache 2.0",
+      "provider": null,
+      "modelUrl": "https://huggingface.co/tencent/Hy3",
+      "inputPricePerMillion": 0.132,
+      "outputPricePerMillion": 0.528,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 35,
+        "max": 42
+      },
+      "avgScore": {
+        "value": -0.057044187117040346,
+        "ci": 0.012272146292553202,
+        "pipelines": 5
+      },
+      "sessions": 29011,
+      "observations": 1142610,
+      "signalScores": {
+        "task_outcome_explicit": -0.11465750191231416,
+        "praise_complaint": -0.0700800952676357,
+        "steering_burden": 0.003574115761211971,
+        "bash_recovery_steps": -0.0734078908581337,
+        "tool_hallucination": -0.03064956330833013
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.02846506882091595,
+        "praise_complaint": 0.03751615410207915,
+        "steering_burden": 0.014481294127168934,
+        "bash_recovery_steps": 0.028696036719294243,
+        "tool_hallucination": 0.010802582537371446
+      }
+    },
+    {
+      "rank": 38,
+      "contenderName": "contenders/minimax-m3-first-party",
+      "model": "Minimax M3",
+      "modelOrganization": "MiniMax",
+      "license": "MiniMax Community License",
+      "provider": null,
+      "modelUrl": "https://www.minimax.io/models/text/m3",
+      "inputPricePerMillion": 0.3,
+      "outputPricePerMillion": 1.2,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 36,
+        "max": 42
+      },
+      "avgScore": {
+        "value": -0.06710541285201452,
+        "ci": 0.008855084190514086,
+        "pipelines": 5
+      },
+      "sessions": 40771,
+      "observations": 3256989,
+      "signalScores": {
+        "task_outcome_explicit": -0.13060959526117355,
+        "praise_complaint": -0.143094114579303,
+        "steering_burden": -0.0693496858858127,
+        "bash_recovery_steps": 0.008697184392474355,
+        "tool_hallucination": -0.0011708529262577372
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.024936852791679794,
+        "praise_complaint": 0.025570230896739828,
+        "steering_burden": 0.01455000007053349,
+        "bash_recovery_steps": 0.010624075857780128,
+        "tool_hallucination": 0.0017524987989655828
+      }
+    },
+    {
+      "rank": 39,
+      "contenderName": "contenders/mimo-v2.5-pro-agent",
+      "model": "Mimo V2.5 Pro",
+      "modelOrganization": "Xiaomi",
+      "license": "MIT",
+      "provider": null,
+      "modelUrl": "https://mimo.xiaomi.com/mimo-v2-5-pro/",
+      "inputPricePerMillion": 0.435,
+      "outputPricePerMillion": 0.87,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 37,
+        "max": 42
+      },
+      "avgScore": {
+        "value": -0.07228507779222011,
+        "ci": 0.009116262219579174,
+        "pipelines": 5
+      },
+      "sessions": 44405,
+      "observations": 2246843,
+      "signalScores": {
+        "task_outcome_explicit": -0.09401768745895711,
+        "praise_complaint": -0.11767363178607138,
+        "steering_burden": -0.07430372737839508,
+        "bash_recovery_steps": -0.06540454532125195,
+        "tool_hallucination": -0.010025797016425031
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.02335672882128799,
+        "praise_complaint": 0.026619788333786976,
+        "steering_burden": 0.013930312843140696,
+        "bash_recovery_steps": 0.016062691698309095,
+        "tool_hallucination": 0.002697477700327928
+      }
+    },
+    {
+      "rank": 40,
+      "contenderName": "contenders/qwen3.7-plus-agent",
+      "model": "Qwen3.7 Plus",
+      "modelOrganization": "Alibaba",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://qwen.ai/blog?id=qwen3.7-plus",
+      "inputPricePerMillion": 0.32,
+      "outputPricePerMillion": 1.28,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 36,
+        "max": 43
+      },
+      "avgScore": {
+        "value": -0.07278309668346637,
+        "ci": 0.014682777652377105,
+        "pipelines": 5
+      },
+      "sessions": 21406,
+      "observations": 1124195,
+      "signalScores": {
+        "task_outcome_explicit": -0.10140156165945846,
+        "praise_complaint": -0.11025548960954712,
+        "steering_burden": -0.08361630772725537,
+        "bash_recovery_steps": -0.057966975425503886,
+        "tool_hallucination": -0.010675148995566985
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.03372064836448235,
+        "praise_complaint": 0.040703538646135295,
+        "steering_burden": 0.01947463962675597,
+        "bash_recovery_steps": 0.03310453555642079,
+        "tool_hallucination": 0.003923264460886578
+      }
+    },
+    {
+      "rank": 41,
+      "contenderName": "contenders/gemini-3.1-pro-preview-agent",
+      "model": "Gemini 3.1 Pro Preview",
+      "modelOrganization": "Google",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
+      "inputPricePerMillion": 1,
+      "outputPricePerMillion": 6,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 37,
+        "max": 42
+      },
+      "avgScore": {
+        "value": -0.07349666328844258,
+        "ci": 0.009795065344408854,
+        "pipelines": 5
+      },
+      "sessions": 86482,
+      "observations": 3435416,
+      "signalScores": {
+        "task_outcome_explicit": -0.09368968776865894,
+        "praise_complaint": -0.00896579751073745,
+        "steering_burden": -0.04527570923167468,
+        "bash_recovery_steps": -0.21669423213408567,
+        "tool_hallucination": -0.0028578897970561457
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.021481981114235882,
+        "praise_complaint": 0.029911256339425936,
+        "steering_burden": 0.013849287640906122,
+        "bash_recovery_steps": 0.01766967494811153,
+        "tool_hallucination": 0.007408355735786963
+      }
+    },
+    {
+      "rank": 42,
+      "contenderName": "contenders/gemini-3.6-flash-agent",
+      "model": "Gemini 3.6 Flash (High)",
+      "modelOrganization": "Google",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+      "inputPricePerMillion": 0.75,
+      "outputPricePerMillion": 3.75,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 37,
+        "max": 43
+      },
+      "avgScore": {
+        "value": -0.07674899660899959,
+        "ci": 0.010844823149928517,
+        "pipelines": 5
+      },
+      "sessions": 22568,
+      "observations": 1488363,
+      "signalScores": {
+        "task_outcome_explicit": -0.055550647724679214,
+        "praise_complaint": -0.08586350716781643,
+        "steering_burden": -0.07490296466514729,
+        "bash_recovery_steps": -0.1703331907646164,
+        "tool_hallucination": 0.002905327277261449
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.02618635058203199,
+        "praise_complaint": 0.031628705724378106,
+        "steering_burden": 0.01735639503313388,
+        "bash_recovery_steps": 0.01983165055656319,
+        "tool_hallucination": 0.0004359568972328895
+      }
+    },
+    {
+      "rank": 43,
+      "contenderName": "contenders/inkling-small",
+      "model": "Inkling Small",
+      "modelOrganization": "Thinky",
+      "license": "Apache 2.0",
+      "provider": null,
+      "modelUrl": "https://thinkingmachines.ai/news/inkling-small/",
+      "inputPricePerMillion": 0.45,
+      "outputPricePerMillion": 1.2,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 41,
+        "max": 45
+      },
+      "avgScore": {
+        "value": -0.09797549493301351,
+        "ci": 0.01419519587275607,
+        "pipelines": 5
+      },
+      "sessions": 13028,
+      "observations": 490572,
+      "signalScores": {
+        "task_outcome_explicit": -0.19512970708922694,
+        "praise_complaint": -0.21632306871915818,
+        "steering_burden": -0.13116442699746417,
+        "bash_recovery_steps": 0.05643166334430161,
+        "tool_hallucination": -0.003691935203519847
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.04326405158667271,
+        "praise_complaint": 0.0367758414866919,
+        "steering_burden": 0.027843764972382085,
+        "bash_recovery_steps": 0.013673805795160227,
+        "tool_hallucination": 0.002908977223222673
+      }
+    },
+    {
+      "rank": 44,
+      "contenderName": "contenders/inkling-agent",
+      "model": "Inkling",
+      "modelOrganization": "Thinky",
+      "license": "Apache 2.0",
+      "provider": null,
+      "modelUrl": "https://thinkingmachines.ai/news/introducing-inkling/",
+      "inputPricePerMillion": 1,
+      "outputPricePerMillion": 4.05,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 43,
+        "max": 45
+      },
+      "avgScore": {
+        "value": -0.10904642553845262,
+        "ci": 0.010601393240786308,
+        "pipelines": 5
+      },
+      "sessions": 42596,
+      "observations": 1784288,
+      "signalScores": {
+        "task_outcome_explicit": -0.20738292344956089,
+        "praise_complaint": -0.22553468017769562,
+        "steering_burden": -0.11899331608039426,
+        "bash_recovery_steps": 0.006859827389855022,
+        "tool_hallucination": -0.00018103537446734208
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.030072257759147153,
+        "praise_complaint": 0.025760988803694873,
+        "steering_burden": 0.020005763361416455,
+        "bash_recovery_steps": 0.01837936686494255,
+        "tool_hallucination": 0.0011715632236077638
+      }
+    },
+    {
+      "rank": 45,
+      "contenderName": "contenders/mistral-medium-3.5-v2-agent",
+      "model": "Mistral Medium 3.5",
+      "modelOrganization": "Mistral",
+      "license": "Modified MIT",
+      "provider": null,
+      "modelUrl": "https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04",
+      "inputPricePerMillion": 0.75,
+      "outputPricePerMillion": 3.75,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 43,
+        "max": 45
+      },
+      "avgScore": {
+        "value": -0.11737227392552999,
+        "ci": 0.014995135539672744,
+        "pipelines": 5
+      },
+      "sessions": 10797,
+      "observations": 424198,
+      "signalScores": {
+        "task_outcome_explicit": -0.13523538992273565,
+        "praise_complaint": -0.16673580699177082,
+        "steering_burden": -0.05720021021800026,
+        "bash_recovery_steps": -0.2041857889308949,
+        "tool_hallucination": -0.023504173564248276
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.03797450892261411,
+        "praise_complaint": 0.03925837065830129,
+        "steering_burden": 0.02230042309286423,
+        "bash_recovery_steps": 0.033436336110685194,
+        "tool_hallucination": 0.007965955780974478
+      }
+    },
+    {
+      "rank": 46,
+      "contenderName": "contenders/solar-pro4-agent",
+      "model": "Solar Pro 4",
+      "modelOrganization": "Upstage",
+      "license": "Proprietary",
+      "provider": null,
+      "modelUrl": "https://www.upstage.ai/blog/en/solar-pro-4",
+      "inputPricePerMillion": 0.09,
+      "outputPricePerMillion": 0.36,
+      "isPublic": true,
+      "releaseType": null,
+      "rankSpread": {
+        "min": 46,
+        "max": 46
+      },
+      "avgScore": {
+        "value": -0.15771152541185327,
+        "ci": 0.019131609538813737,
+        "pipelines": 5
+      },
+      "sessions": 9242,
+      "observations": 405985,
+      "signalScores": {
+        "task_outcome_explicit": -0.2084427520530736,
+        "praise_complaint": -0.22107226321156181,
+        "steering_burden": -0.091037982951719,
+        "bash_recovery_steps": -0.2509011513257513,
+        "tool_hallucination": -0.01710347751716057
+      },
+      "signalCi": {
+        "task_outcome_explicit": 0.054754839623741516,
+        "praise_complaint": 0.046747124215681835,
+        "steering_burden": 0.031050960656444235,
+        "bash_recovery_steps": 0.03902492610916504,
+        "tool_hallucination": 0.006560250734070648
+      }
+    }
+  ],
+  "rawCostStats": [
+    {
+      "contenderName": "contenders/andwise-evfd-agent",
+      "medianUsd": 0.3759328125,
+      "p25Usd": 0.08992267500000001,
+      "p95Usd": 2.729224626250006,
+      "meanUsd": 0.7617614675230061,
+      "totalSampleCount": 2700,
+      "pricedSampleCount": 2608,
+      "outputMtokPerTask": {
+        "medianMtok": 0.029711,
+        "p25Mtok": 0.00762075,
+        "p95Mtok": 0.17235606666666667,
+        "meanMtok": 0.054511069785276076,
+        "totalSampleCount": 2700,
+        "tokenedSampleCount": 2608
+      }
+    },
+    {
+      "contenderName": "contenders/barium-bb-v2-4xts-agent",
+      "medianUsd": 0.6198991999999999,
+      "p25Usd": 0.19250602500000003,
+      "p95Usd": 7.012742689999997,
+      "meanUsd": 1.7881507494888478,
+      "totalSampleCount": 4651,
+      "pricedSampleCount": 4304,
+      "outputMtokPerTask": {
+        "medianMtok": 0.021119,
+        "p25Mtok": 0.00601825,
+        "p95Mtok": 0.16445405,
+        "meanMtok": 0.046724913452602226,
+        "totalSampleCount": 4651,
+        "tokenedSampleCount": 4304
+      }
+    },
+    {
+      "contenderName": "contenders/claude-fable-5-agent",
+      "medianUsd": 2.0244934999999997,
+      "p25Usd": 0.8056686249999999,
+      "p95Usd": 26.075804916666655,
+      "meanUsd": 7.35967606224311,
+      "totalSampleCount": 1353,
+      "pricedSampleCount": 1330,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0150415,
+        "p25Mtok": 0.004838500000000001,
+        "p95Mtok": 0.14435956666666663,
+        "meanMtok": 0.03900056779448621,
+        "totalSampleCount": 1353,
+        "tokenedSampleCount": 1330
+      }
+    },
+    {
+      "contenderName": "contenders/claude-fable-5.1-max-agent",
+      "medianUsd": 4.436707999999999,
+      "p25Usd": 1.1613642499999999,
+      "p95Usd": 43.27864025,
+      "meanUsd": 11.665375565805904,
+      "totalSampleCount": 894,
+      "pricedSampleCount": 881,
+      "outputMtokPerTask": {
+        "medianMtok": 0.041112,
+        "p25Mtok": 0.010398,
+        "p95Mtok": 0.487711,
+        "meanMtok": 0.1126043132803632,
+        "totalSampleCount": 894,
+        "tokenedSampleCount": 881
+      }
+    },
+    {
+      "contenderName": "contenders/claude-opus-4-8-thinking-agent",
+      "medianUsd": 1.3621281666666665,
+      "p25Usd": 0.5002139999999999,
+      "p95Usd": 16.10359189583333,
+      "meanUsd": 3.745917153688524,
+      "totalSampleCount": 430,
+      "pricedSampleCount": 427,
+      "outputMtokPerTask": {
+        "medianMtok": 0.01833,
+        "p25Mtok": 0.005671,
+        "p95Mtok": 0.13568889999999995,
+        "meanMtok": 0.037599868852459015,
+        "totalSampleCount": 430,
+        "tokenedSampleCount": 427
+      }
+    },
+    {
+      "contenderName": "contenders/claude-opus-5-high-agent",
+      "medianUsd": 2.497321875,
+      "p25Usd": 0.7292339999999999,
+      "p95Usd": 23.549020900000002,
+      "meanUsd": 6.459963510080058,
+      "totalSampleCount": 1381,
+      "pricedSampleCount": 1374,
+      "outputMtokPerTask": {
+        "medianMtok": 0.030428999999999998,
+        "p25Mtok": 0.0087125,
+        "p95Mtok": 0.22436504999999982,
+        "meanMtok": 0.06250582544881125,
+        "totalSampleCount": 1381,
+        "tokenedSampleCount": 1374
+      }
+    },
+    {
+      "contenderName": "contenders/claude-opus-5-max-agent",
+      "medianUsd": 3.5855317500000004,
+      "p25Usd": 1.153084125,
+      "p95Usd": 27.103985374999993,
+      "meanUsd": 7.651501993869656,
+      "totalSampleCount": 1279,
+      "pricedSampleCount": 1271,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0505095,
+        "p25Mtok": 0.01510625,
+        "p95Mtok": 0.27058383333333336,
+        "meanMtok": 0.08348655376344084,
+        "totalSampleCount": 1279,
+        "tokenedSampleCount": 1271
+      }
+    },
+    {
+      "contenderName": "contenders/claude-opus-5.5-high-vertex-agent",
+      "medianUsd": 1.5690757,
+      "p25Usd": 0.4475566500000001,
+      "p95Usd": 19.978413360000005,
+      "meanUsd": 5.006378244782282,
+      "totalSampleCount": 4517,
+      "pricedSampleCount": 4440,
+      "outputMtokPerTask": {
+        "medianMtok": 0.025791500000000002,
+        "p25Mtok": 0.006455,
+        "p95Mtok": 0.33506265000000085,
+        "meanMtok": 0.08188687672672672,
+        "totalSampleCount": 4517,
+        "tokenedSampleCount": 4440
+      }
+    },
+    {
+      "contenderName": "contenders/claude-sonnet-5-agent",
+      "medianUsd": 0.897684725,
+      "p25Usd": 0.254150675,
+      "p95Usd": 8.876386594999977,
+      "meanUsd": 2.4005579709077387,
+      "totalSampleCount": 686,
+      "pricedSampleCount": 672,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0228065,
+        "p25Mtok": 0.0056245,
+        "p95Mtok": 0.2056494999999999,
+        "meanMtok": 0.0549249714781746,
+        "totalSampleCount": 686,
+        "tokenedSampleCount": 672
+      }
+    },
+    {
+      "contenderName": "contenders/deepseek-v4-pro-high-fireworks",
+      "medianUsd": 0.3779027875,
+      "p25Usd": 0.10489315,
+      "p95Usd": 4.87378937,
+      "meanUsd": 1.1368778631406011,
+      "totalSampleCount": 5000,
+      "pricedSampleCount": 4981,
+      "outputMtokPerTask": {
+        "medianMtok": 0.045585,
+        "p25Mtok": 0.011431,
+        "p95Mtok": 0.304611,
+        "meanMtok": 0.08866064896607108,
+        "totalSampleCount": 5000,
+        "tokenedSampleCount": 4981
+      }
+    },
+    {
+      "contenderName": "contenders/deepseek-v4.1-flash-max-20260910-agent",
+      "medianUsd": 0.093749272,
+      "p25Usd": 0.025716319999999997,
+      "p95Usd": 1.0502527503999988,
+      "meanUsd": 0.27672858628842234,
+      "totalSampleCount": 62552,
+      "pricedSampleCount": 61873,
+      "outputMtokPerTask": {
+        "medianMtok": 0.05771133333333333,
+        "p25Mtok": 0.017132,
+        "p95Mtok": 0.32214124999999977,
+        "meanMtok": 0.09912693270349782,
+        "totalSampleCount": 62552,
+        "tokenedSampleCount": 61868
+      }
+    },
+    {
+      "contenderName": "contenders/farris-ees5-agent",
+      "medianUsd": 0.14255167799999996,
+      "p25Usd": 0.03274908450000001,
+      "p95Usd": 0.9577854931999996,
+      "meanUsd": 0.2896503535819654,
+      "totalSampleCount": 12534,
+      "pricedSampleCount": 12303,
+      "outputMtokPerTask": {
+        "medianMtok": 0.046304750000000006,
+        "p25Mtok": 0.011909,
+        "p95Mtok": 0.28335899999999997,
+        "meanMtok": 0.08159941527168318,
+        "totalSampleCount": 12534,
+        "tokenedSampleCount": 12306
+      }
+    },
+    {
+      "contenderName": "contenders/gemini-3.1-pro-preview-agent",
+      "medianUsd": 0.2931636,
+      "p25Usd": 0.11048145000000001,
+      "p95Usd": 4.872909489999987,
+      "meanUsd": 1.4081317670641746,
+      "totalSampleCount": 439,
+      "pricedSampleCount": 428,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0106405,
+        "p25Mtok": 0.004474,
+        "p95Mtok": 0.06030865,
+        "meanMtok": 0.01926132943925234,
+        "totalSampleCount": 439,
+        "tokenedSampleCount": 428
+      }
+    },
+    {
+      "contenderName": "contenders/gemini-3.6-flash-agent",
+      "medianUsd": 0.295381275,
+      "p25Usd": 0.098812325,
+      "p95Usd": 2.046795514999998,
+      "meanUsd": 0.571864080535412,
+      "totalSampleCount": 1423,
+      "pricedSampleCount": 1379,
+      "outputMtokPerTask": {
+        "medianMtok": 0.026251,
+        "p25Mtok": 0.0088645,
+        "p95Mtok": 0.12459689999999993,
+        "meanMtok": 0.041108380106357256,
+        "totalSampleCount": 1423,
+        "tokenedSampleCount": 1379
+      }
+    },
+    {
+      "contenderName": "contenders/glm-5.2-agent",
+      "medianUsd": 0.75712883,
+      "p25Usd": 0.1813244,
+      "p95Usd": 7.843949314999998,
+      "meanUsd": 2.03525366999659,
+      "totalSampleCount": 5409,
+      "pricedSampleCount": 5376,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0483425,
+        "p25Mtok": 0.01289775,
+        "p95Mtok": 0.233957,
+        "meanMtok": 0.07643973890128966,
+        "totalSampleCount": 5409,
+        "tokenedSampleCount": 5376
+      }
+    },
+    {
+      "contenderName": "contenders/glm-5.3-agent",
+      "medianUsd": 0.64470332,
+      "p25Usd": 0.1607009,
+      "p95Usd": 7.743088964000002,
+      "meanUsd": 2.0277850798123325,
+      "totalSampleCount": 5639,
+      "pricedSampleCount": 5595,
+      "outputMtokPerTask": {
+        "medianMtok": 0.046142666666666665,
+        "p25Mtok": 0.012346666666666666,
+        "p95Mtok": 0.24528340000000004,
+        "meanMtok": 0.0792811832886506,
+        "totalSampleCount": 5639,
+        "tokenedSampleCount": 5595
+      }
+    },
+    {
+      "contenderName": "contenders/glm-5.3-flash-agent",
+      "medianUsd": 0.100495625,
+      "p25Usd": 0.022845825,
+      "p95Usd": 1.2527328320000002,
+      "meanUsd": 0.3436389478616136,
+      "totalSampleCount": 27797,
+      "pricedSampleCount": 27640,
+      "outputMtokPerTask": {
+        "medianMtok": 0.034899,
+        "p25Mtok": 0.010405166666666667,
+        "p95Mtok": 0.20072269999999998,
+        "meanMtok": 0.06102011491612095,
+        "totalSampleCount": 27797,
+        "tokenedSampleCount": 27639
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.4-high-code-arena-harness-agent",
+      "medianUsd": 0.60403675,
+      "p25Usd": 0.190703125,
+      "p95Usd": 6.028760350000001,
+      "meanUsd": 1.5512558307692306,
+      "totalSampleCount": 886,
+      "pricedSampleCount": 858,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0177515,
+        "p25Mtok": 0.0065025,
+        "p95Mtok": 0.10764864999999997,
+        "meanMtok": 0.032466859945609945,
+        "totalSampleCount": 886,
+        "tokenedSampleCount": 858
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.5-agent",
+      "medianUsd": 0.610801,
+      "p25Usd": 0.22217975,
+      "p95Usd": 5.526130499999995,
+      "meanUsd": 1.4899029240395807,
+      "totalSampleCount": 874,
+      "pricedSampleCount": 859,
+      "outputMtokPerTask": {
+        "medianMtok": 0.010019,
+        "p25Mtok": 0.0038079999999999998,
+        "p95Mtok": 0.052356399999999984,
+        "meanMtok": 0.015701695576251458,
+        "totalSampleCount": 874,
+        "tokenedSampleCount": 859
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.5-xhigh-agent",
+      "medianUsd": 1.221792,
+      "p25Usd": 0.34222275,
+      "p95Usd": 10.748987999999983,
+      "meanUsd": 2.809277809736394,
+      "totalSampleCount": 800,
+      "pricedSampleCount": 784,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0198835,
+        "p25Mtok": 0.00618,
+        "p95Mtok": 0.09114919999999992,
+        "meanMtok": 0.029949983205782318,
+        "totalSampleCount": 800,
+        "tokenedSampleCount": 784
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.6-luna-xhigh-agent",
+      "medianUsd": 0.07296761,
+      "p25Usd": 0.0221785,
+      "p95Usd": 0.8029018169999994,
+      "meanUsd": 0.2208540014469367,
+      "totalSampleCount": 8948,
+      "pricedSampleCount": 8738,
+      "outputMtokPerTask": {
+        "medianMtok": 0.015313,
+        "p25Mtok": 0.004628,
+        "p95Mtok": 0.07263520000000001,
+        "meanMtok": 0.023592519910744934,
+        "totalSampleCount": 8948,
+        "tokenedSampleCount": 8739
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.6-sol-xhigh-agent",
+      "medianUsd": 1.05124595,
+      "p25Usd": 0.2865444,
+      "p95Usd": 11.79848215999998,
+      "meanUsd": 3.177049040021232,
+      "totalSampleCount": 1459,
+      "pricedSampleCount": 1413,
+      "outputMtokPerTask": {
+        "medianMtok": 0.017972,
+        "p25Mtok": 0.005586,
+        "p95Mtok": 0.09904059999999992,
+        "meanMtok": 0.03103095340882283,
+        "totalSampleCount": 1459,
+        "tokenedSampleCount": 1413
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-5.6-terra-xhigh-agent",
+      "medianUsd": 0.42624249999999997,
+      "p25Usd": 0.11083275000000001,
+      "p95Usd": 4.101753461666667,
+      "meanUsd": 1.0555034181515957,
+      "totalSampleCount": 1541,
+      "pricedSampleCount": 1504,
+      "outputMtokPerTask": {
+        "medianMtok": 0.013593000000000001,
+        "p25Mtok": 0.003657375,
+        "p95Mtok": 0.07579489999999997,
+        "meanMtok": 0.022660425975177298,
+        "totalSampleCount": 1541,
+        "tokenedSampleCount": 1504
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-6-astra-max-agent",
+      "medianUsd": 2.9008555,
+      "p25Usd": 0.62960425,
+      "p95Usd": 29.49224939999999,
+      "meanUsd": 8.020217609696264,
+      "totalSampleCount": 645,
+      "pricedSampleCount": 642,
+      "outputMtokPerTask": {
+        "medianMtok": 0.026145,
+        "p25Mtok": 0.00687725,
+        "p95Mtok": 0.1775761499999997,
+        "meanMtok": 0.049606390186915886,
+        "totalSampleCount": 645,
+        "tokenedSampleCount": 642
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-6-luna-max-agent",
+      "medianUsd": 0.06303544,
+      "p25Usd": 0.015107729999999998,
+      "p95Usd": 0.8724222566666662,
+      "meanUsd": 0.22216797418480794,
+      "totalSampleCount": 16345,
+      "pricedSampleCount": 15767,
+      "outputMtokPerTask": {
+        "medianMtok": 0.033205,
+        "p25Mtok": 0.010136,
+        "p95Mtok": 0.2310166,
+        "meanMtok": 0.0649047418342107,
+        "totalSampleCount": 16345,
+        "tokenedSampleCount": 15767
+      }
+    },
+    {
+      "contenderName": "contenders/gpt-6-sol-max-agent",
+      "medianUsd": 0.9061006000000003,
+      "p25Usd": 0.2247109,
+      "p95Usd": 10.213562819999998,
+      "meanUsd": 2.6082398692238886,
+      "totalSampleCount": 5484,
+      "pricedSampleCount": 5403,
+      "outputMtokPerTask": {
+        "medianMtok": 0.028411,
+        "p25Mtok": 0.00845575,
+        "p95Mtok": 0.18820969999999998,
+        "meanMtok": 0.055024671478808074,
+        "totalSampleCount": 5484,
+        "tokenedSampleCount": 5403
+      }
+    },
+    {
+      "contenderName": "contenders/grok-4.5-agent",
+      "medianUsd": 0.43587000000000004,
+      "p25Usd": 0.12782359999999998,
+      "p95Usd": 4.64475184,
+      "meanUsd": 1.1403070695904012,
+      "totalSampleCount": 2427,
+      "pricedSampleCount": 2417,
+      "outputMtokPerTask": {
+        "medianMtok": 0.013413,
+        "p25Mtok": 0.003353,
+        "p95Mtok": 0.09144479999999999,
+        "meanMtok": 0.026153056750792995,
+        "totalSampleCount": 2427,
+        "tokenedSampleCount": 2417
+      }
+    },
+    {
+      "contenderName": "contenders/grok-4.6-xhigh-public-agent",
+      "medianUsd": 0.988828,
+      "p25Usd": 0.263108,
+      "p95Usd": 7.7429484199999985,
+      "meanUsd": 2.1850354436990127,
+      "totalSampleCount": 2335,
+      "pricedSampleCount": 2329,
+      "outputMtokPerTask": {
+        "medianMtok": 0.027035,
+        "p25Mtok": 0.008355,
+        "p95Mtok": 0.11701779999999998,
+        "meanMtok": 0.040343221268069274,
+        "totalSampleCount": 2335,
+        "tokenedSampleCount": 2329
+      }
+    },
+    {
+      "contenderName": "contenders/grok-4.7-xhigh-public-agent",
+      "medianUsd": 1.4728959999999998,
+      "p25Usd": 0.31978719999999994,
+      "p95Usd": 10.036287120000006,
+      "meanUsd": 2.8942106700324928,
+      "totalSampleCount": 9911,
+      "pricedSampleCount": 9889,
+      "outputMtokPerTask": {
+        "medianMtok": 0.048929,
+        "p25Mtok": 0.012743,
+        "p95Mtok": 0.22298959999999957,
+        "meanMtok": 0.07429717472438556,
+        "totalSampleCount": 9911,
+        "tokenedSampleCount": 9887
+      }
+    },
+    {
+      "contenderName": "contenders/hy3-tencent-cloud-agent",
+      "medianUsd": 0.044244222,
+      "p25Usd": 0.0131647824,
+      "p95Usd": 0.7418972209599995,
+      "meanUsd": 0.17524639723772256,
+      "totalSampleCount": 1333,
+      "pricedSampleCount": 1329,
+      "outputMtokPerTask": {
+        "medianMtok": 0.022681,
+        "p25Mtok": 0.006547,
+        "p95Mtok": 0.13007539999999998,
+        "meanMtok": 0.03788083621770754,
+        "totalSampleCount": 1333,
+        "tokenedSampleCount": 1329
+      }
+    },
+    {
+      "contenderName": "contenders/inkling-agent",
+      "medianUsd": 0.24988325,
+      "p25Usd": 0.06909876999999999,
+      "p95Usd": 2.0471412519999994,
+      "meanUsd": 0.5624762056418554,
+      "totalSampleCount": 322,
+      "pricedSampleCount": 309,
+      "outputMtokPerTask": {
+        "medianMtok": 0.011389,
+        "p25Mtok": 0.00409,
+        "p95Mtok": 0.060467599999999976,
+        "meanMtok": 0.018609055016181226,
+        "totalSampleCount": 322,
+        "tokenedSampleCount": 309
+      }
+    },
+    {
+      "contenderName": "contenders/inkling-small",
+      "medianUsd": 0.0992085,
+      "p25Usd": 0.03715945833333333,
+      "p95Usd": 0.70293725,
+      "meanUsd": 0.20995801042260206,
+      "totalSampleCount": 358,
+      "pricedSampleCount": 351,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0153,
+        "p25Mtok": 0.00658125,
+        "p95Mtok": 0.050933,
+        "meanMtok": 0.019170478632478626,
+        "totalSampleCount": 358,
+        "tokenedSampleCount": 351
+      }
+    },
+    {
+      "contenderName": "contenders/kivine-wxzc-agent",
+      "medianUsd": 0.7508934,
+      "p25Usd": 0.21973320000000002,
+      "p95Usd": 7.3560483071999965,
+      "meanUsd": 1.903164168663934,
+      "totalSampleCount": 15687,
+      "pricedSampleCount": 15613,
+      "outputMtokPerTask": {
+        "medianMtok": 0.026843,
+        "p25Mtok": 0.007910083333333333,
+        "p95Mtok": 0.1512208,
+        "meanMtok": 0.04662590238278248,
+        "totalSampleCount": 15687,
+        "tokenedSampleCount": 15612
+      }
+    },
+    {
+      "contenderName": "contenders/mimo-v2.5-pro-agent",
+      "medianUsd": 0.038483031,
+      "p25Usd": 0.00994707815,
+      "p95Usd": 0.6345818511099984,
+      "meanUsd": 0.14785195990115702,
+      "totalSampleCount": 2469,
+      "pricedSampleCount": 2420,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0101725,
+        "p25Mtok": 0.0024441666666666665,
+        "p95Mtok": 0.09492349999999995,
+        "meanMtok": 0.023640339465343795,
+        "totalSampleCount": 2469,
+        "tokenedSampleCount": 2419
+      }
+    },
+    {
+      "contenderName": "contenders/minimax-m3-first-party",
+      "medianUsd": 0.08431896,
+      "p25Usd": 0.018014370000000002,
+      "p95Usd": 1.7596035719999998,
+      "meanUsd": 0.4333699249939039,
+      "totalSampleCount": 1370,
+      "pricedSampleCount": 1367,
+      "outputMtokPerTask": {
+        "medianMtok": 0.010567,
+        "p25Mtok": 0.002743,
+        "p95Mtok": 0.09746740000000001,
+        "meanMtok": 0.026658722140941234,
+        "totalSampleCount": 1370,
+        "tokenedSampleCount": 1367
+      }
+    },
+    {
+      "contenderName": "contenders/mistral-medium-3.5-v2-agent",
+      "medianUsd": 0.670423,
+      "p25Usd": 0.1809895,
+      "p95Usd": 16.487662424999996,
+      "meanUsd": 3.2260480546130954,
+      "totalSampleCount": 461,
+      "pricedSampleCount": 448,
+      "outputMtokPerTask": {
+        "medianMtok": 0.013265666666666667,
+        "p25Mtok": 0.00345175,
+        "p95Mtok": 0.12042279999999995,
+        "meanMtok": 0.03080238206845238,
+        "totalSampleCount": 461,
+        "tokenedSampleCount": 448
+      }
+    },
+    {
+      "contenderName": "contenders/muse-spark-1-3-max-agent",
+      "medianUsd": 0.40948609999999996,
+      "p25Usd": 0.12718265,
+      "p95Usd": 5.167745969999999,
+      "meanUsd": 1.2463172011167831,
+      "totalSampleCount": 22971,
+      "pricedSampleCount": 22923,
+      "outputMtokPerTask": {
+        "medianMtok": 0.019959,
+        "p25Mtok": 0.0068065,
+        "p95Mtok": 0.14669223333333323,
+        "meanMtok": 0.04190150721255216,
+        "totalSampleCount": 22971,
+        "tokenedSampleCount": 22923
+      }
+    },
+    {
+      "contenderName": "contenders/muse-spark-1.2-xhigh-agent",
+      "medianUsd": 0.39728209999999997,
+      "p25Usd": 0.125491425,
+      "p95Usd": 3.914055529999997,
+      "meanUsd": 1.0125515032821937,
+      "totalSampleCount": 10797,
+      "pricedSampleCount": 10777,
+      "outputMtokPerTask": {
+        "medianMtok": 0.022964,
+        "p25Mtok": 0.00835175,
+        "p95Mtok": 0.11077195833333334,
+        "meanMtok": 0.03548860455332838,
+        "totalSampleCount": 10797,
+        "tokenedSampleCount": 10776
+      }
+    },
+    {
+      "contenderName": "contenders/paisley-n9x0",
+      "medianUsd": 0.43885050000000003,
+      "p25Usd": 0.12200625000000001,
+      "p95Usd": 5.159971849999996,
+      "meanUsd": 1.2469920540480086,
+      "totalSampleCount": 12985,
+      "pricedSampleCount": 12852,
+      "outputMtokPerTask": {
+        "medianMtok": 0.025460499999999997,
+        "p25Mtok": 0.008447666666666668,
+        "p95Mtok": 0.14508629999999995,
+        "meanMtok": 0.044403469628592186,
+        "totalSampleCount": 12985,
+        "tokenedSampleCount": 12852
+      }
+    },
+    {
+      "contenderName": "contenders/phoenix-qcs2-agent",
+      "medianUsd": 0.29312866133333326,
+      "p25Usd": 0.08288696498749999,
+      "p95Usd": 2.1853974746499976,
+      "meanUsd": 0.6171234698452734,
+      "totalSampleCount": 12364,
+      "pricedSampleCount": 12190,
+      "outputMtokPerTask": {
+        "medianMtok": 0.039229,
+        "p25Mtok": 0.01168475,
+        "p95Mtok": 0.21892719999999996,
+        "meanMtok": 0.06670323233524747,
+        "totalSampleCount": 12364,
+        "tokenedSampleCount": 12190
+      }
+    },
+    {
+      "contenderName": "contenders/qwen3.7-max-agent",
+      "medianUsd": 0.1949871825,
+      "p25Usd": 0.068327051875,
+      "p95Usd": 2.540580156875,
+      "meanUsd": 0.6274177160165924,
+      "totalSampleCount": 1360,
+      "pricedSampleCount": 1346,
+      "outputMtokPerTask": {
+        "medianMtok": 0.013479499999999998,
+        "p25Mtok": 0.00341375,
+        "p95Mtok": 0.09824125,
+        "meanMtok": 0.02678538348192175,
+        "totalSampleCount": 1360,
+        "tokenedSampleCount": 1346
+      }
+    },
+    {
+      "contenderName": "contenders/qwen3.7-plus-agent",
+      "medianUsd": 0.092556064,
+      "p25Usd": 0.030562416,
+      "p95Usd": 1.250093212,
+      "meanUsd": 0.34214523508869815,
+      "totalSampleCount": 469,
+      "pricedSampleCount": 466,
+      "outputMtokPerTask": {
+        "medianMtok": 0.0142375,
+        "p25Mtok": 0.004441666666666667,
+        "p95Mtok": 0.11513675,
+        "meanMtok": 0.030587298640915597,
+        "totalSampleCount": 469,
+        "tokenedSampleCount": 466
+      }
+    },
+    {
+      "contenderName": "contenders/qwen3.8-27b-code-agent",
+      "medianUsd": 0.3128092,
+      "p25Usd": 0.0811492,
+      "p95Usd": 3.288589800000001,
+      "meanUsd": 0.8263592116683448,
+      "totalSampleCount": 11413,
+      "pricedSampleCount": 11281,
+      "outputMtokPerTask": {
+        "medianMtok": 0.036443,
+        "p25Mtok": 0.009594,
+        "p95Mtok": 0.227481,
+        "meanMtok": 0.0676180905061608,
+        "totalSampleCount": 11413,
+        "tokenedSampleCount": 11281
+      }
+    },
+    {
+      "contenderName": "contenders/skimaki-kwc6-agent",
+      "medianUsd": 0.5811470812499999,
+      "p25Usd": 0.1414392,
+      "p95Usd": 3.6034096274999996,
+      "meanUsd": 1.1053206783026268,
+      "totalSampleCount": 15180,
+      "pricedSampleCount": 14438,
+      "outputMtokPerTask": {
+        "medianMtok": 0.044715000000000005,
+        "p25Mtok": 0.01271075,
+        "p95Mtok": 0.18630949999999996,
+        "meanMtok": 0.0667518453502332,
+        "totalSampleCount": 15180,
+        "tokenedSampleCount": 14438
+      }
+    },
+    {
+      "contenderName": "contenders/solar-pro4-agent",
+      "medianUsd": 0.046321433999999995,
+      "p25Usd": 0.007214175,
+      "p95Usd": 0.7578346028666664,
+      "meanUsd": 0.18100028252985886,
+      "totalSampleCount": 310,
+      "pricedSampleCount": 307,
+      "outputMtokPerTask": {
+        "medianMtok": 0.011058,
+        "p25Mtok": 0.0025995000000000002,
+        "p95Mtok": 0.11921469999999997,
+        "meanMtok": 0.028994179695982628,
+        "totalSampleCount": 310,
+        "tokenedSampleCount": 307
+      }
+    },
+    {
+      "contenderName": "contenders/super-nova-ext-3tam-agent",
+      "medianUsd": 0.4751244,
+      "p25Usd": 0.1360142875,
+      "p95Usd": 6.245575725000008,
+      "meanUsd": 1.5117069586053815,
+      "totalSampleCount": 22947,
+      "pricedSampleCount": 22882,
+      "outputMtokPerTask": {
+        "medianMtok": 0.016262,
+        "p25Mtok": 0.006568,
+        "p95Mtok": 0.10334,
+        "meanMtok": 0.031393030520227856,
+        "totalSampleCount": 22947,
+        "tokenedSampleCount": 22881
+      }
+    }
+  ],
+  "notFound": [
+    {
+      "boardId": "arena_agent_mode",
+      "model": "claude-sonnet-5.5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "composer-2.5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-flash-fast",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4-flash-vision-exp",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "deepseek-v4.1-flash-fast",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.1",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.2-fast",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "glm-5.3-flashx",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "gpt-6.1-sol",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k2.5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k2.6",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k2.7-code",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "kimi-k2.7-code-highspeed",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "longcat-2.0",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.6-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.6-pro",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "mimo-v2.6-pro-ultraspeed",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m2.5",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m2.7",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "minimax-m3.1-flash-preview",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "muse-spark-1.2-contributor",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "muse-spark-1.3-contributor",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "nemotron-3-ultra",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.6-max-preview",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.6-plus",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.7-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.8-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.8-max-0902",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "qwen3.8-omni-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "step-3.5-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "step-3.7-flash",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "step-5-preview",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    },
+    {
+      "boardId": "arena_agent_mode",
+      "model": "swe-2",
+      "reason": "Not among the 46 Agent Arena Overall entries (Sep 30, 2026)."
+    }
+  ]
+}
