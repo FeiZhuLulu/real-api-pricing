@@ -1,6 +1,7 @@
 import type { Lock } from "./domain";
 
 export type Lang = "en" | "zh";
+export type AllowancePeriod = "month" | "week";
 export type View = "pareto" | "price" | "allowance" | "table" | "method";
 export interface Point {
   id: string;
@@ -107,6 +108,7 @@ export type FilterKey =
   | "modes";
 export interface State {
   feeBand: string;
+  allowancePeriod: AllowancePeriod;
   lang: Lang;
   view: View;
   board: string;

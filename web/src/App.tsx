@@ -34,6 +34,7 @@ import type { ChartHandle } from "./Chart";
 import Modal from "./Modal";
 import type {
   FilterKey,
+  AllowancePeriod,
   Lang,
   Point,
   Row,
@@ -45,6 +46,7 @@ import { dotColors, FALLBACK_COLOR } from "./palette";
 import {
   accessLine,
   allowance,
+  weeklyAllowanceNote,
   barAxis,
   color,
   colors,
@@ -378,14 +380,17 @@ function Explorer({
   const shown = useMemo(
     () => tableRows(rows, state),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rows, state.query, state.sort, state.direction, state.lang],
+    [rows, state.query, state.sort, state.direction, state.lang, state.allowancePeriod],
   );
   const pts = useMemo(
     () => visiblePoints(data, state),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data, view, selected, vendors, channels, plans, billing, confidence, feeBand],
   );
-  const axis = useMemo(() => barAxis(data, view), [data, view]);
+  const axis = useMemo(
+    () => barAxis(data, view, state.allowancePeriod),
+    [data, view, state.allowancePeriod],
+  );
   const gs = useMemo(() => groups(rows), [rows]);
   const front = useMemo(() => pareto(gs), [gs]);
   const frontRows = useMemo(
@@ -438,6 +443,7 @@ function Explorer({
       ...defaultState(),
       lang: state.lang,
       view: state.view,
+      allowancePeriod: state.allowancePeriod,
       board: state.board,
     });
     setWarning(false);
@@ -502,10 +508,10 @@ function Explorer({
     },
     {
       view: "allowance",
-      en: "Monthly allowance",
-      cn: "月额度",
+      en: state.allowancePeriod === "week" ? "Weekly allowance" : "Monthly allowance",
+      cn: state.allowancePeriod === "week" ? "周额度" : "月额度",
       shortEn: "Allowance",
-      shortCn: "月额度",
+      shortCn: state.allowancePeriod === "week" ? "周额度" : "月额度",
       hintEn: "Adopted subscription allowances",
       hintCn: "全部已采用订阅额度",
     },
@@ -798,7 +804,28 @@ function Explorer({
                   </span>
                 )}
               </p>
+              {state.allowancePeriod === "week" && (state.view === "allowance" || state.view === "table") && (
+                <p className="view-context quota-period-note" role="note">
+                  {weeklyAllowanceNote(state.lang)}
+                </p>
+              )}
               <div className="toolbar">
+                {(state.view === "allowance" || state.view === "table") && (
+                  <div className="allowance-period" role="group" aria-label={t("Allowance period", "额度周期")}>
+                    <span className="fee-label">{t("Period", "周期")}</span>
+                    <div className="segmented">
+                      {(["month", "week"] as const).map((period) => (
+                        <button
+                          key={period}
+                          aria-pressed={state.allowancePeriod === period}
+                          onClick={() => patch({ allowancePeriod: period })}
+                        >
+                          {period === "month" ? t("Month", "月") : t("Week", "周")}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <button className="select-models" onClick={() => setPanel("models")}>
                   <CheckSquare size={17} />
                   <span>{t("Models & plans", "模型与套餐")}</span>
@@ -1067,7 +1094,12 @@ function Explorer({
                           {sortHead("plan", "Plan · channel", "套餐 · 渠道")}
                           {sortHead("price", "Real price / MTok", "真实单价 / MTok", true)}
                           {sortHead("fee", "Monthly fee", "订阅月费", true)}
-                          {sortHead("allowance", "Monthly tokens", "月 token", true)}
+                          {sortHead(
+                            "allowance",
+                            state.allowancePeriod === "week" ? "Weekly equivalent tokens" : "Monthly tokens",
+                            state.allowancePeriod === "week" ? "每周等值 token" : "月 token",
+                            true,
+                          )}
                           {sortHead("score", "Score", "分数", true)}
                           <th>{t("Quota confidence", "额度置信度")}</th>
                         </tr>
@@ -1118,7 +1150,7 @@ function Explorer({
                                 {r.point.billing === "metered" ? "—" : price(r.point.price_usd)}
                                 {r.point.currency === "CNY" && <small>¥{r.point.original_price}</small>}
                               </td>
-                              <td className="numeric">{allowance(r.point, state.lang)}</td>
+                              <td className="numeric">{allowance(r.point, state.lang, state.allowancePeriod)}</td>
                               <td className="numeric">
                                 {number(r.score, state.lang, 2)}
                                 {r.mapping?.score_is_estimated && <small>{t("AA estimate", "AA 估计值")}</small>}
@@ -1471,8 +1503,8 @@ function Explorer({
               <button
                 onClick={() =>
                   downloadText(
-                    csv(shown, state.lang),
-                    "real-api-pricing-selection.csv",
+                    csv(shown, state.lang, state.allowancePeriod),
+                    `real-api-pricing-selection${state.allowancePeriod === "week" ? "-week" : ""}.csv`,
                     "text/csv;charset=utf-8",
                   )
                 }
@@ -1524,7 +1556,7 @@ function Explorer({
           onClose={() => setDetail(null)}
           closeLabel={t("Close", "关闭")}
         >
-          <Details rows={detail} data={data} lang={state.lang} />
+          <Details rows={detail} data={data} lang={state.lang} period={state.allowancePeriod} />
         </Modal>
       )}
     </>
@@ -1534,10 +1566,12 @@ function Details({
   rows,
   data,
   lang,
+  period,
 }: {
   rows: Row[];
   data: SiteData;
   lang: Lang;
+  period: AllowancePeriod;
 }) {
   const zh = lang === "zh";
   const t = (en: string, cn: string) => (zh ? cn : en);
@@ -1573,8 +1607,10 @@ function Details({
               <strong>{priceExact(p.real_usd_per_mtok)}</strong>
             </div>
             <div>
-              <small>{t("Monthly tokens", "月 token")}</small>
-              <strong>{allowance(p, lang)}</strong>
+              <small>
+                {period === "week" ? t("Weekly equivalent tokens", "每周等值 token") : t("Monthly tokens", "月 token")}
+              </small>
+              <strong>{allowance(p, lang, period)}</strong>
             </div>
             <div>
               <small>{t("Quota confidence", "额度置信度")}</small>
@@ -1585,6 +1621,9 @@ function Details({
               </strong>
             </div>
           </div>
+          {period === "week" && p.monthly_yi !== null && (
+            <p className="panel-description" role="note">{weeklyAllowanceNote(lang)}</p>
+          )}
           <div className="formula">
             {p.billing === "metered" ? (
               p.workload === "anthropic" ? (

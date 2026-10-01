@@ -1,5 +1,6 @@
-import type { State, SiteData, Row, Point, Group, FilterKey, Lang } from "./types";
+import type { State, SiteData, Row, Point, Group, FilterKey, Lang, AllowancePeriod } from "./types";
 import feeBandDefinitions from "../../config/allowance-fee-bands.json";
+import conventions from "../../data/conventions.json";
 import { channelColors, FALLBACK_COLOR } from "./palette";
 export const feeBands = feeBandDefinitions;
 export function matchesFeeBand(fee: number | null, id: string): boolean {
@@ -25,6 +26,7 @@ export const filterKeys: FilterKey[] = [
 export const colors = channelColors;
 export const defaultState = (): State => ({
   feeBand: "all",
+  allowancePeriod: "month",
   lang: "en",
   view: "pareto",
   board: "aa_intelligence_index",
@@ -94,6 +96,7 @@ export function visiblePoints(data: SiteData, s: State): Point[] {
 export function barAxis(
   data: SiteData,
   view: State["view"],
+  period: AllowancePeriod = "month",
 ): { low: number; high: number } {
   const values = data.points
     .filter(
@@ -101,7 +104,7 @@ export function barAxis(
         view !== "allowance" ||
         (p.billing !== "metered" && p.monthly_yi !== null),
     )
-    .map((p) => (view === "allowance" ? p.monthly_yi : p.real_usd_per_mtok))
+    .map((p) => (view === "allowance" ? allowanceYi(p, period) : p.real_usd_per_mtok))
     .filter((v): v is number => v !== null && Number.isFinite(v) && v > 0);
   if (!values.length) return { low: 1, high: 10 };
   const low = Math.floor(Math.log10(Math.min(...values))),
@@ -160,7 +163,7 @@ export function tableRows(rows: Row[], s: State): Row[] {
         : s.sort === "score"
           ? r.score
           : s.sort === "allowance"
-            ? r.point.monthly_yi
+            ? allowanceYi(r.point, s.allowancePeriod)
             : s.sort === "fee"
               ? r.point.price_usd
               : r.point.real_usd_per_mtok;
@@ -509,6 +512,7 @@ export function serialize(s: State): string {
   if (s.configuration !== d.configuration) p.set("config", s.configuration);
   if (s.labels !== d.labels) p.set("labels", s.labels);
   if (s.feeBand !== d.feeBand) p.set("fee", s.feeBand);
+  if (s.allowancePeriod !== d.allowancePeriod) p.set("period", s.allowancePeriod);
   if (s.query) p.set("q", s.query);
   if (s.find) p.set("find", s.find);
   if (s.lock) p.set("lock", serializeLock(s.lock));
@@ -539,6 +543,7 @@ export function restore(
   let warning = false;
   const enums: Record<string, [keyof State, string[]]> = {
     lang: ["lang", ["en", "zh"]],
+    period: ["allowancePeriod", ["month", "week"]],
     view: ["view", ["pareto", "price", "allowance", "table", "method"]],
     config: ["configuration", ["all", "summary"]],
     labels: ["labels", ["frontier", "all", "none"]],
@@ -613,6 +618,7 @@ function restoreLegacy(
     let warning = false;
     const enums = {
       feeBand: ["all", ...feeBands.map((b) => b.id)],
+      allowancePeriod: ["month", "week"],
       lang: ["en", "zh"],
       view: ["pareto", "price", "allowance", "method"],
       configuration: ["all", "summary"],
@@ -681,11 +687,25 @@ export const priceExact = (n: number | null) =>
       ? "≈$0"
       : "$" +
         new Intl.NumberFormat("en-US", { maximumSignificantDigits: 6 }).format(n);
-export const allowance = (p: Point, lang: string) =>
-  p.monthly_yi === null
+// Kimi's independent monthly pool is five weekly pools; all other channels
+// use the project's monthWeeks convention. This is a comparison equivalent.
+const allowanceDivisor = (p: Point, period: AllowancePeriod) =>
+  period === "month" ? 1 : p.channel === "Kimi" ? 5 : conventions.monthWeeks;
+export const allowanceYi = (p: Point, period: AllowancePeriod = "month") =>
+  p.monthly_yi === null ? null : p.monthly_yi / allowanceDivisor(p, period);
+export const allowanceTokens = (p: Point, period: AllowancePeriod = "month") =>
+  p.monthly_tokens === null ? null : p.monthly_tokens / allowanceDivisor(p, period);
+export const allowance = (p: Point, lang: string, period: AllowancePeriod = "month") => {
+  const yi = allowanceYi(p, period);
+  return yi === null
     ? "—"
-    : number(lang === "zh" ? p.monthly_yi : p.monthly_yi / 10, lang, 3) +
-      (lang === "zh" ? " 亿" : " B");
+    : number(lang === "zh" ? yi : yi / 10, lang, 3) +
+        (lang === "zh" ? " 亿" : " B");
+};
+export const weeklyAllowanceNote = (lang: string) =>
+  lang === "zh"
+    ? `每周等值＝月额度 ÷ ${conventions.monthWeeks}（Kimi ÷ 5）；实际重置周期以套餐规则为准。`
+    : `Weekly equivalent = monthly allowance ÷ ${conventions.monthWeeks} (Kimi ÷ 5); actual resets follow each plan's rules.`;
 /** Quota-basis line for the detail panel: which workload the capacity assumes. */
 export function workloadLine(
   p: Point,
@@ -828,7 +848,7 @@ export function displayPlan(plan: string, lang: string): string {
     plan,
   );
 }
-export function csv(rows: Row[], lang: string): string {
+export function csv(rows: Row[], lang: string, period: AllowancePeriod = "month"): string {
   const headings =
     lang === "zh"
       ? [
@@ -840,7 +860,7 @@ export function csv(rows: Row[], lang: string): string {
           "月费 USD",
           "原币价格",
           "币种",
-          "月 token",
+          period === "week" ? "每周等值 token" : "月 token",
           "真实单价 USD/MTok",
           "额度置信度",
           "评测配置",
@@ -861,7 +881,7 @@ export function csv(rows: Row[], lang: string): string {
           "Monthly fee USD",
           "Original price",
           "Currency",
-          "Monthly tokens",
+          period === "week" ? "Weekly equivalent tokens" : "Monthly tokens",
           "Real price USD/MTok",
           "Quota confidence",
           "Benchmark configuration",
@@ -891,7 +911,7 @@ export function csv(rows: Row[], lang: string): string {
         r.point.billing === "metered" ? null : r.point.price_usd,
         r.point.original_price,
         r.point.currency,
-        r.point.monthly_tokens,
+        allowanceTokens(r.point, period),
         r.point.real_usd_per_mtok,
         r.point.confidence,
         r.mapping?.variant,
