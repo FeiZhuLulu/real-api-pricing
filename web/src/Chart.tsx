@@ -314,7 +314,7 @@ function ChartScene(p: SceneProps) {
           const { x, y } = toPixel(view, box, g.plotPrice, g.score);
           if (!inBox(box, x, y, -LOGO_SIZE / 2)) return null;
           const provider = g.rows[0].point.channel;
-          const logo = providerLogoUrl(provider, "light");
+          const logo = providerLogoUrl(provider, p.dark ? "dark" : "light");
           const hit = p.hits.has(g.key);
           const hitColor = color(g.rows[0].point);
           const hover = p.hoverKey === g.key;
@@ -339,7 +339,7 @@ function ChartScene(p: SceneProps) {
                 {logo ? (
                   <image href={logo} x={-10} y={-10} width={20} height={20} preserveAspectRatio="xMidYMid meet" />
                 ) : (
-                  <text textAnchor="middle" dominantBaseline="central" fontSize={9} fontWeight={600} fill="#555">
+                  <text textAnchor="middle" dominantBaseline="central" fontSize={9} fontWeight={600} fill={c.text}>
                     {provider.slice(0, 2)}
                   </text>
                 )}

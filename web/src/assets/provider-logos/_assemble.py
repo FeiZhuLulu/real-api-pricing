@@ -60,7 +60,9 @@ meituan = meituan.replace(
 # opencode.svg / opencode-dark.svg: official OpenCode mark, light/dark variants
 #   (opencode-icon.svg / opencode-icon-dark.svg) copied from the brand library.
 # command-code.svg: official Command Code symbol (commandcode-icon.svg) copied
-#   from the brand library.
+#   from the brand library, minus the thin outer ring (it blurs at 20 px).
+#   command-code-dark.svg: same symbol with tile and glyph colours swapped
+#   (white tile, black ⌘).
 # zhipu.svg: official z.ai mark (zai-icon.svg) copied from the brand library.
 # xai.svg / xai-dark.svg: official SpaceXAI (formerly xAI) squared tiles,
 #   black tile ("spacexai - symbol - white - squared.svg") / white tile
@@ -69,7 +71,9 @@ meituan = meituan.replace(
 # kimi.svg / kimi-dark.svg: official Kimi Logomark tile, light/dark brand-kit variants.
 # devin.svg / devin-dark.svg: official Devin mark, dark-ink and white variants.
 # factory.svg: official factory.ai favicon (realfavicongenerator wrapper
-#   unwrapped to the inner SVG; #020202 tile with #FAFAFA mark, both themes).
+#   unwrapped to the inner SVG; #020202 tile with #FAFAFA mark, light theme).
+#   factory-dark.svg: same favicon with tile and mark colours swapped
+#   (#FAFAFA tile, #020202 mark).
 # cursor.webp / cursor-dark.webp: official Cursor square avatars
 #   (AVATAR_SQUARE_2D_DARK.png / AVATAR_SQUARE_2D_LIGHT.png), resized to 128px.
 # ollama-dark.webp: official ollama.com apple-touch-icon (180px), dark theme only.
