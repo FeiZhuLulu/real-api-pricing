@@ -1,0 +1,32 @@
+{
+  "name": "@fullstop000/real-api-pricing-cli",
+  "version": "0.1.0",
+  "description": "Offline model pricing and monthly allowance queries",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22.12.0" },
+  "bin": { "rap": "dist/main.js" },
+  "files": ["dist", "data", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && tsx --test test/*.test.ts",
+    "prepack": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "cli-table3": "^0.6.5",
+    "commander": "^14.0.1",
+    "csv-stringify": "^6.6.0",
+    "string-width": "^7.2.0",
+    "wrap-ansi": "^9.0.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "csv-parse": "^6.1.0",
+    "esbuild": "^0.25.12",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "repository": { "type": "git", "url": "https://github.com/FeiZhuLulu/real-api-pricing.git", "directory": "cli" }
+}

@@ -119,3 +119,32 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+
+  cli:
+    name: CLI tests & offline package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cli/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Install and query the packed CLI outside the checkout
+        shell: bash
+        run: |
+          npm pack --pack-destination "$RUNNER_TEMP" --json > "$RUNNER_TEMP/rap-pack.json"
+          package_file=$(node --input-type=module -e 'import fs from "node:fs"; console.log(JSON.parse(fs.readFileSync(process.argv[1], "utf8"))[0].filename)' "$RUNNER_TEMP/rap-pack.json")
+          mkdir -p "$RUNNER_TEMP/rap-install"
+          cd "$RUNNER_TEMP/rap-install"
+          npm install --no-audit --no-fund "$RUNNER_TEMP/$package_file"
+          HTTP_PROXY=http://127.0.0.1:9 HTTPS_PROXY=http://127.0.0.1:9 \
+            ./node_modules/.bin/rap price --company Anthropic --format json > result.json
+          node --input-type=module -e 'import fs from "node:fs"; import assert from "node:assert/strict"; const result = JSON.parse(fs.readFileSync("result.json", "utf8")); assert.equal(result.schemaVersion, 1); assert.equal(result.meta.source, "bundled"); assert.equal(result.meta.truncated, false); assert.ok(result.rows.length > 0); assert.ok(result.rows.every(row => row.point.company === "Anthropic"));'

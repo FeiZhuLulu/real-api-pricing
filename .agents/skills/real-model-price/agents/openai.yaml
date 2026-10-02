@@ -1,0 +1,4 @@
+interface:
+  display_name: "Real Model Price"
+  short_description: "Compare model prices, token allowances, and plans"
+  default_prompt: "Use $real-model-price to query and compare AI model prices, monthly token allowances, and plans from the available snapshot, including its date and pricing evidence."
