@@ -21,6 +21,9 @@ import {
   matchesFeeBand,
   feeBands,
   allowance,
+  allowanceYi,
+  allowanceTokens,
+  weeklyAllowanceNote,
   csv,
   dataDateLine,
   defaultState,
@@ -529,6 +532,88 @@ test("Language conversion only changes display units and labels", () => {
   assert.equal(effortLabel("xhigh", "zh"), "超高");
   assert.equal(effortLabel("max", "en"), "Max");
   assert.equal(effortLabel(null, "zh"), null);
+});
+
+test("Weekly allowance uses the adopted month convention and Kimi's independent five-pool month", () => {
+  for (const p of data.points) {
+    const divisor = p.channel === "Kimi" ? 5 : data.conventions.monthWeeks;
+    assert.equal(allowanceYi(p, "week"), p.monthly_yi === null ? null : p.monthly_yi / divisor);
+    assert.equal(allowanceTokens(p, "week"), p.monthly_tokens === null ? null : p.monthly_tokens / divisor);
+    assert.equal(allowanceYi(p), p.monthly_yi);
+    assert.equal(allowanceTokens(p), p.monthly_tokens);
+  }
+  const normal = { ...data.points[0], channel: "OpenAI", monthly_yi: 40, monthly_tokens: 4e9 };
+  const kimi = { ...normal, channel: "Kimi" };
+  assert.equal(allowance(normal, "en", "week"), "1 B");
+  assert.equal(allowance(normal, "zh", "week"), "10 亿");
+  assert.equal(allowance(kimi, "en", "week"), "0.8 B");
+  assert.equal(allowance(kimi, "zh", "week"), "8 亿");
+  assert.equal(allowance({ ...normal, monthly_yi: null }, "en", "week"), "—");
+  assert.ok(weeklyAllowanceNote("en").includes("Kimi ÷ 5"));
+  assert.ok(weeklyAllowanceNote("zh").includes("每周等值"));
+});
+
+test("Month/week switching preserves eligible points, fee bands and prices", () => {
+  for (const feeBand of ["all", ...feeBands.map((b) => b.id)]) {
+    const month = { ...defaultState(), view: "allowance" as const, feeBand };
+    const week = { ...month, allowancePeriod: "week" as const };
+    assert.deepEqual(rowsFor(data, week), rowsFor(data, month));
+    assert.ok(rowsFor(data, week).every((r) => r.point.billing !== "metered" && r.point.monthly_yi !== null));
+    assert.deepEqual(barAxis(data, "price", "week"), barAxis(data, "price", "month"));
+  }
+  const axis = barAxis(data, "allowance", "week");
+  for (const r of rowsFor(data, { ...defaultState(), view: "allowance", allowancePeriod: "week" })) {
+    assert.ok(allowanceYi(r.point, "week")! >= axis.low);
+    assert.ok(allowanceYi(r.point, "week")! <= axis.high);
+  }
+});
+
+test("Weekly sorting reorders Kimi relative to other channels in both rankings and tables", () => {
+  const normal = { ...row("normal", 0.01, 10), point: { ...data.points[0], id: "normal", channel: "OpenAI", monthly_yi: 40 } };
+  const kimi = { ...normal, key: "kimi", point: { ...normal.point, id: "kimi", channel: "Kimi", monthly_yi: 45 } };
+  const missing = { ...normal, key: "missing", point: { ...normal.point, id: "missing", monthly_yi: null } };
+  const input = [kimi, missing, normal];
+  for (const view of ["allowance", "table"] as const) {
+    const month = { ...defaultState(), view, sort: "allowance", direction: "desc" as const };
+    assert.deepEqual(tableRows(input, month).map((r) => r.key), ["kimi", "normal", "missing"]);
+    assert.deepEqual(tableRows(input, { ...month, allowancePeriod: "week" }).map((r) => r.key), ["normal", "kimi", "missing"]);
+    assert.deepEqual(tableRows(input, { ...month, allowancePeriod: "week", direction: "asc" }).map((r) => r.key), ["kimi", "normal", "missing"]);
+  }
+});
+
+test("Allowance period round-trips in share links while old and invalid links retain monthly defaults", () => {
+  for (const view of ["allowance", "table", "price", "pareto"] as const) {
+    const state = { ...defaultState(), view, allowancePeriod: "week" as const, feeBand: "0-30", query: "Kimi" };
+    assert.deepEqual(restore(serialize(state), data), { state, warning: false });
+  }
+  assert.equal(restore("#view=allowance", data).state.allowancePeriod, "month");
+  assert.equal(restore("#period=month", data).warning, false);
+  const invalid = restore("#view=table&period=year", data);
+  assert.equal(invalid.warning, true);
+  assert.equal(invalid.state.allowancePeriod, "month");
+  assert.equal(invalid.state.view, "table");
+  const legacy = restore("#s=" + encodeURIComponent(JSON.stringify({ v: 1, view: "allowance" })), data);
+  assert.equal(legacy.warning, false);
+  assert.equal(legacy.state.allowancePeriod, "month");
+});
+
+test("Weekly CSV uses exact converted tokens and bilingual headers, leaving fees and prices unchanged", () => {
+  const rows = rowsFor(data, { ...defaultState(), view: "price" });
+  for (const lang of ["en", "zh"]) {
+    const exported = parse(csv(rows, lang, "week"), { bom: true, columns: true }) as Record<string, string>[];
+    assert.equal(exported.length, rows.length);
+    const tokens = lang === "en" ? "Weekly equivalent tokens" : "每周等值 token";
+    const fee = lang === "en" ? "Monthly fee USD" : "月费 USD";
+    const price = lang === "en" ? "Real price USD/MTok" : "真实单价 USD/MTok";
+    exported.forEach((r, i) => {
+      const p = rows[i].point;
+      assert.equal(r[tokens], String(allowanceTokens(p, "week") ?? ""));
+      assert.equal(r[fee], String(p.billing === "metered" ? "" : p.price_usd));
+      assert.equal(r[price], String(p.real_usd_per_mtok));
+    });
+    const monthly = parse(csv(rows, lang), { bom: true, columns: true }) as Record<string, string>[];
+    assert.ok(Object.hasOwn(monthly[0], lang === "en" ? "Monthly tokens" : "月 token"));
+  }
 });
 test("Chart names never overlap each other and leave the plot rather than collide", () => {
   const box = { left: 60, top: 20, right: 660, bottom: 420, width: 600, height: 400 };

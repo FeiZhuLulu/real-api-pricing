@@ -9,6 +9,8 @@ import { dotColors } from "./palette";
 import {
   accessLine,
   allowance,
+  allowanceYi,
+  weeklyAllowanceNote,
   barWidth,
   color,
   displayPlan,
@@ -49,7 +51,8 @@ export default function Ranking({
   onQuery: (query: string) => void;
 }) {
   const zh = state.lang === "zh",
-    isPrice = state.view === "price";
+    isPrice = state.view === "price",
+    isWeekly = state.allowancePeriod === "week";
   const dark = useTheme() === "dark";
   const scrollRef = useRef<HTMLDivElement>(null);
   const sorted = tableRows(rows, {
@@ -63,10 +66,10 @@ export default function Ranking({
     if (!el) return;
     el.scrollTop = 0;
     el.scrollLeft = 0;
-  }, [signature, state.view]);
-  const { limit, sentinel } = useIncremental(sorted.length, signature + state.view, scrollRef, 60);
+  }, [signature, state.view, state.allowancePeriod]);
+  const { limit, sentinel } = useIncremental(sorted.length, signature + state.view + state.allowancePeriod, scrollRef, 60);
   const value = (r: Row) =>
-    isPrice ? r.point.real_usd_per_mtok : r.point.monthly_yi!;
+    isPrice ? r.point.real_usd_per_mtok : allowanceYi(r.point, state.allowancePeriod)!;
   const bar = (r: Row) => barWidth(value(r), axis);
   const decades = Math.round(Math.log10(axis.high / axis.low));
   const scaleNote = zh ? "对数刻度 · 每格 10 倍" : "log scale · 10× per tick";
@@ -74,15 +77,21 @@ export default function Ranking({
     isPrice
       ? price(value(r)) +
         (value(r) === 0 ? " · " + unmeteredNote(r.point, state.lang) : "")
-      : allowance(r.point, state.lang);
-  const unit = isPrice ? "USD / MTok" : zh ? "token / 月" : "tokens / month";
+      : allowance(r.point, state.lang, state.allowancePeriod);
+  const unit = isPrice
+    ? "USD / MTok"
+    : isWeekly
+      ? zh ? "token / 周等值" : "tokens / week equivalent"
+      : zh ? "token / 月" : "tokens / month";
   const heading = isPrice
     ? zh
       ? "真实单价排名"
       : "Real price ranking"
-    : zh
-      ? "月额度排名"
-      : "Monthly allowance ranking";
+    : isWeekly
+      ? zh ? "每周等值额度排名" : "Weekly equivalent allowance ranking"
+      : zh
+        ? "月额度排名"
+        : "Monthly allowance ranking";
   const band = feeBands.find((b) => b.id === state.feeBand);
   const title =
     heading +
@@ -99,23 +108,24 @@ export default function Ranking({
         const muted = dark ? "#a0a8b3" : "#5b636e";
         const rule = dark ? "#262b31" : "#edf0f3";
         const track = dark ? "#23282e" : "#f0f2f5";
+        const headerH = !isPrice && isWeekly ? 160 : 130;
         const width = 1100,
           rowH = sorted.length > 40 ? 54 : 86,
-          height = 130 + Math.max(sorted.length, 1) * rowH;
+          height = headerH + Math.max(sorted.length, 1) * rowH;
         const scale =
           format === "png"
             ? Math.max(1, Math.min(2, Math.floor(16384 / Math.max(height, 1))))
             : 1;
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><rect width="100%" height="100%" fill="${bg}"/><g font-family="DM Sans, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="${ink}"><text x="32" y="44" font-size="23" font-weight="600">${escape(title)}</text><text x="32" y="72" font-size="12" fill="${muted}">${escape(`${sorted.length} ${zh ? "条筛选结果" : "filtered rows"} · ${unit} · ${zh ? "条形为对数刻度，每格 10 倍" : "Bars use a logarithmic scale, 10× per tick"} · Real API Pricing`)}</text>${sorted
           .map((r, i) => {
-            const y = 112 + i * rowH;
+            const y = headerH - 18 + i * rowH;
             const titleSize = rowH < 70 ? 14 : 16,
               metaSize = rowH < 70 ? 11 : 12,
               valueSize = rowH < 70 ? 16 : 18;
             const fill = dotColors(color(r.point), dark).fill;
             return `<text x="32" y="${y}" fill="${muted}" font-size="13">${i + 1}</text><text x="75" y="${y}" font-size="${titleSize}" font-weight="600">${escape(r.point.model_display)}</text><text x="75" y="${y + 20}" font-size="${metaSize}" fill="${muted}">${escape(displayPlan(r.point.plan, state.lang) + " · " + accessLine(r.point))}</text><rect x="580" y="${y - 9}" width="280" height="7" rx="3.5" fill="${track}"/><rect x="580" y="${y - 9}" width="${bar(r) * 2.8}" height="7" rx="3.5" fill="${fill}"/>${Array.from({ length: decades - 1 }, (_, k) => `<line x1="${580 + (280 * (k + 1)) / decades}" x2="${580 + (280 * (k + 1)) / decades}" y1="${y - 11}" y2="${y}" stroke="${muted}" stroke-opacity="0.35"/>`).join("")}<text x="1068" y="${y}" text-anchor="end" font-size="${valueSize}" font-weight="600">${escape(formatted(r))}</text><line x1="32" x2="1068" y1="${y + Math.min(40, rowH - 12)}" y2="${y + Math.min(40, rowH - 12)}" stroke="${rule}"/>`;
           })
-          .join("")}</g></svg>`;
+          .join("")}${!isPrice && isWeekly ? `<text x="32" y="97" font-size="12" fill="${muted}">${escape(weeklyAllowanceNote(state.lang))}</text>` : ""}</g></svg>`;
         const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
         let url = URL.createObjectURL(blob);
         try {
@@ -141,7 +151,7 @@ export default function Ranking({
           }
           const link = document.createElement("a");
           link.href = url;
-          link.download = `real-api-pricing-${state.view}-${state.lang}${!isPrice ? `-fee-${state.feeBand}` : ""}.${format}`;
+          link.download = `real-api-pricing-${state.view}-${state.lang}${!isPrice ? `${isWeekly ? "-week" : ""}-fee-${state.feeBand}` : ""}.${format}`;
           link.click();
         } finally {
           setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -213,7 +223,7 @@ export default function Ranking({
                   </span>
                   <span className="rank-value">
                     <strong>
-                      {isPrice ? price(value(r)) : allowance(r.point, state.lang)}
+                      {isPrice ? price(value(r)) : allowance(r.point, state.lang, state.allowancePeriod)}
                     </strong>
                     <small>
                       {isPrice
@@ -226,8 +236,10 @@ export default function Ranking({
                               " · " +
                               price(r.point.price_usd) +
                               (zh ? " / 月" : " / mo")
-                            : allowance(r.point, state.lang) +
-                              (zh ? " token / 月" : " tokens / mo")
+                            : allowance(r.point, state.lang, state.allowancePeriod) +
+                              (isWeekly
+                                ? zh ? " token / 周等值" : " tokens / week eq."
+                                : zh ? " token / 月" : " tokens / mo")
                         : price(r.point.price_usd) + (zh ? " / 月" : " / mo")}
                     </small>
                   </span>
