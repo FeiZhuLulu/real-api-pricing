@@ -17,6 +17,7 @@ import {
   MagnifyingGlass,
   Moon,
   SlidersHorizontal,
+  Storefront,
   Sun,
   Table,
   X,
@@ -32,6 +33,13 @@ import ProviderLogo, { BrandMarks } from "./ProviderLogo";
 import { feeBands } from "./domain";
 import type { ChartHandle } from "./Chart";
 import Modal from "./Modal";
+import CustomProvidersPanel from "./ProviderManager";
+import {
+  loadCustomProviders,
+  mergeCustomProviders,
+  saveCustomProviders,
+  type CustomProvider,
+} from "./customProviders";
 import type {
   FilterKey,
   Lang,
@@ -232,6 +240,13 @@ export default function App() {
   const [data, setData] = useState<SiteData | null>(null);
   const [loadError, setLoadError] = useState("");
   const [theme, setTheme] = useState<Theme>(localTheme);
+  const [customProviders, setCustomProviders] = useState<CustomProvider[]>(
+    loadCustomProviders,
+  );
+  const updateCustomProviders = (list: CustomProvider[]) => {
+    saveCustomProviders(list);
+    setCustomProviders(list);
+  };
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
     document
@@ -264,6 +279,12 @@ export default function App() {
     };
   }, []);
   const zhBoot = localLanguage() === "zh" || /[#&]lang=zh/.test(location.hash);
+  // User-defined relay providers merge into the published data before any
+  // derivation runs, so every view, filter and export sees them natively.
+  const merged = useMemo(
+    () => (data ? mergeCustomProviders(data, customProviders) : null),
+    [data, customProviders],
+  );
   if (loadError)
     return (
       <main className="boot" role="alert">
@@ -278,12 +299,14 @@ export default function App() {
         </div>
       </main>
     );
-  if (!data) return <BootSkeleton />;
+  if (!merged) return <BootSkeleton />;
   return (
     <ThemeContext.Provider value={theme}>
       <Explorer
-        data={data}
+        data={merged}
         theme={theme}
+        customProviders={customProviders}
+        onCustomProvidersChange={updateCustomProviders}
         onThemeChange={(next) => {
           saveTheme(next);
           document.documentElement.dataset.theme = next;
@@ -311,10 +334,14 @@ function BootSkeleton() {
 function Explorer({
   data,
   theme,
+  customProviders,
+  onCustomProvidersChange,
   onThemeChange,
 }: {
   data: SiteData;
   theme: Theme;
+  customProviders: CustomProvider[];
+  onCustomProvidersChange: (providers: CustomProvider[]) => void;
   onThemeChange: (theme: Theme) => void;
 }) {
   const initial = useMemo(
@@ -324,7 +351,7 @@ function Explorer({
   const [state, setState] = useState<State>(initial.state);
   const [warning, setWarning] = useState(initial.warning);
   const [panel, setPanel] = useState<
-    "models" | "filters" | "display" | "download" | "share" | null
+    "models" | "filters" | "display" | "download" | "share" | "providers" | null
   >(null);
   const [detail, setDetail] = useState<Row[] | null>(null);
   const [modelSearch, setModelSearch] = useState("");
@@ -600,6 +627,17 @@ function Explorer({
             </button>
           </nav>
           <div className="header-actions">
+            <button
+              className="header-contribute"
+              onClick={() => setPanel("providers")}
+              title={t(
+                "Manage your own providers (stored locally)",
+                "管理我的自定义供应商（本地存储）",
+              )}
+            >
+              <Storefront size={16} />
+              <span>{t("My providers", "我的供应商")}</span>
+            </button>
             <HeaderActions lang={state.lang} />
             <button
               className="icon-button theme-toggle"
@@ -1219,12 +1257,22 @@ function Explorer({
                   ? t("Chart settings", "图表设置")
                   : panel === "share"
                     ? t("Share this view", "分享当前视图")
-                    : t("Take the data with you", "下载图表与数据")
+                    : panel === "providers"
+                      ? t("My providers", "我的供应商")
+                      : t("Take the data with you", "下载图表与数据")
           }
           onClose={() => setPanel(null)}
-          wide={panel === "models" || panel === "filters"}
+          wide={panel === "models" || panel === "filters" || panel === "providers"}
           closeLabel={t("Close", "关闭")}
         >
+          {panel === "providers" && (
+            <CustomProvidersPanel
+              data={data}
+              providers={customProviders}
+              onChange={onCustomProvidersChange}
+              lang={state.lang}
+            />
+          )}
           {panel === "models" && (
             <>
               <p className="panel-description">
