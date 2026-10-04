@@ -66,7 +66,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Resolution Rate %</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,256.347 L751.501,256.347 L1031.797,284.392 L1116.705,466.687 L1149.767,470.192 L1241.611,512.259 L1277.998,540.305 L1338.000,540.305" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,256.347 L751.501,256.347 L1047.650,284.392 L1116.705,466.687 L1149.767,470.192 L1241.611,512.259 L1277.998,540.305 L1338.000,540.305" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.032467532" data-score="39.899" data-x="781.850" data-y="421.113" transform="translate(781.850 421.113)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 39.899 · mediumArtificial Analysis - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Artificial Analysis - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
@@ -130,7 +130,10 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.11574074" data-score="55.0505" data-x="587.307" data-y="315.944" transform="translate(587.307 315.944)"><title>Claude Fable 5.1 · Max 20x · from Sep 14 · $0.11574/MTok · 55.0505 · mediumArtificial Analysis - Claude Fable 5.1 (xhigh with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0063415562" data-score="59.596" data-x="1031.797" data-y="284.392" transform="translate(1031.797 284.392)"><title>Claude Opus 5.5 · Max 20x · from Sep 14 / Claude Opus 5.5 · Max 5x · from Sep 14 · $0.00634/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Artificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0063415562" data-score="59.596" data-x="1031.797" data-y="284.392" transform="translate(1031.797 284.392)"><title>Claude Opus 5.5 · Max 20x · from Sep 14 · $0.00634/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0057175529" data-score="59.596" data-x="1047.650" data-y="284.392" transform="translate(1047.650 284.392)"><title>Claude Opus 5.5 · Max 5x · from Sep 14 · $0.00572/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#CC5A2E" stroke-width="1.35"/>
 <circle r="4" fill="#CC5A2E"/>
 </g>
@@ -863,10 +866,10 @@
 <text x="723.501" y="345.347" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.03959</text>
 </g>
 <g class="front-label" data-model="claude-opus-5.5">
-<path d="M1046.593,281.926Q1046.593,283.392 1037.797,283.392" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1043.797" y="264.392" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Artificial Analysis · Claude Opus 5.5 · max</text>
-<text x="1043.797" y="284.392" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Max 5x / 20x · from Sep 14</text>
-<text x="1043.797" y="304.392" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00634</text>
+<path d="M1062.446,281.926Q1062.446,283.392 1053.650,283.392" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1059.650" y="264.392" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Artificial Analysis · Claude Opus 5.5 · max</text>
+<text x="1059.650" y="284.392" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Max 5x · from Sep 14</text>
+<text x="1059.650" y="304.392" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00572</text>
 </g>
 <g class="front-label" data-model="step-5-preview">
 <path d="M1115.613,451.726Q1115.613,329.687 1106.705,329.687" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -931,7 +934,7 @@
 <path d="M400.91999999999996 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="414.920" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5×, Droid = 2× weekly · Dollar/credit: 97% cache / 2.5% input / 0.5% output · Direct totals unchanged</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >243 subscription positions / 18 API positions / 6 frontier positions</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >244 subscription positions / 18 API positions / 6 frontier positions</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>
