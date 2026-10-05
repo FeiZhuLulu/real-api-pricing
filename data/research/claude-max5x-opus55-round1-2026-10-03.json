@@ -1,6 +1,6 @@
 {
   "collectedAt": "2026-10-03",
-  "scopeNote": "Claude Max 5x × Claude Opus 5.5 首个直测样本：社区 Claude Code /usage（Settings·Usage）截图，维护者提供。单会话 claude-opus-5-5 token 分项对应周额度（all models）19%。按 devin_max×opus-5.5 同口径（cache 写按 5m 价折 list-worth，再按 Anthropic 档混合价换算）得 174.9 亿/月，替换原借 Max 20x 采用值 ÷2 派生的 157.69 亿（low）。",
+  "scopeNote": "Claude Max 5x × Claude Opus 5.5 首个直测样本：社区 Claude Code /usage（Settings·Usage）截图，维护者提供。单会话 claude-opus-5-5 token 分项对应周额度（all models）19%。截图为 1h TTL，cache 写按实际 1h 档折 list-worth（同 issue #52/#53 口径），再按 Anthropic 档混合价换算，得 183.34 亿/月，替换原借 Max 20x 采用值 ÷2 派生的 157.69 亿（low）。",
   "items": [
     {
       "planId": "claude_max_5x",
@@ -39,24 +39,25 @@
       },
       "verification": "CC 标价闭合：1.3B×$0.2＋5.6M×$8(1h 写)＋23k×$4＋3.0M×$20 = $364.89 ≈ 面板 $366.96（差 0.6%，在 1.3b 两位有效数字取整内）→ 模型身份与 1h 写口径自洽；按 5m 写为 $348.09。prompt cache 显示 1h TTL 亦与 1h 写一致。",
       "calculation": {
-        "formula": "段 list-worth $348.092（读1.3B×$0.2＋5m写5.6M×$5＋入0.023M×$4＋出3.0M×$20）÷ 0.19 × 4周 = 月 worth $7,328.25 ÷ Anthropic 档混合价 $0.419/MTok（0.97×$0.2＋0.025×$5＋0.005×$20）",
-        "monthlyYiCentral": 174.9,
-        "realUsdPerMTokCentral": 0.0057176,
-        "roundedPercentMonthlyYiLow": 170.41,
-        "roundedPercentMonthlyYiHigh": 179.63,
-        "roundedPercentNote": "19% 若为四舍五入整数，真实 18.5~19.5% 对应 170.41~179.63 亿/月",
+        "formula": "段 list-worth $364.892（读1.3B×$0.2＋1h写5.6M×$8＋入0.023M×$4＋出3.0M×$20，按实际写档）÷ 0.19 × 4周 = 月 worth $7,681.94 ÷ Anthropic 档混合价 $0.419/MTok（0.97×$0.2＋0.025×$5＋0.005×$20）",
+        "monthlyYiCentral": 183.34,
+        "realUsdPerMTokCentral": 0.0054543,
+        "roundedPercentMonthlyYiLow": 178.64,
+        "roundedPercentMonthlyYiHigh": 188.29,
+        "roundedPercentNote": "19% 若为四舍五入整数，真实 18.5~19.5% 对应 178.64~188.29 亿/月",
         "cacheReadPrecisionNote": "1.3b 仅两位有效数字（1.25~1.35b），约 ±3.7%",
-        "cacheWrite1hSensitivityYi": 183.34,
         "rawMonthlyYi": 275.5,
-        "attributionCaveat": "19% 为本周 all-models 总额度，是否全归本会话未知；若周内另有用量，Opus 实占 pp 更少、周池更大，本值偏保守（下限性质）"
+        "attributionCaveat": "19% 为本周 all-models 总额度，是否全归本会话未知；若周内另有用量，Opus 实占 pp 更少、周池更大，本值偏保守（下限性质）",
+        "cacheWrite5mComparisonYi": 174.9,
+        "cacheWriteTierNote": "截图 prompt cache 为 1h TTL，CC 面板 $366.96 按 1h 写价闭合，故按实际 1h 档计；按 5m 写折为 $348.09 → 174.9 亿，仅作对照"
       },
       "crossCheck": {
-        "previousAdopted": "157.69 亿/月 low：Max 20x 采用值 315.38 ÷2（确认 20x 周池 = 5x 的 2 倍）派生；新值高 11%",
-        "tensionWith20x": "按 2 倍周池关系推 Max 20x ≈ 349.8 亿，比 20x 采用值 315.38 高 11%；20x 本轮不改，5x 与 20x 不再同价并点",
-        "devinMax": "Devin Max × Opus 5.5 段 worth 每 1% ≈ $1.36（$200 档）；本样本 Max 5x 每 1% ≈ $18.32"
+        "previousAdopted": "157.69 亿/月 low：Max 20x 采用值 315.38 ÷2（确认 20x 周池 = 5x 的 2 倍）派生；新值高 16%",
+        "tensionWith20x": "按 2 倍周池关系推 Max 20x ≈ 366.68 亿，比 20x 采用值 315.38 高 16%；20x 本轮不改，5x 与 20x 不再同价并点",
+        "devinMax": "Devin Max × Opus 5.5 段 worth 每 1% ≈ $1.36（$200 档）；本样本 Max 5x 每 1% ≈ $19.20"
       },
       "confidence": "medium",
-      "adoption": "claude_max_5x × claude-opus-5.5 = 174.9 亿/月（medium, anthropic），替换派生值 157.69；20x 不随动"
+      "adoption": "claude_max_5x × claude-opus-5.5 = 183.34 亿/月（medium, anthropic），替换派生值 157.69；20x 不随动"
     }
   ],
   "relatedFiles": [

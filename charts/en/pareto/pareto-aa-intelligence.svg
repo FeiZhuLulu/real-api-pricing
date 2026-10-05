@@ -60,7 +60,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Intelligence Index</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >Real price · USD per million tokens</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >Cheaper →</text>
-<path id="frontier" d="M120.000,271.985 L967.091,271.985 L1030.149,395.668 L1060.340,412.828 L1144.208,433.767 L1177.435,447.765 L1185.206,611.657 L1283.209,634.074 L1338.000,634.074" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,271.985 L973.677,271.985 L1030.149,395.668 L1060.340,412.828 L1144.208,433.767 L1177.435,447.765 L1185.206,611.657 L1283.209,634.074 L1338.000,634.074" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.032467532" data-score="46.9727" data-x="724.373" data-y="366.828" transform="translate(724.373 366.828)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 46.9727 · mediumGPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified. / GPT-5.6 Sol (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
@@ -127,7 +127,7 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0063415562" data-score="57.6224" data-x="952.614" data-y="271.985" transform="translate(952.614 271.985)"><title>Claude Opus 5.5 · Max 20x · from Sep 14 · $0.00634/MTok · 57.6224 · mediumClaude Opus 5.5 (max with fallback) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0057175529" data-score="57.6224" data-x="967.091" data-y="271.985" transform="translate(967.091 271.985)"><title>Claude Opus 5.5 · Max 5x · from Sep 14 · $0.00572/MTok · 57.6224 · mediumClaude Opus 5.5 (max with fallback) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0054543471" data-score="57.6224" data-x="973.677" data-y="271.985" transform="translate(973.677 271.985)"><title>Claude Opus 5.5 · Max 5x · from Sep 14 · $0.00545/MTok · 57.6224 · mediumClaude Opus 5.5 (max with fallback) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#CC5A2E" stroke-width="1.35"/>
 <circle r="4" fill="#CC5A2E"/>
 </g>
@@ -900,10 +900,10 @@
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#16A34A" stroke-width="1.5" opacity=".68"/>
 </g>
 <g class="front-label" data-model="claude-opus-5.5">
-<path d="M961.233,258.177Q961.233,238.985 953.091,238.985" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="947.091" y="219.985" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5.5 · max</text>
-<text x="947.091" y="239.985" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x · from Sep 14</text>
-<text x="947.091" y="259.985" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00572</text>
+<path d="M967.819,258.177Q967.819,238.985 959.677,238.985" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="953.677" y="219.985" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Claude Opus 5.5 · max</text>
+<text x="953.677" y="239.985" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x · from Sep 14</text>
+<text x="953.677" y="259.985" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00545</text>
 </g>
 <g class="front-label" data-model="step-5-preview">
 <path d="M1034.751,381.391Q1034.751,274.668 1069.149,274.668" stroke="#C4CDC3" stroke-width=".8" fill="none"/>

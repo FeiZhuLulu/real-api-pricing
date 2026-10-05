@@ -5,7 +5,7 @@
 
 ## 2026-10-03 · Claude Max 5x × Opus 5.5 社区截图直测
 
-- **Claude Max 5x × Claude Opus 5.5 改用社区截图直测（Anthropic 档）**：157.69 → 174.9 亿/月，low → medium（真实单价 $0.00634 → $0.00572/MTok）。维护者提供社区 Claude Code /usage 截图：单会话 claude-opus-5-5 in 23.0k / out 3.0m / cache读 1.3b / cache写 5.6m（面板 $366.96，按 1h 写价闭合）＝周额度（all models）19%，Fable 周 0%。同 devin_max×opus-5.5 口径：写按 5m 折 list-worth $348.09 ÷19% ×4 周 ÷ $0.419/MTok。未采：cache 写按 1h 183.34 亿、raw total 275.5 亿，留作对照。19% 为整数读数时区间 170.41~179.63 亿；1.3b 只有两位有效数字（约 ±3.7%）。弱点：截图出处未确认，19% 是否全归本会话未知（若周内另有用量，周池更大、本值偏保守），n=1。张力：按 20x 周池 = 5x×2 推 Max 20x ≈ 349.8 亿，比采用值 315.38 高 11%；20x 本轮不改，5x/20x 不再同价并点。证据：`claude-max5x-opus55-round1-2026-10-03.json`。
+- **Claude Max 5x × Claude Opus 5.5 改用社区截图直测（Anthropic 档）**：157.69 → 183.34 亿/月，low → medium（真实单价 $0.00634 → $0.00545/MTok）。维护者提供社区 Claude Code /usage 截图：单会话 claude-opus-5-5 in 23.0k / out 3.0m / cache读 1.3b / cache写 5.6m（面板 $366.96，按 1h 写价闭合；prompt cache 1h TTL）＝周额度（all models）19%，Fable 周 0%。缓存写按实际 1h 档计（同 issue #52/#53 口径）：list-worth $364.89 ÷19% ×4 周 ÷ $0.419/MTok。未采：cache 写按 5m 折 174.9 亿、raw total 275.5 亿，留作对照。19% 为整数读数时区间 178.64~188.29 亿；1.3b 只有两位有效数字（约 ±3.7%）。弱点：截图出处未确认，19% 是否全归本会话未知（若周内另有用量，周池更大、本值偏保守），n=1。张力：按 20x 周池 = 5x×2 推 Max 20x ≈ 366.68 亿，比采用值 315.38 高 16%；20x 本轮不改，5x/20x 不再同价并点。证据：`claude-max5x-opus55-round1-2026-10-03.json`。
 
 ## 2026-10-03 · Droid 月额度 = 2× 周（裁定）
 
