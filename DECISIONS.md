@@ -3,6 +3,13 @@
 本地 `AGENTS.md`（不入库）只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-10-05 · Cursor Other Models 池首个实测点（Ultra × Opus 5.5）
+
+- **Cursor Ultra × Claude Opus 5.5（新增，Other Models 池，medium）**：**8.96 亿/月**（workload=anthropic）。X @xuanwo 推文（维护者转交截图）：账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日 共 176 条、778,341,121 tok（cache读 748,779,006 / cache写 24,358,860 / 普通输入 9,402 / 输出 5,193,853，hit 96.85%，记录集中北京时间 10月2日22:35–5日14:14）。段 worth $375.46（读×$0.2＋写×$5(5m)＋入×$4＋出×$20，与帖主折算一致）＝账期 Other Models 全部用量 ÷ Anthropic 档混合价 $0.419/MTok。对照不采：raw 口径 7.78 亿；cache写按 1h $8 敏感性 $448.54→10.71 亿。worth 与社区口径 Ultra Other Models 池 $400 同量级（93.9%；Wayback 8/19 计划表有档、CellCog 曾示 $500），视为月池基本用尽；CSV 无账期边界与 % 字段故按整份导出统计，若未用尽本值偏保守。与既有 Cursor Models 池行（grok-4.6 77.37 亿、composer-2.5）为两个独立月池，不联动不改值。真实单价 $0.2232/MTok 为 Opus 5.5 最贵订阅点。
+- **Cursor Pro / Pro+ × Opus 5.5（派生，low）**：Pro **0.448 亿/月**、Pro+ **1.568 亿/月**——由 Ultra 实测 × 社区口径池比（Other Models Pro $20 / Pro+ $70 / Ultra $400，官方页现仅写 Included）；跨档池规模假设，非独立实测，沿用 grok-4.6 行 $800/$3000 跨档派生先例。
+- 证据：`data/research/cursor-opus55-community-round1-2026-10-05.json`。
+- 待裁定（未展开）：同一 Other Models 池按价目比派生其他第三方模型（GPT/Gemini/Sonnet 等）；Other Models 官方池口径（$400 vs CellCog $500）。
+
 ## 2026-10-03 · Droid 月额度 = 2× 周（裁定）
 
 - **Factory Droid 30 天窗 = 2× 7 天窗（维护者裁定，Droid 专用例外，不改通用 ×4 周）**：月额度一律按周 worth × 2。

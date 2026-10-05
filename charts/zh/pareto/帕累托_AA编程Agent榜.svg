@@ -148,6 +148,15 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.029081039" data-score="46.969" data-x="760.871" data-y="543.911" transform="translate(760.871 543.911)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.22321429" data-score="65.9886" data-x="416.316" data-y="307.668" transform="translate(416.316 307.668)"><title>Claude Opus 5.5 · Cursor Ultra (Other Models) · $0.22321/MTok · 65.9886 · mediumClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.44642857" data-score="65.9886" data-x="299.132" data-y="307.668" transform="translate(299.132 307.668)"><title>Claude Opus 5.5 · Cursor Pro (Other Models) · $0.44643/MTok · 65.9886 · lowClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.38265306" data-score="65.9886" data-x="325.193" data-y="307.668" transform="translate(325.193 307.668)"><title>Claude Opus 5.5 · Cursor Pro+ (Other Models) · $0.38265/MTok · 65.9886 · lowClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="51.9259" data-x="774.189" data-y="482.341" transform="translate(774.189 482.341)"><title>Kimi K3 (v1) · Kimi 会员 199 · ¥199 / 国际 $39 · $0.02688/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
 </g>
@@ -429,7 +438,7 @@
 <path d="M62 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="76.000" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5，Droid月=周×2 · 美元/credits换算：缓存97% / 输入2.5% / 输出0.5% · 直接total实测不重算</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >97 个订阅位置 / 11 个 API 位置 / 3 个前沿位置</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >100 个订阅位置 / 11 个 API 位置 / 3 个前沿位置</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/agents/coding-agents</text>

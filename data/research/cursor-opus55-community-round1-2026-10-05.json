@@ -1,0 +1,83 @@
+{
+  "collectedAt": "2026-10-05",
+  "subject": "Cursor Ultra — Other Models 池全程 Claude Opus 5.5 high 的社区实测（usage-events CSV 导出）",
+  "plan": {
+    "name": "Cursor Ultra",
+    "vendor": "Cursor",
+    "priceUsdPerMonth": 200,
+    "source": "https://cursor.com/pricing",
+    "officialUsageNote": "Cursor 个人套餐有两个独立月池：Cursor Models（Grok 4.6/4.5、Composer 2.5）与 Other Models（第三方模型按 API 价扣减）。官方现仅写 Included；社区口径 Other Models 池 Pro $20 / Pro+ $70 / Ultra $400（Wayback 2026-08-19 计划表 Ultra Other Models $400 有档；CellCog 仪表盘曾示 $500）。"
+  },
+  "source": {
+    "type": "community_post_screenshots",
+    "platform": "X",
+    "author": "@xuanwo",
+    "postedAt": "2026-10-05（帖主发帖 1 小时后截图，维护者转交）",
+    "providedBy": "维护者转交截图（2026-10-05）",
+    "claimText": "cc @Fei2411, Cursor Ultra，所有 Other Models 用量全程使用 claude-opus-5.5-high 的 token 数据。Cache 命中率 96.85% 的前提下，可用的 Opus 用量约为 778M，折算成 API 大致是 $375 刀。",
+    "promptsShown": [
+      "请你统计一下 /Users/xuanwo/Downloads/usage-events-2026-10-05.csv：最近一个账单周期，我的 cursor opus 5.5 上用了多少 token，cache 率多少",
+      "请你折算一下，大概相当于 API 用量的多少？"
+    ]
+  },
+  "measurement": {
+    "exportFile": "usage-events-2026-10-05.csv（Cursor 用量事件导出）",
+    "exportWindow": "2026-09-14 至 2026-10-05",
+    "opusRecords": "claude-opus-5-5-high 共 176 条，北京时间 2026-10-02 22:35 至 10-05 14:14",
+    "billingBoundaryField": "CSV 没有账单周期边界字段，按整份导出统计；帖主称「最近一个账单周期」",
+    "scope": "导出范围内 Other Models 用量全部为 claude-opus-5-5-high",
+    "tokens": {
+      "cacheRead": 748779006,
+      "cacheWrite": 24358860,
+      "inputNonCache": 9402,
+      "output": 5193853,
+      "total": 778341121,
+      "totalInput": 773147268,
+      "cacheHitRate": "748,779,006 ÷ 773,147,268 = 96.85%"
+    }
+  },
+  "posterWorthConversion": {
+    "pricesUsed": "缓存写 $5 / 普通输入 $4 / 缓存读 $0.20 / 输出 $20（USD/MTok，5 分钟缓存档）",
+    "rows": {
+      "cacheWrite": "24,358,860 × $5 = $121.79",
+      "input": "9,402 × $4 = $0.04",
+      "cacheRead": "748,779,006 × $0.20 = $149.76",
+      "output": "5,193,853 × $20 = $103.88"
+    },
+    "totalUsd": 375.46,
+    "oneHourCacheSensitivity": "全部按 1 小时缓存写（$8）折算约 $448.54 → 区间 $375~449 的标准 API token 费用，并非 Cursor 实际收费"
+  },
+  "calculation": {
+    "workload": "anthropic（同 devin_max×opus-5.5 / droid_max×opus-5.5 口径：带 token 分项的实测按标价折 list-worth，÷ anthropicTokenMix 混合价 $0.419/MTok 换成标准等效月 token）",
+    "adoptedWorthUsdPerMonth": 375.46,
+    "blendedAnthropicUsdPerMTok": 0.419,
+    "formula": "$375.46 ÷ $0.419/MTok = 8.96 亿/月",
+    "monthlyYi": 8.96,
+    "rawTotalAlternative": {
+      "monthlyYi": 7.78,
+      "note": "raw total 口径 778,341,121 ÷ 1 月；未折算对照"
+    },
+    "oneHourCacheAlternative": {
+      "worthUsd": 448.54,
+      "monthlyYi": 10.71,
+      "note": "CSV 未标缓存有效期，5m 为主口径、1h 为敏感性，不采"
+    }
+  },
+  "crossChecks": [
+    "实测 worth $375.46（5m 写）/ $448.54（1h 写）与社区口径 Ultra Other Models 池 $400 同量级（93.9%~112%），支持把该导出视作月池基本用尽；CellCog 曾示 $500 则用量为其 75%~90%",
+    "Other Models 池与既有 Cursor Models 池（grok-4.6 77.37 亿/月反推）是两个独立月池，本行不与之联动",
+    "真实单价 $200 ÷ 8.96 亿 = $0.2232/MTok，为 Opus 5.5 全库最贵订阅点（对照 Droid Max $0.0792、Devin Max $0.0299、Claude Pro $0.00655）"
+  ],
+  "confidence": "medium",
+  "weaknesses": [
+    "单一社区源、n=1（帖主为 X @xuanwo，公开身份可查，非匿名口述）",
+    "CSV 无账单周期边界与面板 % 字段，「月池用尽」系按「可用的 Opus 用量约为 778M」与 worth≈$400 推断；若池未用尽则真实额度更高，本值偏保守（低估额度、高估单价）",
+    "Opus 记录集中在 10月2–5日约 2.7 天，导出覆盖 9月14日–10月5日；账期内是否有更早 Other Models 消耗未知（帖主称全程 Opus）",
+    "effort 均为 high 档，仅影响速率不影响池扣减；未测 xhigh/标准 effort"
+  ],
+  "openQuestions": [
+    "Cursor Other Models 池官方美元口径（$400 vs $500）与是否随 8/24–25 扩池联动上调",
+    "Pro/Pro+ Other Models 池 ($20/$70 社区口径) 的独立实测",
+    "同一 Other Models 池按价目比派生其他第三方模型（GPT/Gemini/Sonnet 等）是否展开"
+  ]
+}
