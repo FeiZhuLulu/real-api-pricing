@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DotsSixVertical, X } from "@phosphor-icons/react";
 import type { Point, Row, State } from "./types";
 import ProviderLogo from "./ProviderLogo";
@@ -68,24 +68,75 @@ export default function AllowanceCards({
   };
   const remove = (ids: string[]) => onChange(state.cards.filter((id) => !ids.includes(id)));
 
-  // Drag to reorder: cards swap live under the pointer, the order is saved on release.
+  // Drag to reorder: the grabbed card follows the pointer, the others slide
+  // aside (FLIP), and the order is saved on release.
   const byKey = new Map(groups.map((g) => [g.key, g]));
   const [order, setOrder] = useState<string[] | null>(null);
   const [dragging, setDragging] = useState<string | null>(null);
   const [focusGrip, setFocusGrip] = useState<string | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  /** Layout slot of every card (offsets ignore transforms), from the last render. */
+  const slots = useRef(new Map<string, { x: number; y: number }>());
+  const drag = useRef<{ key: string; grabX: number; grabY: number; px: number; py: number; dx: number; dy: number } | null>(null);
   const shown = order ? order.flatMap((k) => byKey.get(k) ?? []) : groups;
   const commit = (keys: string[]) =>
     onChange(keys.flatMap((k) => byKey.get(k)?.points.map((p) => p.id) ?? []));
   const commitRef = useRef(commit);
   commitRef.current = commit;
+  const cardEl = (key: string) =>
+    gridRef.current?.querySelector<HTMLElement>(`[data-card="${CSS.escape(key)}"]`) ?? null;
+  const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Keep the grabbed card under the pointer, wherever its slot is now.
+  const follow = () => {
+    const d = drag.current,
+      grid = gridRef.current,
+      el = d && cardEl(d.key);
+    if (!d || !grid || !el) return;
+    const g = grid.getBoundingClientRect();
+    d.dx = d.px - d.grabX - (g.left + el.offsetLeft);
+    d.dy = d.py - d.grabY - (g.top + el.offsetTop);
+    el.style.transform = `translate(${d.dx}px, ${d.dy}px) scale(1.02)`;
+  };
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    const next = new Map<string, { x: number; y: number }>();
+    if (!grid) {
+      slots.current = next;
+      return;
+    }
+    const animate = !reducedMotion();
+    for (const el of grid.querySelectorAll<HTMLElement>("[data-card]")) {
+      const key = el.dataset.card!;
+      const now = { x: el.offsetLeft, y: el.offsetTop };
+      next.set(key, now);
+      if (drag.current?.key === key) continue;
+      const before = slots.current.get(key);
+      if (!animate || !before || (before.x === now.x && before.y === now.y)) continue;
+      // Start from where the card is drawn now, including any slide in flight.
+      const t = getComputedStyle(el).transform;
+      const m = t && t !== "none" ? new DOMMatrixReadOnly(t) : null;
+      const dx = before.x + (m?.m41 ?? 0) - now.x,
+        dy = before.y + (m?.m42 ?? 0) - now.y;
+      el.getAnimations().forEach((a) => a.cancel());
+      el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], {
+        duration: 260,
+        easing: "cubic-bezier(0.2, 0.7, 0.3, 1)",
+      });
+    }
+    slots.current = next;
+    follow();
+  });
   const startDrag = (e: React.PointerEvent, key: string) => {
     const target = e.target as Element;
     if (e.button !== 0 || target.closest(".plan-card-remove")) return;
     // Touch drags only from the grip, so the rest of the card still scrolls the page.
     if (e.pointerType !== "mouse" && !target.closest(".plan-card-grip")) return;
+    const card = cardEl(key);
+    if (!card) return;
     e.preventDefault();
     const x0 = e.clientX,
       y0 = e.clientY;
+    const r = card.getBoundingClientRect();
     let keys = groups.map((g) => g.key);
     let active = false;
     // Window listeners: React moves the card's DOM node while reordering,
@@ -94,19 +145,29 @@ export default function AllowanceCards({
       if (!active) {
         if (Math.hypot(ev.clientX - x0, ev.clientY - y0) < 5) return;
         active = true;
+        card.getAnimations().forEach((a) => a.cancel());
+        drag.current = { key, grabX: x0 - r.left, grabY: y0 - r.top, px: x0, py: y0, dx: 0, dy: 0 };
         setDragging(key);
         setOrder(keys);
       }
-      const box = scrollRef.current;
-      if (!box) return;
-      const r = box.getBoundingClientRect();
-      if (ev.clientY < r.top + 48) box.scrollTop -= 14;
-      else if (ev.clientY > r.bottom - 48) box.scrollTop += 14;
-      const over = [...box.querySelectorAll<HTMLElement>("[data-card]")].find((el) => {
-        const c = el.getBoundingClientRect();
-        return ev.clientX >= c.left && ev.clientX <= c.right && ev.clientY >= c.top && ev.clientY <= c.bottom;
-      })?.dataset.card;
-      if (!over || over === key) return;
+      const d = drag.current!;
+      d.px = ev.clientX;
+      d.py = ev.clientY;
+      const box = scrollRef.current,
+        grid = gridRef.current;
+      if (!box || !grid) return;
+      const b = box.getBoundingClientRect();
+      if (ev.clientY < b.top + 48) box.scrollTop -= 14;
+      else if (ev.clientY > b.bottom - 48) box.scrollTop += 14;
+      follow();
+      // Hit-test layout slots, not drawn positions, so sliding cards cannot flicker.
+      const g = grid.getBoundingClientRect();
+      const x = ev.clientX - g.left,
+        y = ev.clientY - g.top;
+      const over = [...slots.current].find(
+        ([k, s]) => k !== key && x >= s.x && x <= s.x + card.offsetWidth && y >= s.y && y <= s.y + card.offsetHeight,
+      )?.[0];
+      if (!over) return;
       const next = keys.filter((k) => k !== key);
       next.splice(keys.indexOf(over), 0, key);
       keys = next;
@@ -116,9 +177,22 @@ export default function AllowanceCards({
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", end);
       window.removeEventListener("pointercancel", end);
-      if (active) commitRef.current(keys);
+      if (!active) return;
+      const d = drag.current!;
+      drag.current = null;
+      commitRef.current(keys);
       setOrder(null);
-      setDragging(null);
+      // Settle the card from the pointer into its slot.
+      const el = cardEl(key);
+      if (!el) return setDragging(null);
+      el.style.transform = "";
+      if (reducedMotion()) return setDragging(null);
+      el.animate(
+        [{ transform: `translate(${d.dx}px, ${d.dy}px) scale(1.02)` }, { transform: "none" }],
+        { duration: 220, easing: "cubic-bezier(0.2, 0.7, 0.3, 1)" },
+      );
+      // A timer, not onfinish: hidden tabs never finish animations.
+      setTimeout(() => setDragging(null), 220);
     };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", end);
@@ -170,7 +244,7 @@ export default function AllowanceCards({
         aria-label={zh ? "按套餐分组的月额度卡片，可滚动" : "Allowance cards by plan, scrollable"}
       >
         {groups.length ? (
-          <div className="plan-cards">
+          <div className="plan-cards" ref={gridRef}>
             {shown.map(({ key, points: models }) => {
               const p = models[0];
               const fill = dotColors(color(p), dark).fill;

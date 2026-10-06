@@ -1420,6 +1420,7 @@ input[type="search"]::-webkit-search-cancel-button {
   background: var(--surface-2);
 }
 .plan-cards {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   align-items: start;
@@ -1618,7 +1619,8 @@ select:disabled {
 }
 .plan-card.is-dragging {
   position: relative;
-  z-index: var(--z-raised);
+  z-index: var(--z-overlay);
+  will-change: transform;
   border-color: var(--accent-line);
   box-shadow: var(--shadow-3);
   outline: 2px solid var(--accent);
