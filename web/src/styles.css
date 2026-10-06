@@ -1404,6 +1404,412 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 11.5px;
   overflow-wrap: anywhere;
 }
+.layout-switch {
+  margin-left: 6px;
+}
+.layout-switch > button {
+  min-height: 28px;
+  padding: 4px 10px;
+  gap: 6px;
+  white-space: nowrap;
+}
+/* Allowance cards: one card per plan, one row per model. */
+.plan-cards-scroll {
+  padding: 16px;
+  border-color: var(--line-2);
+  background: var(--surface-2);
+}
+.plan-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+.plan-card {
+  padding: 18px 18px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  transition: opacity 0.18s var(--ease);
+}
+.plan-card.is-faded {
+  opacity: 0.28;
+}
+.plan-card header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.plan-card-channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.plan-card-channel i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.plan-card h3 {
+  margin: 6px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.plan-card-fee {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.plan-card-fee small {
+  font-size: 13px;
+  color: var(--faint);
+}
+.plan-card-caption {
+  margin: 14px 0 4px;
+  color: var(--faint);
+  font-size: 12px;
+}
+.plan-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-card li + li {
+  border-top: 1px solid var(--line-2);
+}
+.plan-card-row {
+  width: calc(100% + 12px);
+  display: grid;
+  grid-template-columns: 22px minmax(112px, 1.3fr) minmax(64px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 8px 6px;
+  margin: 0 -6px;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: none;
+  text-align: left;
+  font-weight: 400;
+}
+.plan-card-row:hover,
+.plan-card-row:focus-visible {
+  background: var(--surface-2);
+}
+.plan-card-row:active:not(:disabled) {
+  transform: none;
+}
+.plan-card-model {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+/* Decade ticks sit on the track only; the filled bar stays solid. */
+.plan-card-bar {
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+      to right,
+      transparent 0 calc(var(--decade) - 1px),
+      var(--surface) calc(var(--decade) - 1px) var(--decade)
+    ),
+    var(--surface-3);
+  overflow: hidden;
+}
+.plan-card-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+}
+.plan-card-value {
+  min-width: 64px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.card-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.card-picker-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+.card-picker select {
+  max-width: 280px;
+}
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.card-picker-clear {
+  min-height: 30px;
+  padding: 4px 10px;
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+}
+.card-picker-clear:hover {
+  color: var(--ink);
+}
+.picker-empty {
+  padding: 48px 16px;
+}
+.plan-card header {
+  position: relative;
+}
+.plan-card-remove {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: var(--faint);
+}
+.plan-card-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.plan-card-item .plan-card-row {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  margin-right: 0;
+}
+.plan-card-row-remove {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  margin-right: -8px;
+  border-color: transparent;
+  background: var(--surface);
+  color: var(--faint);
+  opacity: 0;
+}
+.plan-card-item:hover .plan-card-row-remove,
+.plan-card-row-remove:focus-visible {
+  opacity: 1;
+}
+@media (hover: none) {
+  .plan-card-row-remove {
+    opacity: 1;
+  }
+}
+.compare-placeholder {
+  margin: 18px 0 10px;
+  padding: 28px 16px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-m);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+/* Allowance comparison: offset, overlapping bars on a linear axis. */
+.compare-card {
+  padding: 20px 22px 10px;
+}
+.plan-card .compare-head {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.compare-head > div:first-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.compare-scale > button {
+  min-height: 28px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.compare-pickers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-2);
+}
+.compare-slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compare-slot select {
+  max-width: 280px;
+}
+.compare-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 30px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.compare-key i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.compare-add {
+  min-height: 30px;
+  padding: 4px 10px;
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+}
+.compare-add:hover {
+  color: var(--ink);
+}
+.compare-card .plan-card-caption {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.compare-track {
+  margin: 0 104px 0 4px;
+}
+.compare-plot {
+  position: relative;
+}
+.compare-grid {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 1px;
+  background: var(--line-2);
+}
+.compare-gap {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--ink) 9%, transparent) 0 4px,
+    transparent 4px 8px
+  );
+  border-left: 1px dashed var(--line-strong);
+  border-right: 1px dashed var(--line-strong);
+}
+.compare-bar {
+  position: absolute;
+  left: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0 9px 9px 0;
+  box-shadow: 0 0 0 2px var(--surface);
+  transition: width 0.35s var(--ease);
+}
+.compare-bar:hover:not(:disabled) {
+  background: inherit;
+  filter: brightness(1.06);
+}
+.compare-bar:active:not(:disabled) {
+  transform: none;
+}
+.compare-tag {
+  position: absolute;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-left: 10px;
+  transform: translateY(-50%);
+  color: var(--ink-2);
+  font-size: 13px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transition: left 0.35s var(--ease);
+}
+.compare-tag small {
+  color: var(--faint);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.compare-break {
+  position: absolute;
+  left: -7px;
+  top: -4px;
+  z-index: 10;
+  overflow: visible;
+}
+.compare-break path {
+  fill: none;
+  stroke: var(--faint);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+.compare-axis {
+  position: relative;
+  height: 16px;
+  margin-top: 14px;
+  color: var(--faint);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+.compare-axis span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.plan-card .compare-rows {
+  margin-top: 18px;
+  border-top: 1px solid var(--line-2);
+}
+.compare-row {
+  grid-template-columns: 30px 22px minmax(0, 1fr) auto;
+  min-height: 54px;
+}
+.compare-identity {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.compare-identity small {
+  color: var(--muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.compare-row .plan-card-value {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.compare-row .plan-card-value strong {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+.compare-row .plan-card-value small {
+  color: var(--muted);
+  font-size: 12px;
+}
 div.sentinel-row {
   display: flex;
   justify-content: center;
@@ -2521,6 +2927,47 @@ tbody tr.sentinel-row {
   }
   .fee-bands .segmented > button {
     padding: 4px 8px;
+  }
+  .layout-switch {
+    margin-left: 0;
+  }
+  .plan-cards-scroll {
+    padding: 10px;
+  }
+  .card-picker label {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+  .card-picker select {
+    width: 100%;
+    max-width: none;
+  }
+  .plan-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .compare-card {
+    padding: 16px 14px 6px;
+  }
+  .plan-card .compare-head {
+    flex-direction: column;
+  }
+  .compare-pickers {
+    align-items: stretch;
+  }
+  .compare-slot {
+    flex-wrap: wrap;
+  }
+  .compare-slot label {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+  .compare-slot select {
+    width: 100%;
+    max-width: none;
+  }
+  .compare-track {
+    margin-right: 92px;
   }
   .chart-tools-slot,
   .toolbar-search {

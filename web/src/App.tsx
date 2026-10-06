@@ -18,6 +18,9 @@ import {
   Moon,
   SlidersHorizontal,
   Sun,
+  Rows,
+  SquaresFour,
+  Stack,
   Table,
   X,
 } from "@phosphor-icons/react";
@@ -26,6 +29,8 @@ import Chart from "./Chart";
 import HeaderActions from "./HeaderActions";
 import { unpackData } from "./loadData";
 import Ranking from "./Ranking";
+import AllowanceCards from "./AllowanceCards";
+import AllowanceCompare from "./AllowanceCompare";
 import ResizeHandle from "./ResizeHandle";
 import { useIncremental } from "./useIncremental";
 import ProviderLogo, { BrandMarks } from "./ProviderLogo";
@@ -388,6 +393,14 @@ function Explorer({
     [data, view, selected, vendors, channels, plans, billing, confidence, feeBand],
   );
   const axis = useMemo(() => barAxis(data, view), [data, view]);
+  const allowancePoints = useMemo(
+    () => data.points.filter((p) => p.billing !== "metered" && p.monthly_yi !== null),
+    [data],
+  );
+  // Only slots with both a plan and a model count as compared items.
+  const completeCompare = state.compare.filter((v) =>
+    allowancePoints.some((p) => p.id === v),
+  ).length;
   const gs = useMemo(() => groups(rows), [rows]);
   const front = useMemo(() => pareto(gs), [gs]);
   const frontRows = useMemo(
@@ -441,6 +454,9 @@ function Explorer({
       lang: state.lang,
       view: state.view,
       board: state.board,
+      layout: state.layout,
+      compare: state.compare,
+      cards: state.cards,
     });
     setWarning(false);
   };
@@ -876,6 +892,26 @@ function Explorer({
                     </span>
                   </div>
                 )}
+                {state.view === "allowance" && (
+                  <div className="layout-switch segmented" role="group" aria-label={t("Layout", "展示方式")}>
+                    {(
+                      [
+                        ["list", <Rows size={15} />, "Ranking", "排行"],
+                        ["cards", <SquaresFour size={15} />, "Cards", "卡片"],
+                        ["compare", <Stack size={15} />, "Compare", "对比"],
+                      ] as const
+                    ).map(([layout, icon, en, cn]) => (
+                      <button
+                        key={layout}
+                        aria-pressed={state.layout === layout}
+                        onClick={() => patch({ layout })}
+                      >
+                        {icon}
+                        <span>{t(en, cn)}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <span className="toolbar-space" />
                 <div className="chart-tools-slot" ref={setChartSlot} />
                 {state.view !== "pareto" && (
@@ -903,6 +939,16 @@ function Explorer({
                   {state.view === "pareto" ? (
                     <>
                       <b>{pts.length}</b> {t("points", "个数据点")}
+                    </>
+                  ) : state.view === "allowance" && state.layout === "cards" ? (
+                    <>
+                      {t("Selected", "已选")} <b>{state.cards.length}</b>{" "}
+                      {t(state.cards.length === 1 ? "model" : "models", "个模型")}
+                    </>
+                  ) : state.view === "allowance" && state.layout === "compare" ? (
+                    <>
+                      {t("Selected", "已选")} <b>{completeCompare}</b>{" "}
+                      {t(completeCompare === 1 ? "item" : "items", "项")}
                     </>
                   ) : (
                     <>
@@ -995,7 +1041,26 @@ function Explorer({
                     {t("Reset selection", "恢复全部数据")}
                   </button>
                 </div>
-              ) : state.view === "table" ? null : state.view !== "pareto" ? (
+              ) : state.view === "table" ? null : state.view === "allowance" &&
+                state.layout === "cards" ? (
+                <AllowanceCards
+                  points={allowancePoints}
+                  rows={rows}
+                  state={state}
+                  axis={axis}
+                  highlight={highlight}
+                  onChange={(cards) => patch({ cards })}
+                  onSelect={setDetail}
+                />
+              ) : state.view === "allowance" && state.layout === "compare" ? (
+                <AllowanceCompare
+                  points={allowancePoints}
+                  rows={rows}
+                  state={state}
+                  onChange={(compare) => patch({ compare })}
+                  onSelect={setDetail}
+                />
+              ) : state.view !== "pareto" ? (
                 <Ranking
                   rows={rows}
                   state={state}
