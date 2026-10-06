@@ -1482,6 +1482,21 @@ input[type="search"]::-webkit-search-cancel-button {
   padding: 0;
   list-style: none;
 }
+/* Equal-height cards keep the grid aligned; long model lists scroll inside. */
+.plan-cards .plan-card {
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+}
+.plan-cards .plan-card ul {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  margin-right: -10px;
+  padding-right: 10px;
+}
 .plan-card li + li {
   border-top: 1px solid var(--line-2);
 }
