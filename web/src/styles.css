@@ -1595,6 +1595,35 @@ select:disabled {
   right: -8px;
   color: var(--faint);
 }
+.plan-cards .plan-card header {
+  cursor: grab;
+  user-select: none;
+}
+.plan-card-grip {
+  position: absolute;
+  top: -8px;
+  right: 32px;
+  border-color: transparent;
+  background: none;
+  color: var(--faint);
+  cursor: grab;
+  touch-action: none;
+}
+.plan-card-grip:hover {
+  color: var(--ink);
+}
+.plan-cards-scroll.is-sorting,
+.plan-cards-scroll.is-sorting * {
+  cursor: grabbing;
+}
+.plan-card.is-dragging {
+  position: relative;
+  z-index: var(--z-raised);
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-3);
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
 .plan-card-item {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { X } from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from "react";
+import { DotsSixVertical, X } from "@phosphor-icons/react";
 import type { Point, Row, State } from "./types";
 import ProviderLogo from "./ProviderLogo";
 import PlanModelPicker, { ALL_MODELS, planKey, planOptions } from "./PlanModelPicker";
@@ -68,6 +68,81 @@ export default function AllowanceCards({
   };
   const remove = (ids: string[]) => onChange(state.cards.filter((id) => !ids.includes(id)));
 
+  // Drag to reorder: cards swap live under the pointer, the order is saved on release.
+  const byKey = new Map(groups.map((g) => [g.key, g]));
+  const [order, setOrder] = useState<string[] | null>(null);
+  const [dragging, setDragging] = useState<string | null>(null);
+  const [focusGrip, setFocusGrip] = useState<string | null>(null);
+  const shown = order ? order.flatMap((k) => byKey.get(k) ?? []) : groups;
+  const commit = (keys: string[]) =>
+    onChange(keys.flatMap((k) => byKey.get(k)?.points.map((p) => p.id) ?? []));
+  const commitRef = useRef(commit);
+  commitRef.current = commit;
+  const startDrag = (e: React.PointerEvent, key: string) => {
+    const target = e.target as Element;
+    if (e.button !== 0 || target.closest(".plan-card-remove")) return;
+    // Touch drags only from the grip, so the rest of the card still scrolls the page.
+    if (e.pointerType !== "mouse" && !target.closest(".plan-card-grip")) return;
+    e.preventDefault();
+    const x0 = e.clientX,
+      y0 = e.clientY;
+    let keys = groups.map((g) => g.key);
+    let active = false;
+    // Window listeners: React moves the card's DOM node while reordering,
+    // which would drop a pointer capture held by the card itself.
+    const move = (ev: PointerEvent) => {
+      if (!active) {
+        if (Math.hypot(ev.clientX - x0, ev.clientY - y0) < 5) return;
+        active = true;
+        setDragging(key);
+        setOrder(keys);
+      }
+      const box = scrollRef.current;
+      if (!box) return;
+      const r = box.getBoundingClientRect();
+      if (ev.clientY < r.top + 48) box.scrollTop -= 14;
+      else if (ev.clientY > r.bottom - 48) box.scrollTop += 14;
+      const over = [...box.querySelectorAll<HTMLElement>("[data-card]")].find((el) => {
+        const c = el.getBoundingClientRect();
+        return ev.clientX >= c.left && ev.clientX <= c.right && ev.clientY >= c.top && ev.clientY <= c.bottom;
+      })?.dataset.card;
+      if (!over || over === key) return;
+      const next = keys.filter((k) => k !== key);
+      next.splice(keys.indexOf(over), 0, key);
+      keys = next;
+      setOrder(next);
+    };
+    const end = () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", end);
+      window.removeEventListener("pointercancel", end);
+      if (active) commitRef.current(keys);
+      setOrder(null);
+      setDragging(null);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+  };
+  const nudge = (key: string, by: number) => {
+    const keys = groups.map((g) => g.key);
+    const from = keys.indexOf(key),
+      to = Math.min(keys.length - 1, Math.max(0, from + by));
+    if (from === to) return;
+    keys.splice(from, 1);
+    keys.splice(to, 0, key);
+    setFocusGrip(key);
+    commit(keys);
+  };
+  // Moving a card re-inserts its node, which drops keyboard focus; restore it.
+  useEffect(() => {
+    if (!focusGrip) return;
+    scrollRef.current
+      ?.querySelector<HTMLElement>(`[data-card="${CSS.escape(focusGrip)}"] .plan-card-grip`)
+      ?.focus();
+    setFocusGrip(null);
+  }, [focusGrip, state.cards]);
+
   return (
     <section className="web-ranking" aria-label={zh ? "月额度卡片" : "Monthly allowance cards"}>
       <div className="card-picker">
@@ -88,7 +163,7 @@ export default function AllowanceCards({
         )}
       </div>
       <div
-        className="ranking-scroll plan-cards-scroll"
+        className={`ranking-scroll plan-cards-scroll${dragging ? " is-sorting" : ""}`}
         ref={scrollRef}
         tabIndex={0}
         role="region"
@@ -96,13 +171,17 @@ export default function AllowanceCards({
       >
         {groups.length ? (
           <div className="plan-cards">
-            {groups.map(({ key, points: models }) => {
+            {shown.map(({ key, points: models }) => {
               const p = models[0];
               const fill = dotColors(color(p), dark).fill;
               const faded = highlight !== null && p.channel !== highlight;
               return (
-                <article key={key} className={`plan-card${faded ? " is-faded" : ""}`}>
-                  <header>
+                <article
+                  key={key}
+                  data-card={key}
+                  className={`plan-card${faded ? " is-faded" : ""}${dragging === key ? " is-dragging" : ""}`}
+                >
+                  <header onPointerDown={(e) => startDrag(e, key)}>
                     <span className="plan-card-channel">
                       <i style={{ background: fill }} />
                       {p.channel}
@@ -113,6 +192,28 @@ export default function AllowanceCards({
                       {zh ? "/月" : "/mo"}
                       {p.local_price && <small> · {p.local_price}</small>}
                     </p>
+                    <button
+                      className="icon-button plan-card-grip"
+                      aria-label={
+                        zh
+                          ? `拖动排序 ${displayPlan(p.plan, state.lang)}，方向键移动`
+                          : `Reorder ${displayPlan(p.plan, state.lang)}; arrow keys move it`
+                      }
+                      title={zh ? "拖动排序" : "Drag to reorder"}
+                      onKeyDown={(e) => {
+                        const by =
+                          e.key === "ArrowLeft" || e.key === "ArrowUp"
+                            ? -1
+                            : e.key === "ArrowRight" || e.key === "ArrowDown"
+                              ? 1
+                              : 0;
+                        if (!by) return;
+                        e.preventDefault();
+                        nudge(key, by);
+                      }}
+                    >
+                      <DotsSixVertical size={16} weight="bold" />
+                    </button>
                     <button
                       className="icon-button plan-card-remove"
                       aria-label={zh ? `移除 ${displayPlan(p.plan, state.lang)} 卡片` : `Remove the ${displayPlan(p.plan, state.lang)} card`}
