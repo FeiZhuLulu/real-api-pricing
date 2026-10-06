@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-10-06",
+  "sourceType": "community_tweet_screenshot",
+  "trigger": "维护者提供 X @leo114119（Leo 的游戏人生）推文截图：「claude team 6.25x（125 刀）周额度使用统计」",
+  "communitySample": {
+    "source": "X @leo114119 推文（维护者提供截图；截图时推文发布约 18 分钟，发布日期约 2026-10-05/06）",
+    "model": "claude-opus-5.5",
+    "planInference": "Claude Team Premium 席——官方 Premium 席 $125/月付、$100/月年付，用量 6.25× Pro；推文「6.25x（125 刀）」与官方倍率及 $125÷Pro$20 双口径吻合",
+    "seatContext": "车头共享 Team 席位（转售/合租）；面板为第三方 relay 的 Claude Code 使用统计页（设置→使用统计，7d 窗），非官方 /usage",
+    "requests": 12836,
+    "tokens": {
+      "cacheRead": 4029000000,
+      "cacheReadNote": "面板显示 40.29亿（取整）；按总量残差为 4,028,789,718",
+      "cacheWrite": 49239000,
+      "cacheWriteNote": "面板显示 创建 4,923.9万",
+      "input": 26000,
+      "inputNote": "面板显示 新增输入 2.6万",
+      "output": 13416000,
+      "outputNote": "面板显示 Output 1,341.6万",
+      "totalRaw": 4091470718,
+      "totalNote": "面板显示 ≈40.91亿"
+    },
+    "cacheHitRate": "98.8%",
+    "costUsd": 1320.3794,
+    "usageBar": "整周额度用满（帖主口径：「一周全用 opus 5.5 用满了可以达到 40亿的token」）",
+    "tweetClaims": [
+      "claude team 6.25x（125 刀）周额度使用统计",
+      "一周全用 opus 5.5 用满了可以达到 40亿的token",
+      "这个量和 claude 5x max 几乎一致的",
+      "team 订阅胜在封号率低（如果车头靠谱的话）"
+    ]
+  },
+  "priceClosure": {
+    "formula": "cache_read×$0.2 + cache_write×$5(5m) + input×$4 + output×$20（Opus 5.5 标价）",
+    "computedUsd": 1320.377,
+    "displayedUsd": 1320.3794,
+    "verdict": "面板总成本即 Opus 5.5 5m-写价 list-worth，差 $0.002 在分项显示取整内闭合——面板计价口径与项目 Anthropic 档一致，故直接采面板 worth；写若全按 1h $8 为 $1,468.09 不闭合，不采"
+  },
+  "derivations": {
+    "weeklyWorthUsd": 1320.3794,
+    "monthlyWorthUsd": 5281.5176,
+    "monthlyAdoptedYi": 126.05,
+    "formula": "周 worth $1,320.3794 ×4周 = $5,281.52 ÷ Anthropic 档混合价 $0.419/MTok = 126.05亿",
+    "monthlyRawYi": 163.66,
+    "formulaRaw": "40.9147亿 raw ×4周 = 163.66亿（留作对照）",
+    "sensitivity1hWrite": "缓存写全按 1h $8 → +$147.72/周 → 140.15亿/月（不采，面板按 5m 闭合）",
+    "max5xCrossCheck": "帖主称周量≈Max 5x：Max 5x 周池 39.42亿（折算月额 157.69÷4；raw 口径 37.71亿）vs 本周 40.91亿 raw —— 差约 4~8%，同量级自洽",
+    "realUnitPrice": "$125 ÷ 126.05亿 ≈ $0.992/MTok（折算口径）"
+  },
+  "weaknesses": [
+    "n=1 推文；面板无官方 /usage 额度百分比同框",
+    "车头共享席位 + 第三方 relay 面板——周池是席位级实测；官方席位池结构（与 Pro/Max 是否同权重、跨席位是否互挤）未证",
+    "「用满」为帖主口述；面板为 7d rolling 窗，未区分周额重置边界",
+    "Team 席位多人/共享场景下的并发与公平使用限制未在本样本覆盖"
+  ],
+  "notDrawn": [
+    "Team Standard 席（$20年付/$25月付，官方 1.25× Pro）：无额度样本，不画",
+    "年付价 $100/月（-20%）不单列点，挂月付 $125 并在 decision_note 注明"
+  ],
+  "confidence": "medium"
+}

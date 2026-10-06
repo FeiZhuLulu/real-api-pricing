@@ -191,6 +191,16 @@ CLAUDE_OPUS55_MAX20X_RAW_MONTHLY_YI = round(CLAUDE_MAX_20X_YI / CLAUDE_OPUS55_W,
 CLAUDE_OPUS55_SESSION = {"input": 1_400_000, "output": 8_000_000, "cache_read": 1_000_000_000, "cache_write": 21_100_000}
 CLAUDE_MAX20X_WINDOWS_PER_WEEK = 5.5  # round10 条目#15 同账号多周 /usage 截图：Max 20x ≈5.5 满窗/周
 CLAUDE_MAX20X_TO_PRO_WEEKLY = 10.0  # Max 20x 周额度 = Pro ×10（5h 窗 20×、20x 周池 = 5x 的 2 倍）
+# Claude Team Premium 席（推文/社区称「6.25x」：官方 Premium 席用量 = 6.25× Pro，$125/月付、
+#   $100/月年付）× Opus 5.5 —— X @leo114119 推文（2026-10-06，维护者提供截图）：第三方 relay
+#   使用统计面板 7d 窗满打 4,091,470,718 raw tokens（12,836 次请求，hit 98.8%），面板总成本
+#   $1,320.3794 与 Opus 5.5 标价逐项闭合（写按 5m $5）→ 直接采面板 worth 为周池 list-worth。
+#   分项为面板显示取整值（万/亿），cache_read 取残差。
+CLAUDE_TEAM_OPUS55_WEEK_TOKENS = 4_091_470_718
+CLAUDE_TEAM_OPUS55_WEEK_WORTH_USD = 1320.3794
+CLAUDE_TEAM_OPUS55_WEEK_SEGMENT = {"cache_read": 4_028_789_718, "cache_write": 49_239_000,
+                                 "input": 26_000, "output": 13_416_000}
+assert sum(CLAUDE_TEAM_OPUS55_WEEK_SEGMENT.values()) == CLAUDE_TEAM_OPUS55_WEEK_TOKENS
 
 # Kimi 国内外同名档并为一点（2026-09-14 裁定）：月费/单价统一按国际版美元标价，
 # 国内实付价保留在 price/currency 供展示层注明差价；额度仍国内档实测/派生口径，
@@ -564,6 +574,34 @@ CLAUDE_OPUS55_MAX20X_MONTHLY_YI = claude_max20x_opus55_yi(
     sum(w for w, _ in claude_max20x_opus55_sources().values()),
     sum(p for _, p in claude_max20x_opus55_sources().values()),
 )  # ≈315.38
+
+
+def claude_team_opus55_segment_worth_usd() -> float:
+    # 面板分项按 5m 写价折 worth 的闭合校验（应 ≈ CLAUDE_TEAM_OPUS55_WEEK_WORTH_USD）
+    s = CLAUDE_TEAM_OPUS55_WEEK_SEGMENT
+    return (s["cache_read"] * OPUS55_LIST[0] + s["cache_write"] * ANTHROPIC_CACHE_WRITE_5M["claude-opus-5.5"]
+            + s["input"] * OPUS55_LIST[1] + s["output"] * OPUS55_LIST[2]) / 1e6
+
+
+def claude_team_opus55_monthly_yi() -> float:
+    # 周池 list-worth ×4周 ÷ Anthropic 档混合价 $0.419/MTok（同 devin_max/droid 2026-09-24 口径）
+    return round(CLAUDE_TEAM_OPUS55_WEEK_WORTH_USD * MONTH_WEEKS
+                 / blended_anthropic(OPUS55_LIST[0], ANTHROPIC_CACHE_WRITE_5M["claude-opus-5.5"], OPUS55_LIST[2])
+                 / 100, 2)
+
+
+def claude_team_opus55_raw_monthly_yi() -> float:
+    # 原始 total 口径（raw token ×4周），留作对照
+    return round(CLAUDE_TEAM_OPUS55_WEEK_TOKENS * MONTH_WEEKS / YI, 2)
+
+
+def claude_team_opus55_monthly_yi_1h() -> float:
+    # 敏感性（不采）：缓存写全按 1h $8（面板按 5m 闭合，故采用 5m 口径）
+    return round((CLAUDE_TEAM_OPUS55_WEEK_WORTH_USD
+                  + CLAUDE_TEAM_OPUS55_WEEK_SEGMENT["cache_write"] * 3 / 1e6)
+                 * MONTH_WEEKS
+                 / blended_anthropic(OPUS55_LIST[0], ANTHROPIC_CACHE_WRITE_5M["claude-opus-5.5"], OPUS55_LIST[2])
+                 / 100, 2)
 
 
 def claude_fable51_max_monthly_yi() -> float:
@@ -1014,6 +1052,8 @@ SUBS = [
     ("claude_max_20x", "Claude Max 20x (9/14+)", 200, "USD", "claude-opus-5.5", CLAUDE_OPUS55_MAX20X_MONTHLY_YI, "medium", "X @MiaAI_lab 推文（维护者提供截图）：xHigh 1h2m 烧 10.305亿 raw = ~75% of 5h limit；claude-opus55-round1-2026-09-23.json；round10 条目#15 Max 20x ≈5.5 满窗/周（claude-adoption-round10-2026-09-25.json）；Claude Pro × Opus 5.5 采用样本（issue #52 + Reddit 段）×10；claude-opus55-max20x-round2-2026-09-30.json", f"{CLAUDE_OPUS55_MAX20X_RAW_MONTHLY_YI:g}→{CLAUDE_OPUS55_MAX20X_MONTHLY_YI:g}亿（2026-09-30 裁定，Anthropic 档）：两路各折成 Max 20x 周额度百分点后按百分点合并——① MiaAI 窗 worth ${claude_max20x_opus55_sources()['mia'][0]:.2f}（写按 5m，与推文 $482.63 闭合）= 75% 窗 ÷ {CLAUDE_MAX20X_WINDOWS_PER_WEEK:g} 窗/周 = 周 {claude_max20x_opus55_sources()['mia'][1]:.3f}pp，单独 {claude_max20x_opus55_yi(*claude_max20x_opus55_sources()['mia']):g}亿；② Pro × Opus 5.5 合并 worth ${claude_max20x_opus55_sources()['pro10'][0]:.2f} / 196.333 Pro pp ÷ Max 20x 周额度 = Pro×{CLAUDE_MAX20X_TO_PRO_WEEKLY:g} → 周 {claude_max20x_opus55_sources()['pro10'][1]:.3f}pp，单独 {claude_max20x_opus55_yi(*claude_max20x_opus55_sources()['pro10']):g}亿；两路差 8%。不采：Pro 5h/周 13.333%（7.5 窗）直接套 Max 20x 得 449.7 亿（Max 20x 窗 20×、周 10×，窗/周比与 Pro 不同）；官方倍率推 3.75 窗/周得 224.9 亿（MiaAI 窗仅为 Pro 窗 15.5× 而非 20×，与两倍率同时精确不自洽）；等权平均 317.58 亿；#65 混合样本暂不处理。以下为旧 301.7 决策原文——新增301.7亿：5h池 10.305亿÷~75%={CLAUDE_OPUS55_POOL5H_YI:.2f}亿 raw（9/22发布已上调 Pro/Max/Team 5h 上限，窗池系发布期口径）；隐含权重 {CLAUDE_OPUS55_5H_WEIGHTED_YI:.2f}/{CLAUDE_OPUS55_POOL5H_YI:.2f}={CLAUDE_OPUS55_W:.4f}×Opus5 → 月池157÷{CLAUDE_OPUS55_W:.4f}；标价混合比0.5143独立互证（备选305.28亿差1.2%）；样本按新价$471.1≈推文$482.63闭合(+2.4%)；n=1推文无面板、~75%取整读数（月额区间约283~322亿）、effort仅影响速率；若官方权重偏离价格比（Fable 6.5×前车之鉴）需重推；周池面板直测/reset后受控打满可升high"),
     # Opus 5.5 × Pro —— round10 Reddit 满窗样本（2026-09-25 裁定 worth 口径，替换借权重派生值36.09亿）
     ("claude_pro", "Claude Pro", 20, "USD", "claude-opus-5.5", claude_pro_opus55_monthly_yi(), "high", "issue #52（NTRYourWaifu）：两个 Pro 账号轮询 /api/oauth/usage seven_day %、按 message.id 去重，Opus 5.5 ≥95% 区段 1,396.81M raw = 周 +183pp；community-issues-round1-2026-09-29.json；另与 Reddit r/ClaudeCode 帖满窗段（grok_report 条目#1：151,193,723 raw = 周 13.333%）按百分点合并；claude-adoption-round10-2026-09-25.json", "28.99→30.54亿，2026-09-29 裁定：issue #52（两个 Pro 账号，每 5 分钟轮询 seven_day %，按 message.id 去重，只计 Opus 5.5 占 95% 以上区段）1,396.81M raw = 周 +183 个百分点，标价 worth $587.52（读 $0.2 / 1h 写 $8 / 5m 写 $5 / 入 $4 / 出 $20）；与原 Reddit 5h 段（worth $40.48 / 周 13.333%）按百分点合并：($40.48+$587.52)÷(13.333+183)＝$3.19865/pp → 月 $1,279.46 ÷ Anthropic 档 $0.419/MTok＝30.54亿。单看 #52 为 30.65、Reddit 段 28.98；raw total 口径 30.53，写全按 5m 价 27.39 不采。high/xhigh 每 1% 标价美元均约 $3.2，effort 只影响速率。互证（仅记录不入权，2026-09-30 裁定关闭 PR #77）：X @kanzakichiya ccusage 两周 478.15M raw＝周 22%+47%（口述），缓存写全为 1h，按实际写价 worth $208.25 → $3.018/pp → 28.81 亿，与 #52 $3.210/pp、Reddit 段 $3.036/pp 差 <7%；三源按百分点合并为 30.09 亿、写按 5m 为 24.52 亿，均不采（claude-adoption-round11-2026-09-30.json）。证据：community-issues-round1-2026-09-29.json。"),
+    # Claude Team Premium 席 × Opus 5.5 —— X @leo114119 推文面板直测（relay 7d 满打周池）
+    ("claude_team", "Claude Team 6.25x", 125, "USD", "claude-opus-5.5", claude_team_opus55_monthly_yi(), "medium", "X @leo114119 推文（维护者提供截图）：Claude Team「6.25x」席第三方 relay 使用统计，7d 窗满打 Opus 5.5 共 4,091,470,718 raw（12,836 次请求；命中读 40.29亿/创建写 4923.9万/新增输入 2.6万/输出 1341.6万，hit 98.8%）＝整周额度；面板总成本 $1,320.3794；claude-team-opus55-round1-2026-10-06.json", f"新增{claude_team_opus55_monthly_yi():g}亿（2026-10-06，Anthropic 档）：面板分项按 Opus 5.5 标价逐项闭合（写按 5m $5：读×$0.2＋写×$5＋入×$4＋出×$20＝${claude_team_opus55_segment_worth_usd():.2f}≈面板 $1,320.3794）→ 采面板 worth 为周 list-worth，×{MONTH_WEEKS:g}周＝月${CLAUDE_TEAM_OPUS55_WEEK_WORTH_USD * MONTH_WEEKS:,.2f} ÷ Anthropic 档混合价${blended_anthropic(OPUS55_LIST[0], ANTHROPIC_CACHE_WRITE_5M['claude-opus-5.5'], OPUS55_LIST[2]):.3f}/MTok；raw 口径 {claude_team_opus55_raw_monthly_yi():g}亿（周 {CLAUDE_TEAM_OPUS55_WEEK_TOKENS / YI:.2f}亿 raw）留作对照；写全按 1h $8 敏感性 {claude_team_opus55_monthly_yi_1h():g}亿 不采（面板按 5m 闭合）。档位：官方 Premium 席 $125/月付、$100/月年付，用量 6.25× Pro——推文「6.25x」与官方倍率及 $125÷Pro$20 双口径吻合，挂月付价 $125。自洽：帖主称周量≈Max 5x——Max 5x 周池 {CLAUDE_OPUS55_MAX20X_MONTHLY_YI / 2 / MONTH_WEEKS:.2f}亿（折算月额 157.69÷4；raw 口径 {CLAUDE_OPUS55_MAX20X_RAW_MONTHLY_YI / 2 / MONTH_WEEKS:.2f}亿）vs 本周 {CLAUDE_TEAM_OPUS55_WEEK_TOKENS / YI:.2f}亿 raw，差约 4~8%。弱点：n=1 推文、第三方 relay 面板非官方 /usage、车头共享席位（周池为席位级实测，官方席位池与 Pro/Max 是否同权重未证）；「用满」为帖主口径、面板无额度百分比读数 → medium；Team Standard 席（$20年付/$25月付、1.25× Pro）无额度样本不画"),
     # xAI —— 面板周额度（维护者面板：Super $25 / Plus $100 / Heavy $250）是 Grok 自己的额度美元，不等于公开标价美元
     #   （linux.do 按标价记出 Super $90~110 / Heavy $900，比例相同、整体 3.6×）。所以不用标价换算，而用 Super 档实测 token 标定：
     #   V2EX+#56 合并标定 1.196 亿/周 ÷ $25 = 面板 $1 ≈ 478 万 token，再套到 Plus / Heavy。
@@ -1186,7 +1226,7 @@ METERED = [
 ]
 
 # 精选图只画主流套餐 + 前沿相关点，避免 60 个点挤在一起；全量图画全部
-MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
+MAIN_PLANS = {"chatgpt_plus", "chatgpt_pro_20x", "claude_pro", "claude_max_20x", "claude_team", "cursor_ultra", "cursor_ultra_fast", "cursor_pro",
               "google_ai_pro_us",
               "supergrok_heavy", "supergrok", "kimi_allegretto_cn", "glm_coding_pro_cn_new_peak", "glm_coding_pro_cn_new_mid", "glm_coding_pro_cn_new_offpeak", "glm_coding_pro_cn_old_peak", "glm_coding_pro_cn_old_mid", "glm_coding_pro_cn_old_offpeak",
               "minimax_token_plus_cn", "minimax_token_plus_global", "aliyun_coding_pro_cn", "devin_max", "devin_pro", "droid_max",
@@ -1233,6 +1273,7 @@ DATA_DATES = {
     ("claude_max_20x", "claude-fable-5.1"): ("2026-09-04~2026-09-05", "sample"),
     ("claude_max_20x", "claude-opus-5.5"): ("2026-09-22~2026-09-27", "sample"),
     ("claude_pro", "claude-opus-5.5"): ("2026-09-22~2026-09-27", "sample"),
+    ("claude_team", "claude-opus-5.5"): ("2026-09-30~2026-10-06", "sample"),
     ("supergrok", "grok-4.6"): ("2026-08-23~2026-09-20", "sample"),
     ("supergrok_lite", "grok-4.6"): ("2026-07", "sample"),
     ("supergrok", "grok-4.7"): ("2026-09-22", "sample"),
@@ -1344,7 +1385,7 @@ def workload_of(pid: str, billing: str, model: str = "") -> str:
     if billing == "metered":
         return "anthropic" if model in ANTHROPIC_CACHE_WRITE_5M else "standard"
     if pid == "claude_pro" or (pid, model) == ("devin_max", "claude-opus-5.5") or pid.startswith("droid_") \
-            or (pid in ("claude_max_20x", "claude_max_5x") and model == "claude-opus-5.5"):
+            or (pid in ("claude_max_20x", "claude_max_5x", "claude_team") and model == "claude-opus-5.5"):
         return "anthropic"
     if pid.startswith(("google_", "stepfun_")):
         return "lowCache"

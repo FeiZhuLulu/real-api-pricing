@@ -3,6 +3,14 @@
 本地 `AGENTS.md`（不入库）只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-10-06 · Claude Team 6.25x 首个采用点
+
+- **Claude Team Premium 席 × Opus 5.5**：新增 **126.05 亿/月** medium。X @leo114119 推文（维护者提供截图）：Team「6.25x」席第三方 relay 使用统计 7d 窗满打 4,091,470,718 raw（12,836 次请求，hit 98.8%）＝整周额度，面板总成本 $1,320.3794 与 Opus 5.5 标价逐项闭合（写按 5m $5）→ 采面板 worth ×4周 ÷ Anthropic 档 $0.419/MTok；raw 口径 163.66 亿留作对照；写按 1h $8 敏感性 140.15 亿不采。
+- **档位与价格**：官方 Premium 席 $125/月付、$100/月年付，用量 6.25× Pro——推文「6.25x」与官方倍率及 $125÷Pro$20 双口径吻合，挂月付价 $125。Team Standard 席（1.25× Pro）无额度样本不画。
+- **自洽**：帖主称周量≈Max 5x——Max 5x 周池 39.42 亿（折算口径）/37.71 亿（raw）vs 本周 40.91 亿 raw，差约 4~8%。
+- **弱点**：n=1 推文、第三方 relay 面板非官方 /usage、车头共享席位；官方席位池与 Pro/Max 是否同权重未证。
+- 证据：`data/research/claude-team-opus55-round1-2026-10-06.json`。
+
 ## 2026-10-03 · Droid 月额度 = 2× 周（裁定）
 
 - **Factory Droid 30 天窗 = 2× 7 天窗（维护者裁定，Droid 专用例外，不改通用 ×4 周）**：月额度一律按周 worth × 2。
