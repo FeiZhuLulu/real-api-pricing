@@ -46,6 +46,14 @@ export interface Point {
   data_date_from?: string | null;
   /** Official metered API list prices per MTok in the vendor's own currency. */
   list_price?: { cached: number; input: number; output: number; currency: string } | null;
+  task_reference_price?: {
+    cached: number;
+    input: number;
+    output: number;
+    cache_write: number | null;
+    source: string;
+  } | null;
+  task_reference_usd_per_mtok?: number | null;
   source: string;
   note: string;
   decision_note: string;
@@ -82,6 +90,9 @@ export interface Configuration {
   mean_cost_usd_per_task?: number | null;
   median_cost_per_task_usd?: number | null;
   median_cost_usd_per_task?: number | null;
+  task_cache_read_tokens?: number | null;
+  task_input_tokens?: number | null;
+  task_output_tokens?: number | null;
 }
 export interface Mapping extends Omit<Configuration, "model"> {
   point_id: string;

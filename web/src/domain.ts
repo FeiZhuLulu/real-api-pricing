@@ -1,4 +1,4 @@
-import type { State, SiteData, Row, Point, Group, FilterKey, Lang } from "./types";
+import type { State, SiteData, Row, Point, Group, FilterKey, Lang, Mapping } from "./types";
 import feeBandDefinitions from "../../config/allowance-fee-bands.json";
 import { channelColors, FALLBACK_COLOR } from "./palette";
 export const feeBands = feeBandDefinitions;
@@ -197,52 +197,71 @@ export function zeroSlot(prices: number[]): number {
   return (priced.length ? Math.min(...priced) : 0.001) / ZERO_SLOT_RATIO;
 }
 export type ChartPrice = "token" | "task";
-/**
- * Cost of one task at this point's token price. The archived benchmark cost is
- * the source model's token price × tokens used; scaling it by this point's
- * effective/public blended price preserves the measured token usage while
- * making subscriptions and APIs comparable on the same task axis.
- */
-export function taskPrice(row: Row, fallbackCost?: number): number | null {
-  const sourceCost =
-    row.mapping?.mean_cost_usd_per_task ??
-    row.mapping?.median_cost_usd_per_task ??
-    row.mapping?.median_cost_per_task_usd ??
-    fallbackCost ??
-    null;
-  if (sourceCost === null || !Number.isFinite(sourceCost) || sourceCost < 0)
+type TaskTokens = Mapping & {
+  task_cache_read_tokens: number;
+  task_input_tokens: number;
+  task_output_tokens: number;
+};
+const validTaskAmount = (value: number | null | undefined): value is number =>
+  typeof value === "number" && Number.isFinite(value) && value >= 0;
+const hasTaskTokens = (
+  mapping: Mapping | null | undefined,
+): mapping is TaskTokens =>
+  validTaskAmount(mapping?.task_cache_read_tokens) &&
+  validTaskAmount(mapping?.task_input_tokens) &&
+  validTaskAmount(mapping?.task_output_tokens);
+const reportedTaskCost = (mapping: Mapping | null | undefined): number | null =>
+  [
+    mapping?.mean_cost_usd_per_task,
+    mapping?.median_cost_usd_per_task,
+    mapping?.median_cost_per_task_usd,
+  ].find(validTaskAmount) ?? null;
+const hasTaskData = (mapping: Mapping | null | undefined): boolean =>
+  reportedTaskCost(mapping) !== null || hasTaskTokens(mapping);
+/** List-price task worth scaled by the plan's discount at its workload mix. */
+export function taskPrice(row: Row, fallback?: Mapping): number | null {
+  const source = hasTaskData(row.mapping) ? row.mapping : fallback;
+  if (!source || !hasTaskData(source)) return null;
+  if (isUnmetered(row.point)) return 0;
+  const reference = row.point.task_reference_price;
+  const refBlend = row.point.task_reference_usd_per_mtok;
+  if (
+    !reference ||
+    refBlend === null ||
+    refBlend === undefined ||
+    !Number.isFinite(refBlend) ||
+    refBlend <= 0
+  )
     return null;
-  const publicPrice = row.point.list_blended_usd_per_mtok;
-  if (publicPrice !== null && Number.isFinite(publicPrice) && publicPrice > 0)
-    return sourceCost * (row.point.real_usd_per_mtok / publicPrice);
-  return sourceCost;
+  const worth = hasTaskTokens(source)
+    ? (source.task_cache_read_tokens * reference.cached +
+        source.task_input_tokens * reference.input +
+        source.task_output_tokens * reference.output) /
+      1e6
+    : reportedTaskCost(source);
+  if (worth === null || !Number.isFinite(worth) || worth < 0) return null;
+  return worth * (row.point.real_usd_per_mtok / refBlend);
 }
-/** Best available source task cost for each point, used when a board's own
- * reference has no task-cost field (for example AA Intelligence). */
-export function taskCostMap(data: SiteData): Map<string, number> {
-  const out = new Map<string, { score: number; cost: number }>();
+/** Highest-score task reference for each point, used when its board lacks one. */
+export function taskSourceMap(data: SiteData): Map<string, Mapping> {
+  const out = new Map<string, Mapping>();
   for (const m of data.mappings) {
-    const cost =
-      m.mean_cost_usd_per_task ??
-      m.median_cost_usd_per_task ??
-      m.median_cost_per_task_usd ??
-      null;
-    if (cost === null || !Number.isFinite(cost) || cost < 0) continue;
+    if (!hasTaskData(m)) continue;
     const current = out.get(m.point_id);
-    if (!current || m.score > current.score) out.set(m.point_id, { score: m.score, cost });
+    if (!current || m.score > current.score) out.set(m.point_id, m);
   }
-  return new Map([...out].map(([pointId, value]) => [pointId, value.cost]));
+  return out;
 }
 export function groups(
   rows: Row[],
   chartPrice: ChartPrice = "token",
-  taskCosts?: ReadonlyMap<string, number>,
+  taskSources?: ReadonlyMap<string, Mapping>,
 ): Group[] {
   const map = new Map<string, Group>();
   for (const r of rows) {
     const x =
       chartPrice === "task"
-        ? taskPrice(r, taskCosts?.get(r.point.id))
+        ? taskPrice(r, taskSources?.get(r.point.id))
         : r.point.real_usd_per_mtok;
     const canPlot =
       x !== null &&

@@ -29,7 +29,7 @@ import {
   colorAlpha,
   price,
   number,
-  taskCostMap,
+  taskSourceMap,
   unmeteredNote,
   selfReportTag,
   variantLabel,
@@ -584,10 +584,10 @@ export default function Chart({
   const height = mobile ? 430 : Math.round(Math.min(600, Math.max(470, width * 0.44)));
 
   const taskMode = state.view === "task";
-  const taskCosts = useMemo(() => taskCostMap(data), [data]);
+  const taskSources = useMemo(() => taskSourceMap(data), [data]);
   const gs = useMemo(
-    () => groups(rows, taskMode ? "task" : "token", taskCosts),
-    [rows, taskMode, taskCosts],
+    () => groups(rows, taskMode ? "task" : "token", taskSources),
+    [rows, taskMode, taskSources],
   );
   const front = useMemo(() => pareto(gs), [gs]);
   const frontKeys = useMemo(() => new Set(front.map((g) => g.key)), [front]);

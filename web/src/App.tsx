@@ -76,7 +76,7 @@ import {
   firstUrl,
   isChartView,
   mappingNoteLabel,
-  taskCostMap,
+  taskSourceMap,
 } from "./domain";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
@@ -390,10 +390,10 @@ function Explorer({
     [data, view, selected, vendors, channels, plans, billing, confidence, feeBand],
   );
   const axis = useMemo(() => barAxis(data, view), [data, view]);
-  const taskCosts = useMemo(() => taskCostMap(data), [data]);
+  const taskSources = useMemo(() => taskSourceMap(data), [data]);
   const gs = useMemo(
-    () => groups(rows, view === "task" ? "task" : "token", taskCosts),
-    [rows, view, taskCosts],
+    () => groups(rows, view === "task" ? "task" : "token", taskSources),
+    [rows, view, taskSources],
   );
   const front = useMemo(() => pareto(gs), [gs]);
   const frontRows = useMemo(
@@ -803,8 +803,8 @@ function Explorer({
                     {state.view === "task" && (
                       <span>
                         {t(
-                          "Task price uses reported task-token usage, scaled by each point's token price; matching model references fill gaps between leaderboards.",
-                          "任务价格采用报告的任务 token 用量并按各点 token 价格折算；榜单之间缺失时使用匹配模型参考。",
+                          "Task price = the benchmark's per-task tokens (or its reported task cost when no token breakdown exists) priced at the model's list rates in the benchmark's own token mix, times each plan's discount versus list at its own workload mix. Models without a reference list price are omitted; matching model references fill gaps between leaderboards.",
+                          "任务价格＝评测每任务 token（无分项时用报告的任务成本）按该模型标价、以评测自身的 token 构成计价，再乘以各套餐在其负载档下相对标价的折扣。缺少参考标价的模型不绘制；榜单之间缺失时使用匹配模型参考。",
                         )}
                       </span>
                     )}
@@ -1008,8 +1008,8 @@ function Explorer({
                   <p>
                     {state.view === "task" && pts.length
                       ? t(
-                          "No matching benchmark references report a task cost for this selection. Their token-price data is still available in the token-price chart and table.",
-                          "当前选择没有匹配的评测参考报告任务成本。token 价格图和数据表仍保留这些数据。",
+                          "No matching benchmark reference in this selection has both a task cost (or token usage) and a reference list price. Their token-price data is still available in the token-price chart and table.",
+                          "当前选择中没有同时具备任务成本（或 token 用量）与参考标价的评测参考。token 价格图和数据表仍保留这些数据。",
                         )
                       : pts.length
                       ? t(

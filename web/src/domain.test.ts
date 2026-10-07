@@ -51,7 +51,7 @@ import {
   searchMatches,
   serialize,
   tableRows,
-  taskCostMap,
+  taskSourceMap,
   taskPrice,
   visiblePoints,
   workloadLine,
@@ -264,21 +264,115 @@ test("All boards preserve all references; optional summary takes only matching m
     }
   }
 });
-test("Task-price chart scales reported task usage by each point's token price", () => {
-  const p = data.points.find((x) => x.id === "chatgpt_plus::gpt-5.6-sol")!;
-  const m = data.mappings.find(
-    (x) => x.point_id === p.id && x.board === "aa_coding_agent_index",
-  )!;
-  const r: Row = { key: "task", point: p, mapping: m, score: m.score };
-  assert.equal(
-    taskPrice(r),
-    m.mean_cost_usd_per_task! * (p.real_usd_per_mtok / p.list_blended_usd_per_mtok!),
+const closeTo = (actual: number | null | undefined, expected: number) => {
+  assert.ok(actual !== null && actual !== undefined && Number.isFinite(actual));
+  assert.ok(
+    Math.abs(actual - expected) <= Math.abs(expected) * 1e-9,
+    `expected ${actual} to be close to ${expected}`,
   );
-  const fallback = taskCostMap(data);
-  const aaRows = rowsFor(data, { ...defaultState(), view: "task" });
-  const taskGroups = groups(aaRows, "task", fallback);
-  assert.ok(taskGroups.length > 0, "AA Intelligence can use matching model task references");
-  assert.ok(taskGroups.every((g) => g.price > 0 || isUnmetered(g.rows[0].point)));
+};
+const pointFor = (id: string) => data.points.find((point) => point.id === id)!;
+const mappingFor = (pointId: string, board: string) =>
+  data.mappings.find((mapping) => mapping.point_id === pointId && mapping.board === board)!;
+const rowFor = (pointId: string, board: string): Row => {
+  const mapping = mappingFor(pointId, board);
+  return { key: pointId, point: pointFor(pointId), mapping, score: mapping.score };
+};
+
+test("Task price scales reported task cost by the reference price", () => {
+  const row = rowFor("chatgpt_plus::gpt-5.6-sol", "aa_coding_agent_index");
+  const mapping = row.mapping!;
+  closeTo(
+    taskPrice(row),
+    mapping.mean_cost_usd_per_task! *
+      (row.point.real_usd_per_mtok / row.point.task_reference_usd_per_mtok!),
+  );
+});
+test("Models without a task reference price are omitted", () => {
+  const point = pointFor("command_code_goat::glm-5.2");
+  assert.equal(point.task_reference_price, null);
+  for (const mapping of data.mappings.filter((item) => item.point_id === point.id)) {
+    const row: Row = { key: point.id, point, mapping, score: mapping.score };
+    assert.equal(taskPrice(row), null);
+  }
+  for (const board of Object.keys(data.boards)) {
+    const rows = rowsFor(data, {
+      ...defaultState(),
+      view: "task",
+      board,
+      configuration: "all",
+    });
+    const taskGroups = groups(rows, "task", taskSourceMap(data));
+    assert.ok(taskGroups.every((group) => group.rows.every((row) => row.point.id !== point.id)));
+  }
+});
+test("Task price preserves plan price ratios for OpenDesign references", () => {
+  const plus = rowFor("chatgpt_plus::gpt-6-astra", "open_design_arena");
+  const pro = rowFor("chatgpt_pro_20x::gpt-6-astra", "open_design_arena");
+  const plusPrice = taskPrice(plus)!;
+  const proPrice = taskPrice(pro)!;
+  assert.notEqual(plus.point.real_usd_per_mtok, pro.point.real_usd_per_mtok);
+  closeTo(
+    plusPrice / proPrice,
+    plus.point.real_usd_per_mtok / pro.point.real_usd_per_mtok,
+  );
+});
+test("OpenDesign token usage is repriced at the GPT-6 Sol reference rates", () => {
+  const row = rowFor("chatgpt_plus::gpt-6-sol", "open_design_arena");
+  const mapping = row.mapping!;
+  assert.ok(Math.abs(row.point.task_reference_usd_per_mtok! - 0.294) <= 1e-6);
+  const expected =
+    ((mapping.task_cache_read_tokens! * 0.2 +
+      mapping.task_input_tokens! * 2 +
+      mapping.task_output_tokens! * 10) /
+      1e6) *
+    (row.point.real_usd_per_mtok / 0.294);
+  closeTo(taskPrice(row), expected);
+});
+test("Anthropic task references use the cache-write workload rate", () => {
+  const row = rowFor("anthropic_fable51_api::claude-fable-5.1", "arena_agent_mode");
+  const median =
+    row.mapping!.median_cost_usd_per_task ??
+    row.mapping!.median_cost_per_task_usd!;
+  assert.ok(Math.abs(row.point.task_reference_usd_per_mtok! - 0.805) <= 1e-6);
+  closeTo(taskPrice(row), median);
+});
+test("Gemini 3.8 Flash uses the low-cache reference mix", () => {
+  const point = pointFor("google_ai_pro_us::gemini-3.8-flash");
+  assert.ok(Math.abs(point.task_reference_usd_per_mtok! - 0.19125) <= 1e-6);
+});
+test("Terminal-Bench Gemini 3.8 Flash tokens reproduce its task cost", () => {
+  const config = data.configurations.find(
+    (item) => item.board === "terminal_bench_4" && item.model === "gemini-3.8-flash",
+  )!;
+  const tokenCost =
+    (config.task_cache_read_tokens! * 0.075 +
+      config.task_input_tokens! * 0.75 +
+      config.task_output_tokens! * 3.75) /
+    1e6;
+  assert.ok(
+    Math.abs(tokenCost - config.mean_cost_usd_per_task!) <=
+      config.mean_cost_usd_per_task! * 0.02,
+  );
+});
+test("Every task group has a task reference or an unmetered point", () => {
+  const taskSources = taskSourceMap(data);
+  for (const board of Object.keys(data.boards)) {
+    const rows = rowsFor(data, {
+      ...defaultState(),
+      view: "task",
+      board,
+      configuration: "all",
+    });
+    const taskGroups = groups(rows, "task", taskSources);
+    for (const group of taskGroups) {
+      for (const row of group.rows) {
+        assert.ok(
+          (row.point.task_reference_usd_per_mtok ?? 0) > 0 || isUnmetered(row.point),
+        );
+      }
+    }
+  }
   assert.equal(restore("#lang=en&view=task", data).state.view, "task");
 });
 test("Channels and model developers are separate, and filter dimensions intersect", () => {
