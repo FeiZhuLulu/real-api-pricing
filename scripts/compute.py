@@ -9,6 +9,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
+import build_adopted
 from benchmark_configs import configuration, candidates, routed_board, score_fields
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -139,8 +140,50 @@ def load_list_prices() -> dict[str, dict]:
     return out
 
 
+def task_reference_prices(list_prices: dict[str, dict]) -> dict[str, dict]:
+    references = {}
+    for model, price in list_prices.items():
+        rate = CONVENTIONS["usdPerCny"] if price["currency"] == "CNY" else 1
+        references[model] = dict(
+            cached=price["cached"] / rate,
+            input=price["input"] / rate,
+            output=price["output"] / rate,
+            source="list_prices",
+        )
+    for plan_id, _name, model, cached, inp, out, _source in build_adopted.METERED:
+        references.setdefault(model, dict(
+            cached=cached, input=inp, output=out, source=f"metered_api:{plan_id}",
+        ))
+    derivations = {
+        "gpt-6-sol": build_adopted.GPT6_SOL_LIST,
+        "gpt-6-luna": build_adopted.GPT6_LUNA_LIST,
+        "gpt-6.1-sol": build_adopted.GPT61_SOL_LIST,
+        "gpt-6-astra": build_adopted.GPT6_ASTRA_LIST,
+        "gemini-3.8-flash": build_adopted.GEMINI_FLASH_LIST,
+        "gemini-3.6-flash": build_adopted.GEMINI_FLASH_LIST,
+    }
+    for model, (cached, inp, out) in derivations.items():
+        references.setdefault(model, dict(
+            cached=cached, input=inp, output=out, source="derivation_list",
+        ))
+    for model, reference in references.items():
+        reference["cache_write"] = build_adopted.ANTHROPIC_CACHE_WRITE_5M.get(model)
+    return references
+
+
+def task_reference_blend(reference: dict, workload: str) -> float:
+    cached, inp, out = reference["cached"], reference["input"], reference["output"]
+    if workload == "lowCache":
+        return build_adopted.blended_low(cached, inp, out)
+    if workload == "anthropic":
+        write = reference["cache_write"] if reference["cache_write"] is not None else inp
+        return build_adopted.blended_anthropic(cached, write, out)
+    return build_adopted.blended(cached, inp, out)
+
+
 def main() -> None:
     scores, list_prices = load_scores(), load_list_prices()
+    reference_prices = task_reference_prices(list_prices)
     boards_meta = {b["boardId"]: b for archive in score_archives() if not archive.get("supplement") for b in archive["boards"]}
     # supplement 档案可以声明新榜（如 aa_terminal_bench_4）的元数据；已存在榜仍以快照档为准。
     for archive in score_archives():
@@ -155,6 +198,12 @@ def main() -> None:
             real = float(r["real_usd_per_mtok"])
             lp = list_prices.get(model)
             lb = lp["blended_usd"] if lp else None
+            reference = reference_prices.get(model)
+            if reference:
+                task_reference_price = dict(reference)
+                task_reference_usd_per_mtok = task_reference_blend(task_reference_price, r.get("workload") or "")
+            else:
+                task_reference_price = task_reference_usd_per_mtok = None
             plan_en = r.get("plan_name_en") or None
             gen = r.get("plan_gen") or ""
             gen_tag = f" ({gen})" if gen else ""
@@ -165,6 +214,8 @@ def main() -> None:
                 label=r["plan_name"] if r["billing"] == "metered" else f"{DISPLAY.get(model, model)}{gen_tag} · {r['plan_name']}",
                 workload=r.get("workload") or "",
                 list_price={k: lp[k] for k in ("cached", "input", "output", "currency")} if lp else None,
+                task_reference_price=task_reference_price,
+                task_reference_usd_per_mtok=round(task_reference_usd_per_mtok, 6) if task_reference_usd_per_mtok is not None else None,
                 price_usd=float(r["price_usd"]) if r["price_usd"] else None,
                 monthly_yi=float(r["monthly_yi"]) if r["monthly_yi"] else None,
                 real_usd_per_mtok=real, list_blended_usd_per_mtok=round(lb, 4) if lb else None,
@@ -173,6 +224,8 @@ def main() -> None:
                 data_date=r.get("data_date") or None, data_date_kind=r.get("data_date_kind") or None,
                 data_date_from=r.get("data_date_from") or None,
             )
+            if p["workload"] == "standard" and lp:
+                assert abs(task_reference_usd_per_mtok - lb) < 1e-5
             for b in BOARDS:
                 options = candidates(r, scores, b)
                 # Explicit optional summary projection; full configuration rows are also published.

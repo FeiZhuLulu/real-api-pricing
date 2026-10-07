@@ -71,6 +71,7 @@ assert sum(CHATGPT_PLUS_LUNA_SEGMENT.values()) == CHATGPT_PLUS_LUNA_USED_TOKENS
 GPT6_SOL_LIST = (0.2, 2.0, 10.0)       # $2/$10 为 AA 页标价；cached 按 0.1× 推定
 GPT6_LUNA_LIST = (0.01, 0.1, 0.5)      # scores-gpt6luna-round1 存档 AA 标价；cached 按 0.1× 推定
 GPT61_SOL_LIST = (0.1, 2.0, 10.0)      # GPT-6.1 Sol 官方价：learn.chatgpt.com token rates credits 2.5/50/250 ÷25；developers.openai.com $2/$0.10/$10（cached=输入5%，写$2.5段内为0）
+GPT6_ASTRA_LIST = (1.0, 10.0, 50.0)
 GPT56_LUNA_LIST = (0.02, 0.2, 1.2)     # METERED openai_luna_api（1:10:60）
 GROK_LIST = (0.5, 2.0, 6.0)            # Grok 4.6/4.7 <200K 官方 API 价（docs.x.ai）
 GEMINI_FLASH_LIST = (0.075, 0.75, 3.75)  # Gemini Flash 引入价至 2026-12-31（gemini-weekly-round7）
@@ -360,7 +361,7 @@ def devin_max_astra_monthly_yi() -> float:
     # 段 worth ÷87% ×4周 ÷ 标准负载混合价 $1.47/MTok（2026-09-24 裁定）
     return round(
         devin_max_astra_segment_worth_usd() / DEVIN_MAX_ASTRA_USED_FRACTION
-        * MONTH_WEEKS / blended(1.0, 10.0, 50.0) / 100,
+        * MONTH_WEEKS / blended(*GPT6_ASTRA_LIST) / 100,
         2,
     )
 

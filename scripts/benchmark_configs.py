@@ -65,6 +65,38 @@ def configuration(record, archive):
     if harness is None and record["boardId"] == "open_design_arena":
         harness = "OpenDesign"
     minus, plus = secondary.get("ciMinus"), secondary.get("ciPlus")
+    task_cache_read_tokens = task_input_tokens = task_output_tokens = None
+    if record["boardId"] == "open_design_arena":
+        input_tokens = secondary.get("inputTokens")
+        cache_hit = secondary.get("cacheHit")
+        output_tokens = secondary.get("outputTokens")
+        if input_tokens is not None and cache_hit is not None and output_tokens is not None:
+            task_cache_read_tokens = input_tokens * cache_hit / 100
+            task_input_tokens = input_tokens - task_cache_read_tokens
+            task_output_tokens = output_tokens
+    elif record["boardId"] == "terminal_bench_4":
+        n_trials = secondary.get("nTrials")
+        cached = secondary.get("cachedInputTokens")
+        uncached = secondary.get("uncachedInputTokens")
+        output = secondary.get("outputTokens")
+        total = secondary.get("totalTokens")
+        if (n_trials and cached is not None and uncached is not None and output is not None
+                and total is not None):
+            if total == uncached + output:
+                fresh = uncached - cached
+            elif total == cached + uncached + output:
+                fresh = uncached
+            else:
+                fresh = None
+            if fresh is not None and fresh >= 0:
+                task_cache_read_tokens = cached / n_trials
+                task_input_tokens = fresh / n_trials
+                task_output_tokens = output / n_trials
+    mean_cost = secondary.get("meanCostUsdPerTask")
+    if mean_cost is None:
+        mean_cost = secondary.get("cost")
+    if mean_cost is None and record["boardId"] == "terminal_bench_4":
+        mean_cost = secondary.get("costUsdPerTrialTask")
     return dict(
         configuration_id=cid, board=board, model=model,
         variant=label + (" [AA estimate]" if estimated else "") + (" [vendor self-report]" if self_reported else ""),
@@ -74,8 +106,11 @@ def configuration(record, archive):
                      if record["model"] == "composer-2.5" else None,
         score=record["score"], score_low=record["score"] - minus if minus is not None else None,
         score_high=record["score"] + plus if plus is not None else None,
-        mean_cost_usd_per_task=secondary.get("meanCostUsdPerTask", secondary.get("cost")),
+        mean_cost_usd_per_task=mean_cost,
         median_cost_usd_per_task=secondary.get("medianCostPerTaskUsd"),
+        task_cache_read_tokens=task_cache_read_tokens,
+        task_input_tokens=task_input_tokens,
+        task_output_tokens=task_output_tokens,
         source=record.get("source"), checked_at=record.get("checkedAt"), archive=archive,
         raw_record=record,
     )
@@ -104,7 +139,8 @@ def mapping(record):
 
 def score_fields(record):
     keys = ("configuration_id", "variant", "score", "score_is_estimated", "score_is_self_reported", "agent_harness", "reasoning_effort", "service_mode",
-            "score_low", "score_high", "mean_cost_usd_per_task", "median_cost_usd_per_task", "source")
+            "score_low", "score_high", "mean_cost_usd_per_task", "median_cost_usd_per_task",
+            "task_cache_read_tokens", "task_input_tokens", "task_output_tokens", "source")
     fields = {k: record[k] if record else None for k in keys}
     fields.update(mapping(record) if record else {k: None for k in
                   ("mapping_kind", "mapping_confidence", "mapping_note", "quota_effort_matched")})

@@ -52,7 +52,12 @@ for c, (file, record) in zip(configs, expected):
     assert c["archive"] == file and c["raw_record"] == record
     sec = record.get("secondary", {})
     assert c["score_is_estimated"] == sec.get("intelligenceIndexIsEstimated", record.get("scoreIsEstimated"))
-    assert c["mean_cost_usd_per_task"] == sec.get("meanCostUsdPerTask", sec.get("cost"))
+    expected_mean = sec.get("meanCostUsdPerTask")
+    if expected_mean is None:
+        expected_mean = sec.get("cost")
+    if expected_mean is None and record["boardId"] == "terminal_bench_4":
+        expected_mean = sec.get("costUsdPerTrialTask")
+    assert c["mean_cost_usd_per_task"] == expected_mean
     assert c["median_cost_usd_per_task"] == sec.get("medianCostPerTaskUsd")
     assert c["score_low"] == (record["score"] - sec["ciMinus"] if "ciMinus" in sec else None)
     assert c["score_high"] == (record["score"] + sec["ciPlus"] if "ciPlus" in sec else None)
