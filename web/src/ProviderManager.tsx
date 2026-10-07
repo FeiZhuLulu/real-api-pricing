@@ -15,6 +15,17 @@ import {
   realPriceUsd,
   type CustomProvider,
 } from "./customProviders";
+import { GlassCombobox, GlassSelect, type GlassGroup } from "./GlassSelect";
+
+const CURRENCY_GROUPS: GlassGroup[] = [
+  {
+    label: "",
+    options: [
+      { value: "USD", label: "USD $" },
+      { value: "CNY", label: "CNY ¥" },
+    ],
+  },
+];
 
 interface DraftModel {
   model: string;
@@ -144,6 +155,11 @@ export default function CustomProvidersPanel({
   }, [data]);
   const knownSlugs = useMemo(
     () => new Set(knownModels.map(([slug]) => slug)),
+    [knownModels],
+  );
+  /** Known slugs for the combobox: the slug itself, with its name as hint. */
+  const slugOptions = useMemo(
+    () => knownModels.map(([slug, display]) => ({ value: slug, label: slug, hint: display })),
     [knownModels],
   );
 
@@ -299,23 +315,17 @@ export default function CustomProvidersPanel({
         <h3 className="form-section">
           {t("Models & prices", "模型与价格")}
         </h3>
-        <datalist id="known-model-slugs">
-          {knownModels.map(([slug, display]) => (
-            <option key={slug} value={slug}>
-              {display}
-            </option>
-          ))}
-        </datalist>
         {draft.models.map((m, i) => (
           <div className="model-row" key={i}>
             <div className="model-row-head">
               <label>
                 <span>{t("Model slug", "模型标识")}</span>
-                <input
-                  list="known-model-slugs"
+                <GlassCombobox
                   value={m.model}
-                  onChange={(e) => patchModel(i, { model: e.target.value })}
+                  onChange={(v) => patchModel(i, { model: v })}
+                  options={slugOptions}
                   placeholder="deepseek-v4.1-flash"
+                  ariaLabel={t("Model slug", "模型标识")}
                 />
               </label>
               <label>
@@ -328,15 +338,13 @@ export default function CustomProvidersPanel({
               </label>
               <label>
                 <span>{t("Currency", "币种")}</span>
-                <select
+                <GlassSelect
                   value={m.currency}
-                  onChange={(e) =>
-                    patchModel(i, { currency: e.target.value as "USD" | "CNY" })
-                  }
-                >
-                  <option value="USD">USD $</option>
-                  <option value="CNY">CNY ¥</option>
-                </select>
+                  groups={CURRENCY_GROUPS}
+                  onChange={(v) => patchModel(i, { currency: v as "USD" | "CNY" })}
+                  placeholder={t("Currency", "币种")}
+                  ariaLabel={t("Currency", "币种")}
+                />
               </label>
               <button
                 className="icon-button danger"
