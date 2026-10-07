@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Plus, X } from "@phosphor-icons/react";
 import type { Point, Row, State } from "./types";
 import ProviderLogo from "./ProviderLogo";
@@ -18,8 +18,9 @@ import {
 } from "./domain";
 
 const LETTERS = ["A", "B", "C"];
-const BAR_H = 34;
-const OFFSET = 20;
+const LANE_H = 28;
+const LANE_GAP = 10;
+const LANE_STEP = LANE_H + LANE_GAP;
 
 /** One comparison slot; `id` stays empty until a model has been picked. */
 type Slot = { plan: string; id: string };
@@ -116,6 +117,22 @@ export default function AllowanceCompare({
   });
   const ready = items.length >= 2;
 
+  // Measured plot width lets a tag near the right edge move inside the bar
+  // before its ~104px would overflow the card. The callback ref re-attaches
+  // whenever the plot mounts (it exists only once `ready`).
+  const [plotW, setPlotW] = useState(0);
+  const plotRef = useCallback((el: HTMLDivElement | null) => {
+    if (!el) {
+      setPlotW(0);
+      return;
+    }
+    const update = () => setPlotW(el.clientWidth);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   const values = items.map((x) => x.value);
   const axis = compareAxis(ready ? values : [1], zoom);
   // English shows billions (yi / 10), so its ticks need one more decimal.
@@ -123,7 +140,7 @@ export default function AllowanceCompare({
   const max = Math.max(...values),
     min = Math.min(...values);
   const base = values[0];
-  const plotH = BAR_H + (items.length - 1) * OFFSET;
+  const plotH = items.length * LANE_H + (items.length - 1) * LANE_GAP;
   const delta = (v: number) => {
     const diff = v - base;
     if (diff === 0) return zh ? "与基准相同" : "same as baseline";
@@ -236,7 +253,7 @@ export default function AllowanceCompare({
               : ` · axis starts at ${yi(axis.start)} to magnify the gap`)}
         </p>
         <div className="compare-track">
-          <div className="compare-plot" style={{ height: plotH }}>
+          <div className="compare-plot" ref={plotRef} style={{ height: plotH }}>
             {axis.ticks.map((v) => (
               <i key={v} className="compare-grid" style={{ left: `${axis.pct(v)}%` }} />
             ))}
@@ -251,30 +268,39 @@ export default function AllowanceCompare({
                 key={p.id}
                 className="compare-bar"
                 style={{
-                  top: i * OFFSET,
-                  height: BAR_H,
+                  top: i * LANE_STEP,
+                  height: LANE_H,
                   width: `${axis.pct(value)}%`,
                   background: fill,
-                  zIndex: i + 1,
+                  // A truncated axis cuts the bar's left end, so only the
+                  // right corners are rounded then.
+                  borderRadius: axis.start > 0 ? "0 8px 8px 0" : "8px",
                 }}
                 title={`${LETTERS[slot]} · ${p.model_display} · ${displayPlan(p.plan, state.lang)} · ${yi(value)}`}
                 onClick={() => onSelect([rowFor(p)])}
               />
             ))}
-            {items.map(({ p, slot, value }, i) => (
-              <span
-                key={p.id}
-                className="compare-tag"
-                style={{
-                  left: `${axis.pct(value)}%`,
-                  top: i * OFFSET + (i < items.length - 1 ? OFFSET / 2 : BAR_H / 2),
-                  zIndex: items.length + 1,
-                }}
-              >
-                <small>{LETTERS[slot]}</small>
-                {yi(value)}
-              </span>
-            ))}
+            {items.map(({ p, slot, value }, i) => {
+              const pct = axis.pct(value);
+              // Near the right edge the tag moves inside the bar so it can
+              // never overflow the card — either when the bar crosses 80% of
+              // the track, or when the space left cannot fit the ~104px tag.
+              const inside =
+                pct > 80 || (plotW > 0 && ((100 - pct) / 100) * plotW < 104);
+              return (
+                <span
+                  key={p.id}
+                  className={`compare-tag${inside ? " compare-tag-in" : ""}`}
+                  style={{
+                    left: `${pct}%`,
+                    top: i * LANE_STEP + LANE_H / 2,
+                  }}
+                >
+                  <small>{LETTERS[slot]}</small>
+                  {yi(value)}
+                </span>
+              );
+            })}
             {axis.start > 0 && (
               <svg className="compare-break" width="14" height={plotH + 8} aria-hidden="true">
                 <path d={`M3 0 L11 ${(plotH + 8) / 2} L3 ${plotH + 8}`} />
@@ -315,7 +341,7 @@ export default function AllowanceCompare({
         ) : (
           <div className="compare-placeholder">
             {zh
-              ? `已选好 ${items.length} / 2 项。套餐和模型都选定后，这里显示错位叠放的对比条。`
+              ? `已选好 ${items.length} / 2 项。套餐和模型都选定后，这里显示并排对比条。`
               : `${items.length} of 2 items ready. Bars appear once each has a plan and a model.`}
           </div>
         )}

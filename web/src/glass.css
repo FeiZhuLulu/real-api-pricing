@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Liquid-glass pickers (GlassSelect.tsx): trigger styles match the site's
+   inputs; the popup is a translucent top-layer surface that always scrolls.
+   ========================================================================== */
+.gs {
+  display: inline-block;
+  max-width: 100%;
+}
+.gs-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+.gs-trigger:hover:not(:disabled) {
+  background: var(--surface-3);
+  border-color: var(--line-strong);
+}
+.gs-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.gs-trigger.is-empty .gs-value {
+  color: var(--faint);
+}
+.gs-value {
+  flex: 1;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gs-chevron {
+  flex-shrink: 0;
+  color: var(--faint);
+  transition: transform 0.15s var(--ease);
+}
+.gs-trigger[aria-expanded="true"] .gs-chevron,
+.gs-field.is-open .gs-chevron {
+  transform: rotate(180deg);
+}
+/* Combobox: a plain field wrapping a borderless input and a chevron button. */
+.gs-field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  transition: border-color 0.15s var(--ease);
+}
+.gs-field:focus-within {
+  border-color: var(--line-strong);
+}
+.gs-field input {
+  flex: 1;
+  min-width: 0;
+  min-height: 32px;
+  padding: 7px 4px 7px 11px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 13px;
+  outline: none;
+}
+.gs-combo-btn {
+  flex: none;
+  min-height: 0;
+  height: 32px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--faint);
+}
+.gs-combo-btn:hover {
+  border-color: transparent;
+  background: none;
+  color: var(--ink);
+}
+.gs-combo-btn:active:not(:disabled) {
+  transform: none;
+}
+
+/* The popup lives in the top layer; fixed coords come from the component. */
+.gs-pop {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 18px 48px -12px rgba(22, 25, 29, 0.28),
+    0 2px 8px rgba(22, 25, 29, 0.1);
+  overflow: hidden;
+  animation: gs-in 0.14s var(--ease);
+}
+/* :popover-open wins over the UA's display:block, keeping the column flex. */
+.gs-pop:popover-open {
+  display: flex;
+}
+.gs-search {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+  padding: 5px 9px;
+  border: 1px solid var(--line-2);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  color: var(--faint);
+}
+.gs-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 13px;
+  outline: none;
+}
+.gs-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.gs-group {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 4px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.gs-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.gs-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  color: var(--ink-2);
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.gs-opt.is-active {
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+.gs-opt[aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.gs-opt[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+.gs-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gs-ic {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.gs-check {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.gs-hint {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.gs-empty {
+  padding: 20px 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+@keyframes gs-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+:root[data-theme="dark"] .gs-pop {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 18px 48px -12px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+:root[data-theme="dark"] .gs-dot {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-pop {
+    animation: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .gs-pop,
+  .gs-group,
+  .gs-search {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

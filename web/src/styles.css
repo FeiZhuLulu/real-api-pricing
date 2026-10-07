@@ -1504,7 +1504,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .plan-card-row {
   width: calc(100% + 12px);
   display: grid;
-  grid-template-columns: 22px minmax(112px, 1.3fr) minmax(64px, 1fr) auto;
+  grid-template-columns: 22px minmax(112px, 1.3fr) minmax(120px, 2fr) auto;
   align-items: center;
   gap: 12px;
   min-height: 46px;
@@ -1566,7 +1566,7 @@ input[type="search"]::-webkit-search-cancel-button {
   color: var(--muted);
   font-size: 13px;
 }
-.card-picker select {
+.card-picker .gs-trigger {
   max-width: 280px;
 }
 select:disabled {
@@ -1667,7 +1667,7 @@ select:disabled {
   font-size: 13px;
   text-align: center;
 }
-/* Allowance comparison: offset, overlapping bars on a linear axis. */
+/* Allowance comparison: side-by-side bar lanes on a linear axis. */
 .compare-card {
   padding: 20px 22px 10px;
 }
@@ -1702,7 +1702,7 @@ select:disabled {
   align-items: center;
   gap: 8px;
 }
-.compare-slot select {
+.compare-slot .gs-trigger {
   max-width: 280px;
 }
 .compare-key {
@@ -1751,8 +1751,8 @@ select:disabled {
 }
 .compare-gap {
   position: absolute;
-  top: -10px;
-  bottom: -10px;
+  top: 0;
+  bottom: 0;
   background: repeating-linear-gradient(
     -45deg,
     color-mix(in srgb, var(--ink) 9%, transparent) 0 4px,
@@ -1767,8 +1767,6 @@ select:disabled {
   min-height: 0;
   padding: 0;
   border: 0;
-  border-radius: 0 9px 9px 0;
-  box-shadow: 0 0 0 2px var(--surface);
   transition: width 0.35s var(--ease);
 }
 .compare-bar:hover:not(:disabled) {
@@ -1787,6 +1785,7 @@ select:disabled {
   transform: translateY(-50%);
   color: var(--ink-2);
   font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   pointer-events: none;
@@ -1796,6 +1795,15 @@ select:disabled {
   color: var(--faint);
   font-size: 11.5px;
   font-weight: 600;
+}
+/* Tags past ~80% of the track sit inside the bar's right end in white. */
+.compare-tag.compare-tag-in {
+  margin-left: -10px;
+  transform: translate(-100%, -50%);
+  color: #ffffff;
+}
+.compare-tag.compare-tag-in small {
+  color: rgba(255, 255, 255, 0.75);
 }
 .compare-break {
   position: absolute;
@@ -2984,8 +2992,11 @@ tbody tr.sentinel-row {
     flex: 1 1 140px;
     min-width: 0;
   }
-  .card-picker select {
+  .card-picker .gs {
+    display: block;
     width: 100%;
+  }
+  .card-picker .gs-trigger {
     max-width: none;
   }
   .plan-cards {
@@ -3008,8 +3019,11 @@ tbody tr.sentinel-row {
     flex: 1 1 140px;
     min-width: 0;
   }
-  .compare-slot select {
+  .compare-slot .gs {
+    display: block;
     width: 100%;
+  }
+  .compare-slot .gs-trigger {
     max-width: none;
   }
   .compare-track {
