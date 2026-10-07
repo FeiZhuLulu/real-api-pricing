@@ -46,6 +46,8 @@ export const defaultState = (): State => ({
   sort: "price",
   direction: "asc",
 });
+export const isChartView = (view: State["view"]) =>
+  view === "pareto" || view === "task";
 export const color = (p: Point) => colors[p.channel] || FALLBACK_COLOR;
 /** Channel colour at a given alpha, for search-hit rings. */
 export function colorAlpha(p: Point, alpha: number): string {
@@ -134,7 +136,7 @@ export function rowsFor(data: SiteData, s: State): Row[] {
     if (s.configuration === "summary" && mappings.length)
       mappings = [mappings.reduce((a, b) => (a.score >= b.score ? a : b))];
     // The full table shares the chart's per-configuration score rows.
-    if (s.view !== "pareto" && s.view !== "table") {
+    if (!isChartView(s.view) && s.view !== "table") {
       const m = mappings.length
         ? mappings.reduce((a, b) => (a.score >= b.score ? a : b))
         : null;
@@ -194,29 +196,77 @@ export function zeroSlot(prices: number[]): number {
   const priced = prices.filter((v) => v > 0);
   return (priced.length ? Math.min(...priced) : 0.001) / ZERO_SLOT_RATIO;
 }
-export function groups(rows: Row[]): Group[] {
+export type ChartPrice = "token" | "task";
+/**
+ * Cost of one task at this point's token price. The archived benchmark cost is
+ * the source model's token price × tokens used; scaling it by this point's
+ * effective/public blended price preserves the measured token usage while
+ * making subscriptions and APIs comparable on the same task axis.
+ */
+export function taskPrice(row: Row, fallbackCost?: number): number | null {
+  const sourceCost =
+    row.mapping?.mean_cost_usd_per_task ??
+    row.mapping?.median_cost_usd_per_task ??
+    row.mapping?.median_cost_per_task_usd ??
+    fallbackCost ??
+    null;
+  if (sourceCost === null || !Number.isFinite(sourceCost) || sourceCost < 0)
+    return null;
+  const publicPrice = row.point.list_blended_usd_per_mtok;
+  if (publicPrice !== null && Number.isFinite(publicPrice) && publicPrice > 0)
+    return sourceCost * (row.point.real_usd_per_mtok / publicPrice);
+  return sourceCost;
+}
+/** Best available source task cost for each point, used when a board's own
+ * reference has no task-cost field (for example AA Intelligence). */
+export function taskCostMap(data: SiteData): Map<string, number> {
+  const out = new Map<string, { score: number; cost: number }>();
+  for (const m of data.mappings) {
+    const cost =
+      m.mean_cost_usd_per_task ??
+      m.median_cost_usd_per_task ??
+      m.median_cost_per_task_usd ??
+      null;
+    if (cost === null || !Number.isFinite(cost) || cost < 0) continue;
+    const current = out.get(m.point_id);
+    if (!current || m.score > current.score) out.set(m.point_id, { score: m.score, cost });
+  }
+  return new Map([...out].map(([pointId, value]) => [pointId, value.cost]));
+}
+export function groups(
+  rows: Row[],
+  chartPrice: ChartPrice = "token",
+  taskCosts?: ReadonlyMap<string, number>,
+): Group[] {
   const map = new Map<string, Group>();
-  for (const r of rows)
-    if (
-      r.score !== null &&
-      Number.isFinite(r.score) &&
-      (r.point.real_usd_per_mtok > 0 || isUnmetered(r.point))
-    ) {
-      const key = `${r.point.real_usd_per_mtok}|${r.score}`;
+  for (const r of rows) {
+    const x =
+      chartPrice === "task"
+        ? taskPrice(r, taskCosts?.get(r.point.id))
+        : r.point.real_usd_per_mtok;
+    const canPlot =
+      x !== null &&
+      Number.isFinite(x) &&
+      (x > 0 || (x === 0 && isUnmetered(r.point)));
+    if (r.score !== null && Number.isFinite(r.score) && canPlot) {
+      const key = `${x}|${r.score}`;
       const g = map.get(key);
       if (g) g.rows.push(r);
       else
         map.set(key, {
           key,
-          price: r.point.real_usd_per_mtok,
-          plotPrice: r.point.real_usd_per_mtok,
+          price: x!,
+          plotPrice: x!,
           score: r.score,
           rows: [r],
         });
     }
+  }
   const out = [...map.values()];
-  const slot = zeroSlot(out.map((g) => g.price));
-  for (const g of out) if (g.price === 0) g.plotPrice = slot;
+  if (out.some((g) => g.price === 0)) {
+    const slot = zeroSlot(out.map((g) => g.price));
+    for (const g of out) if (g.price === 0) g.plotPrice = slot;
+  }
   return out;
 }
 export function pareto(gs: Group[]): Group[] {
@@ -539,7 +589,7 @@ export function restore(
   let warning = false;
   const enums: Record<string, [keyof State, string[]]> = {
     lang: ["lang", ["en", "zh"]],
-    view: ["view", ["pareto", "price", "allowance", "table", "method"]],
+    view: ["view", ["pareto", "task", "price", "allowance", "table", "method"]],
     config: ["configuration", ["all", "summary"]],
     labels: ["labels", ["frontier", "all", "none"]],
     fee: ["feeBand", ["all", ...feeBands.map((b) => b.id)]],
@@ -614,7 +664,7 @@ function restoreLegacy(
     const enums = {
       feeBand: ["all", ...feeBands.map((b) => b.id)],
       lang: ["en", "zh"],
-      view: ["pareto", "price", "allowance", "method"],
+      view: ["pareto", "task", "price", "allowance", "method"],
       configuration: ["all", "summary"],
       labels: ["frontier", "all", "none"],
       sort: ["price", "model", "plan", "score", "allowance", "fee"],

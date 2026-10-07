@@ -1,7 +1,13 @@
 import type { Lock } from "./domain";
 
 export type Lang = "en" | "zh";
-export type View = "pareto" | "price" | "allowance" | "table" | "method";
+export type View =
+  | "pareto"
+  | "task"
+  | "price"
+  | "allowance"
+  | "table"
+  | "method";
 export interface Point {
   id: string;
   plan_id: string;
@@ -151,7 +157,7 @@ export interface Row {
 }
 export interface Group {
   key: string;
-  /** Real price used for dominance and display; 0 for unmetered points. */
+  /** X-axis price used for dominance and display; 0 for unmetered points. */
   price: number;
   /** Position on the log axis; unmetered groups sit on a dedicated "$0" slot. */
   plotPrice: number;

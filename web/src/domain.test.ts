@@ -29,6 +29,7 @@ import {
   effortLabel,
   firstUrl,
   isThirdParty,
+  isUnmetered,
   manufacturer,
   mappingNoteLabel,
   frontierPath,
@@ -50,6 +51,8 @@ import {
   searchMatches,
   serialize,
   tableRows,
+  taskCostMap,
+  taskPrice,
   visiblePoints,
   workloadLine,
 } from "./domain";
@@ -260,6 +263,23 @@ test("All boards preserve all references; optional summary takes only matching m
       );
     }
   }
+});
+test("Task-price chart scales reported task usage by each point's token price", () => {
+  const p = data.points.find((x) => x.id === "chatgpt_plus::gpt-5.6-sol")!;
+  const m = data.mappings.find(
+    (x) => x.point_id === p.id && x.board === "aa_coding_agent_index",
+  )!;
+  const r: Row = { key: "task", point: p, mapping: m, score: m.score };
+  assert.equal(
+    taskPrice(r),
+    m.mean_cost_usd_per_task! * (p.real_usd_per_mtok / p.list_blended_usd_per_mtok!),
+  );
+  const fallback = taskCostMap(data);
+  const aaRows = rowsFor(data, { ...defaultState(), view: "task" });
+  const taskGroups = groups(aaRows, "task", fallback);
+  assert.ok(taskGroups.length > 0, "AA Intelligence can use matching model task references");
+  assert.ok(taskGroups.every((g) => g.price > 0 || isUnmetered(g.rows[0].point)));
+  assert.equal(restore("#lang=en&view=task", data).state.view, "task");
 });
 test("Channels and model developers are separate, and filter dimensions intersect", () => {
   const s = {

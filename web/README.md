@@ -28,7 +28,7 @@ The raw downloads retain the original computed fields. The smaller website datas
 
 ## Data and behavior
 
-- Four linked views: price–capability scatterplot, real-price ranking, monthly-allowance ranking, and the full table (`#view=table`, which uses the scatterplot's per-configuration score rows for the selected leaderboard). Every leaderboard stays independent; scores are never mixed across boards.
+- Five linked views: token-price × capability scatterplot, task-price × capability scatterplot, real-price ranking, monthly-allowance ranking, and the full table (`#view=table`, which uses the scatterplot's per-configuration score rows for the selected leaderboard). Every leaderboard stays independent; scores are never mixed across boards.
 - One toolbar per view holds model selection, filters, the benchmark-configuration switch (scatterplot and table), the fee bands (allowance), the chart navigation controls (scatterplot) or the search box (rankings and table), and a single result count.
 - All adopted points and all archived benchmark configurations are selected initially. Model selection expands to channels and individual plan/model points. Empty selection is distinct from selecting everything.
 - Filters within one category are ORed; categories are ANDed. Harness, effort, and mode filters restrict benchmark references. Plans without matching scores stay in the table and in price/allowance views. Those ranking views use one row per plan/model, with any table score labeled as the highest matching reference.

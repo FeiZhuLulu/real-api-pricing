@@ -29,6 +29,7 @@ import {
   colorAlpha,
   price,
   number,
+  taskCostMap,
   unmeteredNote,
   selfReportTag,
   variantLabel,
@@ -582,7 +583,12 @@ export default function Chart({
   const mobile = width > 0 && width < 600;
   const height = mobile ? 430 : Math.round(Math.min(600, Math.max(470, width * 0.44)));
 
-  const gs = useMemo(() => groups(rows), [rows]);
+  const taskMode = state.view === "task";
+  const taskCosts = useMemo(() => taskCostMap(data), [data]);
+  const gs = useMemo(
+    () => groups(rows, taskMode ? "task" : "token", taskCosts),
+    [rows, taskMode, taskCosts],
+  );
   const front = useMemo(() => pareto(gs), [gs]);
   const frontKeys = useMemo(() => new Set(front.map((g) => g.key)), [front]);
   const signature = useMemo(() => gs.map((g) => g.key).join("|"), [gs]);
@@ -664,7 +670,15 @@ export default function Chart({
   const zeroX = zeroGroup ? zeroGroup.plotPrice : null;
 
   const board = data.boards[state.board];
-  const xTitle = zh ? "真实单价 · 美元 / 百万 token（对数）" : "Real price · USD per million tokens (log scale)";
+  const xTitle = taskMode
+    ? zh
+      ? "任务价格 · 美元 / 任务（对数）"
+      : "Task price · USD per task (log scale)"
+    : zh
+      ? "Token 价格 · 美元 / 百万 token（对数）"
+      : "Token price · USD per million tokens (log scale)";
+  const priceUnit = taskMode ? " / task" : " / MTok";
+  const priceName = taskMode ? (zh ? "任务价格" : "Task price") : zh ? "Token 价格" : "Token price";
   const cheaper = zh ? "更便宜 →" : "Cheaper →";
   const unmetered = zh ? "不计额度" : "unmetered";
   const markable = useMemo(
@@ -890,7 +904,7 @@ export default function Chart({
         const keyRows = cards.map((g, i) => ({
           n: i + 1,
           color: color(g.rows[0].point),
-          text: `${[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")} · ${price(g.price)} / MTok${g.price === 0 ? " · " + unmeteredNote(g.rows[0].point, state.lang) : ""} · ${number(g.score, state.lang)}${g.rows[0].mapping?.score_is_self_reported ? " · " + selfReportTag(state.lang) : ""}`,
+          text: `${[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")} · ${price(g.price)}${priceUnit}${g.price === 0 ? " · " + unmeteredNote(g.rows[0].point, state.lang) : ""} · ${number(g.score, state.lang)}${g.rows[0].mapping?.score_is_self_reported ? " · " + selfReportTag(state.lang) : ""}`,
         }));
         const keyH = keyRows.length ? 70 + Math.ceil(keyRows.length / 2) * 24 : 20;
         const m = marginsFor(base.view, plotH, state.lang, false);
@@ -923,7 +937,7 @@ export default function Chart({
               mobile={false}
               clipId="export-clip"
               header={{
-                title: `${b.name} × ${zh ? "真实单价" : "real price"}`,
+                title: `${b.name} × ${priceName}`,
                 subtitle: `${metricLabel(b.metric, state.lang)} · ${zh ? "快照" : "Snapshot"} ${b.snapshot} · Real API Pricing · realapipricing.com`,
               }}
               keyRows={keyRows}
@@ -933,7 +947,7 @@ export default function Chart({
         );
         const svgText = '<?xml version="1.0" encoding="UTF-8"?>\n' + host.innerHTML;
         root.unmount();
-        const filename = `real-api-pricing-${state.board}-${state.lang}.${format}`;
+        const filename = `real-api-pricing-${state.board}-${taskMode ? "task" : "token"}-${state.lang}.${format}`;
         const svgBlob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
         if (format === "svg") return download(svgBlob, filename);
         const url = URL.createObjectURL(svgBlob);
@@ -959,7 +973,7 @@ export default function Chart({
     return () => {
       handle.current = null;
     };
-  }, [handle, state.lang, state.board, zh]);
+  }, [handle, state.lang, state.board, state.view, zh]);
 
   const hoverGroup = hoverKey ? gs.find((g) => g.key === hoverKey) : undefined;
   const hoverPoint = hoverGroup?.rows[0]?.point;
@@ -1090,8 +1104,8 @@ export default function Chart({
             )}
             <div className="hover-stats">
               <span>
-                <small>{zh ? "真实单价" : "Real price"}</small>
-                {price(hoverGroup.price)} <i>/ MTok</i>
+                <small>{priceName}</small>
+                {price(hoverGroup.price)} <i>{priceUnit}</i>
                 {hoverGroup.price === 0 && <i> · {unmeteredNote(hoverPoint, state.lang)}</i>}
               </span>
               <span>
@@ -1139,7 +1153,7 @@ export default function Chart({
                     {[...new Set(g.rows.map((r) => r.point.model_display))].join(" / ")}
                   </strong>
                   <small>
-                    {price(g.price)} / MTok
+                    {price(g.price)}{priceUnit}
                     {g.price === 0 ? ` · ${unmeteredNote(g.rows[0].point, state.lang)}` : ""}
                     {" · "}
                     {number(g.score, state.lang)}

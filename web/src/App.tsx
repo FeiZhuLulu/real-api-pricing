@@ -74,7 +74,9 @@ import {
   metricLabel,
   effortLabel,
   firstUrl,
+  isChartView,
   mappingNoteLabel,
+  taskCostMap,
 } from "./domain";
 
 const REPO = "https://github.com/FeiZhuLulu/real-api-pricing";
@@ -388,7 +390,11 @@ function Explorer({
     [data, view, selected, vendors, channels, plans, billing, confidence, feeBand],
   );
   const axis = useMemo(() => barAxis(data, view), [data, view]);
-  const gs = useMemo(() => groups(rows), [rows]);
+  const taskCosts = useMemo(() => taskCostMap(data), [data]);
+  const gs = useMemo(
+    () => groups(rows, view === "task" ? "task" : "token", taskCosts),
+    [rows, view, taskCosts],
+  );
   const front = useMemo(() => pareto(gs), [gs]);
   const frontRows = useMemo(
     () => new Set(front.flatMap((g) => g.rows.map((r) => r.key))),
@@ -486,12 +492,21 @@ function Explorer({
   }[] = [
     {
       view: "pareto",
-      en: "Price × capability",
-      cn: "价格 × 能力",
-      shortEn: "Capability",
-      shortCn: "价格×能力",
-      hintEn: "Scored models and the current frontier",
-      hintCn: "全部有分模型与当前前沿",
+      en: "Token price × capability",
+      cn: "Token 价格 × 能力",
+      shortEn: "Token × capability",
+      shortCn: "Token×能力",
+      hintEn: "Scored models by token price and the current frontier",
+      hintCn: "按 token 价格查看有分模型与当前前沿",
+    },
+    {
+      view: "task",
+      en: "Task price × capability",
+      cn: "任务价格 × 能力",
+      shortEn: "Task × capability",
+      shortCn: "任务×能力",
+      hintEn: "Scored models by estimated task price and the current frontier",
+      hintCn: "按估算任务价格查看有分模型与当前前沿",
     },
     {
       view: "price",
@@ -521,7 +536,7 @@ function Explorer({
       hintCn: "每个套餐、评测配置与来源",
     },
   ];
-  const scored = state.view === "pareto" || state.view === "table";
+  const scored = isChartView(state.view) || state.view === "table";
   const [chartSlot, setChartSlot] = useState<HTMLDivElement | null>(null);
   const sort = (key: string) =>
     patch({
@@ -711,6 +726,8 @@ function Explorer({
                     >
                       {tab.view === "pareto" ? (
                         <ChartScatter size={16} />
+                      ) : tab.view === "task" ? (
+                        <Coins size={16} />
                       ) : tab.view === "price" ? (
                         <Coins size={16} />
                       ) : tab.view === "allowance" ? (
@@ -742,7 +759,7 @@ function Explorer({
                   >
                     <DownloadSimple size={18} />
                   </button>
-                  {state.view === "pareto" && (
+                  {isChartView(state.view) && (
                     <button
                       className="icon-button"
                       title={t("Chart settings", "图表设置")}
@@ -783,6 +800,14 @@ function Explorer({
                       {t("Source", "来源")}
                       <ArrowUpRight size={12} />
                     </a>
+                    {state.view === "task" && (
+                      <span>
+                        {t(
+                          "Task price uses reported task-token usage, scaled by each point's token price; matching model references fill gaps between leaderboards.",
+                          "任务价格采用报告的任务 token 用量并按各点 token 价格折算；榜单之间缺失时使用匹配模型参考。",
+                        )}
+                      </span>
+                    )}
                   </>
                 ) : state.view === "price" ? (
                   <span>
@@ -878,7 +903,7 @@ function Explorer({
                 )}
                 <span className="toolbar-space" />
                 <div className="chart-tools-slot" ref={setChartSlot} />
-                {state.view !== "pareto" && (
+                {!isChartView(state.view) && (
                   <label className="search toolbar-search">
                     <MagnifyingGlass size={16} />
                     <input
@@ -900,7 +925,7 @@ function Explorer({
                   </label>
                 )}
                 <span className="results-count">
-                  {state.view === "pareto" ? (
+                  {isChartView(state.view) ? (
                     <>
                       <b>{pts.length}</b> {t("points", "个数据点")}
                     </>
@@ -935,7 +960,7 @@ function Explorer({
                 signature={legendCounts.map(([c, n]) => c + n).join("|")}
                 zh={zh}
                 trailing={
-                  state.view === "pareto" && state.frontier ? (
+                  isChartView(state.view) && state.frontier ? (
                     <span className="frontier-legend">
                       <i />
                       {t("Frontier of current selection", "当前筛选前沿")}
@@ -976,12 +1001,17 @@ function Explorer({
                   );
                 })}
               </OneLineLegend>
-              {!pts.length || (state.view === "pareto" && !gs.length) ? (
+              {!pts.length || (isChartView(state.view) && !gs.length) ? (
                 <div className="empty">
                   <ChartScatter size={35} />
                   <h3>{t("No points to plot", "没有可绘制的数据点")}</h3>
                   <p>
-                    {pts.length
+                    {state.view === "task" && pts.length
+                      ? t(
+                          "No matching benchmark references report a task cost for this selection. Their token-price data is still available in the token-price chart and table.",
+                          "当前选择没有匹配的评测参考报告任务成本。token 价格图和数据表仍保留这些数据。",
+                        )
+                      : pts.length
                       ? t(
                           "These models have no matching score for this benchmark configuration. Their data is still in the table.",
                           "当前模型没有匹配的榜单配置分数，仍可在表格中查看。",
@@ -995,7 +1025,7 @@ function Explorer({
                     {t("Reset selection", "恢复全部数据")}
                   </button>
                 </div>
-              ) : state.view === "table" ? null : state.view !== "pareto" ? (
+              ) : state.view === "table" ? null : !isChartView(state.view) ? (
                 <Ranking
                   rows={rows}
                   state={state}
@@ -1018,7 +1048,7 @@ function Explorer({
                   toolsSlot={chartSlot}
                 />
               )}
-              {state.view === "pareto" && (
+              {isChartView(state.view) && (
                 <div className="chart-foot">
                   {noScore.length > 0 ? (
                     <details className="unscored">
@@ -1430,8 +1460,8 @@ function Explorer({
               </label>
               <p className="panel-description">
                 {t(
-                  "These settings apply to the price–capability chart. All data remains visible regardless of label density. Drag to pan; double-click to reset the chart.",
-                  "设置作用于价格 × 能力图。标签密度不改变数据集。拖动平移，双击恢复图表。",
+                  "These settings apply to the selected price–capability chart. All data remains visible regardless of label density. Drag to pan; double-click to reset the chart.",
+                  "设置作用于当前价格 × 能力图。标签密度不改变数据集。拖动平移，双击恢复图表。",
                 )}
               </p>
             </div>
