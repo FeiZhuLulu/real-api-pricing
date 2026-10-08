@@ -6,7 +6,7 @@
 ## 2026-10-05 · Cursor Other Models 池首个实测点（Ultra × Opus 5.5）
 
 - **Cursor Ultra × Claude Opus 5.5（新增，Other Models 池，medium）**：**8.96 亿/月**（workload=anthropic）。X @xuanwo 推文（维护者转交截图）：账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日 共 176 条、778,341,121 tok（cache读 748,779,006 / cache写 24,358,860 / 普通输入 9,402 / 输出 5,193,853，hit 96.85%，记录集中北京时间 10月2日22:35–5日14:14）。段 worth $375.46（读×$0.2＋写×$5(5m)＋入×$4＋出×$20，与帖主折算一致）＝账期 Other Models 全部用量 ÷ Anthropic 档混合价 $0.419/MTok。对照不采：raw 口径 7.78 亿；cache写按 1h $8 敏感性 $448.54→10.71 亿。worth 与社区口径 Ultra Other Models 池 $400 同量级（93.9%；Wayback 8/19 计划表有档、CellCog 曾示 $500），视为月池基本用尽；CSV 无账期边界与 % 字段故按整份导出统计，若未用尽本值偏保守。与既有 Cursor Models 池行（grok-4.6 77.37 亿、composer-2.5）为两个独立月池，不联动不改值。真实单价 $0.2232/MTok 为 Opus 5.5 最贵订阅点。
-- **Cursor Pro / Pro+ × Opus 5.5（派生，low）**：Pro **0.448 亿/月**、Pro+ **1.568 亿/月**——由 Ultra 实测 × 社区口径池比（Other Models Pro $20 / Pro+ $70 / Ultra $400，官方页现仅写 Included）；跨档池规模假设，非独立实测，沿用 grok-4.6 行 $800/$3000 跨档派生先例。
+- **Cursor Pro / Pro+ × Opus 5.5 不画（裁定）**：按社区口径池比（Other Models Pro $20 / Pro+ $70 / Ultra $400，官方页现仅写 Included）由 Ultra 实测派生可得 Pro 0.448 亿、Pro+ 1.568 亿，但只是跨档池规模假设、无独立实测；且以 Ultra 实测 worth $375.46（低于 $400 池）缩放，Pro 点真实单价 $0.446/MTok 高于按量 API $0.419，是推法造成的偏差而非实测结论 → 不采，待 Pro/Pro+ 有独立实测再加。
 - 证据：`data/research/cursor-opus55-community-round1-2026-10-05.json`。
 - 待裁定（未展开）：同一 Other Models 池按价目比派生其他第三方模型（GPT/Gemini/Sonnet 等）；Other Models 官方池口径（$400 vs CellCog $500）。
 

@@ -27,8 +27,8 @@ CURSOR_ULTRA_OPUS55_SEGMENT = {"cache_read": 748_779_006, "cache_create": 24_358
 CURSOR_ULTRA_OPUS55_USED_TOKENS = 778_341_121
 assert sum(CURSOR_ULTRA_OPUS55_SEGMENT.values()) == CURSOR_ULTRA_OPUS55_USED_TOKENS
 # Other Models 月池社区口径美元（官方页现仅写 Included；Wayback 2026-08-19 计划表 Ultra $400 有档，
-#   CellCog 仪表盘曾示 $500）：Pro $20 / Pro+ $70 / Ultra $400，跨档派生按池比
-CURSOR_OTHER_MODELS_POOL_USD = {"cursor_pro": 20, "cursor_pro_plus": 70, "cursor_ultra": 400}
+#   CellCog 仪表盘曾示 $500）：Pro $20 / Pro+ $70 / Ultra $400——仅作 Ultra 用尽判断的对账；
+#   Pro / Pro+ 按池比跨档派生 2026-10-08 裁定不画（无独立实测）
 CLAUDE_MAX_20X_YI = round(47.2 * MONTH_WEEKS / 1.5 * 1.25)
 CLAUDE_WEEKLY_20X_TO_5X = 2
 # Grok 4.6 周池 —— 2026-09-30 裁定带分项实测统一折算（此前为 raw 合计口径）：
@@ -1062,8 +1062,6 @@ SUBS = [
     ("cursor_pro_plus", "Cursor Pro+", 60, "USD", "grok-4.6", CURSOR_ULTRA_STANDARD_YI * 800 / 3000, "medium", "round3面板Pro+池约$800；按Ultra池$3000等比；cursor-adoption-round8-2026-09-06.json", "旧21.33亿→20.63亿：77.37×800/3000；继承跨档池规模假设，非独立实测；未采社区图反推$4500~4800作为官方池；促销与账号差异保留"),
     # Other Models 池（第三方模型按 API 价扣减，与 Cursor Models 池是两个独立月池）——首个实测点
     ("cursor_ultra", "Cursor Ultra (Other Models)", 200, "USD", "claude-opus-5.5", cursor_ultra_opus55_monthly_yi(), "medium", "X @xuanwo 推文（2026-10-05，维护者转交截图）：Cursor Ultra 账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日共 176 条 Opus 记录（集中北京时间10月2日22:35–5日14:14）；cursor-opus55-community-round1-2026-10-05.json", f"新增{cursor_ultra_opus55_monthly_yi():g}亿（Other Models 池首个实测）：段 worth ${cursor_ultra_opus55_segment_worth_usd():.2f}（读748.78M×$0.2＋写24.36M×$5(5m)＋入9.4K×$4＋出5.19M×$20，hit 96.85%）＝账期 Other Models 全部用量 ÷ Anthropic档混合价${blended_anthropic(0.2,5.0,20.0):.3f}/MTok；raw 口径 7.78亿留作对照；cache写按1h $8 敏感性 worth $448.54（10.71亿）不采；worth 与社区口径 Ultra Other Models 池$400同量级（93.9%；CellCog曾示$500），视为月池基本用尽——CSV 无账期边界/%字段故按整份导出统计，若未用尽本值偏保守；与 Cursor Models 池（grok-4.6 77.37亿）为两个独立月池不联动；单一社区源、面板%未截图 → medium；effort 均 high 仅影响速率"),
-    ("cursor_pro", "Cursor Pro (Other Models)", 20, "USD", "claude-opus-5.5", cursor_ultra_opus55_monthly_yi() * CURSOR_OTHER_MODELS_POOL_USD["cursor_pro"] / CURSOR_OTHER_MODELS_POOL_USD["cursor_ultra"], "low", "由 Ultra×opus-5.5 实测 × 社区口径池比 $20/$400；cursor-opus55-community-round1-2026-10-05.json", "新增：8.96亿×20/400；继承跨档池规模假设（社区口径 Other Models Pro $20/Pro+ $70/Ultra $400，官方页现仅写 Included），非独立实测"),
-    ("cursor_pro_plus", "Cursor Pro+ (Other Models)", 60, "USD", "claude-opus-5.5", cursor_ultra_opus55_monthly_yi() * CURSOR_OTHER_MODELS_POOL_USD["cursor_pro_plus"] / CURSOR_OTHER_MODELS_POOL_USD["cursor_ultra"], "low", "由 Ultra×opus-5.5 实测 × 社区口径池比 $70/$400；cursor-opus55-community-round1-2026-10-05.json", "新增：8.96亿×70/400；继承跨档池规模假设（社区口径 Other Models Pro $20/Pro+ $70/Ultra $400，官方页现仅写 Included），非独立实测"),
     # Kimi —— 月池是周池的5倍（不是项目通用4周）；199档本机ccusage反推，其余按官网1x/4x/20x/60x
     #   同名档国内外并点：price_usd 统一按国际版标价（KIMI_INTL），¥价为国内实付；Andante ¥49 无海外同名档
     ("kimi_allegretto_cn", "Kimi 会员 199", 199, "CNY", "kimi-k3", kimi_199_monthly_yi(), "medium", f"本机ccusage {KIMI_199_USED_TOKENS}/{KIMI_199_USED_FRACTION:.0%}反推周额度×Kimi月池{KIMI_MONTHLY_TO_WEEKLY:g}倍；kimi-adoption-round6-2026-09-08.json", "旧11.61亿→14.51亿：确认Kimi月池=周池×5，旧值误套项目通用4周；样本以k3-256k为主且含kimi-for-coding，非纯K3 1M实测；SWE1.7短时面板的模型/统计窗口不同，未替换基准；ACP14.28为旧模型旁证，不直接采用；未折算：ccusage 只存周合计，无分项"),
@@ -1326,8 +1324,6 @@ DATA_DATE_INHERIT = {
     ("google_ai_ultra_20x_us", "gemini-3.8-flash"): ("google_ai_pro_us", "gemini-3.8-flash"),
     ("claude_max_5x", "claude-opus-5"): ("claude_max_20x", "claude-opus-5"),
     ("cursor_pro_plus", "grok-4.6"): ("cursor_ultra", "grok-4.6"),
-    ("cursor_pro", "claude-opus-5.5"): ("cursor_ultra", "claude-opus-5.5"),
-    ("cursor_pro_plus", "claude-opus-5.5"): ("cursor_ultra", "claude-opus-5.5"),
     ("kimi_moderato_cn", "kimi-k3"): ("kimi_allegretto_cn", "kimi-k3"),
     ("kimi_allegro_cn", "kimi-k3"): ("kimi_allegretto_cn", "kimi-k3"),
     ("kimi_moderato_cn", "kimi-k2.7-code"): ("kimi_allegretto_cn", "kimi-k2.7-code"),
@@ -1379,7 +1375,7 @@ def workload_of(pid: str, billing: str, model: str = "") -> str:
         return "anthropic" if model in ANTHROPIC_CACHE_WRITE_5M else "standard"
     if pid == "claude_pro" or (pid, model) == ("devin_max", "claude-opus-5.5") or pid.startswith("droid_") \
             or (pid in ("claude_max_20x", "claude_max_5x") and model == "claude-opus-5.5") \
-            or (pid in ("cursor_ultra", "cursor_pro", "cursor_pro_plus") and model == "claude-opus-5.5"):
+            or (pid == "cursor_ultra" and model == "claude-opus-5.5"):
         return "anthropic"
     if pid.startswith(("google_", "stepfun_")):
         return "lowCache"
