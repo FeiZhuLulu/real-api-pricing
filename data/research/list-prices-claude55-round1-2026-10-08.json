@@ -33,7 +33,7 @@
       },
       "source": "https://platform.claude.com/docs/en/about-claude/pricing",
       "checkedAt": "2026-10-08",
-      "note": "Launched 2026-10-08; Anthropic's cheapest/fastest mini model, billed ~75% cheaper than Haiku 4.5. Base input $0.10/MTok is inferred from the >100K 5x row ($0.50) and the 1.25x cache-write rule; cached read = 0.1x base input."
+      "note": "Launched 2026-10-08; Anthropic's cheapest/fastest mini model, billed ~75% cheaper than Haiku 4.5. Official table (checked 2026-10-08) lists base input $0.10, 5m write $0.125, 1h write $0.20, cache hits $0.01, output $0.50 for prompts up to 100,000 tokens, and $0.50 / $0.625 / $1 / $0.05 / $2.50 above 100,000; cached read = 0.1x base input. Project blends the two tiers 90/10 (2026-10-08 ruling)."
     }
   ]
 }

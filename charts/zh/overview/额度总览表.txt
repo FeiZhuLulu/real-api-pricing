@@ -7,24 +7,24 @@
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 序号  套餐                                价格/月                 服务模型                      月额度(亿)  $/MTok   置信度
 ----  ----------------------------------  ----------------------  ----------------------------  ----------  -------  ------
-1     Claude Max 20x (9/14+)              USD 200                 Claude Haiku 5.5              8622.79     0.00023  low
-2     Claude Max 5x (9/14+)               USD 100                 Claude Haiku 5.5              4311.39     0.00023  low
+1     Claude Max 20x (9/14+)              USD 200                 Claude Haiku 5.5              6159.13     0.00032  low
+2     Claude Max 5x (9/14+)               USD 100                 Claude Haiku 5.5              3580.49     0.00028  low
 3     Step Plan Max (¥699)                CNY 699                 Step 3.5 Flash                1731.6      0.0006   medium
 4     ChatGPT Pro 20x                     USD 200                 GPT 5.6 Luna                  1411.63     0.00142  medium
 5     Droid Max                           USD 200                 GPT-6 Luna                    1010.4      0.00198  medium
 6     Step Plan Max (¥699)                CNY 699                 Step 3.7 Flash                858.83      0.0012   medium
-7     Claude Pro                          USD 20                  Claude Haiku 5.5              834.992     0.00024  low
-8     Droid Max                           USD 200                 GLM 5.3 Flash                 673.6       0.00297  medium
-9     Claude Max 20x (9/14+)              USD 200                 Claude Sonnet 5.5             630.76      0.00317  low
+7     Droid Max                           USD 200                 GLM 5.3 Flash                 673.6       0.00297  medium
+8     Claude Max 20x (9/14+)              USD 200                 Claude Sonnet 5.5             630.76      0.00317  low
+9     Claude Pro                          USD 20                  Claude Haiku 5.5              596.423     0.00034  low
 10    Google AI Ultra 20x                 USD 199.99              Gemini 3.8 Flash              516.2       0.00387  low
 11    Droid Max                           USD 200                 GPT 5.6 Luna                  505.2       0.00396  medium
 12    Claude Max 20x (9/14+)              USD 200                 Claude Sonnet 5               392.5       0.0051   medium
-13    ChatGPT Pro 5x                      USD 100                 GPT 5.6 Luna                  352.91      0.00283  medium
-14    Step Plan Pro (¥199)                CNY 199                 Step 3.5 Flash                346.32      0.00085  medium
-15    Droid Max                           USD 200                 DeepSeek V4.1 Flash           336.8       0.00594  medium
-16    Droid Max                           USD 200                 MiniMax M3                    336.8       0.00594  medium
-17    Claude Max 20x (9/14+)              USD 200                 Claude Opus 5.5               315.38      0.00634  medium
-18    Claude Max 5x (9/14+)               USD 100                 Claude Sonnet 5.5             315.38      0.00317  low
+13    Claude Max 5x (9/14+)               USD 100                 Claude Sonnet 5.5             366.68      0.00273  low
+14    ChatGPT Pro 5x                      USD 100                 GPT 5.6 Luna                  352.91      0.00283  medium
+15    Step Plan Pro (¥199)                CNY 199                 Step 3.5 Flash                346.32      0.00085  medium
+16    Droid Max                           USD 200                 DeepSeek V4.1 Flash           336.8       0.00594  medium
+17    Droid Max                           USD 200                 MiniMax M3                    336.8       0.00594  medium
+18    Claude Max 20x (9/14+)              USD 200                 Claude Opus 5.5               315.38      0.00634  medium
 19    Ollama Max                          USD 100                 DeepSeek V4.1 Flash           310.559     0.00322  medium
 20    Step Plan Max (¥699)                CNY 699                 Step 5 Preview                283.186     0.00364  medium
 21    ChatGPT Pro 20x                     USD 200                 GPT 5.6 Terra                 249.552     0.00801  medium
@@ -35,11 +35,11 @@
 26    MiniMax M Plan Build (CN Annual)    CNY 390.8333333333333   MiniMax M3.1 Flash Preview    191.764     0.00301  low
 27    MiMo Token Plan Max 夜间0.8×        ¥659（国际 $100）       MiMo V2.6 Flash               188.42      0.00531  medium
 28    MiMo Token Plan Max 夜间0.8×        ¥659（国际 $100）       MiMo V2.5                     188.42      0.00531  medium
-29    GLM Coding Max (v3 ¥1078) 闲时      CNY 1078                GLM 5.3 Flash                 174.81      0.0091   high
-30    GLM Coding Max (v2 ¥469) 闲时       CNY 469                 GLM 5.3 Flash                 174.81      0.00396  high
-31    Step Plan Pro (¥199)                CNY 199                 Step 3.7 Flash                171.766     0.00171  medium
-32    Droid Max                           USD 200                 Nemotron 3 Ultra              168.4       0.01188  medium
-33    Claude Max 5x (9/14+)               USD 100                 Claude Opus 5.5               157.69      0.00634  low
+29    Claude Max 5x (9/14+)               USD 100                 Claude Opus 5.5               183.34      0.00545  medium
+30    GLM Coding Max (v3 ¥1078) 闲时      CNY 1078                GLM 5.3 Flash                 174.81      0.0091   high
+31    GLM Coding Max (v2 ¥469) 闲时       CNY 469                 GLM 5.3 Flash                 174.81      0.00396  high
+32    Step Plan Pro (¥199)                CNY 199                 Step 3.7 Flash                171.766     0.00171  medium
+33    Droid Max                           USD 200                 Nemotron 3 Ultra              168.4       0.01188  medium
 34    Claude Max 20x (9/14+)              USD 200                 Claude Opus 5                 157         0.01274  medium
 35    Claude Max 20x (9/14+)              USD 200                 Claude Opus 4.8               157         0.01274  low
 36    MiMo Token Plan Max 日间            ¥659（国际 $100）       MiMo V2.6 Flash               150.74      0.00663  medium

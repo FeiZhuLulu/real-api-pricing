@@ -12,6 +12,12 @@ export function matchesFeeBand(fee: number | null, id: string): boolean {
     (band.maxInclusive ? fee <= band.max : fee < band.max)
   );
 }
+/** Most items the allowance comparison lays over one another. */
+export const COMPARE_MAX = 3;
+/** Prefix of a comparison slot that has a plan but no model yet. */
+export const PLAN_SLOT = "plan:";
+/** Shared by the pickers: plans with one name per plan_id stay apart. */
+export const planKey = (p: Point) => `${p.plan_id}|${p.plan}`;
 export const filterKeys: FilterKey[] = [
   "vendors",
   "channels",
@@ -25,6 +31,9 @@ export const filterKeys: FilterKey[] = [
 export const colors = channelColors;
 export const defaultState = (): State => ({
   feeBand: "all",
+  layout: "list",
+  compare: [],
+  cards: [],
   lang: "en",
   view: "pareto",
   board: "aa_intelligence_index",
@@ -168,7 +177,7 @@ export function tableRows(rows: Row[], s: State): Row[] {
     .filter(
       (r) =>
         !q ||
-        `${r.point.label} ${displayPlan(r.point.plan, s.lang)} ${r.point.channel} ${r.mapping?.variant ?? ""}`
+        `${r.point.label} ${r.point.model} ${displayPlan(r.point.plan, s.lang)} ${r.point.channel} ${r.mapping?.variant ?? ""}`
           .toLocaleLowerCase()
           .includes(q),
     )
@@ -509,6 +518,9 @@ export function serialize(s: State): string {
   if (s.configuration !== d.configuration) p.set("config", s.configuration);
   if (s.labels !== d.labels) p.set("labels", s.labels);
   if (s.feeBand !== d.feeBand) p.set("fee", s.feeBand);
+  if (s.layout !== d.layout) p.set("layout", s.layout);
+  for (const id of s.compare) p.append("cmp", id);
+  for (const id of s.cards) p.append("card", id);
   if (s.query) p.set("q", s.query);
   if (s.find) p.set("find", s.find);
   if (s.lock) p.set("lock", serializeLock(s.lock));
@@ -543,6 +555,7 @@ export function restore(
     config: ["configuration", ["all", "summary"]],
     labels: ["labels", ["frontier", "all", "none"]],
     fee: ["feeBand", ["all", ...feeBands.map((b) => b.id)]],
+    layout: ["layout", ["list", "cards", "compare"]],
     sort: ["sort", ["price", "model", "plan", "score", "allowance", "fee"]],
     dir: ["direction", ["asc", "desc"]],
   };
@@ -579,6 +592,23 @@ export function restore(
           : data.points.some((p) => p.plan_id === parsed.value));
     if (known) state.lock = parsed;
     else warning = true;
+  }
+  const allowanceIds = new Set(
+    data.points.filter((p) => p.billing !== "metered" && p.monthly_yi !== null).map((p) => p.id),
+  );
+  if (params.has("cmp")) {
+    const wanted = params.getAll("cmp");
+    const planKeys = new Set(
+      data.points.filter((p) => allowanceIds.has(p.id)).map((p) => PLAN_SLOT + planKey(p)),
+    );
+    const slots = wanted.filter((v) => v === "" || allowanceIds.has(v) || planKeys.has(v));
+    if (slots.length !== wanted.length || slots.length > COMPARE_MAX) warning = true;
+    state.compare = slots.slice(0, COMPARE_MAX);
+  }
+  if (params.has("card")) {
+    const wanted = params.getAll("card");
+    state.cards = [...new Set(wanted.filter((id) => allowanceIds.has(id)))];
+    if (state.cards.length !== wanted.length) warning = true;
   }
   if (params.has("sel")) {
     const wanted = params.getAll("sel").filter((id) => id !== "");

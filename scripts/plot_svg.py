@@ -176,7 +176,7 @@ def label_position(p, board, x, y, tier="main"):
             if board == "aa_intelligence_index":
                 return x + 24, y - 40, "start"
             if board == "arena_code":
-                return x - 304, y - 18, "middle"
+                return x - 90, y - 20, "end"
             if board == "open_design_arena":
                 return x - 4, y - 70, "end"
     if model == "claude-opus-5.5":

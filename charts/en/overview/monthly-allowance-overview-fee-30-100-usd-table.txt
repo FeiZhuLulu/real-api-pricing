@@ -8,9 +8,9 @@ FX: 1 USD = 6.7787 CNY (2026-09-04, CFETS central parity, via Xinhua); CNY month
 FX source: https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 No.  Plan                               Monthly fee            Served model                Monthly tokens (B)  USD/MTok  Confidence
 ---  ---------------------------------  ---------------------  --------------------------  ------------------  --------  ----------
-1    Claude Max 5x (9/14+)              USD 100                Claude Haiku 5.5            431.139             0.00023   low
-2    ChatGPT Pro 5x                     USD 100                GPT 5.6 Luna                35.291              0.00283   medium
-3    Claude Max 5x (9/14+)              USD 100                Claude Sonnet 5.5           31.538              0.00317   low
+1    Claude Max 5x (9/14+)              USD 100                Claude Haiku 5.5            358.049             0.00028   low
+2    Claude Max 5x (9/14+)              USD 100                Claude Sonnet 5.5           36.668              0.00273   low
+3    ChatGPT Pro 5x                     USD 100                GPT 5.6 Luna                35.291              0.00283   medium
 4    Ollama Max                         USD 100                DeepSeek V4.1 Flash         31.0559             0.00322   medium
 5    Claude Max 5x (9/14+)              USD 100                Claude Sonnet 5             19.625              0.0051    low
 6    Ollama Max                         USD 100                DeepSeek V4 Flash           19.2431             0.0052    medium
@@ -18,8 +18,8 @@ No.  Plan                               Monthly fee            Served model     
 8    MiniMax M Plan Build (CN Annual)   CNY 390.8333333333333  MiniMax M3.1 Flash Preview  19.1764             0.00301   low
 9    MiMo Token Plan Max (Night 0.8x)   $100 · CN ¥659         MiMo V2.6 Flash             18.842              0.00531   medium
 10   MiMo Token Plan Max (Night 0.8x)   $100 · CN ¥659         MiMo V2.5                   18.842              0.00531   medium
-11   GLM Coding Max (v2 ¥469) Off-peak  CNY 469                GLM 5.3 Flash               17.481              0.00396   high
-12   Claude Max 5x (9/14+)              USD 100                Claude Opus 5.5             15.769              0.00634   low
+11   Claude Max 5x (9/14+)              USD 100                Claude Opus 5.5             18.334              0.00545   medium
+12   GLM Coding Max (v2 ¥469) Off-peak  CNY 469                GLM 5.3 Flash               17.481              0.00396   high
 13   MiMo Token Plan Max (Day)          $100 · CN ¥659         MiMo V2.6 Flash             15.074              0.00663   medium
 14   MiMo Token Plan Max (Day)          $100 · CN ¥659         MiMo V2.5                   15.074              0.00663   medium
 15   GLM Coding Max (v2 ¥469) Midpoint  CNY 469                GLM 5.3 Flash               13.111              0.00528   high

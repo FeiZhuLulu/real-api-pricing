@@ -34,6 +34,8 @@ import {
   frontierPath,
   groups,
   pareto,
+  planKey,
+  PLAN_SLOT,
   price,
   priceExact,
   restore,
@@ -395,6 +397,25 @@ test("Share links round-trip language, board, exact empty selection and all view
   const restored = restore(hash, data);
   assert.deepEqual(restored.state, s);
   assert.equal(restored.warning, false);
+});
+test("Compare slots round-trip through the hash, including a plan-only and an empty slot", () => {
+  const p = data.points.find(
+    (q) => q.billing !== "metered" && q.monthly_yi !== null,
+  )!;
+  const cmp = [p.id, PLAN_SLOT + planKey(p), ""];
+  const s = {
+    ...defaultState(),
+    view: "allowance" as const,
+    layout: "compare" as const,
+    compare: cmp,
+  };
+  const restored = restore(serialize(s), data);
+  assert.equal(restored.warning, false);
+  assert.deepEqual(restored.state.compare, cmp);
+  // An untouched added slot serializes as a lone cmp= and restores the same.
+  const empty = restore(serialize({ ...s, compare: ["", "", ""] }), data);
+  assert.equal(empty.warning, false);
+  assert.deepEqual(empty.state.compare, ["", "", ""]);
 });
 test("Default state serializes to a minimal hash and selection states stay distinct", () => {
   assert.equal(serialize(defaultState()), "#lang=en");
