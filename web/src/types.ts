@@ -117,8 +117,18 @@ export type FilterKey =
   | "harness"
   | "effort"
   | "modes";
+export type AllowanceLayout = "list" | "cards" | "compare";
 export interface State {
   feeBand: string;
+  /** Presentation of the monthly-allowance view; other views ignore it. */
+  layout: AllowanceLayout;
+  /**
+   * Allowance comparison slots in order: a point id once complete,
+   * `plan:<planKey>` while only the plan is chosen, "" while empty.
+   */
+  compare: string[];
+  /** Point ids shown as allowance cards, grouped by plan; empty shows none. */
+  cards: string[];
   lang: Lang;
   view: View;
   board: string;
