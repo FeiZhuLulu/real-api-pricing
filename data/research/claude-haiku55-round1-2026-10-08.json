@@ -1,0 +1,74 @@
+{
+  "recordedAt": "2026-10-08",
+  "sourceType": "community_tweet_screenshot + official_launch",
+  "trigger": "维护者提供截图：X @1kartikkabadi1 推文引 Claude 5.5 家族 Pro $20 月额度推算图（Haiku 5.5 约 278 亿 token），引用 @claudeai 官方 Haiku 5.5 发布推文（约 9 小时前）",
+  "officialContext": {
+    "launch": "2026-10-08 @claudeai 发布 Claude Haiku 5.5：迄今最便宜、最快且能力最强的迷你模型；平均运行成本比 Haiku 4.5 低约 75%（Haiku 4.5 不在库，不映射）",
+    "haiku55Pricing": {
+      "le100k": { "cacheRead": 0.01, "cacheWrite5m": 0.125, "output": 0.5, "input_inferred": 0.1 },
+      "gt100k": { "cacheRead": 0.05, "cacheWrite5m": 0.625, "output": 2.5, "input_inferred": 0.5 },
+      "note": "读/写/出三分项取自推文图脚注；输入价按 Anthropic 常价比推定（读=0.1×入、写5m=1.25×入、出=5×入），>100k 档为 ≤100k 的 5×；写价图为 5 分钟档"
+    },
+    "sonnet55PriceCut": "Sonnet 5.5 缓存读价 $0.20 → $0.10（=base input×0.05，同 Opus 5.5 口径）；in $2 / 写5m $2.5 / 出 $10 不变。降价时点按推文语境取 Haiku 5.5 发布日，若官方另标以官方为准",
+    "sources": [
+      "X @1kartikkabadi1（维护者提供截图，2026-10-08）",
+      "@claudeai 官方发布推文（2026-10-08）",
+      "platform.claude.com/docs/en/about-claude/pricing"
+    ]
+  },
+  "chartRows": {
+    "anchor": "Claude Pro $20 月 pool ≈ $1,280 = Opus 5.5 采用值 30.54 亿 × 混合价 $0.419/MTok（$1,279.46，闭合）；与库内 Pro × Opus 5.5（issue #52 + Reddit 段合并）为同一口径",
+    "rows": [
+      { "model": "claude-opus-5.5", "blend": 0.419, "chartTokens": "3.05B", "yi": 30.5, "note": "锚点行，图值与库值 30.54 亿一致" },
+      { "model": "claude-sonnet-5.5 pre-cut", "blend": 0.3065, "chartTokens": "4.17B", "yi": 41.7 },
+      { "model": "claude-sonnet-5.5 post-cut", "blend": 0.2095, "chartTokens": "6.11B", "yi": 61.1 },
+      { "model": "claude-haiku-5.5 >100k", "blend": 0.076625, "chartTokens": "16.7B", "yi": 167.0 },
+      { "model": "claude-haiku-5.5 50/50 mix", "blend": 0.045975, "chartTokens": "27.8B", "yi": 278.3 },
+      { "model": "claude-haiku-5.5 ≤100k", "blend": 0.015325, "chartTokens": "83.5B", "yi": 835.0 }
+    ],
+    "formula": "每行 = $1,280 ÷ 混合价；混合价 = 0.97×读 + 0.025×写5m + 0.005×出（与库 anthropicTokenMix 完全一致）",
+    "chartNote": "图自注：vs 旧 Opus 5 锚 $1,984/月，本家族低 ~35%"
+  },
+  "derivations": {
+    "blendCheck": "Sonnet5.5 post-cut 0.97×0.10+0.025×2.5+0.005×10 = 0.2095（恰为 Opus5.5 混合价 0.419 的一半 → 比率精确 2.0）；Haiku≤100k 0.97×0.01+0.025×0.125+0.005×0.5 = 0.015325；>100k 0.076625；50/50 取两档均值 0.045975",
+    "proSonnet55": "30.54亿 × 0.419/0.2095 = 61.08 亿（图 6.11B 一致）",
+    "proHaiku55_le100k": "30.54亿 × 0.419/0.015325 = 835.0 亿（图 83.5B 一致）",
+    "proHaiku55_gt100k": "30.54亿 × 0.419/0.076625 = 167.0 亿（图 16.7B 一致）",
+    "proHaiku55_5050": "30.54亿 × 0.419/0.045975 = 278.3 亿（图 27.8B 一致，推文标题值）",
+    "proSonnet55_precut": "30.54亿 × 0.419/0.3065 = 41.75 亿（图 4.17B 一致，历史价口径）",
+    "max20xSonnet55": "315.38亿 × 2.0 = 630.76 亿（20x Opus5.5 锚派生）",
+    "max20xHaiku55_le100k": "315.38亿 × 0.419/0.015325 = 8622.7 亿",
+    "max5x": "按确认的 20x=5x×2 周池关系减半：Sonnet55 315.38亿、Haiku55(≤100k) 4311.3亿"
+  },
+  "adoptionSummary": {
+    "claude_pro::claude-sonnet-5.5": "61.08亿 low：Pro × Opus 5.5 锚 × 混合价比 2.0（post-cut），非实测",
+    "claude_pro::claude-haiku-5.5": "835.0亿 low：同上 ×27.34（≤100k 档，沿分段价模型取最低档惯例；qwen3.7-flash ≤32K、gpt-6-luna ≤272K、grok <200k 先例）",
+    "claude_max_20x::claude-sonnet-5.5": "630.76亿 low：20x × Opus 5.5 锚 ×2.0 派生",
+    "claude_max_20x::claude-haiku-5.5": "8622.7亿 low：20x × Opus 5.5 锚 ×27.34 派生",
+    "claude_max_5x::claude-sonnet-5.5": "315.38亿 low：按 20x÷2 派生",
+    "claude_max_5x::claude-haiku-5.5": "4311.3亿 low：按 20x÷2 派生",
+    "anthropic_sonnet55_api": "post-cut 标价 cached/input/output = $0.10/$2/$10（写5m $2.5）→ Anthropic 档混合价 $0.2095/MTok；发布价 $0.20 读（混合价 $0.3065）留对照",
+    "anthropic_haiku55_api": "≤100k 档 cached/input/output = $0.01/$0.10/$0.50（写5m $0.125）→ Anthropic 档混合价 $0.015325/MTok；>100k 档 5× 留作备选"
+  },
+  "notAdopted": [
+    "Pro × Sonnet 5.5 pre-cut 41.75亿：发布价已成历史，不采",
+    "Pro/Max × Haiku 5.5 50/50 mix 278.3亿 / 对应 2873.9亿：备选口径留注（推文标题值）",
+    "Pro/Max × Haiku 5.5 >100k 167.0亿 / 对应 1724.1亿：备选口径留注",
+    "以 Opus 5 池（$1,984/月-worth）为锚的换算：Pro Sonnet5.5 94.67亿、Pro Haiku5.5(≤100k) 1293.4亿——5.5 家族图统一锚 Opus 5.5 样本，两池口径差 ~35% 记张力不入权",
+    "Sonnet 5.5 降价对存量行无影响：command_code_goat 决策模型行记渠道自身目录价（$10 credits 档），droid_max 行按 Factory 官方倍率，均不随官方价变"
+  ],
+  "caveats": [
+    "全部行为派生非实测：假设订阅池按价格比换算（池权重=标价混合比），Sonnet5.5 比率 2.0 与 Sonnet5×Opus5 的 2.5 先例同型但 Haiku 27.34× 外推幅度大，若官方池权重偏离价格比（Fable 6.5× 前车之鉴）采用值须重推",
+    "图为社区推算非官方配额公告；Anchor $1,280 为取整（库精确值 $1,279.46），图值与库值差 ≤0.1%",
+    "Sonnet 5.5 降价生效日按 Haiku 发布语境取 2026-10-08；若官方价表另标降价日，API 行 data_date 须改",
+    "Haiku 5.5 刚发布，无第三方榜单分数，不造分；厂商『比 Haiku 4.5 便宜 ~75%』为官方定价表述非榜分",
+    "≤100k/>100k 档选择沿用仓库对分段价模型的最低档惯例；若改采 50/50 mix 口径，Pro/Max 行同倍率替换即可（值见 notAdopted）"
+  ],
+  "relatedFiles": [
+    "claude-opus55-round1-2026-09-23.json",
+    "community-issues-round1-2026-09-29.json",
+    "claude-adoption-round10-2026-09-25.json",
+    "workload-conversion-round1-2026-09-30.json",
+    "goat-opencode-catalogs-round3-2026-09-30.json"
+  ]
+}

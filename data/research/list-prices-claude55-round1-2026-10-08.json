@@ -1,0 +1,39 @@
+{
+  "collectedAt": "2026-10-08",
+  "usdPerCny": 7.1,
+  "models": [
+    {
+      "model": "claude-sonnet-5.5",
+      "vendor": "Anthropic",
+      "input": 2.0,
+      "cachedInput": 0.1,
+      "output": 10.0,
+      "currency": "USD",
+      "variants": {
+        "batch": { "input": 1.0, "output": 5.0 },
+        "cacheWrite5m": { "input": 2.5 },
+        "cacheWrite1h": { "input": 4.0 }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-10-08",
+      "note": "Cached read cut $0.20→$0.10 at Haiku 5.5 launch (2026-10-08): now base input×0.05, matching Opus 5.5 (other models 0.1x). Input/output unchanged."
+    },
+    {
+      "model": "claude-haiku-5.5",
+      "vendor": "Anthropic",
+      "input": 0.1,
+      "cachedInput": 0.01,
+      "output": 0.5,
+      "currency": "USD",
+      "variants": {
+        "batch": { "input": 0.05, "output": 0.25 },
+        "cacheWrite5m": { "input": 0.125 },
+        "cacheWrite1h": { "input": 0.2 },
+        "gt100k": { "input": 0.5, "cachedInput": 0.05, "output": 2.5, "cacheWrite5m": 0.625, "note": "5x tier for prompts over 100K tokens" }
+      },
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checkedAt": "2026-10-08",
+      "note": "Launched 2026-10-08; Anthropic's cheapest/fastest mini model, billed ~75% cheaper than Haiku 4.5. Base input $0.10/MTok is inferred from the >100K 5x row ($0.50) and the 1.25x cache-write rule; cached read = 0.1x base input."
+    }
+  ]
+}

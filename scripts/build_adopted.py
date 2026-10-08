@@ -232,7 +232,8 @@ assert (ANTHROPIC_MIX["cache"], ANTHROPIC_MIX["cacheWrite"], ANTHROPIC_MIX["outp
     STANDARD_MIX["cache"], STANDARD_MIX["input"], STANDARD_MIX["output"])
 # Anthropic 5 分钟缓存写入价（platform.claude.com pricing；Fable 5.1 见 claude-fable51-round1-2026-09-13.json）
 ANTHROPIC_CACHE_WRITE_5M = {"claude-opus-5": 6.25, "claude-sonnet-5": 2.5, "claude-fable-5": 12.5,
-                          "claude-fable-5.1": 12.5, "claude-opus-5.5": 5.0}
+                          "claude-fable-5.1": 12.5, "claude-opus-5.5": 5.0, "claude-sonnet-5.5": 2.5,
+                          "claude-haiku-5.5": 0.125}
 
 
 def blended_anthropic(cached: float, write: float, out: float) -> float:
@@ -730,7 +731,7 @@ COMMAND_CODE_GOAT_MODELS = (
     ("jev", 20, 0.0, 0.042, 0.0, "new official row; New models table $20; input $0.042, cache read/output free; Decision model (typesafe/jev); goat-opencode-catalogs-round3-2026-09-30.json"),
     ("longcat-2.0", 50, 0.006, 0.3, 1.2, "official three-part price; Every model table $50; goat-opencode-catalogs-round3-2026-09-30.json"),
     # -- standalone tier --
-    ("claude-sonnet-5.5", 10, 0.2, 2.0, 10.0, "official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; goat-opencode-catalogs-round3-2026-09-30.json"),
+    ("claude-sonnet-5.5", 10, 0.1, 2.0, 10.0, "official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; cached read cut $0.20→$0.10 at Haiku 5.5 launch (2026-10-08, base input×0.05); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json"),
     # -- Older models table (all $20) --
     ("kimi-k2.6", 20, 0.16, 0.95, 4.0, "official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json"),
     ("kimi-k2.5", 20, 0.1, 0.6, 3.0, "official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json"),
@@ -1085,6 +1086,9 @@ UNMETERED = [
 RATIO_COMPOSER = blended(0.5, 2, 6) / blended(0.2, 0.5, 2.5)   # Grok 4.6 → Composer 2.5 Standard ≈ 2.57110
 RATIO_COMPOSER_FAST = blended(0.5, 2, 6) / blended(0.5, 3, 15)
 RATIO_SONNET = round(blended(0.5, 5, 25) / blended(0.2, 2, 10), 2)       # Opus → Sonnet 5 = 2.5
+# Opus 5.5 → Sonnet 5.5 / Haiku 5.5：5.5 家族统一锚 Pro×Opus5.5 实测池（$1,279.46/月 list-worth，图取整 $1,280）
+RATIO_SONNET55 = blended_anthropic(0.2, 5.0, 20.0) / blended_anthropic(0.1, 2.5, 10.0)   # Sonnet 5.5 降价后 = 2.0
+RATIO_HAIKU55 = blended_anthropic(0.2, 5.0, 20.0) / blended_anthropic(0.01, 0.125, 0.5)  # Haiku 5.5 ≤100k 档 ≈ 27.34
 # Factory Droid 官方模型倍率（docs.factory.ai/docs/models，2026-09-29）：Standard Usage 按 list-worth × 倍率计，
 #   Opus 5.5 = 1.6×；同池其他模型 = Opus 5.5 采用值 × 1.6 / 倍率。† 为促销倍率，见 DROID_PROMO_MULTIPLIERS。
 DROID_OPUS55_MULTIPLIER = 1.6
@@ -1138,6 +1142,15 @@ DERIVED = [
     # Opus 5.5：20x 按 MiaAI 窗×5.5 窗/周与 Pro×10 加权 315.38亿、Pro 按 #52+Reddit 段 30.54亿（均 SUBS 行）；
     #   5x 按裁定的 20x=5x×2 周池关系由 20x 采用值 ÷2 派生（同 Opus 5 行 157÷2）——2026-09-27 裁定两档精确同价并为一点 → low（标价混合比法 152.64亿 差1.2% 留作备选口径）
     ("claude_max_5x", "claude-opus-5", "claude-opus-5.5", CLAUDE_OPUS55_MAX20X_MONTHLY_YI / CLAUDE_MAX_20X_YI, "low", f"由20x采用值{CLAUDE_OPUS55_MAX20X_MONTHLY_YI:g}亿÷{CLAUDE_WEEKLY_20X_TO_5X}派生（确认20x周池=5x的2倍，同Opus 5行157÷2；2026-09-30 起 20x 为 MiaAI 窗×5.5 窗/周与 Pro×10 加权，旧 20x 301.7 → 本行 150.85）；旧值78.5×1/W=150.852亿与20x/2的差仅来自301.7取整，2026-09-27裁定合为同一点；标价法152.64亿差1.2%；claude-opus55-round1-2026-09-23.json", False),
+    # Sonnet 5.5 / Haiku 5.5（2026-10-08 Haiku 发布日入）：X @1kartikkabadi1 推算图，全部按同套餐 Opus 5.5 锚
+    #   × 标价混合价比派生，非实测（池权重=价格比假设，Haiku 27.34× 外推敏感 → 全档 low）；
+    #   Haiku 取 ≤100k 档（分段价最低档惯例），50/50 mix 与 >100k 档留注
+    ("claude_pro", "claude-opus-5.5", "claude-sonnet-5.5", RATIO_SONNET55, "low", f"新增{claude_pro_opus55_monthly_yi()*RATIO_SONNET55:.2f}亿：Pro Opus5.5 实测锚 {claude_pro_opus55_monthly_yi():g}亿 × 混合价比 {RATIO_SONNET55:g}（Sonnet5.5 降价后 $0.2095 vs Opus5.5 $0.419）；发布价 $0.3065 口径 {claude_pro_opus55_monthly_yi()*blended_anthropic(0.2,5.0,20.0)/blended_anthropic(0.2,2.5,10.0):.2f}亿 留对照；X @1kartikkabadi1 推算图 + 官方价表；claude-haiku55-round1-2026-10-08.json", True),
+    ("claude_pro", "claude-opus-5.5", "claude-haiku-5.5", RATIO_HAIKU55, "low", f"新增{claude_pro_opus55_monthly_yi()*RATIO_HAIKU55:.1f}亿：Pro Opus5.5 实测锚 {claude_pro_opus55_monthly_yi():g}亿 × 混合价比 {RATIO_HAIKU55:.2f}（Haiku5.5 ≤100k 档 $0.015325 vs Opus5.5 $0.419）；分段价取 ≤100k 最低档（沿 qwen3.7-flash ≤32K、grok <200k 先例）；50/50 mix 口径 {claude_pro_opus55_monthly_yi()*blended_anthropic(0.2,5.0,20.0)/((blended_anthropic(0.01,0.125,0.5)+blended_anthropic(0.05,0.625,2.5))/2):.1f}亿、>100k 档 {claude_pro_opus55_monthly_yi()*blended_anthropic(0.2,5.0,20.0)/blended_anthropic(0.05,0.625,2.5):.1f}亿 留作备选；X @1kartikkabadi1 推算图；claude-haiku55-round1-2026-10-08.json", True),
+    ("claude_max_20x", "claude-opus-5.5", "claude-sonnet-5.5", RATIO_SONNET55, "low", f"新增{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_SONNET55:.2f}亿：20x Opus5.5 采用值 {CLAUDE_OPUS55_MAX20X_MONTHLY_YI:g}亿 × 混合价比 {RATIO_SONNET55:g}，同 Pro 口径派生非实测；claude-haiku55-round1-2026-10-08.json", True),
+    ("claude_max_20x", "claude-opus-5.5", "claude-haiku-5.5", RATIO_HAIKU55, "low", f"新增{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_HAIKU55:.1f}亿：20x Opus5.5 采用值 {CLAUDE_OPUS55_MAX20X_MONTHLY_YI:g}亿 × 混合价比 {RATIO_HAIKU55:.2f}（≤100k 档），同 Pro 口径派生非实测；27.34× 外推幅度大，若池权重偏离价格比须重推；claude-haiku55-round1-2026-10-08.json", True),
+    ("claude_max_5x", "claude-opus-5", "claude-sonnet-5.5", (CLAUDE_OPUS55_MAX20X_MONTHLY_YI / CLAUDE_MAX_20X_YI) * RATIO_SONNET55, "low", f"新增{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_SONNET55/CLAUDE_WEEKLY_20X_TO_5X:.2f}亿：Opus5.5 5x行比率{CLAUDE_OPUS55_MAX20X_MONTHLY_YI/CLAUDE_MAX_20X_YI:g} × 混合价比{RATIO_SONNET55:g}（=20x锚派生值{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_SONNET55:g}亿÷{CLAUDE_WEEKLY_20X_TO_5X}）；非实测；claude-haiku55-round1-2026-10-08.json", False),
+    ("claude_max_5x", "claude-opus-5", "claude-haiku-5.5", (CLAUDE_OPUS55_MAX20X_MONTHLY_YI / CLAUDE_MAX_20X_YI) * RATIO_HAIKU55, "low", f"新增{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_HAIKU55/CLAUDE_WEEKLY_20X_TO_5X:.1f}亿：Opus5.5 5x行比率{CLAUDE_OPUS55_MAX20X_MONTHLY_YI/CLAUDE_MAX_20X_YI:g} × 混合价比{RATIO_HAIKU55:.2f}（=20x锚派生值{CLAUDE_OPUS55_MAX20X_MONTHLY_YI*RATIO_HAIKU55:.1f}亿÷{CLAUDE_WEEKLY_20X_TO_5X}，≤100k 档）；非实测；claude-haiku55-round1-2026-10-08.json", False),
     # Astra Pro5x：沿用 Sol 档间 4× 关系由 20x 采用值派生；prolite 同框 2.31亿/周≈9.2亿/月量级接近（多代理高负载偏大，不直接采）
     ("chatgpt_pro_5x", "gpt-5.6-sol", "gpt-6-astra", CHATGPT_PRO20X_ASTRA_MONTHLY_YI / CHATGPT_PRO20X_SOL_MONTHLY_YI, "low", f"{CHATGPT_PRO20X_ASTRA_MONTHLY_YI/4:g}→{30.8*CHATGPT_PRO20X_ASTRA_MONTHLY_YI/CHATGPT_PRO20X_SOL_MONTHLY_YI:g}亿：{CHATGPT_PRO20X_ASTRA_MONTHLY_YI:g}×30.8/{CHATGPT_PRO20X_SOL_MONTHLY_YI:g}（沿用Sol 20x→5x档间比例，基准随Sol 20x加权值联动{CHATGPT_PRO20X_SOL_MONTHLY_YI/30.8:.2f}×）；round12 codex#45085 prolite同框2.31亿/周≈9.2亿/月量级接近但为多代理Astra High放大样本，不直接采；chatgpt-astra-sameframe-round13-2026-09-20.json", False),
     # Pro 档 Fable 5/5.1 套餐内不可用（走 usage credits，官方 high），不挂点
@@ -1181,6 +1194,8 @@ METERED = [
     ("anthropic_fable5_api", "Claude Fable 5 API", "claude-fable-5", 1.0, 10.0, 50.0, "platform.claude.com/docs/en/about-claude/pricing"),
     ("anthropic_fable51_api", "Claude Fable 5.1 API", "claude-fable-5.1", 0.25, 10.0, 50.0, "platform.claude.com/docs/en/about-claude/pricing；cache read $0.25=base input×0.025（其他模型0.1×），in/out 与 Fable 5 同价；claude-fable51-round1-2026-09-13.json"),
     ("anthropic_opus55_api", "Claude Opus 5.5 API", "claude-opus-5.5", 0.2, 4.0, 20.0, "platform.claude.com/docs/en/about-claude/pricing；cache read $0.20=base input×0.05（其他模型0.1×）、写 $5/5m $8/1h、Fast $8/$40；claude-opus55-round1-2026-09-23.json"),
+    ("anthropic_sonnet55_api", "Claude Sonnet 5.5 API", "claude-sonnet-5.5", 0.1, 2.0, 10.0, "platform.claude.com/docs/en/about-claude/pricing；2026-09-28 发布价 cache read $0.20（同 Sonnet 5），Haiku 5.5 发布日降至 $0.10=base input×0.05（同 Opus 5.5 口径）；in/out 与写 $2.5/5m 不变；claude-haiku55-round1-2026-10-08.json"),
+    ("anthropic_haiku55_api", "Claude Haiku 5.5 API (≤100k)", "claude-haiku-5.5", 0.01, 0.1, 0.5, "platform.claude.com/docs/en/about-claude/pricing；2026-10-08 发布，迄今最便宜最快迷你模型，官方称平均比 Haiku 4.5 便宜 ~75%；≤100K 档价（cache read=base input×0.1、写 $0.125/5m）；>100K 档 5×（cached $0.05/in $0.5/out $2.5、写 $0.625/5m）留作备选；claude-haiku55-round1-2026-10-08.json"),
     ("openai_terra_api", "GPT-5.6 Terra API", "gpt-5.6-terra", 0.2, 2.0, 12.0, "developers.openai.com"),
     ("openai_luna_api", "GPT-5.6 Luna API", "gpt-5.6-luna", 0.02, 0.2, 1.2, "developers.openai.com"),
 ]
@@ -1269,6 +1284,15 @@ DATA_DATES = {
     ("anthropic_fable5_api", "claude-fable-5"): ("2026-09-05", "official"),
     ("anthropic_fable51_api", "claude-fable-5.1"): ("2026-09-13", "official"),
     ("anthropic_opus55_api", "claude-opus-5.5"): ("2026-09-23", "official"),
+    ("anthropic_sonnet55_api", "claude-sonnet-5.5"): ("2026-10-08", "official"),
+    ("anthropic_haiku55_api", "claude-haiku-5.5"): ("2026-10-08", "official"),
+    # 5.5 家族派生行：数据有效性取决于新价表（2026-10-08），显式给日期与锚点
+    ("claude_pro", "claude-sonnet-5.5"): ("2026-10-08", "derived", "Claude Pro · claude-opus-5.5"),
+    ("claude_pro", "claude-haiku-5.5"): ("2026-10-08", "derived", "Claude Pro · claude-opus-5.5"),
+    ("claude_max_20x", "claude-sonnet-5.5"): ("2026-10-08", "derived", "Claude Max 20x (9/14+) · claude-opus-5.5"),
+    ("claude_max_20x", "claude-haiku-5.5"): ("2026-10-08", "derived", "Claude Max 20x (9/14+) · claude-opus-5.5"),
+    ("claude_max_5x", "claude-sonnet-5.5"): ("2026-10-08", "derived", "Claude Max 20x (9/14+) · claude-opus-5.5；Claude Max 5x (9/14+) · claude-opus-5"),
+    ("claude_max_5x", "claude-haiku-5.5"): ("2026-10-08", "derived", "Claude Max 20x (9/14+) · claude-opus-5.5；Claude Max 5x (9/14+) · claude-opus-5"),
     # 派生行里锚点不止一个、不能简单沿用 DERIVED 基准行的，显式给日期与锚点
     ("chatgpt_pro_5x", "gpt-6-astra"): ("2026-07-30~2026-09-21", "derived",
                                         "ChatGPT Plus · gpt-5.6-sol；ChatGPT Pro 20x · gpt-6-astra、gpt-5.6-sol"),
@@ -1344,7 +1368,7 @@ def workload_of(pid: str, billing: str, model: str = "") -> str:
     if billing == "metered":
         return "anthropic" if model in ANTHROPIC_CACHE_WRITE_5M else "standard"
     if pid == "claude_pro" or (pid, model) == ("devin_max", "claude-opus-5.5") or pid.startswith("droid_") \
-            or (pid in ("claude_max_20x", "claude_max_5x") and model == "claude-opus-5.5"):
+            or (pid in ("claude_max_20x", "claude_max_5x") and model in ("claude-opus-5.5", "claude-sonnet-5.5", "claude-haiku-5.5")):
         return "anthropic"
     if pid.startswith(("google_", "stepfun_")):
         return "lowCache"

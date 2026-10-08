@@ -3,6 +3,17 @@
 本地 `AGENTS.md`（不入库）只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-10-08 · Claude Haiku 5.5 发布 & Sonnet 5.5 缓存读降价
+
+- **背景**：2026-10-08 Anthropic 发布 Claude Haiku 5.5（官方称迄今最便宜最快的迷你模型，平均比 Haiku 4.5 便宜约 75%），同日 Sonnet 5.5 缓存读价 $0.20→$0.10（改为 base input×0.05，与 Opus 5.5 同口径）。维护者供图：X @1kartikkabadi1 推算图把 Pro 月池按各模型混合价拆开，其锚点与库内采用值精确一致（Pro × Opus 5.5 = 30.54 亿，池 worth $1,279.46≈图 $1,280），方法即仓库自身口径。
+- **Claude Pro × Sonnet 5.5 = 61.08 亿（low，Anthropic 档）**：30.54 × 混合价比 2.0（post-cut $0.2095 vs $0.419）。发布价 $0.3065 口径 41.75 亿留对照。
+- **Claude Pro × Haiku 5.5 = 835.0 亿（low，Anthropic 档）**：30.54 × 27.34（≤100K 档 $0.015325）。分段价取 ≤100K 最低档，沿 qwen3.7-flash ≤32K、gpt-6-luna ≤272K、grok <200k 先例；50/50 mix 口径 278.3 亿、>100K 档 167.0 亿留作备选口径记录。
+- **Claude Max 20x / 5x 同法派生（全 low）**：Sonnet 5.5 = 630.76 / 315.38 亿；Haiku 5.5 = 8,622.8 / 4,311.4 亿。27.34× 外推幅度大，池权重=价格比是假设，若偏离须重推。Max 两档新增行 workload 标 anthropic（与 Opus 5.5 行同档折算）。
+- **API 基线**：`anthropic_sonnet55_api`（$0.10/$2/$10，写 $2.5/5m，降价后价）与 `anthropic_haiku55_api` ≤100K（$0.01/$0.10/$0.50，写 $0.125/5m，>100K 档 5× 存 research 备查）入 METERED；同价目写入 `list-prices-claude55-round1-2026-10-08.json`。
+- **Command Code GOAT × Sonnet 5.5 随官方价联动**：cached read 0.2→0.1，0.340→0.508 亿（0.2941→0.1969 $/MTok，allowance $10 不变）。
+- **不采**：Sonnet 5.5 pre-cut 价 41.75 亿（历史价）；Opus 5 池锚法（两池权重未知）；为 Haiku 5.5 编造 Droid/GOAT 目录行（官方目录未列该模型）；command_code_goat/droid 其余行不变。
+- 证据：`data/research/claude-haiku55-round1-2026-10-08.json`。
+
 ## 2026-10-03 · Droid 月额度 = 2× 周（裁定）
 
 - **Factory Droid 30 天窗 = 2× 7 天窗（维护者裁定，Droid 专用例外，不改通用 ×4 周）**：月额度一律按周 worth × 2。

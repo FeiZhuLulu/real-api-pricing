@@ -751,8 +751,8 @@
       "en": "Added 2.588B: min(shared monthly pool $70, model allowance $50) ÷ project standard-workload weighted price; official three-part price; Every model table $50; goat-opencode-catalogs-round3-2026-09-30.json. Processing fee ignored; allowances of different models in the same plan are not additive; no usage-panel token+% screenshot — computed from official absolute credits and the price list"
     },
     {
-      "zh": "新增0.34亿：min(共享月池$70, 模型allowance $10) ÷ 统一标准负载加权价；official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; goat-opencode-catalogs-round3-2026-09-30.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
-      "en": "Added 34M: min(shared monthly pool $70, model allowance $10) ÷ project standard-workload weighted price; official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; goat-opencode-catalogs-round3-2026-09-30.json. Processing fee ignored; allowances of different models in the same plan are not additive; no usage-panel token+% screenshot — computed from official absolute credits and the price list"
+      "zh": "新增0.508亿：min(共享月池$70, 模型allowance $10) ÷ 统一标准负载加权价；official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; cached read cut $0.20→$0.10 at Haiku 5.5 launch (2026-10-08, base input×0.05); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
+      "en": "New 508M: min(shared monthly pool $70, model allowance $10) ÷ unified standard-workload blended price; official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; cached read cut $0.20→$0.10 at Haiku 5.5 launch (2026-10-08, base input×0.05); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json. Processing fee ignored; model allowances within the same plan do not add up; no panel token+% screenshot, adopted from official absolute credits + price list"
     },
     {
       "zh": "新增1.005亿：min(共享月池$70, 模型allowance $20) ÷ 统一标准负载加权价；official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
@@ -1139,6 +1139,54 @@
       "en": "Derived from the 20x adopted value 31.538B÷2 (confirmed the 20x weekly pool = 2× the 5x pool, same as the Opus 5 row's 157÷2; from 2026-09-30 the 20x value is the weighted MiaAI window ×5.5 windows/week and Pro×10, so old 20x 301.7 → this row 150.85); the old value 78.5×1/W = 15.0852B differs from 20x/2 only by the 301.7 rounding — the ruled on 2026-09-27 to merge them into the same point; the list-price method gives 15.264B, 1.2% off; claude-opus55-round1-2026-09-23.json"
     },
     {
+      "zh": "由同套餐 claude-opus-5.5 30.54 亿 × 2.0",
+      "en": "From same-plan claude-opus-5.5 3.054B × 2.0"
+    },
+    {
+      "zh": "新增61.08亿：Pro Opus5.5 实测锚 30.54亿 × 混合价比 2（Sonnet5.5 降价后 $0.2095 vs Opus5.5 $0.419）；发布价 $0.3065 口径 41.75亿 留对照；X @1kartikkabadi1 推算图 + 官方价表；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 6.108B: Pro Opus 5.5 measured anchor 3.054B × blended-price ratio 2 (post-cut Sonnet 5.5 $0.2095 vs Opus 5.5 $0.419); launch price $0.3065 basis 4.175B kept as comparison; X @1kartikkabadi1 derivation chart + official price list; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 30.54 亿 × 27.340946166394783",
+      "en": "From same-plan claude-opus-5.5 3.054B × 27.340946166394783"
+    },
+    {
+      "zh": "新增835.0亿：Pro Opus5.5 实测锚 30.54亿 × 混合价比 27.34（Haiku5.5 ≤100k 档 $0.015325 vs Opus5.5 $0.419）；分段价取 ≤100k 最低档（沿 qwen3.7-flash ≤32K、grok <200k 先例）；50/50 mix 口径 278.3亿、>100k 档 167.0亿 留作备选；X @1kartikkabadi1 推算图；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 83.50B: Pro Opus 5.5 measured anchor 3.054B × blended-price ratio 27.34 (Haiku 5.5 ≤100K tier $0.015325 vs Opus 5.5 $0.419); tiered pricing adopts the cheapest ≤100K tier (following qwen3.7-flash ≤32K and grok <200k precedents); 50/50 mix basis 27.83B and >100K tier 16.70B kept as alternates; X @1kartikkabadi1 derivation chart; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 315.38 亿 × 2.0",
+      "en": "From same-plan claude-opus-5.5 31.538B × 2.0"
+    },
+    {
+      "zh": "新增630.76亿：20x Opus5.5 采用值 315.38亿 × 混合价比 2，同 Pro 口径派生非实测；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 63.076B: Max 20x Opus 5.5 adopted value 31.538B × blended-price ratio 2, same-basis derivation as Pro, not measured; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 315.38 亿 × 27.340946166394783",
+      "en": "From same-plan claude-opus-5.5 31.538B × 27.340946166394783"
+    },
+    {
+      "zh": "新增8622.8亿：20x Opus5.5 采用值 315.38亿 × 混合价比 27.34（≤100k 档），同 Pro 口径派生非实测；27.34× 外推幅度大，若池权重偏离价格比须重推；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 862.28B: Max 20x Opus 5.5 adopted value 31.538B × blended-price ratio 27.34 (≤100K tier), same-basis derivation as Pro, not measured; the 27.34× extrapolation is large and must be re-derived if pool weighting deviates from the price ratio; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5 78.5 亿 × 4.017579617834395",
+      "en": "From same-plan claude-opus-5 7.85B × 4.017579617834395"
+    },
+    {
+      "zh": "新增315.38亿：Opus5.5 5x行比率2.00879 × 混合价比2（=20x锚派生值630.76亿÷2）；非实测；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 31.538B: Opus 5.5 5x-row ratio 2.00879 × blended-price ratio 2 (= 20x-anchor derived 63.076B ÷ 2); not measured; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5 78.5 亿 × 54.92221402520756",
+      "en": "From same-plan claude-opus-5 7.85B × 54.92221402520756"
+    },
+    {
+      "zh": "新增4311.4亿：Opus5.5 5x行比率2.00879 × 混合价比27.34（=20x锚派生值8622.8亿÷2，≤100k 档）；非实测；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 431.14B: Opus 5.5 5x-row ratio 2.00879 × blended-price ratio 27.34 (= 20x-anchor derived 862.28B ÷ 2, ≤100K tier); not measured; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
       "zh": "由同套餐 gpt-5.6-sol 30.8 亿 × 0.295458068516509",
       "en": "Derived from same-plan gpt-5.6-sol 3.08B × 0.295458068516509"
     },
@@ -1481,6 +1529,22 @@
     {
       "zh": "标价 cached 0.2/in 4.0/out 20.0、缓存写(5m) $5 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）",
       "en": "List price cached 0.2/in 4.0/out 20.0, cache write (5m) $5 × Anthropic unified workload 97.0%/2.50%/0.50% (the regular-input share is billed at the 5-minute cache-write price)"
+    },
+    {
+      "zh": "platform.claude.com/docs/en/about-claude/pricing；2026-09-28 发布价 cache read $0.20（同 Sonnet 5），Haiku 5.5 发布日降至 $0.10=base input×0.05（同 Opus 5.5 口径）；in/out 与写 $2.5/5m 不变；claude-haiku55-round1-2026-10-08.json",
+      "en": "platform.claude.com/docs/en/about-claude/pricing; launch price (2026-09-28) cache read $0.20 (same as Sonnet 5), cut to $0.10 = base input×0.05 on Haiku 5.5 launch day (same basis as Opus 5.5); input/output and write $2.5/5m unchanged; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "标价 cached 0.1/in 2.0/out 10.0、缓存写(5m) $2.5 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）",
+      "en": "List cached 0.1/in 2.0/out 10.0, cache write (5m) $2.5 × Anthropic unified workload 97.0%/2.50%/0.50% (the regular-input share priced at the 5-minute cache-write rate)"
+    },
+    {
+      "zh": "platform.claude.com/docs/en/about-claude/pricing；2026-10-08 发布，迄今最便宜最快迷你模型，官方称平均比 Haiku 4.5 便宜 ~75%；≤100K 档价（cache read=base input×0.1、写 $0.125/5m）；>100K 档 5×（cached $0.05/in $0.5/out $2.5、写 $0.625/5m）留作备选；claude-haiku55-round1-2026-10-08.json",
+      "en": "platform.claude.com/docs/en/about-claude/pricing; launched 2026-10-08, Anthropic's cheapest and fastest mini model, billed ~75% cheaper than Haiku 4.5 on average; ≤100K tier pricing (cache read = base input×0.1, write $0.125/5m); >100K tier at 5× (cached $0.05/in $0.5/out $2.5, write $0.625/5m) kept as alternate; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "标价 cached 0.01/in 0.1/out 0.5、缓存写(5m) $0.125 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）",
+      "en": "List cached 0.01/in 0.1/out 0.5, cache write (5m) $0.125 × Anthropic unified workload 97.0%/2.50%/0.50% (the regular-input share priced at the 5-minute cache-write rate)"
     },
     {
       "zh": "标价 cached 0.2/in 2.0/out 12.0 × 项目统一标准负载 97.0%/2.50%/0.50%",
