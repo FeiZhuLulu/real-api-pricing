@@ -16,6 +16,14 @@
 - **不采**：Sonnet 5.5 pre-cut 价 41.75 亿（历史价）；Opus 5 池锚法（两池权重未知）；为 Haiku 5.5 编造 Droid/GOAT 目录行（官方目录未列该模型）；command_code_goat/droid 其余行不变。
 - 证据：`data/research/claude-haiku55-round1-2026-10-08.json`。
 
+## 2026-10-06 · Claude Team Premium 席首个采用点
+
+- **Claude Team Premium 席 × Opus 5.5**：新增 **126.05 亿/月 low**（2026-10-08 裁定由 medium 降为 low）。X @leo114119 推文（维护者提供截图）：Team「6.25x」席第三方 relay 使用统计 7d 窗 4,091,470,718 raw（12,836 次请求，hit 98.8%），帖主称整周用满；面板总成本 $1,320.3794 与 Opus 5.5 标价逐项闭合（写按 5m $5）→ 采面板 worth ×4周 ÷ Anthropic 档 $0.419/MTok；raw 口径 163.66 亿留作对照；写按 1h $8 敏感性 140.15 亿不采。
+- **档位与价格**：claude.com/pricing（2026-10-08 核对）Premium 席 $125/月付、$100/月年付，「5x more usage than standard seats」；Standard 席 $25/月付、$20/月年付，「more usage than Pro」，官方未给具体倍数，用量倍数按 5 小时会话计。「6.25× Pro」是社区按 Standard≈1.25× Pro 推的说法，不是官方口径。挂月付价 $125。Standard 席无额度样本不画。
+- **自洽（按周 list-worth 比，同单位）**：本样本周 $1,320.38 = Pro × Opus 5.5 周 $319.91 的 4.13×、Max 5x 直测周 $1,920.49 的 69%、Max 20x 周 $3,303.61 的 40%（各行采用值 × $0.419 ÷ 4）。若 Premium 真为 6.25× Pro，月额应约 190.88 亿，本值只有其 66%。PR 初稿「≈Max 5x、差 4~8%」系拿 Team raw token 比 Max 5x 折算值，单位不同，作废。
+- **降 low 理由**：「用满」只是帖主口述、面板无额度百分比；第三方 relay 面板 + 车头共享席位，7d 滚动窗与官方周重置边界未对齐；与 6.25× Pro 说法差 34%。
+- 证据：`data/research/claude-team-opus55-round1-2026-10-06.json`。
+
 ## 2026-10-03 · Claude Max 5x × Opus 5.5 社区截图直测
 
 - **Claude Max 5x × Claude Opus 5.5 改用社区截图直测（Anthropic 档）**：157.69 → 183.34 亿/月，low → medium（真实单价 $0.00634 → $0.00545/MTok）。维护者提供社区 Claude Code /usage 截图：单会话 claude-opus-5-5 in 23.0k / out 3.0m / cache读 1.3b / cache写 5.6m（面板 $366.96，按 1h 写价闭合；prompt cache 1h TTL）＝周额度（all models）19%，Fable 周 0%。缓存写按实际 1h 档计（同 issue #52/#53 口径）：list-worth $364.89 ÷19% ×4 周 ÷ $0.419/MTok。未采：cache 写按 5m 折 174.9 亿、raw total 275.5 亿，留作对照。19% 为整数读数时区间 178.64~188.29 亿；1.3b 只有两位有效数字（约 ±3.7%）。弱点：截图出处未确认，19% 是否全归本会话未知（若周内另有用量，周池更大、本值偏保守），n=1。张力：按 20x 周池 = 5x×2 推 Max 20x ≈ 366.68 亿，比采用值 315.38 高 16%；20x 本轮不改，5x/20x 不再同价并点。证据：`claude-max5x-opus55-round1-2026-10-03.json`。
