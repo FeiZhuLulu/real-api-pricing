@@ -24,6 +24,13 @@
 - **降 low 理由**：「用满」只是帖主口述、面板无额度百分比；第三方 relay 面板 + 车头共享席位，7d 滚动窗与官方周重置边界未对齐；与 6.25× Pro 说法差 34%。
 - 证据：`data/research/claude-team-opus55-round1-2026-10-06.json`。
 
+## 2026-10-05 · Cursor Other Models 池首个实测点（Ultra × Opus 5.5）
+
+- **Cursor Ultra × Claude Opus 5.5（新增，Other Models 池，medium）**：**8.96 亿/月**（workload=anthropic）。X @xuanwo 推文（维护者转交截图）：账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日 共 176 条、778,341,121 tok（cache读 748,779,006 / cache写 24,358,860 / 普通输入 9,402 / 输出 5,193,853，hit 96.85%，记录集中北京时间 10月2日22:35–5日14:14）。段 worth $375.46（读×$0.2＋写×$5(5m)＋入×$4＋出×$20，与帖主折算一致）＝账期 Other Models 全部用量 ÷ Anthropic 档混合价 $0.419/MTok。对照不采：raw 口径 7.78 亿；cache写按 1h $8 敏感性 $448.54→10.71 亿。worth 与社区口径 Ultra Other Models 池 $400 同量级（93.9%；Wayback 8/19 计划表有档、CellCog 曾示 $500），视为月池基本用尽；CSV 无账期边界与 % 字段故按整份导出统计，若未用尽本值偏保守。与既有 Cursor Models 池行（grok-4.6 77.37 亿、composer-2.5）为两个独立月池，不联动不改值。真实单价 $0.2232/MTok 为 Opus 5.5 最贵订阅点。
+- **Cursor Pro / Pro+ × Opus 5.5 不画（裁定）**：按社区口径池比（Other Models Pro $20 / Pro+ $70 / Ultra $400，官方页现仅写 Included）由 Ultra 实测派生可得 Pro 0.448 亿、Pro+ 1.568 亿，但只是跨档池规模假设、无独立实测；且以 Ultra 实测 worth $375.46（低于 $400 池）缩放，Pro 点真实单价 $0.446/MTok 高于按量 API $0.419，是推法造成的偏差而非实测结论 → 不采，待 Pro/Pro+ 有独立实测再加。
+- 证据：`data/research/cursor-opus55-community-round1-2026-10-05.json`。
+- 待裁定（未展开）：同一 Other Models 池按价目比派生其他第三方模型（GPT/Gemini/Sonnet 等）；Other Models 官方池口径（$400 vs CellCog $500）。
+
 ## 2026-10-03 · Claude Max 5x × Opus 5.5 社区截图直测
 
 - **Claude Max 5x × Claude Opus 5.5 改用社区截图直测（Anthropic 档）**：157.69 → 183.34 亿/月，low → medium（真实单价 $0.00634 → $0.00545/MTok）。维护者提供社区 Claude Code /usage 截图：单会话 claude-opus-5-5 in 23.0k / out 3.0m / cache读 1.3b / cache写 5.6m（面板 $366.96，按 1h 写价闭合；prompt cache 1h TTL）＝周额度（all models）19%，Fable 周 0%。缓存写按实际 1h 档计（同 issue #52/#53 口径）：list-worth $364.89 ÷19% ×4 周 ÷ $0.419/MTok。未采：cache 写按 5m 折 174.9 亿、raw total 275.5 亿，留作对照。19% 为整数读数时区间 178.64~188.29 亿；1.3b 只有两位有效数字（约 ±3.7%）。弱点：截图出处未确认，19% 是否全归本会话未知（若周内另有用量，周池更大、本值偏保守），n=1。张力：按 20x 周池 = 5x×2 推 Max 20x ≈ 366.68 亿，比采用值 315.38 高 16%；20x 本轮不改，5x/20x 不再同价并点。证据：`claude-max5x-opus55-round1-2026-10-03.json`。

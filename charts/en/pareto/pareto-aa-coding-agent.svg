@@ -153,6 +153,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.029081039" data-score="46.969" data-x="760.871" data-y="543.911" transform="translate(760.871 543.911)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 46.969 · mediumGrok Build - Grok 4.6 (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.22321429" data-score="65.9886" data-x="416.316" data-y="307.668" transform="translate(416.316 307.668)"><title>Claude Opus 5.5 · Cursor Ultra (Other Models) · $0.22321/MTok · 65.9886 · mediumClaude Code - Opus 5.5 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="51.9259" data-x="774.189" data-y="482.341" transform="translate(774.189 482.341)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 51.9259 · mediumKimi Code CLI - Kimi K3 · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
 </g>
@@ -440,7 +443,7 @@
 <path d="M62 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="76.000" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5×, Droid = 2× weekly · Dollar/credit: 97% cache / 2.5% input / 0.5% output · Direct totals unchanged</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >102 subscription positions / 12 API positions / 2 frontier positions</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >103 subscription positions / 12 API positions / 2 frontier positions</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Highest archived configuration reference; harness and effort shown. Product/quota alignment unverified, not channel measurements.</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/agents/coding-agents</text>

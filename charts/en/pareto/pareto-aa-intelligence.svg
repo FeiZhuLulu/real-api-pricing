@@ -164,6 +164,9 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.029081039" data-score="44.3113" data-x="739.768" data-y="390.530" transform="translate(739.768 390.530)"><title>Grok 4.6 · Cursor Pro+ · $0.02908/MTok · 44.3113 · mediumGrok 4.6 (high) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.22321429" data-score="57.6224" data-x="454.934" data-y="271.985" transform="translate(454.934 271.985)"><title>Claude Opus 5.5 · Cursor Ultra (Other Models) · $0.22321/MTok · 57.6224 · mediumClaude Opus 5.5 (max with fallback) · Exact served-model reference; quota-measurement effort is unverified.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="43.5938" data-x="750.778" data-y="396.919" transform="translate(750.778 396.919)"><title>Kimi K3 (v1) · Kimi Allegretto · $39 / CN ¥199 · $0.02688/MTok · 43.5938 · mediumKimi K3 (max) · Exact served-model reference; quota-measurement effort is unverified.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0EA5E9" opacity=".68"/>
 </g>
@@ -988,7 +991,7 @@
 <path d="M400.91999999999996 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="414.920" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >Metered API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >Default month = 4 weeks; Kimi pool = 5×, Droid = 2× weekly · Dollar/credit: 97% cache / 2.5% input / 0.5% output · Direct totals unchanged</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >263 subscription positions / 19 API positions / 6 frontier positions</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >264 subscription positions / 19 API positions / 6 frontier positions</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Claude Max: permanent allowance estimate from Sep 14; Pro: historical Opus 4.8 measurement. Y uses the top archived variant per model.</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >Subscriptions and metered APIs share one frontier; line segments are visual guides, not purchasable plans.</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>

@@ -303,6 +303,14 @@
       "en": "Old 2.133B→2.063B: 77.37×800/3000; inherits the cross-tier pool-size assumption, not an independent measurement; the community-figure back-derivation of $4500~4800 was not adopted as the official pool; promotion and account differences retained"
     },
     {
+      "zh": "X @xuanwo 推文（2026-10-05，维护者转交截图）：Cursor Ultra 账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日共 176 条 Opus 记录（集中北京时间10月2日22:35–5日14:14）；cursor-opus55-community-round1-2026-10-05.json",
+      "en": "X @xuanwo post (2026-10-05, screenshots relayed by maintainer): all Other Models usage on Cursor Ultra this billing cycle went to claude-opus-5-5-high; usage-events CSV export covering 9/14–10/5 has 176 Opus records (mostly 22:35 on 10/2 through 14:14 on the 5th, Beijing time); cursor-opus55-community-round1-2026-10-05.json"
+    },
+    {
+      "zh": "新增8.96亿（Other Models 池首个实测）：段 worth $375.46（读748.78M×$0.2＋写24.36M×$5(5m)＋入9.4K×$4＋出5.19M×$20，hit 96.85%）＝账期 Other Models 全部用量 ÷ Anthropic档混合价$0.419/MTok；raw 口径 7.78亿留作对照；cache写按1h $8 敏感性 worth $448.54（10.71亿）不采；worth 与社区口径 Ultra Other Models 池$400同量级（93.9%；CellCog曾示$500），视为月池基本用尽——CSV 无账期边界/%字段故按整份导出统计，若未用尽本值偏保守；与 Cursor Models 池（grok-4.6 77.37亿）为两个独立月池不联动；单一社区源、面板%未截图 → medium；effort 均 high 仅影响速率",
+      "en": "New 896M (first measured point of the Other Models pool): segment worth $375.46 (read 748.78M×$0.2 + write 24.36M×$5(5m) + in 9.4K×$4 + out 5.19M×$20, hit 96.85%) = all Other Models usage in the cycle ÷ Anthropic-tier blended price $0.419/MTok; raw basis 778M kept as control; 1h-cache-write-$8 sensitivity worth $448.54 (1.071B) not adopted; worth is the same magnitude as the community-cited Ultra Other Models pool $400 (93.9%; CellCog once showed $500) — treated as the monthly pool essentially exhausted; the CSV has no billing-boundary or % fields so the whole export is counted, and if the pool was not fully used this value is conservative; a separate monthly pool from Cursor Models (grok-4.6 7.737B), not linked; single community source, panel % not screenshotted → medium; all records at high effort, which only affects burn rate"
+    },
+    {
       "zh": "本机ccusage 243739068/84%反推周额度×Kimi月池5倍；kimi-adoption-round6-2026-09-08.json",
       "en": "Local ccusage 243,739,068/84% back-derives the weekly quota × the Kimi monthly pool's 5×; kimi-adoption-round6-2026-09-08.json"
     },
