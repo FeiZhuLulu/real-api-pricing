@@ -731,7 +731,7 @@ COMMAND_CODE_GOAT_MODELS = (
     ("jev", 20, 0.0, 0.042, 0.0, "new official row; New models table $20; input $0.042, cache read/output free; Decision model (typesafe/jev); goat-opencode-catalogs-round3-2026-09-30.json"),
     ("longcat-2.0", 50, 0.006, 0.3, 1.2, "official three-part price; Every model table $50; goat-opencode-catalogs-round3-2026-09-30.json"),
     # -- standalone tier --
-    ("claude-sonnet-5.5", 10, 0.1, 2.0, 10.0, "official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; cached read cut $0.20→$0.10 at Haiku 5.5 launch (2026-10-08, base input×0.05); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json"),
+    ("claude-sonnet-5.5", 10, 0.2, 2.0, 10.0, "official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; channel catalog price unchanged by vendor cached-read cut (2026-10-08); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json"),
     # -- Older models table (all $20) --
     ("kimi-k2.6", 20, 0.16, 0.95, 4.0, "official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json"),
     ("kimi-k2.5", 20, 0.1, 0.6, 3.0, "official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json"),

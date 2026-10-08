@@ -10,7 +10,7 @@
 - **Claude Pro × Haiku 5.5 = 835.0 亿（low，Anthropic 档）**：30.54 × 27.34（≤100K 档 $0.015325）。分段价取 ≤100K 最低档，沿 qwen3.7-flash ≤32K、gpt-6-luna ≤272K、grok <200k 先例；50/50 mix 口径 278.3 亿、>100K 档 167.0 亿留作备选口径记录。
 - **Claude Max 20x / 5x 同法派生（全 low）**：Sonnet 5.5 = 630.76 / 315.38 亿；Haiku 5.5 = 8,622.8 / 4,311.4 亿。27.34× 外推幅度大，池权重=价格比是假设，若偏离须重推。Max 两档新增行 workload 标 anthropic（与 Opus 5.5 行同档折算）。
 - **API 基线**：`anthropic_sonnet55_api`（$0.10/$2/$10，写 $2.5/5m，降价后价）与 `anthropic_haiku55_api` ≤100K（$0.01/$0.10/$0.50，写 $0.125/5m，>100K 档 5× 存 research 备查）入 METERED；同价目写入 `list-prices-claude55-round1-2026-10-08.json`。
-- **Command Code GOAT × Sonnet 5.5 随官方价联动**：cached read 0.2→0.1，0.340→0.508 亿（0.2941→0.1969 $/MTok，allowance $10 不变）。
+- **Command Code GOAT × Sonnet 5.5 不随官方价联动**：该行记渠道自身目录价（$10 credits 档 cached read $0.20），官方 API 降价不影响渠道目录行，维持 0.340 亿不变（同 droid_max 处理）。
 - **不采**：Sonnet 5.5 pre-cut 价 41.75 亿（历史价）；Opus 5 池锚法（两池权重未知）；为 Haiku 5.5 编造 Droid/GOAT 目录行（官方目录未列该模型）；command_code_goat/droid 其余行不变。
 - 证据：`data/research/claude-haiku55-round1-2026-10-08.json`。
 
