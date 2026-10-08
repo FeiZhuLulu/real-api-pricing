@@ -51,7 +51,13 @@ export default function AllowanceCards({
   const [plan, setPlan] = useState("");
   const byId = new Map(points.map((p) => [p.id, p]));
   const chosen = state.cards.flatMap((id) => byId.get(id) ?? []);
-  const options = planOptions(tableRows(rows, state).map((r) => r.point));
+  // Chosen points and the picker's selected plan stay listed even when the
+  // filters now hide them.
+  const chosenIds = new Set(state.cards);
+  const options = planOptions([
+    ...tableRows(rows, state).map((r) => r.point),
+    ...points.filter((p) => chosenIds.has(p.id) || (plan !== "" && planKey(p) === plan)),
+  ]);
   const groups = cardGroups(chosen);
   const decades = Math.round(Math.log10(axis.high / axis.low));
   const caption = zh

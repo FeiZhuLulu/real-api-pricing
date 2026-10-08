@@ -1022,7 +1022,14 @@ function Explorer({
                   );
                 })}
               </OneLineLegend>
-              {!pts.length || (state.view === "pareto" && !gs.length) ? (
+              {(!pts.length || (state.view === "pareto" && !gs.length)) &&
+              // The allowance card/compare pickers have their own empty states
+              // and must stay reachable (and keep saved items) under filters
+              // that match nothing.
+              !(
+                state.view === "allowance" &&
+                (state.layout === "cards" || state.layout === "compare")
+              ) ? (
                 <div className="empty">
                   <ChartScatter size={35} />
                   <h3>{t("No points to plot", "没有可绘制的数据点")}</h3>

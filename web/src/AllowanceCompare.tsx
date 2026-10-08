@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Plus, X } from "@phosphor-icons/react";
 import type { Point, Row, State } from "./types";
 import ProviderLogo from "./ProviderLogo";
@@ -25,6 +25,23 @@ const LANE_STEP = LANE_H + LANE_GAP;
 /** One comparison slot; `id` stays empty until a model has been picked. */
 type Slot = { plan: string; id: string };
 const EMPTY: Slot = { plan: "", id: "" };
+
+/** Slots restored from a `cmp` list: point ids, `plan:`-only slots, or "". */
+function slotsFrom(compare: string[], byId: Map<string, Point>): Slot[] {
+  const saved = compare.map((v): Slot => {
+    const p = byId.get(v);
+    if (p) return { plan: planKey(p), id: v };
+    return v.startsWith(PLAN_SLOT) ? { plan: v.slice(PLAN_SLOT.length), id: "" } : EMPTY;
+  });
+  return [...saved, EMPTY, EMPTY].slice(0, Math.max(2, saved.length));
+}
+
+/** What the slots write to `cmp`; untouched default slots keep the link clean. */
+function serializeSlots(next: Slot[]): string[] {
+  return next.every((s) => !s.plan) && next.length === 2
+    ? []
+    : next.map((s) => s.id || (s.plan ? PLAN_SLOT + s.plan : ""));
+}
 
 /** 1-2-5 step close to `range`. */
 function niceStep(range: number): number {
@@ -71,32 +88,33 @@ export default function AllowanceCompare({
   const dark = useTheme() === "dark";
   const [zoom, setZoom] = useState(true);
   const byId = new Map(points.map((p) => [p.id, p]));
-  // Slots start empty; a saved link restores its complete items.
   // Slots start empty; a saved link restores every slot in its position.
-  const [slots, setSlots] = useState<Slot[]>(() => {
-    const saved = state.compare.map((v): Slot => {
-      const p = byId.get(v);
-      if (p) return { plan: planKey(p), id: v };
-      return v.startsWith(PLAN_SLOT) ? { plan: v.slice(PLAN_SLOT.length), id: "" } : EMPTY;
-    });
-    return [...saved, EMPTY, EMPTY].slice(0, Math.max(2, saved.length));
-  });
+  const [slots, setSlots] = useState<Slot[]>(() => slotsFrom(state.compare, byId));
+  // Hash navigation (share links, back/forward) changes state.compare while the
+  // component stays mounted; re-seed when it diverges from the current slots.
+  // Our own update() writes serialize identically, so they never trigger this.
+  const compareKey = state.compare.join("|");
+  useEffect(() => {
+    setSlots((cur) =>
+      serializeSlots(cur).join("|") === compareKey ? cur : slotsFrom(state.compare, byId),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [compareKey]);
   const update = (next: Slot[]) => {
     setSlots(next);
-    // Untouched default slots keep the link clean.
-    onChange(
-      next.every((s) => !s.plan) && next.length === 2
-        ? []
-        : next.map((s) => s.id || (s.plan ? PLAN_SLOT + s.plan : "")),
-    );
+    onChange(serializeSlots(next));
   };
   const setSlot = (i: number, slot: Slot) => update(slots.map((s, k) => (k === i ? slot : s)));
 
-  // Plans already chosen stay listed even when the filters now hide them.
-  const chosenPlans = new Set(slots.map((s) => s.plan).filter(Boolean));
+  // Chosen points and the plans of still-unfinished slots stay listed even
+  // when the filters now hide them; a finished slot offers no extra models.
+  const chosenIds = new Set(slots.map((s) => s.id).filter(Boolean));
+  const openPlans = new Set(
+    slots.filter((s) => s.plan && !s.id).map((s) => s.plan),
+  );
   const options = planOptions([
     ...tableRows(rows, state).map((r) => r.point),
-    ...points.filter((p) => chosenPlans.has(planKey(p))),
+    ...points.filter((p) => chosenIds.has(p.id) || openPlans.has(planKey(p))),
   ]);
   const yi = (v: number) =>
     zh ? `${number(v, "zh", 3)} 亿` : `${number(v / 10, "en", 3)} B`;
@@ -236,7 +254,7 @@ export default function AllowanceCompare({
             </div>
           ))}
           {slots.length < COMPARE_MAX && (
-            <button className="compare-add" onClick={() => setSlots([...slots, EMPTY])}>
+            <button className="compare-add" onClick={() => update([...slots, EMPTY])}>
               <Plus size={14} />
               {zh ? "添加对比项" : "Add item"}
             </button>
