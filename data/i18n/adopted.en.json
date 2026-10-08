@@ -195,6 +195,14 @@
       "en": "30.17B→31.538B (2026-09-30 decision, Anthropic tier): each path converted to Max 20x weekly-quota percentage points, then merged per pp — (i) the MiaAI window worth $471.10 (write at 5m; closes against the tweet's $482.63) = 75% of a window ÷ 5.5 windows/week = 13.636 weekly pp, 32.981B alone; (ii) the Pro × Opus 5.5 merged worth $628.00 / 196.333 Pro pp ÷ Max 20x weekly quota = Pro×10 → 19.633 weekly pp, 30.536B alone; the two paths differ by 8%. Not adopted: Pro 5h/week 13.333% (7.5 windows) applied directly to Max 20x gives 44.97B (Max 20x windows 20×, week 10× — the window/week ratio differs from Pro's); the official-multiplier derivation with 3.75 windows/week gives 22.49B (the MiaAI window is only 15.5× a Pro window, not 20× — inconsistent with both multipliers at once); equal-weight mean 31.758B; the #65 mixed sample not yet handled. Original 301.7 decision text — new 30.17B: 5h pool 1.0305B÷~75% = 1.374B raw (the 9/22 release had already raised Pro/Max/Team 5h caps, so the window pool reflects release-period basis); implied weight 7.15/13.74 = 0.5204×Opus5 → monthly pool 157÷0.5204; the list-price blend ratio 0.5143 independently corroborates (alternative 30.528B differs by 1.2%); the sample closes at the new price $471.1≈tweet $482.63 (+2.4%); n=1 tweet with no panel, ~75% rounded reading (monthly interval about 28.3B~32.2B), effort only affects rate; if official weights deviate from the price ratio (Fable 6.5× precedent) it must be re-derived; direct weekly-pool panel measurement or post-reset controlled saturation could raise it to high"
     },
     {
+      "zh": "社区截图（维护者提供，2026-10-03）：Claude Code /usage 单会话 claude-opus-5-5 in 23.0k/out 3.0m/cache读 1.3b/cache写 5.6m（CC 标 $366.96）＝周额度（all models）19%，Fable 周 0%；claude-max5x-opus55-round1-2026-10-03.json",
+      "en": "Community screenshot (provided by the maintainer, 2026-10-03): one Claude Code /usage session of claude-opus-5-5 with in 23.0k / out 3.0m / cache read 1.3b / cache write 5.6m (CC shows $366.96) = 19% of the weekly quota (all models), Fable weekly 0%; claude-max5x-opus55-round1-2026-10-03.json"
+    },
+    {
+      "zh": "157.69→183.34亿（2026-10-03 直测替换借 20x÷2 派生，low→medium，Anthropic 档）：段 worth $364.89（读1.3B×$0.2＋1h写5.6M×$8＋入0.023M×$4＋出3.0M×$20，按实际写档计）÷19%×4周＝月$7681.94 ÷ Anthropic 档混合价$0.419/MTok；社区截图来源未确认，19% 是否全归本会话未知——若周内另有用量则 Opus 实占 pp 更少、周池更大，本值偏保守；19% 为整数读数，18.5~19.5% 对应 178.64~188.29亿；1.3b 仅两位有效数字（±0.05b 约 ±3.7%）；截图为 1h TTL、CC 标 $366.96 即按 1h 写闭合；cache 写按 5m $5 折 174.9亿留作对照；原始 total 口径 275.5亿留作对照；haiku-4-5（$0.06）不计；张力：按 20x 周池＝5x×2 推 20x 约 366.68亿，比 20x 采用值 315.38亿 高 16%，20x 暂不改，5x/20x 不再同价并点",
+      "en": "15.769B→18.334B (2026-10-03: direct measurement replaces the value derived as 20x÷2, low→medium, Anthropic tier): segment worth $364.89 (read 1.3B×$0.2 + 1h write 5.6M×$8 + in 0.023M×$4 + out 3.0M×$20, priced at the actual write tier) ÷19% ×4 weeks = monthly $7681.94 ÷ Anthropic-tier blended price $0.419/MTok; the community screenshot's origin is unconfirmed and whether all of the 19% belongs to this session is unknown — if there was other usage that week, Opus took fewer pp and the weekly pool is larger, so this value is conservative; 19% is an integer reading, 18.5~19.5% gives 17.864B~18.829B; 1.3b has only two significant figures (±0.05b ≈ ±3.7%); the screenshot shows a 1h TTL and the CC price of $366.96 closes at 1h writes; cache write at the 5m $5 price gives 17.49B, kept for comparison; raw-total basis 27.55B kept for comparison; haiku-4-5 ($0.06) not counted; tension: with the 20x weekly pool = 5x×2, 20x would be about 36.668B, 16% above the 20x adopted value 31.538B — 20x is unchanged for now, and 5x/20x are no longer the same price or merged into one point"
+    },
+    {
       "zh": "issue #52（NTRYourWaifu）：两个 Pro 账号轮询 /api/oauth/usage seven_day %、按 message.id 去重，Opus 5.5 ≥95% 区段 1,396.81M raw = 周 +183pp；community-issues-round1-2026-09-29.json；另与 Reddit r/ClaudeCode 帖满窗段（grok_report 条目#1：151,193,723 raw = 周 13.333%）按百分点合并；claude-adoption-round10-2026-09-25.json",
       "en": "issue #52 (NTRYourWaifu): two Pro accounts polling /api/oauth/usage seven_day %, deduplicated by message.id — Opus 5.5 ≥95% segments 1,396.81M raw = +183pp of the week; community-issues-round1-2026-09-29.json; merged per percentage point with the Reddit r/ClaudeCode full-window segment (grok_report item #1: 151,193,723 raw = 13.333% of the week); claude-adoption-round10-2026-09-25.json"
     },
@@ -1129,14 +1137,6 @@
     {
       "zh": "15.03→8.63931亿：78.5×0.5/4.54——借20x同框样本隐含权重派生（round9 时间线校正后权重2.61→4.54），非独立实测；单权重跨档沿用仍属假设（Fable5 两档不同为前车之鉴）；claude-fable51-round3/round9",
       "en": "1.503B→863.931M: 78.5×0.5/4.54 — derived via the implied weight of the 20x same-frame sample (weight 2.61→4.54 after the round9 timeline correction), not an independent measurement; carrying a single weight across tiers remains an assumption (Fable 5's two differing tiers are the prior lesson); claude-fable51-round3/round9"
-    },
-    {
-      "zh": "由同套餐 claude-opus-5 78.5 亿 × 2.0087898089171974",
-      "en": "Derived from same-plan claude-opus-5 7.85B × 2.0087898089171974"
-    },
-    {
-      "zh": "由20x采用值315.38亿÷2派生（确认20x周池=5x的2倍，同Opus 5行157÷2；2026-09-30 起 20x 为 MiaAI 窗×5.5 窗/周与 Pro×10 加权，旧 20x 301.7 → 本行 150.85）；旧值78.5×1/W=150.852亿与20x/2的差仅来自301.7取整，2026-09-27裁定合为同一点；标价法152.64亿差1.2%；claude-opus55-round1-2026-09-23.json",
-      "en": "Derived from the 20x adopted value 31.538B÷2 (confirmed the 20x weekly pool = 2× the 5x pool, same as the Opus 5 row's 157÷2; from 2026-09-30 the 20x value is the weighted MiaAI window ×5.5 windows/week and Pro×10, so old 20x 301.7 → this row 150.85); the old value 78.5×1/W = 15.0852B differs from 20x/2 only by the 301.7 rounding — the ruled on 2026-09-27 to merge them into the same point; the list-price method gives 15.264B, 1.2% off; claude-opus55-round1-2026-09-23.json"
     },
     {
       "zh": "由同套餐 gpt-5.6-sol 30.8 亿 × 0.295458068516509",
