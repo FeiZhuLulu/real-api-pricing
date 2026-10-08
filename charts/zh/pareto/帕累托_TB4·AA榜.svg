@@ -66,7 +66,7 @@
 <text x="66.000" y="469.000" font-size="12" fill="#697169" text-anchor="middle" font-weight="400" transform="rotate(-90 66 469.0)">Resolution Rate %</text>
 <text x="720.000" y="775.000" font-size="13" fill="#5D655E" text-anchor="middle" font-weight="400" >真实单价 · 美元 / 百万 token</text>
 <text x="1338.000" y="775.000" font-size="12" fill="#737B74" text-anchor="end" font-weight="400" >越右越便宜 →</text>
-<path id="frontier" d="M120.000,256.347 L751.501,256.347 L1031.797,284.392 L1116.705,466.687 L1149.767,470.192 L1241.611,512.259 L1277.998,540.305 L1338.000,540.305" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="frontier" d="M120.000,256.347 L1160.949,256.347 L1241.611,512.259 L1277.998,540.305 L1338.000,540.305" fill="none" stroke="#303630" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.032467532" data-score="39.899" data-x="781.850" data-y="421.113" transform="translate(781.850 421.113)"><title>GPT 5.6 Sol · Plus / GPT 5.6 Sol · Pro 5x · $0.03247/MTok · 39.899 · mediumArtificial Analysis - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Artificial Analysis - GPT-5.6 Sol (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
@@ -130,11 +130,16 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.11574074" data-score="55.0505" data-x="587.307" data-y="315.944" transform="translate(587.307 315.944)"><title>Claude Fable 5.1 · Max 20x · 9/14+ · $0.11574/MTok · 55.0505 · mediumArtificial Analysis - Claude Fable 5.1 (xhigh with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0063415562" data-score="59.596" data-x="1031.797" data-y="284.392" transform="translate(1031.797 284.392)"><title>Claude Opus 5.5 · Max 20x · 9/14+ / Claude Opus 5.5 · Max 5x · 9/14+ · $0.00634/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Artificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#CC5A2E" stroke-width="1.35"/>
-<circle r="4" fill="#CC5A2E"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0063415562" data-score="59.596" data-x="1031.797" data-y="284.392" transform="translate(1031.797 284.392)"><title>Claude Opus 5.5 · Max 20x · 9/14+ · $0.00634/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0054543471" data-score="59.596" data-x="1054.863" data-y="284.392" transform="translate(1054.863 284.392)"><title>Claude Opus 5.5 · Max 5x · 9/14+ · $0.00545/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0065487885" data-score="59.596" data-x="1026.876" data-y="284.392" transform="translate(1026.876 284.392)"><title>Claude Opus 5.5 · Pro · $0.00655/MTok · 59.596 · highArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0099166997" data-score="59.596" data-x="963.369" data-y="284.392" transform="translate(963.369 284.392)"><title>Claude Opus 5.5 · Team Premium · $0.00992/MTok · 59.596 · lowArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.058139535" data-score="21.2121" data-x="692.682" data-y="550.822" transform="translate(692.682 550.822)"><title>Grok 4.6 · SuperGrok / Grok 4.6 · SuperGrok Heavy · $0.05814/MTok · 21.2121 · highArtificial Analysis - Grok 4.6 (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel. / Artificial Analysis - Grok 4.6 (high) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -165,12 +170,6 @@
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.22321429" data-score="59.596" data-x="486.787" data-y="284.392" transform="translate(486.787 284.392)"><title>Claude Opus 5.5 · Cursor Ultra (Other Models) · $0.22321/MTok · 59.596 · mediumArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.44642857" data-score="59.596" data-x="380.701" data-y="284.392" transform="translate(380.701 284.392)"><title>Claude Opus 5.5 · Cursor Pro (Other Models) · $0.44643/MTok · 59.596 · lowArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
-</g>
-<g class="point" data-billing="subscription" data-frontier="false" data-price="0.38265306" data-score="59.596" data-x="404.294" data-y="284.392" transform="translate(404.294 284.392)"><title>Claude Opus 5.5 · Cursor Pro+ (Other Models) · $0.38265/MTok · 59.596 · lowArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FACC15" opacity=".68" stroke="#AA8B0E" stroke-width=".9"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.026878015" data-score="12.6263" data-x="810.766" data-y="610.417" transform="translate(810.766 610.417)"><title>Kimi K3 (v1) · Kimi 会员 199 · ¥199 / 国际 $39 · $0.02688/MTok · 12.6263 · mediumArtificial Analysis - Kimi K3 (low) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
@@ -263,9 +262,8 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0039118376" data-score="32.8283" data-x="1105.738" data-y="470.192" transform="translate(1105.738 470.192)"><title>GLM 5.3 Flash (v2) · GLM Pro (v2 ¥149) 中间值 · $0.00391/MTok · 32.8283 · highArtificial Analysis - GLM-5.3-Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0029338782" data-score="32.8283" data-x="1149.767" data-y="470.192" transform="translate(1149.767 470.192)"><title>GLM 5.3 Flash (v2) · GLM Pro (v2 ¥149) 闲时 · $0.00293/MTok · 32.8283 · highArtificial Analysis - GLM-5.3-Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#1E1E1E" stroke-width="1.35"/>
-<circle r="4" fill="#1E1E1E"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0029338782" data-score="32.8283" data-x="1149.767" data-y="470.192" transform="translate(1149.767 470.192)"><title>GLM 5.3 Flash (v2) · GLM Pro (v2 ¥149) 闲时 · $0.00293/MTok · 32.8283 · highArtificial Analysis - GLM-5.3-Flash · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.055141311" data-score="41.9192" data-x="700.786" data-y="407.090" transform="translate(700.786 407.090)"><title>GLM 5.3 (v3) · GLM Max (v3 ¥1078) 忙时 · $0.05514/MTok · 41.9192 · highArtificial Analysis - GLM-5.3 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#1E1E1E" opacity=".68"/>
@@ -581,9 +579,8 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.0051833009" data-score="33.3333" data-x="1062.664" data-y="466.687" transform="translate(1062.664 466.687)"><title>Step 5 Preview · Step Plan Pro (¥199) · $0.00518/MTok · 33.3333 · mediumArtificial Analysis - Step 5 Preview · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68" stroke="#00A69C" stroke-width=".9"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0036413211" data-score="33.3333" data-x="1116.705" data-y="466.687" transform="translate(1116.705 466.687)"><title>Step 5 Preview · Step Plan Max (¥699) · $0.00364/MTok · 33.3333 · mediumArtificial Analysis - Step 5 Preview · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#00F4E5" stroke-width="1.35"/>
-<circle r="4" fill="#00F4E5"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0036413211" data-score="33.3333" data-x="1116.705" data-y="466.687" transform="translate(1116.705 466.687)"><title>Step 5 Preview · Step Plan Max (¥699) · $0.00364/MTok · 33.3333 · mediumArtificial Analysis - Step 5 Preview · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#00F4E5" opacity=".68" stroke="#00A69C" stroke-width=".9"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.018927445" data-score="34.8485" data-x="864.439" data-y="456.169" transform="translate(864.439 456.169)"><title>MiMo V2.6 Pro · MiMo Token Plan Lite 日间 · ¥39 / 国际 $6 · $0.01893/MTok · 34.8485 · mediumArtificial Analysis - MiMo-V2.6-Pro · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#FF8A00" opacity=".68"/>
@@ -720,6 +717,16 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.11575414" data-score="55.0505" data-x="587.289" data-y="315.944" transform="translate(587.289 315.944)"><title>Claude Fable 5.1 · Max 5x · 9/14+ · $0.11575/MTok · 55.0505 · lowArtificial Analysis - Claude Fable 5.1 (xhigh with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
 </g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0032743942" data-score="63.6364" data-x="1132.961" data-y="256.347" transform="translate(1132.961 256.347)"><title>Claude Sonnet 5.5 · Pro · $0.00327/MTok · 63.6364 · lowArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.0031707781" data-score="63.6364" data-x="1137.883" data-y="256.347" transform="translate(1137.883 256.347)"><title>Claude Sonnet 5.5 · Max 20x · 9/14+ · $0.00317/MTok · 63.6364 · lowArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#CC5A2E" opacity=".68"/>
+</g>
+<g class="point" data-billing="subscription" data-frontier="true" data-price="0.0027271736" data-score="63.6364" data-x="1160.949" data-y="256.347" transform="translate(1160.949 256.347)"><title>Claude Sonnet 5.5 · Max 5x · 9/14+ · $0.00273/MTok · 63.6364 · lowArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#CC5A2E" stroke-width="1.35"/>
+<circle r="4" fill="#CC5A2E"/>
+</g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.10989011" data-score="59.596" data-x="595.246" data-y="284.392" transform="translate(595.246 284.392)"><title>GPT-6 Astra · Pro 5x · $0.10989/MTok · 59.596 · lowArtificial Analysis - GPT-6 Astra (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#16A34A" opacity=".68"/>
 </g>
@@ -741,9 +748,8 @@
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.098970705" data-score="21.7172" data-x="611.263" data-y="547.316" transform="translate(611.263 547.316)"><title>Claude Opus 4.8 · Droid Max · $0.09897/MTok · 21.7172 · mediumArtificial Analysis - Claude Opus 4.8 (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
-<g class="point" data-billing="subscription" data-frontier="true" data-price="0.039588282" data-score="63.6364" data-x="751.501" data-y="256.347" transform="translate(751.501 256.347)"><title>Claude Sonnet 5.5 · Droid Max · $0.03959/MTok · 63.6364 · mediumArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
-<rect x="-11" y="-11" width="22" height="22" rx="6" fill="#FFF" stroke="#0A0ABF" stroke-width="1.35"/>
-<circle r="4" fill="#0A0ABF"/>
+<g class="point" data-billing="subscription" data-frontier="false" data-price="0.039588282" data-score="63.6364" data-x="751.501" data-y="256.347" transform="translate(751.501 256.347)"><title>Claude Sonnet 5.5 · Droid Max · $0.03959/MTok · 63.6364 · mediumArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
 </g>
 <g class="point" data-billing="subscription" data-frontier="false" data-price="0.19794141" data-score="59.596" data-x="505.178" data-y="284.392" transform="translate(505.178 284.392)"><title>GPT-6 Astra · Droid Max · $0.19794/MTok · 59.596 · mediumArtificial Analysis - GPT-6 Astra (xhigh) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <rect x="-3.5" y="-3.5" width="7" height="7" rx="1.8" fill="#0A0ABF" opacity=".68"/>
@@ -859,6 +865,9 @@
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.419" data-score="59.596" data-x="390.406" data-y="284.392" transform="translate(390.406 284.392)"><title>Claude Opus 5.5 · Opus 5.5 API · $0.419/MTok · 59.596 · highArtificial Analysis - Claude Opus 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#CC5A2E" stroke-width="1.5" opacity=".68"/>
 </g>
+<g class="point" data-billing="metered" data-frontier="false" data-price="0.2095" data-score="63.6364" data-x="496.492" data-y="256.347" transform="translate(496.492 256.347)"><title>Claude Sonnet 5.5 · Sonnet 5.5 API · $0.2095/MTok · 63.6364 · highArtificial Analysis - Claude Sonnet 5.5 (max with fallback) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
+<path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#CC5A2E" stroke-width="1.5" opacity=".68"/>
+</g>
 <g class="point" data-billing="metered" data-frontier="false" data-price="0.304" data-score="35.3535" data-x="439.511" data-y="452.664" transform="translate(439.511 452.664)"><title>GPT 5.6 Terra · GPT-5.6 Terra API · $0.304/MTok · 35.3535 · highArtificial Analysis - GPT-5.6 Terra (max) · Exact served-model reference only; product harness and quota-measurement effort are unverified. Not a benchmark measurement of this subscription or API channel.</title>
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#16A34A" stroke-width="1.5" opacity=".68"/>
 </g>
@@ -866,28 +875,10 @@
 <path d="M0 -5.5L5.5 0 0 5.5 -5.5 0Z" fill="white" stroke="#16A34A" stroke-width="1.5" opacity=".68"/>
 </g>
 <g class="front-label" data-model="claude-sonnet-5.5">
-<path d="M743.679,269.147Q743.679,292.347 729.501,292.347" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="723.501" y="305.347" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Artificial Analysis · Claude Sonnet 5.5 · max</text>
-<text x="723.501" y="325.347" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Droid Max</text>
-<text x="723.501" y="345.347" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.03959</text>
-</g>
-<g class="front-label" data-model="claude-opus-5.5">
-<path d="M1046.593,281.926Q1046.593,283.392 1037.797,283.392" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1043.797" y="264.392" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Artificial Analysis · Claude Opus 5.5 · max</text>
-<text x="1043.797" y="284.392" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Max 5x / 20x · 9/14+</text>
-<text x="1043.797" y="304.392" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00634</text>
-</g>
-<g class="front-label" data-model="step-5-preview">
-<path d="M1115.613,451.726Q1115.613,329.687 1106.705,329.687" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1112.705" y="310.687" font-size="16" fill="#343C34" text-anchor="start" font-weight="400" class="label-name">Artificial Analysis · Step 5 Preview</text>
-<text x="1112.705" y="330.687" font-size="11.5" fill="#8B9487" text-anchor="start" font-weight="400" >Step Plan Max (¥699)</text>
-<text x="1112.705" y="350.687" font-size="14" fill="#566150" text-anchor="start" font-weight="400" class="number">$0.00364</text>
-</g>
-<g class="front-label" data-model="glm-5.3-flash">
-<path d="M1134.772,470.559Q1134.772,477.192 863.767,477.192" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="857.767" y="490.192" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Artificial Analysis · GLM 5.3 Flash (v2)</text>
-<text x="857.767" y="510.192" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >GLM Pro (v2 ¥149) 闲时</text>
-<text x="857.767" y="530.192" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00293</text>
+<path d="M1152.268,244.115Q1152.268,225.347 1138.949,225.347" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1132.949" y="206.347" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Artificial Analysis · Claude Sonnet 5.5 · max</text>
+<text x="1132.949" y="226.347" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >Max 5x · 9/14+</text>
+<text x="1132.949" y="246.347" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00273</text>
 </g>
 <g class="front-label" data-model="deepseek-v4.1-flash">
 <path d="M1241.882,527.257Q1241.882,623.259 1243.611,623.259" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
@@ -896,10 +887,10 @@
 <text x="1237.611" y="676.259" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00161</text>
 </g>
 <g class="front-label" data-model="mimo-v2.6-flash">
-<path d="M1275.351,525.540Q1275.351,395.305 1251.998,395.305" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
-<text x="1257.998" y="376.305" font-size="16" fill="#343C34" text-anchor="middle" font-weight="400" class="label-name">Artificial Analysis · MiMo V2.6 Flash</text>
-<text x="1257.998" y="396.305" font-size="11.5" fill="#8B9487" text-anchor="middle" font-weight="400" >OpenCode Go</text>
-<text x="1257.998" y="416.305" font-size="14" fill="#566150" text-anchor="middle" font-weight="400" class="number">$0.00127</text>
+<path d="M1269.025,528.285Q1269.025,323.305 1115.998,323.305" stroke="#C4CDC3" stroke-width=".8" fill="none"/>
+<text x="1109.998" y="304.305" font-size="16" fill="#343C34" text-anchor="end" font-weight="400" class="label-name">Artificial Analysis · MiMo V2.6 Flash</text>
+<text x="1109.998" y="324.305" font-size="11.5" fill="#8B9487" text-anchor="end" font-weight="400" >OpenCode Go</text>
+<text x="1109.998" y="344.305" font-size="14" fill="#566150" text-anchor="end" font-weight="400" class="number">$0.00127</text>
 </g>
 <rect x="57" y="826" width="8" height="8" fill="#16A34A"/>
 <text x="74.000" y="834.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >OpenAI</text>
@@ -940,7 +931,7 @@
 <path d="M356.52 849l5 5-5 5-5-5Z" fill="none" stroke="#8B958D" stroke-width="1.2"/>
 <text x="370.520" y="858.000" font-size="12" fill="#687168" text-anchor="start" font-weight="400" >按量 API</text>
 <text x="56.000" y="898.000" font-size="12" fill="#727B72" text-anchor="start" font-weight="400" >默认月=4周；Kimi月池=周池×5，Droid月=周×2 · 美元/credits换算：缓存97% / 输入2.5% / 输出0.5% · 直接total实测不重算</text>
-<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >246 个订阅位置 / 18 个 API 位置 / 6 个前沿位置</text>
+<text x="1384.000" y="898.000" font-size="12" fill="#727B72" text-anchor="end" font-weight="400" >249 个订阅位置 / 19 个 API 位置 / 3 个前沿位置</text>
 <text x="56.000" y="922.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >最高存档配置参考；标注harness与effort。产品/额度实测配置未对齐，不代表各渠道的实测成绩。</text>
 <text x="56.000" y="943.000" font-size="11" fill="#929A90" text-anchor="start" font-weight="400" >订阅与按量API共同参与前沿；连线中间不代表可购套餐。完整出处与假设见项目核对报告。</text>
 <text x="1384.000" y="943.000" font-size="11" fill="#929A90" text-anchor="end" font-weight="400" >artificialanalysis.ai/leaderboards/models</text>

@@ -17,7 +17,7 @@ AI coding subscriptions sell a monthly fee, not a per-token price. This project 
 - The black line is the Pareto frontier: for every point on it, no other point is both cheaper and higher-scoring.
 - Subscription prices assume you use the whole allowance. Use half of it and your real price doubles.
 
-Snapshot: <!-- stat:snapshot -->2026-10-05<!-- /stat --> · <!-- stat:points_total -->321<!-- /stat --> plan × model points · [all charts, SVG / PNG, both languages](charts/README.md)
+Snapshot: <!-- stat:snapshot -->2026-10-08<!-- /stat --> · <!-- stat:points_total -->328<!-- /stat --> plan × model points · [all charts, SVG / PNG, both languages](charts/README.md)
 
 ## Query from the terminal
 
@@ -123,7 +123,7 @@ Pass@1 on 113 tasks, official rows run on mini-swe-agent (snapshot 2026-09-03). 
 
 ### Real price
 
-All <!-- stat:points_priced -->320<!-- /stat --> priced subscription and API points on one $/MTok scale.
+All <!-- stat:points_priced -->327<!-- /stat --> priced subscription and API points on one $/MTok scale.
 
 [SVG](charts/en/overview/real-price-overview.svg) · [PNG](charts/en/overview/real-price-overview.png) · [Table](charts/en/overview/real-price-overview-table.txt) · [中文 SVG](charts/zh/overview/单价总览.svg) · [中文 PNG](charts/zh/overview/单价总览.png) · [中文表](charts/zh/overview/单价总览表.txt)
 
@@ -131,7 +131,7 @@ All <!-- stat:points_priced -->320<!-- /stat --> priced subscription and API poi
 
 ### Monthly allowance
 
-The <!-- stat:points_allowance -->301<!-- /stat --> subscription points with a monthly allowance, split into three bands by monthly fee in USD. Each band is ranked on its own. The undivided chart and a hybrid-scale view are in the [chart index](charts/README.md).
+The <!-- stat:points_allowance -->306<!-- /stat --> subscription points with a monthly allowance, split into three bands by monthly fee in USD. Each band is ranked on its own. The undivided chart and a hybrid-scale view are in the [chart index](charts/README.md).
 
 **$0–30** · [SVG](charts/en/overview/monthly-allowance-overview-fee-0-30-usd.svg) · [PNG](charts/en/overview/monthly-allowance-overview-fee-0-30-usd.png) · [Table](charts/en/overview/monthly-allowance-overview-fee-0-30-usd-table.txt) · [中文 SVG](charts/zh/overview/额度总览_月费0-30美元.svg) · [中文 PNG](charts/zh/overview/额度总览_月费0-30美元.png) · [中文表](charts/zh/overview/额度总览表_月费0-30美元.txt)
 
@@ -151,27 +151,27 @@ Chinese charts count tokens in 亿 (100 million): 77.37 亿 = 7.737 billion.
 
 | Points | Count |
 |---|---:|
-| All plan × model points | <!-- stat:points_total -->321<!-- /stat --> |
-| Subscriptions with a monthly allowance | <!-- stat:points_allowance -->301<!-- /stat --> |
+| All plan × model points | <!-- stat:points_total -->328<!-- /stat --> |
+| Subscriptions with a monthly allowance | <!-- stat:points_allowance -->306<!-- /stat --> |
 | Free during a promotion (≈$0) | <!-- stat:points_unmetered -->1<!-- /stat --> |
-| Metered APIs at list price | <!-- stat:points_metered -->19<!-- /stat --> |
+| Metered APIs at list price | <!-- stat:points_metered -->21<!-- /stat --> |
 
 | Leaderboard | Scored points |
 |---|---:|
-| AA Intelligence | <!-- stat:scored_aa_intelligence_index -->290<!-- /stat --> |
-| AA Coding Agent | <!-- stat:scored_aa_coding_agent_index -->117<!-- /stat --> |
-| Code Arena | <!-- stat:scored_arena_code -->261<!-- /stat --> |
-| Agent Arena | <!-- stat:scored_arena_agent_mode -->205<!-- /stat --> |
-| OpenDesign Arena | <!-- stat:scored_open_design_arena -->69<!-- /stat --> |
-| Terminal-Bench 4.0 | <!-- stat:scored_terminal_bench_4 -->114<!-- /stat --> |
-| Terminal-Bench 4.0 (AA) | <!-- stat:scored_aa_terminal_bench_4 -->275<!-- /stat --> |
+| AA Intelligence | <!-- stat:scored_aa_intelligence_index -->293<!-- /stat --> |
+| AA Coding Agent | <!-- stat:scored_aa_coding_agent_index -->120<!-- /stat --> |
+| Code Arena | <!-- stat:scored_arena_code -->264<!-- /stat --> |
+| Agent Arena | <!-- stat:scored_arena_agent_mode -->204<!-- /stat --> |
+| OpenDesign Arena | <!-- stat:scored_open_design_arena -->73<!-- /stat --> |
+| Terminal-Bench 4.0 | <!-- stat:scored_terminal_bench_4 -->113<!-- /stat --> |
+| Terminal-Bench 4.0 (AA) | <!-- stat:scored_aa_terminal_bench_4 -->278<!-- /stat --> |
 | DeepSWE v1.1 | <!-- stat:scored_deepswe_1_1 -->195<!-- /stat --> |
 
 The largest plan families are Command Code GOAT (<!-- stat:plans_command_code_goat -->58<!-- /stat --> points), MiMo Token Plan (<!-- stat:plans_mimo_token -->32<!-- /stat -->), OpenCode Go (<!-- stat:plans_opencode_go -->28<!-- /stat -->), Droid Max (<!-- stat:plans_droid_max -->27<!-- /stat -->), Ollama (<!-- stat:plans_ollama -->22<!-- /stat -->) and Step Plan (<!-- stat:plans_step_plan -->12<!-- /stat -->).
 
 **Downloads:** [adopted values (CSV)](data/adopted.csv) · [computed points (CSV)](derived/points.csv) / [JSON](derived/points.json) · [data notes](data/README.md) · [dated evidence](data/research/)
 
-**Every benchmark configuration**, not just the highest per model: the [configuration archive](derived/benchmark-configurations.json) ([CSV](derived/benchmark-configurations.csv)) keeps all <!-- stat:configs_total -->525<!-- /stat --> records with their original labels, harness, effort, score intervals and task costs. The [plan-to-configuration mappings](derived/benchmark-points.json) ([CSV](derived/benchmark-points.csv)) hold <!-- stat:refs_total -->2650<!-- /stat --> explicit references. Unknown harnesses, efforts and intervals stay empty instead of being guessed. The [all-configuration interactive chart](charts/zh/pareto/帕累托交互图.html) (Chinese; download and open locally, needs network access for Plotly) lets you switch between configurations and effort levels.
+**Every benchmark configuration**, not just the highest per model: the [configuration archive](derived/benchmark-configurations.json) ([CSV](derived/benchmark-configurations.csv)) keeps all <!-- stat:configs_total -->525<!-- /stat --> records with their original labels, harness, effort, score intervals and task costs. The [plan-to-configuration mappings](derived/benchmark-points.json) ([CSV](derived/benchmark-points.csv)) hold <!-- stat:refs_total -->2700<!-- /stat --> explicit references. Unknown harnesses, efforts and intervals stay empty instead of being guessed. The [all-configuration interactive chart](charts/zh/pareto/帕累托交互图.html) (Chinese; download and open locally, needs network access for Plotly) lets you switch between configurations and effort levels.
 
 ## Known limitations
 

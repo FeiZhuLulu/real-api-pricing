@@ -195,12 +195,28 @@
       "en": "30.17B→31.538B (2026-09-30 decision, Anthropic tier): each path converted to Max 20x weekly-quota percentage points, then merged per pp — (i) the MiaAI window worth $471.10 (write at 5m; closes against the tweet's $482.63) = 75% of a window ÷ 5.5 windows/week = 13.636 weekly pp, 32.981B alone; (ii) the Pro × Opus 5.5 merged worth $628.00 / 196.333 Pro pp ÷ Max 20x weekly quota = Pro×10 → 19.633 weekly pp, 30.536B alone; the two paths differ by 8%. Not adopted: Pro 5h/week 13.333% (7.5 windows) applied directly to Max 20x gives 44.97B (Max 20x windows 20×, week 10× — the window/week ratio differs from Pro's); the official-multiplier derivation with 3.75 windows/week gives 22.49B (the MiaAI window is only 15.5× a Pro window, not 20× — inconsistent with both multipliers at once); equal-weight mean 31.758B; the #65 mixed sample not yet handled. Original 301.7 decision text — new 30.17B: 5h pool 1.0305B÷~75% = 1.374B raw (the 9/22 release had already raised Pro/Max/Team 5h caps, so the window pool reflects release-period basis); implied weight 7.15/13.74 = 0.5204×Opus5 → monthly pool 157÷0.5204; the list-price blend ratio 0.5143 independently corroborates (alternative 30.528B differs by 1.2%); the sample closes at the new price $471.1≈tweet $482.63 (+2.4%); n=1 tweet with no panel, ~75% rounded reading (monthly interval about 28.3B~32.2B), effort only affects rate; if official weights deviate from the price ratio (Fable 6.5× precedent) it must be re-derived; direct weekly-pool panel measurement or post-reset controlled saturation could raise it to high"
     },
     {
+      "zh": "社区截图（维护者提供，2026-10-03）：Claude Code /usage 单会话 claude-opus-5-5 in 23.0k/out 3.0m/cache读 1.3b/cache写 5.6m（CC 标 $366.96）＝周额度（all models）19%，Fable 周 0%；claude-max5x-opus55-round1-2026-10-03.json",
+      "en": "Community screenshot (provided by the maintainer, 2026-10-03): one Claude Code /usage session of claude-opus-5-5 with in 23.0k / out 3.0m / cache read 1.3b / cache write 5.6m (CC shows $366.96) = 19% of the weekly quota (all models), Fable weekly 0%; claude-max5x-opus55-round1-2026-10-03.json"
+    },
+    {
+      "zh": "157.69→183.34亿（2026-10-03 直测替换借 20x÷2 派生，low→medium，Anthropic 档）：段 worth $364.89（读1.3B×$0.2＋1h写5.6M×$8＋入0.023M×$4＋出3.0M×$20，按实际写档计）÷19%×4周＝月$7681.94 ÷ Anthropic 档混合价$0.419/MTok；社区截图来源未确认，19% 是否全归本会话未知——若周内另有用量则 Opus 实占 pp 更少、周池更大，本值偏保守；19% 为整数读数，18.5~19.5% 对应 178.64~188.29亿；1.3b 仅两位有效数字（±0.05b 约 ±3.7%）；截图为 1h TTL、CC 标 $366.96 即按 1h 写闭合；cache 写按 5m $5 折 174.9亿留作对照；原始 total 口径 275.5亿留作对照；haiku-4-5（$0.06）不计；张力：按 20x 周池＝5x×2 推 20x 约 366.68亿，比 20x 采用值 315.38亿 高 16%，20x 暂不改，5x/20x 不再同价并点",
+      "en": "15.769B→18.334B (2026-10-03: direct measurement replaces the value derived as 20x÷2, low→medium, Anthropic tier): segment worth $364.89 (read 1.3B×$0.2 + 1h write 5.6M×$8 + in 0.023M×$4 + out 3.0M×$20, priced at the actual write tier) ÷19% ×4 weeks = monthly $7681.94 ÷ Anthropic-tier blended price $0.419/MTok; the community screenshot's origin is unconfirmed and whether all of the 19% belongs to this session is unknown — if there was other usage that week, Opus took fewer pp and the weekly pool is larger, so this value is conservative; 19% is an integer reading, 18.5~19.5% gives 17.864B~18.829B; 1.3b has only two significant figures (±0.05b ≈ ±3.7%); the screenshot shows a 1h TTL and the CC price of $366.96 closes at 1h writes; cache write at the 5m $5 price gives 17.49B, kept for comparison; raw-total basis 27.55B kept for comparison; haiku-4-5 ($0.06) not counted; tension: with the 20x weekly pool = 5x×2, 20x would be about 36.668B, 16% above the 20x adopted value 31.538B — 20x is unchanged for now, and 5x/20x are no longer the same price or merged into one point"
+    },
+    {
       "zh": "issue #52（NTRYourWaifu）：两个 Pro 账号轮询 /api/oauth/usage seven_day %、按 message.id 去重，Opus 5.5 ≥95% 区段 1,396.81M raw = 周 +183pp；community-issues-round1-2026-09-29.json；另与 Reddit r/ClaudeCode 帖满窗段（grok_report 条目#1：151,193,723 raw = 周 13.333%）按百分点合并；claude-adoption-round10-2026-09-25.json",
       "en": "issue #52 (NTRYourWaifu): two Pro accounts polling /api/oauth/usage seven_day %, deduplicated by message.id — Opus 5.5 ≥95% segments 1,396.81M raw = +183pp of the week; community-issues-round1-2026-09-29.json; merged per percentage point with the Reddit r/ClaudeCode full-window segment (grok_report item #1: 151,193,723 raw = 13.333% of the week); claude-adoption-round10-2026-09-25.json"
     },
     {
       "zh": "28.99→30.54亿，2026-09-29 裁定：issue #52（两个 Pro 账号，每 5 分钟轮询 seven_day %，按 message.id 去重，只计 Opus 5.5 占 95% 以上区段）1,396.81M raw = 周 +183 个百分点，标价 worth $587.52（读 $0.2 / 1h 写 $8 / 5m 写 $5 / 入 $4 / 出 $20）；与原 Reddit 5h 段（worth $40.48 / 周 13.333%）按百分点合并：($40.48+$587.52)÷(13.333+183)＝$3.19865/pp → 月 $1,279.46 ÷ Anthropic 档 $0.419/MTok＝30.54亿。单看 #52 为 30.65、Reddit 段 28.98；raw total 口径 30.53，写全按 5m 价 27.39 不采。high/xhigh 每 1% 标价美元均约 $3.2，effort 只影响速率。互证（仅记录不入权，2026-09-30 裁定关闭 PR #77）：X @kanzakichiya ccusage 两周 478.15M raw＝周 22%+47%（口述），缓存写全为 1h，按实际写价 worth $208.25 → $3.018/pp → 28.81 亿，与 #52 $3.210/pp、Reddit 段 $3.036/pp 差 <7%；三源按百分点合并为 30.09 亿、写按 5m 为 24.52 亿，均不采（claude-adoption-round11-2026-09-30.json）。证据：community-issues-round1-2026-09-29.json。",
       "en": "2.899B→3.054B, 2026-09-29 decision: issue #52 (two Pro accounts polling seven_day % every 5 minutes, deduplicated by message.id, only segments where Opus 5.5 exceeds 95%) 1,396.81M raw = +183 weekly percentage points, list-price worth $587.52 (read $0.2 / 1h write $8 / 5m write $5 / in $4 / out $20); merged per percentage point with the original Reddit 5h segment (worth $40.48 / 13.333% of the week): ($40.48+$587.52)÷(13.333+183) = $3.19865/pp → $1,279.46/month ÷ Anthropic tier $0.419/MTok = 3.054B. #52 alone gives 30.65, the Reddit segment 28.98; raw-total basis 30.53 — writes fully at the 5m price would be 27.39, not adopted. Both high and xhigh show about $3.2 list dollars per 1%; effort only affects rate. Corroboration (recorded only, not weighted — 2026-09-30 decision closing PR #77): X @kanzakichiya ccusage two weeks 478.15M raw = 22%+47% of weeks (verbal), cache writes all 1h, worth at actual write prices $208.25 → $3.018/pp → 2.881B, within <7% of #52's $3.210/pp and the Reddit segment's $3.036/pp; the three sources merged per pp give 3.009B, and 2.452B with writes at 5m — neither adopted (claude-adoption-round11-2026-09-30.json). Evidence: community-issues-round1-2026-09-29.json."
+    },
+    {
+      "zh": "X @leo114119 推文（维护者提供截图）：Claude Team「6.25x」席第三方 relay 使用统计，7d 窗 Opus 5.5 共 4,091,470,718 raw（12,836 次请求；命中读 40.29亿/创建写 4923.9万/新增输入 2.6万/输出 1341.6万，hit 98.8%），帖主称整周用满；面板总成本 $1,320.3794；https://claude.com/pricing（Premium 席 $125/月付、$100/月年付）；claude-team-opus55-round1-2026-10-06.json",
+      "en": "X @leo114119 post (screenshot provided by maintainer): third-party relay usage stats for a Claude Team \"6.25x\" seat; 7-day window Opus 5.5 total 4,091,470,718 raw (12,836 requests; cache-read hits 4.029B / cache create-writes 49239K / new inputs 26K / outputs 13416K, hit 98.8%); poster claims the week was fully used; panel total cost $1,320.3794; https://claude.com/pricing (Premium seat $125/mo monthly, $100/mo annual); claude-team-opus55-round1-2026-10-06.json"
+    },
+    {
+      "zh": "新增126.05亿（2026-10-06，Anthropic 档；2026-10-08 裁定 medium→low）：面板分项按 Opus 5.5 标价逐项闭合（写按 5m $5：读×$0.2＋写×$5＋入×$4＋出×$20＝$1320.38≈面板 $1,320.3794）→ 采面板 worth 为周 list-worth，×4周＝月$5,281.52 ÷ Anthropic 档混合价$0.419/MTok；raw 口径 163.66亿（周 40.91亿 raw）留作对照；写全按 1h $8 敏感性 140.15亿 不采（面板按 5m 闭合）。档位：claude.com/pricing（2026-10-08 核对）Premium 席 $125/月付、$100/月年付，官方写 5× Standard 席用量，Standard 席仅写「多于 Pro」、无具体倍数（倍数按 5 小时会话计）；「6.25× Pro」为社区按 Standard≈1.25× Pro 推的说法，非官方口径；挂月付价 $125。自洽（按周 list-worth，采用值×$0.419÷4）：本周 $1,320.38 = Pro × Opus 5.5 周 $319.91 的 4.13×、Max 5x 直测周 $1,920.49 的 69%；若 Premium 真为 6.25× Pro 月额应约 190.88亿，本值仅其 66%；初稿「帖主称≈Max 5x、差 4~8%」系 Team raw 比 Max 5x 折算值，单位不同，作废。弱点 → low：n=1 推文、「用满」为帖主口述且面板无额度百分比；第三方 relay 面板非官方 /usage、车头共享席位，7d 滚动窗未对齐官方周重置；官方席位池与 Pro/Max 是否同权重未证；与 6.25× Pro 说法差 34%。Team Standard 席（$20年付/$25月付）无额度样本不画",
+      "en": "New 12.605B (2026-10-06, Anthropic tier; 2026-10-08 ruled medium->low): the panel itemization closes item by item at Opus 5.5 list prices (writes at 5m $5: reads*$0.2 + writes*$5 + inputs*$4 + outputs*$20 = $1320.38 ~= panel $1,320.3794) -> adopt the panel worth as weekly list-worth, x4 weeks = monthly $5,281.52 / Anthropic-tier blended price $0.419/MTok; raw basis 16.366B (weekly 4.091B raw) kept for comparison; all-writes-at-1h-$8 sensitivity 14.015B not adopted (panel closes at 5m). Tier: claude.com/pricing (verified 2026-10-08) Premium seat $125/mo monthly, $100/mo annual; official text says 5x a Standard seat's usage, and the Standard seat only says \"more than Pro\" with no specific multiplier (the multiplier is counted per 5-hour session); \"6.25x Pro\" is a community inference via Standard~=1.25x Pro, not an official figure; listed at the monthly-pay price $125. Self-consistency (by weekly list-worth, adopted*$0.419/4): this week $1,320.38 = 4.13x Pro's Opus 5.5 weekly $319.91 and 69% of Max 5x's directly measured weekly $1,920.49; if Premium were truly 6.25x Pro the monthly allowance would be about 19.088B and this value is only 66% of that; the draft's \"poster says ~=Max 5x, 4~8% off\" compared Team raw against a converted Max 5x figure, a unit mismatch, discarded. Weaknesses -> low: n=1 post; \"fully used\" is the poster's own claim and the panel shows no quota percentage; the third-party relay panel is not the official /usage and the seat is shared by the organizer; the 7-day rolling window is not aligned with the official weekly reset; whether the official seat pool shares weights with Pro/Max is unproven; 34% below the 6.25x Pro claim. The Team Standard seat ($20/yr or $25/mo) has no quota sample and is not plotted"
     },
     {
       "zh": "V2EX受控打满127,272,629 token=整周100%，与 issue #56（Grok Build _x.ai/billing 轮询）两平常周223.1M=+193pp 按百分点合并→周池128,937,168；community-issues-round1-2026-09-29.json；workload-conversion-round1-2026-09-30.json",
@@ -293,22 +309,6 @@
     {
       "zh": "新增8.96亿（Other Models 池首个实测）：段 worth $375.46（读748.78M×$0.2＋写24.36M×$5(5m)＋入9.4K×$4＋出5.19M×$20，hit 96.85%）＝账期 Other Models 全部用量 ÷ Anthropic档混合价$0.419/MTok；raw 口径 7.78亿留作对照；cache写按1h $8 敏感性 worth $448.54（10.71亿）不采；worth 与社区口径 Ultra Other Models 池$400同量级（93.9%；CellCog曾示$500），视为月池基本用尽——CSV 无账期边界/%字段故按整份导出统计，若未用尽本值偏保守；与 Cursor Models 池（grok-4.6 77.37亿）为两个独立月池不联动；单一社区源、面板%未截图 → medium；effort 均 high 仅影响速率",
       "en": "New 896M (first measured point of the Other Models pool): segment worth $375.46 (read 748.78M×$0.2 + write 24.36M×$5(5m) + in 9.4K×$4 + out 5.19M×$20, hit 96.85%) = all Other Models usage in the cycle ÷ Anthropic-tier blended price $0.419/MTok; raw basis 778M kept as control; 1h-cache-write-$8 sensitivity worth $448.54 (1.071B) not adopted; worth is the same magnitude as the community-cited Ultra Other Models pool $400 (93.9%; CellCog once showed $500) — treated as the monthly pool essentially exhausted; the CSV has no billing-boundary or % fields so the whole export is counted, and if the pool was not fully used this value is conservative; a separate monthly pool from Cursor Models (grok-4.6 7.737B), not linked; single community source, panel % not screenshotted → medium; all records at high effort, which only affects burn rate"
-    },
-    {
-      "zh": "由 Ultra×opus-5.5 实测 × 社区口径池比 $20/$400；cursor-opus55-community-round1-2026-10-05.json",
-      "en": "Derived from the Ultra×opus-5.5 measurement × community-cited pool ratio $20/$400; cursor-opus55-community-round1-2026-10-05.json"
-    },
-    {
-      "zh": "新增：8.96亿×20/400；继承跨档池规模假设（社区口径 Other Models Pro $20/Pro+ $70/Ultra $400，官方页现仅写 Included），非独立实测",
-      "en": "New: 896M×20/400; inherits the cross-tier pool-size assumption (community-cited Other Models pools Pro $20/Pro+ $70/Ultra $400 — the official page now only says Included), not an independent measurement"
-    },
-    {
-      "zh": "由 Ultra×opus-5.5 实测 × 社区口径池比 $70/$400；cursor-opus55-community-round1-2026-10-05.json",
-      "en": "Derived from the Ultra×opus-5.5 measurement × community-cited pool ratio $70/$400; cursor-opus55-community-round1-2026-10-05.json"
-    },
-    {
-      "zh": "新增：8.96亿×70/400；继承跨档池规模假设（社区口径 Other Models Pro $20/Pro+ $70/Ultra $400，官方页现仅写 Included），非独立实测",
-      "en": "New: 896M×70/400; inherits the cross-tier pool-size assumption (community-cited Other Models pools Pro $20/Pro+ $70/Ultra $400 — the official page now only says Included), not an independent measurement"
     },
     {
       "zh": "本机ccusage 243739068/84%反推周额度×Kimi月池5倍；kimi-adoption-round6-2026-09-08.json",
@@ -775,8 +775,8 @@
       "en": "Added 2.588B: min(shared monthly pool $70, model allowance $50) ÷ project standard-workload weighted price; official three-part price; Every model table $50; goat-opencode-catalogs-round3-2026-09-30.json. Processing fee ignored; allowances of different models in the same plan are not additive; no usage-panel token+% screenshot — computed from official absolute credits and the price list"
     },
     {
-      "zh": "新增0.34亿：min(共享月池$70, 模型allowance $10) ÷ 统一标准负载加权价；official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; goat-opencode-catalogs-round3-2026-09-30.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
-      "en": "Added 34M: min(shared monthly pool $70, model allowance $10) ÷ project standard-workload weighted price; official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; goat-opencode-catalogs-round3-2026-09-30.json. Processing fee ignored; allowances of different models in the same plan are not additive; no usage-panel token+% screenshot — computed from official absolute credits and the price list"
+      "zh": "新增0.34亿：min(共享月池$70, 模型allowance $10) ÷ 统一标准负载加权价；official three-part price; standalone table $10 (launched 2026-09-28); cache write $2.50 excluded from standard workload; channel catalog price unchanged by vendor cached-read cut (2026-10-08); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
+      "en": "Added 34M: min(shared monthly pool $70, model allowance $10) ÷ project standard-workload weighted price; official three-part price; standalone table $10 (launched 2026-9-28); cache write $2.50 excluded from standard workload; channel catalog price unchanged by vendor cached-read cut (2026-10-8); goat-opencode-catalogs-round3-2026-09-30.json; claude-haiku55-round1-2026-10-08.json. Processing fee ignored; allowances of different models in the same plan are not additive; no usage-panel token+% screenshot — computed from official absolute credits and the price list"
     },
     {
       "zh": "新增1.005亿：min(共享月池$70, 模型allowance $20) ÷ 统一标准负载加权价；official three-part price; Older models all $20; goat-opencode-catalogs-round3-2026-09-30.json。忽略 processing fee；同套餐各模型额度不可相加；无面板 token+% 截图，按官方绝对credits+价表",
@@ -1155,12 +1155,52 @@
       "en": "1.503B→863.931M: 78.5×0.5/4.54 — derived via the implied weight of the 20x same-frame sample (weight 2.61→4.54 after the round9 timeline correction), not an independent measurement; carrying a single weight across tiers remains an assumption (Fable 5's two differing tiers are the prior lesson); claude-fable51-round3/round9"
     },
     {
-      "zh": "由同套餐 claude-opus-5 78.5 亿 × 2.0087898089171974",
-      "en": "Derived from same-plan claude-opus-5 7.85B × 2.0087898089171974"
+      "zh": "由同套餐 claude-opus-5.5 30.54 亿 × 2.0",
+      "en": "From same-plan claude-opus-5.5 3.054B × 2.0"
     },
     {
-      "zh": "由20x采用值315.38亿÷2派生（确认20x周池=5x的2倍，同Opus 5行157÷2；2026-09-30 起 20x 为 MiaAI 窗×5.5 窗/周与 Pro×10 加权，旧 20x 301.7 → 本行 150.85）；旧值78.5×1/W=150.852亿与20x/2的差仅来自301.7取整，2026-09-27裁定合为同一点；标价法152.64亿差1.2%；claude-opus55-round1-2026-09-23.json",
-      "en": "Derived from the 20x adopted value 31.538B÷2 (confirmed the 20x weekly pool = 2× the 5x pool, same as the Opus 5 row's 157÷2; from 2026-09-30 the 20x value is the weighted MiaAI window ×5.5 windows/week and Pro×10, so old 20x 301.7 → this row 150.85); the old value 78.5×1/W = 15.0852B differs from 20x/2 only by the 301.7 rounding — the ruled on 2026-09-27 to merge them into the same point; the list-price method gives 15.264B, 1.2% off; claude-opus55-round1-2026-09-23.json"
+      "zh": "新增61.08亿：Pro Opus5.5 实测锚 30.54亿 × 混合价比 2（Sonnet5.5 降价后 $0.2095 vs Opus5.5 $0.419）；发布价 $0.3065 口径 41.75亿 留对照；X @1kartikkabadi1 推算图 + 官方价表；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 6.108B: Pro Opus 5.5 measured anchor 3.054B × blended-price ratio 2 (post-cut Sonnet 5.5 $0.2095 vs Opus 5.5 $0.419); launch price $0.3065 basis 4.175B kept as comparison; X @1kartikkabadi1 derivation chart + official price list; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 30.54 亿 × 19.52924726171056",
+      "en": "From same-plan claude-opus-5.5 3.054B × 19.52924726171056"
+    },
+    {
+      "zh": "新增596.42亿：Pro Opus5.5 实测锚 30.54亿 × 混合价比 19.5292（Opus5.5 $0.419 vs Haiku5.5 90/10 分段混合 $0.021455：≤100K 档 $0.015325 占 90%、>100K 档 $0.076625 占 10%，2026-10-08 裁定按 token 近似 90% 落 ≤100K；社区说法为约 90% 请求 <100K，按请求数折 token 会低估 >100K 份额）；不采：纯 ≤100K 档 834.99亿、50/50 278.33亿；X @1kartikkabadi1 推算图；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 59.642B: Pro Opus 5.5 measured anchor 3.054B × blended-price ratio 19.5292 (Opus 5.5 $0.419 vs Haiku 5.5 90/10 tiered blend $0.021455: ≤100K tier $0.015325 at 90%, >100K tier $0.076625 at 10%; ruled on 2026-10-08 to approximate tokens at 90% falling in the ≤100K tier — community reports ~90% of requests <100K, and folding request counts into tokens would underestimate the >100K share); not adopted: pure ≤100K tier 83.499B, 50/50 27.833B; X @1kartikkabadi1 derivation chart; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 315.38 亿 × 2.0",
+      "en": "From same-plan claude-opus-5.5 31.538B × 2.0"
+    },
+    {
+      "zh": "新增630.76亿：20x Opus5.5 采用值 315.38亿 × 混合价比 2，同 Pro 口径派生非实测；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 63.076B: Max 20x Opus 5.5 adopted value 31.538B × blended-price ratio 2, same-basis derivation as Pro, not measured; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 315.38 亿 × 19.52924726171056",
+      "en": "From same-plan claude-opus-5.5 31.538B × 19.52924726171056"
+    },
+    {
+      "zh": "新增6159.13亿：20x Opus5.5 采用值 315.38亿 × 混合价比 19.5292（Haiku5.5 90/10 分段混合），同 Pro 口径派生非实测；外推幅度大，若池权重偏离价格比须重推；不采：纯 ≤100K 8622.79亿、50/50 2874.26亿；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 615.913B: Max 20x Opus 5.5 adopted value 31.538B × blended-price ratio 19.5292 (Haiku 5.5 90/10 tiered blend), same-basis derivation as Pro, not measured; the extrapolation is large and must be re-derived if pool weighting deviates from the price ratio; not adopted: pure ≤100K 862.279B, 50/50 287.426B; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 183.34 亿 × 2.0",
+      "en": "From same-plan claude-opus-5.5 18.334B × 2.0"
+    },
+    {
+      "zh": "新增366.68亿：5x Opus5.5 直测锚 183.34亿 × 混合价比 2，同 Pro 口径派生非实测；2026-10-08 裁定锚同套餐直测行，不用 20x÷2（得 315.38亿，不采）；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 36.668B: Max 5x Opus 5.5 direct-measurement anchor 18.334B × blended-price ratio 2, same-basis derivation as Pro, not measured; ruled on 2026-10-08 to anchor to the same-plan directly measured row instead of 20x÷2 (which yields 31.538B, not adopted); claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "由同套餐 claude-opus-5.5 183.34 亿 × 19.52924726171056",
+      "en": "From same-plan claude-opus-5.5 18.334B × 19.52924726171056"
+    },
+    {
+      "zh": "新增3580.49亿：5x Opus5.5 直测锚 183.34亿 × 混合价比 19.5292（Haiku5.5 90/10 分段混合），同 Pro 口径派生非实测；2026-10-08 裁定锚同套餐直测行，不用 20x÷2；不采：纯 ≤100K 5012.69亿、50/50 1670.90亿；claude-haiku55-round1-2026-10-08.json",
+      "en": "New 358.049B: Max 5x Opus 5.5 direct-measurement anchor 18.334B × blended-price ratio 19.5292 (Haiku 5.5 90/10 tiered blend), same-basis derivation as Pro, not measured; ruled on 2026-10-08 to anchor to the same-plan directly measured row instead of 20x÷2; not adopted: pure ≤100K 501.269B, 50/50 167.09B; claude-haiku55-round1-2026-10-08.json"
     },
     {
       "zh": "由同套餐 gpt-5.6-sol 30.8 亿 × 0.295458068516509",
@@ -1505,6 +1545,22 @@
     {
       "zh": "标价 cached 0.2/in 4.0/out 20.0、缓存写(5m) $5 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）",
       "en": "List price cached 0.2/in 4.0/out 20.0, cache write (5m) $5 × Anthropic unified workload 97.0%/2.50%/0.50% (the regular-input share is billed at the 5-minute cache-write price)"
+    },
+    {
+      "zh": "platform.claude.com/docs/en/about-claude/pricing；2026-09-28 发布价 cache read $0.20（同 Sonnet 5），Haiku 5.5 发布日降至 $0.10=base input×0.05（同 Opus 5.5 口径）；in/out 与写 $2.5/5m 不变；claude-haiku55-round1-2026-10-08.json",
+      "en": "platform.claude.com/docs/en/about-claude/pricing; launch price (2026-09-28) cache read $0.20 (same as Sonnet 5), cut to $0.10 = base input×0.05 on Haiku 5.5 launch day (same basis as Opus 5.5); input/output and write $2.5/5m unchanged; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "标价 cached 0.1/in 2.0/out 10.0、缓存写(5m) $2.5 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）",
+      "en": "List cached 0.1/in 2.0/out 10.0, cache write (5m) $2.5 × Anthropic unified workload 97.0%/2.50%/0.50% (the regular-input share priced at the 5-minute cache-write rate)"
+    },
+    {
+      "zh": "platform.claude.com/docs/en/about-claude/pricing；2026-10-08 发布，迄今最便宜最快迷你模型，官方称平均比 Haiku 4.5 便宜 ~75%；≤100K 档 cached $0.01/in $0.10/out $0.50、写 $0.125/5m；>100K 档 5×（cached $0.05/in $0.50/out $2.50、写 $0.625/5m）；按 90/10 分段混合；claude-haiku55-round1-2026-10-08.json",
+      "en": "platform.claude.com/docs/en/about-claude/pricing; released 2026-10-08, the cheapest and fastest mini model to date, officially ~75% cheaper than Haiku 4.5 on average; ≤100K tier cached $0.01/in $0.10/out $0.50, write $0.125/5m; >100K tier 5× (cached $0.05/in $0.50/out $2.50, write $0.625/5m); blended 90/10 across tiers; claude-haiku55-round1-2026-10-08.json"
+    },
+    {
+      "zh": "Anthropic 档混合价 $0.021455/MTok＝≤100K 档 $0.015325（cached 0.01/写5m 0.125/out 0.5）×90%＋>100K 档 $0.076625（cached 0.05/写5m 0.625/out 2.5）×10%；每档 × Anthropic 统一负载 97.0%/2.50%/0.50%（普通输入份额按5分钟缓存写入价计）；90/10 为 2026-10-08 裁定的 token 近似（社区说法约 90% 请求 <100K）；纯 ≤100K 口径 $0.015325、50/50 口径 $0.045975 不采",
+      "en": "Anthropic tier blended price $0.021455/MTok = ≤100K tier $0.015325 (cached 0.01 / write-5m 0.125 / out 0.5) ×90% + >100K tier $0.076625 (cached 0.05 / write-5m 0.625 / out 2.5) ×10%; each tier × the Anthropic unified workload 97.0%/2.50%/0.50% (the fresh-input share priced at the 5-minute cache-write rate); the 90/10 split is the token approximation ruled on 2026-10-08 (community reports ~90% of requests <100K); the pure ≤100K basis $0.015325 and the 50/50 basis $0.045975 not adopted"
     },
     {
       "zh": "标价 cached 0.2/in 2.0/out 12.0 × 项目统一标准负载 97.0%/2.50%/0.50%",

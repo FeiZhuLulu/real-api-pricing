@@ -3,12 +3,37 @@
 本地 `AGENTS.md`（不入库）只放 Agent 工作流程；口径与规则见 [`CONVENTIONS.md`](CONVENTIONS.md)；本文件记录每条采用值的取舍（旧值 → 新值 → 依据 → 未采来源）。
 最权威的表述仍在 `scripts/build_adopted.py` 的 `decision_note` 和 `data/research/` 证据文件里；本文件是按时间的索引摘要。改数只能改 `build_adopted.py`，改完在这里同步记一笔。
 
+## 2026-10-08 · Claude Haiku 5.5 发布 & Sonnet 5.5 缓存读降价
+
+- **背景**：2026-10-08 Anthropic 发布 Claude Haiku 5.5（官方称迄今最便宜最快的迷你模型，平均比 Haiku 4.5 便宜约 75%），同日 Sonnet 5.5 缓存读价 $0.20→$0.10（改为 base input×0.05，与 Opus 5.5 同口径）。两项价格均已在 platform.claude.com 官方价表复核。维护者供图：X @1kartikkabadi1 推算图把 Pro 月池按各模型混合价拆开，其锚点与库内采用值精确一致（Pro × Opus 5.5 = 30.54 亿，池 worth $1,279.46≈图 $1,280），方法即仓库自身口径。
+- **Claude Pro × Sonnet 5.5 = 61.08 亿（low，Anthropic 档）**：30.54 × 混合价比 2.0（post-cut $0.2095 vs $0.419）。发布价 $0.3065 口径 41.75 亿留对照。
+- **Haiku 5.5 分段价按 90/10 混合（裁定）**：≤100K 档混合价 $0.015325、>100K 档 $0.076625（5×），按 token 计 90% / 10% 混合为 $0.021455/MTok，Opus 5.5 → Haiku 5.5 比率 19.53。依据是社区说法「约 90% 请求 <100K」，未核实；请求数占比折到 token 会低估 >100K 份额，本口径偏宽松，有分档实测后改用实测份额。不沿用分段价取最低档的惯例：Claude Code 单次 prompt 常超 100K，纯 ≤100K 档会把额度放大约 1.4×。
+- **Claude Pro × Haiku 5.5 = 596.42 亿（low，Anthropic 档）**：30.54 × 19.53。不采：纯 ≤100K 档 834.99 亿（PR 初稿值）、50/50 mix 278.33 亿、>100K 档 167.00 亿。
+- **Claude Max 20x 同法派生（low）**：Sonnet 5.5 = 630.76 亿；Haiku 5.5 = 6,159.13 亿（纯 ≤100K 8,622.79 不采）。
+- **Claude Max 5x 锚同套餐 Opus 5.5 直测行 183.34 亿（裁定，不再借 20x÷2）**：Sonnet 5.5 = 366.68 亿；Haiku 5.5 = 3,580.49 亿。20x÷2 口径 315.38 / 3,079.57 亿不采。外推幅度大，池权重=价格比是假设，若偏离须重推。Max 两档新增行 workload 标 anthropic（与 Opus 5.5 行同档折算）；派生行数据日期沿用锚点行。
+- **API 基线**：`anthropic_sonnet55_api`（$0.10/$2/$10，写 $2.5/5m，降价后价，混合价 $0.2095）与 `anthropic_haiku55_api`（两档官方价，按 90/10 混合价 $0.021455）入 METERED；同价目写入 `list-prices-claude55-round1-2026-10-08.json`。
+- **Command Code GOAT × Sonnet 5.5 不随官方价联动**：该行记渠道自身目录价（$10 credits 档 cached read $0.20），官方 API 降价不影响渠道目录行，维持 0.340 亿不变（同 droid_max 处理）。
+- **不采**：Sonnet 5.5 pre-cut 价 41.75 亿（历史价）；Opus 5 池锚法（两池权重未知）；为 Haiku 5.5 编造 Droid/GOAT 目录行（官方目录未列该模型）；command_code_goat/droid 其余行不变。
+- 证据：`data/research/claude-haiku55-round1-2026-10-08.json`。
+
+## 2026-10-06 · Claude Team Premium 席首个采用点
+
+- **Claude Team Premium 席 × Opus 5.5**：新增 **126.05 亿/月 low**（2026-10-08 裁定由 medium 降为 low）。X @leo114119 推文（维护者提供截图）：Team「6.25x」席第三方 relay 使用统计 7d 窗 4,091,470,718 raw（12,836 次请求，hit 98.8%），帖主称整周用满；面板总成本 $1,320.3794 与 Opus 5.5 标价逐项闭合（写按 5m $5）→ 采面板 worth ×4周 ÷ Anthropic 档 $0.419/MTok；raw 口径 163.66 亿留作对照；写按 1h $8 敏感性 140.15 亿不采。
+- **档位与价格**：claude.com/pricing（2026-10-08 核对）Premium 席 $125/月付、$100/月年付，「5x more usage than standard seats」；Standard 席 $25/月付、$20/月年付，「more usage than Pro」，官方未给具体倍数，用量倍数按 5 小时会话计。「6.25× Pro」是社区按 Standard≈1.25× Pro 推的说法，不是官方口径。挂月付价 $125。Standard 席无额度样本不画。
+- **自洽（按周 list-worth 比，同单位）**：本样本周 $1,320.38 = Pro × Opus 5.5 周 $319.91 的 4.13×、Max 5x 直测周 $1,920.49 的 69%、Max 20x 周 $3,303.61 的 40%（各行采用值 × $0.419 ÷ 4）。若 Premium 真为 6.25× Pro，月额应约 190.88 亿，本值只有其 66%。PR 初稿「≈Max 5x、差 4~8%」系拿 Team raw token 比 Max 5x 折算值，单位不同，作废。
+- **降 low 理由**：「用满」只是帖主口述、面板无额度百分比；第三方 relay 面板 + 车头共享席位，7d 滚动窗与官方周重置边界未对齐；与 6.25× Pro 说法差 34%。
+- 证据：`data/research/claude-team-opus55-round1-2026-10-06.json`。
+
 ## 2026-10-05 · Cursor Other Models 池首个实测点（Ultra × Opus 5.5）
 
 - **Cursor Ultra × Claude Opus 5.5（新增，Other Models 池，medium）**：**8.96 亿/月**（workload=anthropic）。X @xuanwo 推文（维护者转交截图）：账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日 共 176 条、778,341,121 tok（cache读 748,779,006 / cache写 24,358,860 / 普通输入 9,402 / 输出 5,193,853，hit 96.85%，记录集中北京时间 10月2日22:35–5日14:14）。段 worth $375.46（读×$0.2＋写×$5(5m)＋入×$4＋出×$20，与帖主折算一致）＝账期 Other Models 全部用量 ÷ Anthropic 档混合价 $0.419/MTok。对照不采：raw 口径 7.78 亿；cache写按 1h $8 敏感性 $448.54→10.71 亿。worth 与社区口径 Ultra Other Models 池 $400 同量级（93.9%；Wayback 8/19 计划表有档、CellCog 曾示 $500），视为月池基本用尽；CSV 无账期边界与 % 字段故按整份导出统计，若未用尽本值偏保守。与既有 Cursor Models 池行（grok-4.6 77.37 亿、composer-2.5）为两个独立月池，不联动不改值。真实单价 $0.2232/MTok 为 Opus 5.5 最贵订阅点。
 - **Cursor Pro / Pro+ × Opus 5.5 不画（裁定）**：按社区口径池比（Other Models Pro $20 / Pro+ $70 / Ultra $400，官方页现仅写 Included）由 Ultra 实测派生可得 Pro 0.448 亿、Pro+ 1.568 亿，但只是跨档池规模假设、无独立实测；且以 Ultra 实测 worth $375.46（低于 $400 池）缩放，Pro 点真实单价 $0.446/MTok 高于按量 API $0.419，是推法造成的偏差而非实测结论 → 不采，待 Pro/Pro+ 有独立实测再加。
 - 证据：`data/research/cursor-opus55-community-round1-2026-10-05.json`。
 - 待裁定（未展开）：同一 Other Models 池按价目比派生其他第三方模型（GPT/Gemini/Sonnet 等）；Other Models 官方池口径（$400 vs CellCog $500）。
+
+## 2026-10-03 · Claude Max 5x × Opus 5.5 社区截图直测
+
+- **Claude Max 5x × Claude Opus 5.5 改用社区截图直测（Anthropic 档）**：157.69 → 183.34 亿/月，low → medium（真实单价 $0.00634 → $0.00545/MTok）。维护者提供社区 Claude Code /usage 截图：单会话 claude-opus-5-5 in 23.0k / out 3.0m / cache读 1.3b / cache写 5.6m（面板 $366.96，按 1h 写价闭合；prompt cache 1h TTL）＝周额度（all models）19%，Fable 周 0%。缓存写按实际 1h 档计（同 issue #52/#53 口径）：list-worth $364.89 ÷19% ×4 周 ÷ $0.419/MTok。未采：cache 写按 5m 折 174.9 亿、raw total 275.5 亿，留作对照。19% 为整数读数时区间 178.64~188.29 亿；1.3b 只有两位有效数字（约 ±3.7%）。弱点：截图出处未确认，19% 是否全归本会话未知（若周内另有用量，周池更大、本值偏保守），n=1。张力：按 20x 周池 = 5x×2 推 Max 20x ≈ 366.68 亿，比采用值 315.38 高 16%；20x 本轮不改，5x/20x 不再同价并点。证据：`claude-max5x-opus55-round1-2026-10-03.json`。
 
 ## 2026-10-03 · Droid 月额度 = 2× 周（裁定）
 

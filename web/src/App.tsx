@@ -17,7 +17,11 @@ import {
   MagnifyingGlass,
   Moon,
   SlidersHorizontal,
+  Storefront,
   Sun,
+  Rows,
+  SquaresFour,
+  Stack,
   Table,
   X,
 } from "@phosphor-icons/react";
@@ -26,12 +30,21 @@ import Chart from "./Chart";
 import HeaderActions from "./HeaderActions";
 import { unpackData } from "./loadData";
 import Ranking from "./Ranking";
+import AllowanceCards from "./AllowanceCards";
+import AllowanceCompare from "./AllowanceCompare";
 import ResizeHandle from "./ResizeHandle";
 import { useIncremental } from "./useIncremental";
 import ProviderLogo, { BrandMarks } from "./ProviderLogo";
 import { feeBands } from "./domain";
 import type { ChartHandle } from "./Chart";
 import Modal from "./Modal";
+import CustomProvidersPanel from "./ProviderManager";
+import {
+  loadCustomProviders,
+  mergeCustomProviders,
+  saveCustomProviders,
+  type CustomProvider,
+} from "./customProviders";
 import type {
   FilterKey,
   Lang,
@@ -232,6 +245,14 @@ export default function App() {
   const [data, setData] = useState<SiteData | null>(null);
   const [loadError, setLoadError] = useState("");
   const [theme, setTheme] = useState<Theme>(localTheme);
+  const [customProviders, setCustomProviders] = useState<CustomProvider[]>(
+    loadCustomProviders,
+  );
+  const updateCustomProviders = (list: CustomProvider[]) => {
+    const persisted = saveCustomProviders(list);
+    setCustomProviders(list);
+    return persisted;
+  };
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
     document
@@ -264,6 +285,12 @@ export default function App() {
     };
   }, []);
   const zhBoot = localLanguage() === "zh" || /[#&]lang=zh/.test(location.hash);
+  // User-defined relay providers merge into the published data before any
+  // derivation runs, so every view, filter and export sees them natively.
+  const merged = useMemo(
+    () => (data ? mergeCustomProviders(data, customProviders) : null),
+    [data, customProviders],
+  );
   if (loadError)
     return (
       <main className="boot" role="alert">
@@ -278,12 +305,14 @@ export default function App() {
         </div>
       </main>
     );
-  if (!data) return <BootSkeleton />;
+  if (!merged) return <BootSkeleton />;
   return (
     <ThemeContext.Provider value={theme}>
       <Explorer
-        data={data}
+        data={merged}
         theme={theme}
+        customProviders={customProviders}
+        onCustomProvidersChange={updateCustomProviders}
         onThemeChange={(next) => {
           saveTheme(next);
           document.documentElement.dataset.theme = next;
@@ -311,10 +340,15 @@ function BootSkeleton() {
 function Explorer({
   data,
   theme,
+  customProviders,
+  onCustomProvidersChange,
   onThemeChange,
 }: {
   data: SiteData;
   theme: Theme;
+  customProviders: CustomProvider[];
+  /** Returns false when browser storage rejected the write. */
+  onCustomProvidersChange: (providers: CustomProvider[]) => boolean;
   onThemeChange: (theme: Theme) => void;
 }) {
   const initial = useMemo(
@@ -324,7 +358,7 @@ function Explorer({
   const [state, setState] = useState<State>(initial.state);
   const [warning, setWarning] = useState(initial.warning);
   const [panel, setPanel] = useState<
-    "models" | "filters" | "display" | "download" | "share" | null
+    "models" | "filters" | "display" | "download" | "share" | "providers" | null
   >(null);
   const [detail, setDetail] = useState<Row[] | null>(null);
   const [modelSearch, setModelSearch] = useState("");
@@ -388,6 +422,14 @@ function Explorer({
     [data, view, selected, vendors, channels, plans, billing, confidence, feeBand],
   );
   const axis = useMemo(() => barAxis(data, view), [data, view]);
+  const allowancePoints = useMemo(
+    () => data.points.filter((p) => p.billing !== "metered" && p.monthly_yi !== null),
+    [data],
+  );
+  // Only slots with both a plan and a model count as compared items.
+  const completeCompare = state.compare.filter((v) =>
+    allowancePoints.some((p) => p.id === v),
+  ).length;
   const gs = useMemo(() => groups(rows), [rows]);
   const front = useMemo(() => pareto(gs), [gs]);
   const frontRows = useMemo(
@@ -441,6 +483,9 @@ function Explorer({
       lang: state.lang,
       view: state.view,
       board: state.board,
+      layout: state.layout,
+      compare: state.compare,
+      cards: state.cards,
     });
     setWarning(false);
   };
@@ -600,6 +645,18 @@ function Explorer({
             </button>
           </nav>
           <div className="header-actions">
+            <button
+              className="header-contribute header-providers"
+              onClick={() => setPanel("providers")}
+              aria-label={t("My providers", "我的供应商")}
+              title={t(
+                "Manage your own providers (stored locally)",
+                "管理我的自定义供应商（本地存储）",
+              )}
+            >
+              <Storefront size={16} />
+              <span>{t("My providers", "我的供应商")}</span>
+            </button>
             <HeaderActions lang={state.lang} />
             <button
               className="icon-button theme-toggle"
@@ -876,6 +933,26 @@ function Explorer({
                     </span>
                   </div>
                 )}
+                {state.view === "allowance" && (
+                  <div className="layout-switch segmented" role="group" aria-label={t("Layout", "展示方式")}>
+                    {(
+                      [
+                        ["list", <Rows size={15} />, "Ranking", "排行"],
+                        ["cards", <SquaresFour size={15} />, "Cards", "卡片"],
+                        ["compare", <Stack size={15} />, "Compare", "对比"],
+                      ] as const
+                    ).map(([layout, icon, en, cn]) => (
+                      <button
+                        key={layout}
+                        aria-pressed={state.layout === layout}
+                        onClick={() => patch({ layout })}
+                      >
+                        {icon}
+                        <span>{t(en, cn)}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <span className="toolbar-space" />
                 <div className="chart-tools-slot" ref={setChartSlot} />
                 {state.view !== "pareto" && (
@@ -903,6 +980,16 @@ function Explorer({
                   {state.view === "pareto" ? (
                     <>
                       <b>{pts.length}</b> {t("points", "个数据点")}
+                    </>
+                  ) : state.view === "allowance" && state.layout === "cards" ? (
+                    <>
+                      {t("Selected", "已选")} <b>{state.cards.length}</b>{" "}
+                      {t(state.cards.length === 1 ? "model" : "models", "个模型")}
+                    </>
+                  ) : state.view === "allowance" && state.layout === "compare" ? (
+                    <>
+                      {t("Selected", "已选")} <b>{completeCompare}</b>{" "}
+                      {t(completeCompare === 1 ? "item" : "items", "项")}
                     </>
                   ) : (
                     <>
@@ -976,7 +1063,14 @@ function Explorer({
                   );
                 })}
               </OneLineLegend>
-              {!pts.length || (state.view === "pareto" && !gs.length) ? (
+              {(!pts.length || (state.view === "pareto" && !gs.length)) &&
+              // The allowance card/compare pickers have their own empty states
+              // and must stay reachable (and keep saved items) under filters
+              // that match nothing.
+              !(
+                state.view === "allowance" &&
+                (state.layout === "cards" || state.layout === "compare")
+              ) ? (
                 <div className="empty">
                   <ChartScatter size={35} />
                   <h3>{t("No points to plot", "没有可绘制的数据点")}</h3>
@@ -995,7 +1089,26 @@ function Explorer({
                     {t("Reset selection", "恢复全部数据")}
                   </button>
                 </div>
-              ) : state.view === "table" ? null : state.view !== "pareto" ? (
+              ) : state.view === "table" ? null : state.view === "allowance" &&
+                state.layout === "cards" ? (
+                <AllowanceCards
+                  points={allowancePoints}
+                  rows={rows}
+                  state={state}
+                  axis={axis}
+                  highlight={highlight}
+                  onChange={(cards) => patch({ cards })}
+                  onSelect={setDetail}
+                />
+              ) : state.view === "allowance" && state.layout === "compare" ? (
+                <AllowanceCompare
+                  points={allowancePoints}
+                  rows={rows}
+                  state={state}
+                  onChange={(compare) => patch({ compare })}
+                  onSelect={setDetail}
+                />
+              ) : state.view !== "pareto" ? (
                 <Ranking
                   rows={rows}
                   state={state}
@@ -1219,12 +1332,22 @@ function Explorer({
                   ? t("Chart settings", "图表设置")
                   : panel === "share"
                     ? t("Share this view", "分享当前视图")
-                    : t("Take the data with you", "下载图表与数据")
+                    : panel === "providers"
+                      ? t("My providers", "我的供应商")
+                      : t("Take the data with you", "下载图表与数据")
           }
           onClose={() => setPanel(null)}
-          wide={panel === "models" || panel === "filters"}
+          wide={panel === "models" || panel === "filters" || panel === "providers"}
           closeLabel={t("Close", "关闭")}
         >
+          {panel === "providers" && (
+            <CustomProvidersPanel
+              data={data}
+              providers={customProviders}
+              onChange={onCustomProvidersChange}
+              lang={state.lang}
+            />
+          )}
           {panel === "models" && (
             <>
               <p className="panel-description">
