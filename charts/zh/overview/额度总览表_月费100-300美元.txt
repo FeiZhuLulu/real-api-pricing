@@ -8,62 +8,64 @@
 汇率来源：https://www.xinhuanet.com/20260904/4c1ce1cbf39d416997cb9c237d6f5024/c.html
 序号  套餐                               价格/月     服务模型             月额度(亿)  $/MTok   置信度
 ----  ---------------------------------  ----------  -------------------  ----------  -------  ------
-1     Step Plan Max (¥699)               CNY 699     Step 3.5 Flash       1731.6      0.0006   medium
-2     ChatGPT Pro 20x                    USD 200     GPT 5.6 Luna         1411.63     0.00142  medium
-3     Droid Max                          USD 200     GPT-6 Luna           1010.4      0.00198  medium
-4     Step Plan Max (¥699)               CNY 699     Step 3.7 Flash       858.83      0.0012   medium
-5     Droid Max                          USD 200     GLM 5.3 Flash        673.6       0.00297  medium
-6     Google AI Ultra 20x                USD 199.99  Gemini 3.8 Flash     516.2       0.00387  low
-7     Droid Max                          USD 200     GPT 5.6 Luna         505.2       0.00396  medium
-8     Claude Max 20x (9/14+)             USD 200     Claude Sonnet 5      392.5       0.0051   medium
-9     Droid Max                          USD 200     DeepSeek V4.1 Flash  336.8       0.00594  medium
-10    Droid Max                          USD 200     MiniMax M3           336.8       0.00594  medium
-11    Claude Max 20x (9/14+)             USD 200     Claude Opus 5.5      315.38      0.00634  medium
-12    Step Plan Max (¥699)               CNY 699     Step 5 Preview       283.186     0.00364  medium
-13    ChatGPT Pro 20x                    USD 200     GPT 5.6 Terra        249.552     0.00801  medium
-14    Cursor Ultra (Standard)            USD 200     Composer 2.5         199.608     0.01002  medium
-15    GLM Coding Max (v3 ¥1078) 闲时     CNY 1078    GLM 5.3 Flash        174.81      0.0091   high
-16    Droid Max                          USD 200     Nemotron 3 Ultra     168.4       0.01188  medium
-17    Claude Max 20x (9/14+)             USD 200     Claude Opus 5        157         0.01274  medium
-18    Claude Max 20x (9/14+)             USD 200     Claude Opus 4.8      157         0.01274  low
-19    Droid Max                          USD 200     Gemini 3.8 Flash     134.72      0.01485  medium
-20    Droid Max                          USD 200     Gemini 3.7 Flash     134.72      0.01485  medium
-21    GLM Coding Max (v3 ¥1078) 中间值   CNY 1078    GLM 5.3 Flash        131.11      0.01213  high
-22    ChatGPT Pro 20x                    USD 200     GPT 5.6 Sol          129.02      0.0155   high
-23    Droid Max                          USD 200     Inkling              101.04      0.01979  medium
-24    ChatGPT Pro 20x                    USD 200     GPT 5.5              99.821      0.02004  medium
-25    MiniMax Token Plan Ultra (Global)  USD 132     MiniMax M3           98          0.01347  high
-26    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078    GLM 5.3 Flash        87.4        0.0182   high
-27    Cursor Ultra                       USD 200     Grok 4.6             77.37       0.02585  medium
-28    Cursor Ultra                       USD 200     Grok 4.5             77.37       0.02585  medium
-29    Droid Max                          USD 200     GLM 5.3              72.171      0.02771  medium
-30    Droid Max                          USD 200     GLM 5.2              72.171      0.02771  medium
-31    Cursor Ultra (Composer Fast)       USD 200     Composer 2.5         68.841      0.02905  medium
-32    Droid Max                          USD 200     Mistral Medium 3.5   67.36       0.02969  medium
-33    Devin Max                          USD 200     Claude Opus 5.5      66.9        0.0299   medium
-34    GLM Coding Max (v3 ¥1078) 闲时     CNY 1078    GLM 5.3              57.69       0.02757  high
-35    SuperGrok Heavy                    USD 300     Grok 4.7             57.2        0.05245  medium
-36    SuperGrok Heavy                    USD 300     Grok 4.6             51.6        0.05814  medium
-37    SuperGrok Heavy                    USD 300     Grok 4.5             51.6        0.05814  medium
-38    Droid Max                          USD 200     Claude Sonnet 5.5    50.52       0.03959  medium
-39    Droid Max                          USD 200     GPT-6 Sol            50.52       0.03959  medium
-40    Droid Max                          USD 200     GPT 5.6 Terra        50.52       0.03959  medium
-41    Droid Max                          USD 200     Grok 4.7             50.52       0.03959  medium
-42    Droid Max                          USD 200     Grok 4.6             50.52       0.03959  medium
-43    Droid Max                          USD 200     Qwen3.8 Max          50.52       0.03959  medium
-44    Droid Max                          USD 200     GLM 5.2 Fast         48.114      0.04157  medium
-45    GLM Coding Max (v3 ¥1078) 中间值   CNY 1078    GLM 5.3              43.27       0.03675  high
-46    ChatGPT Pro 20x                    USD 200     GPT-6 Astra          38.12       0.05247  medium
-47    Droid Max                          USD 200     Kimi K3              33.68       0.05938  medium
-48    Cursor Ultra (Fast)                USD 200     Grok 4.6             30.74       0.06506  high
-49    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078    GLM 5.3              28.84       0.05514  high
-50    Droid Max                          USD 200     Claude Opus 5.5      25.26       0.07918  medium
-51    Droid Max                          USD 200     GPT 5.6 Sol          25.26       0.07918  medium
-52    Droid Max                          USD 200     Claude Opus 5        20.208      0.09897  medium
-53    Droid Max                          USD 200     Claude Opus 4.8      20.208      0.09897  medium
-54    Claude Max 20x (9/14+)             USD 200     Claude Fable 5.1     17.28       0.11574  medium
-55    Claude Max 20x (9/14+)             USD 200     Claude Fable 5       12.077      0.1656   low
-56    Devin Max                          USD 200     GPT-6 Astra          11.15       0.17937  medium
-57    Droid Max                          USD 200     Claude Fable 5.1     10.104      0.19794  medium
-58    Droid Max                          USD 200     Claude Fable 5       10.104      0.19794  medium
-59    Droid Max                          USD 200     GPT-6 Astra          10.104      0.19794  medium
+1     Claude Max 20x (9/14+)             USD 200     Claude Haiku 5.5     6159.13     0.00032  low
+2     Step Plan Max (¥699)               CNY 699     Step 3.5 Flash       1731.6      0.0006   medium
+3     ChatGPT Pro 20x                    USD 200     GPT 5.6 Luna         1411.63     0.00142  medium
+4     Droid Max                          USD 200     GPT-6 Luna           1010.4      0.00198  medium
+5     Step Plan Max (¥699)               CNY 699     Step 3.7 Flash       858.83      0.0012   medium
+6     Droid Max                          USD 200     GLM 5.3 Flash        673.6       0.00297  medium
+7     Claude Max 20x (9/14+)             USD 200     Claude Sonnet 5.5    630.76      0.00317  low
+8     Google AI Ultra 20x                USD 199.99  Gemini 3.8 Flash     516.2       0.00387  low
+9     Droid Max                          USD 200     GPT 5.6 Luna         505.2       0.00396  medium
+10    Claude Max 20x (9/14+)             USD 200     Claude Sonnet 5      392.5       0.0051   medium
+11    Droid Max                          USD 200     DeepSeek V4.1 Flash  336.8       0.00594  medium
+12    Droid Max                          USD 200     MiniMax M3           336.8       0.00594  medium
+13    Claude Max 20x (9/14+)             USD 200     Claude Opus 5.5      315.38      0.00634  medium
+14    Step Plan Max (¥699)               CNY 699     Step 5 Preview       283.186     0.00364  medium
+15    ChatGPT Pro 20x                    USD 200     GPT 5.6 Terra        249.552     0.00801  medium
+16    Cursor Ultra (Standard)            USD 200     Composer 2.5         199.608     0.01002  medium
+17    GLM Coding Max (v3 ¥1078) 闲时     CNY 1078    GLM 5.3 Flash        174.81      0.0091   high
+18    Droid Max                          USD 200     Nemotron 3 Ultra     168.4       0.01188  medium
+19    Claude Max 20x (9/14+)             USD 200     Claude Opus 5        157         0.01274  medium
+20    Claude Max 20x (9/14+)             USD 200     Claude Opus 4.8      157         0.01274  low
+21    Droid Max                          USD 200     Gemini 3.8 Flash     134.72      0.01485  medium
+22    Droid Max                          USD 200     Gemini 3.7 Flash     134.72      0.01485  medium
+23    GLM Coding Max (v3 ¥1078) 中间值   CNY 1078    GLM 5.3 Flash        131.11      0.01213  high
+24    ChatGPT Pro 20x                    USD 200     GPT 5.6 Sol          129.02      0.0155   high
+25    Droid Max                          USD 200     Inkling              101.04      0.01979  medium
+26    ChatGPT Pro 20x                    USD 200     GPT 5.5              99.821      0.02004  medium
+27    MiniMax Token Plan Ultra (Global)  USD 132     MiniMax M3           98          0.01347  high
+28    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078    GLM 5.3 Flash        87.4        0.0182   high
+29    Cursor Ultra                       USD 200     Grok 4.6             77.37       0.02585  medium
+30    Cursor Ultra                       USD 200     Grok 4.5             77.37       0.02585  medium
+31    Droid Max                          USD 200     GLM 5.3              72.171      0.02771  medium
+32    Droid Max                          USD 200     GLM 5.2              72.171      0.02771  medium
+33    Cursor Ultra (Composer Fast)       USD 200     Composer 2.5         68.841      0.02905  medium
+34    Droid Max                          USD 200     Mistral Medium 3.5   67.36       0.02969  medium
+35    Devin Max                          USD 200     Claude Opus 5.5      66.9        0.0299   medium
+36    GLM Coding Max (v3 ¥1078) 闲时     CNY 1078    GLM 5.3              57.69       0.02757  high
+37    SuperGrok Heavy                    USD 300     Grok 4.7             57.2        0.05245  medium
+38    SuperGrok Heavy                    USD 300     Grok 4.6             51.6        0.05814  medium
+39    SuperGrok Heavy                    USD 300     Grok 4.5             51.6        0.05814  medium
+40    Droid Max                          USD 200     Claude Sonnet 5.5    50.52       0.03959  medium
+41    Droid Max                          USD 200     GPT-6 Sol            50.52       0.03959  medium
+42    Droid Max                          USD 200     GPT 5.6 Terra        50.52       0.03959  medium
+43    Droid Max                          USD 200     Grok 4.7             50.52       0.03959  medium
+44    Droid Max                          USD 200     Grok 4.6             50.52       0.03959  medium
+45    Droid Max                          USD 200     Qwen3.8 Max          50.52       0.03959  medium
+46    Droid Max                          USD 200     GLM 5.2 Fast         48.114      0.04157  medium
+47    GLM Coding Max (v3 ¥1078) 中间值   CNY 1078    GLM 5.3              43.27       0.03675  high
+48    ChatGPT Pro 20x                    USD 200     GPT-6 Astra          38.12       0.05247  medium
+49    Droid Max                          USD 200     Kimi K3              33.68       0.05938  medium
+50    Cursor Ultra (Fast)                USD 200     Grok 4.6             30.74       0.06506  high
+51    GLM Coding Max (v3 ¥1078) 忙时     CNY 1078    GLM 5.3              28.84       0.05514  high
+52    Droid Max                          USD 200     Claude Opus 5.5      25.26       0.07918  medium
+53    Droid Max                          USD 200     GPT 5.6 Sol          25.26       0.07918  medium
+54    Droid Max                          USD 200     Claude Opus 5        20.208      0.09897  medium
+55    Droid Max                          USD 200     Claude Opus 4.8      20.208      0.09897  medium
+56    Claude Max 20x (9/14+)             USD 200     Claude Fable 5.1     17.28       0.11574  medium
+57    Claude Max 20x (9/14+)             USD 200     Claude Fable 5       12.077      0.1656   low
+58    Devin Max                          USD 200     GPT-6 Astra          11.15       0.17937  medium
+59    Droid Max                          USD 200     Claude Fable 5.1     10.104      0.19794  medium
+60    Droid Max                          USD 200     Claude Fable 5       10.104      0.19794  medium
+61    Droid Max                          USD 200     GPT-6 Astra          10.104      0.19794  medium

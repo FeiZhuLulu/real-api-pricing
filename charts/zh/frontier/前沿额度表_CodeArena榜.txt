@@ -10,7 +10,8 @@ Code Arena | WebDev Overall | Arena Score | 2026-09-30
 序号  套餐                   价格/月  服务模型             月额度(亿)  $/MTok   置信度  Arena Score  得分版本                            Harness  思考强度  映射
 ----  ---------------------  -------  -------------------  ----------  -------  ------  -----------  ----------------------------------  -------  --------  -----------------------------
 1     ChatGPT Pro 20x        USD 200  GPT 5.6 Luna         1411.63     0.00142  medium  1518         gpt-5.6-luna-xhigh (codex-harness)  Codex    xhigh     agent_configuration_reference
-2     Claude Max 5x (9/14+)  USD 100  Claude Opus 5.5      183.34      0.00545  medium  1818         claude-opus-5.5-max                 —        max       agent_configuration_reference
-3     OpenCode Go            USD 10   MiMo V2.5            78.782      0.00127  medium  1438         mimo-v2.5                           —        —         agent_configuration_reference
-4     OpenCode Go            USD 10   DeepSeek V4.1 Flash  62.112      0.00161  medium  1620         deepseek-v4.1-flash-max             —        max       agent_configuration_reference
-5     Command Code GOAT      USD 10   DeepSeek V4.1 Flash  62.112      0.00161  medium  1620         deepseek-v4.1-flash-max             —        max       agent_configuration_reference
+2     Claude Max 5x (9/14+)  USD 100  Claude Sonnet 5.5    366.68      0.00273  low     1709         claude-sonnet-5.5-high              —        high      agent_configuration_reference
+3     Claude Max 5x (9/14+)  USD 100  Claude Opus 5.5      183.34      0.00545  medium  1818         claude-opus-5.5-max                 —        max       agent_configuration_reference
+4     OpenCode Go            USD 10   MiMo V2.5            78.782      0.00127  medium  1438         mimo-v2.5                           —        —         agent_configuration_reference
+5     OpenCode Go            USD 10   DeepSeek V4.1 Flash  62.112      0.00161  medium  1620         deepseek-v4.1-flash-max             —        max       agent_configuration_reference
+6     Command Code GOAT      USD 10   DeepSeek V4.1 Flash  62.112      0.00161  medium  1620         deepseek-v4.1-flash-max             —        max       agent_configuration_reference

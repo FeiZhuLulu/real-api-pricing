@@ -170,9 +170,15 @@ def label_position(p, board, x, y, tier="main"):
     if model == "claude-sonnet-5.5":
         if tier == "full":
             if board == "aa_terminal_bench_4":
-                return x - 28, y + 49, "end"
+                return x - 28, y - 50, "end"
             if board == "aa_coding_agent_index":
-                return x - 4, y + 22, "end"
+                return x - 4, y - 60, "end"
+            if board == "aa_intelligence_index":
+                return x + 24, y - 40, "start"
+            if board == "arena_code":
+                return x - 90, y - 20, "end"
+            if board == "open_design_arena":
+                return x - 4, y - 70, "end"
     if model == "claude-opus-5.5":
         if tier == "full":
             if board == "aa_terminal_bench_4":
@@ -196,7 +202,7 @@ def label_position(p, board, x, y, tier="main"):
         if board == "aa_intelligence_index" and tier == "full":
             return x + 10, y + 0, "start"
         if board == "aa_terminal_bench_4" and tier == "full":
-            return x - 20, y - 164, "middle"
+            return x - 168, y - 236, "end"
         if board == "open_design_arena" and tier == "full":
             return x - 40, y + 52, "end"
     if model == "mimo-v2.5":
@@ -224,7 +230,7 @@ def label_position(p, board, x, y, tier="main"):
         return x + 24, y - 31, "start"
     if model == "glm-5.3-flash":
         if board == "aa_intelligence_index":
-            return x + 23, y - 95, "start"
+            return x + 95, y - 93, "start"
         if board == "open_design_arena":
             return x - 24, y + 45, "end"
         if board == "arena_agent_mode":
@@ -246,7 +252,7 @@ def label_position(p, board, x, y, tier="main"):
         if model == "deepseek-v4.1-flash" and board == "arena_agent_mode" and tier == "full":
             return x + 0, y - 100, "middle"
         if model == "deepseek-v4.1-flash" and board == "arena_code" and tier == "full":
-            return x + 0, y - 110, "middle"
+            return x + 0, y - 160, "middle"
         if model == "deepseek-v4.1-flash" and board == "aa_terminal_bench_4" and tier == "full":
             return x - 4, y + 124, "end"
         return x - 24, y + 49, "end"
