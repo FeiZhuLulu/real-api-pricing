@@ -391,6 +391,16 @@ input[type="search"]::-webkit-search-cancel-button {
   background: var(--surface-3);
   color: var(--ink);
 }
+/* The "My providers" entry reuses .header-contribute on a <button>: keep it
+   chromeless like the anchor, without the global button border/hover fill. */
+button.header-contribute {
+  min-height: 0;
+  border: 0;
+  background: none;
+}
+button.header-contribute:hover {
+  background: var(--surface-3);
+}
 .header-star {
   border: 1px solid var(--line-2);
   background: var(--surface);
@@ -2438,6 +2448,177 @@ tbody tr.sentinel-row {
   gap: 10px;
   padding-top: 18px;
 }
+/* Custom providers panel ("我的供应商"): list cards + edit form. */
+.providers-empty {
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.providers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.provider-card {
+  padding: 12px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: var(--surface-2);
+}
+.provider-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.provider-card-head strong {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.provider-card-head a {
+  color: var(--accent);
+  font-size: 12.5px;
+  text-decoration: none;
+}
+.provider-card-head a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.provider-models {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.provider-model {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line-2);
+  font-size: 13px;
+}
+.provider-model > span:first-child {
+  min-width: 0;
+}
+.provider-model small {
+  display: block;
+  color: var(--muted);
+  font-size: 11.5px;
+}
+.provider-model-meta {
+  flex-shrink: 0;
+  text-align: right;
+}
+.provider-model-meta strong {
+  font-size: 14px;
+}
+.provider-model-meta small {
+  display: inline;
+}
+.provider-model-meta em {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+}
+.provider-model-meta em.unscored-tag {
+  color: var(--ink-2);
+  opacity: 0.7;
+}
+.providers-form .form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.providers-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.providers-form input,
+.providers-form select {
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+}
+.providers-form input:focus,
+.providers-form select:focus {
+  border-color: var(--line-strong);
+  outline: none;
+}
+.form-section {
+  margin: 18px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+.model-row {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+}
+.model-row-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr minmax(90px, 0.5fr) 34px;
+  gap: 10px;
+  align-items: end;
+}
+.model-row-prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+.model-row-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11.5px;
+}
+.icon-button.danger:hover {
+  border-color: var(--danger, #c0392b);
+  color: var(--danger, #c0392b);
+}
+.form-error {
+  margin: 12px 0 0;
+  color: var(--danger, #c0392b);
+  font-size: 13px;
+}
+.form-notice {
+  margin: 12px 0 0;
+  color: var(--accent);
+  font-size: 13px;
+}
+.form-actions {
+  justify-content: flex-start;
+}
+.form-actions .primary {
+  margin-left: auto;
+}
+@media (max-width: 640px) {
+  .providers-form .form-fields,
+  .model-row-head,
+  .model-row-prices {
+    grid-template-columns: 1fr;
+  }
+  .model-row-head .icon-button {
+    justify-self: end;
+  }
+}
 .filter-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2898,6 +3079,10 @@ tbody tr.sentinel-row {
   .header-contribute,
   .github {
     display: none;
+  }
+  /* The "My providers" entry stays reachable on mobile, icon-only. */
+  .header-providers {
+    display: inline-flex;
   }
   .intro {
     padding: 26px 0 20px;

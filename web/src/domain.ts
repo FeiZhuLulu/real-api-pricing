@@ -177,7 +177,7 @@ export function tableRows(rows: Row[], s: State): Row[] {
     .filter(
       (r) =>
         !q ||
-        `${r.point.label} ${displayPlan(r.point.plan, s.lang)} ${r.point.channel} ${r.mapping?.variant ?? ""}`
+        `${r.point.label} ${r.point.model} ${displayPlan(r.point.plan, s.lang)} ${r.point.channel} ${r.mapping?.variant ?? ""}`
           .toLocaleLowerCase()
           .includes(q),
     )
