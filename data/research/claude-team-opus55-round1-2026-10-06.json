@@ -5,7 +5,15 @@
   "communitySample": {
     "source": "X @leo114119 推文（维护者提供截图；截图时推文发布约 18 分钟，发布日期约 2026-10-05/06）",
     "model": "claude-opus-5.5",
-    "planInference": "Claude Team Premium 席——官方 Premium 席 $125/月付、$100/月年付，用量 6.25× Pro；推文「6.25x（125 刀）」与官方倍率及 $125÷Pro$20 双口径吻合",
+    "planInference": "Claude Team Premium 席——推文「6.25x（125 刀）」与 Premium 席月付价 $125 吻合",
+    "officialPlan": {
+      "source": "https://claude.com/pricing",
+      "checkedAt": "2026-10-08",
+      "standardSeat": "$20/席/月年付，$25 月付；「All Claude features, plus more usage than Pro」",
+      "premiumSeat": "$100/席/月年付，$125 月付；「5x more usage than standard seats」",
+      "usageFaq": "On Team plans, Standard seats give more than Pro and Premium seats give 5x more than Standard（按 5 小时会话计）",
+      "note": "官方未给 Standard 相对 Pro 的具体倍数；「6.25× Pro」是社区按 Standard≈1.25× Pro 推的说法，非官方口径（2026-10-08 复核更正，初稿误记为官方）"
+    },
     "seatContext": "车头共享 Team 席位（转售/合租）；面板为第三方 relay 的 Claude Code 使用统计页（设置→使用统计，7d 窗），非官方 /usage",
     "requests": 12836,
     "tokens": {
@@ -44,18 +52,21 @@
     "monthlyRawYi": 163.66,
     "formulaRaw": "40.9147亿 raw ×4周 = 163.66亿（留作对照）",
     "sensitivity1hWrite": "缓存写全按 1h $8 → +$147.72/周 → 140.15亿/月（不采，面板按 5m 闭合）",
-    "max5xCrossCheck": "帖主称周量≈Max 5x：Max 5x 周池 39.42亿（折算月额 157.69÷4；raw 口径 37.71亿）vs 本周 40.91亿 raw —— 差约 4~8%，同量级自洽",
-    "realUnitPrice": "$125 ÷ 126.05亿 ≈ $0.992/MTok（折算口径）"
+    "max5xCrossCheck": "（初稿，作废）帖主称周量≈Max 5x：Max 5x 周池 39.42亿（折算月额 157.69÷4；raw 口径 37.71亿）vs 本周 40.91亿 raw —— 差约 4~8%。此比较拿 Team raw token 对 Max 5x 折算值，单位不同",
+    "worthCrossCheck": "2026-10-08 复核，按周 list-worth 同单位比较（各行采用值 × $0.419 ÷ 4）：本周 $1,320.38 = Pro × Opus 5.5 周 $319.91 的 4.13×、Max 5x 直测（183.34亿）周 $1,920.49 的 69%、Max 20x（315.38亿）周 $3,303.61 的 40%；若 Premium 为 6.25× Pro，月额应约 30.54×6.25 = 190.88亿，本值 126.05 仅其 66%",
+    "realUnitPrice": "$125 ÷ 126.05亿 ≈ $0.00992/MTok（折算口径；初稿误写 $0.992）"
   },
   "weaknesses": [
     "n=1 推文；面板无官方 /usage 额度百分比同框",
     "车头共享席位 + 第三方 relay 面板——周池是席位级实测；官方席位池结构（与 Pro/Max 是否同权重、跨席位是否互挤）未证",
     "「用满」为帖主口述；面板为 7d rolling 窗，未区分周额重置边界",
-    "Team 席位多人/共享场景下的并发与公平使用限制未在本样本覆盖"
+    "Team 席位多人/共享场景下的并发与公平使用限制未在本样本覆盖",
+    "与社区「6.25× Pro」说法差 34%（见 worthCrossCheck）"
   ],
   "notDrawn": [
-    "Team Standard 席（$20年付/$25月付，官方 1.25× Pro）：无额度样本，不画",
+    "Team Standard 席（$20年付/$25月付，官方写「多于 Pro」无具体倍数）：无额度样本，不画",
     "年付价 $100/月（-20%）不单列点，挂月付 $125 并在 decision_note 注明"
   ],
-  "confidence": "medium"
+  "confidence": "low",
+  "confidenceNote": "初稿 medium；2026-10-08 裁定降为 low（「用满」仅帖主口述、relay 面板 + 共享席位、与 6.25× Pro 说法差 34%）"
 }
