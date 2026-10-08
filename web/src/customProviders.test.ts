@@ -204,3 +204,56 @@ test("export/parse round-trips and rejects invalid input", () => {
     ),
   );
 });
+
+test("unsafe provider URLs are stripped on load/import; http(s) is kept", () => {
+  const pack = (url: string) =>
+    JSON.stringify({
+      version: 1,
+      providers: [
+        { id: "p", name: "N", url, models: [{ model: "m", input: 1, output: 1 }] },
+      ],
+    });
+  assert.equal(parseCustomProviders(pack("javascript:alert(1)"))[0].url, "");
+  assert.equal(parseCustomProviders(pack("data:text/html;base64,PGI+"))[0].url, "");
+  assert.equal(parseCustomProviders(pack(" https://relay.example.com/p "))[0].url,
+    "https://relay.example.com/p",
+  );
+  assert.equal(parseCustomProviders(pack("http://relay.example.com"))[0].url,
+    "http://relay.example.com",
+  );
+});
+
+test("one provider's models share a single plan_id while ids stay per-model", () => {
+  const merged = mergeCustomProviders(site, [provider]);
+  const custom = merged.points.filter((p) => p.id.startsWith("custom::"));
+  assert.equal(custom.length, 2);
+  assert.deepEqual(
+    [...new Set(custom.map((p) => p.plan_id))],
+    ["custom::prov1"],
+  );
+  assert.deepEqual(
+    new Set(custom.map((p) => p.id)),
+    new Set(["custom::prov1::my-model", "custom::prov1::mystery-model"]),
+  );
+});
+
+test("duplicate model slugs within one provider are rejected", () => {
+  assert.throws(
+    () =>
+      parseCustomProviders(
+        JSON.stringify({
+          version: 1,
+          providers: [
+            {
+              name: "Dup",
+              models: [
+                { model: "m", input: 1, output: 1 },
+                { model: "m", input: 1, output: 1 },
+              ],
+            },
+          ],
+        }),
+      ),
+    /Dup: duplicate model m/,
+  );
+});

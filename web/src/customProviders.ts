@@ -24,6 +24,18 @@ export interface CustomProvider {
 
 const STORAGE_KEY = "pricing-custom-providers";
 
+/** Only http(s) URLs may become links; anything else degrades to "". */
+export function safeHttpUrl(s: string): string {
+  const v = s.trim();
+  if (!v) return "";
+  try {
+    const u = new URL(v);
+    return u.protocol === "http:" || u.protocol === "https:" ? v : "";
+  } catch {
+    return "";
+  }
+}
+
 const isRecord = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v);
 const isPrice = (v: unknown): v is number =>
@@ -42,13 +54,14 @@ function validateProviders(raw: unknown): CustomProvider[] {
     if (!name) throw new Error(`Provider #${i + 1} has no name`);
     const models = Array.isArray(entry.models) ? entry.models : [];
     if (!models.length) throw new Error(`${name}: no models`);
+    const slugs = new Set<string>();
     return {
       id:
         typeof entry.id === "string" && entry.id
           ? entry.id
           : `p${i.toString(36)}${Date.now().toString(36)}`,
       name,
-      url: typeof entry.url === "string" ? entry.url.trim() : "",
+      url: safeHttpUrl(typeof entry.url === "string" ? entry.url : ""),
       createdAt:
         typeof entry.createdAt === "string" && entry.createdAt
           ? entry.createdAt
@@ -57,6 +70,8 @@ function validateProviders(raw: unknown): CustomProvider[] {
         if (!isRecord(m)) throw new Error(`${name} model #${j + 1} is not an object`);
         const model = typeof m.model === "string" ? m.model.trim() : "";
         if (!model) throw new Error(`${name} model #${j + 1} has no slug`);
+        if (slugs.has(model)) throw new Error(`${name}: duplicate model ${model}`);
+        slugs.add(model);
         if (!isPrice(m.input) || !isPrice(m.output))
           throw new Error(`${name} · ${model}: input/output prices must be positive numbers`);
         const cached =
@@ -88,14 +103,16 @@ export function loadCustomProviders(): CustomProvider[] {
     return [];
   }
 }
-export function saveCustomProviders(providers: CustomProvider[]) {
+/** Persists to localStorage; returns false when storage rejects the write. */
+export function saveCustomProviders(providers: CustomProvider[]): boolean {
   try {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({ version: 1, providers }),
     );
+    return true;
   } catch {
-    /* Storage is optional. */
+    return false;
   }
 }
 export function exportCustomProviders(providers: CustomProvider[]): string {
@@ -155,15 +172,18 @@ export function mergeCustomProviders(
       const ref = knownModel.get(mod.model);
       const display = mod.displayName || ref?.model_display || mod.model;
       const id = `custom::${provider.id}::${mod.model}`;
-      const sourceZh = provider.url
-        ? `自定义供应商「${provider.name}」报价（用户本地录入，未经公开核实）：${provider.url}`
+      const url = safeHttpUrl(provider.url);
+      const sourceZh = url
+        ? `自定义供应商「${provider.name}」报价（用户本地录入，未经公开核实）：${url}`
         : `自定义供应商「${provider.name}」报价（用户本地录入，未经公开核实）`;
-      const sourceEn = provider.url
-        ? `Custom provider "${provider.name}" pricing (user-local entry, not publicly verified): ${provider.url}`
+      const sourceEn = url
+        ? `Custom provider "${provider.name}" pricing (user-local entry, not publicly verified): ${url}`
         : `Custom provider "${provider.name}" pricing (user-local entry, not publicly verified)`;
       points.push({
         id,
-        plan_id: id,
+        // One plan per provider: its models group together (chart plan search,
+        // filters, share links) instead of scattering as one-plan-per-model.
+        plan_id: `custom::${provider.id}`,
         plan: provider.name,
         plan_en: null,
         local_price: null,
@@ -199,7 +219,7 @@ export function mergeCustomProviders(
         source_en: sourceEn,
         note_en: "",
         decision_note_en: "",
-        evidence: provider.url ? [{ label: provider.url, url: provider.url }] : [],
+        evidence: url ? [{ label: url, url }] : [],
       });
       // Score reuse: copy every mapping whose configuration benchmarks this
       // model, retargeted at the custom point (deduped per board/config).

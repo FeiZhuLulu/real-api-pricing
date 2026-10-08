@@ -13,6 +13,7 @@ import {
   exportCustomProviders,
   parseCustomProviders,
   realPriceUsd,
+  safeHttpUrl,
   type CustomProvider,
 } from "./customProviders";
 import { GlassCombobox, GlassSelect, type GlassGroup } from "./GlassSelect";
@@ -127,7 +128,8 @@ export default function CustomProvidersPanel({
 }: {
   data: SiteData;
   providers: CustomProvider[];
-  onChange: (providers: CustomProvider[]) => void;
+  /** Persists the list; returns false when browser storage rejected it. */
+  onChange: (providers: CustomProvider[]) => boolean;
   lang: Lang;
 }) {
   const zh = lang === "zh";
@@ -135,6 +137,7 @@ export default function CustomProvidersPanel({
   const [draft, setDraft] = useState<Draft | null>(loadDraft);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [storageWarn, setStorageWarn] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   useEffect(() => {
     try {
@@ -164,7 +167,9 @@ export default function CustomProvidersPanel({
   );
 
   const save = (next: CustomProvider[]) => {
-    onChange(next);
+    // State still updates when storage fails, so the session keeps working;
+    // the warning stays up until a write succeeds.
+    setStorageWarn(!onChange(next));
     setNotice("");
     setError("");
   };
@@ -217,6 +222,25 @@ export default function CustomProvidersPanel({
       setError(t("Add at least one model.", "请至少添加一个模型。"));
       return;
     }
+    if (draft.url.trim() && !safeHttpUrl(draft.url)) {
+      setError(
+        t(
+          "Pricing page URL must start with http:// or https://.",
+          "定价页链接必须以 http:// 或 https:// 开头。",
+        ),
+      );
+      return;
+    }
+    const slugs = draft.models.map((m) => m.model.trim());
+    if (new Set(slugs).size !== slugs.length) {
+      setError(
+        t(
+          "Each model slug can appear only once per provider.",
+          "同一供应商里模型标识不能重复。",
+        ),
+      );
+      return;
+    }
     const num = (s: string) => (s.trim() === "" ? NaN : Number(s));
     for (const [i, m] of draft.models.entries()) {
       const label = m.model.trim() || `#${i + 1}`;
@@ -224,7 +248,7 @@ export default function CustomProvidersPanel({
         setError(t(`Model row ${i + 1}: slug is required.`, `第 ${i + 1} 行：请填写模型标识。`));
         return;
       }
-      if (!(num(m.input) > 0) || !(num(m.output) > 0)) {
+      if (!(Number.isFinite(num(m.input)) && num(m.input) > 0) || !(Number.isFinite(num(m.output)) && num(m.output) > 0)) {
         setError(
           t(
             `${label}: input and output prices must be positive numbers (per MTok).`,
@@ -233,7 +257,7 @@ export default function CustomProvidersPanel({
         );
         return;
       }
-      if (m.cached.trim() !== "" && !(num(m.cached) >= 0)) {
+      if (m.cached.trim() !== "" && !(Number.isFinite(num(m.cached)) && num(m.cached) >= 0)) {
         setError(
           t(
             `${label}: cached price must be a number ≥ 0, or leave it empty to use the input price.`,
@@ -425,6 +449,14 @@ export default function CustomProvidersPanel({
       </p>
       {notice && <p className="form-notice" role="status">{notice}</p>}
       {error && <p className="form-error" role="alert">{error}</p>}
+      {storageWarn && (
+        <p className="form-error" role="alert">
+          {t(
+            "Couldn't write to browser storage — these providers will be lost on reload. Export a JSON backup first.",
+            "无法写入浏览器存储，刷新页面后这些供应商会丢失，请先导出 JSON 备份。",
+          )}
+        </p>
+      )}
       <div className="providers-list">
         {providers.length === 0 && (
           <p className="providers-empty">
@@ -435,8 +467,8 @@ export default function CustomProvidersPanel({
           <div className="provider-card" key={p.id}>
             <div className="provider-card-head">
               <strong>{p.name}</strong>
-              {p.url && (
-                <a href={p.url} target="_blank" rel="noreferrer">
+              {safeHttpUrl(p.url) && (
+                <a href={safeHttpUrl(p.url)} target="_blank" rel="noreferrer">
                   {t("Pricing page", "定价页")}
                 </a>
               )}

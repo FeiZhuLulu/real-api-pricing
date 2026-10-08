@@ -2620,6 +2620,10 @@ tbody tr.sentinel-row {
   .github {
     display: none;
   }
+  /* The "My providers" entry stays reachable on mobile, icon-only. */
+  .header-providers {
+    display: inline-flex;
+  }
   .intro {
     padding: 26px 0 20px;
   }

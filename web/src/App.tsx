@@ -244,8 +244,9 @@ export default function App() {
     loadCustomProviders,
   );
   const updateCustomProviders = (list: CustomProvider[]) => {
-    saveCustomProviders(list);
+    const persisted = saveCustomProviders(list);
     setCustomProviders(list);
+    return persisted;
   };
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -341,7 +342,8 @@ function Explorer({
   data: SiteData;
   theme: Theme;
   customProviders: CustomProvider[];
-  onCustomProvidersChange: (providers: CustomProvider[]) => void;
+  /** Returns false when browser storage rejected the write. */
+  onCustomProvidersChange: (providers: CustomProvider[]) => boolean;
   onThemeChange: (theme: Theme) => void;
 }) {
   const initial = useMemo(
@@ -628,8 +630,9 @@ function Explorer({
           </nav>
           <div className="header-actions">
             <button
-              className="header-contribute"
+              className="header-contribute header-providers"
               onClick={() => setPanel("providers")}
+              aria-label={t("My providers", "我的供应商")}
               title={t(
                 "Manage your own providers (stored locally)",
                 "管理我的自定义供应商（本地存储）",
