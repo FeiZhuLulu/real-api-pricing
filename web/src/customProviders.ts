@@ -22,6 +22,26 @@ export interface CustomProvider {
   models: CustomModelPrice[];
 }
 
+/** Fresh local identity; never reuse an imported provider's overwrite key. */
+export const newProviderId = () =>
+  typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `p${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+
+/** An isolated, unsaved copy. The caller decides whether to persist it. */
+export function copyCustomProvider(
+  provider: CustomProvider,
+  suffix: string,
+): CustomProvider {
+  return {
+    ...provider,
+    id: newProviderId(),
+    name: `${provider.name} ${suffix}`,
+    createdAt: new Date().toISOString().slice(0, 10),
+    models: provider.models.map((model) => ({ ...model })),
+  };
+}
+
 const STORAGE_KEY = "pricing-custom-providers";
 
 /** Only http(s) URLs may become links; anything else degrades to "". */

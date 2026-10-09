@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
+  Copy,
   DownloadSimple,
   PencilSimple,
   Plus,
@@ -10,12 +11,15 @@ import {
 import type { Lang, SiteData } from "./types";
 import { price } from "./domain";
 import {
+  copyCustomProvider,
+  newProviderId,
   exportCustomProviders,
   parseCustomProviders,
   realPriceUsd,
   safeHttpUrl,
   type CustomProvider,
 } from "./customProviders";
+import PricingPrompt from "./PricingPrompt";
 import { GlassCombobox, GlassSelect, type GlassGroup } from "./GlassSelect";
 
 const CURRENCY_GROUPS: GlassGroup[] = [
@@ -37,17 +41,14 @@ interface DraftModel {
   output: string;
 }
 interface Draft {
+  /** Copies are discarded on close, unlike ordinary recoverable edits. */
+  isCopy?: boolean;
   id: string;
   name: string;
   url: string;
   createdAt: string;
   models: DraftModel[];
 }
-
-const newId = () =>
-  typeof crypto !== "undefined" && "randomUUID" in crypto
-    ? crypto.randomUUID()
-    : `p${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 
 const blankModel = (): DraftModel => ({
   model: "",
@@ -141,7 +142,7 @@ export default function CustomProvidersPanel({
   const fileInput = useRef<HTMLInputElement>(null);
   useEffect(() => {
     try {
-      if (draft) sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      if (draft && !draft.isCopy) sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
       else sessionStorage.removeItem(DRAFT_KEY);
     } catch {
       /* Storage is optional. */
@@ -312,8 +313,8 @@ export default function CustomProvidersPanel({
       <div className="providers-form">
         <p className="panel-description">
           {t(
-            "Prices are per million tokens (MTok) in the provider's own listing. The site weights cached/input/output by the standard workload and converts CNY at the project's exchange rate, exactly like the official API points. An unfinished form is kept as a draft if the dialog closes accidentally, until you save or go back.",
-            "价格按供应商标价填写（每百万 token）。站点会用与官方 API 点相同的口径折算：缓存读/输入/输出按标准负载加权，人民币按项目汇率换算。误触关闭也没关系——未保存的表单会保留为草稿，直到保存或返回。",
+            "Prices are per million tokens (MTok) in the provider's own listing. The site weights cached/input/output by the standard workload and converts CNY at the project's exchange rate, exactly like the official API points. An unfinished edit is kept as a draft until you save or go back. Unsaved copies are discarded on close.",
+            "价格按供应商标价填写（每百万 token）。站点会用与官方 API 点相同的口径折算：缓存读/输入/输出按标准负载加权，人民币按项目汇率换算。未保存的编辑会保留为草稿，直到保存或返回；未保存的副本在关闭时丢弃。",
           )}
         </p>
         <div className="form-fields">
@@ -429,7 +430,7 @@ export default function CustomProvidersPanel({
         <div className="panel-bottom form-actions">
           <button onClick={() => { setDraft(null); setError(""); }}>
             <ArrowLeft size={15} />
-            {t("Back", "返回")}
+            {draft.isCopy ? t("Cancel copy", "取消复制") : t("Back", "返回")}
           </button>
           <button className="primary" onClick={submitDraft}>
             {t("Save provider", "保存供应商")}
@@ -479,6 +480,18 @@ export default function CustomProvidersPanel({
                 onClick={() => { setDraft(toDraft(p)); setError(""); setNotice(""); }}
               >
                 <PencilSimple size={15} />
+              </button>
+              <button
+                className="icon-button"
+                title={t("Copy provider", "复制供应商")}
+                aria-label={t(`Copy ${p.name}`, `复制 ${p.name}`)}
+                onClick={() => {
+                  setDraft({ ...toDraft(copyCustomProvider(p, t("(copy)", "（副本）"))), isCopy: true });
+                  setError("");
+                  setNotice("");
+                }}
+              >
+                <Copy size={15} />
               </button>
               <button
                 className="icon-button danger"
@@ -537,7 +550,7 @@ export default function CustomProvidersPanel({
           className="primary"
           onClick={() => {
             setDraft({
-              id: newId(),
+              id: newProviderId(),
               name: "",
               url: "",
               createdAt: new Date().toISOString().slice(0, 10),
@@ -551,6 +564,7 @@ export default function CustomProvidersPanel({
           {t("New provider", "新建供应商")}
         </button>
       </div>
+      <PricingPrompt knownModels={knownModels} lang={lang} />
       <input
         ref={fileInput}
         type="file"
