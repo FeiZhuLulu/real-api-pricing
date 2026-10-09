@@ -3418,3 +3418,31 @@ tbody tr.sentinel-row {
     scroll-behavior: auto !important;
   }
 }
+
+.pricing-prompt {
+  margin-top: 18px;
+  border-top: 1px solid var(--line-2);
+  padding-top: 14px;
+}
+.pricing-prompt summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.pricing-prompt .form-fields {
+  margin-bottom: 12px;
+}
+.pricing-prompt-output {
+  margin-top: 12px;
+}
+.pricing-prompt-output textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-s);
+  padding: 10px;
+  font: inherit;
+  font-size: 12px;
+}

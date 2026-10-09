@@ -257,3 +257,21 @@ test("duplicate model slugs within one provider are rejected", () => {
     /Dup: duplicate model m/,
   );
 });
+
+test("copy creates an isolated unsaved provider with a new identity and date", async () => {
+  const { copyCustomProvider } = await import("./customProviders");
+  const before = JSON.stringify(provider);
+  const copy = copyCustomProvider(provider, "（副本）");
+  const second = copyCustomProvider(provider, "（副本）");
+  assert.notEqual(copy.id, provider.id);
+  assert.notEqual(copy.id, second.id);
+  assert.equal(copy.name, `${provider.name} （副本）`);
+  assert.equal(copy.createdAt, new Date().toISOString().slice(0, 10));
+  assert.equal(copy.url, provider.url);
+  assert.deepEqual(copy.models, provider.models);
+  assert.notEqual(copy.models, provider.models);
+  assert.notEqual(copy.models[0], provider.models[0]);
+  copy.models[0].input = 999;
+  assert.equal(JSON.stringify(provider), before);
+  assert.deepEqual(parseCustomProviders(exportCustomProviders([second])), [second]);
+});

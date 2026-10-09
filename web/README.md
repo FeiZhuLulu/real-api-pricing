@@ -39,6 +39,33 @@ The raw downloads retain the original computed fields. The smaller website datas
 - PNG/SVG exports use the current chart. Mobile dialogs fill the screen; long ranking charts and wide tables scroll within their containers.
 - Real-price and monthly-allowance ranking views use responsive React rows with comparison bars; all filtered rows remain reachable, and PNG/SVG exports capture the current view with its range and units labeled.
 
+## Custom providers: copies and pricing prompts
+
+In **My providers**, **Copy provider** opens an independent editable copy with a
+fresh ID and today's creation date. Nothing is added until **Save provider**.
+**Cancel copy** or closing the dialog discards the unsaved copy; the original
+provider and its model prices are unchanged. Ordinary edit drafts retain their
+existing recovery behavior. Use provider names such as `Site · Standard` and
+`Site · Premium` for separate group prices; no group or multiplier fields are
+added to the import format.
+
+**Get prices with an AI prompt** accepts a public pricing-page URL (the path is
+editable) and optional group/model scope. It generates a bilingual research
+prompt for an external browsing agent, including the existing version-1 JSON
+format and the site's known model slug/display-name catalog. It makes no request
+to the supplied URL. If clipboard access fails, the generated text remains
+available for manual copying.
+
+The prompt targets New API / Sub2API deployments, requires public evidence and
+final USD/CNY prices per million tokens, and explains that `/pricing` is not a
+standard API. Unknown prices, unsupported billing types, and uncertain model
+matches must not be fabricated. In particular, `cached: null` means **same as
+input**, not unknown. Review the external agent's evidence and JSON before
+using **Import JSON**. Import still replaces providers with matching `id`; the
+prompt asks for fresh IDs for each group and collection batch to avoid accidental
+overwrite. No credentials, server, proxy, or automatic third-party lookup is
+introduced.
+
 ## Fee bands
 
 Monthly-allowance fee bands share `../config/allowance-fee-bands.json` with Python chart generation. They use adopted USD monthly fees: [0,30], (30,100], (100,300]. "All" retains every allowance, including any future >$300 plan. The `feeBand` hash field is backward compatible and applies only to the allowance view; ranking, detail table, image export and CSV follow it. Regenerate static bands with `python scripts/plot_quotas.py --fee-bands-only`, publish via `python scripts/publish_charts.py --fee-bands-only`, and run `python scripts/checks/verify_fee_bands.py` for independent partition validation.
